@@ -74,7 +74,6 @@
     [textFile returnKeyboard];
 }
 - (void)LoadData{
-    
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_JIAOYANYANZHENGMA];
     NSString * str = [textFile phonestring];
     NSDictionary * dic = @{@"newphone":str,@"studentid":Me.ssid};
