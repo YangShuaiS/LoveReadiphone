@@ -1,0 +1,60 @@
+//
+//  PrefixHeader.pch
+//  ZYVideoPlayer
+//
+//  Created by Fairy on 2016/11/17.
+//  Copyright © 2016年 com.yourCompany.www. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "Public.h"
+#import "BaseENUM.h"
+#import "NativeView.h"
+#import "BaseObject.h"
+//#import "YYTextManager.h"
+#import <Masonry/Masonry.h>
+#import <AFNetworking/AFNetworking.h>
+#import <Messages/Messages.h>
+#import <MJExtension/MJExtension.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <FLAnimatedImage/FLAnimatedImage.h>
+//#import <YYKit.h>
+//#import <YYText/YYText.h>
+//#import <TTTAttributedLabel/TTTAttributedLabel.h>
+#import <MJRefresh/MJRefresh.h>
+#import <SDCycleScrollView/SDCycleScrollView.h>
+
+
+
+
+#import "MenuNav.h"
+#import "MeModel.h"
+
+#import "BaseAppRequestManager.h"
+
+#import "PublicView.h"
+/**
+ *  字体适配 我在PCH文件定义了一个方法
+ */
+static inline CGFloat FontSize(CGFloat fontSize){
+    return fontSize;
+    
+    //    if (WIDTH<375) {
+    //        return fontSize-2;
+    //    }else if (WIDTH == 375){
+    //        return fontSize;
+    //    }else if (WIDTH >375&&WIDTH<600){
+    //        return fontSize+2;
+    //    }else if (WIDTH >600&& WIDTH<800){
+    //        return fontSize+4;
+    //    }else{
+    //        return fontSize+4;
+    //    }
+}
+
+#endif /* PrefixHeader_pch */
