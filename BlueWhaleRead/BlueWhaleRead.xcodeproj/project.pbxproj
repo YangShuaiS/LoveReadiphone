@@ -297,10 +297,10 @@
 		0D82223920F06AAA00E88E07 /* MyMessageCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82223820F06AAA00E88E07 /* MyMessageCellView.m */; };
 		0D82223C20F06F8A00E88E07 /* MyMessageXQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82223B20F06F8A00E88E07 /* MyMessageXQViewController.m */; };
 		0D82223F20F0F5D000E88E07 /* MedalListXqBookTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82223E20F0F5D000E88E07 /* MedalListXqBookTableView.m */; };
-		0D90D936216066EC009F1820 /* ZhiShiShuDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D92E216066EB009F1820 /* ZhiShiShuDataModel.m */; };
-		0D90D937216066EC009F1820 /* ZhiShiShuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D92F216066EB009F1820 /* ZhiShiShuModel.m */; };
-		0D90D938216066EC009F1820 /* ZhiSHiShuXianModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D933216066EB009F1820 /* ZhiSHiShuXianModel.m */; };
-		0D90D939216066EC009F1820 /* ZhiShiShuNeiRongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D934216066EB009F1820 /* ZhiShiShuNeiRongModel.m */; };
+		0D90D9612160687B009F1820 /* ZhiShiShuDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D9592160687B009F1820 /* ZhiShiShuDataModel.m */; };
+		0D90D9622160687B009F1820 /* ZhiShiShuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D95A2160687B009F1820 /* ZhiShiShuModel.m */; };
+		0D90D9632160687B009F1820 /* ZhiSHiShuXianModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D95E2160687B009F1820 /* ZhiSHiShuXianModel.m */; };
+		0D90D9642160687B009F1820 /* ZhiShiShuNeiRongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D95F2160687B009F1820 /* ZhiShiShuNeiRongModel.m */; };
 		0D99872F20F304AA002BD2B7 /* MedalListXqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D99872E20F304A9002BD2B7 /* MedalListXqTableViewCell.m */; };
 		0D99873220F31A6D002BD2B7 /* MedalChooseABookCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D99873120F31A6D002BD2B7 /* MedalChooseABookCollectionView.m */; };
 		0D99873520F335AC002BD2B7 /* MedalChoosCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D99873420F335AC002BD2B7 /* MedalChoosCollectionViewCell.m */; };
@@ -1051,14 +1051,14 @@
 		0D82223B20F06F8A00E88E07 /* MyMessageXQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMessageXQViewController.m; sourceTree = "<group>"; };
 		0D82223D20F0F5D000E88E07 /* MedalListXqBookTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalListXqBookTableView.h; sourceTree = "<group>"; };
 		0D82223E20F0F5D000E88E07 /* MedalListXqBookTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalListXqBookTableView.m; sourceTree = "<group>"; };
-		0D90D92E216066EB009F1820 /* ZhiShiShuDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuDataModel.m; sourceTree = "<group>"; };
-		0D90D92F216066EB009F1820 /* ZhiShiShuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuModel.m; sourceTree = "<group>"; };
-		0D90D930216066EB009F1820 /* ZhiShiShuNeiRongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuNeiRongModel.h; sourceTree = "<group>"; };
-		0D90D931216066EB009F1820 /* ZhiSHiShuXianModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiSHiShuXianModel.h; sourceTree = "<group>"; };
-		0D90D932216066EB009F1820 /* ZhiShiShuDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuDataModel.h; sourceTree = "<group>"; };
-		0D90D933216066EB009F1820 /* ZhiSHiShuXianModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiSHiShuXianModel.m; sourceTree = "<group>"; };
-		0D90D934216066EB009F1820 /* ZhiShiShuNeiRongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuNeiRongModel.m; sourceTree = "<group>"; };
-		0D90D935216066EB009F1820 /* ZhiShiShuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuModel.h; sourceTree = "<group>"; };
+		0D90D9592160687B009F1820 /* ZhiShiShuDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuDataModel.m; sourceTree = "<group>"; };
+		0D90D95A2160687B009F1820 /* ZhiShiShuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuModel.m; sourceTree = "<group>"; };
+		0D90D95B2160687B009F1820 /* ZhiShiShuNeiRongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuNeiRongModel.h; sourceTree = "<group>"; };
+		0D90D95C2160687B009F1820 /* ZhiSHiShuXianModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiSHiShuXianModel.h; sourceTree = "<group>"; };
+		0D90D95D2160687B009F1820 /* ZhiShiShuDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuDataModel.h; sourceTree = "<group>"; };
+		0D90D95E2160687B009F1820 /* ZhiSHiShuXianModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiSHiShuXianModel.m; sourceTree = "<group>"; };
+		0D90D95F2160687B009F1820 /* ZhiShiShuNeiRongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuNeiRongModel.m; sourceTree = "<group>"; };
+		0D90D9602160687B009F1820 /* ZhiShiShuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuModel.h; sourceTree = "<group>"; };
 		0D99872D20F304A9002BD2B7 /* MedalListXqTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalListXqTableViewCell.h; sourceTree = "<group>"; };
 		0D99872E20F304A9002BD2B7 /* MedalListXqTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalListXqTableViewCell.m; sourceTree = "<group>"; };
 		0D99873020F31A6D002BD2B7 /* MedalChooseABookCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalChooseABookCollectionView.h; sourceTree = "<group>"; };
@@ -1414,6 +1414,7 @@
 		0D56D8A820C90F8F00E24C23 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				0D90D9582160687B009F1820 /* ZhiShiShuM */,
 				0D577B56215CD9A5004080A5 /* ZhiShiShu */,
 				0D56D8A920C90F8F00E24C23 /* M */,
 				0D56D8AA20C90F8F00E24C23 /* C */,
@@ -1826,7 +1827,6 @@
 		0D577B56215CD9A5004080A5 /* ZhiShiShu */ = {
 			isa = PBXGroup;
 			children = (
-				0D90D92D216066EB009F1820 /* M */,
 				0D577B58215CD9A5004080A5 /* C */,
 				0D577B5B215CD9A5004080A5 /* V */,
 			);
@@ -2316,19 +2316,19 @@
 			path = Biao;
 			sourceTree = "<group>";
 		};
-		0D90D92D216066EB009F1820 /* M */ = {
+		0D90D9582160687B009F1820 /* ZhiShiShuM */ = {
 			isa = PBXGroup;
 			children = (
-				0D90D92E216066EB009F1820 /* ZhiShiShuDataModel.m */,
-				0D90D92F216066EB009F1820 /* ZhiShiShuModel.m */,
-				0D90D930216066EB009F1820 /* ZhiShiShuNeiRongModel.h */,
-				0D90D931216066EB009F1820 /* ZhiSHiShuXianModel.h */,
-				0D90D932216066EB009F1820 /* ZhiShiShuDataModel.h */,
-				0D90D933216066EB009F1820 /* ZhiSHiShuXianModel.m */,
-				0D90D934216066EB009F1820 /* ZhiShiShuNeiRongModel.m */,
-				0D90D935216066EB009F1820 /* ZhiShiShuModel.h */,
+				0D90D9592160687B009F1820 /* ZhiShiShuDataModel.m */,
+				0D90D95A2160687B009F1820 /* ZhiShiShuModel.m */,
+				0D90D95B2160687B009F1820 /* ZhiShiShuNeiRongModel.h */,
+				0D90D95C2160687B009F1820 /* ZhiSHiShuXianModel.h */,
+				0D90D95D2160687B009F1820 /* ZhiShiShuDataModel.h */,
+				0D90D95E2160687B009F1820 /* ZhiSHiShuXianModel.m */,
+				0D90D95F2160687B009F1820 /* ZhiShiShuNeiRongModel.m */,
+				0D90D9602160687B009F1820 /* ZhiShiShuModel.h */,
 			);
-			path = M;
+			path = ZhiShiShuM;
 			sourceTree = "<group>";
 		};
 		0D99874820F4C5C5002BD2B7 /* UpView */ = {
@@ -3142,7 +3142,7 @@
 				0D99875920F4C8D3002BD2B7 /* GenPopViewModel.m in Sources */,
 				0D32684E21097DB700D7D563 /* AcherPowerTYModel.m in Sources */,
 				0D7ABE93215E2EE6002EAA1D /* ZhiShiShuOneDownView.m in Sources */,
-				0D90D937216066EC009F1820 /* ZhiShiShuModel.m in Sources */,
+				0D90D9622160687B009F1820 /* ZhiShiShuModel.m in Sources */,
 				0D65F14020D246FE00F3B71F /* GeneralBookImageNumberView.m in Sources */,
 				0D65F0BE20CFAD6200F3B71F /* BookXQTopView.m in Sources */,
 				0D82221020EE492800E88E07 /* SZOrSCJieGuoViewController.m in Sources */,
@@ -3250,7 +3250,7 @@
 				0D65F07D20CE554700F3B71F /* TypeListModel.m in Sources */,
 				0DF4120820C8D7810076B154 /* AttributedStringModel.m in Sources */,
 				0D7ABE99215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m in Sources */,
-				0D90D938216066EC009F1820 /* ZhiSHiShuXianModel.m in Sources */,
+				0D90D9632160687B009F1820 /* ZhiSHiShuXianModel.m in Sources */,
 				0DD66B7120DA47360056528B /* CTLianXianSmallView.m in Sources */,
 				0D0D7D5E20E0DC5E003A3495 /* HomeActivityTopTableViewCell.m in Sources */,
 				0DF411DD20C8D6F90076B154 /* BaseTableView.m in Sources */,
@@ -3371,7 +3371,7 @@
 				0D65F09C20CF5C7800F3B71F /* BookFenjiModel.m in Sources */,
 				0D65F04020CE092D00F3B71F /* BaseAppRequestManager.m in Sources */,
 				0D99872F20F304AA002BD2B7 /* MedalListXqTableViewCell.m in Sources */,
-				0D90D939216066EC009F1820 /* ZhiShiShuNeiRongModel.m in Sources */,
+				0D90D9642160687B009F1820 /* ZhiShiShuNeiRongModel.m in Sources */,
 				0DA111FB20ECB00C001A3D4E /* UserLoginForgetMMTwoViewController.m in Sources */,
 				0D65F05820CE1CB600F3B71F /* JKStarScoreView.m in Sources */,
 				0D32684B21097B1900D7D563 /* AchiereadPowerModel.m in Sources */,
@@ -3468,7 +3468,7 @@
 				0D1233AE210587870092B6C0 /* CreatetimeModel.m in Sources */,
 				0D65F19D20D2661F00F3B71F /* MyClassTableView.m in Sources */,
 				0D0D7D4C20E0C629003A3495 /* FoundGoodArticleModel.m in Sources */,
-				0D90D936216066EC009F1820 /* ZhiShiShuDataModel.m in Sources */,
+				0D90D9612160687B009F1820 /* ZhiShiShuDataModel.m in Sources */,
 				0D577B68215CD9A5004080A5 /* ZhiShiShuViewController.m in Sources */,
 				0D99876520F5DA98002BD2B7 /* HomeMilestBackView.m in Sources */,
 				0D6D7E1C211933750058C0C0 /* BookTopLabel.m in Sources */,
