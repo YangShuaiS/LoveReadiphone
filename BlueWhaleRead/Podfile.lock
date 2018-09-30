@@ -16,6 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - FLAnimatedImage (1.0.12)
   - FXBlurView (1.6.4)
+  - iCarousel (1.8.3)
   - Masonry (1.0.2)
   - MBProgressHUD (1.0.0)
   - MJExtension (3.0.13)
@@ -31,6 +32,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - FXBlurView
+  - iCarousel (~> 1.8.3)
   - Masonry
   - MBProgressHUD
   - MJExtension
@@ -44,6 +46,7 @@ SPEC REPOS:
     - AFNetworking
     - FLAnimatedImage
     - FXBlurView
+    - iCarousel
     - Masonry
     - MBProgressHUD
     - MJExtension
@@ -55,6 +58,7 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
+  iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
@@ -62,6 +66,6 @@ SPEC CHECKSUMS:
   SDCycleScrollView: 90e43636fcc8e6a7f74e8b64d87418a8e96549b4
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
 
-PODFILE CHECKSUM: 122d5aa9b55c2a49e03921117081e8a785d9860b
+PODFILE CHECKSUM: 59e1362521f282aaa3215b20d70b967263259661
 
 COCOAPODS: 1.5.3

@@ -9,5 +9,6 @@
 #import "BaseView.h"
 
 @interface ZhiShiShuView : BaseView
+@property(nonatomic,strong)ZhiShiShuDataModel * data;
 - (void)huadong;
 @end

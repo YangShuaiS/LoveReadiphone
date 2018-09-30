@@ -79,7 +79,7 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"home-Click" Title:@"发现" RightTitle:@"home-Click" NativeStyle:NacStyleFound];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"发现" RightTitle:@"home-Click" NativeStyle:NacStyleFound];
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
     [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {

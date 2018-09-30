@@ -44,7 +44,7 @@
     _itemArray = itemArray;
     NSMutableArray * imageArray = [NSMutableArray array];
     for (LunboModel * model in itemArray) {
-        NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,model.banner_img];
+        NSString * url = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner_img];
         [imageArray addObject:url];
     }
     cycleScrollerView.imageURLStringsGroup = imageArray;

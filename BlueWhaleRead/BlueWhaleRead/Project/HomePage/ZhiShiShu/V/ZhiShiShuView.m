@@ -12,7 +12,11 @@
 
 static BOOL SDImageCacheOldShouldDecompressImages = YES;
 static BOOL SDImagedownloderOldShouldDecompressImages = YES;
+
 @implementation ZhiShiShuView{
+    NSMutableArray * viewdataarray;
+    NSMutableArray * layerdataarray;
+    
     NSMutableArray * viewarray;
     NSMutableArray * layerarray;
 
@@ -23,6 +27,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     NSInteger page;
     
     ZhiShiSHuTanKuang * tankuang;
+    CGFloat poinw;
 }
 - (instancetype)init
 {
@@ -44,58 +49,115 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     SDWebImageDownloader *downloder = [SDWebImageDownloader sharedDownloader];
     SDImagedownloderOldShouldDecompressImages = downloder.shouldDecompressImages;
     downloder.shouldDecompressImages = NO;
-    
     self.userInteractionEnabled = YES;
     page = 0;
 
-    
     viewarray = [NSMutableArray array];
     layerarray = [NSMutableArray array];
-    @autoreleasepool {
-    for (int i = 0; i <100; i++) {
-        ZhiShiShuNEiRong * imageview = [ZhiShiShuNEiRong new];
-        [self addSubview:imageview];
-        [viewarray addObject:imageview];
-        }
-    }
-    
-    for (int i = 0; i < viewarray.count; i++) {
-        ZhiShiShuNEiRong * view = viewarray[i];
-        NSInteger x = WIDTH*3;
-        NSInteger y = HEIGHT*2;
-        NSInteger sjx = arc4random() % x;
-        NSInteger sjy = arc4random() % y;
-        if (sjx>lastw) {
-            lastw=sjx;
-
-        }
-        if (sjy>lasth) {
-            lasth=sjy;
-        }
-//        NSLog(@"x=%ld,y=%ld",sjx,sjy);
-//        view.center = CGPointMake(sjx, sjy);
-
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.centerX.mas_equalTo(sjx);
-//            make.centerY.mas_equalTo(sjy);
-            make.left.mas_equalTo(sjx);
-            make.top.mas_equalTo(sjy);
-
-        }];
-    }
-    
+    viewdataarray = [NSMutableArray array];
+    layerdataarray = [NSMutableArray array];
+    lastw = 0;
+    lasth = 0;
+    poinw = WIDTH/8;
     [self mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(WIDTH);
+        make.height.mas_equalTo(HEIGHT);
+    }];
+    
+//    @autoreleasepool {
+//    for (int i = 0; i <100; i++) {
+//        ZhiShiShuNEiRong * imageview = [ZhiShiShuNEiRong new];
+//        [self addSubview:imageview];
+//        [viewarray addObject:imageview];
+//        }
+//    }
+//
+//    for (int i = 0; i < viewarray.count; i++) {
+//        ZhiShiShuNEiRong * view = viewarray[i];
+//        NSInteger x = WIDTH*3;
+//        NSInteger y = HEIGHT*2;
+//        NSInteger sjx = arc4random() % x;
+//        NSInteger sjy = arc4random() % y;
+//        if (sjx>lastw) {
+//            lastw=sjx;
+//
+//        }
+//        if (sjy>lasth) {
+//            lasth=sjy;
+//        }
+////        NSLog(@"x=%ld,y=%ld",sjx,sjy);
+////        view.center = CGPointMake(sjx, sjy);
+//
+//        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+////            make.centerX.mas_equalTo(sjx);
+////            make.centerY.mas_equalTo(sjy);
+//            make.left.mas_equalTo(sjx);
+//            make.top.mas_equalTo(sjy);
+//
+//        }];
+//    }
+
+
+//    double delayInSeconds = 1.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        for (int i = 0; i < self->viewarray.count; i++) {
+//                ZhiShiShuNEiRong * view = self->viewarray[i];
+//                [view addimage];
+//        }
+//    });
+}
+- (void)setData:(ZhiShiShuDataModel *)data{
+    _data = data;
+    //线
+    [layerdataarray addObjectsFromArray:data.relation];
+    for (NSInteger i = layerarray.count; i <layerdataarray.count; i++) {
+        ZhiSHiShuXianModel * xian = layerdataarray[i];
+        
+                UIBezierPath *path = [UIBezierPath bezierPath];
+                CAShapeLayer * animLayer = [CAShapeLayer layer];
+                animLayer.lineJoin = kCALineJoinRound;
+                animLayer .lineCap = kCALineCapRound;
+//                animLayer.shadowOpacity = 0.4;
+//                animLayer.shadowColor = [UIColor blackColor].CGColor;
+//                animLayer.shadowRadius = 2.0f;
+//                animLayer.shadowOffset = CGSizeMake(0,0);
+                animLayer.lineWidth = 4.0f;
+                animLayer.strokeColor = [BaseObject colorWithHexString:xian.color].CGColor;
+                animLayer.fillColor = [UIColor clearColor].CGColor;
+                [self.layer addSublayer:animLayer];
+        
+        CGPoint stars = CGPointMake(xian.start_x*poinw, xian.start_y*poinw);
+                CGPoint ends = CGPointMake(xian.end_x*poinw, xian.end_y*poinw);
+                [path moveToPoint:stars];
+                [path addLineToPoint:ends];
+        
+                animLayer.path = path.CGPath;
+                [layerarray addObject:animLayer];
+    }
+    //内容
+    [viewdataarray addObjectsFromArray:data.point];
+    for (NSInteger i = viewarray.count; i <viewdataarray.count; i++) {
+            ZhiShiShuNeiRongModel * neirong = viewdataarray[i];
+            if (lastw>neirong.width*poinw+neirong.width*poinw) {
+                lastw=neirong.width*poinw+neirong.width*poinw;
+            }
+            if (lasth>neirong.height*poinw+neirong.height*poinw) {
+                lasth=neirong.height*poinw+neirong.height*poinw;
+            }
+            ZhiShiShuNEiRong * imageview = [ZhiShiShuNEiRong new];
+            [self addSubview:imageview];
+            [viewarray addObject:imageview];
+        imageview.neirong = neirong;
+            [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo((neirong.x_axis-neirong.width/2)*self->poinw);
+                make.top.mas_equalTo((neirong.y_axis-neirong.height/2)*self->poinw);
+            }];
+    }
+    [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(WIDTH/2+self->lastw);
         make.height.mas_equalTo(HEIGHT/2+self->lasth);
     }];
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        for (int i = 0; i < self->viewarray.count; i++) {
-                ZhiShiShuNEiRong * view = self->viewarray[i];
-                [view addimage];
-        }
-    });
 }
 - (void)dealloc{
     SDImageCache *canche = [SDImageCache sharedImageCache];
@@ -104,112 +166,112 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     downloder.shouldDecompressImages = SDImagedownloderOldShouldDecompressImages;
 }
 - (void)huadong{
-    NSInteger lastviewin = viewarray.count-1;
-    page++;
-    @autoreleasepool {
-    for (int i = 0; i <100; i++) {
-        ZhiShiShuNEiRong * imageview = [ZhiShiShuNEiRong new];
-        [self addSubview:imageview];
-        [viewarray addObject:imageview];
-    }
-    }
-    for (NSInteger i = lastviewin; i < viewarray.count; i++) {
-        ZhiShiShuNEiRong * view = viewarray[i];
-        NSInteger x = WIDTH*3;
-        NSInteger y = HEIGHT*2;
-        NSInteger sjx = arc4random() % x;
-        NSInteger sjy = arc4random() % y +HEIGHT*2*page;
-        if (sjx>lastw) {
-            lastw=sjx;
-        }
-        if (sjy>lasth) {
-            lasth=sjy;
-        }
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(sjx);
-            make.top.mas_equalTo(sjy);
-        }];
-    }
-    
-    [self mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(WIDTH/2+self->lastw);
-        make.height.mas_equalTo(HEIGHT/2+self->lasth);
-    }];
-    
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        for (int i = 0; i < self->viewarray.count; i++) {
-            ZhiShiShuNEiRong * view = self->viewarray[i];
-            [view addimage];
-        }
-    });
+//    NSInteger lastviewin = viewarray.count-1;
+//    page++;
+//    @autoreleasepool {
+//    for (int i = 0; i <100; i++) {
+//        ZhiShiShuNEiRong * imageview = [ZhiShiShuNEiRong new];
+//        [self addSubview:imageview];
+//        [viewarray addObject:imageview];
+//    }
+//    }
+//    for (NSInteger i = lastviewin; i < viewarray.count; i++) {
+//        ZhiShiShuNEiRong * view = viewarray[i];
+//        NSInteger x = WIDTH*3;
+//        NSInteger y = HEIGHT*2;
+//        NSInteger sjx = arc4random() % x;
+//        NSInteger sjy = arc4random() % y +HEIGHT*2*page;
+//        if (sjx>lastw) {
+//            lastw=sjx;
+//        }
+//        if (sjy>lasth) {
+//            lasth=sjy;
+//        }
+//        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(sjx);
+//            make.top.mas_equalTo(sjy);
+//        }];
+//    }
+//
+//    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.width.mas_equalTo(WIDTH/2+self->lastw);
+//        make.height.mas_equalTo(HEIGHT/2+self->lasth);
+//    }];
+//
+//    double delayInSeconds = 1.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        for (int i = 0; i < self->viewarray.count; i++) {
+//            ZhiShiShuNEiRong * view = self->viewarray[i];
+//            [view addimage];
+//        }
+//    });
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    for (NSInteger i = layerarray.count+1; i < viewarray.count; i++) {
-        
-        UIBezierPath *path = [UIBezierPath bezierPath];
-        CAShapeLayer * animLayer = [CAShapeLayer layer];
-        animLayer.lineJoin = kCALineJoinRound;
-        animLayer .lineCap = kCALineCapRound;
-        animLayer.shadowOpacity = 0.4;
-        animLayer.shadowColor = [UIColor blackColor].CGColor;
-        animLayer.shadowRadius = 2.0f;
-        animLayer.shadowOffset = CGSizeMake(0,0);
-        animLayer.lineWidth = 5.0f;
-        animLayer.strokeColor = [UIColor yellowColor].CGColor;
-        animLayer.fillColor = [UIColor clearColor].CGColor;
-        [self.layer addSublayer:animLayer];
-        
-        ZhiShiShuNEiRong * starview = self->viewarray[i-1];
-        ZhiShiShuNEiRong * endview = self->viewarray[i];
-        CGPoint stars = starview.center;
-        CGPoint ends = endview.center;
-        [path moveToPoint:stars];
-        [path addLineToPoint:ends];
-        
-        animLayer.path = path.CGPath;
-        [layerarray addObject:animLayer];
-
-    }
+//    for (NSInteger i = layerarray.count+1; i < viewarray.count; i++) {
+//
+//        UIBezierPath *path = [UIBezierPath bezierPath];
+//        CAShapeLayer * animLayer = [CAShapeLayer layer];
+//        animLayer.lineJoin = kCALineJoinRound;
+//        animLayer .lineCap = kCALineCapRound;
+//        animLayer.shadowOpacity = 0.4;
+//        animLayer.shadowColor = [UIColor blackColor].CGColor;
+//        animLayer.shadowRadius = 2.0f;
+//        animLayer.shadowOffset = CGSizeMake(0,0);
+//        animLayer.lineWidth = 5.0f;
+//        animLayer.strokeColor = [UIColor yellowColor].CGColor;
+//        animLayer.fillColor = [UIColor clearColor].CGColor;
+//        [self.layer addSublayer:animLayer];
+//
+//        ZhiShiShuNEiRong * starview = self->viewarray[i-1];
+//        ZhiShiShuNEiRong * endview = self->viewarray[i];
+//        CGPoint stars = starview.center;
+//        CGPoint ends = endview.center;
+//        [path moveToPoint:stars];
+//        [path addLineToPoint:ends];
+//
+//        animLayer.path = path.CGPath;
+//        [layerarray addObject:animLayer];
+//
+//    }
 //    MJExtensionLog(@"width=%f,height=%f",self.frame.size.width,self.frame.size.height);
 }
 
-- (void)addviews{
-    WS(ws);
-    
-    for (int i = 0; i <1000; i++) {
-        FLAnimatedImageView * imageview = [FLAnimatedImageView new];
-        imageview.layer.masksToBounds = YES;
-        imageview.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:imageview];
-        [viewarray addObject:imageview];
-    }
-    FLAnimatedImageView * view = viewarray[1000-1];
-
-    [lastview mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws).with.offset(100);
-        make.top.mas_equalTo(view.mas_bottom).with.offset(LENGTH(100));
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(100);
-    }];
-    for (int i = 2000; i < viewarray.count; i++) {
-        FLAnimatedImageView * view = viewarray[i];
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(ws).with.offset(100);
-            make.top.mas_equalTo(self->lastview.mas_bottom).with.offset(LENGTH(100));
-            make.width.mas_equalTo(100);
-            make.height.mas_equalTo(100);
-        }];
-        if (i == viewarray.count-1) {
-            [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.equalTo(ws).with.offset(0);
-            }];
-        }
-        lastview = view;
-    }
-}
+//- (void)addviews{
+//    WS(ws);
+//
+//    for (int i = 0; i <1000; i++) {
+//        FLAnimatedImageView * imageview = [FLAnimatedImageView new];
+//        imageview.layer.masksToBounds = YES;
+//        imageview.contentMode = UIViewContentModeScaleAspectFit;
+//        [self addSubview:imageview];
+//        [viewarray addObject:imageview];
+//    }
+//    FLAnimatedImageView * view = viewarray[1000-1];
+//
+//    [lastview mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(ws).with.offset(100);
+//        make.top.mas_equalTo(view.mas_bottom).with.offset(LENGTH(100));
+//        make.width.mas_equalTo(100);
+//        make.height.mas_equalTo(100);
+//    }];
+//    for (int i = 2000; i < viewarray.count; i++) {
+//        FLAnimatedImageView * view = viewarray[i];
+//        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(ws).with.offset(100);
+//            make.top.mas_equalTo(self->lastview.mas_bottom).with.offset(LENGTH(100));
+//            make.width.mas_equalTo(100);
+//            make.height.mas_equalTo(100);
+//        }];
+//        if (i == viewarray.count-1) {
+//            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.bottom.equalTo(ws).with.offset(0);
+//            }];
+//        }
+//        lastview = view;
+//    }
+//}
 
 - (BOOL)isDisplayedInScreen:(FLAnimatedImageView *)view
 {

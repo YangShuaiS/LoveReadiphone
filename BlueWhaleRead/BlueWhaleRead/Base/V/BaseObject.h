@@ -59,4 +59,6 @@ extern MeModel const * Me;
 + (NSMutableAttributedString*)AttribleString:(NSInteger)HangJianJu
                                       String:(NSString * )string;
 +(NSString*)getCurrentTimes;
+
++ (UIColor *) colorWithHexString: (NSString *)color;
 @end

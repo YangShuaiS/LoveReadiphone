@@ -19,16 +19,51 @@
     NSInteger next;
     BaseView * leftview;
     
+    NativeView * nav;
+    
 }
+- (void)loadUpData{
+//    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FOUND];
+    NSString * url = @"http://192.168.1.102/knowledge/public/knowledge/get-all?knowledge_id=5baeeba8f52cad3684006ad2";
+    NSDictionary * dic = @{@"studentid":Me.ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            ZhiShiShuModel * model = [ZhiShiShuModel mj_objectWithKeyValues:responseObject];
+            if ([model.code isEqual:@200]) {
+                self->ZSSView.data = model.data;
+                [self->nav jianbian:model.data.name Color:@[(id)RGB(242,227,185).CGColor,(id)RGB(207,186,135).CGColor,(id)RGBA(172,145,84,1).CGColor]];
+
+            }
+        }else{
+            
+        }
+    }];
+}
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
+        [self AddNavtion];
         [self addview];
     }
     return self;
 }
 
+#pragma mark --------------------  导航栏以及代理
+- (void)AddNavtion{
+    WS(ws);
+    nav = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"" RightTitle:@"" NativeStyle:NavStyleGeneral];
+    nav.backgroundColor = [UIColor clearColor];
+    nav.delegate = self;
+    [self addSubview:nav];
+    [nav mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(ws).with.offset(0);
+        make.right.equalTo(ws).with.offset(0);
+        make.top.equalTo(ws).with.offset(0);
+        make.height.mas_equalTo(NavHeight);
+    }];
+}
 - (void)addview{
     WS(ws);
     next = 1;
@@ -41,15 +76,18 @@
     scrollView.maximumZoomScale = 10;
     [self addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws);
+        make.top.mas_equalTo(self->nav.mas_bottom);
+        make.left.mas_equalTo(ws);
+        make.right.mas_equalTo(ws);
+        make.bottom.mas_equalTo(ws);
     }];
     UIImage *backgroundImage = [UIImage imageNamed:@"581537874042_.pic_hd"];
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
-    [scrollView setBackgroundColor:backgroundColor];
+    [self setBackgroundColor:backgroundColor];
 
 
     
-    scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headRefresh)];
+//    scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headRefresh)];
 
     
 //    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchScrollView)];
@@ -75,6 +113,9 @@
         make.left.mas_equalTo(self->scrollView);
         make.width.mas_equalTo(LENGTH(1));
     }];
+    
+    [self loadUpData];
+
     
 //    BaseView * rightview = [BaseView new];
 //    rightview.backgroundColor = [UIColor redColor];

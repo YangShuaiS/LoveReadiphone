@@ -9,6 +9,7 @@
 #import "BaseView.h"
 
 @interface ZhiShiShuNEiRong : BaseView
+@property(nonatomic,strong)ZhiShiShuNeiRongModel * neirong;
 - (void)addimage;
 @end
 

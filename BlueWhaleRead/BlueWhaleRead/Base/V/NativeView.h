@@ -24,4 +24,6 @@
 @property (nonatomic, weak) id <NavDelegate> delegate;
 @property(nonatomic,strong) NSString * title;
 
+- (void)jianbian:(NSString *)text
+           Color:(NSArray *)colorarray;
 @end

@@ -156,6 +156,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     [ShiCiLiangModel InitializeModel];
     [FoundModel InitializeModel];
     [LCBMilestone InitializeModel];
+    [ZhiShiShuModel InitializeModel];//知识树
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
