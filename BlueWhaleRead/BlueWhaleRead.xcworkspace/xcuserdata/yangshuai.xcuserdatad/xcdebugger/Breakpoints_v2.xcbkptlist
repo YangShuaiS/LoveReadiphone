@@ -186,7 +186,7 @@
                   moduleName = "BlueWhaleRead"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yangshuai/Desktop/%E5%A4%A9%E5%A4%A9%E7%88%B1%E8%AF%BB/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-                  timestampString = "559733740.642961"
+                  timestampString = "559908205.61059"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "268"
@@ -201,7 +201,7 @@
                   moduleName = "BlueWhaleRead"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yangshuai/Desktop/%E5%A4%A9%E5%A4%A9%E7%88%B1%E8%AF%BB/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-                  timestampString = "559733740.644953"
+                  timestampString = "559908205.612422"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "269"
@@ -216,7 +216,7 @@
                   moduleName = "BlueWhaleRead"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yangshuai/Desktop/%E5%A4%A9%E5%A4%A9%E7%88%B1%E8%AF%BB/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-                  timestampString = "559733740.646897"
+                  timestampString = "559908205.6142139"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "268"
@@ -239,6 +239,38 @@
             startingLineNumber = "132"
             endingLineNumber = "132"
             landmarkName = "-clickTag:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/C/ZhiShiShuViewController.m"
+            timestampString = "559906042.692403"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "-carousel:didSelectItemAtIndex:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BlueWhaleRead/Base/V/NativeView.m"
+            timestampString = "559908910.321692"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "-jianbian:Color:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

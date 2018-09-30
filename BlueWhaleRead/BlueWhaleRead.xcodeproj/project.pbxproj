@@ -279,6 +279,9 @@
 		0D7017B720D90311009BEA52 /* MyClassListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7017B620D90311009BEA52 /* MyClassListModel.m */; };
 		0D7017BA20D90462009BEA52 /* MyClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7017B920D90462009BEA52 /* MyClassModel.m */; };
 		0D7017BD20D90530009BEA52 /* BadgeOnlyImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7017BC20D90530009BEA52 /* BadgeOnlyImageModel.m */; };
+		0D7ABE93215E2EE6002EAA1D /* ZhiShiShuOneDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7ABE92215E2EE6002EAA1D /* ZhiShiShuOneDownView.m */; };
+		0D7ABE96215E363F002EAA1D /* ZhiShiShuQiuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7ABE95215E363F002EAA1D /* ZhiShiShuQiuView.m */; };
+		0D7ABE99215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7ABE98215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m */; };
 		0D82221020EE492800E88E07 /* SZOrSCJieGuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82220F20EE492800E88E07 /* SZOrSCJieGuoViewController.m */; };
 		0D82221320EE4A8900E88E07 /* SZSCJGView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82221220EE4A8900E88E07 /* SZSCJGView.m */; };
 		0D82221620EE552C00E88E07 /* SZSCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82221520EE552C00E88E07 /* SZSCViewController.m */; };
@@ -294,6 +297,10 @@
 		0D82223920F06AAA00E88E07 /* MyMessageCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82223820F06AAA00E88E07 /* MyMessageCellView.m */; };
 		0D82223C20F06F8A00E88E07 /* MyMessageXQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82223B20F06F8A00E88E07 /* MyMessageXQViewController.m */; };
 		0D82223F20F0F5D000E88E07 /* MedalListXqBookTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82223E20F0F5D000E88E07 /* MedalListXqBookTableView.m */; };
+		0D90D936216066EC009F1820 /* ZhiShiShuDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D92E216066EB009F1820 /* ZhiShiShuDataModel.m */; };
+		0D90D937216066EC009F1820 /* ZhiShiShuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D92F216066EB009F1820 /* ZhiShiShuModel.m */; };
+		0D90D938216066EC009F1820 /* ZhiSHiShuXianModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D933216066EB009F1820 /* ZhiSHiShuXianModel.m */; };
+		0D90D939216066EC009F1820 /* ZhiShiShuNeiRongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D934216066EB009F1820 /* ZhiShiShuNeiRongModel.m */; };
 		0D99872F20F304AA002BD2B7 /* MedalListXqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D99872E20F304A9002BD2B7 /* MedalListXqTableViewCell.m */; };
 		0D99873220F31A6D002BD2B7 /* MedalChooseABookCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D99873120F31A6D002BD2B7 /* MedalChooseABookCollectionView.m */; };
 		0D99873520F335AC002BD2B7 /* MedalChoosCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D99873420F335AC002BD2B7 /* MedalChoosCollectionViewCell.m */; };
@@ -386,11 +393,14 @@
 		0DD66B8C20DA47360056528B /* DTLianXIanTiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD66B6C20DA47360056528B /* DTLianXIanTiView.m */; };
 		0DD66B9020DA683E0056528B /* TheTopPicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD66B8F20DA683E0056528B /* TheTopPicModel.m */; };
 		0DD66B9320DA6C960056528B /* BookProblemsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD66B9220DA6C960056528B /* BookProblemsModel.m */; };
+		0DE181FD215F268A00585389 /* ZhiShiShuSMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE181FC215F268A00585389 /* ZhiShiShuSMViewController.m */; };
+		0DE18200215F26BF00585389 /* ZhiShiShuShuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE181FF215F26BF00585389 /* ZhiShiShuShuViewController.m */; };
 		0DE22F3820F84D70007DB0B8 /* GeneraNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE22F3720F84D70007DB0B8 /* GeneraNoDataView.m */; };
 		0DE22F3F20F8793B007DB0B8 /* SaoMaBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE22F3E20F8793B007DB0B8 /* SaoMaBookViewController.m */; };
 		0DE22F4220F893D0007DB0B8 /* PopUpViewStyleAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE22F4120F893D0007DB0B8 /* PopUpViewStyleAnswerView.m */; };
 		0DE22F4520F8B315007DB0B8 /* PopUpViewStyleBelongView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE22F4420F8B315007DB0B8 /* PopUpViewStyleBelongView.m */; };
 		0DE24A1D212D5ACF00D71A1D /* MedalListXQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE24A1C212D5ACF00D71A1D /* MedalListXQViewController.m */; };
+		0DEDC53C215F7C24003FE894 /* Baoli-SC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DEDC53B215F7C02003FE894 /* Baoli-SC-Regular.ttf */; };
 		0DF4115E20C8CB3C0076B154 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4115D20C8CB3C0076B154 /* AppDelegate.m */; };
 		0DF4116120C8CB3C0076B154 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4116020C8CB3C0076B154 /* ViewController.m */; };
 		0DF4116420C8CB3C0076B154 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF4116220C8CB3C0076B154 /* Main.storyboard */; };
@@ -1005,6 +1015,12 @@
 		0D7017B920D90462009BEA52 /* MyClassModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyClassModel.m; sourceTree = "<group>"; };
 		0D7017BB20D90530009BEA52 /* BadgeOnlyImageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BadgeOnlyImageModel.h; sourceTree = "<group>"; };
 		0D7017BC20D90530009BEA52 /* BadgeOnlyImageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BadgeOnlyImageModel.m; sourceTree = "<group>"; };
+		0D7ABE91215E2EE6002EAA1D /* ZhiShiShuOneDownView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuOneDownView.h; sourceTree = "<group>"; };
+		0D7ABE92215E2EE6002EAA1D /* ZhiShiShuOneDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuOneDownView.m; sourceTree = "<group>"; };
+		0D7ABE94215E363F002EAA1D /* ZhiShiShuQiuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuQiuView.h; sourceTree = "<group>"; };
+		0D7ABE95215E363F002EAA1D /* ZhiShiShuQiuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuQiuView.m; sourceTree = "<group>"; };
+		0D7ABE97215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiSHuQiuCollectionViewCell.h; sourceTree = "<group>"; };
+		0D7ABE98215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiSHuQiuCollectionViewCell.m; sourceTree = "<group>"; };
 		0D82220E20EE492800E88E07 /* SZOrSCJieGuoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZOrSCJieGuoViewController.h; sourceTree = "<group>"; };
 		0D82220F20EE492800E88E07 /* SZOrSCJieGuoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SZOrSCJieGuoViewController.m; sourceTree = "<group>"; };
 		0D82221120EE4A8900E88E07 /* SZSCJGView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZSCJGView.h; sourceTree = "<group>"; };
@@ -1035,6 +1051,14 @@
 		0D82223B20F06F8A00E88E07 /* MyMessageXQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMessageXQViewController.m; sourceTree = "<group>"; };
 		0D82223D20F0F5D000E88E07 /* MedalListXqBookTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalListXqBookTableView.h; sourceTree = "<group>"; };
 		0D82223E20F0F5D000E88E07 /* MedalListXqBookTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalListXqBookTableView.m; sourceTree = "<group>"; };
+		0D90D92E216066EB009F1820 /* ZhiShiShuDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuDataModel.m; sourceTree = "<group>"; };
+		0D90D92F216066EB009F1820 /* ZhiShiShuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuModel.m; sourceTree = "<group>"; };
+		0D90D930216066EB009F1820 /* ZhiShiShuNeiRongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuNeiRongModel.h; sourceTree = "<group>"; };
+		0D90D931216066EB009F1820 /* ZhiSHiShuXianModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiSHiShuXianModel.h; sourceTree = "<group>"; };
+		0D90D932216066EB009F1820 /* ZhiShiShuDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuDataModel.h; sourceTree = "<group>"; };
+		0D90D933216066EB009F1820 /* ZhiSHiShuXianModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiSHiShuXianModel.m; sourceTree = "<group>"; };
+		0D90D934216066EB009F1820 /* ZhiShiShuNeiRongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuNeiRongModel.m; sourceTree = "<group>"; };
+		0D90D935216066EB009F1820 /* ZhiShiShuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuModel.h; sourceTree = "<group>"; };
 		0D99872D20F304A9002BD2B7 /* MedalListXqTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalListXqTableViewCell.h; sourceTree = "<group>"; };
 		0D99872E20F304A9002BD2B7 /* MedalListXqTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalListXqTableViewCell.m; sourceTree = "<group>"; };
 		0D99873020F31A6D002BD2B7 /* MedalChooseABookCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalChooseABookCollectionView.h; sourceTree = "<group>"; };
@@ -1219,6 +1243,10 @@
 		0DD66B8F20DA683E0056528B /* TheTopPicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheTopPicModel.m; sourceTree = "<group>"; };
 		0DD66B9120DA6C960056528B /* BookProblemsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookProblemsModel.h; sourceTree = "<group>"; };
 		0DD66B9220DA6C960056528B /* BookProblemsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookProblemsModel.m; sourceTree = "<group>"; };
+		0DE181FB215F268A00585389 /* ZhiShiShuSMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuSMViewController.h; sourceTree = "<group>"; };
+		0DE181FC215F268A00585389 /* ZhiShiShuSMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuSMViewController.m; sourceTree = "<group>"; };
+		0DE181FE215F26BF00585389 /* ZhiShiShuShuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuShuViewController.h; sourceTree = "<group>"; };
+		0DE181FF215F26BF00585389 /* ZhiShiShuShuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuShuViewController.m; sourceTree = "<group>"; };
 		0DE22F3620F84D70007DB0B8 /* GeneraNoDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneraNoDataView.h; sourceTree = "<group>"; };
 		0DE22F3720F84D70007DB0B8 /* GeneraNoDataView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneraNoDataView.m; sourceTree = "<group>"; };
 		0DE22F3D20F8793B007DB0B8 /* SaoMaBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaoMaBookViewController.h; sourceTree = "<group>"; };
@@ -1228,6 +1256,7 @@
 		0DE22F4320F8B315007DB0B8 /* PopUpViewStyleBelongView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopUpViewStyleBelongView.h; sourceTree = "<group>"; };
 		0DE22F4420F8B315007DB0B8 /* PopUpViewStyleBelongView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopUpViewStyleBelongView.m; sourceTree = "<group>"; };
 		0DE24A1C212D5ACF00D71A1D /* MedalListXQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedalListXQViewController.m; sourceTree = "<group>"; };
+		0DEDC53B215F7C02003FE894 /* Baoli-SC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baoli-SC-Regular.ttf"; sourceTree = "<group>"; };
 		0DF4115920C8CB3C0076B154 /* BlueWhaleRead.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueWhaleRead.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DF4115C20C8CB3C0076B154 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0DF4115D20C8CB3C0076B154 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1797,18 +1826,11 @@
 		0D577B56215CD9A5004080A5 /* ZhiShiShu */ = {
 			isa = PBXGroup;
 			children = (
-				0D577B57215CD9A5004080A5 /* M */,
+				0D90D92D216066EB009F1820 /* M */,
 				0D577B58215CD9A5004080A5 /* C */,
 				0D577B5B215CD9A5004080A5 /* V */,
 			);
 			path = ZhiShiShu;
-			sourceTree = "<group>";
-		};
-		0D577B57215CD9A5004080A5 /* M */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = M;
 			sourceTree = "<group>";
 		};
 		0D577B58215CD9A5004080A5 /* C */ = {
@@ -1816,6 +1838,10 @@
 			children = (
 				0D577B59215CD9A5004080A5 /* ZhiShiShuViewController.h */,
 				0D577B5A215CD9A5004080A5 /* ZhiShiShuViewController.m */,
+				0DE181FB215F268A00585389 /* ZhiShiShuSMViewController.h */,
+				0DE181FC215F268A00585389 /* ZhiShiShuSMViewController.m */,
+				0DE181FE215F26BF00585389 /* ZhiShiShuShuViewController.h */,
+				0DE181FF215F26BF00585389 /* ZhiShiShuShuViewController.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -1823,18 +1849,24 @@
 		0D577B5B215CD9A5004080A5 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				0D577B62215CD9A5004080A5 /* UIView+UIScreenDisplaying.h */,
 				0D577B5C215CD9A5004080A5 /* UIView+UIScreenDisplaying.m */,
 				0D577B5D215CD9A5004080A5 /* ZhiShiShuView.h */,
-				0D577B5E215CD9A5004080A5 /* ZhiShiShuScroVuew.h */,
-				0D577B5F215CD9A5004080A5 /* ZhiShiSHuTanKuang.h */,
-				0D577B60215CD9A5004080A5 /* ZhiShiSHuLeftView.h */,
-				0D577B61215CD9A5004080A5 /* ZhiShiShuNEiRong.m */,
-				0D577B62215CD9A5004080A5 /* UIView+UIScreenDisplaying.h */,
-				0D577B63215CD9A5004080A5 /* ZhiShiShuScroVuew.m */,
 				0D577B64215CD9A5004080A5 /* ZhiShiShuView.m */,
+				0D577B5E215CD9A5004080A5 /* ZhiShiShuScroVuew.h */,
+				0D577B63215CD9A5004080A5 /* ZhiShiShuScroVuew.m */,
+				0D577B5F215CD9A5004080A5 /* ZhiShiSHuTanKuang.h */,
 				0D577B65215CD9A5004080A5 /* ZhiShiSHuTanKuang.m */,
-				0D577B66215CD9A5004080A5 /* ZhiShiShuNEiRong.h */,
+				0D577B60215CD9A5004080A5 /* ZhiShiSHuLeftView.h */,
 				0D577B67215CD9A5004080A5 /* ZhiShiSHuLeftView.m */,
+				0D577B66215CD9A5004080A5 /* ZhiShiShuNEiRong.h */,
+				0D577B61215CD9A5004080A5 /* ZhiShiShuNEiRong.m */,
+				0D7ABE91215E2EE6002EAA1D /* ZhiShiShuOneDownView.h */,
+				0D7ABE92215E2EE6002EAA1D /* ZhiShiShuOneDownView.m */,
+				0D7ABE94215E363F002EAA1D /* ZhiShiShuQiuView.h */,
+				0D7ABE95215E363F002EAA1D /* ZhiShiShuQiuView.m */,
+				0D7ABE97215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.h */,
+				0D7ABE98215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -2284,6 +2316,21 @@
 			path = Biao;
 			sourceTree = "<group>";
 		};
+		0D90D92D216066EB009F1820 /* M */ = {
+			isa = PBXGroup;
+			children = (
+				0D90D92E216066EB009F1820 /* ZhiShiShuDataModel.m */,
+				0D90D92F216066EB009F1820 /* ZhiShiShuModel.m */,
+				0D90D930216066EB009F1820 /* ZhiShiShuNeiRongModel.h */,
+				0D90D931216066EB009F1820 /* ZhiSHiShuXianModel.h */,
+				0D90D932216066EB009F1820 /* ZhiShiShuDataModel.h */,
+				0D90D933216066EB009F1820 /* ZhiSHiShuXianModel.m */,
+				0D90D934216066EB009F1820 /* ZhiShiShuNeiRongModel.m */,
+				0D90D935216066EB009F1820 /* ZhiShiShuModel.h */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
 		0D99874820F4C5C5002BD2B7 /* UpView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2627,6 +2674,7 @@
 				0D46A83E20FC9C4F008D9ADD /* 汉仪丫丫体简.ttf */,
 				0D46A84921008B45008D9ADD /* 简卡通.ttf */,
 				0D1233A7210584CC0092B6C0 /* 简少儿.ttf */,
+				0DEDC53B215F7C02003FE894 /* Baoli-SC-Regular.ttf */,
 				0DF4116220C8CB3C0076B154 /* Main.storyboard */,
 				0DF4116820C8CB3D0076B154 /* Assets.xcassets */,
 				0DF4116A20C8CB3D0076B154 /* LaunchScreen.storyboard */,
@@ -2951,6 +2999,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DEDC53C215F7C24003FE894 /* Baoli-SC-Regular.ttf in Resources */,
 				0D46A84A21008D82008D9ADD /* 简卡通.ttf in Resources */,
 				0DF411CC20C8D6630076B154 /* SGQRCode.bundle in Resources */,
 				0DF4119E20C8D5F90076B154 /* 001 icon-看看-未选中@3x.png in Resources */,
@@ -3046,6 +3095,7 @@
 				0D6D7E1621184FCE0058C0C0 /* JoinBookBageModel.m in Sources */,
 				0D32682721084DBD00D7D563 /* MedalStudentUserModel.m in Sources */,
 				0DF411FB20C8D7000076B154 /* BaseObject.m in Sources */,
+				0DE181FD215F268A00585389 /* ZhiShiShuSMViewController.m in Sources */,
 				0D65F08620CE563400F3B71F /* HomebadgelistModel.m in Sources */,
 				0DD66B8320DA47360056528B /* DTPaiXuView.m in Sources */,
 				0DD66B7A20DA47360056528B /* TZJieGuoViewController.m in Sources */,
@@ -3091,6 +3141,8 @@
 				0D577B69215CD9A5004080A5 /* UIView+UIScreenDisplaying.m in Sources */,
 				0D99875920F4C8D3002BD2B7 /* GenPopViewModel.m in Sources */,
 				0D32684E21097DB700D7D563 /* AcherPowerTYModel.m in Sources */,
+				0D7ABE93215E2EE6002EAA1D /* ZhiShiShuOneDownView.m in Sources */,
+				0D90D937216066EC009F1820 /* ZhiShiShuModel.m in Sources */,
 				0D65F14020D246FE00F3B71F /* GeneralBookImageNumberView.m in Sources */,
 				0D65F0BE20CFAD6200F3B71F /* BookXQTopView.m in Sources */,
 				0D82221020EE492800E88E07 /* SZOrSCJieGuoViewController.m in Sources */,
@@ -3197,6 +3249,8 @@
 				0D32682421084D8A00D7D563 /* MedalStudenBookModel.m in Sources */,
 				0D65F07D20CE554700F3B71F /* TypeListModel.m in Sources */,
 				0DF4120820C8D7810076B154 /* AttributedStringModel.m in Sources */,
+				0D7ABE99215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m in Sources */,
+				0D90D938216066EC009F1820 /* ZhiSHiShuXianModel.m in Sources */,
 				0DD66B7120DA47360056528B /* CTLianXianSmallView.m in Sources */,
 				0D0D7D5E20E0DC5E003A3495 /* HomeActivityTopTableViewCell.m in Sources */,
 				0DF411DD20C8D6F90076B154 /* BaseTableView.m in Sources */,
@@ -3317,6 +3371,7 @@
 				0D65F09C20CF5C7800F3B71F /* BookFenjiModel.m in Sources */,
 				0D65F04020CE092D00F3B71F /* BaseAppRequestManager.m in Sources */,
 				0D99872F20F304AA002BD2B7 /* MedalListXqTableViewCell.m in Sources */,
+				0D90D939216066EC009F1820 /* ZhiShiShuNeiRongModel.m in Sources */,
 				0DA111FB20ECB00C001A3D4E /* UserLoginForgetMMTwoViewController.m in Sources */,
 				0D65F05820CE1CB600F3B71F /* JKStarScoreView.m in Sources */,
 				0D32684B21097B1900D7D563 /* AchiereadPowerModel.m in Sources */,
@@ -3406,12 +3461,14 @@
 				0D56D8AE20C90FAB00E24C23 /* HomePageViewController.m in Sources */,
 				0DD66B1320D9FCC30056528B /* FriendTopView.m in Sources */,
 				0D65F12E20D155DD00F3B71F /* MedalXQLQXSTableViewCell.m in Sources */,
+				0D7ABE96215E363F002EAA1D /* ZhiShiShuQiuView.m in Sources */,
 				0DF4125F20C8E5C80076B154 /* PublicView.m in Sources */,
 				0DF411C820C8D6630076B154 /* QRCodeGenerateVC.m in Sources */,
 				0D01AF4D20DD09AB005C549B /* FoundFriendBooKModel.m in Sources */,
 				0D1233AE210587870092B6C0 /* CreatetimeModel.m in Sources */,
 				0D65F19D20D2661F00F3B71F /* MyClassTableView.m in Sources */,
 				0D0D7D4C20E0C629003A3495 /* FoundGoodArticleModel.m in Sources */,
+				0D90D936216066EC009F1820 /* ZhiShiShuDataModel.m in Sources */,
 				0D577B68215CD9A5004080A5 /* ZhiShiShuViewController.m in Sources */,
 				0D99876520F5DA98002BD2B7 /* HomeMilestBackView.m in Sources */,
 				0D6D7E1C211933750058C0C0 /* BookTopLabel.m in Sources */,
@@ -3435,6 +3492,7 @@
 				0D65F0C420CFB0C200F3B71F /* UserFriendViewController.m in Sources */,
 				0D56D8C020C91D5700E24C23 /* HomeCkassifcationCollectionViewCell.m in Sources */,
 				0DD66B7C20DA47360056528B /* YDWZTimeView.m in Sources */,
+				0DE18200215F26BF00585389 /* ZhiShiShuShuViewController.m in Sources */,
 				0D6E93C120EB48DB00BC1BC4 /* BookListMenu.m in Sources */,
 				0D56D90B20CA7F8100E24C23 /* FoundViewController.m in Sources */,
 				0DD66B7720DA47360056528B /* ChaKanCuoTiViewController.m in Sources */,
