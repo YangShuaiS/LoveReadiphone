@@ -3546,7 +3546,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W8T8Y5Y5H2;
+				DEVELOPMENT_TEAM = G4XKPC4WVK;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BlueWhaleRead/Base/tool/PrefixHeader.pch";
 				INFOPLIST_FILE = BlueWhaleRead/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3554,7 +3554,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead.iphone.zhenji;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3567,7 +3567,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W8T8Y5Y5H2;
+				DEVELOPMENT_TEAM = G4XKPC4WVK;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BlueWhaleRead/Base/tool/PrefixHeader.pch";
 				INFOPLIST_FILE = BlueWhaleRead/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3575,7 +3575,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead.iphone.zhenji;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
