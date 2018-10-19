@@ -10,6 +10,9 @@
 #import "ZhiShiShuDataModel.h"
 #import "ZhiShiShuNeiRongModel.h"
 #import "ZhiSHiShuXianModel.h"
+#import "ZhiShiShuTimeLineModel.h"
+#import "ZhiShiShuViTypeModel.h"
+#import "ZhiShiShuLineModel.h"
 @interface ZhiShiShuModel : BaseModel
 @property (nonatomic, copy) NSNumber * code;
 @property(nonatomic,strong) ZhiShiShuDataModel * data;

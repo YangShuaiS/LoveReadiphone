@@ -112,4 +112,11 @@
             break;
     }
 }
+
+- (void)setModel:(ZhiShiShuFLOneModel *)model{
+    zssqiu.nav = self.nav;
+    label.text = model.name;
+    [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.icon]]];
+    zssqiu.itemarray = model.children;
+}
 @end

@@ -70,11 +70,9 @@
     [imageView addGestureRecognizer:tapGestur];
     
     name = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255, 255, 255) LabelFont:TextFont(20) TextAlignment:NSTextAlignmentLeft Text:@""];
+    name.numberOfLines = 2;
     [self addSubview:name];
-    [name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->imageView.mas_top).with.offset(LENGTH(11));
-        make.left.equalTo(self->imageView.mas_right).with.offset(LENGTH(10));
-    }];
+
 
     banji = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255, 255, 255) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:banji];
@@ -88,8 +86,8 @@
     byview.layer.masksToBounds = YES;
     [self addSubview:byview];
     [byview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self->name.mas_centerY);
-        make.left.equalTo(self->name.mas_right).with.offset(LENGTH(6));
+        make.centerY.mas_equalTo(self->banji.mas_centerY);
+        make.left.equalTo(self->banji.mas_right).with.offset(LENGTH(6));
 //        make.width.mas_equalTo(LENGTH(60));
         make.height.mas_equalTo(LENGTH(20));
     }];
@@ -206,7 +204,7 @@
     [self addSubview:BJPM];
     
     [tdfj mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->imageView.mas_bottom).with.offset(LENGTH(12));
+        make.top.equalTo(self->BiaoYang.mas_bottom).with.offset(LENGTH(14));
         make.left.equalTo(ws).with.offset(0);
         make.width.mas_equalTo(tdjf.mas_width);
     }];
@@ -237,6 +235,21 @@
         make.top.equalTo(ydjf.mas_bottom).with.offset(LENGTH(4));
         make.centerX.mas_equalTo(ydjf.mas_centerX);
         make.bottom.mas_equalTo(ws).with.offset(-LENGTH(15));
+    }];
+    
+    [name mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self->imageView.mas_top).with.offset(LENGTH(11));
+        make.left.equalTo(self->imageView.mas_right).with.offset(LENGTH(10));
+        make.right.equalTo(self->CJBB.mas_left).with.offset(0);
+    }];
+    
+    [CJBB mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(ws).with.offset(LENGTH(22)+NavHeight-StatusBar);
+        make.right.equalTo(ws).with.offset(-LENGTH(12.5));
+//        make.left.equalTo(self->name.mas_right).with.offset(LENGTH(10));
+
+                make.width.mas_equalTo(LENGTH(85));
+        //        make.height.mas_equalTo(LENGTH(23));
     }];
     
 }

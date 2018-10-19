@@ -26,8 +26,10 @@
         make.edges.mas_equalTo(ws);
     }];
 }
-- (void)setImagestring:(NSString *)imagestring{
-    _imagestring = imagestring;
-    imageview.image = UIIMAGE(imagestring);
+
+- (void)setModel:(ZhiShiShuFLOneModel *)model{
+    _model = model;
+    [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
+
 }
 @end

@@ -79,8 +79,9 @@
             [self AddBackImage:_image];
             [self AddCenterSearch:_title];
             break;
-        case NavStyleLeftImageAndRightImage:
+        case NavStyleLeftImageAndRightImageAndCenter:
             [self AddBackImage:_image];
+            [self AddCenterTitle:_title];
             [self AddRightImage:_rightTitle];
 
             break;
@@ -212,7 +213,6 @@
     [self.delegate NavCenterClick];
 }
 
-
 - (void)jianbian:(NSString *)text
            Color:(NSArray *)colorarray{
     titleLable.text = text;
@@ -248,5 +248,10 @@
 //    gradient.frame = titleLable.frame;
 //    gradient.colors = colorarray;
 //
+}
+
+- (void)setTitcolor:(UIColor *)titcolor{
+    _titcolor = titcolor;
+    titleLable.textColor = titcolor;
 }
 @end

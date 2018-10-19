@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, NavStyle) {
     NacStyleBookCitySJ = 4, //书架
     nacStyleCengterAndRight = 5,
     NacStyleLeftCenterSearch = 6,
-    NavStyleLeftImageAndRightImage = 7,
+    NavStyleLeftImageAndRightImageAndCenter = 7,
 
 };
 #pragma mark -------------- 书架样式

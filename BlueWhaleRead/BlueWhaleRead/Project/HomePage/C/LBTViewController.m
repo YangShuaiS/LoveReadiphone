@@ -62,15 +62,15 @@
     [scrollView addSubview:name];
     [name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self->scrollView.mas_top).with.offset(LENGTH(40));
-        make.right.equalTo(ws.view).with.offset(-LENGTH(58));
-        make.left.equalTo(ws.view).with.offset(LENGTH(58));
+        make.right.equalTo(ws.view).with.offset(-LENGTH(12));
+        make.left.equalTo(ws.view).with.offset(LENGTH(12));
     }];
     
     time = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(182,181,181) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:@"2012-12-12"];
     [scrollView addSubview:time];
     [time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self->name.mas_bottom).with.offset(10);
-        make.left.equalTo(ws.view).with.offset(LENGTH(50));
+        make.left.equalTo(ws.view).with.offset(LENGTH(12));
     }];
     
 
@@ -155,7 +155,7 @@
 //    [topImageView sd_setImageWithURL:URLIMAGE(model.banner.banner_img) placeholderImage:UIIMAGE(@"bg_推荐书籍")];
     time.text = [BaseObject TiemArray:model.banner.create_time String:@" "][0];
 //    name.text = model.banner.
-    name.text = model.banner.title;
+    name.text = model.banner.title; 
     NSString * str = model.banner.content;
     [webView loadHTMLString:str baseURL:nil];
 

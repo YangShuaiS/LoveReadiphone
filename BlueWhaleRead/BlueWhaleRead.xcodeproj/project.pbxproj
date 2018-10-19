@@ -27,6 +27,13 @@
 		0D0D7D6720E221B4003A3495 /* ShiZiJGTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0D7D6620E221B4003A3495 /* ShiZiJGTopView.m */; };
 		0D0D7D6A20E221C0003A3495 /* ShiZiJGDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0D7D6920E221C0003A3495 /* ShiZiJGDownView.m */; };
 		0D0D7D6D20E22D34003A3495 /* GenBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0D7D6C20E22D34003A3495 /* GenBookView.m */; };
+		0D1025CD216DB2B800BAF30A /* ZhiShiShuTimeLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1025CC216DB2B800BAF30A /* ZhiShiShuTimeLineModel.m */; };
+		0D1025D0216E1DA200BAF30A /* ZhiShiShuGuanXi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1025CF216E1DA200BAF30A /* ZhiShiShuGuanXi.m */; };
+		0D1025D3216E23FC00BAF30A /* ZhiShiShuViTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1025D2216E23FC00BAF30A /* ZhiShiShuViTypeModel.m */; };
+		0D1025D6216E276B00BAF30A /* ZhiShiShuViView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1025D5216E276B00BAF30A /* ZhiShiShuViView.m */; };
+		0D1025D9216E278B00BAF30A /* ZhiShiShuLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1025D8216E278B00BAF30A /* ZhiShiShuLineView.m */; };
+		0D1025DC216E27BF00BAF30A /* ZhiShiShuRelationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1025DB216E27BF00BAF30A /* ZhiShiShuRelationView.m */; };
+		0D1025E0216EFABF00BAF30A /* ZhiShiShuBookStyleView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1025DF216EFABF00BAF30A /* ZhiShiShuBookStyleView1.m */; };
 		0D1233A3210578E30092B6C0 /* HomeWorkTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1233A2210578E30092B6C0 /* HomeWorkTableView.m */; };
 		0D1233A6210579220092B6C0 /* HomeWorkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1233A5210579220092B6C0 /* HomeWorkTableViewCell.m */; };
 		0D1233A8210584CC0092B6C0 /* 简少儿.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D1233A7210584CC0092B6C0 /* 简少儿.ttf */; };
@@ -54,6 +61,10 @@
 		0D26053F210C1D7700D15D17 /* classDynamicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D26053E210C1D7700D15D17 /* classDynamicModel.m */; };
 		0D260542210C54A500D15D17 /* MyBadgeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D260541210C54A500D15D17 /* MyBadgeListModel.m */; };
 		0D260545210C5E0300D15D17 /* MyBadgeXQModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D260544210C5E0300D15D17 /* MyBadgeXQModel.m */; };
+		0D29BEC621749E750000A00A /* ZhiShiShuBookStyleView1All.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D29BEC521749E750000A00A /* ZhiShiShuBookStyleView1All.m */; };
+		0D29BEC92175D7D70000A00A /* ZhiShiShuFLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D29BEC82175D7D70000A00A /* ZhiShiShuFLModel.m */; };
+		0D29BECC2175D8270000A00A /* ZhiShiShuFLOneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D29BECB2175D8270000A00A /* ZhiShiShuFLOneModel.m */; };
+		0D29BECF2175F43A0000A00A /* ZhiShiShuTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D29BECE2175F43A0000A00A /* ZhiShiShuTwoModel.m */; };
 		0D2DAB6420E32B5D00EFFD1A /* ShiZiOrShiCiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2DAB6320E32B5D00EFFD1A /* ShiZiOrShiCiTableViewCell.m */; };
 		0D2DAB6A20E4763C00EFFD1A /* DTDownLasOrNextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2DAB6920E4763C00EFFD1A /* DTDownLasOrNextView.m */; };
 		0D2DAB6D20E4CBDF00EFFD1A /* DtJieGuoTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2DAB6C20E4CBDF00EFFD1A /* DtJieGuoTopView.m */; };
@@ -86,6 +97,7 @@
 		0D326863210A048000D7D563 /* MyMessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D326862210A048000D7D563 /* MyMessageListModel.m */; };
 		0D326866210A048D00D7D563 /* MyMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D326865210A048D00D7D563 /* MyMessageModel.m */; };
 		0D4209DE20D39E4B00E842FB /* TZXZView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4209DC20D39E4B00E842FB /* TZXZView.m */; };
+		0D45C8C9217857BB0004C6AC /* ZhiShiShuLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D45C8C8217857BB0004C6AC /* ZhiShiShuLineModel.m */; };
 		0D46A83F20FC9C50008D9ADD /* 汉仪丫丫体简.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D46A83E20FC9C4F008D9ADD /* 汉仪丫丫体简.ttf */; };
 		0D46A84521002E6B008D9ADD /* LCBMilestone.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D46A84421002E6B008D9ADD /* LCBMilestone.m */; };
 		0D46A84821002F25008D9ADD /* LCBmilestoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D46A84721002F25008D9ADD /* LCBmilestoneModel.m */; };
@@ -297,6 +309,8 @@
 		0D82223920F06AAA00E88E07 /* MyMessageCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82223820F06AAA00E88E07 /* MyMessageCellView.m */; };
 		0D82223C20F06F8A00E88E07 /* MyMessageXQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82223B20F06F8A00E88E07 /* MyMessageXQViewController.m */; };
 		0D82223F20F0F5D000E88E07 /* MedalListXqBookTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82223E20F0F5D000E88E07 /* MedalListXqBookTableView.m */; };
+		0D8C6CD2216B4A2C00776070 /* ZhiShiShuXQScroview.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8C6CD1216B4A2C00776070 /* ZhiShiShuXQScroview.m */; };
+		0D8E32C2216B413A00D238F7 /* ZhiShiShuXQView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8E32C1216B413A00D238F7 /* ZhiShiShuXQView.m */; };
 		0D90D96E21606960009F1820 /* ZhiShiShuDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D9662160695E009F1820 /* ZhiShiShuDataModel.m */; };
 		0D90D96F21606960009F1820 /* ZhiShiShuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D9672160695E009F1820 /* ZhiShiShuModel.m */; };
 		0D90D97021606960009F1820 /* ZhiSHiShuXianModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D90D96B2160695E009F1820 /* ZhiSHiShuXianModel.m */; };
@@ -323,6 +337,9 @@
 		0D99876B20F73FB6002BD2B7 /* RanderDownLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D99876A20F73FB6002BD2B7 /* RanderDownLabel.m */; };
 		0D99877220F75986002BD2B7 /* HistogramView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D99877120F75986002BD2B7 /* HistogramView.m */; };
 		0D99877520F78D74002BD2B7 /* HisDownLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D99877420F78D74002BD2B7 /* HisDownLabel.m */; };
+		0D9EEF0E216F45540077A4A1 /* ZhiShiShuXqModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EEF0D216F45540077A4A1 /* ZhiShiShuXqModel.m */; };
+		0D9EEF11216F45E10077A4A1 /* ZhiShiShuXqStyle1Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EEF10216F45E10077A4A1 /* ZhiShiShuXqStyle1Model.m */; };
+		0D9EEF14216F45F40077A4A1 /* ZhiShiShuXqStyle2Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EEF13216F45F40077A4A1 /* ZhiShiShuXqStyle2Model.m */; };
 		0DA111E820EBAE1C001A3D4E /* BookXQDownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA111E720EBAE1C001A3D4E /* BookXQDownMenuView.m */; };
 		0DA111EF20EC9D7D001A3D4E /* UserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA111EE20EC9D7D001A3D4E /* UserLoginViewController.m */; };
 		0DA111F220ECA24E001A3D4E /* UserlLoginTextFileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA111F120ECA24E001A3D4E /* UserlLoginTextFileView.m */; };
@@ -401,6 +418,8 @@
 		0DE22F4520F8B315007DB0B8 /* PopUpViewStyleBelongView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE22F4420F8B315007DB0B8 /* PopUpViewStyleBelongView.m */; };
 		0DE24A1D212D5ACF00D71A1D /* MedalListXQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE24A1C212D5ACF00D71A1D /* MedalListXQViewController.m */; };
 		0DEDC53C215F7C24003FE894 /* Baoli-SC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DEDC53B215F7C02003FE894 /* Baoli-SC-Regular.ttf */; };
+		0DF0152C216C8266006500D8 /* MyPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF0152B216C8266006500D8 /* MyPageControl.m */; };
+		0DF0152F216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF0152E216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.m */; };
 		0DF4115E20C8CB3C0076B154 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4115D20C8CB3C0076B154 /* AppDelegate.m */; };
 		0DF4116120C8CB3C0076B154 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4116020C8CB3C0076B154 /* ViewController.m */; };
 		0DF4116420C8CB3C0076B154 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF4116220C8CB3C0076B154 /* Main.storyboard */; };
@@ -511,6 +530,20 @@
 		0D0D7D6920E221C0003A3495 /* ShiZiJGDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShiZiJGDownView.m; sourceTree = "<group>"; };
 		0D0D7D6B20E22D34003A3495 /* GenBookView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenBookView.h; sourceTree = "<group>"; };
 		0D0D7D6C20E22D34003A3495 /* GenBookView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenBookView.m; sourceTree = "<group>"; };
+		0D1025CB216DB2B800BAF30A /* ZhiShiShuTimeLineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuTimeLineModel.h; sourceTree = "<group>"; };
+		0D1025CC216DB2B800BAF30A /* ZhiShiShuTimeLineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuTimeLineModel.m; sourceTree = "<group>"; };
+		0D1025CE216E1DA200BAF30A /* ZhiShiShuGuanXi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuGuanXi.h; sourceTree = "<group>"; };
+		0D1025CF216E1DA200BAF30A /* ZhiShiShuGuanXi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuGuanXi.m; sourceTree = "<group>"; };
+		0D1025D1216E23FC00BAF30A /* ZhiShiShuViTypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuViTypeModel.h; sourceTree = "<group>"; };
+		0D1025D2216E23FC00BAF30A /* ZhiShiShuViTypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuViTypeModel.m; sourceTree = "<group>"; };
+		0D1025D4216E276B00BAF30A /* ZhiShiShuViView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuViView.h; sourceTree = "<group>"; };
+		0D1025D5216E276B00BAF30A /* ZhiShiShuViView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuViView.m; sourceTree = "<group>"; };
+		0D1025D7216E278B00BAF30A /* ZhiShiShuLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuLineView.h; sourceTree = "<group>"; };
+		0D1025D8216E278B00BAF30A /* ZhiShiShuLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuLineView.m; sourceTree = "<group>"; };
+		0D1025DA216E27BE00BAF30A /* ZhiShiShuRelationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuRelationView.h; sourceTree = "<group>"; };
+		0D1025DB216E27BF00BAF30A /* ZhiShiShuRelationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuRelationView.m; sourceTree = "<group>"; };
+		0D1025DE216EFABF00BAF30A /* ZhiShiShuBookStyleView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuBookStyleView1.h; sourceTree = "<group>"; };
+		0D1025DF216EFABF00BAF30A /* ZhiShiShuBookStyleView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuBookStyleView1.m; sourceTree = "<group>"; };
 		0D1233A1210578E30092B6C0 /* HomeWorkTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeWorkTableView.h; sourceTree = "<group>"; };
 		0D1233A2210578E30092B6C0 /* HomeWorkTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeWorkTableView.m; sourceTree = "<group>"; };
 		0D1233A4210579220092B6C0 /* HomeWorkTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeWorkTableViewCell.h; sourceTree = "<group>"; };
@@ -564,6 +597,14 @@
 		0D260541210C54A500D15D17 /* MyBadgeListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyBadgeListModel.m; sourceTree = "<group>"; };
 		0D260543210C5E0300D15D17 /* MyBadgeXQModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyBadgeXQModel.h; sourceTree = "<group>"; };
 		0D260544210C5E0300D15D17 /* MyBadgeXQModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyBadgeXQModel.m; sourceTree = "<group>"; };
+		0D29BEC421749E750000A00A /* ZhiShiShuBookStyleView1All.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuBookStyleView1All.h; sourceTree = "<group>"; };
+		0D29BEC521749E750000A00A /* ZhiShiShuBookStyleView1All.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuBookStyleView1All.m; sourceTree = "<group>"; };
+		0D29BEC72175D7D70000A00A /* ZhiShiShuFLModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuFLModel.h; sourceTree = "<group>"; };
+		0D29BEC82175D7D70000A00A /* ZhiShiShuFLModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuFLModel.m; sourceTree = "<group>"; };
+		0D29BECA2175D8270000A00A /* ZhiShiShuFLOneModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuFLOneModel.h; sourceTree = "<group>"; };
+		0D29BECB2175D8270000A00A /* ZhiShiShuFLOneModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuFLOneModel.m; sourceTree = "<group>"; };
+		0D29BECD2175F43A0000A00A /* ZhiShiShuTwoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuTwoModel.h; sourceTree = "<group>"; };
+		0D29BECE2175F43A0000A00A /* ZhiShiShuTwoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuTwoModel.m; sourceTree = "<group>"; };
 		0D2DAB6220E32B5D00EFFD1A /* ShiZiOrShiCiTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShiZiOrShiCiTableViewCell.h; sourceTree = "<group>"; };
 		0D2DAB6320E32B5D00EFFD1A /* ShiZiOrShiCiTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShiZiOrShiCiTableViewCell.m; sourceTree = "<group>"; };
 		0D2DAB6820E4763C00EFFD1A /* DTDownLasOrNextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTDownLasOrNextView.h; sourceTree = "<group>"; };
@@ -630,6 +671,8 @@
 		0D3441572147D91D008D1CCC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		0D4209DC20D39E4B00E842FB /* TZXZView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZXZView.m; sourceTree = "<group>"; };
 		0D4209DD20D39E4B00E842FB /* TZXZView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZXZView.h; sourceTree = "<group>"; };
+		0D45C8C7217857BB0004C6AC /* ZhiShiShuLineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuLineModel.h; sourceTree = "<group>"; };
+		0D45C8C8217857BB0004C6AC /* ZhiShiShuLineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuLineModel.m; sourceTree = "<group>"; };
 		0D46A83E20FC9C4F008D9ADD /* 汉仪丫丫体简.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "汉仪丫丫体简.ttf"; sourceTree = "<group>"; };
 		0D46A84321002E6B008D9ADD /* LCBMilestone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCBMilestone.h; sourceTree = "<group>"; };
 		0D46A84421002E6B008D9ADD /* LCBMilestone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCBMilestone.m; sourceTree = "<group>"; };
@@ -1051,6 +1094,10 @@
 		0D82223B20F06F8A00E88E07 /* MyMessageXQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMessageXQViewController.m; sourceTree = "<group>"; };
 		0D82223D20F0F5D000E88E07 /* MedalListXqBookTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalListXqBookTableView.h; sourceTree = "<group>"; };
 		0D82223E20F0F5D000E88E07 /* MedalListXqBookTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalListXqBookTableView.m; sourceTree = "<group>"; };
+		0D8C6CD0216B4A2C00776070 /* ZhiShiShuXQScroview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuXQScroview.h; sourceTree = "<group>"; };
+		0D8C6CD1216B4A2C00776070 /* ZhiShiShuXQScroview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuXQScroview.m; sourceTree = "<group>"; };
+		0D8E32C0216B413A00D238F7 /* ZhiShiShuXQView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuXQView.h; sourceTree = "<group>"; };
+		0D8E32C1216B413A00D238F7 /* ZhiShiShuXQView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuXQView.m; sourceTree = "<group>"; };
 		0D90D9662160695E009F1820 /* ZhiShiShuDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuDataModel.m; sourceTree = "<group>"; };
 		0D90D9672160695E009F1820 /* ZhiShiShuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuModel.m; sourceTree = "<group>"; };
 		0D90D9682160695E009F1820 /* ZhiShiShuNeiRongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuNeiRongModel.h; sourceTree = "<group>"; };
@@ -1103,6 +1150,12 @@
 		0D99877120F75986002BD2B7 /* HistogramView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistogramView.m; sourceTree = "<group>"; };
 		0D99877320F78D74002BD2B7 /* HisDownLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HisDownLabel.h; sourceTree = "<group>"; };
 		0D99877420F78D74002BD2B7 /* HisDownLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HisDownLabel.m; sourceTree = "<group>"; };
+		0D9EEF0C216F45540077A4A1 /* ZhiShiShuXqModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuXqModel.h; sourceTree = "<group>"; };
+		0D9EEF0D216F45540077A4A1 /* ZhiShiShuXqModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuXqModel.m; sourceTree = "<group>"; };
+		0D9EEF0F216F45E10077A4A1 /* ZhiShiShuXqStyle1Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuXqStyle1Model.h; sourceTree = "<group>"; };
+		0D9EEF10216F45E10077A4A1 /* ZhiShiShuXqStyle1Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuXqStyle1Model.m; sourceTree = "<group>"; };
+		0D9EEF12216F45F40077A4A1 /* ZhiShiShuXqStyle2Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuXqStyle2Model.h; sourceTree = "<group>"; };
+		0D9EEF13216F45F40077A4A1 /* ZhiShiShuXqStyle2Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuXqStyle2Model.m; sourceTree = "<group>"; };
 		0DA111E620EBAE1C001A3D4E /* BookXQDownMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookXQDownMenuView.h; sourceTree = "<group>"; };
 		0DA111E720EBAE1C001A3D4E /* BookXQDownMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookXQDownMenuView.m; sourceTree = "<group>"; };
 		0DA111ED20EC9D7D001A3D4E /* UserLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginViewController.h; sourceTree = "<group>"; };
@@ -1257,6 +1310,10 @@
 		0DE22F4420F8B315007DB0B8 /* PopUpViewStyleBelongView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopUpViewStyleBelongView.m; sourceTree = "<group>"; };
 		0DE24A1C212D5ACF00D71A1D /* MedalListXQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedalListXQViewController.m; sourceTree = "<group>"; };
 		0DEDC53B215F7C02003FE894 /* Baoli-SC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baoli-SC-Regular.ttf"; sourceTree = "<group>"; };
+		0DF0152A216C8266006500D8 /* MyPageControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPageControl.h; sourceTree = "<group>"; };
+		0DF0152B216C8266006500D8 /* MyPageControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPageControl.m; sourceTree = "<group>"; };
+		0DF0152D216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuXQImagesAndTitle.h; sourceTree = "<group>"; };
+		0DF0152E216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuXQImagesAndTitle.m; sourceTree = "<group>"; };
 		0DF4115920C8CB3C0076B154 /* BlueWhaleRead.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueWhaleRead.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DF4115C20C8CB3C0076B154 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0DF4115D20C8CB3C0076B154 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1388,6 +1445,17 @@
 				D8258FD3664F42B3007F36D9 /* libPods-BlueWhaleRead.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0D1025DD216EFA6800BAF30A /* StyleView */ = {
+			isa = PBXGroup;
+			children = (
+				0D29BEC421749E750000A00A /* ZhiShiShuBookStyleView1All.h */,
+				0D29BEC521749E750000A00A /* ZhiShiShuBookStyleView1All.m */,
+				0D1025DE216EFABF00BAF30A /* ZhiShiShuBookStyleView1.h */,
+				0D1025DF216EFABF00BAF30A /* ZhiShiShuBookStyleView1.m */,
+			);
+			path = StyleView;
 			sourceTree = "<group>";
 		};
 		0D56D8A720C90F8F00E24C23 /* Project */ = {
@@ -1826,6 +1894,8 @@
 		0D577B56215CD9A5004080A5 /* ZhiShiShu */ = {
 			isa = PBXGroup;
 			children = (
+				0D9EEF15216F460D0077A4A1 /* StyleModel */,
+				0D1025DD216EFA6800BAF30A /* StyleView */,
 				0D90D9652160695E009F1820 /* M */,
 				0D577B58215CD9A5004080A5 /* C */,
 				0D577B5B215CD9A5004080A5 /* V */,
@@ -1867,6 +1937,20 @@
 				0D7ABE95215E363F002EAA1D /* ZhiShiShuQiuView.m */,
 				0D7ABE97215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.h */,
 				0D7ABE98215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m */,
+				0D8E32C0216B413A00D238F7 /* ZhiShiShuXQView.h */,
+				0D8E32C1216B413A00D238F7 /* ZhiShiShuXQView.m */,
+				0D8C6CD0216B4A2C00776070 /* ZhiShiShuXQScroview.h */,
+				0D8C6CD1216B4A2C00776070 /* ZhiShiShuXQScroview.m */,
+				0DF0152D216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.h */,
+				0DF0152E216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.m */,
+				0D1025CE216E1DA200BAF30A /* ZhiShiShuGuanXi.h */,
+				0D1025CF216E1DA200BAF30A /* ZhiShiShuGuanXi.m */,
+				0D1025D4216E276B00BAF30A /* ZhiShiShuViView.h */,
+				0D1025D5216E276B00BAF30A /* ZhiShiShuViView.m */,
+				0D1025D7216E278B00BAF30A /* ZhiShiShuLineView.h */,
+				0D1025D8216E278B00BAF30A /* ZhiShiShuLineView.m */,
+				0D1025DA216E27BE00BAF30A /* ZhiShiShuRelationView.h */,
+				0D1025DB216E27BF00BAF30A /* ZhiShiShuRelationView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -2319,14 +2403,28 @@
 		0D90D9652160695E009F1820 /* M */ = {
 			isa = PBXGroup;
 			children = (
-				0D90D9662160695E009F1820 /* ZhiShiShuDataModel.m */,
-				0D90D9672160695E009F1820 /* ZhiShiShuModel.m */,
 				0D90D9682160695E009F1820 /* ZhiShiShuNeiRongModel.h */,
-				0D90D9692160695E009F1820 /* ZhiSHiShuXianModel.h */,
-				0D90D96A2160695E009F1820 /* ZhiShiShuDataModel.h */,
-				0D90D96B2160695E009F1820 /* ZhiSHiShuXianModel.m */,
 				0D90D96C2160695E009F1820 /* ZhiShiShuNeiRongModel.m */,
 				0D90D96D2160695E009F1820 /* ZhiShiShuModel.h */,
+				0D90D9672160695E009F1820 /* ZhiShiShuModel.m */,
+				0D90D9692160695E009F1820 /* ZhiSHiShuXianModel.h */,
+				0D90D96B2160695E009F1820 /* ZhiSHiShuXianModel.m */,
+				0D90D96A2160695E009F1820 /* ZhiShiShuDataModel.h */,
+				0D90D9662160695E009F1820 /* ZhiShiShuDataModel.m */,
+				0D1025CB216DB2B800BAF30A /* ZhiShiShuTimeLineModel.h */,
+				0D1025CC216DB2B800BAF30A /* ZhiShiShuTimeLineModel.m */,
+				0D1025D1216E23FC00BAF30A /* ZhiShiShuViTypeModel.h */,
+				0D1025D2216E23FC00BAF30A /* ZhiShiShuViTypeModel.m */,
+				0D45C8C7217857BB0004C6AC /* ZhiShiShuLineModel.h */,
+				0D45C8C8217857BB0004C6AC /* ZhiShiShuLineModel.m */,
+				0DF0152A216C8266006500D8 /* MyPageControl.h */,
+				0DF0152B216C8266006500D8 /* MyPageControl.m */,
+				0D29BEC72175D7D70000A00A /* ZhiShiShuFLModel.h */,
+				0D29BEC82175D7D70000A00A /* ZhiShiShuFLModel.m */,
+				0D29BECA2175D8270000A00A /* ZhiShiShuFLOneModel.h */,
+				0D29BECB2175D8270000A00A /* ZhiShiShuFLOneModel.m */,
+				0D29BECD2175F43A0000A00A /* ZhiShiShuTwoModel.h */,
+				0D29BECE2175F43A0000A00A /* ZhiShiShuTwoModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -2367,6 +2465,20 @@
 			);
 			path = V;
 			sourceTree = "<group>";
+		};
+		0D9EEF15216F460D0077A4A1 /* StyleModel */ = {
+			isa = PBXGroup;
+			children = (
+				0D9EEF0C216F45540077A4A1 /* ZhiShiShuXqModel.h */,
+				0D9EEF0D216F45540077A4A1 /* ZhiShiShuXqModel.m */,
+				0D9EEF0F216F45E10077A4A1 /* ZhiShiShuXqStyle1Model.h */,
+				0D9EEF10216F45E10077A4A1 /* ZhiShiShuXqStyle1Model.m */,
+				0D9EEF12216F45F40077A4A1 /* ZhiShiShuXqStyle2Model.h */,
+				0D9EEF13216F45F40077A4A1 /* ZhiShiShuXqStyle2Model.m */,
+			);
+			name = StyleModel;
+			path = BlueWhaleRead/Project/HomePage/ZhiShiShu/StyleModel;
+			sourceTree = SOURCE_ROOT;
 		};
 		0DA111E920EC9D63001A3D4E /* UserLogin */ = {
 			isa = PBXGroup;
@@ -3098,10 +3210,13 @@
 				0DE181FD215F268A00585389 /* ZhiShiShuSMViewController.m in Sources */,
 				0D65F08620CE563400F3B71F /* HomebadgelistModel.m in Sources */,
 				0DD66B8320DA47360056528B /* DTPaiXuView.m in Sources */,
+				0D29BEC621749E750000A00A /* ZhiShiShuBookStyleView1All.m in Sources */,
+				0D8E32C2216B413A00D238F7 /* ZhiShiShuXQView.m in Sources */,
 				0DD66B7A20DA47360056528B /* TZJieGuoViewController.m in Sources */,
 				0D0D7D6120E0F475003A3495 /* SearchView.m in Sources */,
 				0DF411FC20C8D7000076B154 /* LeiDaTuOnlyUser.m in Sources */,
 				0D56D8CC20C92B1700E24C23 /* HomeModerateCollectView.m in Sources */,
+				0D29BECC2175D8270000A00A /* ZhiShiShuFLOneModel.m in Sources */,
 				0D6D7E19211854F10058C0C0 /* JoinBookBageXQModel.m in Sources */,
 				0D99873520F335AC002BD2B7 /* MedalChoosCollectionViewCell.m in Sources */,
 				0DA1121F20EDFBBE001A3D4E /* MedalPaiHuanTableView.m in Sources */,
@@ -3139,6 +3254,7 @@
 				0DE22F3820F84D70007DB0B8 /* GeneraNoDataView.m in Sources */,
 				0DD66B1F20DA27FD0056528B /* FriendXunZhangTabView.m in Sources */,
 				0D577B69215CD9A5004080A5 /* UIView+UIScreenDisplaying.m in Sources */,
+				0D1025D0216E1DA200BAF30A /* ZhiShiShuGuanXi.m in Sources */,
 				0D99875920F4C8D3002BD2B7 /* GenPopViewModel.m in Sources */,
 				0D32684E21097DB700D7D563 /* AcherPowerTYModel.m in Sources */,
 				0D7ABE93215E2EE6002EAA1D /* ZhiShiShuOneDownView.m in Sources */,
@@ -3151,6 +3267,7 @@
 				0D65F06220CE208A00F3B71F /* UnderTableViewCell.m in Sources */,
 				0DD66B6E20DA47360056528B /* CTTableViewCell.m in Sources */,
 				0D82223020F06A4A00E88E07 /* MyMessageViewController.m in Sources */,
+				0D9EEF11216F45E10077A4A1 /* ZhiShiShuXqStyle1Model.m in Sources */,
 				0D65F0C120CFAF0700F3B71F /* BookXQMenuView.m in Sources */,
 				0D0D7D5520E0DA4E003A3495 /* HomeActivityView.m in Sources */,
 				0D65F1A920D2661F00F3B71F /* MyMedalView.m in Sources */,
@@ -3167,6 +3284,7 @@
 				0D56D90E20CA81C600E24C23 /* FoundBanjiView.m in Sources */,
 				0D3268572109C0E500D7D563 /* AcherSZSCModel.m in Sources */,
 				0D32685A2109C26D00D7D563 /* AcherSzScNRModel.m in Sources */,
+				0D1025CD216DB2B800BAF30A /* ZhiShiShuTimeLineModel.m in Sources */,
 				0D65F06120CE208A00F3B71F /* UnderTabView.m in Sources */,
 				0D99875620F4C88E002BD2B7 /* PopUpViewStyleMedalcompleteView.m in Sources */,
 				0DA111E820EBAE1C001A3D4E /* BookXQDownMenuView.m in Sources */,
@@ -3196,6 +3314,7 @@
 				0DF411D120C8D6630076B154 /* SGQRCodeGenerateManager.m in Sources */,
 				0DF411F920C8D7000076B154 /* BaseButton.m in Sources */,
 				0DA111F220ECA24E001A3D4E /* UserlLoginTextFileView.m in Sources */,
+				0D8C6CD2216B4A2C00776070 /* ZhiShiShuXQScroview.m in Sources */,
 				0D99875F20F5AA91002BD2B7 /* HomeMilestoneViewController.m in Sources */,
 				0D65F14320D2471000F3B71F /* GeneralBookImageNumberCollectionView.m in Sources */,
 				0D65F06B20CE474600F3B71F /* BookFriendModel.m in Sources */,
@@ -3282,11 +3401,13 @@
 				0D65F0E220CFC9FB00F3B71F /* MingShiDDTableViewCell.m in Sources */,
 				0D26053C210C1CCC00D15D17 /* ClassBJDTModel.m in Sources */,
 				0D65F1A420D2661F00F3B71F /* MyQingKuang.m in Sources */,
+				0DF0152C216C8266006500D8 /* MyPageControl.m in Sources */,
 				0D56D8B120C911E700E24C23 /* BaseModel.m in Sources */,
 				0D65F1AD20D2661F00F3B71F /* MyMedalTopTableViewCell.m in Sources */,
 				0D82223F20F0F5D000E88E07 /* MedalListXqBookTableView.m in Sources */,
 				0DA1120A20ECD062001A3D4E /* PersonXgPhoneTwoViewController.m in Sources */,
 				0DA1122E20EE2AED001A3D4E /* SzScXuanXiangCollectionView.m in Sources */,
+				0D1025D6216E276B00BAF30A /* ZhiShiShuViView.m in Sources */,
 				0D260545210C5E0300D15D17 /* MyBadgeXQModel.m in Sources */,
 				0D99875C20F5A163002BD2B7 /* HomeNoticeView.m in Sources */,
 				0DF411FA20C8D7000076B154 /* NativeView.m in Sources */,
@@ -3297,8 +3418,10 @@
 				0D65F09020CE9AEF00F3B71F /* BookListViewController.m in Sources */,
 				0DA1121320ECD5C1001A3D4E /* PersonXiuGaiMimaViewController.m in Sources */,
 				0D65F11320D0F19F00F3B71F /* MenuTwon.m in Sources */,
+				0D9EEF14216F45F40077A4A1 /* ZhiShiShuXqStyle2Model.m in Sources */,
 				0D65F10D20D0C94900F3B71F /* FriendOrMedaliAndNameCollectionViewCell.m in Sources */,
 				0D0D7D6720E221B4003A3495 /* ShiZiJGTopView.m in Sources */,
+				0D9EEF0E216F45540077A4A1 /* ZhiShiShuXqModel.m in Sources */,
 				0D260521210ABBFF00D15D17 /* MyMessageXQModel.m in Sources */,
 				0D56D8C320C921AD00E24C23 /* HomeClassIfCation.m in Sources */,
 				0D56D8B420C9121000E24C23 /* LINSHI.m in Sources */,
@@ -3306,10 +3429,12 @@
 				0D65F1AC20D2661F00F3B71F /* PersonalTableView.m in Sources */,
 				0DF411A120C8D5F90076B154 /* BaseNavigationViewController.m in Sources */,
 				0DD66B2520DA34590056528B /* FriendHotView.m in Sources */,
+				0D1025D3216E23FC00BAF30A /* ZhiShiShuViTypeModel.m in Sources */,
 				0D56D8BA20C91A1900E24C23 /* HomeLBTView.m in Sources */,
 				0D65F1A320D2661F00F3B71F /* PersonDownView.m in Sources */,
 				0DF4116720C8CB3C0076B154 /* BlueWhaleRead.xcdatamodeld in Sources */,
 				0D56D8DD20CA28B600E24C23 /* NavigationMenuView.m in Sources */,
+				0D45C8C9217857BB0004C6AC /* ZhiShiShuLineModel.m in Sources */,
 				0DA1122820EE1F3F001A3D4E /* SZOrSCViewController.m in Sources */,
 				0DF411CA20C8D6630076B154 /* WCQRCodeScanningVC.m in Sources */,
 				0D260536210C162900D15D17 /* LunBoTuXQModel.m in Sources */,
@@ -3361,6 +3486,7 @@
 				0DA1121920ECFB6D001A3D4E /* FoundUserModel.m in Sources */,
 				0DA1121620ECD6DE001A3D4E /* PersonXGMMView.m in Sources */,
 				0D32685D2109D9AC00D7D563 /* UserLoginModel.m in Sources */,
+				0D29BECF2175F43A0000A00A /* ZhiShiShuTwoModel.m in Sources */,
 				0D56D91A20CA91E600E24C23 /* FoundClassRankingView.m in Sources */,
 				0D56D91420CA851400E24C23 /* FoundClassTableView.m in Sources */,
 				0D65F16B20D2654000F3B71F /* MyViewController.m in Sources */,
@@ -3380,12 +3506,14 @@
 				0DE24A1D212D5ACF00D71A1D /* MedalListXQViewController.m in Sources */,
 				0D577B6E215CD9A5004080A5 /* ZhiShiSHuLeftView.m in Sources */,
 				0D4DB7FE20DBA06000160848 /* TXXunZhangModel.m in Sources */,
+				0D1025E0216EFABF00BAF30A /* ZhiShiShuBookStyleView1.m in Sources */,
 				0DA111F820ECAFFC001A3D4E /* UserLoginForgetMMOneViewController.m in Sources */,
 				0D65F08320CE55DA00F3B71F /* HomeuserModel.m in Sources */,
 				0D46A84521002E6B008D9ADD /* LCBMilestone.m in Sources */,
 				0DD66B8A20DA47360056528B /* DTShiZiCiView.m in Sources */,
 				0D7017AB20D8A7A4009BEA52 /* UnreadBookModel.m in Sources */,
 				0DD66B1920DA08C80056528B /* FriendUserModel.m in Sources */,
+				0D1025DC216E27BF00BAF30A /* ZhiShiShuRelationView.m in Sources */,
 				0D1233C62107559E0092B6C0 /* ZhuTiTagModel.m in Sources */,
 				0D640C8F20E9D1EB0029ED99 /* TiStyleModel.m in Sources */,
 				0D65F0EB20D0ABD600F3B71F /* YouXiuSPTableViewCell.m in Sources */,
@@ -3417,6 +3545,7 @@
 				0D65F07720CE540000F3B71F /* TagModel.m in Sources */,
 				0D65F19920D2661F00F3B71F /* MyClassCellView.m in Sources */,
 				0D65F16520D2650400F3B71F /* MyClassViewController.m in Sources */,
+				0DF0152F216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.m in Sources */,
 				0D1233A3210578E30092B6C0 /* HomeWorkTableView.m in Sources */,
 				0DF4120A20C8D7810076B154 /* UnderModel.m in Sources */,
 				0D56D8E620CA51A300E24C23 /* HomeInterestGroupCollectionViewCell.m in Sources */,
@@ -3427,6 +3556,7 @@
 				0D0D7D4920E09C12003A3495 /* FoundLikeBookModel.m in Sources */,
 				0DF4126020C8E5C80076B154 /* PublicModel.m in Sources */,
 				0D7017AE20D8D727009BEA52 /* ReadBookListTableView.m in Sources */,
+				0D1025D9216E278B00BAF30A /* ZhiShiShuLineView.m in Sources */,
 				0D0D7D6420E1157B003A3495 /* ShiZiOrShiCIJieGuoViewController.m in Sources */,
 				0D65F07A20CE547D00F3B71F /* TestImgListModel.m in Sources */,
 				0D65F1AB20D2661F00F3B71F /* MyQingKuangCollectionViewCell.m in Sources */,
@@ -3435,6 +3565,7 @@
 				0D6D7E22211AD89B0058C0C0 /* FoundBookCollectionViewCell.m in Sources */,
 				0DA1120D20ECD0D6001A3D4E /* PersonXinAndOldPhoneView.m in Sources */,
 				0D65F04F20CE1BE500F3B71F /* BookTableViewCell.m in Sources */,
+				0D29BEC92175D7D70000A00A /* ZhiShiShuFLModel.m in Sources */,
 				0D56D92720CA936200E24C23 /* DCCycleScrollViewCell.m in Sources */,
 				0DD66B8520DA47360056528B /* DaTiClick.m in Sources */,
 				0D65F10A20D0BF2400F3B71F /* MedalBageFriendModel.m in Sources */,
@@ -3678,7 +3809,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W8T8Y5Y5H2;
+				DEVELOPMENT_TEAM = G4XKPC4WVK;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BlueWhaleRead/Base/tool/PrefixHeader.pch";
 				INFOPLIST_FILE = BlueWhaleRead/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3686,7 +3817,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jiashi.----";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3699,7 +3830,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W8T8Y5Y5H2;
+				DEVELOPMENT_TEAM = G4XKPC4WVK;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BlueWhaleRead/Base/tool/PrefixHeader.pch";
 				INFOPLIST_FILE = BlueWhaleRead/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3707,7 +3838,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jiashi.----";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

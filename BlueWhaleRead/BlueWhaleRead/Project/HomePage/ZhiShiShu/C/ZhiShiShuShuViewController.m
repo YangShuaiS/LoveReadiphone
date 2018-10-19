@@ -9,7 +9,9 @@
 #import "ZhiShiShuShuViewController.h"
 #import "ZhiShiShuScroVuew.h"
 
-@interface ZhiShiShuShuViewController ()
+@interface ZhiShiShuShuViewController (){
+    ZhiShiShuScroVuew * scroview;
+}
 
 @end
 
@@ -18,12 +20,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     WS(ws);
-    ZhiShiShuScroVuew * scroview = [ZhiShiShuScroVuew new];
+    @autoreleasepool {
+    scroview = [ZhiShiShuScroVuew new];
+    scroview.nav = self.navigationController;
     [self.view addSubview:scroview];
     [scroview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(ws.view);
     }];
+    }
+    scroview.itemid = _itemid;
+
     // Do any additional setup after loading the view.
+}
+- (void)dealloc{
+    [self.view.superview removeFromSuperview];
+    [self.view removeFromSuperview];
+    [scroview removeFromSuperview];
 }
 
 /*

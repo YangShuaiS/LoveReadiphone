@@ -19,9 +19,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.01</string>
+	<string>1.03</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>9</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -42,7 +42,8 @@
 		<string>简少儿.ttf</string>
 		<string>汉仪丫丫体简.ttf</string>
 		<string>简卡通.ttf</string>
-        <string>Baoli-SC-Regular.ttf</string>
+		<string>Baoli-SC-Regular.ttf</string>
+		<string>HanYiZongYiTiJian-1.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

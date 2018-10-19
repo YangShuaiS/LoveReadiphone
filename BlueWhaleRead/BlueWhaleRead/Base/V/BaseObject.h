@@ -11,6 +11,8 @@
 extern CGFloat NavHeight;
 extern CGFloat TabBarHeight;
 extern CGFloat StatusBar;
+extern CGFloat poinw;
+
 
 extern NSString * ZSFWQ;
 

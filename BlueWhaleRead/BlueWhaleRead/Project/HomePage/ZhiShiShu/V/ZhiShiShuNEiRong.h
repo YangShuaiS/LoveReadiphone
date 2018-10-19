@@ -10,6 +10,8 @@
 
 @interface ZhiShiShuNEiRong : BaseView
 @property(nonatomic,strong)ZhiShiShuNeiRongModel * neirong;
+@property(nonatomic,strong)ZhiShiShuDataModel * textmodel;
+
 - (void)addimage;
 @end
 

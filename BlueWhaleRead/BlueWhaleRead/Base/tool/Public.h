@@ -10,6 +10,7 @@
 #define Public_h
 #define WIDTH  [UIScreen mainScreen].bounds.size.width
 #define HEIGHT  [UIScreen mainScreen].bounds.size.height
+
 #define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 #define LENGTH(x)       (NSInteger)(x*([UIScreen mainScreen].bounds.size.width/375.0))
 #define LENGTHHEIGHT(x)       (NSInteger)(x*([UIScreen mainScreen].bounds.size.width/768.0))
@@ -40,6 +41,9 @@
 //#define IMAGEURL @"http://192.168.1.221:8081/"
 //#define IMAGEURL @"http://192.168.1.221:8080/"
 #define IMAGEURL @"http://tiantianaidu.com/"
+#define ZSTX @"http://192.168.1.231:9001/"//内网
+//#define ZSTX @"http://119.90.89.88:9001/"//外网
+
 
 #define HOMEPAGE @"api/v1.0/homePage"//首页
 #define BOOKCITY @"api/v1.0/bookList"//书库
@@ -97,6 +101,11 @@
 
 
 #define JK_GHYM @"api/v1.0/testApi"//是否更换域名
+
+
+#define JK_ZHISHITIXIXIANGQING @"knowledge/get-all"//体系详情
+#define JK_ZHISHITIXIXIFENLEI @"/knowledge/get-type"//体系分类
+#define JK_ZHISHITIXIXQ @"/knowledge/get-content"//体系详情
 
 // 相对iphone6S 屏幕比
 #define KWidth_ScaleW [UIScreen mainScreen].bounds.size.width/414.0f

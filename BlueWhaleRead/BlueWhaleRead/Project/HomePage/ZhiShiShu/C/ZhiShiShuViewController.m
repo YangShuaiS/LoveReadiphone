@@ -12,12 +12,11 @@
 #import "ZhiShiShuSMViewController.h"
 @interface ZhiShiShuViewController ()<iCarouselDataSource, iCarouselDelegate,NavDelegate>
 @property (nonatomic, strong) iCarousel      *carousel;   // iCarousel
-@property (nonatomic, strong) NSArray *dataArray;  // 数据源
-@property (nonatomic, strong) NSArray *smoldataArray;  // 小数据源
 @end
 
 @implementation ZhiShiShuViewController{
     ZhiShiShuOneDownView * downview;
+    NSMutableArray * modelarray;
 }
 - (void)viewWillAppear:(BOOL)animated{
 //    [self.navigationController setNavigationBarHidden:NO animated:animated];
@@ -36,8 +35,9 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"" RightTitle:@"？" NativeStyle:NavStyleLeftImageAndRightImage];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"知识树" RightTitle:@"？" NativeStyle:NavStyleLeftImageAndRightImageAndCenter];
     self.navtive.backgroundColor = [UIColor clearColor];
+    self.navtive.titcolor = RGB(51,51,51);
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
     [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -61,8 +61,27 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)loadUpData{
+    //    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FOUND];
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSTX,JK_ZHISHITIXIXIFENLEI];
+    NSDictionary * dic = @{@"studentid":Me.ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            ZhiShiShuFLModel * model = [ZhiShiShuFLModel mj_objectWithKeyValues:responseObject];
+            if ([model.code isEqual:@200]) {
+                self->modelarray = [NSMutableArray array];
+                self->modelarray = model.data;
+                [self->_carousel reloadData];
+            }
+        }else{
+            
+        }
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadUpData];
     WS(ws);
 //    ZhiShiShuScroVuew * scroview = [ZhiShiShuScroVuew new];
 //    [self.view addSubview:scroview];
@@ -71,14 +90,12 @@
 //    }];
     
     // 初始化数据源
-    _dataArray = @[@"基础",@"自然",@"人文",@"美学",@"科技"];
-    _smoldataArray = @[@"基础-模糊",@"自然-模糊",@"人文-模糊",@"美学-模糊",@"科技-模糊"];
     // 初始化iCarousel
 //    UIImage *backgroundImage = [UIImage imageNamed:@"bg"];
 //    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
 //    self.view.backgroundColor = backgroundColor;
     UIImageView * bacimage = [UIImageView new];
-    bacimage.contentMode = UIViewContentModeScaleAspectFit;
+    bacimage.contentMode = UIViewContentModeScaleAspectFill;
     bacimage.image = UIIMAGE(@"bg");
     [self.view addSubview:bacimage];
     [bacimage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -103,7 +120,6 @@
     
     downview = [ZhiShiShuOneDownView new];
     downview.nav = self.navigationController;
-    downview.downstyle = 0;
     [self.view addSubview:downview];
     [downview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws.view).with.offset(HEIGHT/2+LENGTH(278)/2+LENGTH(28));
@@ -133,7 +149,7 @@
 - (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
     // 元素个数
-    return [_dataArray count];
+    return [modelarray count];
 }
 
 - (UIView *)carousel:(iCarousel *)carousel
@@ -147,10 +163,11 @@
 
     // 强行转换指针
     FLAnimatedImageView *pointView = (FLAnimatedImageView *)view;
+    ZhiShiShuFLOneModel * model = modelarray[index];
     if (index == 0) {
-        pointView.image = UIIMAGE(_dataArray[index]);
+        [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
     }else{
-        pointView.image = UIIMAGE(_smoldataArray[index]);
+        [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.mini_logo]]];
     }
     // 图片自动适应
     pointView.contentMode = UIViewContentModeScaleAspectFit;
@@ -172,18 +189,20 @@
 
 - (void)carousel:(__unused iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
     //点击第几个
-    NSLog(@"Tapped view number: %ld", (long)index);
+     NSLog(@"Tapped view number: %ld", (long)index);
 }
 
 - (void)carouselCurrentItemIndexDidChange:(__unused iCarousel *)carousel {
     for (NSInteger i = 0; i < carousel.visibleItemViews.count; i++) {
         FLAnimatedImageView * view = carousel.visibleItemViews[i];
+        ZhiShiShuFLOneModel * model = modelarray[i];
         if (carousel.currentItemIndex == i) {
-            view.image = UIIMAGE(_dataArray[i]);
+            [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
         }else{
-            view.image = UIIMAGE(_smoldataArray[i]);
+            [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.mini_logo]]];
         }
-        downview.downstyle = carousel.currentItemIndex;
+//        downview.downstyle = carousel.currentItemIndex;
+        downview.model = modelarray[carousel.currentItemIndex];
 //        NSString * str = _dataArray[i];
 //        if ([str isEqualToString:@"基础"]) {
 //
@@ -203,7 +222,11 @@
     return WIDTH ;
 }
 
-
-
+- (void)dealloc{
+    _carousel.delegate = nil;
+    [_carousel removeFromSuperview];
+    [self.view removeFromSuperview];
+    [self.view.superview removeFromSuperview];
+}
 
 @end

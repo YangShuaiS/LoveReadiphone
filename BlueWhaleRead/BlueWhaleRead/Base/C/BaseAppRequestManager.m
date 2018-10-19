@@ -29,6 +29,7 @@ static BaseAppRequestManager * manger = nil;
 //    [mangers.securityPolicy setValidatesDomainName:NO];
 
     //3.请求
+
     mangers.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传普通格式
     mangers.responseSerializer = [AFHTTPResponseSerializer serializer]; // AFN不会解析,数据是data，需要自己解析
 //    AFHTTPRequestSerializer *requestSerializer =  [AFJSONRequestSerializer serializer];
@@ -40,7 +41,6 @@ static BaseAppRequestManager * manger = nil;
 //        }
 //    }
 //    mangers.requestSerializer = requestSerializer;
-    
     mangers.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:@" /json",@"text/json", @"text/plain", @"text/html",@"application/json",nil];
     mangers.requestSerializer.timeoutInterval = 30;
     [mangers.securityPolicy setAllowInvalidCertificates:YES];

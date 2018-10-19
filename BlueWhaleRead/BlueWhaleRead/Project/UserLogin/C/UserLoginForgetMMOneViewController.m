@@ -103,6 +103,8 @@
             MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
                 [self UpData];
+                mb.label.text = model.message;
+                [mb hideAnimated:NO afterDelay:1];
             }else{
                 mb.label.text = model.message;
                 [mb hideAnimated:NO afterDelay:1];

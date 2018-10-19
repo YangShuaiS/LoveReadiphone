@@ -63,6 +63,9 @@
 #import "JoinBookModel.h"//加入书架model
 
 #import "ZhiShiShuModel.h"//知识树model
+
+#import "ZhiShiShuXqModel.h" //知识树model详情
+#import "ZhiShiShuFLModel.h"//知识树分类
 @interface MeModel : BaseModel
 @property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, strong) NSString *code;

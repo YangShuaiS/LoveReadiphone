@@ -22,6 +22,7 @@
     StatusBar = statusBar.frame.size.height;
     NavHeight = StatusBar+NAVIGATIONHeight;
     TabBarHeight = TABBARHeight;
+    poinw = WIDTH/16;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -21,4 +21,6 @@
 @property(nonatomic,assign)CGFloat x_axis;//中心点x
 @property(nonatomic,assign)CGFloat y_axis;//中心点y
 
+@property(nonatomic,strong)NSString * flag;//
+@property(nonatomic,strong)NSMutableArray * underline;
 @end

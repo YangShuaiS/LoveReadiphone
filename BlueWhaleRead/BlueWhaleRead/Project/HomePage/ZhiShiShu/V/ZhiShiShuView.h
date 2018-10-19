@@ -10,5 +10,6 @@
 
 @interface ZhiShiShuView : BaseView
 @property(nonatomic,strong)ZhiShiShuDataModel * data;
+@property(nonatomic,strong)BaseView * lastview;
 - (void)huadong;
 @end

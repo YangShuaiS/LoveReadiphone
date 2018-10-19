@@ -23,6 +23,7 @@
 @property(nonatomic,assign)NavStyle nativeStyle;
 @property (nonatomic, weak) id <NavDelegate> delegate;
 @property(nonatomic,strong) NSString * title;
+@property(nonatomic,strong) UIColor * titcolor;
 
 - (void)jianbian:(NSString *)text
            Color:(NSArray *)colorarray;

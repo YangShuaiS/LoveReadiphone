@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/TheTopic/C/ChaKanCuoTiViewController.m"
-            timestampString = "557296014.752723"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQView.m"
+            timestampString = "561552201.373934"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "-loadUpData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/TheTopic/C/ChaKanCuoTiViewController.m"
-            timestampString = "557296014.752791"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQView.m"
+            timestampString = "561552282.4676549"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "-loadUpData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/TheTopic/C/ChaKanCuoTiViewController.m"
-            timestampString = "557296014.75284"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQView.m"
+            timestampString = "561552283.345726"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "-loadUpData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/MedalList/C/MedalListXQViewController.m"
-            timestampString = "557373598.6552891"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQView.m"
+            timestampString = "561552287.897603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
-            landmarkName = "-UpData"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "-loadUpData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/MedalList/C/MedalListXQViewController.m"
-            timestampString = "557373598.655637"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQView.m"
+            timestampString = "561552295.338268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
-            landmarkName = "-UpData"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "-loadUpData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/MedalList/C/MedalListXQViewController.m"
-            timestampString = "557373598.655849"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQView.m"
+            timestampString = "561552300.262442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
-            landmarkName = "-UpData"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-upview"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -105,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/MedalList/C/MedalListXQViewController.m"
-            timestampString = "557373598.656055"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQView.m"
+            timestampString = "561552300.7820981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
-            landmarkName = "-AddView"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "-upview"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-            timestampString = "558259063.652633"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQView.m"
+            timestampString = "561552301.427364"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "-setModel:"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "-upview"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-            timestampString = "558259063.652702"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQScroview.m"
+            timestampString = "561552318.535107"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
-            landmarkName = "-setModel:"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "-setItemarray:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,13 +153,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-            timestampString = "558259063.65275"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQScroview.m"
+            timestampString = "561552322.2936521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
-            landmarkName = "-setModel:"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "-setItemarray:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,76 +169,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-            timestampString = "558259063.652797"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQScroview.m"
+            timestampString = "561552323.103339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
-            landmarkName = "-yidu"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[BookXQDownView yidu]"
-                  moduleName = "BlueWhaleRead"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yangshuai/Desktop/%E5%A4%A9%E5%A4%A9%E7%88%B1%E8%AF%BB/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-                  timestampString = "559908205.61059"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "268"
-                  endingLineNumber = "268"
-                  offsetFromSymbolStart = "264">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__22-[BookXQDownView yidu]_block_invoke.282"
-                  moduleName = "BlueWhaleRead"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yangshuai/Desktop/%E5%A4%A9%E5%A4%A9%E7%88%B1%E8%AF%BB/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-                  timestampString = "559908205.612422"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "269"
-                  endingLineNumber = "269"
-                  offsetFromSymbolStart = "68">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.284"
-                  moduleName = "BlueWhaleRead"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yangshuai/Desktop/%E5%A4%A9%E5%A4%A9%E7%88%B1%E8%AF%BB/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-                  timestampString = "559908205.6142139"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "268"
-                  endingLineNumber = "268"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/MyView/C/AchievementReportViewController.m"
-            timestampString = "558441893.68783"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "-clickTag:"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-setItemarray:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -248,29 +185,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/C/ZhiShiShuViewController.m"
-            timestampString = "559906042.692403"
+            filePath = "BlueWhaleRead/Project/HomePage/ZhiShiShu/V/ZhiShiShuXQScroview.m"
+            timestampString = "561552326.486262"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "-carousel:didSelectItemAtIndex:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Base/V/NativeView.m"
-            timestampString = "559908910.321692"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "-jianbian:Color:"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-setItemarray:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -45,6 +45,7 @@
     UIView *statusBar = STAUBARHEIGHT;
     StatusBar = statusBar.frame.size.height;
     NavHeight = StatusBar+NAVIGATIONHeight;
+    poinw = WIDTH/16;
     TabBarHeight = TABBARHeight;
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -239,8 +240,9 @@
             make.height.mas_equalTo(0);
         }];
     }else{
-        homeWork.itemarray = model.classStudent;
-
+        if (homeWork.itemarray.count ==0) {
+            homeWork.itemarray = model.classStudent;
+        }
     }
     moderate.model = model.typeList;
     new.itemarray = model.hotBadge;

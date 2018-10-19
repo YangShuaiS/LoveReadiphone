@@ -8,10 +8,8 @@
 
 #import "BaseViewController.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface ZhiShiShuShuViewController : BaseViewController
-
+@property(nonatomic,strong) NSString * itemid;
 @end
 
-NS_ASSUME_NONNULL_END

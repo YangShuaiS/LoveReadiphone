@@ -17,4 +17,5 @@ typedef NS_ENUM(NSInteger, DownStyle) {
 };
 @interface ZhiShiShuOneDownView : BaseView
 @property(nonatomic,assign)DownStyle downstyle;
+@property(nonatomic,strong) ZhiShiShuFLOneModel * model;
 @end

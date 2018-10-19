@@ -8,6 +8,7 @@
 
 #import "BaseView.h"
 
-@interface ZhiShiShuScroVuew : BaseView<UIScrollViewDelegate>
+@interface ZhiShiShuScroVuew : BaseView<UIScrollViewDelegate,NavDelegate>
+@property(nonatomic,strong) NSString * itemid;
 
 @end

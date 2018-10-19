@@ -9,5 +9,6 @@
 #import "BaseView.h"
 
 @interface ZhiShiSHuLeftView : BaseView
-
+@property(nonatomic,strong)NSMutableArray * axidataarry;
+@property(nonatomic,assign)CGFloat sizefloat;
 @end

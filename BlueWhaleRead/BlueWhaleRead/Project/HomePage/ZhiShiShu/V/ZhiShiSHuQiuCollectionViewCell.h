@@ -8,5 +8,6 @@
 
 #import "BaseCollectionViewCell.h"
 @interface ZhiShiSHuQiuCollectionViewCell : BaseCollectionViewCell
-@property(nonatomic,strong)NSString * imagestring;
+//@property(nonatomic,strong)NSString * imagestring;
+@property(nonatomic,strong)ZhiShiShuFLOneModel * model;
 @end

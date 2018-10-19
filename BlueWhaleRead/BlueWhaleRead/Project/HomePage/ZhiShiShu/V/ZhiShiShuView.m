@@ -9,6 +9,7 @@
 #import "ZhiShiShuView.h"
 #import "ZhiShiShuNEiRong.h"
 #import "ZhiShiSHuTanKuang.h"
+#import "ZhiShiShuXQView.h"
 
 static BOOL SDImageCacheOldShouldDecompressImages = YES;
 static BOOL SDImagedownloderOldShouldDecompressImages = YES;
@@ -27,7 +28,6 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     NSInteger page;
     
     ZhiShiSHuTanKuang * tankuang;
-    CGFloat poinw;
 }
 - (instancetype)init
 {
@@ -39,16 +39,16 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 }
 
 - (void)addview{
-    SDImageCache *canche = [SDImageCache sharedImageCache];
-    // SDImageCacheOldShouldDecompressImages = canche.shouldDecompressImages;
-    // canche.shouldDecompressImages = NO;
-    // 上面的被废掉了，目前的写法是：
-    SDImageCacheOldShouldDecompressImages = canche.config.shouldDecompressImages;
-    canche.config.shouldDecompressImages = NO;
-    
-    SDWebImageDownloader *downloder = [SDWebImageDownloader sharedDownloader];
-    SDImagedownloderOldShouldDecompressImages = downloder.shouldDecompressImages;
-    downloder.shouldDecompressImages = NO;
+//    SDImageCache *canche = [SDImageCache sharedImageCache];
+//    // SDImageCacheOldShouldDecompressImages = canche.shouldDecompressImages;
+//    // canche.shouldDecompressImages = NO;
+//    // 上面的被废掉了，目前的写法是：
+//    SDImageCacheOldShouldDecompressImages = canche.config.shouldDecompressImages;
+//    canche.config.shouldDecompressImages = NO;
+//    
+//    SDWebImageDownloader *downloder = [SDWebImageDownloader sharedDownloader];
+//    SDImagedownloderOldShouldDecompressImages = downloder.shouldDecompressImages;
+//    downloder.shouldDecompressImages = NO;
     self.userInteractionEnabled = YES;
     page = 0;
 
@@ -58,7 +58,6 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     layerdataarray = [NSMutableArray array];
     lastw = 0;
     lasth = 0;
-    poinw = WIDTH/8;
     [self mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(WIDTH);
         make.height.mas_equalTo(HEIGHT);
@@ -122,7 +121,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 //                animLayer.shadowColor = [UIColor blackColor].CGColor;
 //                animLayer.shadowRadius = 2.0f;
 //                animLayer.shadowOffset = CGSizeMake(0,0);
-                animLayer.lineWidth = 4.0f;
+                animLayer.lineWidth = 2.0f;
                 animLayer.strokeColor = [BaseObject colorWithHexString:xian.color].CGColor;
                 animLayer.fillColor = [UIColor clearColor].CGColor;
                 [self.layer addSublayer:animLayer];
@@ -139,25 +138,46 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     [viewdataarray addObjectsFromArray:data.point];
     for (NSInteger i = viewarray.count; i <viewdataarray.count; i++) {
             ZhiShiShuNeiRongModel * neirong = viewdataarray[i];
-            if (lastw>neirong.width*poinw+neirong.width*poinw) {
-                lastw=neirong.width*poinw+neirong.width*poinw;
+            if (lastw<neirong.width*poinw+neirong.x_axis*poinw) {
+                lastw=neirong.width*poinw+neirong.x_axis*poinw;
             }
-            if (lasth>neirong.height*poinw+neirong.height*poinw) {
-                lasth=neirong.height*poinw+neirong.height*poinw;
+            if (lasth<neirong.height*poinw+neirong.y_axis*poinw) {
+                lasth=neirong.height*poinw+neirong.y_axis*poinw;
             }
             ZhiShiShuNEiRong * imageview = [ZhiShiShuNEiRong new];
+        imageview.nav = self.nav;
             [self addSubview:imageview];
             [viewarray addObject:imageview];
-        imageview.neirong = neirong;
+            imageview.neirong = neirong;
+        imageview.textmodel = data;
+        if (neirong.width<=0) {
             [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo((neirong.x_axis-neirong.width/2)*self->poinw);
-                make.top.mas_equalTo((neirong.y_axis-neirong.height/2)*self->poinw);
+                make.left.mas_equalTo((neirong.x_axis-neirong.width/2)*poinw);
+                make.top.mas_equalTo((neirong.y_axis-neirong.height/2)*poinw-LENGTH(16));
             }];
+        }else{
+            [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo((neirong.x_axis-neirong.width/2)*poinw);
+                make.top.mas_equalTo((neirong.y_axis-neirong.height/2)*poinw);
+            }];
+        }
+        
+        imageview.userInteractionEnabled = YES;
+        BaseButton * oneButton = [BaseButton buttonWithType:UIButtonTypeCustom];
+        oneButton.tag = 100+i;
+        [oneButton addTarget:self action:@selector(oneButton:) forControlEvents:UIControlEventTouchUpInside];
+        [imageview addSubview:oneButton];
+        [oneButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(imageview);
+        }];
+        
+        
     }
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(WIDTH/2+self->lastw);
         make.height.mas_equalTo(HEIGHT/2+self->lasth);
     }];
+    
 }
 - (void)dealloc{
     SDImageCache *canche = [SDImageCache sharedImageCache];
@@ -209,6 +229,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
+    
 //    for (NSInteger i = layerarray.count+1; i < viewarray.count; i++) {
 //
 //        UIBezierPath *path = [UIBezierPath bezierPath];
@@ -330,4 +351,22 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 ////    }
 //    NSLog(@"%@",NSStringFromCGPoint(touchLocation));
 //}
+
+
+- (void)oneButton:(BaseButton *)button{
+    WS(ws);
+    ZhiShiShuNeiRongModel * neirong = viewdataarray[button.tag-100];
+    if ([neirong.flag isEqualToString:@""]||[neirong.flag isEqualToString:@"0"]) {
+        
+    }else{
+    ZhiShiShuXQView * view = [ZhiShiShuXQView new];
+    view.itemid = neirong._id;
+    view.nav = self.nav;
+    [_lastview addSubview:view];
+    
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.lastview);
+    }];
+    }
+}
 @end

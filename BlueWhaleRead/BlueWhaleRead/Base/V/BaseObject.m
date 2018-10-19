@@ -10,7 +10,7 @@
 CGFloat NavHeight = 0;
 CGFloat TabBarHeight = 0;
 CGFloat StatusBar = 0;
-
+CGFloat poinw = 0;
 NSString * ZSFWQ = @"http://tiantianaidu.com/";
 //NSString * ZSFWQ = @"http://192.168.1.221:8080/";
 
@@ -192,28 +192,17 @@ MeModel * Me = nil;
 
 
 + (NSArray*)rangeOfSubString:(NSString*)subStr inString:(NSString*)string {
-    
     NSMutableArray *rangeArray = [NSMutableArray array];
-    
-     NSString*string1 = [string stringByAppendingString:subStr];
-    
-        NSString *temp;
-    
-        for(int i =0; i < string.length-subStr.length+1; i ++) {
-        
-              temp = [string1 substringWithRange:NSMakeRange(i, subStr.length)];
-        
-                  if ([temp isEqualToString:subStr]) {
-            
-                            NSRange range = {i,subStr.length};
-            
-                            [rangeArray addObject: [NSValue valueWithRange:range]];
-            
-                      }
-        
-              }
-         return rangeArray;
-    
+    NSString*string1 = [string stringByAppendingString:subStr];
+    NSString *temp;
+    for(int i =0; i < string.length-subStr.length+1; i ++) {
+        temp = [string1 substringWithRange:NSMakeRange(i, subStr.length)];
+        if ([temp isEqualToString:subStr]) {
+            NSRange range = {i,subStr.length};
+            [rangeArray addObject: [NSValue valueWithRange:range]];
+        }
+    }
+    return rangeArray;
 }
 
 
