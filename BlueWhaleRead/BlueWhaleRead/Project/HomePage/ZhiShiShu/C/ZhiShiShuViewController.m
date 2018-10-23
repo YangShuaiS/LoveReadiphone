@@ -17,6 +17,7 @@
 @implementation ZhiShiShuViewController{
     ZhiShiShuOneDownView * downview;
     NSMutableArray * modelarray;
+    NSInteger nowindext;
 }
 - (void)viewWillAppear:(BOOL)animated{
 //    [self.navigationController setNavigationBarHidden:NO animated:animated];
@@ -34,6 +35,7 @@
 #pragma mark --------------------  导航栏以及代理
 - (void)AddNavtion{
     [super AddNavtion];
+    nowindext = 0;
     WS(ws);
     self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"知识树" RightTitle:@"？" NativeStyle:NavStyleLeftImageAndRightImageAndCenter];
     self.navtive.backgroundColor = [UIColor clearColor];
@@ -108,15 +110,61 @@
     _carousel.type = iCarouselTypeRotary;
     _carousel.pagingEnabled = YES;
     _carousel.autoscroll = 0;
-    _carousel.viewpointOffset = CGSizeMake(0, -LENGTH(300));
+    _carousel.viewpointOffset = CGSizeMake(0, -LENGTH(200));
     [self.view addSubview:_carousel];
 //    [_carousel setBackgroundColor:backgroundColor];
     [_carousel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(-LENGTH(600), 0, -LENGTH(0), 0));
+        make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(-LENGTH(450), 0, -LENGTH(0), 0));
     }];
     // 设置代理
     self.carousel.delegate   = self;
     self.carousel.dataSource = self;
+
+    FLAnimatedImageView * leftimage = [FLAnimatedImageView new];
+    leftimage.image = UIIMAGE(@"左");
+    [self.view addSubview:leftimage];
+    [leftimage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(ws.view).with.offset(LENGTH(15));
+        make.centerY.mas_equalTo(ws.view);
+        make.width.mas_equalTo(LENGTH(15));
+        make.height.mas_equalTo(LENGTH(30));
+    }];
+    UIView * leftv = [UIView new];
+    [self.view addSubview:leftv];
+    [leftv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(ws.view);;
+        make.centerY.mas_equalTo(ws.view);
+        make.width.mas_equalTo(LENGTH(40));
+        make.height.mas_equalTo(LENGTH(60));
+    }];
+    
+    FLAnimatedImageView * rightimage = [FLAnimatedImageView new];
+    rightimage.image = UIIMAGE(@"右");
+    [self.view addSubview:rightimage];
+    [rightimage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(ws.view).with.offset(-LENGTH(15));
+        make.centerY.mas_equalTo(ws.view);
+        make.width.mas_equalTo(LENGTH(15));
+        make.height.mas_equalTo(LENGTH(30));
+    }];
+    
+    UIView * rightv = [UIView new];
+    [self.view addSubview:rightv];
+    [rightv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(ws.view);;
+        make.centerY.mas_equalTo(ws.view);
+        make.width.mas_equalTo(LENGTH(40));
+        make.height.mas_equalTo(LENGTH(60));
+    }];
+    
+    leftv.userInteractionEnabled = YES;
+    rightv.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer * tapleft = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(leftbutton)];
+    [leftv addGestureRecognizer:tapleft];
+    
+    UITapGestureRecognizer * tapright = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightbutton)];
+    [rightv addGestureRecognizer:tapright];
     
     downview = [ZhiShiShuOneDownView new];
     downview.nav = self.navigationController;
@@ -129,7 +177,20 @@
     [self AddNavtion];
 
 }
-
+- (void)leftbutton{
+    nowindext++;
+    if (nowindext>modelarray.count-1) {
+        nowindext = 0;
+    }
+    [_carousel scrollToItemAtIndex:nowindext animated:YES];
+}
+- (void)rightbutton{
+    nowindext--;
+    if (nowindext<0) {
+        nowindext = modelarray.count-1;
+    }
+    [_carousel scrollToItemAtIndex:nowindext animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -158,11 +219,13 @@
 {
     if (view == nil)
     {
-        view = [[FLAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, LENGTH(254), LENGTH(278))];
+        view = [[FLAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, LENGTH(375), LENGTH(450))];
     }
 
     // 强行转换指针
     FLAnimatedImageView *pointView = (FLAnimatedImageView *)view;
+//    pointView.image = UIIMAGE(@"人文-孙悟空");
+
     ZhiShiShuFLOneModel * model = modelarray[index];
     if (index == 0) {
         [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
@@ -181,7 +244,7 @@
 {
     if (option == iCarouselOptionSpacing)
     {
-        return value * 1.1f;
+        return value * 1.9f;
     }
     
     return value;
@@ -189,13 +252,16 @@
 
 - (void)carousel:(__unused iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
     //点击第几个
+//    [_carousel scrollToItemAtIndex:3 animated:YES];
      NSLog(@"Tapped view number: %ld", (long)index);
 }
 
 - (void)carouselCurrentItemIndexDidChange:(__unused iCarousel *)carousel {
+    nowindext = carousel.currentItemIndex;
     for (NSInteger i = 0; i < carousel.visibleItemViews.count; i++) {
         FLAnimatedImageView * view = carousel.visibleItemViews[i];
         ZhiShiShuFLOneModel * model = modelarray[i];
+//        view.image = UIIMAGE(@"人文-孙悟空");
         if (carousel.currentItemIndex == i) {
             [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
         }else{
@@ -219,7 +285,7 @@
 }
 - (CGFloat)carouselItemWidth:(iCarousel *)carousel
 {
-    return WIDTH ;
+    return WIDTH;
 }
 
 - (void)dealloc{

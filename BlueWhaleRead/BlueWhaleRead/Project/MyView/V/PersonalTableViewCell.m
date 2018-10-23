@@ -31,6 +31,7 @@
             break;
             case ViewDownStyle:
             [self down];
+            downView.jt = NO;
             break;
             case ViewDownSwith:
             [self down];
@@ -69,7 +70,7 @@
     [self addSubview:rightview];
     [rightview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self->downView.mas_centerY);
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(16));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(28));
         make.width.mas_equalTo(LENGTH(8));
         make.height.mas_equalTo(LENGTH(14));
     }];

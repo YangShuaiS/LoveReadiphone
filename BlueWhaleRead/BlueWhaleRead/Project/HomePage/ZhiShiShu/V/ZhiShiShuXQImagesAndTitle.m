@@ -52,6 +52,21 @@
     gradient = [CAGradientLayer layer];
     [backview.layer addSublayer:gradient];
     
+    BaseView * bacv = [BaseView new];
+    bacv.backgroundColor = [UIColor whiteColor];
+    [backview addSubview:bacv];
+    [bacv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self->backview).with.insets(UIEdgeInsetsMake(LENGTH(5), LENGTH(5), LENGTH(5), LENGTH(5)));
+
+    }];
+    bacv.backgroundColor = [UIColor whiteColor];
+    bacv.layer.masksToBounds = YES;
+    bacv.layer.cornerRadius = LENGTH(40);
+    bacv.layer.shadowOpacity = 1;
+    bacv.layer.shadowColor = RGB(1,149,151).CGColor;
+    bacv.layer.shadowRadius = 2.0f;
+    bacv.layer.shadowOffset = CGSizeMake(0,0);
+    
     scrollViewback = [UIScrollView new];
     scrollViewback.backgroundColor = [UIColor whiteColor];
     scrollViewback.delegate = self;
@@ -62,16 +77,8 @@
     scrollViewback.showsHorizontalScrollIndicator = NO;
     [backview addSubview:scrollViewback];
     [scrollViewback mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self->backview).with.insets(UIEdgeInsetsMake(LENGTH(5), LENGTH(5), LENGTH(5), LENGTH(5)));
+        make.edges.mas_equalTo(self->backview).with.insets(UIEdgeInsetsMake(LENGTH(17), LENGTH(17), LENGTH(17), LENGTH(17)));
     }];
-    
-    scrollViewback.backgroundColor = [UIColor whiteColor];
-    scrollViewback.layer.masksToBounds = YES;
-    scrollViewback.layer.cornerRadius = LENGTH(40);
-    scrollViewback.layer.shadowOpacity = 1;
-    scrollViewback.layer.shadowColor = RGB(1,149,151).CGColor;
-    scrollViewback.layer.shadowRadius = 2.0f;
-    scrollViewback.layer.shadowOffset = CGSizeMake(0,0);
     
     scrollView = [UIScrollView new];
     scrollView.backgroundColor = [UIColor whiteColor];
@@ -95,7 +102,7 @@
     [scrollViewback addSubview:leftsanjiao];
     [leftsanjiao mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self->scrollView);
-        make.left.mas_equalTo(self->scrollView).with.offset(-LENGTH(20));
+        make.left.mas_equalTo(self->scrollView).with.offset(-LENGTH(12));
         make.width.mas_equalTo(LENGTH(12));
         make.height.mas_equalTo(LENGTH(23));
     }];
@@ -104,7 +111,7 @@
     [scrollViewback addSubview:leftview];
     [leftview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self->scrollView);
-        make.left.mas_equalTo(self->scrollView).with.offset(-LENGTH(20));
+        make.left.mas_equalTo(self->scrollView).with.offset(-LENGTH(12));
         make.width.mas_equalTo(LENGTH(50));
         make.height.mas_equalTo(LENGTH(50));
     }];
@@ -114,7 +121,7 @@
     [scrollViewback addSubview:rightsanjiao];
     [rightsanjiao mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self->scrollView);
-        make.right.mas_equalTo(self->scrollView).with.offset(LENGTH(20));
+        make.right.mas_equalTo(self->scrollView).with.offset(LENGTH(12));
         make.width.mas_equalTo(LENGTH(12));
         make.height.mas_equalTo(LENGTH(23));
     }];
@@ -123,7 +130,7 @@
     [scrollViewback addSubview:rightview];
     [rightview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self->scrollView);
-        make.right.mas_equalTo(self->scrollView).with.offset(LENGTH(50));
+        make.right.mas_equalTo(self->scrollView).with.offset(LENGTH(12));
         make.width.mas_equalTo(LENGTH(50));
         make.height.mas_equalTo(LENGTH(50));
     }];
@@ -141,9 +148,9 @@
     [scrollViewback addSubview:webView];
     [webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self->scrollView.mas_bottom).with.offset(LENGTH(10));
-        make.right.equalTo(self->backview).with.offset(-LENGTH(12));
-        make.left.equalTo(self->backview).with.offset(LENGTH(12));
-        make.bottom.equalTo(self->scrollViewback.mas_bottom).with.offset(-LENGTH(10));
+        make.right.equalTo(bacv).with.offset(-LENGTH(17));
+        make.left.equalTo(bacv).with.offset(LENGTH(17));
+        make.bottom.equalTo(self->scrollViewback.mas_bottom).with.offset(0);
         make.height.mas_equalTo(1);
     }];
     

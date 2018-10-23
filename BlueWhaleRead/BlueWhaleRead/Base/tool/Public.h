@@ -41,6 +41,7 @@
 //#define IMAGEURL @"http://192.168.1.221:8081/"
 //#define IMAGEURL @"http://192.168.1.221:8080/"
 #define IMAGEURL @"http://tiantianaidu.com/"
+
 #define ZSTX @"http://192.168.1.231:9001/"//内网
 //#define ZSTX @"http://119.90.89.88:9001/"//外网
 

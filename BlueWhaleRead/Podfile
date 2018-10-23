@@ -22,4 +22,5 @@ pod 'MBProgressHUD'
 #pod 'Charts', '~> 3.0.1'
 
 pod 'iCarousel', '~> 1.8.3'
+pod 'PGDatePicker'
 end

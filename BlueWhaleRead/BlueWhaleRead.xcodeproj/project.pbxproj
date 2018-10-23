@@ -294,6 +294,13 @@
 		0D7ABE93215E2EE6002EAA1D /* ZhiShiShuOneDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7ABE92215E2EE6002EAA1D /* ZhiShiShuOneDownView.m */; };
 		0D7ABE96215E363F002EAA1D /* ZhiShiShuQiuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7ABE95215E363F002EAA1D /* ZhiShiShuQiuView.m */; };
 		0D7ABE99215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7ABE98215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m */; };
+		0D802C1B217D851E00CFD24F /* AccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D802C1A217D851E00CFD24F /* AccountSettingsViewController.m */; };
+		0D802C1F217DA17D00CFD24F /* AccountSettingsClick.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D802C1E217DA17D00CFD24F /* AccountSettingsClick.m */; };
+		0D802C22217DA70900CFD24F /* ChangethephoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D802C21217DA70900CFD24F /* ChangethephoneViewController.m */; };
+		0D802C25217DAD9C00CFD24F /* GHPhonePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D802C24217DAD9C00CFD24F /* GHPhonePasswordViewController.m */; };
+		0D802C28217DADAF00CFD24F /* GNPhoneYZMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D802C27217DADAF00CFD24F /* GNPhoneYZMViewController.m */; };
+		0D802C2B217DADC200CFD24F /* GHPhoenTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D802C2A217DADC200CFD24F /* GHPhoenTwoViewController.m */; };
+		0D802C2E217DB44B00CFD24F /* WanShanXinXiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D802C2D217DB44B00CFD24F /* WanShanXinXiViewController.m */; };
 		0D82221020EE492800E88E07 /* SZOrSCJieGuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82220F20EE492800E88E07 /* SZOrSCJieGuoViewController.m */; };
 		0D82221320EE4A8900E88E07 /* SZSCJGView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82221220EE4A8900E88E07 /* SZSCJGView.m */; };
 		0D82221620EE552C00E88E07 /* SZSCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82221520EE552C00E88E07 /* SZSCViewController.m */; };
@@ -367,6 +374,15 @@
 		0DC881E220FA18B900214014 /* YDYView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC881E120FA18B900214014 /* YDYView.m */; };
 		0DC881E520FA192800214014 /* YDYCollectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC881E420FA192800214014 /* YDYCollectView.m */; };
 		0DC881E820FA193500214014 /* YDYCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC881E720FA193500214014 /* YDYCollectionViewCell.m */; };
+		0DD620B92179A86300AF1AD7 /* UserLoginClickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620B82179A86300AF1AD7 /* UserLoginClickView.m */; };
+		0DD620BC2179AEC700AF1AD7 /* UserLoginRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620BB2179AEC700AF1AD7 /* UserLoginRegisteredViewController.m */; };
+		0DD620BF2179B29D00AF1AD7 /* UserLoginTextFileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620BE2179B29D00AF1AD7 /* UserLoginTextFileView.m */; };
+		0DD620C22179C0B800AF1AD7 /* UserLoginPerfectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620C12179C0B800AF1AD7 /* UserLoginPerfectViewController.m */; };
+		0DD620C52179C79200AF1AD7 /* UserLoginGirlOrBoyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620C42179C79200AF1AD7 /* UserLoginGirlOrBoyView.m */; };
+		0DD620C82179CD1800AF1AD7 /* UserLoginWsXXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620C72179CD1800AF1AD7 /* UserLoginWsXXViewController.m */; };
+		0DD620CB2179D26E00AF1AD7 /* UserLoginDlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620CA2179D26E00AF1AD7 /* UserLoginDlViewController.m */; };
+		0DD620CE2179D76500AF1AD7 /* UserLoginUJMMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620CD2179D76500AF1AD7 /* UserLoginUJMMViewController.m */; };
+		0DD620D12179E02900AF1AD7 /* UserLoginWJMMTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620D02179E02900AF1AD7 /* UserLoginWJMMTwoViewController.m */; };
 		0DD66B1020D9EED70056528B /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD66B0F20D9EED70056528B /* FriendViewController.m */; };
 		0DD66B1320D9FCC30056528B /* FriendTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD66B1120D9FCC30056528B /* FriendTopView.m */; };
 		0DD66B1620DA07EC0056528B /* FriendCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD66B1520DA07EC0056528B /* FriendCodeModel.m */; };
@@ -1064,6 +1080,20 @@
 		0D7ABE95215E363F002EAA1D /* ZhiShiShuQiuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuQiuView.m; sourceTree = "<group>"; };
 		0D7ABE97215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiSHuQiuCollectionViewCell.h; sourceTree = "<group>"; };
 		0D7ABE98215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiSHuQiuCollectionViewCell.m; sourceTree = "<group>"; };
+		0D802C19217D851E00CFD24F /* AccountSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountSettingsViewController.h; sourceTree = "<group>"; };
+		0D802C1A217D851E00CFD24F /* AccountSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountSettingsViewController.m; sourceTree = "<group>"; };
+		0D802C1D217DA17D00CFD24F /* AccountSettingsClick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountSettingsClick.h; sourceTree = "<group>"; };
+		0D802C1E217DA17D00CFD24F /* AccountSettingsClick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountSettingsClick.m; sourceTree = "<group>"; };
+		0D802C20217DA70900CFD24F /* ChangethephoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangethephoneViewController.h; sourceTree = "<group>"; };
+		0D802C21217DA70900CFD24F /* ChangethephoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangethephoneViewController.m; sourceTree = "<group>"; };
+		0D802C23217DAD9C00CFD24F /* GHPhonePasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHPhonePasswordViewController.h; sourceTree = "<group>"; };
+		0D802C24217DAD9C00CFD24F /* GHPhonePasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHPhonePasswordViewController.m; sourceTree = "<group>"; };
+		0D802C26217DADAF00CFD24F /* GNPhoneYZMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GNPhoneYZMViewController.h; sourceTree = "<group>"; };
+		0D802C27217DADAF00CFD24F /* GNPhoneYZMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GNPhoneYZMViewController.m; sourceTree = "<group>"; };
+		0D802C29217DADC200CFD24F /* GHPhoenTwoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHPhoenTwoViewController.h; sourceTree = "<group>"; };
+		0D802C2A217DADC200CFD24F /* GHPhoenTwoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHPhoenTwoViewController.m; sourceTree = "<group>"; };
+		0D802C2C217DB44B00CFD24F /* WanShanXinXiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WanShanXinXiViewController.h; sourceTree = "<group>"; };
+		0D802C2D217DB44B00CFD24F /* WanShanXinXiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WanShanXinXiViewController.m; sourceTree = "<group>"; };
 		0D82220E20EE492800E88E07 /* SZOrSCJieGuoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZOrSCJieGuoViewController.h; sourceTree = "<group>"; };
 		0D82220F20EE492800E88E07 /* SZOrSCJieGuoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SZOrSCJieGuoViewController.m; sourceTree = "<group>"; };
 		0D82221120EE4A8900E88E07 /* SZSCJGView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZSCJGView.h; sourceTree = "<group>"; };
@@ -1210,6 +1240,24 @@
 		0DC881E420FA192800214014 /* YDYCollectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YDYCollectView.m; sourceTree = "<group>"; };
 		0DC881E620FA193500214014 /* YDYCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YDYCollectionViewCell.h; sourceTree = "<group>"; };
 		0DC881E720FA193500214014 /* YDYCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YDYCollectionViewCell.m; sourceTree = "<group>"; };
+		0DD620B72179A86300AF1AD7 /* UserLoginClickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginClickView.h; sourceTree = "<group>"; };
+		0DD620B82179A86300AF1AD7 /* UserLoginClickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginClickView.m; sourceTree = "<group>"; };
+		0DD620BA2179AEC700AF1AD7 /* UserLoginRegisteredViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginRegisteredViewController.h; sourceTree = "<group>"; };
+		0DD620BB2179AEC700AF1AD7 /* UserLoginRegisteredViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginRegisteredViewController.m; sourceTree = "<group>"; };
+		0DD620BD2179B29D00AF1AD7 /* UserLoginTextFileView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginTextFileView.h; sourceTree = "<group>"; };
+		0DD620BE2179B29D00AF1AD7 /* UserLoginTextFileView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginTextFileView.m; sourceTree = "<group>"; };
+		0DD620C02179C0B800AF1AD7 /* UserLoginPerfectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginPerfectViewController.h; sourceTree = "<group>"; };
+		0DD620C12179C0B800AF1AD7 /* UserLoginPerfectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginPerfectViewController.m; sourceTree = "<group>"; };
+		0DD620C32179C79200AF1AD7 /* UserLoginGirlOrBoyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginGirlOrBoyView.h; sourceTree = "<group>"; };
+		0DD620C42179C79200AF1AD7 /* UserLoginGirlOrBoyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginGirlOrBoyView.m; sourceTree = "<group>"; };
+		0DD620C62179CD1800AF1AD7 /* UserLoginWsXXViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginWsXXViewController.h; sourceTree = "<group>"; };
+		0DD620C72179CD1800AF1AD7 /* UserLoginWsXXViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginWsXXViewController.m; sourceTree = "<group>"; };
+		0DD620C92179D26E00AF1AD7 /* UserLoginDlViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginDlViewController.h; sourceTree = "<group>"; };
+		0DD620CA2179D26E00AF1AD7 /* UserLoginDlViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginDlViewController.m; sourceTree = "<group>"; };
+		0DD620CC2179D76500AF1AD7 /* UserLoginUJMMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginUJMMViewController.h; sourceTree = "<group>"; };
+		0DD620CD2179D76500AF1AD7 /* UserLoginUJMMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginUJMMViewController.m; sourceTree = "<group>"; };
+		0DD620CF2179E02900AF1AD7 /* UserLoginWJMMTwoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginWJMMTwoViewController.h; sourceTree = "<group>"; };
+		0DD620D02179E02900AF1AD7 /* UserLoginWJMMTwoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginWJMMTwoViewController.m; sourceTree = "<group>"; };
 		0DD66B0E20D9EED70056528B /* FriendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendViewController.h; sourceTree = "<group>"; };
 		0DD66B0F20D9EED70056528B /* FriendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendViewController.m; sourceTree = "<group>"; };
 		0DD66B1120D9FCC30056528B /* FriendTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTopView.m; sourceTree = "<group>"; };
@@ -2202,6 +2250,7 @@
 		0D65F14720D2619A00F3B71F /* MyView */ = {
 			isa = PBXGroup;
 			children = (
+				0D802C18217D84F900CFD24F /* UserC */,
 				0D65F1AE20D2663600F3B71F /* Biao */,
 				0D65F14820D2619A00F3B71F /* M */,
 				0D65F14920D2619A00F3B71F /* C */,
@@ -2400,6 +2449,35 @@
 			path = Biao;
 			sourceTree = "<group>";
 		};
+		0D802C18217D84F900CFD24F /* UserC */ = {
+			isa = PBXGroup;
+			children = (
+				0D802C1C217DA15C00CFD24F /* UserV */,
+				0D802C19217D851E00CFD24F /* AccountSettingsViewController.h */,
+				0D802C1A217D851E00CFD24F /* AccountSettingsViewController.m */,
+				0D802C20217DA70900CFD24F /* ChangethephoneViewController.h */,
+				0D802C21217DA70900CFD24F /* ChangethephoneViewController.m */,
+				0D802C23217DAD9C00CFD24F /* GHPhonePasswordViewController.h */,
+				0D802C24217DAD9C00CFD24F /* GHPhonePasswordViewController.m */,
+				0D802C26217DADAF00CFD24F /* GNPhoneYZMViewController.h */,
+				0D802C27217DADAF00CFD24F /* GNPhoneYZMViewController.m */,
+				0D802C29217DADC200CFD24F /* GHPhoenTwoViewController.h */,
+				0D802C2A217DADC200CFD24F /* GHPhoenTwoViewController.m */,
+				0D802C2C217DB44B00CFD24F /* WanShanXinXiViewController.h */,
+				0D802C2D217DB44B00CFD24F /* WanShanXinXiViewController.m */,
+			);
+			path = UserC;
+			sourceTree = "<group>";
+		};
+		0D802C1C217DA15C00CFD24F /* UserV */ = {
+			isa = PBXGroup;
+			children = (
+				0D802C1D217DA17D00CFD24F /* AccountSettingsClick.h */,
+				0D802C1E217DA17D00CFD24F /* AccountSettingsClick.m */,
+			);
+			path = UserV;
+			sourceTree = "<group>";
+		};
 		0D90D9652160695E009F1820 /* M */ = {
 			isa = PBXGroup;
 			children = (
@@ -2505,6 +2583,18 @@
 			children = (
 				0DA111ED20EC9D7D001A3D4E /* UserLoginViewController.h */,
 				0DA111EE20EC9D7D001A3D4E /* UserLoginViewController.m */,
+				0DD620BA2179AEC700AF1AD7 /* UserLoginRegisteredViewController.h */,
+				0DD620BB2179AEC700AF1AD7 /* UserLoginRegisteredViewController.m */,
+				0DD620C02179C0B800AF1AD7 /* UserLoginPerfectViewController.h */,
+				0DD620C12179C0B800AF1AD7 /* UserLoginPerfectViewController.m */,
+				0DD620C62179CD1800AF1AD7 /* UserLoginWsXXViewController.h */,
+				0DD620C72179CD1800AF1AD7 /* UserLoginWsXXViewController.m */,
+				0DD620C92179D26E00AF1AD7 /* UserLoginDlViewController.h */,
+				0DD620CA2179D26E00AF1AD7 /* UserLoginDlViewController.m */,
+				0DD620CC2179D76500AF1AD7 /* UserLoginUJMMViewController.h */,
+				0DD620CD2179D76500AF1AD7 /* UserLoginUJMMViewController.m */,
+				0DD620CF2179E02900AF1AD7 /* UserLoginWJMMTwoViewController.h */,
+				0DD620D02179E02900AF1AD7 /* UserLoginWJMMTwoViewController.m */,
 				0DA111F620ECAFFC001A3D4E /* UserLoginForgetMMOneViewController.h */,
 				0DA111F720ECAFFC001A3D4E /* UserLoginForgetMMOneViewController.m */,
 				0DA111F920ECB00C001A3D4E /* UserLoginForgetMMTwoViewController.h */,
@@ -2516,6 +2606,12 @@
 		0DA111EC20EC9D63001A3D4E /* V */ = {
 			isa = PBXGroup;
 			children = (
+				0DD620B72179A86300AF1AD7 /* UserLoginClickView.h */,
+				0DD620B82179A86300AF1AD7 /* UserLoginClickView.m */,
+				0DD620BD2179B29D00AF1AD7 /* UserLoginTextFileView.h */,
+				0DD620BE2179B29D00AF1AD7 /* UserLoginTextFileView.m */,
+				0DD620C32179C79200AF1AD7 /* UserLoginGirlOrBoyView.h */,
+				0DD620C42179C79200AF1AD7 /* UserLoginGirlOrBoyView.m */,
 				0DA111F020ECA24E001A3D4E /* UserlLoginTextFileView.h */,
 				0DA111F120ECA24E001A3D4E /* UserlLoginTextFileView.m */,
 				0DA111F320ECA365001A3D4E /* UserLoginShruView.h */,
@@ -3170,10 +3266,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BlueWhaleRead/Pods-BlueWhaleRead-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PGDatePicker.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3202,13 +3300,16 @@
 				0D0D7D6A20E221C0003A3495 /* ShiZiJGDownView.m in Sources */,
 				0D1233C3210755750092B6C0 /* ZHUTIMODEL.m in Sources */,
 				0D82223320F06A7D00E88E07 /* MyMessageTableView.m in Sources */,
+				0DD620CE2179D76500AF1AD7 /* UserLoginUJMMViewController.m in Sources */,
 				0D65F1A520D2661F00F3B71F /* MyMedalTableViewCell.m in Sources */,
 				0D65F1A020D2661F00F3B71F /* MyClassView.m in Sources */,
 				0D6D7E1621184FCE0058C0C0 /* JoinBookBageModel.m in Sources */,
 				0D32682721084DBD00D7D563 /* MedalStudentUserModel.m in Sources */,
 				0DF411FB20C8D7000076B154 /* BaseObject.m in Sources */,
 				0DE181FD215F268A00585389 /* ZhiShiShuSMViewController.m in Sources */,
+				0D802C2E217DB44B00CFD24F /* WanShanXinXiViewController.m in Sources */,
 				0D65F08620CE563400F3B71F /* HomebadgelistModel.m in Sources */,
+				0DD620C82179CD1800AF1AD7 /* UserLoginWsXXViewController.m in Sources */,
 				0DD66B8320DA47360056528B /* DTPaiXuView.m in Sources */,
 				0D29BEC621749E750000A00A /* ZhiShiShuBookStyleView1All.m in Sources */,
 				0D8E32C2216B413A00D238F7 /* ZhiShiShuXQView.m in Sources */,
@@ -3288,6 +3389,7 @@
 				0D65F06120CE208A00F3B71F /* UnderTabView.m in Sources */,
 				0D99875620F4C88E002BD2B7 /* PopUpViewStyleMedalcompleteView.m in Sources */,
 				0DA111E820EBAE1C001A3D4E /* BookXQDownMenuView.m in Sources */,
+				0D802C1F217DA17D00CFD24F /* AccountSettingsClick.m in Sources */,
 				0D65F0A520CF5FD100F3B71F /* CityBadgeListModel.m in Sources */,
 				0DF411DC20C8D6F90076B154 /* BaseViewController.m in Sources */,
 				0DF4120B20C8D7810076B154 /* PushModel.m in Sources */,
@@ -3301,6 +3403,7 @@
 				0D326848210968D700D7D563 /* AchieLeveModel.m in Sources */,
 				0D65F0FB20D0BD2700F3B71F /* MedalListTableView.m in Sources */,
 				0DD66B8220DA47360056528B /* DTDanXuanCollectionViewCell.m in Sources */,
+				0DD620BF2179B29D00AF1AD7 /* UserLoginTextFileView.m in Sources */,
 				0D56D8EF20CA5E7800E24C23 /* HomeLiteracy.m in Sources */,
 				0D56D8F820CA651F00E24C23 /* HomeFriendCollectionViewCell.m in Sources */,
 				0D65F0F120D0B2FA00F3B71F /* BookXQDownView.m in Sources */,
@@ -3357,6 +3460,7 @@
 				0D65F0DF20CFC9EB00F3B71F /* MingShiDDTableView.m in Sources */,
 				0D82223920F06AAA00E88E07 /* MyMessageCellView.m in Sources */,
 				0D65F0F820D0B9C900F3B71F /* MedalListViewController.m in Sources */,
+				0D802C1B217D851E00CFD24F /* AccountSettingsViewController.m in Sources */,
 				0D65F0AE20CF624200F3B71F /* CityReadBalanceModel.m in Sources */,
 				0D99874420F396F2002BD2B7 /* JoinDownView.m in Sources */,
 				0D65F11920D0FBF100F3B71F /* MedalListXqModel.m in Sources */,
@@ -3407,6 +3511,7 @@
 				0D82223F20F0F5D000E88E07 /* MedalListXqBookTableView.m in Sources */,
 				0DA1120A20ECD062001A3D4E /* PersonXgPhoneTwoViewController.m in Sources */,
 				0DA1122E20EE2AED001A3D4E /* SzScXuanXiangCollectionView.m in Sources */,
+				0D802C25217DAD9C00CFD24F /* GHPhonePasswordViewController.m in Sources */,
 				0D1025D6216E276B00BAF30A /* ZhiShiShuViView.m in Sources */,
 				0D260545210C5E0300D15D17 /* MyBadgeXQModel.m in Sources */,
 				0D99875C20F5A163002BD2B7 /* HomeNoticeView.m in Sources */,
@@ -3425,11 +3530,13 @@
 				0D260521210ABBFF00D15D17 /* MyMessageXQModel.m in Sources */,
 				0D56D8C320C921AD00E24C23 /* HomeClassIfCation.m in Sources */,
 				0D56D8B420C9121000E24C23 /* LINSHI.m in Sources */,
+				0DD620C52179C79200AF1AD7 /* UserLoginGirlOrBoyView.m in Sources */,
 				0D7017BD20D90530009BEA52 /* BadgeOnlyImageModel.m in Sources */,
 				0D65F1AC20D2661F00F3B71F /* PersonalTableView.m in Sources */,
 				0DF411A120C8D5F90076B154 /* BaseNavigationViewController.m in Sources */,
 				0DD66B2520DA34590056528B /* FriendHotView.m in Sources */,
 				0D1025D3216E23FC00BAF30A /* ZhiShiShuViTypeModel.m in Sources */,
+				0DD620C22179C0B800AF1AD7 /* UserLoginPerfectViewController.m in Sources */,
 				0D56D8BA20C91A1900E24C23 /* HomeLBTView.m in Sources */,
 				0D65F1A320D2661F00F3B71F /* PersonDownView.m in Sources */,
 				0DF4116720C8CB3C0076B154 /* BlueWhaleRead.xcdatamodeld in Sources */,
@@ -3451,6 +3558,7 @@
 				0D7017A220D89F5F009BEA52 /* UnreadBookListTableView.m in Sources */,
 				0DD66B8120DA47360056528B /* RTDragCellTableView.m in Sources */,
 				0D32682D21087E8400D7D563 /* AchievementReportModel.m in Sources */,
+				0DD620B92179A86300AF1AD7 /* UserLoginClickView.m in Sources */,
 				0D01AF3E20DCA072005C549B /* ShiZiLiangModel.m in Sources */,
 				0D65F05C20CE1E7800F3B71F /* BookMenuView.m in Sources */,
 				0DF411F520C8D7000076B154 /* BaseTableViewCell.m in Sources */,
@@ -3464,8 +3572,10 @@
 				0DF411CD20C8D6630076B154 /* UIImage+SGImageSize.m in Sources */,
 				0D65F0CD20CFB24800F3B71F /* UserFriendTabView.m in Sources */,
 				0D56D92620CA936200E24C23 /* DCCycleScrollView.m in Sources */,
+				0DD620BC2179AEC700AF1AD7 /* UserLoginRegisteredViewController.m in Sources */,
 				0D65F10120D0BD6200F3B71F /* MedalListCellView.m in Sources */,
 				0D99876820F60DE7002BD2B7 /* HomeMilestDuiHuaKuangView.m in Sources */,
+				0DD620D12179E02900AF1AD7 /* UserLoginWJMMTwoViewController.m in Sources */,
 				0DA1121020ECD3A3001A3D4E /* PersonQingChuHUanCunView.m in Sources */,
 				0DD66B9320DA6C960056528B /* BookProblemsModel.m in Sources */,
 				0D65F0FE20D0BD4900F3B71F /* MedalListTableViewCell.m in Sources */,
@@ -3538,6 +3648,7 @@
 				0D65F16720D2650400F3B71F /* PersonXGphoneViewController.m in Sources */,
 				0D65F0C720CFB0D000F3B71F /* MingShiDDViewController.m in Sources */,
 				0D6E93BB20EB1EC500BC1BC4 /* UnderLeftTabView.m in Sources */,
+				0D802C28217DADAF00CFD24F /* GNPhoneYZMViewController.m in Sources */,
 				0D46A84821002F25008D9ADD /* LCBmilestoneModel.m in Sources */,
 				0D56D93620CAB5ED00E24C23 /* OliverView.m in Sources */,
 				0D65F12520D1339500F3B71F /* MedalLQXSViewController.m in Sources */,
@@ -3560,8 +3671,10 @@
 				0D0D7D6420E1157B003A3495 /* ShiZiOrShiCIJieGuoViewController.m in Sources */,
 				0D65F07A20CE547D00F3B71F /* TestImgListModel.m in Sources */,
 				0D65F1AB20D2661F00F3B71F /* MyQingKuangCollectionViewCell.m in Sources */,
+				0D802C2B217DADC200CFD24F /* GHPhoenTwoViewController.m in Sources */,
 				0DF411D420C8D6630076B154 /* YYTextManager.m in Sources */,
 				0D260542210C54A500D15D17 /* MyBadgeListModel.m in Sources */,
+				0DD620CB2179D26E00AF1AD7 /* UserLoginDlViewController.m in Sources */,
 				0D6D7E22211AD89B0058C0C0 /* FoundBookCollectionViewCell.m in Sources */,
 				0DA1120D20ECD0D6001A3D4E /* PersonXinAndOldPhoneView.m in Sources */,
 				0D65F04F20CE1BE500F3B71F /* BookTableViewCell.m in Sources */,
@@ -3619,6 +3732,7 @@
 				0D65F11C20D0FC6900F3B71F /* MedalListDetailModel.m in Sources */,
 				0D99876220F5D4BF002BD2B7 /* GppdBookXinXingView.m in Sources */,
 				0D65F19A20D2661F00F3B71F /* MyMedalTopView.m in Sources */,
+				0D802C22217DA70900CFD24F /* ChangethephoneViewController.m in Sources */,
 				0D65F1AA20D2661F00F3B71F /* MyTopView.m in Sources */,
 				0D65F0C420CFB0C200F3B71F /* UserFriendViewController.m in Sources */,
 				0D56D8C020C91D5700E24C23 /* HomeCkassifcationCollectionViewCell.m in Sources */,

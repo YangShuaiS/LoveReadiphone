@@ -11,4 +11,5 @@
 @interface PersonDownView : BaseView
 @property (nonatomic, strong)NSString * title;
 @property (nonatomic, strong)NSString * subtitle;
+@property(nonatomic,assign)BOOL jt;
 @end

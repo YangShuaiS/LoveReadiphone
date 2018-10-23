@@ -9,6 +9,10 @@
 #import "PersonalTableView.h"
 #import "PersonalTableViewCell.h"
 #import "PersonXGphoneViewController.h"
+
+
+#import "AccountSettingsViewController.h"
+#import "WanShanXinXiViewController.h"
 @interface PersonalTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -34,14 +38,17 @@
 }
 - (void)setModel:(MyZiLiaoModel *)model{
     _model = model;
-    titleArray = @[@"姓名",@"账号",@"等级",@"修改预留手机号",@"学校",@"班级",@"性别"];
+//    titleArray = @[@"姓名",@"账号",@"等级",@"修改预留手机号",@"学校",@"班级",@"性别"];
+    titleArray = @[@"姓名",@"生日",@"等级",@"账号/绑定设置",@"所在地区",@"学校",@"班级",@"性别"];
     NSString * xb;
     if (model.sex == 1) {
         xb = @"男";
     }else{
         xb = @"女";
     }
-    subArray = @[model.name,model.code,model.level,model.phone,model.school,model.clazz,xb];
+    
+    subArray = @[model.name,@"生日",model.level,@"账号状态",@"所在地区",@"学校",@"班级",xb];
+    
     [self reloadData];
 }
 #pragma mark  - tableViewDelegate代理方法
@@ -65,9 +72,13 @@
         }else if (indexPath.row == 4){
             cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
             cell.title = titleArray[indexPath.row-1];
+//            cell.subtitle = subArray[indexPath.row - 1];
+        }else if (indexPath.row == 5||indexPath.row == 6||indexPath.row ==7){
+            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
+            cell.title = titleArray[indexPath.row-1];
             cell.subtitle = subArray[indexPath.row - 1];
-
-        }else{
+        }
+        else{
             cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
             cell.title = titleArray[indexPath.row-1];
             cell.subtitle = subArray[indexPath.row - 1];
@@ -119,9 +130,18 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 4) {
-        PersonXGphoneViewController * vc = [PersonXGphoneViewController new];
+        AccountSettingsViewController * vc = [AccountSettingsViewController new];
+        [self.nav pushViewController:vc animated:YES];
+    }else if (indexPath.row ==5){
+        
+    }else if (indexPath.row == 6){
+        WanShanXinXiViewController * vc = [WanShanXinXiViewController new];
+        vc.style = WanShanXinXiStyleScholl;
+        [self.nav pushViewController:vc animated:YES];
+    }else if (indexPath.row == 7){
+        WanShanXinXiViewController * vc = [WanShanXinXiViewController new];
+        vc.style = WanShanXinXiStyleClass;
         [self.nav pushViewController:vc animated:YES];
     }
-    
 }
 @end
