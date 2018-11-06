@@ -18,8 +18,7 @@ typedef NS_ENUM(NSInteger, ViewStyle) {
 @property (nonatomic, strong)NSString * title;
 @property (nonatomic, strong)NSString * subtitle;
 
-
 @property (nonatomic,strong)UIView * baseview;
-@property(nonatomic,strong)MyZiLiaoModel * model;
+@property(nonatomic,strong)MyZiLiaoModel * model; 
 
 @end

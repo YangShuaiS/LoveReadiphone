@@ -10,7 +10,7 @@
 #import "HomeActivityTopTableViewCell.h"
 #import "BookTableViewCell.h"
 #import "BookXqViewController.h"
-
+#import "BookDanTableViewCell.h"
 @interface HomeActivityTableView()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -70,18 +70,47 @@
         cell.model = _model.tag;
         return cell;
     }else{
-        rid = @"cell";
-        BookTableViewCell * cell =[tableView dequeueReusableCellWithIdentifier:rid];
-        if(cell==nil){
-            cell=[[BookTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid];
+        if ([_model.tag.style_id isEqualToString:@"2"]) {
+            rid = @"cell";
+            BookDanTableViewCell * cell =[tableView dequeueReusableCellWithIdentifier:rid];
+            if(cell==nil){
+                cell=[[BookDanTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (cell.nav == nil) {
+                cell.nav = self.nav;
+            }
+            cell.dj = [NSString stringWithFormat:@"%ld",indexPath.section];
+            cell.model = _itemarray[indexPath.section-1];
+            
+            cell.layer.shadowColor = RGB(0, 0, 0).CGColor;
+            cell.layer.shadowOffset = CGSizeMake(0,2);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+            cell.layer.shadowRadius = LENGTH(10);
+            cell.layer.shadowOpacity = 0.08;
+            
+            return cell;
+        }else{
+            rid = @"cell";
+            BookTableViewCell * cell =[tableView dequeueReusableCellWithIdentifier:rid];
+            if(cell==nil){
+                cell=[[BookTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (cell.nav == nil) {
+                cell.nav = self.nav;
+            }
+            cell.model = _itemarray[indexPath.section-1];
+            
+            cell.layer.shadowColor = RGB(0, 0, 0).CGColor;
+            cell.layer.shadowOffset = CGSizeMake(0,2);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+            cell.layer.shadowRadius = LENGTH(10);
+            cell.layer.shadowOpacity = 0.08;
+            
+            return cell;
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (cell.nav == nil) {
-            cell.nav = self.nav;
-        }
-        cell.model = _itemarray[indexPath.section-1];
-        return cell;
+  
     }
+
 
 }
 
@@ -110,19 +139,19 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return LENGTH(10);
-    }else{
         return LENGTH(6);
+    }else{
+        return LENGTH(10);
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView * v = [UIView new];
-    v.backgroundColor = TABLEVIEWCELLROW;
+//    v.backgroundColor = TABLEVIEWCELLROW;
     return v;
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView * v = [UIView new];
-    v.backgroundColor = TABLEVIEWCELLROW;
+//    v.backgroundColor = TABLEVIEWCELLROW;
     return v;
 }
 

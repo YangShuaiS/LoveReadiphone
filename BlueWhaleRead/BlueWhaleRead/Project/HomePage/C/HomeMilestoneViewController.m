@@ -9,6 +9,8 @@
 #import "HomeMilestoneViewController.h"
 #import "HomeMilestBackView.h"
 #import "BeiJingView.h"
+#import "FenXiangView.h"
+#import "HaiBaoView.h"
 @interface HomeMilestoneViewController ()<NavDelegate,UIScrollViewDelegate>
 
 @end
@@ -36,7 +38,42 @@
         make.top.equalTo(ws.view).with.offset(0);
         make.height.mas_equalTo(NavHeight);
     }];
+    
+    FLAnimatedImageView * imageview = [FLAnimatedImageView new];
+    imageview.image = UIIMAGE(@"告诉朋友");
+    [self.navtive addSubview:imageview];
+    [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
+        make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
+        make.size.mas_equalTo(imageview.image.size);
+    }];
+    imageview.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
+    [imageview addGestureRecognizer:tap];
 }
+- (void)FenXiang{
+    FenXiangView * fenxiang = [FenXiangView new];
+    fenxiang.sharestyle = ShareStyleTag1;
+    [self.view addSubview:fenxiang];
+    WS(ws);
+    [fenxiang mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view);
+    }];
+    [fenxiang setBlock:^(FenXiangModel *model, ShareStyle sharestyle) {
+        [self addhabai:model Style:sharestyle];
+    }];
+}
+- (void)addhabai:(FenXiangModel *)model Style:(ShareStyle)style{
+    HaiBaoView * haibao = [HaiBaoView new];
+    haibao.sharestyle = style;
+    haibao.modes = model;
+    [self.view addSubview:haibao];
+    WS(ws);
+    [haibao mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view);
+    }];
+}
+
 - (void)NavLeftClick{
     [self.navigationController popViewControllerAnimated:YES];
 }

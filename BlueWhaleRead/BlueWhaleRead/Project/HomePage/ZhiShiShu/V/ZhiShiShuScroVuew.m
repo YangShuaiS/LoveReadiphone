@@ -56,7 +56,15 @@
 //                [self->nav jianbian:model.data.name Color:@[(id)RGB(242,227,185).CGColor,(id)RGB(207,186,135).CGColor,(id)RGBA(172,145,84,1).CGColor]];
             }
             FLAnimatedImageView * imageview = [FLAnimatedImageView new];
-            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.data.bg_img]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            NSInteger scale_screen = [UIScreen mainScreen].scale;
+            NSMutableString *topimage = [[NSMutableString alloc] initWithString:model.data.bg_img];
+            if (topimage.length >4) {
+                if (scale_screen == 2) {
+                }else if (scale_screen >= 3){
+                    [topimage insertString:@"_3x" atIndex:topimage.length-4];
+                }
+            }
+            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,topimage]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 UIColor *backgroundColor = [UIColor colorWithPatternImage:image];
                 [self setBackgroundColor:backgroundColor];
                 self->nav.backgroundColor = backgroundColor;

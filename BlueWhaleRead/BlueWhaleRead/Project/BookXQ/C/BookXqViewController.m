@@ -29,6 +29,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setTranslucent:NO];
+    self.navigationController.navigationBar.hidden = YES;
 //        if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
 //            self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 //        }

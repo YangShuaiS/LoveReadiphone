@@ -9,5 +9,9 @@
 #import "BaseView.h"
 
 @interface UserLoginGirlOrBoyView : BaseView
-
+- (void)boy;
+- (void)girl;
+- (void)boyxuanz;
+- (void)girlwexuanzhong;
+- (void)qx;
 @end

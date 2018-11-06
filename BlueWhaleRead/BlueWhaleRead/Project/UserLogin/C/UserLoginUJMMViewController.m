@@ -35,6 +35,7 @@
     
     phone = [[UserLoginTextFileView alloc] initWithStyle:UserLoginTextFilePhoneAndYZM];
     phone.titles = @"请输入手机号";
+    phone.vc = self;
     [self.view addSubview:phone];
     [phone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(title.mas_bottom).with.offset(LENGTH(52));
@@ -75,8 +76,8 @@
 //        make.width.mas_equalTo(WIDTH);
     }];
     emal.userInteractionEnabled = YES;
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPre:)];
-    [emal addGestureRecognizer:longPress];
+    UITapGestureRecognizer * emalclick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(emalclick)];
+    [emal addGestureRecognizer:emalclick];
     
     
     BaseLabel * yiwen = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(96,96,96) LabelFont:TextFontCu(15) TextAlignment:NSTextAlignmentCenter Text:@"如有任何疑问，请与客服联系"];
@@ -85,6 +86,18 @@
         make.bottom.mas_equalTo(self->emal.mas_top).with.offset(-LENGTH(6));
         make.centerX.mas_equalTo(ws.view);
     }];
+    
+    self.view.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture2)];
+    //将手势添加到需要相应的view中去
+    [self.view addGestureRecognizer:tapGesture2];
+}
+
+- (void)emalclick{
+    
+    NSString *urlStr = [NSString stringWithFormat:@"mailto://services@bowanjuan.com?subject=%@&body=%@",@"",@""];
+    NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 #pragma mark ----------- 返回
 - (void)addnav{
@@ -109,42 +122,82 @@
 - (void)backClick{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (void)next{
-    UserLoginWJMMTwoViewController * vc = [UserLoginWJMMTwoViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_JIAOYANYANZHENGMA];
+    NSDictionary * dic = @{@"phone":phone.textField.text,@"code":yzm.textField.text};
+    WS(ws);
+    MBProgressHUD * mb = [MBProgressHUD new];
+    mb.mode = MBProgressHUDModeIndeterminate;
+    mb.label.text = @"";
+    [mb showAnimated:YES];
+    mb.removeFromSuperViewOnHide = YES;
+    [self.view.window addSubview:mb];
+    [mb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(ws.view.window);
+    }];
+    if ([BaseObject valiMobile:phone.textField.text]==NO) {
+        mb.label.text = @"手机号格式错误";
+        [mb hideAnimated:NO afterDelay:1];
+    }else{
+        [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+            if (responseObject) {
+                MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
+                if ([model.code isEqual:@200]) {
+                    UserLoginWJMMTwoViewController * vc = [UserLoginWJMMTwoViewController new];
+                    vc.phone = self->phone.textField.text;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    mb.label.text = model.message;
+                    [mb hideAnimated:NO afterDelay:1];
+                }else{
+                    mb.label.text = model.message;
+                    [mb hideAnimated:NO afterDelay:1];
+                }
+            }else{
+                mb.label.text = @"网络请求失败";
+                [mb hideAnimated:NO afterDelay:1];
+            }
+        }];
+    }
 }
 
 
 
 // 使label能够成为响应事件，为了能接收到事件（能成为第一响应者）
-- (BOOL)canBecomeFirstResponder{
-    return YES;
-}
-// 可以控制响应的方法
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
-    return (action == @selector(copy:));
-}
-//针对响应方法的实现，最主要的复制的两句代码
-- (void)copy:(id)sender{
-    
-    //UIPasteboard：该类支持写入和读取数据，类似剪贴板
-    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-    pasteBoard.string = emal.text;
-}
+//- (BOOL)canBecomeFirstResponder{
+//    return YES;
+//}
+//// 可以控制响应的方法
+//- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+//    return (action == @selector(copy:));
+//}
+////针对响应方法的实现，最主要的复制的两句代码
+//- (void)copy:(id)sender{
+//
+//    //UIPasteboard：该类支持写入和读取数据，类似剪贴板
+//    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+//    pasteBoard.string = emal.text;
+//}
 // 处理长按事件
-- (void)longPre:(UILongPressGestureRecognizer *)recognizer{
-    [self becomeFirstResponder]; // 用于UIMenuController显示，缺一不可
-    
-    //UIMenuController：可以通过这个类实现点击内容，或者长按内容时展示出复制等选择的项，每个选项都是一个UIMenuItem对象
-    UIMenuItem *copyLink = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(copy:)];
-    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObjects:copyLink, nil]];
-    [[UIMenuController sharedMenuController] setTargetRect:emal.frame inView:emal.superview];
-    [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
-}
+//- (void)longPre:(UILongPressGestureRecognizer *)recognizer{
+//    [self becomeFirstResponder]; // 用于UIMenuController显示，缺一不可
+//
+//    //UIMenuController：可以通过这个类实现点击内容，或者长按内容时展示出复制等选择的项，每个选项都是一个UIMenuItem对象
+//    UIMenuItem *copyLink = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(copy:)];
+//    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObjects:copyLink, nil]];
+//    [[UIMenuController sharedMenuController] setTargetRect:emal.frame inView:emal.superview];
+//    [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+
+- (void)tapGesture2{
+    [yzm returnKeyboard];
+    [phone returnKeyboard];
+}
 /*
 #pragma mark - Navigation
 

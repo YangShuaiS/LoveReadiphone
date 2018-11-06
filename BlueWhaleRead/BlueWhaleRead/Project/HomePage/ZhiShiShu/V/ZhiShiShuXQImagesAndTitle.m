@@ -311,6 +311,9 @@
         NSString * imageurl = [NSString stringWithFormat:@"%@%@",ZSTX,image];
         [imagearray addObject:imageurl];
     }
+    if (imagearray.count ==0) {
+        
+    }else{
     [imagearray insertObject:imagearray[imagearray.count-1] atIndex:0];
     [imagearray addObject:imagearray[1]];
     //过渡视图添加子视图
@@ -339,7 +342,7 @@
         }];
         previousView = imageView;
     }
-
+    }
     NSString * str = model.desc;
     [webView loadHTMLString:str baseURL:nil];
     

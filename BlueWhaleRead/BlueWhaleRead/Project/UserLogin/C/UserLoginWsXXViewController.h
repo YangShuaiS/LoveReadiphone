@@ -10,6 +10,7 @@
 
 
 @interface UserLoginWsXXViewController : BaseViewController
+@property(nonatomic,strong)NSMutableArray * itemarray;
 
 @end
 

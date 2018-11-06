@@ -15,18 +15,24 @@ typedef NS_ENUM(NSInteger, UserLoginTextFile) {
     UserLoginTextFileYHM = 4,//用户名
     UserLoginTextFileClick = 5,//点击事件
     UserLoginTextFileWjMM = 6,//忘记密码
+    UserLoginTextFileClickDQ = 7,//点击事件
+
 };
 
 typedef void(^ClickBlock)(void);
 #import <PGDatePickManager.h>
+#import "GFAddressPicker.h"
 
-@interface UserLoginTextFileView : BaseView<UITextFieldDelegate,PGDatePickerDelegate>
+@interface UserLoginTextFileView : BaseView<UITextFieldDelegate,PGDatePickerDelegate,GFAddressPickerDelegate>
 - (instancetype)initWithStyle:(UserLoginTextFile)style;
 @property (strong, nonatomic) UITextField *textField;
 @property(nonatomic,strong)BaseLabel * djshj;//点击事件
 @property(nonatomic,strong) NSString * titles;
-@property(nonatomic,assign)ClickBlock block;
+@property(nonatomic,copy)ClickBlock block;
 @property(nonatomic,strong)UIViewController * vc;
+@property (nonatomic, strong) GFAddressPicker *pickerView;
+
+@property(nonatomic,strong)NSString * dqid;
 - (void)returnKeyboard;
 @end
 

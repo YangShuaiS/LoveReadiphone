@@ -66,6 +66,9 @@
 
 #import "ZhiShiShuXqModel.h" //知识树model详情
 #import "ZhiShiShuFLModel.h"//知识树分类
+#import "UserCityModel.h"//城市
+
+#import "FenXiangModel.h"//分享
 @interface MeModel : BaseModel
 @property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, strong) NSString *code;

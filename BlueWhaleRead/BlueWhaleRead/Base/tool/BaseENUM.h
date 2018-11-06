@@ -137,6 +137,22 @@ typedef NS_ENUM(NSInteger, ChartStyle) {
 
 
 };
+
+
+typedef NS_ENUM(NSInteger, ShareStyle) {
+    ShareStyleTag1 = 1,//里程碑
+    ShareStyleTag2 = 2,//书架最近读完的一本书是勋章书，且勋章点亮中
+    ShareStyleTag3 = 3,//书架最近读完的一 本书是勋章书，且勋章点亮了
+    ShareStyleTag4 = 4,//最近读完的一本书不是勋章书
+    ShareStyleTag5 = 5,//排名第一时
+    ShareStyleTag6 = 6,//其他的时候
+    ShareStyleTag7 = 7,//排名第一时
+    ShareStyleTag8 = 8,//其他的时候
+    ShareStyleTag9 = 9,//轮播图
+    ShareStyleTag10 = 10,//书单
+
+
+};
 @interface BaseENUM : NSObject
 
 @end

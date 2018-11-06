@@ -116,18 +116,26 @@
         make.right.mas_equalTo(self->downView).with.offset(LENGTH(5));
         make.height.mas_equalTo(3);
     }];
-    NSString * imageurlvilogo0 = [NSString stringWithFormat:@"%@%@",ZSTX,imagarrya[0]];
+    NSInteger scale_screen = [UIScreen mainScreen].scale;
+    NSMutableString *topimage = [[NSMutableString alloc] initWithString:imagarrya[0]];
+    if (topimage.length >4) {
+        if (scale_screen == 2) {
+        }else if (scale_screen >= 3){
+            [topimage insertString:@"_3x" atIndex:topimage.length-4];
+        }
+    }
+    NSString * imageurlvilogo0 = [NSString stringWithFormat:@"%@%@",ZSTX,topimage];
     [imageviewtop sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo0] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         UIImage *backgroundImage = image;
-        backgroundImage = [self scaleImage:backgroundImage toScale:0.5];
+        backgroundImage = [self scaleImage:backgroundImage toScale:1.0/scale_screen];
         UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
         [topview setBackgroundColor:backgroundColor];
-        CGFloat he = image.size.height/2;
+        CGFloat he = image.size.height/scale_screen;
         if (he>=0&&he<=1) {
             he = 1;
         }
         [topview mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(LENGTH(he));
+            make.height.mas_equalTo(he);
         }];
     }];
     lastview = topview;
@@ -144,19 +152,28 @@
         make.right.mas_equalTo(self->downView).with.offset(LENGTH(10));
         make.height.mas_equalTo(LENGTH(3));
     }];
-
-    NSString * imageurlvilogo1 = [NSString stringWithFormat:@"%@%@",ZSTX,imagarrya[1]];
+    NSInteger scale_screen = [UIScreen mainScreen].scale;
+    NSMutableString *dowimage = [[NSMutableString alloc] initWithString:imagarrya[1]];
+    if (dowimage.length >4) {
+        
+        if (scale_screen == 2) {
+        }else if (scale_screen >=3){
+            [dowimage insertString:@"_3x" atIndex:dowimage.length-4];
+        }
+    }
+    
+    NSString * imageurlvilogo1 = [NSString stringWithFormat:@"%@%@",ZSTX,dowimage];
     [imageviewdown sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo1] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         UIImage *backgroundImage = image;
-        backgroundImage = [self scaleImage:backgroundImage toScale:0.5];
+        backgroundImage = [self scaleImage:backgroundImage toScale:1.0/scale_screen];
         UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
         [downview setBackgroundColor:backgroundColor];
-        CGFloat he = image.size.height/2;
+        CGFloat he = image.size.height/scale_screen;
         if (he>=0&&he<=1) {
             he = 1;
         }
         [downview mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(LENGTH(he));
+            make.height.mas_equalTo(he);
         }];
     }];
     lastview = downview;

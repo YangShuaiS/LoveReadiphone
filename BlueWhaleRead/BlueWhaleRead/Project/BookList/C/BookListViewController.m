@@ -16,6 +16,9 @@
 #import "DTALLiewController.h"
 
 #import "SearchView.h"
+
+#import "FenXiangView.h"
+#import "HaiBaoView.h"
 @interface BookListViewController ()<NavDelegate>
 
 @end
@@ -26,6 +29,12 @@
     UnreadViewController* hotview;
     ReadBookListViewController * Familiar;
     BookListMenu * homeMenu;
+    
+    FLAnimatedImageView * sharefriend;
+    
+    ReadbookModel *model;
+    
+    NSMutableArray *arraybook;//已读书
 }
 
 - (void)viewDidLoad {
@@ -252,8 +261,74 @@
 //    Familiar.bookCase = BookCaseStyleYD;
     [self addChildViewController:Familiar];
     [childVC addObject:Familiar];
+    
+    [Familiar setBlock:^(NSMutableArray *array) {
+        if (array.count>0) {
+            self->model = array[0];
+            self->arraybook = array;
+            [ws addfenxiang];
+        }
+    }];
     //
     homeMenu.controllerArray = childVC;
+}
+- (void)addfenxiang{
+    if (sharefriend == nil) {
+        WS(ws);
+        sharefriend = [FLAnimatedImageView new];
+        sharefriend.image = UIIMAGE(@"告诉朋友");
+        [self.navtive addSubview:sharefriend];
+        [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
+            make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
+            make.size.mas_equalTo(self->sharefriend.image.size);
+        }];
+        sharefriend.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
+        [sharefriend addGestureRecognizer:tap];
+    }
+}
+
+- (void)FenXiang{
+    NSMutableArray * bagarray = model.badgeList;
+    FenXiangView * fenxiangs = [FenXiangView new];
+    if (model.badgeList.count == 0) {
+        fenxiangs.yidgh = [NSString stringWithFormat:@"%ld",arraybook.count];
+        fenxiangs.imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.cover];
+        fenxiangs.sharestyle = ShareStyleTag4;
+    }else{
+        CityBadgeListModel * mo = bagarray[0];
+        if ([mo.is_completed isEqualToString:@"1"]) {
+            NSArray * lvarr = [BaseObject TiemArray:model.levels String:@","];
+            fenxiangs.classname = lvarr[0];
+            fenxiangs.bookname = model.name;
+            fenxiangs.imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.cover];
+            fenxiangs.sharestyle = ShareStyleTag2;
+        }else{
+            fenxiangs.bolistname = mo.name;
+            fenxiangs.imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,mo.min_logo];
+            fenxiangs.sharestyle = ShareStyleTag3;
+        }
+    }
+    [self.view addSubview:fenxiangs];
+    WS(ws);
+    [fenxiangs mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view);
+    }];
+    [fenxiangs setBlock:^(FenXiangModel *model, ShareStyle sharestyle) {
+        [self addhabai:model Style:sharestyle];
+    }];
+}
+
+- (void)addhabai:(FenXiangModel *)model Style:(ShareStyle)style{
+    HaiBaoView * haibao = [HaiBaoView new];
+    haibao.sharestyle = style;
+    haibao.modes = model;
+    [self.view addSubview:haibao];
+    WS(ws);
+    [haibao mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

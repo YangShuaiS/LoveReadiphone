@@ -44,6 +44,7 @@
 
 #define ZSTX @"http://192.168.1.231:9001/"//内网
 //#define ZSTX @"http://119.90.89.88:9001/"//外网
+//#define ZSTX @"http://192.168.1.102/knowledge/public/"//
 
 
 #define HOMEPAGE @"api/v1.0/homePage"//首页
@@ -81,15 +82,23 @@
 #define JK_BANJIDONGTAI @"api/v1.0/classDynamicList"//班级动态
 #define JK_FASONGYANZHENGMA @"api/v1.0/sendMessage"//发送验证码
 #define JK_JIAOYANYANZHENGMA @"api/v1.0/checkCode"//教研验证码
+#define JK_GENGGAISHOUJIHAO @"api/v1.0/updatePhone"//更改手机号
+#define JK_JIAOYANPHONE @"api/v1.0/checkPhone"//教研手机号是否注册
+#define JK_ZHUCE @"api/v1.0/userRegister"//注册
+#define JK_DIQU @"api/v1.0/areaList"//地区
+#define JK_WSXX @"api/v1.0/improveUserinfo"//完善信息
+#define JK_GHGHMM @"api/v1.0/checkPassword"//更换手机号密码
+#define JK_XGNAME @"api/v1.0/updateUserName"//修改昵称
+
+
 #define JK_GOODBOOKGAN @"api/v1.0/goodArticleList"//读后感
 #define JK_MyBadge @"api/v1.0/myBadge"//我的勋章
 #define JK_FRIENDHYH @"api/v1.0/friendBook"//首页换一换
 #define JK_SCTP @"api/v1.0/uploadAvatar"//
 #define JK_TIFANKUI @"api/v1.0/problemFeedback"//题反馈
 #define JK_YIJIANFANKUI @"api/v1.0/suggestFeedback"//意见反馈
-#define JK_LOVEANDNOLOVE @"/api/v1.0/bookIsLike"//喜欢不喜欢
-#define JK_TCDL @"/api/v1.0/userSignOut"//退出登录
-
+#define JK_LOVEANDNOLOVE @"api/v1.0/bookIsLike"//喜欢不喜欢
+#define JK_TCDL @"api/v1.0/userSignOut"//退出登录
 
 
 
@@ -103,10 +112,13 @@
 
 #define JK_GHYM @"api/v1.0/testApi"//是否更换域名
 
-
 #define JK_ZHISHITIXIXIANGQING @"knowledge/get-all"//体系详情
 #define JK_ZHISHITIXIXIFENLEI @"/knowledge/get-type"//体系分类
 #define JK_ZHISHITIXIXQ @"/knowledge/get-content"//体系详情
+
+
+
+#define JK_FXLCB @"api/v1.0/sharewxInfo"//分享里程碑
 
 // 相对iphone6S 屏幕比
 #define KWidth_ScaleW [UIScreen mainScreen].bounds.size.width/414.0f
@@ -132,8 +144,9 @@
 //通知名称
 #define kNotificationDenglu        @"kNotificationDenglu"
 #define kNotificationTuiChuDenglu        @"kNotificationTuiChuDenglu"
-
 #define kNotificationAcitivity     @"kNotificationAcitivity"//推荐书籍更多展开
+#define kNotificationGengHuanPhone    @"kNotificationGengHuanPhone"//更换手机号
+
 //字体大小
 #define TextFont(f) [UIFont fontWithName:@"PingFang-SC-Regular" size:FontSize(LENGTH(f))]
 #define TextFontHeight(f) [UIFont fontWithName:@"PingFang-SC-Regular" size:FontSize(LENGTHHEIGHT(f))]

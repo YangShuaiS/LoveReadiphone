@@ -23,6 +23,7 @@
     UserLoginGirlOrBoyView *boy;
     UserLoginGirlOrBoyView * girl;
     
+    NSString * xb;
 }
 
 - (void)viewDidLoad {
@@ -45,7 +46,7 @@
     }];
     
     yhm = [[UserLoginTextFileView alloc] initWithStyle:UserLoginTextFileYHM];
-    yhm.titles = @"请填写用户名";
+    yhm.titles = @"请填写昵称(限20个字符)";
     [self.view addSubview:yhm];
     [yhm mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(onesubtitle.mas_bottom).with.offset(LENGTH(36));
@@ -62,12 +63,12 @@
     }];
     
     UIImageView * gth = [UIImageView new];
-    gth.backgroundColor = RANDOMCOLOR;
+    gth.image = UIIMAGE(@"组 321");
     [self.view addSubview:gth];
     [gth mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(twosubtitle);
         make.right.mas_equalTo(twosubtitle.mas_left).with.offset(-LENGTH(5));
-        make.width.and.height.mas_equalTo(LENGTH(20));
+        make.width.and.height.mas_equalTo(LENGTH(14));
     }];
     
     shengri = [[UserLoginTextFileView alloc] initWithStyle:UserLoginTextFileClick];
@@ -85,6 +86,8 @@
 //    }];
     
     girl = [UserLoginGirlOrBoyView new];
+    [girl girl];
+    xb = @"2";
     [self.view addSubview:girl];
     [girl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(ws.view).with.offset(-LENGTH(65)-LENGTH(31));
@@ -93,12 +96,22 @@
     }];
     
     boy = [UserLoginGirlOrBoyView new];
+    [boy boy];
+    [boy qx];
     [self.view addSubview:boy];
     [boy mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(ws.view).with.offset(LENGTH(65)+LENGTH(31));
         make.top.mas_equalTo(self->shengri.mas_bottom).with.offset(LENGTH(14));
         make.width.mas_equalTo(LENGTH(62));
     }];
+    girl.userInteractionEnabled = YES;
+    boy.userInteractionEnabled = YES;
+    UITapGestureRecognizer * girltapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(girltapGesture2)];
+    //将手势添加到需要相应的view中去
+    [girl addGestureRecognizer:girltapGesture2];
+    UITapGestureRecognizer * boytapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(boytapGesture2)];
+    //将手势添加到需要相应的view中去
+    [boy addGestureRecognizer:boytapGesture2];
     
     UserLoginClickView * NewUser = [[UserLoginClickView alloc] initWithImage:@"" Text:@"下一步" Style:UserLoginClickStyleNoml];
     NewUser.userInteractionEnabled = YES;
@@ -112,6 +125,22 @@
     [NewUser setBlock:^{
         [self pushWSXINXI];
     }];
+    self.view.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture2)];
+    //将手势添加到需要相应的view中去
+    [self.view addGestureRecognizer:tapGesture2];
+}
+
+- (void)girltapGesture2{
+    [girl girlwexuanzhong];
+    [boy qx];
+    xb = @"2";
+}
+
+- (void)boytapGesture2{
+    [girl qx];
+    [boy boyxuanz];
+    xb = @"1";
 }
 #pragma mark ----------- 返回
 - (void)addnav{
@@ -138,8 +167,7 @@
 }
 
 - (void)pushWSXINXI{
-//    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_JIAOYANYANZHENGMA];
-    NSString * url = @"http://192.168.1.114:8075/api/v1.0/userRegister";
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_ZHUCE];
     
     WS(ws);
     MBProgressHUD * mb = [MBProgressHUD new];
@@ -163,12 +191,13 @@
 //        [mb hideAnimated:NO afterDelay:1];
 //    }
     else{
-        NSDictionary * dic = @{@"phone":_itemarray[0],@"password":_itemarray[1],@"username":yhm.textField.text,@"birthday":shengri.djshj.text,@"sex":@"1"};
+        NSDictionary * dic = @{@"phone":_itemarray[0],@"password":_itemarray[1],@"username":yhm.textField.text,@"birthday":shengri.djshj.text,@"sex":xb};
         [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
             if (responseObject) {
                 MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
                 if ([model.code isEqual:@200]) {
                     UserLoginWsXXViewController * vc = [UserLoginWsXXViewController new];
+                    vc.itemarray = self->_itemarray;
                     [self.navigationController pushViewController:vc animated:YES];                    mb.label.text = model.message;
                     [mb hideAnimated:NO afterDelay:1];
                 }else{
@@ -188,6 +217,11 @@
 
 - (void)setItemarray:(NSMutableArray *)itemarray{
     _itemarray = itemarray;
+}
+
+- (void)tapGesture2{
+    [yhm returnKeyboard];
+    [shengri returnKeyboard];
 }
 /*
 #pragma mark - Navigation

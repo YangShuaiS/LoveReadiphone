@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString * name;//tag名
 @property (nonatomic, copy) NSString * ssid;//ag id
 @property (nonatomic, copy) NSString * theme_img;//主题图
+@property (nonatomic, copy) NSString * style_id;//
 
 @property(nonatomic,strong) NSMutableArray * booklist;
 @end

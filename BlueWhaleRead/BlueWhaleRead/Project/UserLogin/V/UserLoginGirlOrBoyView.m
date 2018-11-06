@@ -30,7 +30,6 @@
         make.top.and.left.and.right.mas_equalTo(ws);
         make.height.mas_equalTo(self->topimageview.mas_width);
     }];
-    topimageview.backgroundColor = RANDOMCOLOR;
     
     xb = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(43,67,66) LabelFont:TextFont(12) TextAlignment:NSTextAlignmentCenter Text:@"性别"];
     [self addSubview:xb];
@@ -47,6 +46,29 @@
         make.width.and.height.mas_equalTo(20);
         make.bottom.mas_equalTo(ws);
     }];
-    downimageview.backgroundColor = RANDOMCOLOR;
+}
+
+- (void)boy{
+    xb.text = @"男生";
+    topimageview.image = UIIMAGE(@"组 302");
+    downimageview.image =UIIMAGE(@"组 351");
+
+}
+- (void)girl{
+    xb.text = @"女生";
+    topimageview.image = UIIMAGE(@"组 301");
+    downimageview.image =UIIMAGE(@"组 226");
+}
+- (void)boyxuanz{
+    downimageview.image = UIIMAGE(@"组 351");
+
+}
+- (void)girlwexuanzhong{
+    downimageview.image =UIIMAGE(@"组 226");
+
+}
+- (void)qx{
+    downimageview.image =UIIMAGE(@"组 227");
+
 }
 @end

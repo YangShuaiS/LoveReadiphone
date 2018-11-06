@@ -8,6 +8,8 @@
 
 #import "HomeActivityViewController.h"
 #import "HomeActivityTableView.h"
+#import "FenXiangView.h"
+#import "HaiBaoView.h"
 @interface HomeActivityViewController ()<NavDelegate>
 
 @end
@@ -18,11 +20,13 @@
     
     NSInteger page;
     NSMutableArray * itemarray;
+    
+    FLAnimatedImageView * sharefriend;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = BEIJINGCOLOR;
+    self.view.backgroundColor = [UIColor whiteColor];
     [self AddNavtion];
     
     WS(ws);
@@ -31,7 +35,7 @@
     tableView.hiden = _hiden;
     [self.view addSubview:tableView];
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.navtive.mas_bottom).with.offset(0);
+        make.top.equalTo(ws.navtive.mas_bottom).with.offset(LENGTH(6));
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(0);
@@ -84,8 +88,49 @@
     [itemarray addObjectsFromArray:model.tag.booklist];
     tableView.itemarray =itemarray; 
     self.navtive.title = model.tag.name;
+    
+    WS(ws);
+    if (sharefriend == nil) {
+        sharefriend = [FLAnimatedImageView new];
+        sharefriend.image = UIIMAGE(@"告诉朋友");
+        [self.navtive addSubview:sharefriend];
+        [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
+            make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
+            make.size.mas_equalTo(self->sharefriend.image.size);
+        }];
+        sharefriend.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
+        [sharefriend addGestureRecognizer:tap];
+    }
+}
+- (void)FenXiang{
+    FenXiangView * fenxiangs = [FenXiangView new];
+    fenxiangs.imageurl = tableView.model.tag.theme_img;
+    fenxiangs.wzbt = tableView.model.tag.descriptions;
+    fenxiangs.sdm = tableView.model.tag.name;
+    fenxiangs.sharestyle = ShareStyleTag10;
+    [self.view addSubview:fenxiangs];
+    WS(ws);
+    [fenxiangs mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view);
+    }];
+    [fenxiangs setBlock:^(FenXiangModel *model, ShareStyle sharestyle) {
+        [self addhabai:model Style:sharestyle];
+    }];
+    
 }
 
+- (void)addhabai:(FenXiangModel *)model Style:(ShareStyle)style{
+    HaiBaoView * haibao = [HaiBaoView new];
+    haibao.sharestyle = style;
+    haibao.modes = model;
+    [self.view addSubview:haibao];
+    WS(ws);
+    [haibao mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view);
+    }];
+}
 - (void)addShaFa{
     WS(ws);
     wdView = [GeneraNoDataView new];
@@ -109,9 +154,15 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"" RightTitle:@"home-Click" NativeStyle:NavStyleGeneral];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"" RightTitle:@"" NativeStyle:NavStyleGeneral];
     self.navtive.delegate = self;
+    self.navtive.titcolor = RGB(0, 0, 0);
     [self.view addSubview:self.navtive];
+    self.navtive.backgroundColor = [UIColor whiteColor];
+    self.navtive.layer.shadowColor = RGB(0, 0, 0).CGColor;
+    self.navtive.layer.shadowOffset = CGSizeMake(0,2);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+    self.navtive.layer.shadowRadius = LENGTH(4);
+    self.navtive.layer.shadowOpacity = 0.04;
     [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);

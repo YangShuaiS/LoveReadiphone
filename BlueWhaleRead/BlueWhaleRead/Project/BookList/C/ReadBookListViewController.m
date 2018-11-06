@@ -98,6 +98,7 @@
         }
     }
     _tableView.itemarray = itemarray;
+    self.block(itemarray);
 
 }
 - (void)addShaFa{

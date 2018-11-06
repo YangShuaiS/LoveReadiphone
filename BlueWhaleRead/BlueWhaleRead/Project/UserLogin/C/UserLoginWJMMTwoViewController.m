@@ -16,6 +16,8 @@
 @implementation UserLoginWJMMTwoViewController{
     UserLoginTextFileView * mm;
     BaseLabel * emal;
+    MBProgressHUD * mb;
+
 }
 
 - (void)viewDidLoad {
@@ -62,8 +64,8 @@
         //        make.width.mas_equalTo(WIDTH);
     }];
     emal.userInteractionEnabled = YES;
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPre:)];
-    [emal addGestureRecognizer:longPress];
+    UITapGestureRecognizer * emalclick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(emalclick)];
+    [emal addGestureRecognizer:emalclick];
     
     
     BaseLabel * yiwen = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(96,96,96) LabelFont:TextFontCu(15) TextAlignment:NSTextAlignmentCenter Text:@"如有任何疑问，请与客服联系"];
@@ -72,6 +74,11 @@
         make.bottom.mas_equalTo(self->emal.mas_top).with.offset(-LENGTH(6));
         make.centerX.mas_equalTo(ws.view);
     }];
+    
+    self.view.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture2)];
+    //将手势添加到需要相应的view中去
+    [self.view addGestureRecognizer:tapGesture2];
 }
 
 #pragma mark ----------- 返回
@@ -95,37 +102,66 @@
     }];
 }
 - (void)next{
+    WS(ws);
+    mb = [MBProgressHUD new];
+    mb.mode = MBProgressHUDModeIndeterminate;
+    mb.label.text = @"";
+    [mb showAnimated:YES];
+    //        mb.removeFromSuperViewOnHide = NO;
+    [self.view.window addSubview:mb];
+    [mb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(ws.view.window);
+    }];
+    if (mm.textField.text.length>=6&&mm.textField.text.length<=12) {
+        [self LoadData];
+    }else{
+        mb.mode = MBProgressHUDModeCustomView;
+        mb.label.text = @"新密码长度不对";
+        [mb hideAnimated:YES afterDelay:2];
+    }
+
+}
+
+- (void)LoadData{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_WJMM];
+    NSDictionary * dic = @{@"password":mm.textField.text,@"phone":_phone};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            MyDeModel *model = [MyDeModel mj_objectWithKeyValues:responseObject];
+            if ([model.code isEqual:@200]) {
+                self->mb.mode = MBProgressHUDModeCustomView;
+                self->mb.label.text = model.message;
+                [self->mb hideAnimated:YES afterDelay:2];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }else{
+                self->mb.mode = MBProgressHUDModeCustomView;
+                self->mb.label.text = model.message;
+                [self->mb hideAnimated:YES afterDelay:2];
+            }
+        }else{
+            self->mb.mode = MBProgressHUDModeCustomView;
+            self->mb.label.text = @"网络连接失败";
+            [self->mb hideAnimated:YES afterDelay:2];
+        }
+    }];
     
 }
+
 - (void)backClick{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 
-// 使label能够成为响应事件，为了能接收到事件（能成为第一响应者）
-- (BOOL)canBecomeFirstResponder{
-    return YES;
-}
-// 可以控制响应的方法
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
-    return (action == @selector(copy:));
-}
-//针对响应方法的实现，最主要的复制的两句代码
-- (void)copy:(id)sender{
+- (void)emalclick{
     
-    //UIPasteboard：该类支持写入和读取数据，类似剪贴板
-    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-    pasteBoard.string = emal.text;
+    NSString *urlStr = [NSString stringWithFormat:@"mailto://services@bowanjuan.com?subject=%@&body=%@",@"",@""];
+    NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+    [[UIApplication sharedApplication] openURL:url];
 }
-// 处理长按事件
-- (void)longPre:(UILongPressGestureRecognizer *)recognizer{
-    [self becomeFirstResponder]; // 用于UIMenuController显示，缺一不可
-    
-    //UIMenuController：可以通过这个类实现点击内容，或者长按内容时展示出复制等选择的项，每个选项都是一个UIMenuItem对象
-    UIMenuItem *copyLink = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(copy:)];
-    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObjects:copyLink, nil]];
-    [[UIMenuController sharedMenuController] setTargetRect:emal.frame inView:emal.superview];
-    [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
+
+
+- (void)tapGesture2{
+    [mm returnKeyboard];
 }
 /*
 #pragma mark - Navigation

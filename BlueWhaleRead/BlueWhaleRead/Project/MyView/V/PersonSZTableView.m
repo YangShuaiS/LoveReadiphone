@@ -38,8 +38,8 @@
     _model = model;
     NSString * currentVolum = [self HuanCunDaXiao];
     
-    titleArray = @[@"账号",@"消息推送",@"修改密码",@"清除缓存",@"意见反馈",@"关于天天爱读",@"退出登录"];
-    subArray = @[model.code,@"",@"",currentVolum,@"",@"",@""];
+    titleArray = @[@"消息推送",@"修改密码",@"清除缓存",@"意见反馈",@"关于天天爱读",@"退出登录"];
+    subArray = @[@"",@"",currentVolum,@"",@"",@""];
     [self reloadData];
 }
 - (NSString *)HuanCunDaXiao{
@@ -79,9 +79,10 @@
     NSString * rid = [NSString stringWithFormat:@"cell%ld",(long)indexPath.row];
     PersonalTableViewCell * cell =[tableView dequeueReusableCellWithIdentifier:rid];
     if(cell==nil){
+//        if (indexPath.row == 0){
+//            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
+//        }else
         if (indexPath.row == 0){
-            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
-        }else if (indexPath.row == 1){
             cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownSwith];
 
         }else{
@@ -137,10 +138,10 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WS(ws);
-    if (indexPath.row == 2) {
+    if (indexPath.row == 1) {
         PersonXiuGaiMimaViewController * vc = [PersonXiuGaiMimaViewController new];
         [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 3) {
+    }else if (indexPath.row == 2) {
         PersonQingChuHUanCunView * xuanze = [PersonQingChuHUanCunView new];
         [self.nav.view addSubview:xuanze];
         [xuanze mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -149,13 +150,13 @@
         [xuanze setBlock:^{
             [ws qingchu];
         }];
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == 3){
         FeedbackViewController * vc = [FeedbackViewController new];
         [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 5){
+    }else if (indexPath.row == 4){
         AboutViewController * vc = [AboutViewController new];
         [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 6){
+    }else if (indexPath.row == 5){
         [self tuichudenglu];
     }
     

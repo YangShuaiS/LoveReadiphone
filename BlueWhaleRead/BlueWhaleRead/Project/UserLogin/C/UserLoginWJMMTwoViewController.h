@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface UserLoginWJMMTwoViewController : BaseViewController
-
+@property(nonatomic,strong)NSString * phone;
 @end

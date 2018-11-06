@@ -10,6 +10,10 @@
 #import "UserLoginTextFileView.h"
 #import "UserLoginClickView.h"
 #import "UserLoginUJMMViewController.h"
+#import "UserLoginUJMMViewController.h"
+
+#import "UserSQDLView.h"
+
 @interface UserLoginDlViewController ()
 
 @end
@@ -54,17 +58,38 @@
         make.height.mas_equalTo(LENGTH(50));
     }];
     
+    BaseLabel * wj = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(155,177,176) LabelFont:TextFont(12) TextAlignment:NSTextAlignmentRight Text:@"忘记密码？"];
+    [self.view addSubview:wj];
+    [wj mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self->wjmm.mas_bottom);
+        make.right.mas_equalTo(self->wjmm).with.offset(0);
+        make.height.mas_equalTo(LENGTH(50));
+        make.width.mas_equalTo(LENGTH(100));
+    }];
+    wj.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapGesture4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(puswjmm)];
+    //将手势添加到需要相应的view中去
+    [wj addGestureRecognizer:tapGesture4];
+    
     UserLoginClickView * NewUser = [[UserLoginClickView alloc] initWithImage:@"" Text:@"登录" Style:UserLoginClickStyleNoml];
     NewUser.userInteractionEnabled = YES;
     [self.view addSubview:NewUser];
     [NewUser mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->wjmm.mas_bottom).with.offset(LENGTH(42));
+        make.top.mas_equalTo(wj.mas_bottom).with.offset(LENGTH(42));
         make.left.mas_equalTo(ws.view).with.offset(LENGTH(50));
         make.right.mas_equalTo(ws.view).with.offset(-LENGTH(50));
         make.height.mas_equalTo(LENGTH(50));
     }];
     [NewUser setBlock:^{
         [self dl];
+    }];
+    
+    UserSQDLView * sqdl = [UserSQDLView new];
+    sqdl.nav = self.navigationController;
+    [self.view addSubview:sqdl];
+    [sqdl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(NewUser.mas_bottom).with.offset(LENGTH(80));
+        make.left.and.right.mas_equalTo(ws.view);
     }];
     
     self.view.userInteractionEnabled = YES;
@@ -148,5 +173,8 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+- (void)puswjmm{
+    UserLoginUJMMViewController * vc = [UserLoginUJMMViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

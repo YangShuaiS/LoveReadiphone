@@ -11,9 +11,12 @@ CGFloat NavHeight = 0;
 CGFloat TabBarHeight = 0;
 CGFloat StatusBar = 0;
 CGFloat poinw = 0;
-NSString * ZSFWQ = @"http://tiantianaidu.com/"; 
+//NSString * ZSFWQ = @"http://tiantianaidu.com/";
 //NSString * ZSFWQ = @"http://192.168.1.221:8080/";
 //NSString * ZSFWQ = @"http://192.168.1.114:8075/";
+
+NSString * ZSFWQ = @"http://192.168.1.221:8085/";
+//NSString * ZSFWQ = @"http://119.90.89.88:8085/";
 
 
 MeModel * Me = nil;
@@ -220,6 +223,10 @@ MeModel * Me = nil;
 }
 
 //判断手机号码格式是否正确
+- (BOOL)isValidateByRegex:(NSString *)regex{
+    NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    return [pre evaluateWithObject:self];
+}
 
 + (BOOL)valiMobile:(NSString *)mobile
 
@@ -236,25 +243,28 @@ MeModel * Me = nil;
                           * 移动号段正则表达式
                      
                           */
-                
-    NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
+    NSString * CM_NUM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d|705)\\d{7}$";
+
+//    NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
 
             /**
                      
                           * 联通号段正则表达式
                      
                           */
-                
-        NSString *CU_NUM = @"^((13[0-2])|(145)|(15[5-6])|(176)|(18[5,6]))|(166)\\d{8}|(1709)\\d{7}$";
-                
+        NSString * CU_NUM = @"^1((3[0-2]|5[256]|8[56])\\d|709)\\d{7}$";
+
+//        NSString *CU_NUM = @"^((13[0-2])|(145)|(15[5-6])|(176)|(18[5,6]))|(166)\\d{8}|(1709)\\d{7}$";
+        
                 /**
                      
                           * 电信号段正则表达式
                      
                           */
-                
-        NSString *CT_NUM = @"^((133)|(153)|(177)|(18[0,1,9]))|(199)\\d{8}$";
-                
+        NSString * CT_NUM = @"^1((33|53|8[09])\\d|349|700)\\d{7}$";
+
+//        NSString *CT_NUM = @"^((133)|(153)|(177)|(18[0,1,9]))|(199)\\d{8}$";
+        
         NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM_NUM];
         BOOL isMatch1 = [pred1 evaluateWithObject:mobile];
         NSPredicate *pred2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU_NUM];
@@ -338,4 +348,7 @@ MeModel * Me = nil;
     return [UIColor colorWithRed:((float) r / 255.0f) green:((float) g / 255.0f) blue:((float) b / 255.0f) alpha:1.0f];
 }
 
++ (NSString *)Sharetitle:(NSString *)title{
+    return title;
+}
 @end

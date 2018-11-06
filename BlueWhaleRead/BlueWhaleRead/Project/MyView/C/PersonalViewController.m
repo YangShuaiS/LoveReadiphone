@@ -22,6 +22,12 @@
     [super viewDidLoad];
     [self AddNavtion];
     [self LoadData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(denglu:) name:kNotificationGengHuanPhone object:nil];
+
+}
+- (void)denglu:(NSNotification *)text{
+    [self LoadData];
+
 }
 #pragma mark --------------------  导航栏以及代理
 - (void)AddNavtion{
@@ -68,17 +74,21 @@
 - (void)Addview{
     WS(ws);
     self.view.backgroundColor = [UIColor whiteColor];
-    _tableView = [PersonalTableView new];
-    _tableView.nav = self.navigationController;
-    _tableView.baseview = self.view;
-    [self.view addSubview:_tableView];
-    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.navtive.mas_bottom).with.offset(0);
-        make.left.equalTo(ws.view).with.offset(0);
-        make.right.equalTo(ws.view).with.offset(0);
-        make.bottom.equalTo(ws.view).with.offset(0);
-    }];
-    _tableView.model = userModel;
+    if (_tableView == nil) {
+        _tableView = [PersonalTableView new];
+        _tableView.vc = self;
+        _tableView.nav = self.navigationController;
+        _tableView.baseview = self.view;
+        [self.view addSubview:_tableView];
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(ws.navtive.mas_bottom).with.offset(0);
+            make.left.equalTo(ws.view).with.offset(0);
+            make.right.equalTo(ws.view).with.offset(0);
+            make.bottom.equalTo(ws.view).with.offset(0);
+        }];
+    }
+    self->_tableView.model = self->userModel;
+
 }
 
 - (void)didReceiveMemoryWarning {

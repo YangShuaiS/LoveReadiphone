@@ -7,9 +7,12 @@
 //
 
 #import "BaseTableView.h"
+#import "GFAddressPicker.h"
 
-@interface PersonalTableView : BaseTableView
+@interface PersonalTableView : BaseTableView<GFAddressPickerDelegate>
 @property (nonatomic,strong)UIView * baseview;
 @property (nonatomic,strong)MyZiLiaoModel * model;
+@property(nonatomic,strong)UIViewController * vc;
+@property (nonatomic, strong) GFAddressPicker *pickerView;
 
 @end

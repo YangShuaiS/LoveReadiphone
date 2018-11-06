@@ -13,12 +13,24 @@
 
 #import "AccountSettingsViewController.h"
 #import "WanShanXinXiViewController.h"
+#import "ModifyNameViewController.h"
+
+#import <MOFSPickerManager.h>
 @interface PersonalTableView ()<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong)NSMutableArray *provinces;
+@property(nonatomic,assign)NSInteger provinceIndex;
+@property(nonatomic,assign)NSInteger provinceIndextwo;
 
 @end
 @implementation PersonalTableView{
     NSArray * titleArray;
     NSArray * subArray;
+    UserCityModel * citymodel;
+    
+    NSArray * arr;
+    
+    MyDeModel * mo;
+    MyZiLiaoModel * newModel;
 }
 
 - (instancetype)init{
@@ -38,17 +50,26 @@
 }
 - (void)setModel:(MyZiLiaoModel *)model{
     _model = model;
-//    titleArray = @[@"姓名",@"账号",@"等级",@"修改预留手机号",@"学校",@"班级",@"性别"];
-    titleArray = @[@"姓名",@"生日",@"等级",@"账号/绑定设置",@"所在地区",@"学校",@"班级",@"性别"];
     NSString * xb;
     if (model.sex == 1) {
         xb = @"男";
     }else{
         xb = @"女";
     }
-    
-    subArray = @[model.name,@"生日",model.level,@"账号状态",@"所在地区",@"学校",@"班级",xb];
-    
+    if ([_model.source isEqualToString:@"2"]) {
+        titleArray = @[@"昵称",@"生日",@"等级",@"账号/绑定设置",@"所在地区",@"学校",@"班级",@"性别"];
+        NSString * area = model.area;
+        NSString * true_school = model.true_school;
+        NSString * true_class = model.true_class;
+        area=[area isEqualToString:@""]?@"待完善":area;
+        true_school=[true_school isEqualToString:@""]?@"待完善":true_school;
+        true_class=[true_class isEqualToString:@""]?@"待完善":true_class;
+        subArray = @[model.name,model.birthday,[NSString stringWithFormat:@"Lv%@",model.level],model.phone,area,true_school,true_class,xb];
+    }else{
+        titleArray = @[@"昵称",@"等级",@"修改预留手机号",@"学校",@"班级",@"性别"];
+        subArray = @[model.name,[NSString stringWithFormat:@"Lv%@",model.level],model.phone,model.school,model.clazz,xb];
+
+    }
     [self reloadData];
 }
 #pragma mark  - tableViewDelegate代理方法
@@ -65,24 +86,47 @@
     NSString * rid = [NSString stringWithFormat:@"cell%ld",(long)indexPath.row];
     PersonalTableViewCell * cell =[tableView dequeueReusableCellWithIdentifier:rid];
     if(cell==nil){
-        if(indexPath.row == 0){
-            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewTopStyle];
-            cell.model = _model;
-            cell.baseview = self.baseview;
-        }else if (indexPath.row == 4){
-            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
-            cell.title = titleArray[indexPath.row-1];
-//            cell.subtitle = subArray[indexPath.row - 1];
-        }else if (indexPath.row == 5||indexPath.row == 6||indexPath.row ==7){
-            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
+        if ([_model.source isEqualToString:@"2"]) {
+            if(indexPath.row == 0){
+                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewTopStyle];
+                cell.model = _model;
+                cell.baseview = self.baseview;
+            }else if (indexPath.row == 4){
+                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
+                cell.title = titleArray[indexPath.row-1];
+//                cell.subtitle = subArray[indexPath.row - 1];
+            }else if (indexPath.row == 1||indexPath.row == 5||indexPath.row == 6||indexPath.row ==7){
+                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
+                cell.title = titleArray[indexPath.row-1];
+                cell.subtitle = subArray[indexPath.row - 1];
+            }else{
+                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
+                cell.title = titleArray[indexPath.row-1];
+                cell.subtitle = subArray[indexPath.row - 1];
+            }
+        }else{
+            if(indexPath.row == 0){
+                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewTopStyle];
+                cell.model = _model;
+                cell.baseview = self.baseview;
+            }else if (indexPath.row == 3){
+                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
+                cell.title = titleArray[indexPath.row-1];
+//                cell.subtitle = subArray[indexPath.row - 1];
+            }else{
+                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
+                cell.title = titleArray[indexPath.row-1];
+                cell.subtitle = subArray[indexPath.row - 1];
+            }
+        }
+    }
+    if ([_model.source isEqualToString:@"2"]) {
+        if (indexPath.row == 1||indexPath.row == 5||indexPath.row == 6||indexPath.row ==7){
             cell.title = titleArray[indexPath.row-1];
             cell.subtitle = subArray[indexPath.row - 1];
         }
-        else{
-            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
-            cell.title = titleArray[indexPath.row-1];
-            cell.subtitle = subArray[indexPath.row - 1];
-        }
+    }else{
+        
     }
     cell.nav = self.nav;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -129,19 +173,88 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 4) {
+    if ([_model.source isEqualToString:@"2"]) {
+        if (indexPath.row == 1) {
+            ModifyNameViewController * vc = [ModifyNameViewController new];
+            [self.nav pushViewController:vc animated:YES];
+            [vc setBlock:^{
+                [self LoadData];
+            }];
+        }else if (indexPath.row == 4) {
         AccountSettingsViewController * vc = [AccountSettingsViewController new];
+        vc.phonetext = subArray[indexPath.row - 1];
         [self.nav pushViewController:vc animated:YES];
     }else if (indexPath.row ==5){
-        
+        [self diqu];
     }else if (indexPath.row == 6){
         WanShanXinXiViewController * vc = [WanShanXinXiViewController new];
         vc.style = WanShanXinXiStyleScholl;
         [self.nav pushViewController:vc animated:YES];
+        [vc setBlock:^{
+            [self LoadData];
+        }];
     }else if (indexPath.row == 7){
         WanShanXinXiViewController * vc = [WanShanXinXiViewController new];
         vc.style = WanShanXinXiStyleClass;
         [self.nav pushViewController:vc animated:YES];
+        [vc setBlock:^{
+            [self LoadData];
+        }];
+    }
+    }else{
+        if (indexPath.row == 3) {
+            AccountSettingsViewController * vc = [AccountSettingsViewController new];
+            vc.phonetext = subArray[indexPath.row - 1];
+            [self.nav pushViewController:vc animated:YES];
+        }
     }
 }
+
+- (void)diqu{
+    self.pickerView = [[GFAddressPicker alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+//    [self.pickerView updateAddressAtProvince:@"河南省" city:@"郑州市" town:@"金水区"];
+    self.pickerView.delegate = self;
+    self.pickerView.font = [UIFont boldSystemFontOfSize:18];
+    [_vc.view addSubview:self.pickerView];
+    
+}
+
+- (void)GFAddressPickerCancleAction
+{
+    [self.pickerView removeFromSuperview];
+}
+- (void)GFAddressPickerWithProvince:(UserCitySmolModel *)province city:(UserCitySmolModel *)city area:(UserCitySmolModel *)area{
+    [self.pickerView removeFromSuperview];
+    NSString * str = [NSString stringWithFormat:@"%@,%@,%@",province.ssid,city.ssid,area.ssid];
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_WSXX];
+    NSDictionary * dic = @{@"tag":@"2",@"studentid":Me.ssid,@"area":str,@"school":@"",@"clazz":@""};
+    [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            self->mo = [MyDeModel mj_objectWithKeyValues:responseObject];
+            if ([self->mo.code isEqual:@200]) {
+                [self LoadData];
+            }
+        }else{
+            
+        }
+    }];
+}
+
+- (void)LoadData{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_MYDEXINXI];
+    NSDictionary * dic = @{@"studentid":Me.ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            self->mo = [MyDeModel mj_objectWithKeyValues:responseObject];
+            if ([self->mo.code isEqual:@200]) {
+                self->newModel = [MyZiLiaoModel mj_objectWithKeyValues:responseObject[@"user"]];
+                self.model = self->newModel;
+            }
+        }else{
+            
+        }
+    }];
+}
+
+
 @end

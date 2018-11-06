@@ -7,8 +7,9 @@
 //  已读书籍列表
 
 #import "BaseViewController.h"
-
+typedef void(^ReadGenBlock)(NSMutableArray *array);
 @interface ReadBookListViewController : BaseViewController
 @property(nonatomic,strong)NSString * bookName;
+@property(nonatomic,copy)ReadGenBlock block;
 
 @end

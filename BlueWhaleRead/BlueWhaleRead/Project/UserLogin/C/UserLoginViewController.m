@@ -12,6 +12,8 @@
 
 #import "UserLoginRegisteredViewController.h"
 #import "UserLoginDlViewController.h"
+
+#import "UserSQDLView.h"
 @interface UserLoginViewController (){
     FLAnimatedImageView * userImageView;
     UserlLoginTextFileView * textFile;
@@ -31,7 +33,6 @@
     [super viewDidLoad];
     [self ConfirmTheSize];
     WS(ws);
-    
     userImageView = [FLAnimatedImageView new];
     userImageView.image = UIIMAGE(@"天天爱读");
     userImageView.layer.shadowColor = RGB(0, 0, 0).CGColor;
@@ -78,6 +79,14 @@
     }];
     [DL setBlock:^{
         [self denglu];
+    }];
+    
+    UserSQDLView * sqdl = [UserSQDLView new];
+    sqdl.nav = self.navigationController;
+    [self.view addSubview:sqdl];
+    [sqdl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(DL.mas_bottom).with.offset(LENGTH(80));
+        make.left.and.right.mas_equalTo(ws.view);
     }];
     
     self.view.userInteractionEnabled = YES;

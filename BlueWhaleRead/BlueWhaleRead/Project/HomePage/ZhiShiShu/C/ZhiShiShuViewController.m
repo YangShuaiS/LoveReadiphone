@@ -65,7 +65,8 @@
 
 - (void)loadUpData{
     //    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FOUND];
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSTX,JK_ZHISHITIXIXIFENLEI];
+//    NSString * url = [NSString stringWithFormat:@"%@%@",ZSTX,JK_ZHISHITIXIXIFENLEI];
+    NSString * url = @"http://192.168.1.102/knowledge/public/knowledge/get-type";
     NSDictionary * dic = @{@"studentid":Me.ssid};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
@@ -110,11 +111,11 @@
     _carousel.type = iCarouselTypeRotary;
     _carousel.pagingEnabled = YES;
     _carousel.autoscroll = 0;
-    _carousel.viewpointOffset = CGSizeMake(0, -LENGTH(200));
+    _carousel.viewpointOffset = CGSizeMake(0, -LENGTH(0));
     [self.view addSubview:_carousel];
 //    [_carousel setBackgroundColor:backgroundColor];
     [_carousel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(-LENGTH(450), 0, -LENGTH(0), 0));
+        make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(-LENGTH(100), 0, -LENGTH(0), 0));
     }];
     // 设置代理
     self.carousel.delegate   = self;
@@ -229,8 +230,11 @@
     ZhiShiShuFLOneModel * model = modelarray[index];
     if (index == 0) {
         [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
+        pointView.alpha = 1;
     }else{
         [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.mini_logo]]];
+        pointView.alpha = 0.3;
+
     }
     // 图片自动适应
     pointView.contentMode = UIViewContentModeScaleAspectFit;
@@ -264,8 +268,12 @@
 //        view.image = UIIMAGE(@"人文-孙悟空");
         if (carousel.currentItemIndex == i) {
             [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
+            view.alpha = 1;
+
         }else{
             [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.mini_logo]]];
+            view.alpha = 0.3;
+
         }
 //        downview.downstyle = carousel.currentItemIndex;
         downview.model = modelarray[carousel.currentItemIndex];

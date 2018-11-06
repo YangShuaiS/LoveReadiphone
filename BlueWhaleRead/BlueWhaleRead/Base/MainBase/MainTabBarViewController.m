@@ -12,7 +12,7 @@
 
 #import "HomePageViewController.h"
 #import "FoundViewController.h"
-#import "BookCityViewController.h"
+#import "NBookCityViewController.h"
 #import "MyViewController.h"
 @interface MainTabBarViewController ()<UITabBarControllerDelegate>{
     NSInteger _currentIndex;
@@ -70,7 +70,7 @@
     BaseNavigationViewController * homenav1 = [[BaseNavigationViewController alloc] initWithRootViewController:view2];
     homenav1.tabBarItem =item2;
     
-    BookCityViewController * view3 = [[BookCityViewController  alloc] init];
+    NBookCityViewController * view3 = [[NBookCityViewController  alloc] init];
     BaseNavigationViewController * homenav2 = [[BaseNavigationViewController alloc] initWithRootViewController:view3];
     homenav2.tabBarItem =item3;
     

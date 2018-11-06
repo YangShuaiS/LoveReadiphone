@@ -18,5 +18,5 @@
 @property (nonatomic, copy) NSString * logo;
 @property (nonatomic, copy) NSString * level;
 
-
+@property (nonatomic,strong) NSString * is_completed;
 @end

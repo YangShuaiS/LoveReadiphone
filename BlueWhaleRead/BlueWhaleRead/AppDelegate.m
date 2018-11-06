@@ -13,6 +13,8 @@
 #import "YDYView.h"
 
 #import "DTLianXUanXIang.h"
+
+#import "MOBShareSDKHelper.h"
 @interface AppDelegate ()
 
 @end
@@ -27,15 +29,33 @@
         }else{
 //                        ZSFWQ = @"http://192.168.1.221:8080/";
                         ZSFWQ = @"http://39.106.100.235:8081/";
-
-            
         }
 
     }];
 }
+- (void)addwenjian{
+    NSArray *pathArray =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    // 创建一个文件管理器
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *filePath = [[pathArray firstObject] stringByAppendingPathComponent:@"booktext"];
+    // 创建文件夹
+    [manager createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:nil];
+    // 文件是否存在
+    BOOL isExists = [manager fileExistsAtPath:filePath];
+    // 删除文件
+    //    NSString *bookPath = [[pathArray firstObject] stringByAppendingPathComponent:@"book.plist"];
+    //    BOOL isDele = [manager removeItemAtPath:bookPath error:nil];
+    if (isExists) {
+        NSLog(@"文件夹存在");
+    }else{
+        NSLog(@"文件夹不存在");
+        
+    }
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self uodatazsfwq];
-    
+    [self addwenjian];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(denglu) name:kNotificationDenglu object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tuichudenglu) name:kNotificationTuiChuDenglu object:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -65,6 +85,7 @@
         [self addYDYView];
     } else {
     }
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     [NSThread sleepForTimeInterval:1];
     return YES;
 
@@ -100,7 +121,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     NSString *urlStr = [NSString stringWithFormat:@"mailto://1395325260@qq.com?subject=bug报告&body=感谢您的配合!" "错误详情:%@",content];
     
-    NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     [[UIApplication sharedApplication] openURL:url];
     
     
@@ -159,6 +180,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     [ZhiShiShuModel InitializeModel];//知识树
     [ZhiShiShuXqModel InitializeModel];
     [ZhiShiShuFLModel InitializeModel];//知识树分类
+    [UserCityModel InitializeModel];//城市
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -235,4 +257,23 @@ void UncaughtExceptionHandler(NSException *exception) {
     }
 }
 
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation
+{
+    NSLog(@"application:openURL:sourceApplication:annotation:");
+    //    [self application:application handleOpenURL:url];
+    return  YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    NSLog(@"application:handleOpenURL:");
+    //    [self application:application openURL:url sourceApplication:nil annotation:nil];
+    return  YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+    return  YES;
+}
 @end

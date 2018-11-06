@@ -12,6 +12,7 @@
     BaseView * backview;
     BaseLabel * yzm;//验证码
     UserLoginTextFile _style;
+    UIImageView * yanjing;
 }
 - (instancetype)initWithStyle:(UserLoginTextFile)style{
     self = [super init];
@@ -56,6 +57,9 @@
         case UserLoginTextFileWjMM:
             [self addUserLoginTextFileWjMM];
             break;
+        case UserLoginTextFileClickDQ:
+            [self addUserLoginTextFileClickDQ];
+            break;
         default:
             break;
     }
@@ -87,13 +91,18 @@
     yzm.backgroundColor = [UIColor whiteColor];
     yzm.layer.masksToBounds = YES;
     yzm.layer.cornerRadius = LENGTH(15);
+    
+    yzm.layer.shadowColor = RGB(0, 0, 0).CGColor;
+    yzm.layer.shadowOffset = CGSizeMake(0,0.5);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+    yzm.layer.shadowRadius = LENGTH(3);
+    yzm.layer.shadowOpacity = 0.06;
     [yzm mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(ws);
         make.right.mas_equalTo(-LENGTH(22));
         make.width.mas_equalTo(LENGTH(90));
         make.height.mas_equalTo(LENGTH(30));
     }];
-    yzm.userInteractionEnabled = NO;
+    yzm.userInteractionEnabled = YES;
     //添加手势
     UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ClickYZM)];
     //将手势添加到需要相应的view中去
@@ -105,19 +114,37 @@
 //忘记密码
 - (void)addwjmm{
     WS(ws);
-    yzm = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(51,75,74) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentCenter Text:@"忘记密码？"];
-    [backview addSubview:yzm];
-    [yzm mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    yanjing = [UIImageView new];
+    yanjing.image = UIIMAGE(@"组 339");
+    yanjing.contentMode = UIViewContentModeScaleAspectFit;
+    [backview addSubview:yanjing];
+    [yanjing mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(ws);
-        make.right.mas_equalTo(-LENGTH(22));
-        make.width.mas_equalTo(LENGTH(90));
-        make.height.mas_equalTo(LENGTH(30));
+        make.right.mas_equalTo(-LENGTH(32));
+        make.width.mas_equalTo(LENGTH(20));
+        make.height.mas_equalTo(LENGTH(13));
+
     }];
-    yzm.userInteractionEnabled = YES;
-    //添加手势
-    UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestures)];
-    //将手势添加到需要相应的view中去
-    [yzm addGestureRecognizer:tapGesture1];
+        yanjing.userInteractionEnabled = YES;
+        //添加手势
+        UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestures)];
+        //将手势添加到需要相应的view中去
+        [yanjing addGestureRecognizer:tapGesture1];
+    _textField.secureTextEntry = YES;
+//    yzm = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(51,75,74) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentCenter Text:@"忘记密码？"];
+//    [backview addSubview:yzm];
+//    [yzm mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(ws);
+//        make.right.mas_equalTo(-LENGTH(22));
+//        make.width.mas_equalTo(LENGTH(90));
+//        make.height.mas_equalTo(LENGTH(30));
+//    }];
+//    yzm.userInteractionEnabled = YES;
+//    //添加手势
+//    UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestures)];
+//    //将手势添加到需要相应的view中去
+//    [yzm addGestureRecognizer:tapGesture1];
 }
 - (void)UpData{
     __block NSInteger time = 59; //倒计时时间
@@ -151,18 +178,40 @@
     dispatch_resume(_timer);
 }
 - (void)ClickYZM{
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FASONGYANZHENGMA];
-    NSDictionary * dic = @{@"phone":_textField.text};
-    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
-        if (responseObject) {
-            MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
-            if ([model.code isEqual:@200]) {
-                [self UpData];
-            }
-        }else{
+    if (_style == UserLoginTextFilePhoneAndYZM) {
+        BOOL phone = [BaseObject valiMobile:_textField.text];
+        if (phone == YES) {
+            yzm.userInteractionEnabled = YES;
+            WS(ws);
+            MBProgressHUD * mb = [MBProgressHUD new];
+            mb.mode = MBProgressHUDModeIndeterminate;
+            mb.label.text = @"正在发送验证码...";
+            [mb showAnimated:YES];
+            mb.removeFromSuperViewOnHide = YES;
+            [self.vc.view.window addSubview:mb];
+            [mb mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(ws.vc.view.window);
+            }];
             
+            NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FASONGYANZHENGMA];
+            NSDictionary * dic = @{@"phone":_textField.text};
+            [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+                if (responseObject) {
+                    MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
+                    if ([model.code isEqual:@200]) {
+                        [self UpData];
+                    }
+                    mb.label.text = model.message;
+                    [mb hideAnimated:NO afterDelay:1];
+                }else{
+                    mb.label.text = @"发送失败";
+                    [mb hideAnimated:NO afterDelay:1];
+                }
+            }];
+        }else{
+            yzm.userInteractionEnabled = NO;
         }
-    }];
+    }
 }
 - (void)phone:(NSString *)str{
     BOOL phone = [BaseObject valiMobile:str];
@@ -208,6 +257,8 @@
 - (void)addUserLoginTextFileYHM{
     [self addTextField];
     _textField.keyboardType = UIKeyboardTypeDefault;
+    [_textField addTarget:self action:@selector(phoneNum_tfChange:) forControlEvents:UIControlEventEditingChanged];
+
 }
 //点击事件
 - (void)addUserLoginTextFileClick{
@@ -217,6 +268,37 @@
     //将手势添加到需要相应的view中去
     [self addGestureRecognizer:tapGesture2];
 }
+
+- (void)addUserLoginTextFileClickDQ{
+    [self addClickLabel];
+    self.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(diqu)];
+    //将手势添加到需要相应的view中去
+    [self addGestureRecognizer:tapGesture2];
+}
+
+- (void)diqu{
+    self.pickerView = [[GFAddressPicker alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    //    [self.pickerView updateAddressAtProvince:@"河南省" city:@"郑州市" town:@"金水区"];
+    self.pickerView.delegate = self;
+    self.pickerView.font = [UIFont boldSystemFontOfSize:18];
+    [_vc.view addSubview:self.pickerView];
+    
+}
+
+- (void)GFAddressPickerCancleAction
+{
+    [self.pickerView removeFromSuperview];
+}
+- (void)GFAddressPickerWithProvince:(UserCitySmolModel *)province city:(UserCitySmolModel *)city area:(UserCitySmolModel *)area{
+    _djshj.text = [NSString stringWithFormat:@"%@%@%@",province.name,city.name,area.name];
+    _dqid = [NSString stringWithFormat:@"%@,%@,%@",province.ssid,city.ssid,area.ssid];
+    _djshj.textColor = RGB(43,67,66);
+    [self.pickerView removeFromSuperview];
+    //    NSLog(@"%@  %@  %@",province,city,area);
+
+}
+
 - (void)addUserLoginTextFileWjMM{
     [self addTextField];
     _textField.keyboardType = UIKeyboardTypeAlphabet;
@@ -232,6 +314,14 @@
     PGDatePicker *datePicker = datePickManager.datePicker;
     datePicker.datePickerMode = PGDatePickerModeDate;
     datePicker.delegate = self;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date = [dateFormatter dateFromString:_djshj.text];//上次设置的日期
+    if (!_djshj.text) {
+        date = [NSDate date];
+    }
+    [datePicker setDate:date];
+
     [_vc presentViewController:datePickManager animated:false completion:nil];
     
     datePickManager.titleLabel.text = @"选择生日";
@@ -269,8 +359,15 @@
 
 
 - (void)tapGestures{
-    UserLoginUJMMViewController * vc = [UserLoginUJMMViewController new];
-    [self.nav pushViewController:vc animated:YES];
+//    UserLoginUJMMViewController * vc = [UserLoginUJMMViewController new];
+//    [self.nav pushViewController:vc animated:YES];
+    if (_textField.secureTextEntry == NO) {
+        _textField.secureTextEntry = YES;
+        yanjing.image = UIIMAGE(@"组 339");
+    }else{
+        _textField.secureTextEntry = NO;
+        yanjing.image = UIIMAGE(@"组 335");
+    }
 }
 - (void)returnKeyboard{
     [_textField resignFirstResponder];
@@ -284,6 +381,10 @@
             yzm.userInteractionEnabled = YES;
         }else{
             yzm.userInteractionEnabled = NO;
+        }
+    }else if (_style == UserLoginTextFileYHM){
+        if (textField.text.length >=10) {
+            [self returnKeyboard];
         }
     }
 }

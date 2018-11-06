@@ -10,4 +10,5 @@
 
 @interface LBTViewController : BaseViewController
 @property(nonatomic,strong)NSString * itemid;
+@property(nonatomic,strong)NSString * imageurl;
 @end

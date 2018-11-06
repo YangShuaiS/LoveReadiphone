@@ -57,6 +57,7 @@
     LBTViewController * vc = [LBTViewController new];
     LunboModel * model = _itemArray[index];
     vc.itemid = model.ssid;
+    vc.imageurl = cycleScrollerView.imageURLStringsGroup[index];
     [self.nav pushViewController:vc animated:YES];
 }
 

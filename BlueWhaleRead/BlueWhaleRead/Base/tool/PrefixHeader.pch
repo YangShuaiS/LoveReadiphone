@@ -38,6 +38,9 @@
 #import "BaseAppRequestManager.h"
 
 #import "PublicView.h"
+#import <ShareSDK/ShareSDK.h>
+#import <ZipArchive.h>
+
 /**
  *  字体适配 我在PCH文件定义了一个方法
  */

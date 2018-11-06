@@ -63,4 +63,7 @@ extern MeModel const * Me;
 +(NSString*)getCurrentTimes;
 
 + (UIColor *) colorWithHexString: (NSString *)color;
+
++ (NSString *)Sharetitle:(NSString *)title;
+
 @end

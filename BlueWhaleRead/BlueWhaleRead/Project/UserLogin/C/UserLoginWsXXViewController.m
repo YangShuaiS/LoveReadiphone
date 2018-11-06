@@ -39,8 +39,9 @@
         make.centerX.mas_equalTo(ws.view);
     }];
     
-    address = [[UserLoginTextFileView alloc] initWithStyle:UserLoginTextFileClick];
+    address = [[UserLoginTextFileView alloc] initWithStyle:UserLoginTextFileClickDQ];
     address.titles = @"所在地区";
+    address.vc = self;
     [self.view addSubview:address];
     [address mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(onesubtitle.mas_bottom).with.offset(LENGTH(46));
@@ -48,9 +49,8 @@
         make.right.mas_equalTo(ws.view).with.offset(-LENGTH(25));
         make.height.mas_equalTo(LENGTH(50));
     }];
-    [address setBlock:^{
-        NSLog(@"123");
-    }];
+//    [address setBlock:^{
+//    }];
     
     school = [[UserLoginTextFileView alloc] initWithStyle:UserLoginTextFileYHM];
     school.titles = @"所在学校";
@@ -94,13 +94,106 @@
         make.height.mas_equalTo(LENGTH(50));
     }];
     label.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(wancheng)];
+    UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buwanshan)];
     //将手势添加到需要相应的view中去
     [label addGestureRecognizer:tapGesture2];
 
+    self.view.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapGesture3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture3)];
+    //将手势添加到需要相应的view中去
+    [self.view addGestureRecognizer:tapGesture3];
 }
+
+
+
 - (void)wancheng{
+    WS(ws);
+    MBProgressHUD * mb = [MBProgressHUD new];
+    mb.mode = MBProgressHUDModeIndeterminate;
+    mb.label.text = @"正在完善信息";
+    [mb showAnimated:YES];
+    mb.removeFromSuperViewOnHide = YES;
+    [self.view.window addSubview:mb];
+    [mb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(ws.view.window);
+    }];
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_DENGLU];
+    NSDictionary * dic = @{@"code":_itemarray[0],@"password":_itemarray[1]};
+    [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                NSString *filePatch = [BaseObject AddPathName:UserMe];
+                Me = [MeModel mj_objectWithKeyValues:m.studentInfo];
+                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
+                NSDictionary * dics = m.studentInfo;
+                [usersDic setObject:dics forKey:UserMe];
+                [usersDic writeToFile:filePatch atomically:YES];
+                [mb hideAnimated:NO];
+                [self wansahn];
+            }else{
+                mb.label.text = m.message;
+                [mb hideAnimated:NO afterDelay:1];
+            }
+            
+        }else{
+            mb.label.text = @"网络请求失败";
+            [mb hideAnimated:NO afterDelay:1];
+        }
+    }];
     
+}
+- (void)buwanshan{
+    WS(ws);
+    MBProgressHUD * mb = [MBProgressHUD new];
+    mb.mode = MBProgressHUDModeIndeterminate;
+    mb.label.text = @"正在完善信息";
+    [mb showAnimated:YES];
+    mb.removeFromSuperViewOnHide = YES;
+    [self.view.window addSubview:mb];
+    [mb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(ws.view.window);
+    }];
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_DENGLU];
+    NSDictionary * dic = @{@"code":_itemarray[0],@"password":_itemarray[1]};
+    [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                NSString *filePatch = [BaseObject AddPathName:UserMe];
+                Me = [MeModel mj_objectWithKeyValues:m.studentInfo];
+                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
+                NSDictionary * dics = m.studentInfo;
+                [usersDic setObject:dics forKey:UserMe];
+                [usersDic writeToFile:filePatch atomically:YES];
+                [mb hideAnimated:NO];
+                NSNotification *notification =[NSNotification notificationWithName:kNotificationDenglu object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+            }else{
+                mb.label.text = m.message;
+                [mb hideAnimated:NO afterDelay:1];
+            }
+            
+        }else{
+            mb.label.text = @"网络请求失败";
+            [mb hideAnimated:NO afterDelay:1];
+        }
+    }];
+}
+- (void)wansahn{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_WSXX];
+    NSDictionary * dic = @{@"tag":@"1",@"studentid":Me.ssid,@"school":school.textField.text,@"clazz":schoolclass.textField.text,@"area":address.dqid};
+    [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            MyDeModel *mo = [MyDeModel mj_objectWithKeyValues:responseObject];
+            if ([mo.code isEqual:@200]) {
+                NSNotification *notification =[NSNotification notificationWithName:kNotificationDenglu object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+            }
+        }else{
+            
+        }
+    }];
 }
 #pragma mark ----------- 返回
 - (void)addnav{
@@ -124,6 +217,12 @@
 }
 - (void)backClick{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)tapGesture3{
+    [address returnKeyboard];
+    [school returnKeyboard];
+    [schoolclass returnKeyboard];
 }
 /*
 #pragma mark - Navigation

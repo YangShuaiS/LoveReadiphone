@@ -39,12 +39,13 @@
 //    }];
     
     imageview = [UIImageView new];
+    imageview.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(ws);
         make.top.mas_equalTo(ws);
-        make.width.mas_equalTo(LENGTH(85));
-        make.height.mas_equalTo(LENGTH(43));
+        make.width.mas_equalTo(LENGTH(85)*1.5);
+        make.height.mas_equalTo(LENGTH(43)*1.5);
     }];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -60,7 +61,7 @@
     [self addSubview:zssqiu];
     [zssqiu mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.equalTo(ws).with.offset(0);
-        make.top.equalTo(self->imageview.mas_bottom).with.offset(LENGTH(32));
+        make.top.equalTo(self->imageview.mas_bottom).with.offset(LENGTH(16));
 //        make.right.equalTo(ws).with.offset(0);
         make.height.mas_equalTo(LENGTH(53));
         make.centerX.mas_equalTo(ws);

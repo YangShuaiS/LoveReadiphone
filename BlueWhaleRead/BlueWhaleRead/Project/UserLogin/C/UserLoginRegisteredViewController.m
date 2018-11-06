@@ -35,6 +35,7 @@
     
     phone = [[UserLoginTextFileView alloc] initWithStyle:UserLoginTextFilePhoneAndYZM];
     phone.titles = @"请输入手机号";
+    phone.vc = self;
     [self.view addSubview:phone];
     [phone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(title.mas_bottom).with.offset(LENGTH(52));
@@ -75,6 +76,10 @@
     [NewUser setBlock:^{
         [self pushZC];
     }];
+    self.view.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture2)];
+    //将手势添加到需要相应的view中去
+    [self.view addGestureRecognizer:tapGesture2];
 }
 #pragma mark ----------- 返回
 - (void)addnav{
@@ -103,6 +108,10 @@
 - (void)pushZC{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_JIAOYANYANZHENGMA];
     NSDictionary * dic = @{@"phone":phone.textField.text,@"code":yzm.textField.text};
+    
+    NSString * yzphoneurl = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_JIAOYANPHONE];
+    NSDictionary * yzphonedic = @{@"phone":phone.textField.text};
+
     WS(ws);
     MBProgressHUD * mb = [MBProgressHUD new];
     mb.mode = MBProgressHUDModeIndeterminate;
@@ -114,13 +123,27 @@
         make.edges.equalTo(ws.view.window);
     }];
     if (mima.textField.text.length>=6&&mima.textField.text.length<=12) {
-        [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        
+        [[BaseAppRequestManager manager] getNormaldataURL:yzphoneurl dic:yzphonedic andBlock:^(id responseObject, NSError *error) {
             if (responseObject) {
                 MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
                 if ([model.code isEqual:@200]) {
-                    [self UpData];
-                    mb.label.text = model.message;
-                    [mb hideAnimated:NO afterDelay:1];
+                    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+                        if (responseObject) {
+                            MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
+                            if ([model.code isEqual:@200]) {
+                                [self UpData];
+                                mb.label.text = model.message;
+                                [mb hideAnimated:NO afterDelay:1];
+                            }else{
+                                mb.label.text = model.message;
+                                [mb hideAnimated:NO afterDelay:1];
+                            }
+                        }else{
+                            mb.label.text = @"网络请求失败";
+                            [mb hideAnimated:NO afterDelay:1];
+                        }
+                    }];
                 }else{
                     mb.label.text = model.message;
                     [mb hideAnimated:NO afterDelay:1];
@@ -130,13 +153,12 @@
                 [mb hideAnimated:NO afterDelay:1];
             }
         }];
+        
+
     }else{
         mb.label.text = @"密码长度不对";
         [mb hideAnimated:NO afterDelay:1];
     }
-    
-    
-    
 }
 - (void)UpData{
     NSMutableArray * itemarray = [NSMutableArray array];
@@ -145,6 +167,13 @@
     UserLoginPerfectViewController * vc = [UserLoginPerfectViewController new];
     vc.itemarray = itemarray;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (void)tapGesture2{
+    [phone returnKeyboard];
+    [yzm returnKeyboard];
+    [mima returnKeyboard];
 }
 /*
 #pragma mark - Navigation

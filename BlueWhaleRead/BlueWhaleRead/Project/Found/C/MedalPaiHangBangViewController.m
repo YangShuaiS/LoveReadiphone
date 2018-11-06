@@ -8,12 +8,15 @@
 
 #import "MedalPaiHangBangViewController.h"
 #import "MedalPaiHuanTableView.h"
+#import "FenXiangView.h"
+#import "HaiBaoView.h"
 @interface MedalPaiHangBangViewController ()<NavDelegate>
 
 @end
 
 @implementation MedalPaiHangBangViewController{
     MedalPaiHuanTableView *tableView;
+    MonthstudentModel * models;
 }
 
 - (void)viewDidLoad {
@@ -49,6 +52,7 @@
     }];
 }
 - (void)UpData:(MonthPMModel *)model{
+    models = model.studentList;
     tableView.monthBadgeList = model.studentList;
 }
 #pragma mark --------------------  导航栏以及代理
@@ -65,6 +69,51 @@
         make.height.mas_equalTo(NavHeight);
     }];
     
+    FLAnimatedImageView * sharefriend = [FLAnimatedImageView new];
+    sharefriend.image = UIIMAGE(@"告诉朋友");
+    [self.navtive addSubview:sharefriend];
+    [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
+        make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
+        make.size.mas_equalTo(sharefriend.image.size);
+    }];
+    sharefriend.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
+    [sharefriend addGestureRecognizer:tap];
+    
+}
+
+- (void)FenXiang{
+    NSMutableArray * itemarray = models.studentList;
+    MyClassModel * mymodel = itemarray[models.myRank];
+    if (itemarray.count != 0) {
+        FenXiangView * fenxiangs = [FenXiangView new];
+        if (models.myRank == 0) {
+            fenxiangs.sharestyle = ShareStyleTag7;
+        }else{
+            fenxiangs.balistgs = [NSString stringWithFormat:@"%ld",mymodel.studentBadgeList.count];
+            fenxiangs.sharestyle = ShareStyleTag8;
+        }
+        [self.view addSubview:fenxiangs];
+        WS(ws);
+        [fenxiangs mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(ws.view);
+        }];
+        [fenxiangs setBlock:^(FenXiangModel *model, ShareStyle sharestyle) {
+            [self addhabai:model Style:sharestyle];
+        }];
+    }
+}
+
+- (void)addhabai:(FenXiangModel *)model Style:(ShareStyle)style{
+    HaiBaoView * haibao = [HaiBaoView new];
+    haibao.sharestyle = style;
+    haibao.modes = model;
+    [self.view addSubview:haibao];
+    WS(ws);
+    [haibao mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view);
+    }];
 }
 - (void)NavLeftClick{
     [self.navigationController popViewControllerAnimated:YES];

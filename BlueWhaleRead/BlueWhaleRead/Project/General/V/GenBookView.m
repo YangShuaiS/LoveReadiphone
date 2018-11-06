@@ -256,6 +256,14 @@
         xunzhangone.model = array[0];
         xunzhangtwo.model = array[1];
     }
+    
+    RightImage.hidden = YES;
+    
+    if (_model.is_read == 2) {
+        RightImage.hidden = NO;
+    }else{
+        RightImage.hidden = YES;
+    }
 }
 
 - (void)setAllmodel:(AllBookListModel *)allmodel{
