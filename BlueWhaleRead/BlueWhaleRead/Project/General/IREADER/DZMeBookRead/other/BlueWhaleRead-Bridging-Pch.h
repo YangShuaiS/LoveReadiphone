@@ -10,7 +10,7 @@
 #define BlueWhaleRead_Bridging_Pch_h
 
 /// 导航栏扩展
-#import "UINavigationController+FDFullscreenPopGesture.h"
+//#import "UINavigationController+FDFullscreenPopGesture.h"
 
 /// 小说阅读效果控制器 (无效果,覆盖)
 #import "DZMCoverController.h"

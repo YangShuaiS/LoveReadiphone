@@ -108,7 +108,7 @@
     [downView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self->bookTop.mas_bottom).with.offset(LENGTH(15));
         make.left.equalTo(backImageView.mas_left).with.offset(LENGTH(15));
-        make.bottom.equalTo(backImageView.mas_bottom).with.offset(-LENGTH(48));
+        make.bottom.equalTo(backImageView.mas_bottom).with.offset(-LENGTH(TabBarHeight));
         make.right.equalTo(backImageView.mas_right).with.offset(-LENGTH(15));
     }];
     
@@ -157,7 +157,7 @@
         make.right.equalTo(ws.view).with.offset(0);
         //        make.top.equalTo(self->homeMenu.mas_bottom).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(0);
-        make.height.mas_equalTo(LENGTH(48));
+        make.height.mas_equalTo(LENGTH(TabBarHeight));
     }];
     
 }

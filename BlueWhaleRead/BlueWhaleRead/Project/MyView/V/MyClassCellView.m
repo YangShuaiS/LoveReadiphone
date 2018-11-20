@@ -76,7 +76,6 @@
     [name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(ws).with.offset(LENGTH(18));
         make.left.mas_equalTo(self->Touxiang.mas_right).with.offset(LENGTH(6.5));
-        
     }];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -173,7 +172,7 @@
     AttributedStringModel * models = [AttributedStringModel new];
     models.textString = onetextstr;
     models.bianString = lv;
-    models.fount = LENGTH(18);
+    models.fount = 18;
     models.color = RGB(251,143,37);
     NSArray * modelarray = @[models];
     NSMutableAttributedString *AttributedStr = [BaseObject Attributed:modelarray];

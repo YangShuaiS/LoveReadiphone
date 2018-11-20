@@ -11,6 +11,7 @@
 @interface BookXQbookModel : BaseModel
 @property (nonatomic, copy) NSString * author;
 @property (nonatomic, copy) NSString * b_score;
+@property (nonatomic, copy) NSString * b_download;
 @property (nonatomic, copy) NSString * catalogs;//分类id
 @property (nonatomic, copy) NSString * cover;//封皮
 @property (nonatomic, assign) NSInteger imp_type;//精读/泛读 精读为1 泛读为2

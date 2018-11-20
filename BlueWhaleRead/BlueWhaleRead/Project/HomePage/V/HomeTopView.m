@@ -96,19 +96,7 @@
         make.edges.mas_equalTo(self->touxiang);
         
     }];
-    
-    [name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self->touxiang.mas_right).with.offset(LENGTH(8));
-        make.bottom.mas_equalTo(self->touxiang.mas_centerY).with.offset(-LENGTH(0));
-//        make.top.equalTo(self->touxiang.mas_top).with.offset(LENGTH(20));
-    }];
-    
-    [dengji mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self->name.mas_bottom).with.offset(LENGTH(10));
-        make.left.equalTo(self->touxiang.mas_right).with.offset(LENGTH(8));
-        make.top.equalTo(self->name.mas_bottom).with.offset(LENGTH(4));
 
-    }];
     
     
     BaseView * leftview = [BaseView new];
@@ -194,6 +182,22 @@
     
     [lichengbeibutton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(rightview);
+    }];
+    
+    
+    
+    [name mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self->touxiang.mas_right).with.offset(LENGTH(8));
+        make.bottom.mas_equalTo(self->touxiang.mas_centerY).with.offset(-LENGTH(0));
+        make.right.mas_equalTo(leftview.mas_left).with.offset(-LENGTH(5));
+        //        make.top.equalTo(self->touxiang.mas_top).with.offset(LENGTH(20));
+    }];
+    
+    [dengji mas_makeConstraints:^(MASConstraintMaker *make) {
+        //        make.top.equalTo(self->name.mas_bottom).with.offset(LENGTH(10));
+        make.left.equalTo(self->touxiang.mas_right).with.offset(LENGTH(8));
+        make.top.equalTo(self->name.mas_bottom).with.offset(LENGTH(4));
+        
     }];
 }
 

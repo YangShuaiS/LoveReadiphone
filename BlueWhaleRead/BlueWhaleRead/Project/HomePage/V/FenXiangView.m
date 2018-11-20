@@ -11,11 +11,13 @@
 #import <Photos/Photos.h>
 
 @interface FenXiangView ()<WKNavigationDelegate>
-@property(nonatomic,strong) GZWKWebView *webView;
+//@property(nonatomic,strong) GZWKWebView *webView;
 @property(nonatomic,strong) UIImageView *imageView;
 @end
 @implementation FenXiangView{
     NSMutableArray * viewarray;
+    NSMutableArray * titarrays;
+
     NSInteger inter;
     SSDKPlatformType platformType;
     FenXiangModel * fxmodel;
@@ -25,7 +27,11 @@
     
     NSString * url;
     FenXiangModel * bakmodel;
-
+    FLAnimatedImageView * hb;
+    
+    UIView * wxclick;
+    UIView * wxpyqclick;
+    UIView * hbclick;
 }
 
 - (instancetype)init
@@ -42,20 +48,20 @@
     [self returndic];
 }
 - (void)addhaibao{
-    _webView = [GZWKWebView new];
-    _webView.navigationDelegate = self;
-    _webView.scrollView.bounces = NO;
-    [self addSubview:_webView];
-    WS(ws);
-    [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws).with.offset(StatusBar);
-        make.bottom.mas_equalTo(self->backview.mas_top).with.offset(-LENGTH(12));
-        make.width.mas_equalTo(ws.webView.mas_height).multipliedBy(0.62);
-        //        make.centerX.mas_offset(ws);
-        make.centerX.mas_equalTo(self->backview);
-        //        make.left.mas_equalTo(ws).with.offset(LENGTH(26));
-        //        make.right.mas_equalTo(ws).with.offset(-LENGTH(26));
-    }];
+//    _webView = [GZWKWebView new];
+//    _webView.navigationDelegate = self;
+//    _webView.scrollView.bounces = NO;
+//    [self addSubview:_webView];
+//    WS(ws);
+//    [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(ws).with.offset(StatusBar);
+//        make.bottom.mas_equalTo(self->backview.mas_top).with.offset(-LENGTH(12));
+//        make.width.mas_equalTo(ws.webView.mas_height).multipliedBy(0.62);
+//        //        make.centerX.mas_offset(ws);
+//        make.centerX.mas_equalTo(self->backview);
+//        //        make.left.mas_equalTo(ws).with.offset(LENGTH(26));
+//        //        make.right.mas_equalTo(ws).with.offset(-LENGTH(26));
+//    }];
 }
 - (void)addview{
     
@@ -114,33 +120,52 @@
     }];
     
     viewarray = [NSMutableArray array];
+    titarrays = [NSMutableArray array];
     if ([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"weixin://"]]) {
         FLAnimatedImageView * wxview = [FLAnimatedImageView new];
         wxview.image = UIIMAGE(@"微信");
         wxview.contentMode = UIViewContentModeScaleAspectFit;
         [topview addSubview:wxview];
         [viewarray addObject:wxview];
-        wxview.userInteractionEnabled = YES;
+        
+        wxclick = [UIView new];
+        [topview addSubview:wxclick];
+        wxclick.userInteractionEnabled = YES;
+        [wxclick mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(wxview).with.insets(UIEdgeInsetsMake(-30, -30, -30, -30));
+        }];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(wxhy)];
-        [wxview addGestureRecognizer:tap];
+        [wxclick addGestureRecognizer:tap];
         
         FLAnimatedImageView * wxviewpyq = [FLAnimatedImageView new];
         wxviewpyq.image = UIIMAGE(@"朋友圈");
         wxviewpyq.contentMode = UIViewContentModeScaleAspectFit;
         [topview addSubview:wxviewpyq];
         [viewarray addObject:wxviewpyq];
-        wxviewpyq.userInteractionEnabled = YES;
+        
+        wxpyqclick = [UIView new];
+        [topview addSubview:wxpyqclick];
+        wxpyqclick.userInteractionEnabled = YES;
+        [wxpyqclick mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(wxviewpyq).with.insets(UIEdgeInsetsMake(-30, -30, -30, -30));
+        }];
         UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(wxviewpyq)];
-        [wxviewpyq addGestureRecognizer:tap1];
+        [wxpyqclick addGestureRecognizer:tap1];
     }
-    FLAnimatedImageView * hb = [FLAnimatedImageView new];
+    hb = [FLAnimatedImageView new];
     hb.image = UIIMAGE(@"生成海报");
     hb.contentMode = UIViewContentModeScaleAspectFit;
     [topview addSubview:hb];
     [viewarray addObject:hb];
-    hb.userInteractionEnabled = YES;
+    
+    hbclick = [UIView new];
+    [topview addSubview:hbclick];
+    hbclick.userInteractionEnabled = YES;
+    [hbclick mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self->hb).with.insets(UIEdgeInsetsMake(-30, -30, -30, -30));
+    }];
     UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hb)];
-    [hb addGestureRecognizer:tap1];
+    [hbclick addGestureRecognizer:tap1];
     
     if (viewarray.count == 1) {
         NSArray * titarray = @[@"生成海报"];
@@ -157,6 +182,7 @@
             make.top.mas_equalTo(view.mas_bottom).with.offset(LENGTH(10));
             make.bottom.mas_equalTo(topview);
         }];
+        [titarrays addObject:title];
     }else{
     NSArray * titarray = @[@"微信好友",@"朋友圈",@"生成海报"];
     FLAnimatedImageView * lastview;
@@ -191,6 +217,7 @@
             make.top.mas_equalTo(view.mas_bottom).with.offset(LENGTH(10));
             make.bottom.mas_equalTo(topview);
         }];
+        [titarrays addObject:title];
     }
     }
 }
@@ -214,7 +241,7 @@
 - (void)returndic{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FXLCB];
     NSDictionary * dic;
-    if (_sharestyle == ShareStyleTag9) {
+    if (_sharestyle == ShareStyleTag9||_sharestyle == ShareStyleTag10) {
         dic = @{@"tag":tag,@"articleid":_textid};
     }else{
         dic = @{@"tag":tag};
@@ -234,14 +261,14 @@
 }
 - (void)ShareStyleTag1{
     url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",fxmodel.url,Me.ssid];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     _Text = fxmodel.content;
     _title = fxmodel.title;
     _imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,fxmodel.img];
 }
 - (void)ShareStyleTag2{
     url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",fxmodel.url,Me.ssid];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     _Text = fxmodel.content;
     NSString * tit = fxmodel.title;
     tit = [tit stringByReplacingOccurrencesOfString:@"####" withString:_classname];
@@ -250,7 +277,7 @@
 }
 - (void)ShareStyleTag3{
     url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",fxmodel.url,Me.ssid];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     _Text = fxmodel.content;
     NSString * tit = fxmodel.title;
     tit = [tit stringByReplacingOccurrencesOfString:@"###" withString:_bolistname];
@@ -258,7 +285,7 @@
 }
 - (void)ShareStyleTag4{
     url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",fxmodel.url,Me.ssid];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     NSString * tex = fxmodel.content;
     tex = [tex stringByReplacingOccurrencesOfString:@"#######" withString:_yidgh];
     tex = [tex stringByReplacingOccurrencesOfString:@"##" withString:Me.name];
@@ -269,7 +296,7 @@
     _imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,fxmodel.img];
 
     url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",fxmodel.url,Me.ssid];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     _Text = fxmodel.content;
     NSString * tit = fxmodel.title;
     tit = [tit stringByReplacingOccurrencesOfString:@"##" withString:Me.name];
@@ -278,7 +305,7 @@
 - (void)ShareStyleTag6{
     _imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,fxmodel.img];
     url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",fxmodel.url,Me.ssid];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     _Text = fxmodel.content;
     NSString * tit = fxmodel.title;
     tit = [tit stringByReplacingOccurrencesOfString:@"##" withString:Me.name];
@@ -288,7 +315,7 @@
 }
 - (void)ShareStyleTag7{
     url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",fxmodel.url,Me.ssid];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     _Text = fxmodel.content;
     NSString * tit = fxmodel.title;
     tit = [tit stringByReplacingOccurrencesOfString:@"##" withString:Me.name];
@@ -296,17 +323,25 @@
 }
 - (void)ShareStyleTag8{
     url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",fxmodel.url,Me.ssid];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     _Text = fxmodel.content;
     NSString * tit = fxmodel.title;
-    tit = [tit stringByReplacingOccurrencesOfString:@"#######" withString:_studentnum];
+    tit = [tit stringByReplacingOccurrencesOfString:@"#####" withString:_balistgs];
     tit = [tit stringByReplacingOccurrencesOfString:@"##" withString:Me.name];
     _title = tit;
 }
 - (void)ShareStyleTag9{
-    url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",fxmodel.url,Me.ssid];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-    _Text = fxmodel.content;
+    hb.image = UIIMAGE(@"复制链接");
+    BaseLabel * title = titarrays[titarrays.count-1];
+    title.text = @"复制链接";
+    
+    url = [NSString stringWithFormat:@"%@?showType=%@&studentId=%@&atype=%@",fxmodel.url,_textid,Me.ssid,_atype];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    NSString * fxtext = fxmodel.content;
+    if (fxmodel.content.length>100) {
+        fxtext = [fxtext substringToIndex:99];
+    }
+    _Text = fxtext;
     NSString * tit = fxmodel.title;
     tit = [tit stringByReplacingOccurrencesOfString:@"##" withString:Me.name];
     tit = [tit stringByReplacingOccurrencesOfString:@"*" withString:_bookname];
@@ -315,9 +350,14 @@
     
 }
 - (void)ShareStyleTag10{
-    url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",fxmodel.url,Me.ssid];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    hb.image = UIIMAGE(@"复制链接");
+    BaseLabel * title = titarrays[titarrays.count-1];
+    title.text = @"复制链接";
+    
+    url = [NSString stringWithFormat:@"%@?showType=%@&studentId=%@",fxmodel.url,_textid,Me.ssid];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     _imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,_imageurl];
+//    _imageurl = @"http://192.168.1.221:8081/images/banners/201809281425503031.png";
     NSString * tit = fxmodel.title;
     tit = [tit stringByReplacingOccurrencesOfString:@"##" withString:Me.name];
     tit = [tit stringByReplacingOccurrencesOfString:@"**" withString:_sdm];
@@ -371,12 +411,18 @@
 
 - (void)wxhy{
     inter = 1;
+    wxclick.userInteractionEnabled = NO;
+    wxpyqclick.userInteractionEnabled = NO;
+    hbclick.userInteractionEnabled = NO;
     [self wxhys:self->fxmodel];
     
 }
 
 - (void)wxviewpyq{
     inter = 2;
+    wxclick.userInteractionEnabled = NO;
+    wxpyqclick.userInteractionEnabled = NO;
+    hbclick.userInteractionEnabled = NO;
     [self wxviewpyq:self->fxmodel];
 
 }
@@ -391,7 +437,6 @@
 }
 - (void)shareLinkpyq:(FenXiangModel *)dic
 {
-    NSString * url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",dic.url,Me.ssid];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     //平台定制
     [parameters SSDKSetupWeChatParamsByText:_Text
@@ -413,7 +458,6 @@
 
 - (void)shareLinkhy:(FenXiangModel *)dic
 {
-    NSString * url = [NSString stringWithFormat:@"%@?showType=1&studentId=%@",dic.url,Me.ssid];
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     //平台定制
@@ -459,6 +503,9 @@
          NSString *titel = @"";
          NSString *typeStr = @"";
          UIColor *typeColor = [UIColor grayColor];
+         self->wxclick.userInteractionEnabled = YES;
+         self->wxpyqclick.userInteractionEnabled = YES;
+         self->hbclick.userInteractionEnabled = YES;
          switch (state) {
              case SSDKResponseStateSuccess:
              {
@@ -470,9 +517,9 @@
              }
              case SSDKResponseStateFail:
              {
-                 NSLog(@"---------------->share error :%@",error);
+//                 NSLog(@"---------------->share error :%@",error);
                  titel = @"分享失败";
-                 typeStr = [NSString stringWithFormat:@"%@",error];
+                 typeStr = @"";
                  typeColor = [UIColor redColor];
                  break;
              }
@@ -495,7 +542,18 @@
      }];
 }
 - (void)hb{
-    self.block(self->bakmodel,self->_sharestyle);
+    if (_sharestyle == ShareStyleTag9 || _sharestyle == ShareStyleTag10) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = url;
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"复制" message:@"已复制剪切板" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction * okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:cancelAction];
+        [alertController addAction:okAction];
+        [_vc presentViewController: alertController animated: YES completion: nil];
+    }else{
+        self.block(self->bakmodel,self->_sharestyle);
+    }
     self.alpha = 0;
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);

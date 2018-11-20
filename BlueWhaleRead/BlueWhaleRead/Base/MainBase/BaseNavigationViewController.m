@@ -7,6 +7,8 @@
 //
 
 #import "BaseNavigationViewController.h"
+
+#import "DTJieGuoViewController.h"
 @interface BaseNavigationViewController ()<UINavigationControllerDelegate,UIGestureRecognizerDelegate>{
     NSInteger inter;
     NSString * VC;
@@ -27,6 +29,7 @@
     if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
 //        statusBar.backgroundColor = RGB(0x33, 0x33, 0x33);
     }
+//    self.interactivePopGestureRecognizer.delegate = self;
 
 
 }
@@ -97,7 +100,7 @@
 
 }
 -(BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
-//    if([touch.view isKindOfClass:[XJGestureButton class]]||[touch.view isKindOfClass:[NoHuaDong class]])
+//    if([touch.view isKindOfClass:[DTJieGuoViewController class]])
 //        return NO;
 //    else
         return YES;

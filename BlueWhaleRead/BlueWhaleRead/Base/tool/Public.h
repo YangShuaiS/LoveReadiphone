@@ -22,7 +22,7 @@
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 #define IOS_X [UIDevice currentDevice].systemVersion
 
-#define BANBENHAO @"v1.01"
+#define BANBENHAO @"v1.07"
 
 
 //#define ZSFWQ @"http://192.168.1.114:8088/"
@@ -42,8 +42,8 @@
 //#define IMAGEURL @"http://192.168.1.221:8080/"
 #define IMAGEURL @"http://tiantianaidu.com/"
 
-#define ZSTX @"http://192.168.1.231:9001/"//内网
-//#define ZSTX @"http://119.90.89.88:9001/"//外网
+//#define ZSTX @"http://192.168.1.231:9001/"//内网
+#define ZSTX @"http://119.90.89.88:9001/"//外网
 //#define ZSTX @"http://192.168.1.102/knowledge/public/"//
 
 
@@ -119,6 +119,10 @@
 
 
 #define JK_FXLCB @"api/v1.0/sharewxInfo"//分享里程碑
+
+
+#define JK_NBCHOME @"api/v1.0/bookPage"//新书城home
+#define JK_NBCZT @"api/v1.0/themeList"//专题
 
 // 相对iphone6S 屏幕比
 #define KWidth_ScaleW [UIScreen mainScreen].bounds.size.width/414.0f

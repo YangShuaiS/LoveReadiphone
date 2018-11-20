@@ -14,7 +14,7 @@
 
 #import "DTLianXUanXIang.h"
 
-#import "MOBShareSDKHelper.h"
+//#import "MOBShareSDKHelper.h"
 @interface AppDelegate ()
 
 @end
@@ -46,12 +46,12 @@
     // 删除文件
     //    NSString *bookPath = [[pathArray firstObject] stringByAppendingPathComponent:@"book.plist"];
     //    BOOL isDele = [manager removeItemAtPath:bookPath error:nil];
-    if (isExists) {
-        NSLog(@"文件夹存在");
-    }else{
-        NSLog(@"文件夹不存在");
-        
-    }
+//    if (isExists) {
+//        NSLog(@"文件夹存在");
+//    }else{
+//        NSLog(@"文件夹不存在");
+//        
+//    }
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self uodatazsfwq];
@@ -181,6 +181,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     [ZhiShiShuXqModel InitializeModel];
     [ZhiShiShuFLModel InitializeModel];//知识树分类
     [UserCityModel InitializeModel];//城市
+    [NBCALLModel InitializeModel];//新书城
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

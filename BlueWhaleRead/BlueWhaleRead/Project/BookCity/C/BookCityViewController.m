@@ -7,7 +7,7 @@
 //
 
 #import "BookCityViewController.h"
-#import "BookHeadView.h"
+//#import "BookHeadView.h"
 #import "BooStyleView.h"
 #import "SearchView.h"
 @interface BookCityViewController ()<NavDelegate,BooStyleViewDelegate>
@@ -16,7 +16,7 @@
 @end
 
 @implementation BookCityViewController{
-    BookHeadView *headView;
+//    BookHeadView *headView;
     NSInteger page;
     NSArray  * arr;
     NSInteger allpage;
@@ -31,7 +31,7 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"" Title:@"请输入书籍名称" RightTitle:@"" NativeStyle:NacStyleBookCity];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"请输入书籍名称" RightTitle:@"" NativeStyle:NacStyleBookCity];
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
     [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -44,6 +44,7 @@
     
 }
 - (void)NavLeftClick{
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 
@@ -86,25 +87,33 @@
         make.top.equalTo(ws.view).with.offset(NavHeight);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
-        make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
+        make.bottom.equalTo(ws.view).with.offset(0);
     }];
     arr = [NSArray array];
-    arr = @[@"0",@"0",@"0"];
+    arr = @[_cata,@"0",@"0"];
     [self chushihua];
+    typeof(self) __weak weakSelf = self;
     _menu.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [ws LoadData:self->arr[0] Leve:self->arr[1] Sort:self->arr[2]];
+        [weakSelf headRefresh];
     }];
     [_menu.tableView.mj_header beginRefreshing];
-    
+
     _menu.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         // 进入刷新状态后会自动调用这个 block
-        if (self->allpage >=self->page) {
-            [ws LoadData:self->arr[0] Leve:self->arr[1] Sort:self->arr[2]]; 
-        }else{
-            [self->_menu.tableView.mj_footer endRefreshing];
-        }
-
+        [weakSelf footerRefresh];
     }];
+}
+#pragma mark - 下拉刷新
+- (void)headRefresh{
+    [self LoadData:self->arr[0] Leve:self->arr[1] Sort:self->arr[2]];
+}
+#pragma mark - 上拉加载
+- (void)footerRefresh{
+    if (allpage >=page) {
+        [self LoadData:self->arr[0] Leve:self->arr[1] Sort:self->arr[2]];
+    }else{
+        [_menu.tableView.mj_footer endRefreshing];
+    }
 }
 - (void)chushihua{
     _menu.inter = 1;
@@ -150,48 +159,52 @@
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,BOOKCITY];
     //studentid 学生id
     if ([catalogid isEqualToString:@""]) {
-        catalogid = @"0";
+        catalogid = _cata;
     }
-    
+
     if ([levelid isEqualToString:@""]) {
         levelid = @"0";
     }
-    
+
     if ([sort isEqualToString:@""]) {
         sort = @"0";
     }
-    
+
     NSDictionary * dic = @{@"studentid":Me.ssid,@"catalogid":catalogid,@"levelid":levelid,@"sort":sort,@"page":[NSString stringWithFormat:@"%ld",(long)page]};
-    
+    typeof(self) __weak weakSelf = self;
+
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
-            BookCityModel * model = [BookCityModel mj_objectWithKeyValues:responseObject];
-            if ([model.code isEqual:@200]) {
-                [self UpData:model];
-                self->page++;
-            }
+            [weakSelf UpresponseObject:responseObject];
+   
         }else{
-            
+
         }
-        [self->_menu.tableView.mj_header endRefreshing];
-        [self->_menu.tableView.mj_footer endRefreshing];
+        [weakSelf.menu.tableView.mj_header endRefreshing];
+        [weakSelf.menu.tableView.mj_footer endRefreshing];
     }];
     
 }
-
-- (void)UpData:(BookCityModel *)model{
-    [self->_menu.tableView.mj_header endRefreshing];
-    [self->_menu.tableView.mj_footer endRefreshing];
-    if (model.readBalance.studentBalance.count == 0||model.readBalance.myReadNum<5) {
-            WS(ws);
-            [headView removeFromSuperview];
-            [_menu mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(ws.navtive.mas_bottom);
-            }];
-    }else{
-        headView.readBalance = model.readBalance;
+- (void)UpresponseObject:(id)responseObject{
+    BookCityModel * model = [BookCityModel mj_objectWithKeyValues:responseObject];
+    if ([model.code isEqual:@200]) {
+        [self UpData:model];
+        self->page++;
     }
-
+}
+- (void)UpData:(BookCityModel *)model{
+    [_menu.tableView.mj_header endRefreshing];
+    [_menu.tableView.mj_footer endRefreshing];
+//    if (model.readBalance.studentBalance.count == 0||model.readBalance.myReadNum<5) {
+//            WS(ws);
+////            [headView removeFromSuperview];
+//            [_menu mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.top.equalTo(ws.navtive.mas_bottom);
+//            }];
+//    }else{
+////        headView.readBalance = model.readBalance;
+//    }
+    _menu.inpath = _inpath;
     _menu.model = model;
     allpage = model.totalCount;
 }
@@ -206,5 +219,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+- (void)dealloc{
+}
 @end

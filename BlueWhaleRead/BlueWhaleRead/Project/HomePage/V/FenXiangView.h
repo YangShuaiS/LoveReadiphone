@@ -32,5 +32,9 @@ typedef void(^GenBlock)(FenXiangModel * model,ShareStyle sharestyle);
 
 @property(nonatomic,strong)NSString * textid;//文章分享id
 
+
+@property(nonatomic,strong) UIViewController * vc;
+@property(nonatomic,strong)NSString * atype;//
+
 @end
 

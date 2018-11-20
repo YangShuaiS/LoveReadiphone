@@ -17,9 +17,7 @@
     if (self) {
         [self qxwxsq:SSDKPlatformSubTypeWechatSession];
         [self qxwxsq:SSDKPlatformSubTypeQQFriend];
-
         [self addview];
-        
     }
     return self;
 }

@@ -67,9 +67,9 @@
     tiMu.backgroundColor = RGB(32,186,242);
     [self addSubview:tiMu];
     [tiMu mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws).with.offset(LENGTH(41)+NavHeight);
-        make.left.equalTo(ws).with.offset(LENGTH(15));
-        make.right.equalTo(ws).with.offset(-LENGTH(15));
+        make.top.equalTo(ws).with.offset(20+NavHeight);
+        make.left.equalTo(ws).with.offset(15);
+        make.right.equalTo(ws).with.offset(-15);
     }];
     
     title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255, 255, 255) LabelFont:TextFont(17) TextAlignment:NSTextAlignmentLeft Text:@""];
@@ -77,10 +77,10 @@
     [tiMu addSubview:title];
     
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->tiMu.mas_top).with.offset(LENGTH(14));
-        make.right.equalTo(self->tiMu.mas_right).with.offset(-LENGTH(18));
-        make.left.equalTo(self->tiMu.mas_left).with.offset(LENGTH(18));
-        make.bottom.equalTo(self->tiMu.mas_bottom).with.offset(-LENGTH(14));
+        make.top.equalTo(self->tiMu.mas_top).with.offset(14);
+        make.right.equalTo(self->tiMu.mas_right).with.offset(-18);
+        make.left.equalTo(self->tiMu.mas_left).with.offset(18);
+        make.bottom.equalTo(self->tiMu.mas_bottom).with.offset(-14);
     }];
     
     tiMuImage = [FLAnimatedImageView new];
@@ -89,7 +89,7 @@
     tiMuImage.layer.cornerRadius = LENGTH(10);
     [self addSubview:tiMuImage];
     [tiMuImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws).with.offset(LENGTH(42)+NavHeight);
+        make.top.equalTo(ws).with.offset(20+NavHeight);
         make.centerX.mas_equalTo(ws);
         make.width.mas_equalTo(LENGTH(180));
         make.height.mas_equalTo(LENGTH(180));
@@ -101,9 +101,9 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(itemWidth,itemHeight);
     //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = LENGTH(25);
+    flowLayout.minimumLineSpacing = 25;
     //定义每个UICollectionView 纵向的间距
-    flowLayout.minimumInteritemSpacing = LENGTH(25);
+    flowLayout.minimumInteritemSpacing = 25;
     //定义每个UICollectionView 的边距距
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);//上左下右
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -111,10 +111,10 @@
     _collectView = [[SzScXuanXiangCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
     [self addSubview:_collectView];
     [_collectView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->tiMu.mas_bottom).with.offset(LENGTH(30));
+        make.top.equalTo(self->tiMu.mas_bottom).with.offset(10);
         make.centerX.mas_equalTo(ws);
-        make.height.mas_equalTo(itemHeight*2+LENGTH(25));
-        make.width.mas_equalTo(itemHeight*2+LENGTH(25));
+        make.height.mas_equalTo(itemHeight*2+25);
+        make.width.mas_equalTo(itemHeight*2+25);
     }];
     
     nexttopic = [FLAnimatedImageView new];
@@ -125,7 +125,7 @@
         make.centerX.mas_equalTo(ws);
         make.width.mas_equalTo(LENGTH(104));
         make.height.mas_equalTo(LENGTH(44));
-        make.bottom.equalTo(ws).with.offset(-LENGTH(42));
+        make.bottom.equalTo(ws).with.offset(-42);
 
     }];
     
@@ -239,20 +239,20 @@
         tiMuImage.hidden = NO;
         [tiMuImage sd_setImageWithURL:URLIMAGE(scorci.picture) placeholderImage:UIIMAGE(ZHANWEITU)];
         [_collectView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self->tiMuImage.mas_bottom).with.offset(LENGTH(30));
+            make.top.equalTo(self->tiMuImage.mas_bottom).with.offset(10);
             make.centerX.mas_equalTo(ws);
-            make.height.mas_equalTo(itemHeight*2+LENGTH(25));
-            make.width.mas_equalTo(itemHeight*2+LENGTH(25));
+            make.height.mas_equalTo(itemHeight*2+25);
+            make.width.mas_equalTo(itemHeight*2+25);
         }];
     }else{
         tiMu.hidden = NO;
         tiMuImage.hidden = YES;
         title.text = scorci.meaning;
         [_collectView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self->tiMu.mas_bottom).with.offset(LENGTH(30));
+            make.top.equalTo(self->tiMu.mas_bottom).with.offset(10);
             make.centerX.mas_equalTo(ws);
-            make.height.mas_equalTo(itemHeight*2+LENGTH(25));
-            make.width.mas_equalTo(itemHeight*2+LENGTH(25));
+            make.height.mas_equalTo(itemHeight*2+25);
+            make.width.mas_equalTo(itemHeight*2+25);
         }];
     }
     _collectView.itemarray = array;
@@ -271,20 +271,20 @@
         tiMuImage.hidden = NO;
         [tiMuImage sd_setImageWithURL:URLIMAGE(szorci.LiteracyPicture) placeholderImage:UIIMAGE(ZHANWEITU)];
         [_collectView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self->tiMuImage.mas_bottom).with.offset(LENGTH(30));
+            make.top.equalTo(self->tiMuImage.mas_bottom).with.offset(10);
             make.centerX.mas_equalTo(ws);
-            make.height.mas_equalTo(itemHeight*2+LENGTH(25));
-            make.width.mas_equalTo(itemHeight*2+LENGTH(25));
+            make.height.mas_equalTo(itemHeight*2+25);
+            make.width.mas_equalTo(itemHeight*2+25);
         }];
     }else{
         tiMu.hidden = NO;
         tiMuImage.hidden = YES;
         title.text = szorci.LiteracyMeaning;
         [_collectView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self->tiMu.mas_bottom).with.offset(LENGTH(30));
+            make.top.equalTo(self->tiMu.mas_bottom).with.offset(10);
             make.centerX.mas_equalTo(ws);
-            make.height.mas_equalTo(itemHeight*2+LENGTH(25));
-            make.width.mas_equalTo(itemHeight*2+LENGTH(25));
+            make.height.mas_equalTo(itemHeight*2+25);
+            make.width.mas_equalTo(itemHeight*2+25);
         }];
     }
     _collectView.itemarray = array;

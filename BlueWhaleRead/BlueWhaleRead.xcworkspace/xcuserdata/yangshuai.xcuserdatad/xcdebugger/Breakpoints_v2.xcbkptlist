@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/HomePage/C/HomeActivityViewController.m"
-            timestampString = "563184714.865868"
+            filePath = "BlueWhaleRead/Project/General/IREADER/DZMeBookRead/other/thirdParty/FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.m"
+            timestampString = "564389718.609814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-UpData:"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "-fd_pushViewController:animated:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/HomePage/C/HomeActivityViewController.m"
-            timestampString = "563184714.865972"
+            filePath = "BlueWhaleRead/Project/General/IREADER/DZMeBookRead/other/thirdParty/FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.m"
+            timestampString = "564389725.530239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "-FenXiang"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "-gestureRecognizerShouldBegin:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

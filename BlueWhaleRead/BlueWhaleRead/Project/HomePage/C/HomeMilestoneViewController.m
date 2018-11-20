@@ -39,17 +39,6 @@
         make.height.mas_equalTo(NavHeight);
     }];
     
-    FLAnimatedImageView * imageview = [FLAnimatedImageView new];
-    imageview.image = UIIMAGE(@"告诉朋友");
-    [self.navtive addSubview:imageview];
-    [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
-        make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
-        make.size.mas_equalTo(imageview.image.size);
-    }];
-    imageview.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
-    [imageview addGestureRecognizer:tap];
 }
 - (void)FenXiang{
     FenXiangView * fenxiang = [FenXiangView new];
@@ -119,6 +108,22 @@
 }
 - (void)UpData:(LCBMilestone *)model{
     WS(ws);
+    
+    if (model.milestone.count > 0) {
+        FLAnimatedImageView * imageview = [FLAnimatedImageView new];
+        imageview.image = UIIMAGE(@"告诉朋友");
+        [self.navtive addSubview:imageview];
+        [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
+            make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
+            make.size.mas_equalTo(imageview.image.size);
+        }];
+        imageview.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
+        [imageview addGestureRecognizer:tap];
+    }
+    
+    
     HomeMilestBackView * view = [HomeMilestBackView new];
     view.model = model;
     [scrollView addSubview:view];

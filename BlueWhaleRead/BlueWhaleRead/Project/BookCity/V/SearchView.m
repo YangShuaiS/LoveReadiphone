@@ -42,13 +42,14 @@
     text.backgroundColor = RGB(255, 255, 255);
     text.alpha = 0.3;
     text.layer.masksToBounds = YES;
-    text.layer.cornerRadius = LENGTH(17);
+    text.layer.cornerRadius = 15;
     [NavView addSubview:text];
     
     textField = [UITextField new];
     textField.borderStyle = UITextBorderStyleRoundedRect;
     textField.backgroundColor = [UIColor clearColor];
     textField.placeholder = @"请输入书名";
+//    textField.font = TextFont(15);
     [textField becomeFirstResponder];//默认编辑状态
     [textField addTarget:self action:@selector(phoneNum_tfChange:) forControlEvents:UIControlEventEditingChanged];
 
@@ -76,23 +77,23 @@
     }];
     
     [text mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(NavView.mas_left).with.offset(LENGTH(56));
-        make.right.mas_equalTo(NavView.mas_right).with.offset(-LENGTH(108));
-        make.bottom.mas_equalTo(NavView.mas_bottom).with.offset(-LENGTH(6));
-        make.height.mas_equalTo(33);
+        make.left.mas_equalTo(NavView.mas_left).with.offset(LENGTH(60));
+        make.right.mas_equalTo(NavView.mas_right).with.offset(-LENGTH(60));
+        make.bottom.mas_equalTo(NavView.mas_bottom).with.offset(-6);
+        make.height.mas_equalTo(30);
     }];
 
     [textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(NavView.mas_left).with.offset(LENGTH(56));
-        make.right.mas_equalTo(NavView.mas_right).with.offset(-LENGTH(108));
-        make.bottom.mas_equalTo(NavView.mas_bottom).with.offset(-LENGTH(6));
-        make.height.mas_equalTo(33);
+        make.left.mas_equalTo(NavView.mas_left).with.offset(LENGTH(60));
+        make.right.mas_equalTo(NavView.mas_right).with.offset(-LENGTH(60));
+        make.bottom.mas_equalTo(NavView.mas_bottom).with.offset(-6);
+        make.height.mas_equalTo(30);
     }];
     
     [quxiao mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self->textField.mas_right).with.offset(LENGTH(20));
+        make.left.equalTo(self->textField.mas_right).with.offset(LENGTH(0));
         make.centerY.mas_equalTo(self->textField.mas_centerY);
-//        make.right.equalTo(backView.mas_right).with.offset(0);
+        make.right.equalTo(backView.mas_right).with.offset(0);
         make.height.mas_equalTo(self->textField.mas_height);
     }];
     
@@ -183,6 +184,11 @@
 #pragma mark ---------- textfieltdel
 - (void)phoneNum_tfChange:(UITextField *)textField
 {
+    UITextRange *selectedRange = textField.markedTextRange;
+    UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+    if (position) {
+        return;
+    }
     if (textField.text.length>=2) {
         NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_SOUSUOSHUKU];
         //studentid 学生id

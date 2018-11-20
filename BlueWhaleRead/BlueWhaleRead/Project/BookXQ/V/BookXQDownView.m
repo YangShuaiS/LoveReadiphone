@@ -28,7 +28,9 @@
     //电子书
     NSURLSessionDownloadTask *_downloadTask;
     NSString * bookstring;
+    NSMutableArray * viewarray;
 
+    NSString * zipname;
 }
 -(instancetype)init{
     self = [super init];
@@ -37,87 +39,54 @@
     }
     return self;
 }
--(void)setupUI{
-    WS(ws);
-    BaseView * bacView = [BaseView new];
-    bacView.backgroundColor = RGBA(1,78,136,0.6);
-    [self addSubview:bacView];
-    [bacView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws);
-    }];
-    
-    yueduview  = [BaseView new];
-    yueduview.backgroundColor = RGB(247,203,103);
-    yueduview.layer.masksToBounds = YES;
-    yueduview.layer.cornerRadius = LENGTH(21);
-    [self addSubview:yueduview];
-    [yueduview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(ws);
-        make.left.mas_equalTo(ws).with.offset(16);
-        make.width.mas_equalTo(LENGTH(100));
-        make.height.mas_equalTo(LENGTH(42));
-    }];
-    
-    yuedulabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"免费畅读"];
-    [yueduview addSubview:yuedulabel];
-    
-    [yuedulabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self->yueduview.mas_centerY);
-        make.centerX.mas_equalTo(self->yueduview.mas_centerX);
-    }];
 
-    
-    
+- (void)addread{
+    viewarray = [NSMutableArray array];
+    if (![_model.b_download isEqualToString:@""]) {
+        yueduview  = [BaseView new];
+        yueduview.backgroundColor = RGB(247,203,103);
+        yueduview.layer.masksToBounds = YES;
+        yueduview.layer.cornerRadius = LENGTH(21);
+        [self addSubview:yueduview];
+        yuedulabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"免费畅读"];
+        [yueduview addSubview:yuedulabel];
+        
+        [yuedulabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self->yueduview.mas_centerY);
+            make.centerX.mas_equalTo(self->yueduview.mas_centerX);
+        }];
+        [viewarray addObject:yueduview];
+        yueduview.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createProgress)];
+        //将手势添加到需要相应的view中去
+        [yueduview addGestureRecognizer:tapGesture1];
+    }
     Lefttview  = [BaseView new];
     Lefttview.backgroundColor = RGB(255,167,96);
     Lefttview.layer.masksToBounds = YES;
     Lefttview.layer.cornerRadius = LENGTH(21);
     [self addSubview:Lefttview];
-    [Lefttview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(ws);
-        make.left.mas_equalTo(self->yueduview.mas_right).with.offset(8);
-
-//        make.centerX.mas_equalTo(ws).with.offset(-LENGTH(89));
-        make.width.mas_equalTo(LENGTH(100));
-        make.height.mas_equalTo(LENGTH(42));
-    }];
-    
-    
     leftLabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"答题"];
     [self addSubview:leftLabel];
     [leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self->Lefttview.mas_centerY);
         make.centerX.mas_equalTo(self->Lefttview.mas_centerX);
     }];
-
+    [viewarray addObject:Lefttview];
+    
     rightview  = [BaseView new];
     rightview.backgroundColor = RGB(1,195,193);
     rightview.layer.masksToBounds = YES;
     rightview.layer.cornerRadius = LENGTH(21);
     [self addSubview:rightview];
-    [rightview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(ws);
-//        make.centerX.mas_equalTo(ws).with.offset(LENGTH(80+9));
-        make.left.mas_equalTo(self->Lefttview.mas_right).with.offset(8);
-
-        make.width.mas_equalTo(LENGTH(100));
-        make.height.mas_equalTo(LENGTH(42));
-    }];
-    
     RightLabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"加入书架"];
     [rightview addSubview:RightLabel];
-
+    
     [RightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self->rightview.mas_centerY);
         make.centerX.mas_equalTo(self->rightview.mas_centerX);
     }];
-
-
-    yueduview.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createProgress)];
-    //将手势添加到需要相应的view中去
-    [yueduview addGestureRecognizer:tapGesture1];
-    
+    [viewarray addObject:rightview];
     Lefttview.userInteractionEnabled = YES;
     rightview.userInteractionEnabled = YES;
     UITapGestureRecognizer * tapGesture0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bookcity)];
@@ -147,7 +116,42 @@
         make.width.mas_equalTo(LENGTH(22));
         make.height.mas_equalTo(LENGTH(22));
     }];
-
+    BaseView * lastview;
+    WS(ws);
+    for (int i = 0; i < viewarray.count; i++) {
+        BaseView * view = viewarray[i];
+        if (!lastview) {
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(ws).with.offset(LENGTH(20));
+            }];
+        }else{
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(lastview.mas_right).with.offset(LENGTH(9.5));
+                make.width.mas_equalTo(lastview);
+            }];
+        }
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(ws);
+            make.height.mas_equalTo(LENGTH(42));
+        }];
+        if (i == viewarray.count-1) {
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(ws).with.offset(-LENGTH(20));
+            }];
+        }
+        lastview = view;
+    }
+}
+-(void)setupUI{
+    WS(ws);
+    
+    BaseView * bacView = [BaseView new];
+    bacView.backgroundColor = RGBA(1,78,136,0.6);
+    [self addSubview:bacView];
+    [bacView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws);
+    }];
+    
 }
 - (void)bookcity{
     if ([self.nav respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
@@ -225,7 +229,7 @@
             make.centerX.mas_equalTo(self->rightview.mas_centerX).with.offset(LENGTH(5));
         }];
         [self->rightImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self->rightview.mas_left).with.offset(LENGTH(20));
+            make.left.mas_equalTo(self->rightview.mas_left).with.offset(LENGTH(10));
         }];
         [self->RightLabel layoutIfNeeded];
         [self->rightImageView layoutIfNeeded];
@@ -289,6 +293,7 @@
 }
 - (void)setModel:(BookXQbookModel *)model{
     _model = model;
+    [self addread];
     if (model.is_read == 1) {
         [self addBook];
         if (model.dayTimes<=0) {
@@ -316,7 +321,7 @@
         make.centerX.mas_equalTo(self->Lefttview.mas_centerX).with.offset(LENGTH(5));
     }];
     [self->leftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self->Lefttview.mas_left).with.offset(LENGTH(20));
+        make.left.mas_equalTo(self->Lefttview.mas_left).with.offset(LENGTH(10));
     }];
     [self->leftLabel layoutIfNeeded];
     [self->leftImageView layoutIfNeeded];
@@ -352,8 +357,8 @@
     NSFileManager* fm=[NSFileManager defaultManager];
     NSString * paths = [self dataFilePath] ;
     NSArray *files = [fm subpathsAtPath:paths];
-    if ([files containsObject: @"山居岁月.txt"]) {
-        NSString * booklujing = [paths stringByAppendingPathComponent:@"山居岁月.txt"];
+    if ([files containsObject: [NSString stringWithFormat:@"%@.txt",_model.name]]) {
+        NSString * booklujing = [paths stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt",_model.name]];
         __weak BookXQDownView *weakSelf = self;
         NSURL *fileURL = [[NSBundle mainBundle] URLForAuxiliaryExecutable:booklujing];
         
@@ -374,7 +379,7 @@
 - (void)down{
     //[NSString stringWithFormat:@"%@%@",DOWNLOADZHENGSHUURL,@"1097449557765533696489"]
     mb.label.text = @"正在下载...";
-    NSString * url = [NSString stringWithFormat:@"%@download/山居岁月.zip",ZSFWQ];
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,_model.b_download];
 //    NSString * url = [NSString stringWithFormat:@"http://192.168.1.114:8069/download/山居岁月.zip"];
     
     //    NSString * url = [NSString stringWithFormat:@"http://192.168.1.114/山居岁月.zip"];
@@ -433,7 +438,7 @@
             self->mb.label.text = fullPath;
             [self->mb hideAnimated:NO afterDelay:1];
         });
-        
+        self->zipname = response.suggestedFilename;
         self->bookstring = fullPath;
         return [NSURL fileURLWithPath:fullPath];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
@@ -443,23 +448,25 @@
         NSArray *pathArray =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSFileManager *manager = [NSFileManager defaultManager];
         NSString *filePaths = [[pathArray firstObject] stringByAppendingPathComponent:@"booktext"];
-        NSString *movePath = [filePaths stringByAppendingPathComponent:@"山居岁月.zip"];;
+        NSString *movePath = [filePaths stringByAppendingPathComponent:self->zipname];;
         BOOL isMove = [manager moveItemAtPath:self->bookstring toPath:movePath error:nil];
         if (isMove) {
-            NSLog(@"移动成功");
+            // 删除文件
+            BOOL isDele = [manager removeItemAtPath:self->bookstring error:nil];
+            if (isDele) {
+
+
+            } else {
+                NSLog(@"删除失败");
+            }
+
         } else {
             NSLog(@"移动失败");
         }
         
-        // 删除文件
-        BOOL isDele = [manager removeItemAtPath:self->bookstring error:nil];
-        if (isDele) {
-            NSLog(@"删除成功");
-        } else {
-            NSLog(@"删除失败");
-        }
         self->bookstring = movePath;
         [self jieya];
+
         
     }];
     
@@ -477,9 +484,9 @@
     //Caches路径
     //    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
     //解压目标路径
-    NSString *savePath = [[pathArray firstObject] stringByAppendingPathComponent:@"booktext"];
+     NSString *savePath = [[pathArray firstObject] stringByAppendingPathComponent:@"booktext"];
     //zip压缩包的路径
-    NSString *path = [savePath stringByAppendingPathComponent:@"山居岁月.zip"];
+    NSString *path = [savePath stringByAppendingPathComponent:zipname];
     //解压不带密码压缩包
     [zip UnzipOpenFile:path];
     //解压带密码压缩包
@@ -500,7 +507,7 @@
         }
         self->mb.label.text = @"正在读取...";
         [self->mb hideAnimated:NO afterDelay:1];
-        NSString * booklujing = [savePath stringByAppendingPathComponent:@"山居岁月.txt"];
+        NSString * booklujing = [savePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt",_model.name]];
         //        NSString *encoded = [booklujing stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         __weak BookXQDownView *weakSelf = self;
         NSURL *fileURL = [[NSBundle mainBundle] URLForAuxiliaryExecutable:booklujing];
@@ -514,25 +521,6 @@
             
             [weakSelf.nav pushViewController:read animated:YES];
         }];
-        
-        //        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        //            LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
-        //            NSURL *fileURL = [[NSBundle mainBundle] URLForAuxiliaryExecutable:booklujing];
-        //            pageView.resourceURL = fileURL;    //文件位置
-        //            pageView.model = [LSYReadModel getLocalModelWithURL:fileURL];
-        //
-        //            dispatch_async(dispatch_get_main_queue(), ^{
-        //
-        //                [self.vc presentViewController:pageView animated:YES completion:nil];
-        //            });
-        //        });
-        
-        //        ReadOCViewController * vc = [ReadOCViewController new];
-        //        [_vc presentViewController:vc animated:YES completion:^{
-        //            vc.wancheng = booklujing;
-        //            self->mb.label.text = @"读取成功...";
-        //            [self->mb hideAnimated:NO afterDelay:1];
-        //        }];
     } else {
         self->mb.label.text = @"解压失败";
         [self->mb hideAnimated:NO afterDelay:1];

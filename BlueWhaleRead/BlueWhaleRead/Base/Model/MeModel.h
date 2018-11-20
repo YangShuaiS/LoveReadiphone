@@ -69,6 +69,8 @@
 #import "UserCityModel.h"//城市
 
 #import "FenXiangModel.h"//分享
+
+#import "NBCALLModel.h"//新书成
 @interface MeModel : BaseModel
 @property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, strong) NSString *code;

@@ -79,12 +79,12 @@
         [self.nav pushViewController:vc animated:YES];
     }
     if (model.seq == 5) {
-//        HomeActivityViewController * vc = [HomeActivityViewController new];
-//        vc.itemid = model.ssid;
-//        [self.nav pushViewController:vc animated:YES];
-        
-        ZhiShiShuViewController * vc = [ZhiShiShuViewController new];
+        HomeActivityViewController * vc = [HomeActivityViewController new];
+        vc.itemid = model.ssid;
         [self.nav pushViewController:vc animated:YES];
+        
+//        ZhiShiShuViewController * vc = [ZhiShiShuViewController new];
+//        [self.nav pushViewController:vc animated:YES];
     }
 }
 

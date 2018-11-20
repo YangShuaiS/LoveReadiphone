@@ -59,7 +59,9 @@
 }
 - (void)LoadData{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_ZHUTIPAGE];
+//    NSDictionary * dic = @{@"studentid":Me.ssid,@"tagid":_itemid,@"page":[NSString stringWithFormat:@"%ld",page]};
     NSDictionary * dic = @{@"studentid":Me.ssid,@"tagid":_itemid,@"page":[NSString stringWithFormat:@"%ld",page]};
+
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             ZHUTIMODEL * model = [ZHUTIMODEL mj_objectWithKeyValues:responseObject];
@@ -106,9 +108,11 @@
 }
 - (void)FenXiang{
     FenXiangView * fenxiangs = [FenXiangView new];
+    fenxiangs.vc = self;
     fenxiangs.imageurl = tableView.model.tag.theme_img;
     fenxiangs.wzbt = tableView.model.tag.descriptions;
     fenxiangs.sdm = tableView.model.tag.name;
+    fenxiangs.textid = _itemid;
     fenxiangs.sharestyle = ShareStyleTag10;
     [self.view addSubview:fenxiangs];
     WS(ws);
@@ -123,6 +127,7 @@
 
 - (void)addhabai:(FenXiangModel *)model Style:(ShareStyle)style{
     HaiBaoView * haibao = [HaiBaoView new];
+    haibao.textid = _itemid;
     haibao.sharestyle = style;
     haibao.modes = model;
     [self.view addSubview:haibao];

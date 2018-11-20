@@ -72,6 +72,7 @@
 		0D2DAB7320E4DB7E00EFFD1A /* GeneralLongBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2DAB7220E4DB7E00EFFD1A /* GeneralLongBtn.m */; };
 		0D2DAB7620E6236F00EFFD1A /* CTDuoXuanNewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2DAB7520E6236F00EFFD1A /* CTDuoXuanNewView.m */; };
 		0D2DAB7920E6237E00EFFD1A /* CTDuoXuanSmallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2DAB7820E6237E00EFFD1A /* CTDuoXuanSmallView.m */; };
+		0D2F54C421957EBE00D02174 /* NBCCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2F54C321957EBE00D02174 /* NBCCollectionViewFlowLayout.m */; };
 		0D32682121084D4600D7D563 /* MedalStudentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D32682021084D4600D7D563 /* MedalStudentListModel.m */; };
 		0D32682421084D8A00D7D563 /* MedalStudenBookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D32682321084D8A00D7D563 /* MedalStudenBookModel.m */; };
 		0D32682721084DBD00D7D563 /* MedalStudentUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D32682621084DBD00D7D563 /* MedalStudentUserModel.m */; };
@@ -131,7 +132,6 @@
 		0D395E30218C50A1007B99AE /* DZMGlobalMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D395DF2218C50A1007B99AE /* DZMGlobalMethod.swift */; };
 		0D395E31218C50A1007B99AE /* DZMGlobalProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D395DF3218C50A1007B99AE /* DZMGlobalProperty.swift */; };
 		0D395E32218C50A1007B99AE /* DZMCoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D395DF7218C50A1007B99AE /* DZMCoverController.m */; };
-		0D395E33218C50A1007B99AE /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D395DFA218C50A1007B99AE /* UINavigationController+FDFullscreenPopGesture.m */; };
 		0D395E34218C50A1007B99AE /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D395DFE218C50A1007B99AE /* ASValuePopUpView.m */; };
 		0D395E35218C50A1007B99AE /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D395DFF218C50A1007B99AE /* ASValueTrackingSlider.m */; };
 		0D395E36218C50A1007B99AE /* UIView+YGPulseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D395E01218C50A1007B99AE /* UIView+YGPulseView.m */; };
@@ -369,6 +369,7 @@
 		0D7ABE93215E2EE6002EAA1D /* ZhiShiShuOneDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7ABE92215E2EE6002EAA1D /* ZhiShiShuOneDownView.m */; };
 		0D7ABE96215E363F002EAA1D /* ZhiShiShuQiuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7ABE95215E363F002EAA1D /* ZhiShiShuQiuView.m */; };
 		0D7ABE99215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7ABE98215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m */; };
+		0D7FB5BA2194293C00E99F97 /* NBCThemeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7FB5B92194293C00E99F97 /* NBCThemeViewController.m */; };
 		0D802C1B217D851E00CFD24F /* AccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D802C1A217D851E00CFD24F /* AccountSettingsViewController.m */; };
 		0D802C1F217DA17D00CFD24F /* AccountSettingsClick.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D802C1E217DA17D00CFD24F /* AccountSettingsClick.m */; };
 		0D802C22217DA70900CFD24F /* ChangethephoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D802C21217DA70900CFD24F /* ChangethephoneViewController.m */; };
@@ -514,6 +515,24 @@
 		0DEE76512191697C004D5DB7 /* BookDanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE76502191697C004D5DB7 /* BookDanView.m */; };
 		0DEE765A2191815A004D5DB7 /* NBookCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE76592191815A004D5DB7 /* NBookCityViewController.m */; };
 		0DEE765D21918684004D5DB7 /* NBCchannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE765C21918684004D5DB7 /* NBCchannelView.m */; };
+		0DEE76602191895F004D5DB7 /* NBCchannelCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE765F2191895F004D5DB7 /* NBCchannelCollectionView.m */; };
+		0DEE766321918A34004D5DB7 /* NBCchannelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE766221918A34004D5DB7 /* NBCchannelCollectionViewCell.m */; };
+		0DEE766621919935004D5DB7 /* NBCmenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE766521919935004D5DB7 /* NBCmenuView.m */; };
+		0DEE7669219199B1004D5DB7 /* NBCGoodBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE7668219199B1004D5DB7 /* NBCGoodBookView.m */; };
+		0DEE766C2191A37B004D5DB7 /* NBCGoodBookCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE766B2191A37B004D5DB7 /* NBCGoodBookCollectionView.m */; };
+		0DEE766F2191B1A2004D5DB7 /* NBCweekReadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE766E2191B1A2004D5DB7 /* NBCweekReadingView.m */; };
+		0DEE767221928134004D5DB7 /* NBClistAllView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE767121928134004D5DB7 /* NBClistAllView.m */; };
+		0DEE76752192816A004D5DB7 /* NBClistCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE76742192816A004D5DB7 /* NBClistCollectionView.m */; };
+		0DEE767821928180004D5DB7 /* NBClistCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE767721928180004D5DB7 /* NBClistCollectionViewCell.m */; };
+		0DEE767B2192865E004D5DB7 /* NBCclassificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE767A2192865E004D5DB7 /* NBCclassificationView.m */; };
+		0DEE767E21928680004D5DB7 /* NBCclassificationCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE767D21928680004D5DB7 /* NBCclassificationCollectionView.m */; };
+		0DEE7681219286BF004D5DB7 /* NBCclassificationCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE7680219286BF004D5DB7 /* NBCclassificationCollectionViewCell.m */; };
+		0DEE768421928CA9004D5DB7 /* NBCALLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE768321928CA9004D5DB7 /* NBCALLModel.m */; };
+		0DEE768721928D0D004D5DB7 /* NBCclassificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE768621928D0D004D5DB7 /* NBCclassificationModel.m */; };
+		0DEE768A2192C1FB004D5DB7 /* NBCGoodBoookListTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE76892192C1FB004D5DB7 /* NBCGoodBoookListTabView.m */; };
+		0DEE768D2192C221004D5DB7 /* NBCGoodBookListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE768C2192C221004D5DB7 /* NBCGoodBookListTableViewCell.m */; };
+		0DEE76902192DF28004D5DB7 /* NBCMoreChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE768F2192DF28004D5DB7 /* NBCMoreChannelViewController.m */; };
+		0DEE76932192E8B5004D5DB7 /* NBCMoreWeekViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE76922192E8B5004D5DB7 /* NBCMoreWeekViewController.m */; };
 		0DF0152C216C8266006500D8 /* MyPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF0152B216C8266006500D8 /* MyPageControl.m */; };
 		0DF0152F216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF0152E216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.m */; };
 		0DF4115E20C8CB3C0076B154 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4115D20C8CB3C0076B154 /* AppDelegate.m */; };
@@ -525,13 +544,8 @@
 		0DF4116F20C8CB3D0076B154 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4116E20C8CB3D0076B154 /* main.m */; };
 		0DF4117920C8CB3D0076B154 /* BlueWhaleReadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4117820C8CB3D0076B154 /* BlueWhaleReadTests.m */; };
 		0DF4118420C8CB3D0076B154 /* BlueWhaleReadUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4118320C8CB3D0076B154 /* BlueWhaleReadUITests.m */; };
-		0DF4119C20C8D5F90076B154 /* 001 icon-看看-选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF4119320C8D5F80076B154 /* 001 icon-看看-选中@3x.png */; };
-		0DF4119D20C8D5F90076B154 /* tab-project@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF4119420C8D5F80076B154 /* tab-project@2x.png */; };
-		0DF4119E20C8D5F90076B154 /* 001 icon-看看-未选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF4119620C8D5F80076B154 /* 001 icon-看看-未选中@3x.png */; };
 		0DF4119F20C8D5F90076B154 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4119820C8D5F80076B154 /* MainTabBarViewController.m */; };
-		0DF411A020C8D5F90076B154 /* 拍照识别@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF4119920C8D5F80076B154 /* 拍照识别@3x.png */; };
 		0DF411A120C8D5F90076B154 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4119A20C8D5F80076B154 /* BaseNavigationViewController.m */; };
-		0DF411A220C8D5F90076B154 /* tab-Project-Click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF4119B20C8D5F80076B154 /* tab-Project-Click@2x.png */; };
 		0DF411C720C8D6630076B154 /* BaseENUM.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF411A520C8D6630076B154 /* BaseENUM.m */; };
 		0DF411C820C8D6630076B154 /* QRCodeGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF411AB20C8D6630076B154 /* QRCodeGenerateVC.m */; };
 		0DF411C920C8D6630076B154 /* WBQRCodeScanningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF411AD20C8D6630076B154 /* WBQRCodeScanningVC.m */; };
@@ -715,6 +729,8 @@
 		0D2DAB7520E6236F00EFFD1A /* CTDuoXuanNewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDuoXuanNewView.m; sourceTree = "<group>"; };
 		0D2DAB7720E6237E00EFFD1A /* CTDuoXuanSmallView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDuoXuanSmallView.h; sourceTree = "<group>"; };
 		0D2DAB7820E6237E00EFFD1A /* CTDuoXuanSmallView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDuoXuanSmallView.m; sourceTree = "<group>"; };
+		0D2F54C221957EBE00D02174 /* NBCCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		0D2F54C321957EBE00D02174 /* NBCCollectionViewFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		0D32681F21084D4600D7D563 /* MedalStudentListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalStudentListModel.h; sourceTree = "<group>"; };
 		0D32682021084D4600D7D563 /* MedalStudentListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalStudentListModel.m; sourceTree = "<group>"; };
 		0D32682221084D8A00D7D563 /* MedalStudenBookModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalStudenBookModel.h; sourceTree = "<group>"; };
@@ -808,8 +824,6 @@
 		0D395DF3218C50A1007B99AE /* DZMGlobalProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DZMGlobalProperty.swift; sourceTree = "<group>"; };
 		0D395DF6218C50A1007B99AE /* DZMCoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DZMCoverController.h; sourceTree = "<group>"; };
 		0D395DF7218C50A1007B99AE /* DZMCoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DZMCoverController.m; sourceTree = "<group>"; };
-		0D395DF9218C50A1007B99AE /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
-		0D395DFA218C50A1007B99AE /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		0D395DFC218C50A1007B99AE /* ASValuePopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValuePopUpView.h; sourceTree = "<group>"; };
 		0D395DFD218C50A1007B99AE /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
 		0D395DFE218C50A1007B99AE /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
@@ -1256,6 +1270,8 @@
 		0D7ABE95215E363F002EAA1D /* ZhiShiShuQiuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuQiuView.m; sourceTree = "<group>"; };
 		0D7ABE97215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiSHuQiuCollectionViewCell.h; sourceTree = "<group>"; };
 		0D7ABE98215E36E0002EAA1D /* ZhiShiSHuQiuCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiSHuQiuCollectionViewCell.m; sourceTree = "<group>"; };
+		0D7FB5B82194293C00E99F97 /* NBCThemeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCThemeViewController.h; sourceTree = "<group>"; };
+		0D7FB5B92194293C00E99F97 /* NBCThemeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCThemeViewController.m; sourceTree = "<group>"; };
 		0D802C19217D851E00CFD24F /* AccountSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountSettingsViewController.h; sourceTree = "<group>"; };
 		0D802C1A217D851E00CFD24F /* AccountSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountSettingsViewController.m; sourceTree = "<group>"; };
 		0D802C1D217DA17D00CFD24F /* AccountSettingsClick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountSettingsClick.h; sourceTree = "<group>"; };
@@ -1544,6 +1560,42 @@
 		0DEE76592191815A004D5DB7 /* NBookCityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBookCityViewController.m; sourceTree = "<group>"; };
 		0DEE765B21918684004D5DB7 /* NBCchannelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCchannelView.h; sourceTree = "<group>"; };
 		0DEE765C21918684004D5DB7 /* NBCchannelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCchannelView.m; sourceTree = "<group>"; };
+		0DEE765E2191895F004D5DB7 /* NBCchannelCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCchannelCollectionView.h; sourceTree = "<group>"; };
+		0DEE765F2191895F004D5DB7 /* NBCchannelCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCchannelCollectionView.m; sourceTree = "<group>"; };
+		0DEE766121918A34004D5DB7 /* NBCchannelCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCchannelCollectionViewCell.h; sourceTree = "<group>"; };
+		0DEE766221918A34004D5DB7 /* NBCchannelCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCchannelCollectionViewCell.m; sourceTree = "<group>"; };
+		0DEE766421919935004D5DB7 /* NBCmenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCmenuView.h; sourceTree = "<group>"; };
+		0DEE766521919935004D5DB7 /* NBCmenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCmenuView.m; sourceTree = "<group>"; };
+		0DEE7667219199B1004D5DB7 /* NBCGoodBookView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCGoodBookView.h; sourceTree = "<group>"; };
+		0DEE7668219199B1004D5DB7 /* NBCGoodBookView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCGoodBookView.m; sourceTree = "<group>"; };
+		0DEE766A2191A37B004D5DB7 /* NBCGoodBookCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCGoodBookCollectionView.h; sourceTree = "<group>"; };
+		0DEE766B2191A37B004D5DB7 /* NBCGoodBookCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCGoodBookCollectionView.m; sourceTree = "<group>"; };
+		0DEE766D2191B1A2004D5DB7 /* NBCweekReadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCweekReadingView.h; sourceTree = "<group>"; };
+		0DEE766E2191B1A2004D5DB7 /* NBCweekReadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCweekReadingView.m; sourceTree = "<group>"; };
+		0DEE767021928134004D5DB7 /* NBClistAllView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBClistAllView.h; sourceTree = "<group>"; };
+		0DEE767121928134004D5DB7 /* NBClistAllView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBClistAllView.m; sourceTree = "<group>"; };
+		0DEE76732192816A004D5DB7 /* NBClistCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBClistCollectionView.h; sourceTree = "<group>"; };
+		0DEE76742192816A004D5DB7 /* NBClistCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBClistCollectionView.m; sourceTree = "<group>"; };
+		0DEE767621928180004D5DB7 /* NBClistCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBClistCollectionViewCell.h; sourceTree = "<group>"; };
+		0DEE767721928180004D5DB7 /* NBClistCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBClistCollectionViewCell.m; sourceTree = "<group>"; };
+		0DEE76792192865E004D5DB7 /* NBCclassificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCclassificationView.h; sourceTree = "<group>"; };
+		0DEE767A2192865E004D5DB7 /* NBCclassificationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCclassificationView.m; sourceTree = "<group>"; };
+		0DEE767C21928680004D5DB7 /* NBCclassificationCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCclassificationCollectionView.h; sourceTree = "<group>"; };
+		0DEE767D21928680004D5DB7 /* NBCclassificationCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCclassificationCollectionView.m; sourceTree = "<group>"; };
+		0DEE767F219286BF004D5DB7 /* NBCclassificationCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCclassificationCollectionViewCell.h; sourceTree = "<group>"; };
+		0DEE7680219286BF004D5DB7 /* NBCclassificationCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCclassificationCollectionViewCell.m; sourceTree = "<group>"; };
+		0DEE768221928CA9004D5DB7 /* NBCALLModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCALLModel.h; sourceTree = "<group>"; };
+		0DEE768321928CA9004D5DB7 /* NBCALLModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCALLModel.m; sourceTree = "<group>"; };
+		0DEE768521928D0C004D5DB7 /* NBCclassificationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCclassificationModel.h; sourceTree = "<group>"; };
+		0DEE768621928D0D004D5DB7 /* NBCclassificationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCclassificationModel.m; sourceTree = "<group>"; };
+		0DEE76882192C1FB004D5DB7 /* NBCGoodBoookListTabView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCGoodBoookListTabView.h; sourceTree = "<group>"; };
+		0DEE76892192C1FB004D5DB7 /* NBCGoodBoookListTabView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCGoodBoookListTabView.m; sourceTree = "<group>"; };
+		0DEE768B2192C221004D5DB7 /* NBCGoodBookListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCGoodBookListTableViewCell.h; sourceTree = "<group>"; };
+		0DEE768C2192C221004D5DB7 /* NBCGoodBookListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCGoodBookListTableViewCell.m; sourceTree = "<group>"; };
+		0DEE768E2192DF28004D5DB7 /* NBCMoreChannelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCMoreChannelViewController.h; sourceTree = "<group>"; };
+		0DEE768F2192DF28004D5DB7 /* NBCMoreChannelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCMoreChannelViewController.m; sourceTree = "<group>"; };
+		0DEE76912192E8B5004D5DB7 /* NBCMoreWeekViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCMoreWeekViewController.h; sourceTree = "<group>"; };
+		0DEE76922192E8B5004D5DB7 /* NBCMoreWeekViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCMoreWeekViewController.m; sourceTree = "<group>"; };
 		0DF0152A216C8266006500D8 /* MyPageControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPageControl.h; sourceTree = "<group>"; };
 		0DF0152B216C8266006500D8 /* MyPageControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPageControl.m; sourceTree = "<group>"; };
 		0DF0152D216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuXQImagesAndTitle.h; sourceTree = "<group>"; };
@@ -1565,15 +1617,10 @@
 		0DF4117F20C8CB3D0076B154 /* BlueWhaleReadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueWhaleReadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DF4118320C8CB3D0076B154 /* BlueWhaleReadUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlueWhaleReadUITests.m; sourceTree = "<group>"; };
 		0DF4118520C8CB3D0076B154 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0DF4119320C8D5F80076B154 /* 001 icon-看看-选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "001 icon-看看-选中@3x.png"; sourceTree = "<group>"; };
-		0DF4119420C8D5F80076B154 /* tab-project@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-project@2x.png"; sourceTree = "<group>"; };
 		0DF4119520C8D5F80076B154 /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
-		0DF4119620C8D5F80076B154 /* 001 icon-看看-未选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "001 icon-看看-未选中@3x.png"; sourceTree = "<group>"; };
 		0DF4119720C8D5F80076B154 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
 		0DF4119820C8D5F80076B154 /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
-		0DF4119920C8D5F80076B154 /* 拍照识别@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "拍照识别@3x.png"; sourceTree = "<group>"; };
 		0DF4119A20C8D5F80076B154 /* BaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationViewController.m; sourceTree = "<group>"; };
-		0DF4119B20C8D5F80076B154 /* tab-Project-Click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-Project-Click@2x.png"; sourceTree = "<group>"; };
 		0DF411A420C8D6630076B154 /* YYTextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextManager.h; sourceTree = "<group>"; };
 		0DF411A520C8D6630076B154 /* BaseENUM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseENUM.m; sourceTree = "<group>"; };
 		0DF411A620C8D6630076B154 /* Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Public.h; sourceTree = "<group>"; };
@@ -1910,8 +1957,6 @@
 		0D395DF8218C50A1007B99AE /* FDFullscreenPopGesture */ = {
 			isa = PBXGroup;
 			children = (
-				0D395DF9218C50A1007B99AE /* UINavigationController+FDFullscreenPopGesture.h */,
-				0D395DFA218C50A1007B99AE /* UINavigationController+FDFullscreenPopGesture.m */,
 			);
 			path = FDFullscreenPopGesture;
 			sourceTree = "<group>";
@@ -3453,6 +3498,10 @@
 		0DEE765321917B70004D5DB7 /* M */ = {
 			isa = PBXGroup;
 			children = (
+				0DEE768221928CA9004D5DB7 /* NBCALLModel.h */,
+				0DEE768321928CA9004D5DB7 /* NBCALLModel.m */,
+				0DEE768521928D0C004D5DB7 /* NBCclassificationModel.h */,
+				0DEE768621928D0D004D5DB7 /* NBCclassificationModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -3462,6 +3511,12 @@
 			children = (
 				0DEE76582191815A004D5DB7 /* NBookCityViewController.h */,
 				0DEE76592191815A004D5DB7 /* NBookCityViewController.m */,
+				0DEE768E2192DF28004D5DB7 /* NBCMoreChannelViewController.h */,
+				0DEE768F2192DF28004D5DB7 /* NBCMoreChannelViewController.m */,
+				0DEE76912192E8B5004D5DB7 /* NBCMoreWeekViewController.h */,
+				0DEE76922192E8B5004D5DB7 /* NBCMoreWeekViewController.m */,
+				0D7FB5B82194293C00E99F97 /* NBCThemeViewController.h */,
+				0D7FB5B92194293C00E99F97 /* NBCThemeViewController.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -3469,8 +3524,38 @@
 		0DEE765521917B70004D5DB7 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				0D2F54C221957EBE00D02174 /* NBCCollectionViewFlowLayout.h */,
+				0D2F54C321957EBE00D02174 /* NBCCollectionViewFlowLayout.m */,
 				0DEE765B21918684004D5DB7 /* NBCchannelView.h */,
 				0DEE765C21918684004D5DB7 /* NBCchannelView.m */,
+				0DEE765E2191895F004D5DB7 /* NBCchannelCollectionView.h */,
+				0DEE765F2191895F004D5DB7 /* NBCchannelCollectionView.m */,
+				0DEE766121918A34004D5DB7 /* NBCchannelCollectionViewCell.h */,
+				0DEE766221918A34004D5DB7 /* NBCchannelCollectionViewCell.m */,
+				0DEE766421919935004D5DB7 /* NBCmenuView.h */,
+				0DEE766521919935004D5DB7 /* NBCmenuView.m */,
+				0DEE76882192C1FB004D5DB7 /* NBCGoodBoookListTabView.h */,
+				0DEE76892192C1FB004D5DB7 /* NBCGoodBoookListTabView.m */,
+				0DEE768B2192C221004D5DB7 /* NBCGoodBookListTableViewCell.h */,
+				0DEE768C2192C221004D5DB7 /* NBCGoodBookListTableViewCell.m */,
+				0DEE7667219199B1004D5DB7 /* NBCGoodBookView.h */,
+				0DEE7668219199B1004D5DB7 /* NBCGoodBookView.m */,
+				0DEE766A2191A37B004D5DB7 /* NBCGoodBookCollectionView.h */,
+				0DEE766B2191A37B004D5DB7 /* NBCGoodBookCollectionView.m */,
+				0DEE766D2191B1A2004D5DB7 /* NBCweekReadingView.h */,
+				0DEE766E2191B1A2004D5DB7 /* NBCweekReadingView.m */,
+				0DEE767021928134004D5DB7 /* NBClistAllView.h */,
+				0DEE767121928134004D5DB7 /* NBClistAllView.m */,
+				0DEE76732192816A004D5DB7 /* NBClistCollectionView.h */,
+				0DEE76742192816A004D5DB7 /* NBClistCollectionView.m */,
+				0DEE767621928180004D5DB7 /* NBClistCollectionViewCell.h */,
+				0DEE767721928180004D5DB7 /* NBClistCollectionViewCell.m */,
+				0DEE76792192865E004D5DB7 /* NBCclassificationView.h */,
+				0DEE767A2192865E004D5DB7 /* NBCclassificationView.m */,
+				0DEE767C21928680004D5DB7 /* NBCclassificationCollectionView.h */,
+				0DEE767D21928680004D5DB7 /* NBCclassificationCollectionView.m */,
+				0DEE767F219286BF004D5DB7 /* NBCclassificationCollectionViewCell.h */,
+				0DEE7680219286BF004D5DB7 /* NBCclassificationCollectionViewCell.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -3553,15 +3638,10 @@
 		0DF4119220C8D5F80076B154 /* MainBase */ = {
 			isa = PBXGroup;
 			children = (
-				0DF4119320C8D5F80076B154 /* 001 icon-看看-选中@3x.png */,
-				0DF4119420C8D5F80076B154 /* tab-project@2x.png */,
-				0DF4119620C8D5F80076B154 /* 001 icon-看看-未选中@3x.png */,
 				0DF4119720C8D5F80076B154 /* BaseNavigationViewController.h */,
 				0DF4119A20C8D5F80076B154 /* BaseNavigationViewController.m */,
-				0DF4119920C8D5F80076B154 /* 拍照识别@3x.png */,
 				0DF4119520C8D5F80076B154 /* MainTabBarViewController.h */,
 				0DF4119820C8D5F80076B154 /* MainTabBarViewController.m */,
-				0DF4119B20C8D5F80076B154 /* tab-Project-Click@2x.png */,
 			);
 			path = MainBase;
 			sourceTree = "<group>";
@@ -3840,18 +3920,13 @@
 				0D395DC9218C41FA007B99AE /* ShareSDK.bundle in Resources */,
 				0D46A84A21008D82008D9ADD /* 简卡通.ttf in Resources */,
 				0DF411CC20C8D6630076B154 /* SGQRCode.bundle in Resources */,
-				0DF4119E20C8D5F90076B154 /* 001 icon-看看-未选中@3x.png in Resources */,
 				0D1233A8210584CC0092B6C0 /* 简少儿.ttf in Resources */,
 				0D46A83F20FC9C50008D9ADD /* 汉仪丫丫体简.ttf in Resources */,
 				0DF4116C20C8CB3D0076B154 /* LaunchScreen.storyboard in Resources */,
-				0DF411A020C8D5F90076B154 /* 拍照识别@3x.png in Resources */,
-				0DF411A220C8D5F90076B154 /* tab-Project-Click@2x.png in Resources */,
 				0DF4116920C8CB3D0076B154 /* Assets.xcassets in Resources */,
-				0DF4119D20C8D5F90076B154 /* tab-project@2x.png in Resources */,
 				0D395DCA218C41FA007B99AE /* ShareSDKUI.bundle in Resources */,
 				0DF4116420C8CB3C0076B154 /* Main.storyboard in Resources */,
 				0D395DC5218C41FA007B99AE /* README.txt in Resources */,
-				0DF4119C20C8D5F90076B154 /* 001 icon-看看-选中@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3997,6 +4072,7 @@
 				0D56D91D20CA91F100E24C23 /* FoundClass.m in Sources */,
 				0D65F1BA20D2663600F3B71F /* AchievementTableView.m in Sources */,
 				0DD66B7920DA47360056528B /* DTALLiewController.m in Sources */,
+				0DEE76752192816A004D5DB7 /* NBClistCollectionView.m in Sources */,
 				0DD66B8420DA47360056528B /* DTPaiXuTableViewCell.m in Sources */,
 				0DE22F3820F84D70007DB0B8 /* GeneraNoDataView.m in Sources */,
 				0DD66B1F20DA27FD0056528B /* FriendXunZhangTabView.m in Sources */,
@@ -4004,6 +4080,7 @@
 				0D1025D0216E1DA200BAF30A /* ZhiShiShuGuanXi.m in Sources */,
 				0D99875920F4C8D3002BD2B7 /* GenPopViewModel.m in Sources */,
 				0DBC20F9218B2EE5001BBB69 /* ModifyNameViewController.m in Sources */,
+				0DEE768A2192C1FB004D5DB7 /* NBCGoodBoookListTabView.m in Sources */,
 				0D32684E21097DB700D7D563 /* AcherPowerTYModel.m in Sources */,
 				0D395E37218C50A1007B99AE /* DZMMagnifierView.m in Sources */,
 				0D7ABE93215E2EE6002EAA1D /* ZhiShiShuOneDownView.m in Sources */,
@@ -4056,6 +4133,7 @@
 				0D326848210968D700D7D563 /* AchieLeveModel.m in Sources */,
 				0D65F0FB20D0BD2700F3B71F /* MedalListTableView.m in Sources */,
 				0DD66B8220DA47360056528B /* DTDanXuanCollectionViewCell.m in Sources */,
+				0DEE766F2191B1A2004D5DB7 /* NBCweekReadingView.m in Sources */,
 				0DD620BF2179B29D00AF1AD7 /* UserLoginTextFileView.m in Sources */,
 				0D56D8EF20CA5E7800E24C23 /* HomeLiteracy.m in Sources */,
 				0D56D8F820CA651F00E24C23 /* HomeFriendCollectionViewCell.m in Sources */,
@@ -4071,21 +4149,27 @@
 				0DF411F920C8D7000076B154 /* BaseButton.m in Sources */,
 				0DA111F220ECA24E001A3D4E /* UserlLoginTextFileView.m in Sources */,
 				0D8C6CD2216B4A2C00776070 /* ZhiShiShuXQScroview.m in Sources */,
+				0DEE76602191895F004D5DB7 /* NBCchannelCollectionView.m in Sources */,
 				0D99875F20F5AA91002BD2B7 /* HomeMilestoneViewController.m in Sources */,
 				0D65F14320D2471000F3B71F /* GeneralBookImageNumberCollectionView.m in Sources */,
 				0D65F06B20CE474600F3B71F /* BookFriendModel.m in Sources */,
+				0DEE7669219199B1004D5DB7 /* NBCGoodBookView.m in Sources */,
 				0D260533210B41CE00D15D17 /* BeiJingView.m in Sources */,
 				0D1233B42106BFA60092B6C0 /* MyDeModel.m in Sources */,
+				0DEE767221928134004D5DB7 /* NBClistAllView.m in Sources */,
 				0D65F10420D0BDE700F3B71F /* MedalListModel.m in Sources */,
 				0D65F0D320CFB4B800F3B71F /* BookXQbookModel.m in Sources */,
+				0DEE767E21928680004D5DB7 /* NBCclassificationCollectionView.m in Sources */,
 				0DD66B8620DA47360056528B /* DTLianXian.m in Sources */,
 				0D01AF3B20DC8EFB005C549B /* ShiZiOrCiLiangViewController.m in Sources */,
 				0D56D8BD20C91CB500E24C23 /* HomeClassificationView.m in Sources */,
 				0D3268332108897B00D7D563 /* AchiemyBalanceModel.m in Sources */,
+				0D7FB5BA2194293C00E99F97 /* NBCThemeViewController.m in Sources */,
 				0D7017B420D8DF93009BEA52 /* ReadbookModel.m in Sources */,
 				0D65F13120D2041600F3B71F /* MedalXQLQXSCellView.m in Sources */,
 				0D26052A210B1A6D00D15D17 /* MonthPMModel.m in Sources */,
 				0DC881E820FA193500214014 /* YDYCollectionViewCell.m in Sources */,
+				0DEE768421928CA9004D5DB7 /* NBCALLModel.m in Sources */,
 				0D747157218FE2C1001549A3 /* UIView+GZExtend.m in Sources */,
 				0DC881E220FA18B900214014 /* YDYView.m in Sources */,
 				0D32683621088D9600D7D563 /* AchieclassBalanceModel.m in Sources */,
@@ -4137,6 +4221,7 @@
 				0DD66B7120DA47360056528B /* CTLianXianSmallView.m in Sources */,
 				0D0D7D5E20E0DC5E003A3495 /* HomeActivityTopTableViewCell.m in Sources */,
 				0DF411DD20C8D6F90076B154 /* BaseTableView.m in Sources */,
+				0DEE768721928D0D004D5DB7 /* NBCclassificationModel.m in Sources */,
 				0D65F19F20D2661F00F3B71F /* MyMedalTableView.m in Sources */,
 				0D395E27218C50A1007B99AE /* NSObject+Extension.swift in Sources */,
 				0D65F16220D2650400F3B71F /* AboutViewController.m in Sources */,
@@ -4161,7 +4246,6 @@
 				0D65F16620D2650400F3B71F /* PersonalViewController.m in Sources */,
 				0D65F0D020CFB27300F3B71F /* UserTableViewCell.m in Sources */,
 				0D6D7E1F211ACBD80058C0C0 /* FoundMedalCollectionViewCell.m in Sources */,
-				0D395E33218C50A1007B99AE /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				0D65F19820D2661F00F3B71F /* PersonalTableViewCell.m in Sources */,
 				0D2DAB6D20E4CBDF00EFFD1A /* DtJieGuoTopView.m in Sources */,
 				0D260530210B1BD400D15D17 /* MonthstudentxqModel.m in Sources */,
@@ -4193,6 +4277,7 @@
 				0D65F10D20D0C94900F3B71F /* FriendOrMedaliAndNameCollectionViewCell.m in Sources */,
 				0D0D7D6720E221B4003A3495 /* ShiZiJGTopView.m in Sources */,
 				0D9EEF0E216F45540077A4A1 /* ZhiShiShuXqModel.m in Sources */,
+				0D2F54C421957EBE00D02174 /* NBCCollectionViewFlowLayout.m in Sources */,
 				0D260521210ABBFF00D15D17 /* MyMessageXQModel.m in Sources */,
 				0D56D8C320C921AD00E24C23 /* HomeClassIfCation.m in Sources */,
 				0D395DA5218C3BF2007B99AE /* UserSQDLView.m in Sources */,
@@ -4221,6 +4306,7 @@
 				0D56D8E020CA517B00E24C23 /* HomeInterestGroupView.m in Sources */,
 				0D32683F2108B3DF00D7D563 /* XianNeiRongView.m in Sources */,
 				0D65F19B20D2661F00F3B71F /* PersonXuanZeZhaoPian.m in Sources */,
+				0DEE767B2192865E004D5DB7 /* NBCclassificationView.m in Sources */,
 				0D65F1A620D2661F00F3B71F /* MyQingKuangView.m in Sources */,
 				0DE22F4220F893D0007DB0B8 /* PopUpViewStyleAnswerView.m in Sources */,
 				0DD66B7E20DA47360056528B /* DTDuoXuanView.m in Sources */,
@@ -4262,6 +4348,7 @@
 				0DA111EF20EC9D7D001A3D4E /* UserLoginViewController.m in Sources */,
 				0D395E36218C50A1007B99AE /* UIView+YGPulseView.m in Sources */,
 				0D82221620EE552C00E88E07 /* SZSCViewController.m in Sources */,
+				0DEE7681219286BF004D5DB7 /* NBCclassificationCollectionViewCell.m in Sources */,
 				0D99875320F4C880002BD2B7 /* PopUpViewStyleAddMedalPartView.m in Sources */,
 				0D65F16420D2650400F3B71F /* MyMedalViewController.m in Sources */,
 				0D1233C021070DB30092B6C0 /* MedalListBadgeInfoModel.m in Sources */,
@@ -4339,6 +4426,7 @@
 				0D65F07720CE540000F3B71F /* TagModel.m in Sources */,
 				0D65F19920D2661F00F3B71F /* MyClassCellView.m in Sources */,
 				0D65F16520D2650400F3B71F /* MyClassViewController.m in Sources */,
+				0DEE76902192DF28004D5DB7 /* NBCMoreChannelViewController.m in Sources */,
 				0DF0152F216C88D7006500D8 /* ZhiShiShuXQImagesAndTitle.m in Sources */,
 				0D395E48218C50A1007B99AE /* DZMRMTopView.swift in Sources */,
 				0D1233A3210578E30092B6C0 /* HomeWorkTableView.m in Sources */,
@@ -4346,6 +4434,7 @@
 				0D56D8E620CA51A300E24C23 /* HomeInterestGroupCollectionViewCell.m in Sources */,
 				0D32685421099E7800D7D563 /* AcherPowerNumModel.m in Sources */,
 				0D65F09920CF5BA500F3B71F /* ReadBalanceModel.m in Sources */,
+				0DEE768D2192C221004D5DB7 /* NBCGoodBookListTableViewCell.m in Sources */,
 				0D395E29218C50A1007B99AE /* String+Extension.swift in Sources */,
 				0DEE765A2191815A004D5DB7 /* NBookCityViewController.m in Sources */,
 				0D577B6C215CD9A5004080A5 /* ZhiShiShuView.m in Sources */,
@@ -4369,6 +4458,7 @@
 				0D29BEC92175D7D70000A00A /* ZhiShiShuFLModel.m in Sources */,
 				0D56D92720CA936200E24C23 /* DCCycleScrollViewCell.m in Sources */,
 				0DD66B8520DA47360056528B /* DaTiClick.m in Sources */,
+				0DEE766621919935004D5DB7 /* NBCmenuView.m in Sources */,
 				0D65F10A20D0BF2400F3B71F /* MedalBageFriendModel.m in Sources */,
 				0D260524210AC6E900D15D17 /* CityTopBiaoreadBalanceModel.m in Sources */,
 				0D65F07120CE507000F3B71F /* DynamicListModel.m in Sources */,
@@ -4377,6 +4467,7 @@
 				0D0D7D5220E0D8F2003A3495 /* HomeActivityViewController.m in Sources */,
 				0D395E38218C50A1007B99AE /* DZMBatteryView.swift in Sources */,
 				0D395E47218C50A1007B99AE /* DZMReadMenu.swift in Sources */,
+				0DEE767821928180004D5DB7 /* NBClistCollectionViewCell.m in Sources */,
 				0D65F06820CE435C00F3B71F /* BadgeListModel.m in Sources */,
 				0D56D8CF20C92B3300E24C23 /* HomeModerateCollectionViewCell.m in Sources */,
 				0D395E51218C50A1007B99AE /* DZMCursorView.swift in Sources */,
@@ -4387,6 +4478,7 @@
 				0D3268422109676B00D7D563 /* AchieusersystemBalanceModel.m in Sources */,
 				0DD66B7520DA47360056528B /* ChallengeTwoController.m in Sources */,
 				0D65F0D920CFB6EF00F3B71F /* BookXQReadFriendModel.m in Sources */,
+				0DEE76932192E8B5004D5DB7 /* NBCMoreWeekViewController.m in Sources */,
 				0D577B6D215CD9A5004080A5 /* ZhiShiSHuTanKuang.m in Sources */,
 				0DE22F4520F8B315007DB0B8 /* PopUpViewStyleBelongView.m in Sources */,
 				0DA1122220EE1760001A3D4E /* GppdBookPageViewController.m in Sources */,
@@ -4405,6 +4497,7 @@
 				0D0D7D4C20E0C629003A3495 /* FoundGoodArticleModel.m in Sources */,
 				0D90D96E21606960009F1820 /* ZhiShiShuDataModel.m in Sources */,
 				0D577B68215CD9A5004080A5 /* ZhiShiShuViewController.m in Sources */,
+				0DEE766321918A34004D5DB7 /* NBCchannelCollectionViewCell.m in Sources */,
 				0D99876520F5DA98002BD2B7 /* HomeMilestBackView.m in Sources */,
 				0D6D7E1C211933750058C0C0 /* BookTopLabel.m in Sources */,
 				0D65F09320CEA03F00F3B71F /* Menu.m in Sources */,
@@ -4431,6 +4524,7 @@
 				0D56D8C020C91D5700E24C23 /* HomeCkassifcationCollectionViewCell.m in Sources */,
 				0DD66B7C20DA47360056528B /* YDWZTimeView.m in Sources */,
 				0DE18200215F26BF00585389 /* ZhiShiShuShuViewController.m in Sources */,
+				0DEE766C2191A37B004D5DB7 /* NBCGoodBookCollectionView.m in Sources */,
 				0D6E93C120EB48DB00BC1BC4 /* BookListMenu.m in Sources */,
 				0D56D90B20CA7F8100E24C23 /* FoundViewController.m in Sources */,
 				0DD66B7720DA47360056528B /* ChaKanCuoTiViewController.m in Sources */,
@@ -4642,7 +4736,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/yangshuai/Desktop/天天爱读/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/General/IREADER/DZMeBookRead/other/BlueWhaleRead-Bridging-Pch.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -4678,7 +4772,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/yangshuai/Desktop/天天爱读/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/General/IREADER/DZMeBookRead/other/BlueWhaleRead-Bridging-Pch.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

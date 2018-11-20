@@ -21,14 +21,30 @@
 }
 -(void)setupUI{
     WS(ws);
+//    UIView * yy = [UIView new];
+//    yy.backgroundColor = [UIColor whiteColor];
+//    [self addSubview:yy];
+//    [yy mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(ws.mas_top).with.offset(2);
+//        make.left.equalTo(ws.mas_left).with.offset(2);
+//        make.right.equalTo(ws.mas_right).with.offset(-2);
+//        make.height.equalTo(ws.mas_width).multipliedBy(1.417);
+//    }];
+//    yy.layer.shadowOpacity = 0.4;
+//    yy.layer.shadowColor = [UIColor blackColor].CGColor;
+//    yy.layer.shadowRadius = 2.f;
+//    yy.layer.shadowOffset = CGSizeMake(0,0);
+    
     imageView = [FLAnimatedImageView new];
+//    imageView.backgroundColor = [UIColor whiteColor];
+    imageView.image = UIIMAGE(@"发现_你的同学_书缺省位置");
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self addSubview:imageView];
+    
     imageView.layer.shadowOpacity = 0.4;
     imageView.layer.shadowColor = [UIColor blackColor].CGColor;
     imageView.layer.shadowRadius = 2.f;
     imageView.layer.shadowOffset = CGSizeMake(0,0);
-    imageView.image = UIIMAGE(@"发现_你的同学_书缺省位置");
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self addSubview:imageView];
     
     Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:ChangYongTitLe LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
     Title.numberOfLines = 2;

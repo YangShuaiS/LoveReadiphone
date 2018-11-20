@@ -21,4 +21,6 @@
 @property (strong, nonatomic) BookTableView *tableView;
 @property(nonatomic,assign)NSInteger inter;
 
+@property(nonatomic,strong)NSIndexPath * inpath;
+
 @end

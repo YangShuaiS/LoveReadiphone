@@ -67,7 +67,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return LENGTH(5);
+        return LENGTH(5);
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView * v = [UIView new];
@@ -100,5 +100,23 @@
     CGFloat contentOffsetY = scrollView.contentOffset.y;
     self.block(contentOffsetY);
     
+    if (scrollView == self)
+    {
+        CGFloat sectionHeaderHeight = 40;
+        CGFloat sectionFooterHeight = 15;
+        CGFloat offsetY = scrollView.contentOffset.y;
+        if (offsetY >= 0 && offsetY <= sectionHeaderHeight)
+        {
+            scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -sectionFooterHeight, 0);
+        }else if (offsetY >= sectionHeaderHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight)
+        {
+            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, -sectionFooterHeight, 0);
+        }else if (offsetY >= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height)
+        {
+            scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -(scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight), 0);
+        }
+    }
+
 }
+
 @end

@@ -37,10 +37,7 @@
     MyImage.progress = 0;//进度
     [bacViwe addSubview:MyImage];
     [MyImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws).with.offset(LENGTH(2));
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(2));
-        make.top.mas_equalTo(ws).with.offset(LENGTH(2));
-        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(2));
+        make.edges.mas_equalTo(ws);
 
 //        make.center.mas_equalTo(self->bacViwe);
 //        make.width.mas_equalTo(self->bacViwe).with.offset(-LENGTH(10));

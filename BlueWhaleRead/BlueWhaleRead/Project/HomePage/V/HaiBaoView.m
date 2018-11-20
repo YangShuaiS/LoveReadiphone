@@ -23,6 +23,12 @@
     UIImage * haibaoimage;
     MBProgressHUD * mb;
     NSString * url;
+    
+    FLAnimatedImageView * backimageview;
+    
+    UIView * wxclick;
+    UIView * wxpyqclick;
+    UIView * hbclick;
 }
 
 - (instancetype)init
@@ -40,20 +46,50 @@
     [self addSubview:_webView];
     WS(ws);
     [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(ws).with.offset(StatusBar+50);
+//        make.bottom.mas_equalTo(self->backview.mas_top).with.offset(-LENGTH(12)-50);
+//        make.center.mas_equalTo(self->backview);
+//        make.left.mas_equalTo(ws).with.offset(LENGTH(100));
+//        make.right.mas_equalTo(ws).with.offset(-LENGTH(100));
+        make.width.mas_equalTo(LENGTH(322));
+        make.height.mas_equalTo(LENGTH(519));
+        make.top.mas_equalTo(ws.mas_bottom);
+    }];
+    
+    backimageview = [FLAnimatedImageView new];
+    backimageview.backgroundColor = [UIColor whiteColor];
+    backimageview.contentMode = UIViewContentModeScaleAspectFit;
+    [self addSubview:backimageview];
+    [backimageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws).with.offset(StatusBar);
         make.bottom.mas_equalTo(self->backview.mas_top).with.offset(-LENGTH(12));
-        make.width.mas_equalTo(ws.webView.mas_height).multipliedBy(0.62);
-//        make.centerX.mas_offset(ws);
+//        make.width.mas_equalTo(self->backimageview.mas_height).multipliedBy(0.62);
+        //        make.centerX.mas_offset(ws);
         make.centerX.mas_equalTo(self->backview);
-//        make.left.mas_equalTo(ws).with.offset(LENGTH(26));
-//        make.right.mas_equalTo(ws).with.offset(-LENGTH(26));
+                make.left.mas_equalTo(ws).with.offset(LENGTH(26));
+                make.right.mas_equalTo(ws).with.offset(-LENGTH(26));
     }];
 }
 - (void)setModes:(FenXiangModel *)modes{
     _modes = modes;
-    url = [NSString stringWithFormat:@"%@?showType=2&studentId=%@",_modes.url,Me.ssid];
+    if (_sharestyle == ShareStyleTag9||_sharestyle == ShareStyleTag10) {
+        url = [NSString stringWithFormat:@"%@?showType=%@&studentId=%@",_modes.url,_textid,Me.ssid];
+    }else{
+        url = [NSString stringWithFormat:@"%@?showType=2&studentId=%@",_modes.url,Me.ssid];
+    }
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 
+    double delayInSeconds = 5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        if (self->haibaoimage == nil) {
+            [self->_webView captureContentImage:^(UIImage *image) {
+                self->haibaoimage = image;
+                self->backimageview.image = image;
+                self->backimageview.backgroundColor = [UIColor clearColor];
+            }];
+        }
+    });
 //    switch (_sharestyle) {
 //        case ShareStyleTag1:
 //            url = [NSString stringWithFormat:@"%@?showType=2&studentId=%@",modes.url,Me.ssid];
@@ -147,27 +183,45 @@
         wxview.contentMode = UIViewContentModeScaleAspectFit;
         [topview addSubview:wxview];
         [viewarray addObject:wxview];
-        wxview.userInteractionEnabled = YES;
+        
+        wxclick = [UIView new];
+        [topview addSubview:wxclick];
+        wxclick.userInteractionEnabled = YES;
+        [wxclick mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(wxview).with.insets(UIEdgeInsetsMake(-30, -30, -30, -30));
+        }];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(wxhy)];
-        [wxview addGestureRecognizer:tap];
+        [wxclick addGestureRecognizer:tap];
         
         FLAnimatedImageView * wxviewpyq = [FLAnimatedImageView new];
         wxviewpyq.image = UIIMAGE(@"朋友圈");
         wxviewpyq.contentMode = UIViewContentModeScaleAspectFit;
         [topview addSubview:wxviewpyq];
         [viewarray addObject:wxviewpyq];
-        wxviewpyq.userInteractionEnabled = YES;
+        
+        wxpyqclick = [UIView new];
+        [topview addSubview:wxpyqclick];
+        wxpyqclick.userInteractionEnabled = YES;
+        [wxpyqclick mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(wxviewpyq).with.insets(UIEdgeInsetsMake(-30, -30, -30, -30));
+        }];
         UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(wxviewpyq)];
-        [wxviewpyq addGestureRecognizer:tap1];
+        [wxpyqclick addGestureRecognizer:tap1];
     }
     FLAnimatedImageView * hb = [FLAnimatedImageView new];
     hb.image = UIIMAGE(@"保存到本地");
     hb.contentMode = UIViewContentModeScaleAspectFit;
     [topview addSubview:hb];
     [viewarray addObject:hb];
-    hb.userInteractionEnabled = YES;
+    
+    hbclick = [UIView new];
+    [topview addSubview:hbclick];
+    hbclick.userInteractionEnabled = YES;
+    [hbclick mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(hb).with.insets(UIEdgeInsetsMake(-30, -30, -30, -30));
+    }];
     UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(xz)];
-    [hb addGestureRecognizer:tap1];
+    [hbclick addGestureRecognizer:tap1];
     
     if (viewarray.count == 1) {
         NSArray * titarray = @[@"保存到相册"];
@@ -228,6 +282,9 @@
         mb.label.text = @"正在生成海报，请稍后";
         [mb hideAnimated:NO afterDelay:1];
     }else{
+        wxclick.userInteractionEnabled = NO;
+        wxpyqclick.userInteractionEnabled = NO;
+        hbclick.userInteractionEnabled = NO;
         [self wxhys:self->_modes];
     }
 }
@@ -238,6 +295,9 @@
         mb.label.text = @"正在生成海报，请稍后";
         [mb hideAnimated:NO afterDelay:1];
     }else{
+        wxclick.userInteractionEnabled = NO;
+        wxpyqclick.userInteractionEnabled = NO;
+        hbclick.userInteractionEnabled = NO;
         [self wxviewpyq:self->_modes];
     }
 }
@@ -316,6 +376,9 @@
          NSString *titel = @"";
          NSString *typeStr = @"";
          UIColor *typeColor = [UIColor grayColor];
+         self->wxclick.userInteractionEnabled = YES;
+         self->wxpyqclick.userInteractionEnabled = YES;
+         self->hbclick.userInteractionEnabled = YES;
          switch (state) {
              case SSDKResponseStateSuccess:
              {
@@ -401,6 +464,9 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self->_webView captureContentImage:^(UIImage *image) {
             self->haibaoimage = image;
+            self->backimageview.image = image;
+            self->backimageview.backgroundColor = [UIColor clearColor];
+
         }];
     });
 }

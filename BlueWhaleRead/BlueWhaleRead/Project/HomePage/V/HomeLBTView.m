@@ -55,6 +55,7 @@
 /** 点击图片回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     LBTViewController * vc = [LBTViewController new];
+    vc.inter = 1;
     LunboModel * model = _itemArray[index];
     vc.itemid = model.ssid;
     vc.imageurl = cycleScrollerView.imageURLStringsGroup[index];

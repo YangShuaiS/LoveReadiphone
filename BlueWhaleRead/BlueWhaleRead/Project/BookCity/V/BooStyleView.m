@@ -64,7 +64,7 @@
         make.top.equalTo(self->topview.mas_bottom).with.offset(0);
         make.left.equalTo(ws).with.offset(0);
         make.right.equalTo(ws).with.offset(0);
-        make.bottom.equalTo(ws).with.offset(0);
+        make.bottom.equalTo(ws).with.offset(-LENGTH(20));
     }];
     [_tableView setBlock:^(CGFloat flo) {
         [ws daili:flo];
@@ -76,13 +76,27 @@
 }
 - (void)setModel:(BookCityModel *)model{
     _model = model;
-    _tableView.itemarray = model.bookList;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    if (_tableView.itemarray.count == 0) {
         [self chushihuashuzu];
-    });
-}
+        [self zhiding];
+    }
+    _tableView.itemarray = model.bookList;
 
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//    });
+}
+- (void)zhiding{
+    NSIndexPath * indexpa = [NSIndexPath indexPathForRow:0 inSection:0];
+    if ([indexpa isEqual:_inpath]) {
+        
+    }else{
+        CityTypeListModel * m = item1[_inpath.section];
+        item11 = m.child;
+        [self RefreshCaiDanView:1 LastInter:last1 Weizhi:indexpa Nsmuarray:item11];
+    }
+
+}
 - (void)setNav:(UINavigationController *)nav{
     _tableView.nav = nav;
 }
@@ -256,6 +270,7 @@
     }
     [self.delegete backbodys:arr];
 }
+
 - (void)RefreshCaiDanView:(NSInteger)Now LastInter:(NSInteger)last Weizhi:(NSIndexPath *)intextp Nsmuarray:(NSMutableArray *)array{
 
     if (last !=9999999) {

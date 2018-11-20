@@ -55,9 +55,9 @@
     bookStyleLabel.backgroundColor = RGB(107, 219, 216);
     [downImageView addSubview:bookStyleLabel];
     [bookStyleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self->downImageView.mas_left).with.offset(LENGTH(2));
-        make.right.mas_equalTo(self->downImageView.mas_right).with.offset(-LENGTH(2));
-        make.bottom.mas_equalTo(self->downImageView.mas_bottom).with.offset(-LENGTH(1));
+        make.left.mas_equalTo(self->downImageView.mas_left).with.offset(2);
+        make.right.mas_equalTo(self->downImageView.mas_right).with.offset(-2);
+        make.bottom.mas_equalTo(self->downImageView.mas_bottom).with.offset(-1);
 //        make.centerX.mas_equalTo(self->downImageView.mas_centerX);
 //        make.top.mas_equalTo(self->downImageView.mas_bottom).with.offset(LENGTH(2));
 //        make.height.mas_equalTo(LENGTH(17));

@@ -106,7 +106,7 @@
     text.backgroundColor = RGB(255, 255, 255);
     text.alpha = 0.3;
     text.layer.masksToBounds = YES;
-    text.layer.cornerRadius = LENGTH(17);
+    text.layer.cornerRadius = 15;
     [sousuo addSubview:text];
     
     textField = [UITextField new];
@@ -136,23 +136,23 @@
     }];
     
     [text mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self->sousuo.mas_left).with.offset(LENGTH(56));
-        make.right.mas_equalTo(self->sousuo.mas_right).with.offset(-LENGTH(108));
-        make.bottom.mas_equalTo(self->sousuo.mas_bottom).with.offset(-LENGTH(6));
-        make.height.mas_equalTo(33);
+        make.left.mas_equalTo(self->sousuo.mas_left).with.offset(LENGTH(60));
+        make.right.mas_equalTo(self->sousuo.mas_right).with.offset(-LENGTH(60));
+        make.bottom.mas_equalTo(self->sousuo.mas_bottom).with.offset(-6);
+        make.height.mas_equalTo(30);
     }];
     
     [textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self->sousuo.mas_left).with.offset(LENGTH(56));
-        make.right.mas_equalTo(self->sousuo.mas_right).with.offset(-LENGTH(108));
-        make.bottom.mas_equalTo(self->sousuo.mas_bottom).with.offset(-LENGTH(6));
-        make.height.mas_equalTo(33);
+        make.left.mas_equalTo(self->sousuo.mas_left).with.offset(LENGTH(60));
+        make.right.mas_equalTo(self->sousuo.mas_right).with.offset(-LENGTH(60));
+        make.bottom.mas_equalTo(self->sousuo.mas_bottom).with.offset(-6);
+        make.height.mas_equalTo(30);
     }];
 
     [quxiao mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self->textField.mas_right).with.offset(LENGTH(20));
+        make.left.equalTo(self->textField.mas_right).with.offset(LENGTH(0));
         make.centerY.mas_equalTo(self->textField.mas_centerY);
-//        make.right.equalTo(self->sousuo.mas_right).with.offset(0);
+        make.right.equalTo(self->sousuo.mas_right).with.offset(0);
         make.height.mas_equalTo(self->textField.mas_height);
     }];
     //监听当键盘将要出现时
@@ -271,6 +271,18 @@
     }];
     //
     homeMenu.controllerArray = childVC;
+    __block BookListViewController *blockSelf = self;
+    [homeMenu setBlock:^(NSInteger inter) {
+        [blockSelf upfenxiang:inter];
+    }];
+}
+
+- (void)upfenxiang:(NSInteger)inter{
+    if (inter == 0) {
+        sharefriend.hidden = YES;
+    }else{
+        sharefriend.hidden = NO;
+    }
 }
 - (void)addfenxiang{
     if (sharefriend == nil) {
@@ -286,6 +298,7 @@
         sharefriend.userInteractionEnabled = YES;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
         [sharefriend addGestureRecognizer:tap];
+        sharefriend.hidden = YES;
     }
 }
 
@@ -300,7 +313,11 @@
         CityBadgeListModel * mo = bagarray[0];
         if ([mo.is_completed isEqualToString:@"1"]) {
             NSArray * lvarr = [BaseObject TiemArray:model.levels String:@","];
-            fenxiangs.classname = lvarr[0];
+            NSString * lv = lvarr[0];
+            if (lv.length>2) {
+                lv = [lv substringFromIndex:2];//截取掉下标3之后的字符串
+            }
+            fenxiangs.classname = lv;
             fenxiangs.bookname = model.name;
             fenxiangs.imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.cover];
             fenxiangs.sharestyle = ShareStyleTag2;

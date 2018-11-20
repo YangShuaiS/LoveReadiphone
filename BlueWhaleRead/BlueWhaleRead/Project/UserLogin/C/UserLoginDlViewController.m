@@ -84,13 +84,13 @@
         [self dl];
     }];
     
-    UserSQDLView * sqdl = [UserSQDLView new];
-    sqdl.nav = self.navigationController;
-    [self.view addSubview:sqdl];
-    [sqdl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(NewUser.mas_bottom).with.offset(LENGTH(80));
-        make.left.and.right.mas_equalTo(ws.view);
-    }];
+//    UserSQDLView * sqdl = [UserSQDLView new];
+//    sqdl.nav = self.navigationController;
+//    [self.view addSubview:sqdl];
+//    [sqdl mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(NewUser.mas_bottom).with.offset(LENGTH(80));
+//        make.left.and.right.mas_equalTo(ws.view);
+//    }];
     
     self.view.userInteractionEnabled = YES;
     UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture2)];

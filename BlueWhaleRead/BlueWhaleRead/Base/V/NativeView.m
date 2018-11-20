@@ -61,7 +61,7 @@
 //            [self AddRightImage:_rightTitle];
             break;
         case NacStyleBookCity:
-//            [self AddBackImage:_image];
+            [self AddBackImage:_image];
             [self AddCenterSearch:_title];
 
             break;

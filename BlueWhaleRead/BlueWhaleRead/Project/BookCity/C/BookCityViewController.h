@@ -9,5 +9,7 @@
 #import "BaseViewController.h"
 
 @interface BookCityViewController : BaseViewController
+@property(nonatomic,strong)NSIndexPath * inpath;
+@property(nonatomic,strong)NSString * cata;
 
 @end

@@ -26,5 +26,4 @@ pod 'PGDatePicker'
 pod 'MOFSPickerManager'
 
 pod 'ZipArchive'
-
 end

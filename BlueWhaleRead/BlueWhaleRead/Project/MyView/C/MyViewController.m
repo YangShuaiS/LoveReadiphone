@@ -60,7 +60,14 @@
 }
 - (void)UpData{
     topView.model = model.userinfo;
-    XunZhang.itemarray = model.myBadgeList;
+    if (model.myBadgeList.count == 0) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            self->XunZhang.itemarray = self->model.myBadgeList;
+        });
+    }else{
+        XunZhang.itemarray = model.myBadgeList;
+    }
     myqingkuang.model = model;
 }
 #pragma mark --------------------  导航栏以及代理

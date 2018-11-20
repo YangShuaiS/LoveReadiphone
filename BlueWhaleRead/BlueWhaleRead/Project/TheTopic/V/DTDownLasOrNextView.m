@@ -235,6 +235,7 @@
 
 //提交答案
 - (void)TJDAN{
+    RJOrFanHuiBookCity.userInteractionEnabled = NO;
     PushModel * model = [PushModel new];
     model.style = PushDaTiJieGuo;
     [self.delegate DtDownClick:model];

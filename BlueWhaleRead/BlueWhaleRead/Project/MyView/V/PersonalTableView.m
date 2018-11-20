@@ -56,6 +56,15 @@
     }else{
         xb = @"女";
     }
+    NSString * phone = model.phone;
+    if (phone.length == 11) {
+        NSRange rangeone = {0,3};
+        NSRange rangetwo = {7,4};
+        NSString * str = [NSString stringWithFormat:@"%@****%@",[phone substringWithRange:rangeone],[phone substringWithRange:rangetwo]];
+        phone = str;
+    }else{
+        phone = @"";
+    }
     if ([_model.source isEqualToString:@"2"]) {
         titleArray = @[@"昵称",@"生日",@"等级",@"账号/绑定设置",@"所在地区",@"学校",@"班级",@"性别"];
         NSString * area = model.area;
@@ -64,10 +73,10 @@
         area=[area isEqualToString:@""]?@"待完善":area;
         true_school=[true_school isEqualToString:@""]?@"待完善":true_school;
         true_class=[true_class isEqualToString:@""]?@"待完善":true_class;
-        subArray = @[model.name,model.birthday,[NSString stringWithFormat:@"Lv%@",model.level],model.phone,area,true_school,true_class,xb];
+        subArray = @[model.name,model.birthday,[NSString stringWithFormat:@"Lv%@",model.level],phone,area,true_school,true_class,xb];
     }else{
         titleArray = @[@"昵称",@"等级",@"修改预留手机号",@"学校",@"班级",@"性别"];
-        subArray = @[model.name,[NSString stringWithFormat:@"Lv%@",model.level],model.phone,model.school,model.clazz,xb];
+        subArray = @[model.name,[NSString stringWithFormat:@"Lv%@",model.level],phone,model.school,model.clazz,xb];
 
     }
     [self reloadData];
@@ -94,7 +103,7 @@
             }else if (indexPath.row == 4){
                 cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
                 cell.title = titleArray[indexPath.row-1];
-//                cell.subtitle = subArray[indexPath.row - 1];
+                cell.subtitle = subArray[indexPath.row - 1];
             }else if (indexPath.row == 1||indexPath.row == 5||indexPath.row == 6||indexPath.row ==7){
                 cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
                 cell.title = titleArray[indexPath.row-1];
@@ -112,7 +121,7 @@
             }else if (indexPath.row == 3){
                 cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
                 cell.title = titleArray[indexPath.row-1];
-//                cell.subtitle = subArray[indexPath.row - 1];
+                cell.subtitle = subArray[indexPath.row - 1];
             }else{
                 cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
                 cell.title = titleArray[indexPath.row-1];

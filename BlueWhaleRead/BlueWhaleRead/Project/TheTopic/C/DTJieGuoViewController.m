@@ -65,8 +65,9 @@
 
 - (void)NavLeftClick {
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
+
 //
 //    NSInteger i = 0;
 //    switch (_style) {
@@ -79,17 +80,17 @@
 //        default:
 //            break;
 //    }
-    NSArray * contarray = self.navigationController.viewControllers;
-        for (int i =0; i < contarray.count; i++) {
-            UIViewController *controller = contarray[i];
-            if ([controller isKindOfClass:[BookListViewController class]]) {
-                [self.navigationController popToViewController:controller animated:YES];
-                break;
-            }
-    }
+//    NSArray * contarray = self.navigationController.viewControllers;
+//        for (int i =0; i < contarray.count; i++) {
+//            UIViewController *controller = contarray[i];
+//            if ([controller isKindOfClass:[BookListViewController class]]) {
+//                [self.navigationController popToViewController:controller animated:YES];
+//                break;
+//            }
+//    }
 
-    BookListViewController * vc = [BookListViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+//    BookListViewController * vc = [BookListViewController new];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark --------------------  导航栏以及代理
 - (void)addtitle{
@@ -137,7 +138,7 @@
     }else{
         
     }
-    
+
 //    TopView.model = model;
 //    FLAnimatedImageView * leftImage = [FLAnimatedImageView new];
 //    leftImage.backgroundColor = RANDOMCOLOR;
@@ -269,4 +270,11 @@
 - (void)setModel:(TKJIEGUOMODEL *)model{
     _model = model;
 }
+
+//-(void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+//    }
+//}
 @end

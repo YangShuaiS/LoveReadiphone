@@ -9,7 +9,10 @@
 #import "LBTViewController.h"
 #import "FenXiangView.h"
 #import "HaiBaoView.h"
-@interface LBTViewController ()<NavDelegate,UIWebViewDelegate>
+
+#import <WebKit/WebKit.h>
+#import "BookXqViewController.h"
+@interface LBTViewController ()<NavDelegate,WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler>
 
 @end
 
@@ -20,7 +23,7 @@
     BaseLabel * name;
     BaseLabel * down;
     
-    UIWebView *webView;
+    WKWebView *webView;
 
 
 }
@@ -75,8 +78,11 @@
     }];
     
     
-    webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    webView.delegate = self;
+    webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+    webView.navigationDelegate = self;
+    webView.UIDelegate = self;
+    webView.backgroundColor = [UIColor clearColor];
+    webView.scrollView.backgroundColor = [UIColor clearColor];
     [scrollView addSubview:webView];
     [webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self->time.mas_bottom).with.offset(LENGTH(10));
@@ -85,6 +91,7 @@
         make.bottom.equalTo(self->scrollView.mas_bottom).with.offset(-LENGTH(10));
         make.height.mas_equalTo(1);
     }];
+        [[webView configuration].userContentController addScriptMessageHandler:self name:@"getMessage"];
     
 //    down = [BaseLabel new];
 //    down.numberOfLines = 0;
@@ -126,10 +133,13 @@
 
 - (void)FenXiang{
     FenXiangView * fenxiangs = [FenXiangView new];
-            fenxiangs.imageurl = _imageurl;
+    fenxiangs.atype = @"1";
+    fenxiangs.vc = self;
+    fenxiangs.imageurl = _imageurl;
     fenxiangs.wzbt = name.text;
     fenxiangs.textid = _itemid;
-        fenxiangs.sharestyle = ShareStyleTag9;
+    fenxiangs.bookname = name.text;
+    fenxiangs.sharestyle = ShareStyleTag9;
         [self.view addSubview:fenxiangs];
         WS(ws);
         [fenxiangs mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,7 +169,7 @@
 - (void)setItemid:(NSString *)itemid{
     _itemid = itemid;
         NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_LBTXQ];
-        NSDictionary * dic = @{@"bannerid":itemid};
+    NSDictionary * dic = @{@"bannerid":itemid,@"studentid":Me.ssid};
         
         [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
             if (responseObject) {
@@ -179,33 +189,74 @@
     name.text = model.banner.title; 
     NSString * str = model.banner.content;
     [webView loadHTMLString:str baseURL:nil];
-
 //    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[str
 //                                                                             dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:
 //                                                                                                                                      NSHTMLTextDocumentType} documentAttributes:nil error:nil];
 //
 //    down.attributedText = attrStr;
 }
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
-    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#edf3f3'"];
-    [webView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(webView.scrollView.contentSize.height);
-    }];
-    //方法1 实际使用js方法实现
-    //    CGFloat documentWidth = [[webView stringByEvaluatingJavaScriptFromString:@"document.getElementById('content').offsetWidth"] floatValue];
-    //    CGFloat documentHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"content\").offsetHeight;"] floatValue];
-    //    NSLog(@"documentSize = {%f, %f}", documentWidth, documentHeight);
-    //
-    //    //方法2
-    //    CGRect frame = webView.frame;
-    ////    frame.size.width = 768;
-    ////    frame.size.height = 1;
-    ////        webView.scrollView.scrollEnabled = NO;
-    ////    webView.frame = frame;
-    //    frame.size.height = webView.scrollView.contentSize.height;
-    //    NSLog(@"frame = %@", [NSValue valueWithCGRect:frame]);
-    //    webView.frame = frame;
+//- (void)webViewDidFinishLoad:(UIWebView *)webView{
+//    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#edf3f3'"];
+//    [webView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(webView.scrollView.contentSize.height);
+//    }];
+//    
+//}
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
+{
+    //开始加载
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+//    self.navtive.title = webView.title;
+    //加载完成
+    //这里可以接受web前端的方法，用来初始化web页面的信息
+    //    [webView evaluateJavaScript:@"setTing()" completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+    //        //当然在这个setTing()返回的数据可以是个字典的数据形式。
+    //    }];
+    if (_inter == 1) {
+        [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '200%'"completionHandler:nil];
+
+    }else{
+        [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"completionHandler:nil];
+
+    }
+    [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.background='#edf3f3'"completionHandler:nil];
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [webView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(webView.scrollView.contentSize.height);
+        }];
+    });
+
     
+}
+
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
+{
+    //网络错误
+}
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    
+    decisionHandler(WKNavigationActionPolicyAllow);
+    //允许webView的点击时数据的获取
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+{
+    //    NSDictionary *dic = [NSDictionary parseJSONStringToNSDictionary:message];
+    BookXqViewController * vc = [BookXqViewController new];
+    vc.loadId = message;
+    [self.navigationController pushViewController:vc animated:YES];
+    completionHandler();
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler
+{
+    completionHandler(NO);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -221,5 +272,10 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
+    NSDictionary *dic = message.body;
+    BookXqViewController * vc = [BookXqViewController new];
+    vc.loadId = dic[@"id"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

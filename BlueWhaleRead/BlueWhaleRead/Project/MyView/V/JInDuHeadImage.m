@@ -53,7 +53,7 @@
     self.circleLayer.strokeEnd = 1;
     self.circleLayer.strokeColor = [[UIColor colorWithRed:6.0f/255.0f green:6.0f/255.0f blue:6.0f/255.0f alpha:0.5f] CGColor];
     self.circleLayer.fillColor = [UIColor clearColor].CGColor;
-    [_touxiang.layer addSublayer:self.circleLayer];
+    [self.layer addSublayer:self.circleLayer];
 //
 }
 - (void)layoutSubviews{
@@ -143,10 +143,10 @@
     _upjl = upjl;
     WS(ws);
     [_touxiang mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws).with.offset(LENGTH(upjl));
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(upjl));
-        make.top.mas_equalTo(ws).with.offset(LENGTH(upjl));
-        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(upjl));
+        make.left.mas_equalTo(ws).with.offset(upjl);
+        make.right.mas_equalTo(ws).with.offset(-upjl);
+        make.top.mas_equalTo(ws).with.offset(upjl);
+        make.bottom.mas_equalTo(ws).with.offset(-upjl);
     }];
 }
 @end

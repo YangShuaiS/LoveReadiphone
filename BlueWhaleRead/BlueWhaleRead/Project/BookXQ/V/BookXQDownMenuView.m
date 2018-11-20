@@ -91,9 +91,9 @@
 
             }else if (ws.titarray.count ==2){
                 if (i == 0) {
-                    make.centerX.equalTo(ws).with.offset(-LENGTH(wid/2));
+                    make.centerX.equalTo(ws).with.offset(-wid/2);
                 }else if (i == 1){
-                    make.centerX.equalTo(ws).with.offset(LENGTH(wid/2));
+                    make.centerX.equalTo(ws).with.offset(wid/2);
                 }
             }
         }];

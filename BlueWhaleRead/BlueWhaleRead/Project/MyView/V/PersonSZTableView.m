@@ -51,6 +51,12 @@
 
 //计算出大小
 - (NSString *)fileSizeWithInterge:(NSInteger)size{
+    NSArray *pathArray =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [[pathArray firstObject] stringByAppendingPathComponent:@"booktext"];
+    NSString *filePathtwo = [[pathArray firstObject] stringByAppendingPathComponent:@"DZMeBookRead"];
+    float booktext = [self folderSizeAtPath:filePath];
+    float DZMeBookRead = [self folderSizeAtPath:filePathtwo];
+    size = booktext+DZMeBookRead+size;
     // 1k = 1024, 1m = 1024k
     if (size < 1024) {// 小于1k
         return [NSString stringWithFormat:@"%ldB",(long)size];
@@ -65,6 +71,29 @@
         return [NSString stringWithFormat:@"%.1fG",aFloat];
     }
 }
+- (float)folderSizeAtPath:(NSString *)folderPath
+{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:folderPath]) return 0;
+    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
+    NSString* fileName;
+    long long folderSize = 0;
+    while ((fileName = [childFilesEnumerator nextObject]) != nil)
+    {
+        NSString* fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
+        folderSize += [self fileSizeAtPath:fileAbsolutePath];
+    }
+    return folderSize;
+}
+- (long long)fileSizeAtPath:(NSString*)filePath
+{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:filePath]){
+        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
+    }
+    return 0;
+}
+
 #pragma mark  - tableViewDelegate代理方法
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -211,7 +240,23 @@
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
     [[SDImageCache sharedImageCache] clearMemory];//可不写
     NSString * currentVolum = [self HuanCunDaXiao];
-    subArray = @[_model.code,@"",@"",currentVolum,@"",@"",@""];
-    [self reloadData];
+    subArray = @[@"",@"",currentVolum,@"",@"",@""];
+    // 创建一个文件管理器
+    NSArray *pathArray =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *filePath = [[pathArray firstObject] stringByAppendingPathComponent:@"booktext"];
+    NSString *filePathtwo = [[pathArray firstObject] stringByAppendingPathComponent:@"DZMeBookRead"];
+    [manager removeItemAtPath:filePathtwo error:nil];
+    BOOL isDele = [manager removeItemAtPath:filePath error:nil];
+        if (isDele) {
+            // 创建文件夹
+            [manager createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:nil];
+            // 文件是否存在
+            [manager fileExistsAtPath:filePath];
+            [self reloadData];
+        }else{
+    
+        }
 }
+
 @end

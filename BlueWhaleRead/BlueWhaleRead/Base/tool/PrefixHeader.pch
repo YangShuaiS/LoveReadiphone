@@ -41,6 +41,8 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ZipArchive.h>
 
+//#import "UINavigationController+FDFullscreenPopGesture.h"
+
 /**
  *  字体适配 我在PCH文件定义了一个方法
  */

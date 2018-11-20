@@ -34,20 +34,20 @@
         make.height.mas_equalTo(LENGTH(74));
     }];
 #pragma legacy ------------------------ 富文本居中？
-    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(1,117,223) LabelFont:TextFontHeight(30) TextAlignment:NSTextAlignmentCenter Text:@"小朋友你已经读完了 0  本书"];
+    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(1,117,223) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:@"小朋友你已经读完了 0  本书"];
     [xinxing addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->xinxing.mas_top).with.offset(LENGTHHEIGHT(20)+LENGTH(6));
+        make.top.mas_equalTo(self->xinxing.mas_top).with.offset(LENGTH(10)+LENGTH(6));
         make.left.mas_equalTo(self->xinxing);
         make.right.mas_equalTo(self->xinxing);
     }];
     
-    subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(1,117,223) LabelFont:TextFontHeight(30) TextAlignment:NSTextAlignmentCenter Text:@"完成了第 0 个里程碑"];
+    subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(1,117,223) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:@"完成了第 0 个里程碑"];
     [xinxing addSubview:subtitle];
     [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self->xinxing);
         make.right.mas_equalTo(self->xinxing);
-        make.top.mas_equalTo(self->title.mas_bottom).with.offset(LENGTHHEIGHT(5));
+        make.top.mas_equalTo(self->title.mas_bottom).with.offset(LENGTH(2));
     }];
 
 }
@@ -59,7 +59,7 @@
     lcbmodel.textString = lcball;
     lcbmodel.bianString = [NSString stringWithFormat:@"%ld",now];
     lcbmodel.color = RGB(253,171,82);
-    lcbmodel.fount = LENGTHHEIGHT(30);
+    lcbmodel.fount = 15;
     NSArray * lcblarray = @[lcbmodel];
     NSMutableAttributedString *lcbAttributedStr = [BaseObject Attributed:lcblarray];
     subtitle.attributedText = lcbAttributedStr;
@@ -72,8 +72,7 @@
     bookmodel.textString = bookall;
     bookmodel.bianString = bookS;
     bookmodel.color = RGB(253,171,82);
-    bookmodel.fount = LENGTHHEIGHT(30
-                                   );
+    bookmodel.fount = 15;
     NSArray * modelarray = @[bookmodel];
     NSMutableAttributedString *AttributedStr = [BaseObject Attributed:modelarray];
     title.attributedText = AttributedStr;
@@ -93,7 +92,7 @@
     lcbmodel.textString = lcball;
     lcbmodel.bianString = [NSString stringWithFormat:@"%ld",_now];
     lcbmodel.color = RGB(253,171,82);
-    lcbmodel.fount = LENGTHHEIGHT(30);
+    lcbmodel.fount = 15;
     NSArray * lcblarray = @[lcbmodel];
     NSMutableAttributedString *lcbAttributedStr = [BaseObject Attributed:lcblarray];
     subtitle.attributedText = lcbAttributedStr;
@@ -103,7 +102,7 @@
     bookmodel.textString = bookall;
     bookmodel.bianString = _bookS;
     bookmodel.color = RGB(253,171,82);
-    bookmodel.fount = LENGTHHEIGHT(30);
+    bookmodel.fount = 15;
     NSArray * modelarray = @[bookmodel];
     NSMutableAttributedString *AttributedStr = [BaseObject Attributed:modelarray];
     title.attributedText = AttributedStr;

@@ -14,5 +14,7 @@
 @property(nonatomic,assign)ShareStyle sharestyle;
 @property(nonatomic,strong)NSString * Text;
 @property(nonatomic,strong)NSString * title;
+
+@property(nonatomic,strong)NSString * textid;//文章分享id
 @end
 

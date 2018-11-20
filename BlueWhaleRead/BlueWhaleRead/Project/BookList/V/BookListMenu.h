@@ -8,7 +8,11 @@
 
 #import "BaseView.h"
 
+typedef void(^GenBlockInter)(NSInteger inter);
 @interface BookListMenu : BaseView
 @property (nonatomic, strong) NSArray *controllerArray;
 @property (nonatomic, strong) NSArray *titarray;
+@property (nonatomic, assign) NSInteger indext;
+@property(nonatomic,copy)GenBlockInter block;
+
 @end

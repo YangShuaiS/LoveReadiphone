@@ -126,6 +126,8 @@
 // 切换到相应的控制器页面
 - (void)scrollViewSelectToIndex:(UIButton *)button{
     [self selectButton:button.tag-100];
+//    _indext = button.tag-100;
+    self.block(button.tag-100);
     // 切换到选中的控制器的view
     [UIView animateWithDuration:0.5 animations:^{
         self->_controllerScroll.contentOffset = CGPointMake(WIDTH*(button.tag-100), 0);
@@ -217,6 +219,8 @@
     
     //        if (scrollView == _titleScroll) {
     NSInteger index = scrollView.contentOffset.x / WIDTH;
+//    _indext = index;
+    self.block(index);
     [self selectButton:index];
     //    NSLog(@"%f",scrollView.contentOffset.x);
     

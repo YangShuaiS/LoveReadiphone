@@ -60,6 +60,9 @@
         case UserLoginTextFileClickDQ:
             [self addUserLoginTextFileClickDQ];
             break;
+        case UserLoginTextFileNR:
+            [self addUserLoginTextFileNR];
+            break;
         default:
             break;
     }
@@ -226,7 +229,8 @@
     if (_textField) {
         UIColor * color = RGB(155,177,176);
         _textField.textColor = RGB(43,67,66);
-        _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:_titles attributes:@{NSForegroundColorAttributeName: color}];
+        _textField.font = TextFont(16);
+        _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:_titles attributes:@{NSForegroundColorAttributeName: color,NSFontAttributeName:TextFont(16)}];
     }
 
     if (_djshj) {
@@ -259,6 +263,11 @@
     _textField.keyboardType = UIKeyboardTypeDefault;
     [_textField addTarget:self action:@selector(phoneNum_tfChange:) forControlEvents:UIControlEventEditingChanged];
 
+}
+
+- (void)addUserLoginTextFileNR{
+    [self addTextField];
+    _textField.keyboardType = UIKeyboardTypeDefault;
 }
 //点击事件
 - (void)addUserLoginTextFileClick{
@@ -383,9 +392,21 @@
             yzm.userInteractionEnabled = NO;
         }
     }else if (_style == UserLoginTextFileYHM){
-        if (textField.text.length >=10) {
-            [self returnKeyboard];
+        // 判断是否存在高亮字符，如果有，则不进行字数统计和字符串截断
+        UITextRange *selectedRange = textField.markedTextRange;
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+        if (position) {
+            return;
         }
+        
+        // 判断是否超过最大字数限制，如果超过就截断
+        if (textField.text.length > 20) {
+            textField.text = [textField.text substringToIndex:20];
+        }
+        // 剩余字数显示 UI 更新
+//        if (textField.text.length >=10) {
+//            [self returnKeyboard];
+//        }
     }
 }
 @end

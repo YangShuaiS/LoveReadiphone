@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, UserLoginTextFile) {
     UserLoginTextFileClick = 5,//点击事件
     UserLoginTextFileWjMM = 6,//忘记密码
     UserLoginTextFileClickDQ = 7,//点击事件
+    UserLoginTextFileNR = 8,//内容，不限长度
 
 };
 

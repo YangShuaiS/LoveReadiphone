@@ -58,7 +58,7 @@
     [self Addview];
     [self ViewLaout];
 
-    [self LoadData];
+//    [self LoadData];
 }
 
 #pragma mark - 下拉刷新
@@ -228,7 +228,6 @@
             [self->scrollView.mj_footer endRefreshing];
         }
     }];
-
 }
 - (void)UpData:(HomePage *)model{
     
