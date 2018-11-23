@@ -168,7 +168,7 @@
 
 - (void)setLoadId:(NSString *)loadId{
     _loadId = loadId;
-    [self LoadData:loadId];
+//    [self LoadData:loadId];
 }
 - (void)LoadData:(NSString*)loadId{
     

@@ -67,7 +67,7 @@
     tiMu.backgroundColor = RGB(32,186,242);
     [self addSubview:tiMu];
     [tiMu mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws).with.offset(20+NavHeight);
+        make.top.equalTo(ws).with.offset(LENGTHHEIGHT(45)+NavHeight);
         make.left.equalTo(ws).with.offset(15);
         make.right.equalTo(ws).with.offset(-15);
     }];

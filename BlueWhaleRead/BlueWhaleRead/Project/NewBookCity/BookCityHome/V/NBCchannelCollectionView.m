@@ -97,8 +97,9 @@
                 [self.nav pushViewController:vc animated:YES];
             }else{
                 NBCclassificationModel * model = _itemArray[indexPath.row];
-                LBTViewController * vc = [LBTViewController new];
-                vc.itemid = model.ssid;
+                NBCThemeViewController * vc = [NBCThemeViewController new];
+                vc.style = 1;
+                vc.bannerid = model.ssid;
                 vc.imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner_img];
                 [self.nav pushViewController:vc animated:YES];
             }

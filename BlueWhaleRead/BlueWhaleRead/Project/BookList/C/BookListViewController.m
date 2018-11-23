@@ -175,8 +175,8 @@
 //    }
     
     [sousuo removeFromSuperview];
-    hotview.bookName = @"";
-    Familiar.bookName = @"";
+//    hotview.bookName = @"";
+//    Familiar.bookName = @"";
 
 }
 

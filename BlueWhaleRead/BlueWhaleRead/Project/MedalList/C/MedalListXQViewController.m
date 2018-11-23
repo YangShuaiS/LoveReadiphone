@@ -51,7 +51,7 @@
     self.view.backgroundColor = BEIJINGCOLOR;
     [self AddNavtion];
     [self AddView];
-    [self LoadData:1];
+//    [self LoadData:1];
 
 }
 #pragma mark --------------------  导航栏以及代理

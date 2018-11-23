@@ -66,8 +66,10 @@
             cell=[[HomeActivityTopTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.hiden = _hiden;
-        cell.model = _model.tag;
+        if (_model != nil) {
+            cell.hiden = _hiden;
+            cell.model = _model.tag;
+        }
         return cell;
     }else{
         if ([_model.tag.style_id isEqualToString:@"2"]) {

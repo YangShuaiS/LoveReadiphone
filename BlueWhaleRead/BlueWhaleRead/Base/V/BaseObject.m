@@ -11,12 +11,12 @@ CGFloat NavHeight = 0;
 CGFloat TabBarHeight = 0;
 CGFloat StatusBar = 0;
 CGFloat poinw = 0;
-NSString * ZSFWQ = @"http://tiantianaidu.com/";
+//NSString * ZSFWQ = @"http://tiantianaidu.com/";
 
-//NSString * ZSFWQ = @"http://192.168.1.221:8080/";
+//NSString *  ZSFWQ = @"http://192.168.1.221:8080/";
 //NSString * ZSFWQ = @"http://192.168.1.114:8075/";
 
-//NSString * ZSFWQ = @"http://192.168.1.221:8085/";
+NSString * ZSFWQ = @"http://192.168.1.221:8085/";
 //NSString * ZSFWQ = @"http://119.90.89.88:8085/";
 
 

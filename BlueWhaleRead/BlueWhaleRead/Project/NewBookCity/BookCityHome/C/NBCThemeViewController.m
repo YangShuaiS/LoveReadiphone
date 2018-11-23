@@ -69,7 +69,11 @@
     }
     FenXiangView * fenxiangs = [FenXiangView new];
     fenxiangs.vc = self;
-    fenxiangs.atype = @"2";
+    if (_style == 1) {
+        fenxiangs.atype = @"1";
+    }else{
+        fenxiangs.atype = @"2";
+    }
     fenxiangs.imageurl = _imageurl;
     fenxiangs.wzbt = title;
     fenxiangs.textid = _bannerid;
@@ -143,7 +147,7 @@
 - (void)setBannerid:(NSString *)bannerid{
     _bannerid = bannerid;
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_LBTXQ];
-    NSDictionary * dic = @{@"bannerid":bannerid};
+    NSDictionary * dic = @{@"bannerid":bannerid,@"studentid":Me.ssid};
     
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {

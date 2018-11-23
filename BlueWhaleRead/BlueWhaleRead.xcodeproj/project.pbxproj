@@ -73,6 +73,9 @@
 		0D2DAB7620E6236F00EFFD1A /* CTDuoXuanNewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2DAB7520E6236F00EFFD1A /* CTDuoXuanNewView.m */; };
 		0D2DAB7920E6237E00EFFD1A /* CTDuoXuanSmallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2DAB7820E6237E00EFFD1A /* CTDuoXuanSmallView.m */; };
 		0D2F54C421957EBE00D02174 /* NBCCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2F54C321957EBE00D02174 /* NBCCollectionViewFlowLayout.m */; };
+		0D30E2DB21A7A7E500A8AD94 /* HuiBenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D30E2DA21A7A7E500A8AD94 /* HuiBenViewController.m */; };
+		0D30E2E021A7A85E00A8AD94 /* HuiBenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D30E2DC21A7A85D00A8AD94 /* HuiBenView.m */; };
+		0D30E2E121A7A85E00A8AD94 /* HuiBenImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D30E2DE21A7A85E00A8AD94 /* HuiBenImageView.m */; };
 		0D32682121084D4600D7D563 /* MedalStudentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D32682021084D4600D7D563 /* MedalStudentListModel.m */; };
 		0D32682421084D8A00D7D563 /* MedalStudenBookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D32682321084D8A00D7D563 /* MedalStudenBookModel.m */; };
 		0D32682721084DBD00D7D563 /* MedalStudentUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D32682621084DBD00D7D563 /* MedalStudentUserModel.m */; };
@@ -731,6 +734,12 @@
 		0D2DAB7820E6237E00EFFD1A /* CTDuoXuanSmallView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDuoXuanSmallView.m; sourceTree = "<group>"; };
 		0D2F54C221957EBE00D02174 /* NBCCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBCCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		0D2F54C321957EBE00D02174 /* NBCCollectionViewFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBCCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		0D30E2D921A7A7E500A8AD94 /* HuiBenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HuiBenViewController.h; sourceTree = "<group>"; };
+		0D30E2DA21A7A7E500A8AD94 /* HuiBenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HuiBenViewController.m; sourceTree = "<group>"; };
+		0D30E2DC21A7A85D00A8AD94 /* HuiBenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuiBenView.m; sourceTree = "<group>"; };
+		0D30E2DD21A7A85D00A8AD94 /* HuiBenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuiBenView.h; sourceTree = "<group>"; };
+		0D30E2DE21A7A85E00A8AD94 /* HuiBenImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HuiBenImageView.m; sourceTree = "<group>"; };
+		0D30E2DF21A7A85E00A8AD94 /* HuiBenImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HuiBenImageView.h; sourceTree = "<group>"; };
 		0D32681F21084D4600D7D563 /* MedalStudentListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalStudentListModel.h; sourceTree = "<group>"; };
 		0D32682021084D4600D7D563 /* MedalStudentListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalStudentListModel.m; sourceTree = "<group>"; };
 		0D32682221084D8A00D7D563 /* MedalStudenBookModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalStudenBookModel.h; sourceTree = "<group>"; };
@@ -2685,6 +2694,8 @@
 				0D65F0C620CFB0D000F3B71F /* MingShiDDViewController.m */,
 				0D65F0C820CFB0DC00F3B71F /* YouXiuSPViewController.h */,
 				0D65F0C920CFB0DC00F3B71F /* YouXiuSPViewController.m */,
+				0D30E2D921A7A7E500A8AD94 /* HuiBenViewController.h */,
+				0D30E2DA21A7A7E500A8AD94 /* HuiBenViewController.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -2692,6 +2703,10 @@
 		0D65F0B520CFA64500F3B71F /* V */ = {
 			isa = PBXGroup;
 			children = (
+				0D30E2DF21A7A85E00A8AD94 /* HuiBenImageView.h */,
+				0D30E2DE21A7A85E00A8AD94 /* HuiBenImageView.m */,
+				0D30E2DD21A7A85D00A8AD94 /* HuiBenView.h */,
+				0D30E2DC21A7A85D00A8AD94 /* HuiBenView.m */,
 				0D65F0BD20CFAD6200F3B71F /* BookXQTopView.h */,
 				0D65F0BC20CFAD6200F3B71F /* BookXQTopView.m */,
 				0D6D7E1A211933750058C0C0 /* BookTopLabel.h */,
@@ -4025,6 +4040,7 @@
 				0DE181FD215F268A00585389 /* ZhiShiShuSMViewController.m in Sources */,
 				0D802C2E217DB44B00CFD24F /* WanShanXinXiViewController.m in Sources */,
 				0D65F08620CE563400F3B71F /* HomebadgelistModel.m in Sources */,
+				0D30E2DB21A7A7E500A8AD94 /* HuiBenViewController.m in Sources */,
 				0DD620C82179CD1800AF1AD7 /* UserLoginWsXXViewController.m in Sources */,
 				0DD66B8320DA47360056528B /* DTPaiXuView.m in Sources */,
 				0D29BEC621749E750000A00A /* ZhiShiShuBookStyleView1All.m in Sources */,
@@ -4086,6 +4102,7 @@
 				0D7ABE93215E2EE6002EAA1D /* ZhiShiShuOneDownView.m in Sources */,
 				0D90D96F21606960009F1820 /* ZhiShiShuModel.m in Sources */,
 				0D65F14020D246FE00F3B71F /* GeneralBookImageNumberView.m in Sources */,
+				0D30E2E021A7A85E00A8AD94 /* HuiBenView.m in Sources */,
 				0D65F0BE20CFAD6200F3B71F /* BookXQTopView.m in Sources */,
 				0D82221020EE492800E88E07 /* SZOrSCJieGuoViewController.m in Sources */,
 				0DD66B2220DA2B4C0056528B /* FriendXunZhangTableViewCell.m in Sources */,
@@ -4283,6 +4300,7 @@
 				0D395DA5218C3BF2007B99AE /* UserSQDLView.m in Sources */,
 				0D56D8B420C9121000E24C23 /* LINSHI.m in Sources */,
 				0DD620C52179C79200AF1AD7 /* UserLoginGirlOrBoyView.m in Sources */,
+				0D30E2E121A7A85E00A8AD94 /* HuiBenImageView.m in Sources */,
 				0D7017BD20D90530009BEA52 /* BadgeOnlyImageModel.m in Sources */,
 				0D65F1AC20D2661F00F3B71F /* PersonalTableView.m in Sources */,
 				0DF411A120C8D5F90076B154 /* BaseNavigationViewController.m in Sources */,
@@ -4732,11 +4750,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BlueWhaleRead/Project/UserLogin/ShareDLandFX/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead.iphone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/yangshuai/Desktop/天天爱读/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/General/IREADER/DZMeBookRead/other/BlueWhaleRead-Bridging-Pch.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -4768,11 +4786,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BlueWhaleRead/Project/UserLogin/ShareDLandFX/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead.iphone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/yangshuai/Desktop/天天爱读/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/General/IREADER/DZMeBookRead/other/BlueWhaleRead-Bridging-Pch.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -24,4 +24,11 @@ static MeModel * model = nil;
     model = [MeModel mj_objectWithKeyValues:dictionary];
     return model;
 }
+
+- (NSMutableDictionary *)ADDdic{
+    NSString *filePatch = [BaseObject AddPathName:UserMe];
+    NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
+    NSMutableDictionary *dictionary = dataDictionary[UserMe];
+    return dictionary;
+}
 @end

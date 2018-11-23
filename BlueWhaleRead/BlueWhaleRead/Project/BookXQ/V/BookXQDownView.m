@@ -10,6 +10,7 @@
 #import "DTALLiewController.h"
 #import "BlueWhaleRead-Swift.h"
 
+#import "HuiBenViewController.h"
 @implementation BookXQDownView{
     BaseView * yueduview;
     BaseView * Lefttview;
@@ -31,6 +32,10 @@
     NSMutableArray * viewarray;
 
     NSString * zipname;
+    
+    
+    NSString * bookpngfile;
+    NSArray * bookpng;
 }
 -(instancetype)init{
     self = [super init];
@@ -371,20 +376,27 @@
             
             [weakSelf.nav pushViewController:read animated:YES];
         }];
+    }else if ([files containsObject: [NSString stringWithFormat:@"%@",_model.name]]) {
+        self->mb.label.text = @"读取成功";
+        [self->mb hideAnimated:NO afterDelay:1];
+        __weak BookXQDownView *weakSelf = self;
+        bookpngfile = [NSString stringWithFormat:@"%@/%@",paths,_model.name];
+        bookpng = [fm subpathsAtPath:bookpngfile];
+        HuiBenViewController * vc = [HuiBenViewController new];
+        vc.bookpngfile = bookpngfile;
+        vc.itemarray = (NSMutableArray *)bookpng;
+        [weakSelf.nav pushViewController:vc animated:YES];
     }else{
         [self down];
     }
+
 }
 
 - (void)down{
     //[NSString stringWithFormat:@"%@%@",DOWNLOADZHENGSHUURL,@"1097449557765533696489"]
     mb.label.text = @"正在下载...";
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,_model.b_download];
-//    NSString * url = [NSString stringWithFormat:@"http://192.168.1.114:8069/download/山居岁月.zip"];
-    
-    //    NSString * url = [NSString stringWithFormat:@"http://192.168.1.114/山居岁月.zip"];
-    
-    //    NSString * url = [NSString stringWithFormat:@"http://192.168.1.114:8075/download/山居岁月.zip"];
+    NSString * url = [NSString stringWithFormat:@"%@%@",IMAGEURL,_model.b_download];
+ 
     
     NSString *encoded = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSURL *URL = [NSURL URLWithString:encoded];
@@ -507,20 +519,36 @@
         }
         self->mb.label.text = @"正在读取...";
         [self->mb hideAnimated:NO afterDelay:1];
-        NSString * booklujing = [savePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt",_model.name]];
-        //        NSString *encoded = [booklujing stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        __weak BookXQDownView *weakSelf = self;
-        NSURL *fileURL = [[NSBundle mainBundle] URLForAuxiliaryExecutable:booklujing];
         
-        [DZMReadParser ParserLocalURLWithUrl:fileURL complete:^(DZMReadModel * _Nonnull readModel) {
+        NSFileManager* fm=[NSFileManager defaultManager];
+        NSString * paths = [self dataFilePath] ;
+        NSArray *files = [fm subpathsAtPath:paths];
+        if ([files containsObject: [NSString stringWithFormat:@"%@.txt",_model.name]]) {
+            NSString * booklujing = [paths stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt",_model.name]];
+            __weak BookXQDownView *weakSelf = self;
+            NSURL *fileURL = [[NSBundle mainBundle] URLForAuxiliaryExecutable:booklujing];
+            
+            [DZMReadParser ParserLocalURLWithUrl:fileURL complete:^(DZMReadModel * _Nonnull readModel) {
+                self->mb.label.text = @"读取成功";
+                [self->mb hideAnimated:NO afterDelay:1];
+                DZMReadController * read = [[DZMReadController alloc] init];
+                
+                read.readModel = readModel;
+                
+                [weakSelf.nav pushViewController:read animated:YES];
+            }];
+        }else if ([files containsObject: [NSString stringWithFormat:@"%@",_model.name]]) {
             self->mb.label.text = @"读取成功";
             [self->mb hideAnimated:NO afterDelay:1];
-            DZMReadController * read = [[DZMReadController alloc] init];
-            
-            read.readModel = readModel;
-            
-            [weakSelf.nav pushViewController:read animated:YES];
-        }];
+            __weak BookXQDownView *weakSelf = self;
+            bookpngfile = [NSString stringWithFormat:@"%@/%@",paths,_model.name];
+            bookpng = [fm subpathsAtPath:bookpngfile];
+            HuiBenViewController * vc = [HuiBenViewController new];
+            vc.bookpngfile = bookpngfile;
+            vc.itemarray = (NSMutableArray *)bookpng;
+            [weakSelf.nav pushViewController:vc animated:YES];
+        }
+
     } else {
         self->mb.label.text = @"解压失败";
         [self->mb hideAnimated:NO afterDelay:1];

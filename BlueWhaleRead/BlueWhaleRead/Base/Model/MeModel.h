@@ -88,4 +88,5 @@
 
 + (MeModel *)SharedModel;
 - (MeModel *)ADDvalue;
+- (NSMutableDictionary *)ADDdic;
 @end

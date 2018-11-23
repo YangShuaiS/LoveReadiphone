@@ -11,5 +11,7 @@
 @interface NBCThemeViewController : BaseViewController
 @property(nonatomic,strong)NSString * bannerid;
 @property(nonatomic,strong)NSString * imageurl;
+
+@property(nonatomic,assign) NSInteger  style;
 @end
 

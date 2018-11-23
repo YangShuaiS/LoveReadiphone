@@ -23,7 +23,8 @@
 
 - (void)uodatazsfwq{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_GHYM];
-    [[BaseAppRequestManager manager] getNormaldataURL:url dic:nil andBlock:^(id responseObject, NSError *error) {
+    NSDictionary * dic = @{@"UUID":[[UIDevice currentDevice] identifierForVendor].UUIDString};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
   
         }else{
@@ -277,4 +278,12 @@ void UncaughtExceptionHandler(NSException *exception) {
 {
     return  YES;
 }
+
+-(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    if (self.allowRotation) {//如果设置了allowRotation属性，支持全屏
+        return UIInterfaceOrientationMaskAll;
+    }
+    return UIInterfaceOrientationMaskPortrait;//默认全局不支持横屏
+}
+
 @end
