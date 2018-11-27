@@ -143,7 +143,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     // 对选取照片的处理，如果选取的图片尺寸过大，则压缩选取图片，否则不作处理
-    UIImage *image = [UIImage SG_imageSizeWithScreenImage:info[UIImagePickerControllerOriginalImage]];
+    UIImage *image = [UIImage SG_imageSizeWithScreenImage:info[UIImagePickerControllerEditedImage]];
     self.block(image);
     [self.nav dismissViewControllerAnimated:YES completion:nil];
     [self xuaoshi];

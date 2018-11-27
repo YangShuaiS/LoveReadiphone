@@ -4728,6 +4728,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4XKPC4WVK;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4752,6 +4753,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/yangshuai/Desktop/天天爱读/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/General/IREADER/DZMeBookRead/other/BlueWhaleRead-Bridging-Pch.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4764,6 +4766,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4XKPC4WVK;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4788,6 +4791,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BoWanJuan.DayDayLoveRead;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/yangshuai/Desktop/天天爱读/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/General/IREADER/DZMeBookRead/other/BlueWhaleRead-Bridging-Pch.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
