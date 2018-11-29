@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <sys/utsname.h>
 #import "MeModel.h"
 extern CGFloat NavHeight;
 extern CGFloat TabBarHeight;
@@ -66,4 +67,5 @@ extern MeModel const * Me;
 
 + (NSString *)Sharetitle:(NSString *)title;
 
++ (NSString*)deviceModelName;
 @end

@@ -25,7 +25,7 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"关于天天爱读" RightTitle:@"" NativeStyle:NavStyleGeneral];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"关于博万卷" RightTitle:@"" NativeStyle:NavStyleGeneral];
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
     [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,7 +76,7 @@
         make.height.mas_equalTo(LENGTH(70));
     }];
     
-    BaseLabel * bbh = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(102,102,102) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:BANBENHAO];
+    BaseLabel * bbh = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(102,102,102) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:APP_VERSION];
     [scrollView addSubview:bbh];
     [bbh mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws.view).with.offset(LENGTH(24));
@@ -85,7 +85,7 @@
         make.centerX.mas_equalTo(ws.view);
     }];
     
-    NSString * str = @"    天天爱读是一款面向全国小学生的阅读陪伴类移动产品。学生在阅读完喜欢的纸质书籍之后，使用天天爱读扫码回答书籍相关题目，便可以获得积分和勋章，还可以了解同班同学的阅读情况。系统跟踪记录孩子的阅读情况，帮助家长和老师更好地了解孩子对阅读喜好和程度。让孩子养成阅读习惯并爱上阅读，通过读书开拓视野，增长见识，为未来的学习成长打下基础。";
+    NSString * str = @"    博万卷是一款面向全国小学生的阅读陪伴类移动产品。学生在阅读完喜欢的纸质书籍之后，使用博万卷扫码回答书籍相关题目，便可以获得积分和勋章，还可以了解同班同学的阅读情况。系统跟踪记录孩子的阅读情况，帮助家长和老师更好地了解孩子对阅读喜好和程度。让孩子养成阅读习惯并爱上阅读，通过读书开拓视野，增长见识，为未来的学习成长打下基础。";
     BaseLabel * title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(102,102,102) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:str];
     title.numberOfLines = 0;
     [scrollView addSubview:title];

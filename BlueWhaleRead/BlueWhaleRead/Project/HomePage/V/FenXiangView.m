@@ -364,7 +364,7 @@
     _title = tit;
     _Text = _wzbt;
     if ([_Text isEqualToString:@""]) {
-        _Text = @"天天爱读";
+        _Text = @"博万卷";
     }
 }
 - (void)loaddata{

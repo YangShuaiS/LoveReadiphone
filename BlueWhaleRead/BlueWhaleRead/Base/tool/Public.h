@@ -8,6 +8,9 @@
 
 #ifndef Public_h
 #define Public_h
+
+#define APP_VERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+
 #define WIDTH  [UIScreen mainScreen].bounds.size.width
 #define HEIGHT  [UIScreen mainScreen].bounds.size.height
 
@@ -22,7 +25,6 @@
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 #define IOS_X [UIDevice currentDevice].systemVersion
 
-#define BANBENHAO @"v1.11"
 
 
 //#define ZSFWQ @"http://192.168.1.114:8088/"

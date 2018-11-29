@@ -23,7 +23,11 @@
 
 - (void)uodatazsfwq{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_GHYM];
-    NSDictionary * dic = @{@"UUID":[[UIDevice currentDevice] identifierForVendor].UUIDString};
+    NSString * str = APP_VERSION;
+    NSString *sysVersion = [[UIDevice currentDevice] systemName]; //获取系统名称 例如：iPhone OS
+    NSString *sysVersions = [[UIDevice currentDevice] systemVersion]; //获取系统版本 例如：9.2
+
+    NSDictionary * dic = @{@"UUID":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"mobileModel":[BaseObject deviceModelName],@"os":sysVersion,@"osVersion":sysVersions,@"appVersionCode":str};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
   

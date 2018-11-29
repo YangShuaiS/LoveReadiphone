@@ -38,7 +38,7 @@
     _model = model;
     NSString * currentVolum = [self HuanCunDaXiao];
     
-    titleArray = @[@"消息推送",@"修改密码",@"清除缓存",@"意见反馈",@"关于天天爱读",@"退出登录"];
+    titleArray = @[@"消息推送",@"修改密码",@"清除缓存",@"意见反馈",@"关于博万卷",@"退出登录"];
     subArray = @[@"",@"",currentVolum,@"",@"",@""];
     [self reloadData];
 }
