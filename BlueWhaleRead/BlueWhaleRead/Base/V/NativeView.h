@@ -25,6 +25,8 @@
 @property(nonatomic,strong) NSString * title;
 @property(nonatomic,strong) UIColor * titcolor;
 
+@property(nonatomic,assign) BOOL downlayer;
+
 - (void)jianbian:(NSString *)text
            Color:(NSArray *)colorarray;
 @end

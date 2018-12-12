@@ -8,9 +8,7 @@
 //
 
 #import "BookXQTopView.h"
-#import "BookCityXunZhang.h"
 #import "BookTopLabel.h"
-#import "MedalListXQViewController.h"
 @implementation BookXQTopView{
     FLAnimatedImageView * leftImageView;
     BaseLabel * Title;
@@ -18,8 +16,6 @@
 
     BaseLabel * dengji;
     BaseLabel * nengli;
-    BookCityXunZhang * xunzhangone;
-
     
 //    BaseLabel * longtext;
     BookTopLabel * longtext;
@@ -85,13 +81,6 @@
     nengli = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(4,51,50) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:nengli];
     
-
-    
-    xunzhangone = [BookCityXunZhang new];
-    [self addSubview:xunzhangone];
-    
-    
-    
     [Title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self->leftImageView.mas_right).with.offset(LENGTH(20));
         make.top.equalTo(self->leftImageView.mas_top).with.offset(LENGTH(0));
@@ -132,14 +121,6 @@
         make.top.equalTo(self->subtitle.mas_bottom).with.offset(LENGTH(8));
     }];
 
-    [xunzhangone mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self->leftImageView.mas_right).with.offset(LENGTH(20));
-        make.top.equalTo(self->nengli.mas_bottom).with.offset(LENGTH(8));
-
-//        make.bottom.mas_equalTo(self->leftImageView.mas_bottom).with.offset(-LENGTH(8));
-//        make.width.mas_equalTo(LENGTH(128));
-        make.height.mas_equalTo(LENGTH(30));
-    }];
 
     scrollView = [UIScrollView new];
     scrollView.backgroundColor = [UIColor clearColor];
@@ -201,10 +182,7 @@
         make.width.mas_equalTo(LENGTH(12));
         make.height.mas_equalTo(LENGTH(7));
     }];
-    
-    xunzhangone.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushmenu)];
-    [xunzhangone addGestureRecognizer:tap];
+
 #pragma mark ----------------------- 还有?
 //    jd = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:subtitleColor LabelFont:TextFont(20) TextAlignment:NSTextAlignmentCenter Text:[NSString stringWithFormat:@"精读"]];
 //    jd.backgroundColor = RANDOMCOLOR;
@@ -242,13 +220,6 @@
     subtitle.text =[NSString stringWithFormat:@"%@",model.author];
     dengji.text = [NSString stringWithFormat:@"%@",model.levels];
     nengli.text = model.b_score;
-    NSMutableArray * arr = model.badgeList;
-    if (arr.count>0) {
-        xunzhangone.hidden = NO;
-        xunzhangone.model = arr[0];
-    }else{
-        xunzhangone.hidden = YES;
-    }
     longtext.longlabel.text = model.info;
 }
 - (void)layoutSubviews{
@@ -276,15 +247,4 @@
         }
 }
 
-
-- (void)pushmenu{
-    NSMutableArray * arr = _model.badgeList;
-    if (arr.count>0) {
-        CityBadgeListModel * mo = arr[0];
-        MedalListXQViewController * vc = [MedalListXQViewController new];
-        vc.itemid = mo.ssid;
-        [self.nav pushViewController:vc animated:YES];
-    }
-
-}
 @end

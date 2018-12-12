@@ -13,15 +13,12 @@
 #import "MyQingKuangView.h"
 #import "MyJoinInterestGroupView.h"
 
-#import "FriendXunZhangView.h"
-
 @interface MyViewController ()<UIScrollViewDelegate,NavDelegate>{
     NSMutableArray *  viewarray;
     UIScrollView * scrollView;
     
     MyTopView * topView;
     MyDeModel * model;
-    FriendXunZhangView * XunZhang;
     MyQingKuangView * myqingkuang;
     
     MyZiLiaoModel * userModel;
@@ -60,14 +57,6 @@
 }
 - (void)UpData{
     topView.model = model.userinfo;
-    if (model.myBadgeList.count == 0) {
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            self->XunZhang.itemarray = self->model.myBadgeList;
-        });
-    }else{
-        XunZhang.itemarray = model.myBadgeList;
-    }
     myqingkuang.model = model;
 }
 #pragma mark --------------------  导航栏以及代理
@@ -119,11 +108,7 @@
     topView = [MyTopView new];
     topView.nav = self.navigationController;
     [viewarray addObject:topView];
-    
-    
-    XunZhang = [FriendXunZhangView new];
-    XunZhang.nav = self.navigationController;
-    [viewarray addObject:XunZhang];
+
     
     myqingkuang = [MyQingKuangView new];
     myqingkuang.nav = self.navigationController;
@@ -147,20 +132,11 @@
                 make.right.equalTo(ws.view).with.offset(0);
             }];
         }else{
-            if (i == 1) {
-                [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(ws.view).with.offset(LENGTH(15));
-                    make.right.equalTo(ws.view).with.offset(-LENGTH(15));
-                    make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(10));
-                }];
-            }else{
-                [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(ws.view).with.offset(0);
-                    make.right.equalTo(ws.view).with.offset(0);
-                    make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(10));
-                }];
-            }
-            
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(ws.view).with.offset(0);
+                make.right.equalTo(ws.view).with.offset(0);
+                make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(10));
+            }];
         }
         if (i == viewarray.count-1) {
             [view mas_makeConstraints:^(MASConstraintMaker *make) {

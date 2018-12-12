@@ -57,11 +57,6 @@
 
 }
 
-- (void)setModel:(MedalBadgeListModel *)model{
-    _model = model;
-    [MyImage.touxiang sd_setImageWithURL:URLIMAGE(model.logo) placeholderImage:UIIMAGE(ZHANWEITUXZ)];
-
-}
 - (void)setImages:(NSString *)images{
     _images = images;
     [MyImage.touxiang sd_setImageWithURL:URLIMAGE(_images) placeholderImage:UIIMAGE(ZHANWEITUXZ)];

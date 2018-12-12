@@ -7,8 +7,7 @@
 //
 
 #import "BookDanView.h"
-#import "BookCityXunZhang.h"
-#import "MedalListXQViewController.h"
+
 @implementation BookDanView{
     FLAnimatedImageView * leftImage;
     BaseLabel * Title;
@@ -18,8 +17,6 @@
     FLAnimatedImageView * RightImage;
     BaseButton * ComeOn;
     
-    BookCityXunZhang * xunzhangone;
-    BookCityXunZhang * xunzhangtwo;
     
     BaseLabel * title;
     
@@ -63,7 +60,6 @@
     
     [self updata];
     [self addYiDu];
-    [self addXunZhang];
     
 }
 - (void)setBookCase:(BookCaseStyle)bookCase{
@@ -108,31 +104,6 @@
     }];
 }
 
-- (void)addXunZhang{
-    
-    
-    xunzhangone = [BookCityXunZhang new];
-    [self addSubview:xunzhangone];
-    xunzhangone.hidden = YES;
-    
-    //    xunzhangtwo = [BookCityXunZhang new];
-    //    [self addSubview:xunzhangtwo];
-    //    xunzhangtwo.hidden = YES;
-    [xunzhangone mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->fuwenben.mas_bottom).with.offset(LENGTH(6.5));
-        make.left.equalTo(self->leftImage.mas_right).with.offset(LENGTH(16));
-        make.height.mas_equalTo(LENGTH(31));
-    }];
-    xunzhangone.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushmedal)];
-    [xunzhangone addGestureRecognizer:tap];
-    //    [xunzhangtwo mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.left.mas_equalTo(self->xunzhangone.mas_right).with.offset(LENGTH(44));
-    //        make.centerY.mas_equalTo(ws);
-    //        make.width.mas_equalTo(LENGTH(128));
-    //        make.height.mas_equalTo(LENGTH(36));
-    //    }];
-}
 - (void)addWeiDu{
     WS(ws);
     
@@ -307,8 +278,7 @@
 }
 -(void)setModel:(CityBookListModel *)model{
     _model = model;
-    xunzhangone.hidden = YES;
-    xunzhangtwo.hidden = YES;
+
     [leftImage sd_setImageWithURL:URLIMAGE(model.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = model.name;
     self.jKStarDisplayView.redValue = [model.mark floatValue];
@@ -331,22 +301,6 @@
     NSMutableAttributedString *AttributedStr = [BaseObject Attributed:modelarray];
     fuwenben.attributedText = AttributedStr;
     
-    NSMutableArray * array = model.badgeList;
-    //    if ([[array class] isKindOfClass:[NSArray class]]) {
-    if (array.count == 0) {
-    }else if (array.count == 1&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        xunzhangone.model = array[0];
-    }else if (array.count == 2&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        xunzhangone.model = array[0];
-        //        xunzhangone.hidden = NO;
-        //        xunzhangtwo.hidden = NO;
-        //        xunzhangone.model = array[0];
-        //        xunzhangtwo.model = array[1];
-    }
-    //    }
-    
     RightImage.hidden = YES;
     
     if (_model.is_read == 2) {
@@ -359,9 +313,6 @@
 
 - (void)setAllmodel:(AllBookListModel *)allmodel{
     _allmodel = allmodel;
-    
-    xunzhangone.hidden = YES;
-    xunzhangtwo.hidden = YES;
     
     [leftImage sd_setImageWithURL:URLIMAGE(allmodel.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = allmodel.name;
@@ -385,17 +336,6 @@
     NSMutableAttributedString *AttributedStr = [BaseObject Attributed:modelarray];
     fuwenben.attributedText = AttributedStr;
     
-    NSMutableArray * array = allmodel.badgeList;
-    if (array.count == 0) {
-    }else if (array.count == 1&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        xunzhangone.model = array[0];
-    }else if (array.count == 2&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        //        xunzhangtwo.hidden = NO;
-        xunzhangone.model = array[0];
-        //        xunzhangtwo.model = array[1];
-    }
     RightImage.hidden = YES;
     
     if (_model.is_read == 2) {
@@ -433,8 +373,6 @@
     }else{
         title.text = [NSString stringWithFormat:@"今日剩余%ld次答题机会",unreadBookModel.dayTimes];
     }
-    NSMutableArray * array = unreadBookModel.badgeList;
-    [self xunzhanghiden:array];
 }
 
 - (void)setReadBookModel:(ReadbookModel *)readBookModel{
@@ -461,9 +399,6 @@
     NSMutableAttributedString *AttributedStr = [BaseObject Attributed:modelarray];
     fuwenben.attributedText = AttributedStr;
     
-    NSMutableArray * array = readBookModel.badgeList;
-    [self xunzhanghiden:array];
-    
     if (readBookModel.is_like == 0) {
         likeimage.image = UIIMAGE(@"icon_喜欢_未选中");
         nolikeimage.image = UIIMAGE(@"icon_不喜欢_未选中");
@@ -476,21 +411,6 @@
     }
 }
 
--(void)xunzhanghiden:(NSMutableArray *)array{
-    xunzhangone.hidden = YES;
-    xunzhangtwo.hidden = YES;
-    if (array.count == 0) {
-    }else if (array.count == 1&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        xunzhangone.model = array[0];
-    }
-    else if (array.count == 2&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        //        xunzhangtwo.hidden = NO;
-        xunzhangone.model = array[0];
-        //        xunzhangtwo.model = array[1];
-    }
-}
 - (void)dianji{
     
 }
@@ -543,46 +463,4 @@
     fuwenben.textColor = RGB(122,120,120);
 }
 
-
-- (void)pushmedal{
-    NSArray * arr = _model.badgeList;
-    if (arr.count > 0) {
-        CityBadgeListModel * medmodel = arr[0];
-        MedalListXQViewController * vc = [MedalListXQViewController new];
-        vc.itemid = medmodel.ssid;
-        [self.nav pushViewController:vc animated:YES];
-        WS(ws);
-        if (_lastview != nil) {
-            [UIView animateWithDuration:1 animations:^{
-                ws.lastview.alpha = 0;
-            } completion:^(BOOL finished) {
-                [ws.lastview removeFromSuperview];
-            }];
-        }
-    }
-    
-    NSMutableArray * array = _allmodel.badgeList;
-    if (array.count > 0) {
-        CityBadgeListModel * medmodel = array[0];
-        MedalListXQViewController * vc = [MedalListXQViewController new];
-        vc.itemid = medmodel.ssid;
-        [self.nav pushViewController:vc animated:YES];
-    }
-    
-    NSMutableArray * userarray = _unreadBookModel.badgeList;
-    if (userarray.count > 0) {
-        CityBadgeListModel * medmodel = userarray[0];
-        MedalListXQViewController * vc = [MedalListXQViewController new];
-        vc.itemid = medmodel.ssid;
-        [self.nav pushViewController:vc animated:YES];
-    }
-    
-    NSMutableArray * readaray = _readBookModel.badgeList;
-    if (readaray.count > 0) {
-        CityBadgeListModel * medmodel = readaray[0];
-        MedalListXQViewController * vc = [MedalListXQViewController new];
-        vc.itemid = medmodel.ssid;
-        [self.nav pushViewController:vc animated:YES];
-    }
-}
 @end

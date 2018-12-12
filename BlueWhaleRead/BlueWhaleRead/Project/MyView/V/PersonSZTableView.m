@@ -220,7 +220,7 @@
     NSDictionary * dic = @{@"studentid":Me.ssid};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
-            MedalListModel * model = [MedalListModel mj_objectWithKeyValues:responseObject];
+            MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
                 mb.label.text = @"退出成功";
                 [mb hideAnimated:NO afterDelay:1];

@@ -8,7 +8,6 @@
 
 #import "FriendViewController.h"
 #import "FriendTopView.h"
-#import "FriendXunZhangView.h"
 #import "FriendHotView.h"
 #import "MyViewController.h"
 @interface FriendViewController ()<NavDelegate,UIScrollViewDelegate>{
@@ -16,7 +15,6 @@
     NSMutableArray *  viewarray;
     
     FriendTopView * topview;
-    FriendXunZhangView * XunZhangView;
     FriendHotView * rmtj;
 }
 
@@ -56,10 +54,6 @@
     topview = [FriendTopView new];
     topview.nav = self.navigationController;  
     [viewarray addObject:topview];
-    
-    XunZhangView = [FriendXunZhangView new];
-    XunZhangView.nav = self.navigationController;
-    [viewarray addObject:XunZhangView];
     
     rmtj = [FriendHotView new];
     rmtj.nav = self.navigationController;
@@ -156,13 +150,7 @@
     [self AddView];
     [self ViewLaout];
     topview.usermodel = model.friendInfo;
-    XunZhangView.itemarray = model.friendBadgeList;
-//    NSMutableArray * arr = [NSMutableArray array];
-    rmtj.itemarray = model.friendReadList;
-//    rmtj.itemarray = arr;
-
-//    rmtj.wd = YES;
-    
+     rmtj.itemarray = model.friendReadList;
 }
 
 

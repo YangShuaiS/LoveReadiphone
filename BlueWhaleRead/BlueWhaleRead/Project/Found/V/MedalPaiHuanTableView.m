@@ -8,13 +8,10 @@
 
 #import "MedalPaiHuanTableView.h"
 #import "MyClassTableViewCell.h"
-#import "FoundClassRankingView.h"
-#import "FriendViewController.h"
 @interface MedalPaiHuanTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 @implementation MedalPaiHuanTableView{
-    FoundClassRankingView * classRanking;
     BaseView * v;
 
 }
@@ -30,9 +27,6 @@
         self.tableFooterView = [[UIView alloc]init];
         self.estimatedRowHeight = 300;//估算高度
         self.rowHeight = UITableViewAutomaticDimension;
-        classRanking = [FoundClassRankingView new];
-        classRanking.styles = RankingStyleSmall;
-        classRanking.nav = self.nav;
         
         v = [BaseView new];
         v.backgroundColor = [UIColor clearColor];
@@ -120,13 +114,7 @@
     return v;
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-//        classRanking = [[FoundClassRankingView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, LENGTH(361))];
-
-        return classRanking;
-    }else{
         return v;
-    }
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -134,10 +122,7 @@
 }
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MyClassModel * model = _itemarray[indexPath.section];
-    FriendViewController * vc = [FriendViewController new];
-    vc.itemid = model.ssid;
-    [self.nav pushViewController:vc animated:YES];
+
     
 }
 - (void)setMonthBadgeList:(MonthstudentModel *)monthBadgeList{
@@ -145,9 +130,7 @@
     _itemarray = monthBadgeList.studentList;
     MyClassModel  * model = _itemarray[monthBadgeList.myRank];
     [_itemarray insertObject:model atIndex:0];
-    classRanking.nav = self.nav;
-    classRanking.monthList = monthBadgeList;
-    [self reloadData];
+
 }
 
 @end

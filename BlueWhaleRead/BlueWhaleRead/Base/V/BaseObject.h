@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <sys/utsname.h>
 #import "MeModel.h"
 extern CGFloat NavHeight;
 extern CGFloat TabBarHeight;
@@ -66,4 +67,13 @@ extern MeModel const * Me;
 
 + (NSString *)Sharetitle:(NSString *)title;
 
++ (NSString*)deviceModelName;
+
++ (NSDate *)TimeStringForDate:(NSString *)format;
++ (NSDate *)LastMonth:(NSDate *)date;
++ (NSDate *)NextMonth:(NSDate *)date;
++ (NSString*)weekDayStr:(NSDate *)date;
++ (NSInteger)MonthDayLength:(NSDate *)date;
++ (NSDate *)LastDays:(NSDate *)date Days:(NSInteger)day;
++ (NSDate *)NextDays:(NSDate *)date Days:(NSInteger)day;
 @end

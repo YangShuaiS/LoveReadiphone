@@ -9,7 +9,6 @@
 #import "BaseView.h"
 
 @interface GeneralMedalView : BaseView
-@property(nonatomic,strong)MedalBadgeListModel * model;
 @property(nonatomic,strong)NSString * images;
 @property(nonatomic,assign)CGFloat floatjidu;
 

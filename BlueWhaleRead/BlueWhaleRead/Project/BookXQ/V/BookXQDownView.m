@@ -201,7 +201,7 @@
                 }else{
                     citymodel.name = @"";
                 }
-                m.subtitle = [NSString stringWithFormat:@"一共%ld道题\n你必须在%@分钟之内答完所有题目\n答题成功之后可以点亮\n%@\n你准备好了吗？",self->Topmodel.bookProblems.count,str_minute,citymodel.name];
+                m.subtitle = [NSString stringWithFormat:@"一共%ld道题\n你必须在%@分钟之内答完所有题目\n\n你准备好了吗？",self->Topmodel.bookProblems.count,str_minute];
                 genView.model = m;
                 [genView setBlock:^{
                     DTALLiewController * vc = [DTALLiewController new];

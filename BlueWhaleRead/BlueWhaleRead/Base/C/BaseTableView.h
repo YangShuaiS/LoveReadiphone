@@ -10,5 +10,6 @@
 
 @interface BaseTableView : UITableView
 @property (nonatomic,strong) UINavigationController * nav;
+- (UIViewController*)viewController;
 
 @end

@@ -12,7 +12,6 @@
 #import "FriendModredddCollectionViewCell.h"
 #import "FriendViewController.h"
 
-#import "MedalListXQViewController.h"
 
 #import "FoundMedalCollectionViewCell.h"
 @interface FriendIrMedalCollectionView ()<UICollectionViewDataSource,UICollectionViewDelegate>
@@ -142,26 +141,9 @@
                 [self.nav pushViewController:vc animated:YES];
             }
             
-            if ([_itemarray[indexPath.row]isMemberOfClass:[CityBadgeListModel class]]) {
-                MedalListXQViewController * vc = [MedalListXQViewController new];
-                CityBadgeListModel * model = _itemarray[indexPath.row];
-                vc.itemid = model.ssid;
-                [self.nav pushViewController:vc animated:YES];
-            }
-            if ([_itemarray[indexPath.row]isMemberOfClass:[BadgeOnlyImageModel class]]) {
-                BadgeOnlyImageModel * model = _itemarray[indexPath.row];
-                MedalListXQViewController * vc = [MedalListXQViewController new];
-                vc.itemid = model.ssid;
-                [self.nav pushViewController:vc animated:YES];
-            }
             
         }else{
-            if (_itemarray.count>indexPath.row) {
-                BadgeOnlyImageModel * model = _itemarray[indexPath.row];
-                MedalListXQViewController * vc = [MedalListXQViewController new];
-                vc.itemid = model.ssid;
-                [self.nav pushViewController:vc animated:YES];
-            }
+
         }
         
 //        if ([_itemarray[indexPath.row]isMemberOfClass:[BadgeOnlyImageModel class]]) {

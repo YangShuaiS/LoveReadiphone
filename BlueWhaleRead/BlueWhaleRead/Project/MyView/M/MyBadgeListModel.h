@@ -14,7 +14,6 @@
 
 
 
-@property(nonatomic,strong)CityBadgeListModel * badge;//本周勋章
 @property(nonatomic,strong)NSMutableArray * badgestudent;//本周勋章领取的人
 @property(nonatomic,strong)NSMutableArray * myBadge;//我的勋章
 + (void)InitializeModel;

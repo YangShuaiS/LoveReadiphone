@@ -17,7 +17,7 @@
 #import "ShiZiJGTopView.h"
 #import "ShiZiJGDownView.h"
 
-#import "HomePageViewController.h"
+#import "MyViewController.h"
 @interface ShiZiOrShiCIJieGuoViewController ()<UIScrollViewDelegate>
 
 @end
@@ -131,7 +131,7 @@
     NSArray * contarray = self.navigationController.viewControllers;
     for (int i =0; i < contarray.count; i++) {
         UIViewController *controller = contarray[i];
-        if ([controller isKindOfClass:[HomePageViewController class]]) {
+        if ([controller isKindOfClass:[MyViewController class]]) {
             [self.navigationController popToViewController:controller animated:YES];
             break;
         }

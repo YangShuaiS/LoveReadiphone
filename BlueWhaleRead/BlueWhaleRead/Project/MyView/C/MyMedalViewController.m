@@ -8,7 +8,6 @@
 
 #import "MyMedalViewController.h"
 #import "MyMedalTableView.h"
-#import "MedalListViewController.h"
 @interface MyMedalViewController ()<NavDelegate>
 @property (strong, nonatomic) MyMedalTableView *tableView;
 
@@ -37,7 +36,6 @@
     if (model.myBadge.count == 0) {
         _tableView.hidden = YES;
         if (wdView == nil) {
-            [self addWdView];
         }else{
             [wdView removeFromSuperview];
         }
@@ -108,26 +106,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)addWdView{
-    WS(ws);
-    wdView = [GeneraNoDataView new];
-    wdView.backgroundColor = [UIColor clearColor];
-    wdView.titlename = @"你还没有点亮勋章哦，去点亮吧！";
-    wdView.clickName = @"去点亮勋章";
-    wdView.style = NoDtaaViewStyleLabelClick;
-//    wdView.nav = self.navigationController;
-    [self.view addSubview:wdView];
-    [wdView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.view);
-    }];
-    [self.view addSubview:self.navtive];
 
-    [wdView setBlock:^{
-        MedalListViewController * vc = [MedalListViewController new];
-        vc.style = ViewControllerStyleXZXQ;
-        [ws.navigationController pushViewController:vc animated:YES];
-    }];
-}
 /*
 #pragma mark - Navigation
 

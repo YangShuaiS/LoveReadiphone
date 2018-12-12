@@ -150,8 +150,30 @@ typedef NS_ENUM(NSInteger, ShareStyle) {
     ShareStyleTag8 = 8,//其他的时候
     ShareStyleTag9 = 9,//轮播图
     ShareStyleTag10 = 10,//书单
+    ShareStyleTag11 = 11,//书单
 
 
+};
+#pragma mark -------------- 任务
+typedef NS_ENUM(NSInteger, TKAlltaskStyle) {
+    TKAlltaskStyleXS = 1,//新手
+    TKAlltaskStyleZJ = 2, //中高介
+    TKAlltaskStyleZJALL = 3, //自建任务内容
+    TKAlltaskStyleZJS = 4, //自荐人物
+};
+
+#pragma mark -------------- 任务详情
+typedef NS_ENUM(NSInteger, TaxkXqStyele) {
+    TaxkXqStyelenoviceingStyle = 0,//新手进行中
+    TaxkXqStyelenoviceendStyle = 1, //新手任务完成
+    TaxkXqStyelenovicefqStyle = 2, //新手任务放弃
+    TaxkXqStyeUserOthering = 3,//自己其他任我游进行中
+    TaxkXqStyeUserOtherend = 4,//自己其他任务r完成
+    TaxkXqStyeUserOtherfq = 5,//自己其他任务放弃
+    TaxkXqStyeOtherPeopleing = 6,//其达人任务进行中
+    TaxkXqStyeOtherPeopleend = 7,//其他人其他任务r完成
+    TaxkXqStyeOtherPeoplefa = 8,//其他人其他任务放弃
+    TaxkXqStyeUserZJ = 9,//自建任务
 };
 @interface BaseENUM : NSObject
 

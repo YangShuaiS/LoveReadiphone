@@ -28,8 +28,6 @@
 - (void)addview{
     WS(ws);
     imageview = [FLAnimatedImageView new];
-//    imageview.image = UIIMAGE(@"bg_推荐书籍");
-//    imageview.backgroundColor = [UIColor cyanColor];
     imageview.layer.masksToBounds = YES;
     imageview.layer.cornerRadius = LENGTH(8);
     [self addSubview:imageview];

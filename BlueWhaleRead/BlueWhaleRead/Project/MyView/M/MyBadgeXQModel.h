@@ -11,7 +11,7 @@
 @interface MyBadgeXQModel : BaseModel
 
 @property (nonatomic, strong) NSMutableArray *badgeStudentList;//MedalBageFriendModel 数据统一
-@property(nonatomic,strong) CreatetimeModel * endtime;//结束时间
+//@property(nonatomic,strong) CreatetimeModel * endtime;//结束时间
 @property (nonatomic, copy) NSString * min_logo;
 @property (nonatomic, copy) NSString * name;
 @property (nonatomic, copy) NSString * ssid;

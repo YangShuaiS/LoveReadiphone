@@ -31,7 +31,7 @@
     xianView.backgroundColor = RGB(204,204,204);
     [self addSubview:xianView];
     
-    Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:ChangYongTitLe LabelFont:TextFontCu(19) TextAlignment:NSTextAlignmentLeft Text:@""];
+    Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(31, 31, 31) LabelFont:TextFontCu(20) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:Title];
     
     [xianView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,7 +66,7 @@
 }
 - (void)addRightlabel{
     WS(ws);
-        huanyihuan = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:ChangYongTitLe LabelFont:TextFont(12) TextAlignment:NSTextAlignmentLeft Text:@""];
+        huanyihuan = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(31, 31, 31) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
         huanyihuan.userInteractionEnabled = YES;
         [self addSubview:huanyihuan];
         huanyibibutton = [BaseButton buttonWithType:UIButtonTypeCustom];

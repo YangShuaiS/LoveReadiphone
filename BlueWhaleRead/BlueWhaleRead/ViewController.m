@@ -13,9 +13,17 @@
 @end
 
 @implementation ViewController
-
+//初始化位置
+- (void)ConfirmTheSize{
+    UIView *statusBar = STAUBARHEIGHT;
+    StatusBar = statusBar.frame.size.height;
+    NavHeight = StatusBar+NAVIGATIONHeight;
+    poinw = WIDTH/16;
+    TabBarHeight = TABBARHeight;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self ConfirmTheSize];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

@@ -13,8 +13,11 @@ CGFloat StatusBar = 0;
 CGFloat poinw = 0;
 
 //NSString * ZSFWQ = @"http://39.106.100.235/";
-NSString * ZSFWQ = @"http://tiantianaidu.com/";
-//NSString * ZSFWQ = @"http://192.168.1.221:8085/";
+//NSString * ZSFWQ = @"http://tiantianaidu.com/";
+NSString * ZSFWQ = @"http://192.168.1.221:8085/";
+//NSString * ZSFWQ = @"http://192.168.1.114:8069/";
+
+
 
 
 //NSString *  ZSFWQ = @"http://192.168.1.221:8080/";
@@ -355,4 +358,177 @@ MeModel * Me = nil;
 + (NSString *)Sharetitle:(NSString *)title{
     return title;
 }
+
++ (NSString*)deviceModelName
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *deviceModel = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    if ([deviceModel isEqualToString:@"iPhone3,1"])    return @"iPhone4";
+    if ([deviceModel isEqualToString:@"iPhone3,2"])    return @"iPhone4";
+    if ([deviceModel isEqualToString:@"iPhone3,3"])    return @"iPhone4";
+    if ([deviceModel isEqualToString:@"iPhone4,1"])    return @"iPhone4S";
+    if ([deviceModel isEqualToString:@"iPhone5,1"])    return @"iPhone5";
+    if ([deviceModel isEqualToString:@"iPhone5,2"])    return @"iPhone5(GSM+CDMA)";
+    if ([deviceModel isEqualToString:@"iPhone5,3"])    return @"iPhone5c(GSM)";
+    if ([deviceModel isEqualToString:@"iPhone5,4"])    return @"iPhone5c(GSM+CDMA)";
+    if ([deviceModel isEqualToString:@"iPhone6,1"])    return @"iPhone5s(GSM)";
+    if ([deviceModel isEqualToString:@"iPhone6,2"])    return @"iPhone5s(GSM+CDMA)";
+    if ([deviceModel isEqualToString:@"iPhone7,1"])    return @"iPhone6Plus";
+    if ([deviceModel isEqualToString:@"iPhone7,2"])    return @"iPhone6";
+    if ([deviceModel isEqualToString:@"iPhone8,1"])    return @"iPhone6s";
+    if ([deviceModel isEqualToString:@"iPhone8,2"])    return @"iPhone6sPlus";
+    if ([deviceModel isEqualToString:@"iPhone8,4"])    return @"iPhoneSE";
+    // 日行两款手机型号均为日本独占，可能使用索尼FeliCa支付方案而不是苹果支付
+    if ([deviceModel isEqualToString:@"iPhone9,1"])    return @"iPhone7";
+    if ([deviceModel isEqualToString:@"iPhone9,2"])    return @"iPhone7Plus";
+    if ([deviceModel isEqualToString:@"iPhone9,3"])    return @"iPhone7";
+    if ([deviceModel isEqualToString:@"iPhone9,4"])    return @"iPhone7Plus";
+    if ([deviceModel isEqualToString:@"iPhone10,1"])   return @"iPhone_8";
+    if ([deviceModel isEqualToString:@"iPhone10,4"])   return @"iPhone_8";
+    if ([deviceModel isEqualToString:@"iPhone10,2"])   return @"iPhone_8_Plus";
+    if ([deviceModel isEqualToString:@"iPhone10,5"])   return @"iPhone_8_Plus";
+    if ([deviceModel isEqualToString:@"iPhone10,3"])   return @"iPhoneX";
+    if ([deviceModel isEqualToString:@"iPhone10,6"])   return @"iPhoneX";
+    if ([deviceModel isEqualToString:@"iPhone11,8"])   return @"iPhoneXR";
+    if ([deviceModel isEqualToString:@"iPhone11,2"])   return @"iPhoneXS";
+    if ([deviceModel isEqualToString:@"iPhone11,6"])   return @"iPhoneXSMax";
+    if ([deviceModel isEqualToString:@"iPhone11,4"])   return @"iPhoneXSMax";
+    if ([deviceModel isEqualToString:@"iPod1,1"])      return @"iPodTouch1G";
+    if ([deviceModel isEqualToString:@"iPod2,1"])      return @"iPodTouch2G";
+    if ([deviceModel isEqualToString:@"iPod3,1"])      return @"iPodTouch3G";
+    if ([deviceModel isEqualToString:@"iPod4,1"])      return @"iPodTouch4G";
+    if ([deviceModel isEqualToString:@"iPod5,1"])      return @"iPodTouch(5Gen)";
+    if ([deviceModel isEqualToString:@"iPad1,1"])      return @"iPad";
+    if ([deviceModel isEqualToString:@"iPad1,2"])      return @"iPad3G";
+    if ([deviceModel isEqualToString:@"iPad2,1"])      return @"iPad2(WiFi)";
+    if ([deviceModel isEqualToString:@"iPad2,2"])      return @"iPad2";
+    if ([deviceModel isEqualToString:@"iPad2,3"])      return @"iPad2(CDMA)";
+    if ([deviceModel isEqualToString:@"iPad2,4"])      return @"iPad2";
+    if ([deviceModel isEqualToString:@"iPad2,5"])      return @"iPadMini(WiFi)";
+    if ([deviceModel isEqualToString:@"iPad2,6"])      return @"iPadMini";
+    if ([deviceModel isEqualToString:@"iPad2,7"])      return @"iPadMini(GSM+CDMA)";
+    if ([deviceModel isEqualToString:@"iPad3,1"])      return @"iPad3(WiFi)";
+    if ([deviceModel isEqualToString:@"iPad3,2"])      return @"iPad3(GSM+CDMA)";
+    if ([deviceModel isEqualToString:@"iPad3,3"])      return @"iPad3";
+    if ([deviceModel isEqualToString:@"iPad3,4"])      return @"iPad4(WiFi)";
+    if ([deviceModel isEqualToString:@"iPad3,5"])      return @"iPad4";
+    if ([deviceModel isEqualToString:@"iPad3,6"])      return @"iPad4(GSM+CDMA)";
+    if ([deviceModel isEqualToString:@"iPad4,1"])      return @"iPadAir(WiFi)";
+    if ([deviceModel isEqualToString:@"iPad4,2"])      return @"iPadAir(Cellular)";
+    if ([deviceModel isEqualToString:@"iPad4,4"])      return @"iPadMini2(WiFi)";
+    if ([deviceModel isEqualToString:@"iPad4,5"])      return @"iPadMini2(Cellular)";
+    if ([deviceModel isEqualToString:@"iPad4,6"])      return @"iPadMini2";
+    if ([deviceModel isEqualToString:@"iPad4,7"])      return @"iPadMini3";
+    if ([deviceModel isEqualToString:@"iPad4,8"])      return @"iPadMini3";
+    if ([deviceModel isEqualToString:@"iPad4,9"])      return @"iPadMini3";
+    if ([deviceModel isEqualToString:@"iPad5,1"])      return @"iPadMini4(WiFi)";
+    if ([deviceModel isEqualToString:@"iPad5,2"])      return @"iPadMini4(LTE)";
+    if ([deviceModel isEqualToString:@"iPad5,3"])      return @"iPadAir2";
+    if ([deviceModel isEqualToString:@"iPad5,4"])      return @"iPadAir2";
+    if ([deviceModel isEqualToString:@"iPad6,3"])      return @"iPadPro9.7";
+    if ([deviceModel isEqualToString:@"iPad6,4"])      return @"iPadPro9.7";
+    if ([deviceModel isEqualToString:@"iPad6,7"])      return @"iPadPro12.9";
+    if ([deviceModel isEqualToString:@"iPad6,8"])      return @"iPadPro12.9";
+    
+    if ([deviceModel isEqualToString:@"AppleTV2,1"])      return @"AppleTV2";
+    if ([deviceModel isEqualToString:@"AppleTV3,1"])      return @"AppleTV3";
+    if ([deviceModel isEqualToString:@"AppleTV3,2"])      return @"AppleTV3";
+    if ([deviceModel isEqualToString:@"AppleTV5,3"])      return @"AppleTV4";
+    
+    if ([deviceModel isEqualToString:@"i386"])         return @"Simulator";
+    if ([deviceModel isEqualToString:@"x86_64"])       return @"Simulator";
+    return deviceModel;
+}
+#pragma mark --------- string转date
++ (NSDate *)TimeStringForDate:(NSString *)format{
+    NSDateFormatter *formats = [[NSDateFormatter alloc] init];
+    formats.dateFormat = @"yyyy-MM-dd";
+    NSDate *data = [formats dateFromString:format];
+    return data;
+}
+#pragma mark --------- 上月
++ (NSDate *)LastMonth:(NSDate *)date{
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    comps.month = -1;
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *_date = [gregorian dateByAddingComponents:comps toDate:date options:NSCalendarMatchStrictly];
+    return _date;
+
+}
+#pragma mark --------- 下月
++ (NSDate *)NextMonth:(NSDate *)date{
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    comps.month = +1;
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *_date = [gregorian dateByAddingComponents:comps toDate:date options:NSCalendarMatchStrictly];
+    return _date;
+}
+
++ (NSDate *)LastDays:(NSDate *)date Days:(NSInteger)day{
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    comps.day = -day;
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *_date = [gregorian dateByAddingComponents:comps toDate:date options:NSCalendarMatchStrictly];
+    return _date;
+}
+
++ (NSDate *)NextDays:(NSDate *)date Days:(NSInteger)day{
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    comps.day = +day;
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *_date = [gregorian dateByAddingComponents:comps toDate:date options:NSCalendarMatchStrictly];
+    return _date;
+}
+
++ (NSDateComponents *)weekdayComponents:(NSDate *)date{
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *weekdayComponents = [gregorian components:NSCalendarUnitWeekday fromDate:date];
+    return weekdayComponents;
+}
+
++ (NSString*)weekDayStr:(NSDate *)date
+{
+    NSString *weekDayStr = nil;
+    NSDateComponents *weekdayComponents = [self weekdayComponents:date];
+    NSInteger week = [weekdayComponents weekday];
+    switch (week) {
+        case 1:
+            weekDayStr = @"日";
+            break;
+        case 2:
+            weekDayStr = @"一";
+            break;
+        case 3:
+            weekDayStr = @"二";
+            break;
+        case 4:
+            weekDayStr = @"三";
+            break;
+        case 5:
+            weekDayStr = @"四";
+            break;
+        case 6:
+            weekDayStr = @"五";
+            break;
+        case 7:
+            weekDayStr = @"六";
+            break;
+        default:
+            weekDayStr = @"";
+            break;
+    }
+    return weekDayStr;
+}
++ (NSInteger)MonthDayLength:(NSDate *)date{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
+    return range.length;
+}
+
 @end

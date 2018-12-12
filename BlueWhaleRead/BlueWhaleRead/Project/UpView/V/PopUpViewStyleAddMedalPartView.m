@@ -9,10 +9,8 @@
 //
 
 #import "PopUpViewStyleAddMedalPartView.h"
-#import "JoinDownView.h"
 @implementation PopUpViewStyleAddMedalPartView{
     BaseLabel * title;
-    JoinDownView * joinDown;
     BaseLabel * subtitle;
 }
 
@@ -104,24 +102,11 @@
     KS.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [KS addGestureRecognizer:tap];
-    
-    joinDown = [JoinDownView new];
-    //    _joinDown.itemarray = _itemarray;
-    [self addSubview:joinDown];
-    [joinDown mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws).with.offset(0);
-        make.right.mas_equalTo(ws).with.offset(0);
-        make.top.mas_equalTo(backView.mas_bottom).with.offset(LENGTH(44));
-        make.height.mas_equalTo(LENGTH(56));
-    }];
+
 }
 - (void)setModel:(GenPopViewModel *)model{
     _model = model;
-    title.text = [NSString stringWithFormat:@"你已经把%@指定的%ld本书全部加入书架了",model.title,model.task_num];
-    subtitle.text = [NSString stringWithFormat:@"去读完它们吧！\n全部答题正确就可以点亮%@了",model.title];
-    joinDown.nav = self.nav;
-    joinDown.models = model.model;
-    joinDown.itemarray = model.itemarray;
+
 }
 - (void)tap{
     self.block(PopUpViewClickStyleRemo);

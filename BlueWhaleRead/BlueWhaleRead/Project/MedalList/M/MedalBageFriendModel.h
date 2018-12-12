@@ -7,7 +7,7 @@
 //
 
 #import "BaseModel.h"
-
+#import "AllBookListModel.h"
 @interface MedalBageFriendModel : BaseModel
 @property (nonatomic, copy) NSString * avatar;
 @property (nonatomic, copy) NSString * name;

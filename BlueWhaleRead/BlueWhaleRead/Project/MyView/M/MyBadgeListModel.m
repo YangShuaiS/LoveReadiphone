@@ -13,9 +13,7 @@
     [MyBadgeListModel mj_setupObjectClassInArray:^NSDictionary *{
         return @{@"badgestudent":@"ReadPeopleModel",@"myBadge":@"MyBadgeXQModel"};
     }];
-    [MyBadgeXQModel mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"badgeStudentList":@"MedalBageFriendModel",@"studentBadge":@"MedalStudenBookModel"};
-    }];
+
 
 }
 @end

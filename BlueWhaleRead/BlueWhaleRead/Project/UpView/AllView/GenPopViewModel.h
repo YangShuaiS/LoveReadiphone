@@ -15,7 +15,6 @@
 @property(nonatomic,assign)NSInteger task_num;
 @property (nonatomic, assign) CGFloat studentCompletedNum;//学生完成数
 @property(nonatomic,copy)NSMutableArray * itemarray;
-@property(nonatomic,strong)MedalListXqModel * model;
 
 
 @end

@@ -19,4 +19,6 @@ void Coordinate_2 (double pi, float l, float c_w , float c_h, float *x, float *y
 
 @property (nonatomic,strong) UINavigationController * nav;
 
+
+- (UIViewController*)viewController;
 @end

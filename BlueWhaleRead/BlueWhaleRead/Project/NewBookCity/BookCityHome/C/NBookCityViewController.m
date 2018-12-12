@@ -49,12 +49,7 @@
         make.top.equalTo(ws.view).with.offset(0);
         make.height.mas_equalTo(NavHeight);
     }];
-    self.navtive.backgroundColor = [UIColor whiteColor];
-    self.navtive.layer.shadowColor = RGB(0, 0, 0).CGColor;
-    self.navtive.layer.shadowOffset = CGSizeMake(0,2);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
-    self.navtive.layer.shadowRadius = LENGTH(4);
-    self.navtive.layer.shadowOpacity = 0.04;
-    
+    self.navtive.downlayer = YES;
 }
 - (void)NavLeftClick{
     

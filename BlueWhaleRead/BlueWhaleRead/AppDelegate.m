@@ -23,15 +23,16 @@
 
 - (void)uodatazsfwq{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_GHYM];
-    NSDictionary * dic = @{@"UUID":[[UIDevice currentDevice] identifierForVendor].UUIDString};
+    NSString * str = APP_VERSION;
+    NSString *sysVersion = [[UIDevice currentDevice] systemName]; //获取系统名称 例如：iPhone OS
+    NSString *sysVersions = [[UIDevice currentDevice] systemVersion]; //获取系统版本 例如：9.2
+    
+    NSDictionary * dic = @{@"UUID":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"mobileModel":[BaseObject deviceModelName],@"os":sysVersion,@"osVersion":sysVersions,@"appVersionCode":str};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
-  
         }else{
-//                        ZSFWQ = @"http://192.168.1.221:8080/";
-                        ZSFWQ = @"http://39.106.100.235/";
+            ZSFWQ = @"http://39.106.100.235/";
         }
-
     }];
 }
 - (void)addwenjian{
@@ -43,7 +44,7 @@
     // 创建文件夹
     [manager createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:nil];
     // 文件是否存在
-    BOOL isExists = [manager fileExistsAtPath:filePath];
+    [manager fileExistsAtPath:filePath];
     // 删除文件
     //    NSString *bookPath = [[pathArray firstObject] stringByAppendingPathComponent:@"book.plist"];
     //    BOOL isDele = [manager removeItemAtPath:bookPath error:nil];
@@ -51,7 +52,6 @@
 //        NSLog(@"文件夹存在");
 //    }else{
 //        NSLog(@"文件夹不存在");
-//        
 //    }
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -87,6 +87,10 @@
     } else {
     }
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotification) {
+        NSLog(@"Recieved Notification === %@",localNotification);
+    }
     [NSThread sleepForTimeInterval:1];
     return YES;
 
@@ -151,6 +155,9 @@ void UncaughtExceptionHandler(NSException *exception) {
 //    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mailPath]];
 }
 - (void)loadModel{
+    [NewHomeModel InitializeModel];//新首页
+    [TKAllTaskModel InitializeModel];//任务列表
+    
     [BookCityModel InitializeModel];//书城
     [HomePage InitializeModel];//首页
     [MyDeModel InitializeModel];//我的
@@ -159,15 +166,11 @@ void UncaughtExceptionHandler(NSException *exception) {
     [SearchCitBookModel InitializeModel];//搜索
     [MyMessageListModel InitializeModel];//
     [MonthPMModel InitializeModel];
-    [ClassBJDTModel InitializeModel];//班级动态
     [MyBadgeListModel InitializeModel];//我的勋章
     [TKJIEGUOMODEL InitializeModel];//挑战结果
-    [HomeFriendHYHModel InitializeModel];//首页换一换
     [JoinBookModel InitializeModel];//加入书架弹出视图
     
     [BookXQModel InitializeModel];
-    [MedalListModel InitializeModel];
-    [MedalListXqModel InitializeModel];
     [UnreadBookListModel InitializeModel];
     [ReadBookListModel InitializeModel];
     [MyClassListModel InitializeModel];

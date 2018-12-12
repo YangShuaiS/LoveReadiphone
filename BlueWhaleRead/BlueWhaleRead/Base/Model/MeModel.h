@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LINSHI.h"
-
-
+#import "MedalBageFriendModel.h"
+#import "NewHomeModel.h"//新首页
+#import "TKXQRLModel.h"//
 #import "LCBMilestone.h"//里程碑
+#import "TKAllTaskModel.h"
 
 #import "PushModel.h"
 #import "AttributedStringModel.h"
@@ -21,8 +22,6 @@
 #import "FoundModel.h" //发现model
 #import "BookCityModel.h"
 #import "BookXQModel.h"
-#import "MedalListModel.h"
-#import "MedalListXqModel.h"
 #import "UnreadBookListModel.h"    //未读书籍model
 #import "ReadBookListModel.h"     //已读
 #import "MyClassListModel.h"      //班级
@@ -54,11 +53,8 @@
 
 #import "LunBoTuXQModel.h"
 
-#import "ClassBJDTModel.h"//班级动态
 
 #import "MyBadgeListModel.h"//我的勋章
-
-#import "HomeFriendHYHModel.h"//换一换
 
 #import "JoinBookModel.h"//加入书架model
 

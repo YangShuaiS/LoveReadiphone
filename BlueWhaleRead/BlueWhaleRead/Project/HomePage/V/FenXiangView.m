@@ -44,7 +44,11 @@
 }
 - (void)setSharestyle:(ShareStyle)sharestyle{
     _sharestyle = sharestyle;
-    tag = [NSString stringWithFormat:@"%ld",sharestyle];
+    if (_shareid == ShareStyleTag11) {
+        tag =[NSString stringWithFormat:@"%ld",_shareid];;
+    }else{
+        tag = [NSString stringWithFormat:@"%ld",sharestyle];
+    }
     [self returndic];
 }
 - (void)addhaibao{
@@ -239,14 +243,14 @@
 //    }];
 //}
 - (void)returndic{
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FXLCB];
+    NSString * urls = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FXLCB];
     NSDictionary * dic;
     if (_sharestyle == ShareStyleTag9||_sharestyle == ShareStyleTag10) {
         dic = @{@"tag":tag,@"articleid":_textid};
     }else{
         dic = @{@"tag":tag};
     }
-    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+    [[BaseAppRequestManager manager] getNormaldataURL:urls dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             HomePage * model = [HomePage mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
@@ -349,6 +353,17 @@
     _title = tit;
     
 }
+
+- (void)ShareStyleTag11{
+    hb.image = UIIMAGE(@"复制链接");
+    BaseLabel * title = titarrays[titarrays.count-1];
+    title.text = @"复制链接";
+    
+    url = fxmodel.url;
+    _Text = fxmodel.content;
+    _title = fxmodel.title;
+
+}
 - (void)ShareStyleTag10{
     hb.image = UIIMAGE(@"复制链接");
     BaseLabel * title = titarrays[titarrays.count-1];
@@ -399,6 +414,9 @@
             break;
         case ShareStyleTag10:
             [self ShareStyleTag10];
+            break;
+        case ShareStyleTag11:
+            [self ShareStyleTag11];
             break;
         default:
             break;

@@ -9,7 +9,6 @@
 #import "FoundViewController.h"
 #import "FoundBanjiView.h"
 #import "FoundYouClassView.h"
-#import "FoundClassRankingView.h"
 #import "FoundClassLoveView.h"
 #import "FoundOliverView.h"
 @interface FoundViewController ()<UIScrollViewDelegate,NavDelegate>{
@@ -18,7 +17,6 @@
     
     FoundBanjiView * banJiview;
     FoundYouClassView * youClass;
-    FoundClassRankingView * classRanking;
     FoundClassLoveView * classlove;
     FoundOliverView * oliver;
 }
@@ -56,11 +54,6 @@
         [viewarray removeObject:youClass];
     }else{
         youClass.itemarray = model.myFriendBookList;
-    }
-    if (model.monthBadgeList.studentList.count == 0) {
-        [viewarray removeObject:classRanking];
-    }else{
-        classRanking.monthBadgeList = model.monthBadgeList;
     }
     if (model.classBookList.count==0) {
         [viewarray removeObject:classlove];
@@ -119,11 +112,6 @@
     youClass.nav = self.navigationController;
     [viewarray addObject:youClass];
     
-    classRanking = [FoundClassRankingView new];
-    classRanking.styles = RankingStyleAll;
-    classRanking.nav = self.navigationController;
-    [viewarray addObject:classRanking];
-    
     classlove = [FoundClassLoveView new];
     classlove.nav = self.navigationController;
     [viewarray addObject:classlove];
@@ -171,12 +159,6 @@
         lastview = view;
     }
 
-    [classRanking mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(LENGTH(235));
-    }];
-    
-//    classRanking.itemarray = arrs;
-//    oliver.itemarray = arrs;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

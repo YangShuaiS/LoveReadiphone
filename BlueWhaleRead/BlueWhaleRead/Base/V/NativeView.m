@@ -183,10 +183,10 @@
     
     [right mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(ws).with.offset(-LENGTH(25));
-//        make.bottom.equalTo(ws).with.offset(-LENGTH(2));
-        make.centerY.mas_equalTo(ws).with.offset(StatusBar/2);
-        make.height.mas_equalTo(23);
-        make.width.mas_equalTo(23);
+        make.bottom.equalTo(ws).with.offset(-LENGTH(2));
+//        make.centerY.mas_equalTo(ws).with.offset(StatusBar/2);
+//        make.height.mas_equalTo(23);
+//        make.width.mas_equalTo(23);
     }];
     
     BaseButton * LeftBigButton = [BaseButton buttonWithType:UIButtonTypeCustom];
@@ -253,5 +253,17 @@
 - (void)setTitcolor:(UIColor *)titcolor{
     _titcolor = titcolor;
     titleLable.textColor = titcolor;
+}
+
+
+- (void)setDownlayer:(BOOL)downlayer{
+    _downlayer = downlayer;
+    if (downlayer == YES) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.layer.shadowColor = RGB(0, 0, 0).CGColor;
+        self.layer.shadowOffset = CGSizeMake(0,2);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+        self.layer.shadowRadius = 4;
+        self.layer.shadowOpacity = 0.04;
+    }
 }
 @end

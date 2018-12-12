@@ -281,7 +281,6 @@
         TongZhi.hidden = NO;
         TongZhi.text = model.messageNum;
     }
-
 }
 
 #pragma mark----------------------view跳转

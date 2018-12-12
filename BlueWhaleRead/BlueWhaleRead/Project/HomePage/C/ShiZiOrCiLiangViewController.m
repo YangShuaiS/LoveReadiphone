@@ -17,7 +17,6 @@
 #import "TZJieGuoViewController.h"
 #import "ShiZiOrShiCIJieGuoViewController.h"
 
-#import "HomePageViewController.h"
 #import "BeiJingView.h"
 @interface ShiZiOrCiLiangViewController ()<NavDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UICollectionView *collectionView; /**< 集合视图 */
@@ -173,30 +172,7 @@
     }];
     
 }
-//- (void)NavLeftClick{
-//    [time invalidate];
-//    time = nil;
-//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-//        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-//    }
-//
-//    NSArray * contarray = self.navigationController.viewControllers;
-//    for (int i =0; i < contarray.count; i++) {
-//        UIViewController *controller = contarray[i];
-//        if ([controller isKindOfClass:[HomePageViewController class]]) {
-//            [self.navigationController popToViewController:controller animated:YES];
-//            break;
-//        }
-//    }
-//    if (contarray.count == self.navigationController.viewControllers.count) {
-//        self.tabBarController.selectedIndex = 0;
-//
-//    }
-////    NSInteger i = 1;
-////    UIViewController *controller = self.navigationController.viewControllers[self.navigationController.viewControllers.count-1-i];
-////    [self.navigationController popToViewController:controller animated:YES];
-////
-//}
+
 //
 //- (void)NavCenterClick {
 //

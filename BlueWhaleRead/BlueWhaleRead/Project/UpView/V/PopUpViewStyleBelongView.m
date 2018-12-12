@@ -7,11 +7,8 @@
 //
 
 #import "PopUpViewStyleBelongView.h"
-#import "JoinDownView.h"
-
 @implementation PopUpViewStyleBelongView{
     BaseLabel * title;
-    JoinDownView * joinDown;
     BaseLabel * subtitle;
 }
 
@@ -104,25 +101,13 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [KS addGestureRecognizer:tap];
     
-    joinDown = [JoinDownView new];
-    //    _joinDown.itemarray = _itemarray;
-    [self addSubview:joinDown];
-    [joinDown mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws).with.offset(0);
-        make.right.mas_equalTo(ws).with.offset(0);
-        make.top.mas_equalTo(backView.mas_bottom).with.offset(LENGTH(49));
-        make.height.mas_equalTo(LENGTH(56));
-    }];
 }
 - (void)setModel:(GenPopViewModel *)model{
     _model = model;
-    subtitle.text = [NSString stringWithFormat:@"《%@》属于%@\n读完这本书就有机会点亮%@",model.title,model.subtitle,model.subtitle];
 }
 - (void)setJoinmodel:(JoinBookModel *)joinmodel{
     _joinmodel = joinmodel;
-    [joinDown layoutIfNeeded];
-    joinDown.nav = self.nav;
-    joinDown.joinmodel = _joinmodel;
+
 }
 - (void)tap{
     self.block(PopUpViewClickStyleRemo);

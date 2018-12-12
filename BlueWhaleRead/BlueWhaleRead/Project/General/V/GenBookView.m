@@ -7,7 +7,6 @@
 //
 
 #import "GenBookView.h"
-#import "BookCityXunZhang.h"
 @implementation GenBookView{
     FLAnimatedImageView * leftImage;
     BaseLabel * Title;
@@ -16,9 +15,6 @@
     //    BaseView * downview;
     FLAnimatedImageView * RightImage;
     BaseButton * ComeOn;
-    
-    BookCityXunZhang * xunzhangone;
-    BookCityXunZhang * xunzhangtwo;
     
     BaseLabel * title;
     
@@ -55,8 +51,6 @@
     
     [self updata];
     [self addYiDu];
-    [self addXunZhang];
-    
 }
 - (void)setBookCase:(BookCaseStyle)bookCase{
     _bookCase = bookCase;
@@ -99,31 +93,6 @@
     }];
 }
 
-- (void)addXunZhang{
-    
-    
-    xunzhangone = [BookCityXunZhang new];
-    [self addSubview:xunzhangone];
-    xunzhangone.hidden = YES;
-    
-    xunzhangtwo = [BookCityXunZhang new];
-    [self addSubview:xunzhangtwo];
-    xunzhangtwo.hidden = YES;
-    WS(ws);
-    [xunzhangone mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self->subtitle.mas_right).with.offset(LENGTH(44));
-        make.centerY.mas_equalTo(ws);
-        make.width.mas_equalTo(LENGTH(128));
-        make.height.mas_equalTo(LENGTH(36));
-    }];
-    
-    [xunzhangtwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self->xunzhangone.mas_right).with.offset(LENGTH(44));
-        make.centerY.mas_equalTo(ws);
-//        make.width.mas_equalTo(LENGTH(128));
-        make.height.mas_equalTo(LENGTH(36));
-    }];
-}
 - (void)addWeiDu{
     WS(ws);
     
@@ -237,25 +206,11 @@
 }
 -(void)setModel:(CityBookListModel *)model{
     _model = model;
-    xunzhangone.hidden = YES;
-    xunzhangtwo.hidden = YES;
     [leftImage sd_setImageWithURL:URLIMAGE(model.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = model.name;
     self.jKStarDisplayView.redValue = [model.mark floatValue];
     subtitle.text = model.author;
     fuwenben.text = [NSString stringWithFormat:@"阅读分级: %@ 分值: %@",model.levels,model.b_score];
-    
-    NSMutableArray * array = model.badgeList;
-    if (array.count == 0) {
-    }else if (array.count == 1&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        xunzhangone.model = array[0];
-    }else if (array.count == 2&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        xunzhangtwo.hidden = NO;
-        xunzhangone.model = array[0];
-        xunzhangtwo.model = array[1];
-    }
     
     RightImage.hidden = YES;
     
@@ -268,26 +223,11 @@
 
 - (void)setAllmodel:(AllBookListModel *)allmodel{
     _allmodel = allmodel;
-    
-    xunzhangone.hidden = YES;
-    xunzhangtwo.hidden = YES;
     [leftImage sd_setImageWithURL:URLIMAGE(allmodel.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = allmodel.name;
     self.jKStarDisplayView.redValue = [allmodel.mark floatValue];
     subtitle.text = allmodel.author;
     fuwenben.text = [NSString stringWithFormat:@"阅读分级: %@ 分值: %@",allmodel.levels,allmodel.b_score];
-    
-    NSMutableArray * array = allmodel.badgeList;
-    if (array.count == 0) {
-    }else if (array.count == 1&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        xunzhangone.model = array[0];
-    }else if (array.count == 2&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        xunzhangtwo.hidden = NO;
-        xunzhangone.model = array[0];
-        xunzhangtwo.model = array[1];
-    }
 }
 
 - (void)setUnreadBookModel:(UnreadBookModel *)unreadBookModel{
@@ -298,8 +238,6 @@
     subtitle.text = unreadBookModel.author;
     fuwenben.text = [NSString stringWithFormat:@"阅读分级: %@ 分值: %@",unreadBookModel.levels,unreadBookModel.b_score];
     title.text = [NSString stringWithFormat:@"今日剩余%ld次答题机会",unreadBookModel.dayTimes];
-    NSMutableArray * array = unreadBookModel.badgeList;
-    [self xunzhanghiden:array];
 }
 
 - (void)setReadBookModel:(ReadbookModel *)readBookModel{
@@ -309,25 +247,8 @@
     self.jKStarDisplayView.redValue = [readBookModel.mark floatValue];
     subtitle.text = readBookModel.author;
     fuwenben.text = [NSString stringWithFormat:@"阅读分级: %@ 分值: %@",readBookModel.levels,readBookModel.b_score];
-    NSMutableArray * array = readBookModel.badgeList;
-    [self xunzhanghiden:array];
 }
 
--(void)xunzhanghiden:(NSMutableArray *)array{
-    xunzhangone.hidden = YES;
-    xunzhangtwo.hidden = YES;
-    if (array.count == 0) {
-    }else if (array.count == 1&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        xunzhangone.model = array[0];
-    }
-    else if (array.count == 2&&xunzhangone!=nil){
-        xunzhangone.hidden = NO;
-        //        xunzhangtwo.hidden = NO;
-        xunzhangone.model = array[0];
-        //        xunzhangtwo.model = array[1];
-    }
-}
 - (void)dianji{
     
 }

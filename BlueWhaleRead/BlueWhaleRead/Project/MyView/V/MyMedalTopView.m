@@ -9,7 +9,6 @@
 #pragma mark------------页面有问题，布局还是图片问题
 #import "MyMedalTopView.h"
 #import "FiendOrMedalView.h"
-#import "MedalListXQViewController.h"
 @implementation MyMedalTopView{
     FLAnimatedImageView * imageView;
     FLAnimatedImageView * xzimageView;
@@ -149,14 +148,7 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [xzimageView addGestureRecognizer:tap];
 }
-- (void)tap{
-    
-//    if (_model.badge.badge_id.length>0) {
-        MedalListXQViewController * vc = [MedalListXQViewController new];
-        vc.itemid = _model.badge.ssid;
-        [self.nav pushViewController:vc animated:YES];
-//    }
-}
+
 - (void)setItemarray:(NSString *)itemarray{
 //    [friendView mas_updateConstraints:^(MASConstraintMaker *make) {
 //        make.width.mas_equalTo(8*LENGTH(48)+7*LENGTH(10));
@@ -165,8 +157,7 @@
 
 - (void)setModel:(MyBadgeListModel *)model{
     _model = model;
-    [xzimageView sd_setImageWithURL:URLIMAGE(model.badge.min_logo) placeholderImage:UIIMAGE(ZHANWEITUXZ)];
-    touxiang.nav = self.nav;
+     touxiang.nav = self.nav;
     touxiang.itemarray= model.badgestudent;
     ydreiend.text = [NSString stringWithFormat:@"%lu人点亮中",(unsigned long)model.badgestudent.count];
 }

@@ -15,4 +15,15 @@ void Coordinate_2 (double pi, float l, float c_w , float c_h, float *x, float *y
     *x = c_w + sin(pi)*l;
     *y = c_h - cos(pi)*l;
 }
+
+- (UIViewController*)viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder* nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController
+                                          class]]) {
+            return (UIViewController*)nextResponder;
+        }
+    }
+    return nil;
+}
 @end

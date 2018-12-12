@@ -8,6 +8,8 @@
 
 #ifndef Public_h
 #define Public_h
+#define APP_VERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+
 #define WIDTH  [UIScreen mainScreen].bounds.size.width
 #define HEIGHT  [UIScreen mainScreen].bounds.size.height
 
@@ -21,8 +23,6 @@
 #define kUserDefaults [NSUserDefaults standardUserDefaults]
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 #define IOS_X [UIDevice currentDevice].systemVersion
-
-#define BANBENHAO @"v1.11"
 
 
 //#define ZSFWQ @"http://192.168.1.114:8088/"
@@ -40,12 +40,31 @@
 //#define IMAGEURL @"http://39.106.100.235:8081/"
 //#define IMAGEURL @"http://192.168.1.221:8080/"
 
-//#define IMAGEURL @"http://192.168.1.221:8081/"
-#define IMAGEURL @"http://tiantianaidu.com/"
+#define IMAGEURL @"http://192.168.1.221:8081/"
+//#define IMAGEURL @"http://tiantianaidu.com/"
 
 //#define ZSTX @"http://192.168.1.231:9001/"//内网
 #define ZSTX @"http://119.90.89.88:9001/"//外网
 //#define ZSTX @"http://192.168.1.102/knowledge/public/"//
+
+#define JK_NEWHOME @"api/v1.0/missionPage"//新首页
+#define JK_ALLTASK @"api/v1.0/allMission"//全部任务
+#define JK_TASKXQ @"api/v1.0/missionDetail"//任务详情pastLotteryList
+#define JK_MRT @"api/v1.0/famousList"//名人堂
+#define JK_JPLIST @"api/v1.0/prizeList"//奖品列表
+#define JK_LQRW @"api/v1.0/receivedMission"//领取任务
+#define JK_FQTASK @"api/v1.0/giveUpMission"//放弃任务
+#define JK_AJTASK @"api/v1.0/buildSelfMission"//自荐人物
+#define JK_KJTS @"api/v1.0/lotteryInfo"//开奖提示
+#define JK_WQZJ @"api/v1.0/pastLotteryList"//往期中奖
+#define JK_WDRW @"api/v1.0/myMission"//我的任务
+#define JK_XSRWWC @"api/v1.0/lotteryList"//新手任务完成
+#define JK_RWWC @"api/v1.0/missionCompleted"//任务完成
+#define JK_RWLJ @"api/v1.0/receivePrize"//任务领奖
+#define JK_LJTJ @"api/v1.0/submitStudentPrize"//任务领奖
+
+#define JK_SHARERW @"api/v1.0/missionShare"//分享
+
 
 
 #define HOMEPAGE @"api/v1.0/homePage"//首页

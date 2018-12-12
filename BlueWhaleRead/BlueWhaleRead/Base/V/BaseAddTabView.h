@@ -10,5 +10,6 @@
 
 @interface BaseAddTabView : BaseView
 @property (strong, nonatomic) BaseTableView *tableView;
+- (UIViewController*)viewController;
 
 @end

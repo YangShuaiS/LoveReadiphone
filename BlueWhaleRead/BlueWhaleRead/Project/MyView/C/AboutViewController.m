@@ -76,7 +76,7 @@
         make.height.mas_equalTo(LENGTH(70));
     }];
     
-    BaseLabel * bbh = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(102,102,102) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:BANBENHAO];
+    BaseLabel * bbh = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(102,102,102) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:APP_VERSION];
     [scrollView addSubview:bbh];
     [bbh mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws.view).with.offset(LENGTH(24));

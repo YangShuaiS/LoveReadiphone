@@ -10,10 +10,10 @@
 #import "BaseNavigationViewController.h"
 #import "ViewController.h"
 
-#import "HomePageViewController.h"
+#import "NewHomeViewController.h"
 #import "FoundViewController.h"
 #import "NBookCityViewController.h"
-#import "MyViewController.h"
+#import "MMyViewController.h"
 @interface MainTabBarViewController ()<UITabBarControllerDelegate>{
     NSInteger _currentIndex;
 }
@@ -62,7 +62,7 @@
                          forState:UIControlStateSelected];
 //    [item4 setTitleTextAttributes:@{NSForegroundColorAttributeName:RGB(33, 33, 33),NSFontAttributeName:[UIFont systemFontOfSize:40]} forState:UIControlStateNormal];
     
-    HomePageViewController * view1 = [[HomePageViewController alloc] init];
+    NewHomeViewController * view1 = [[NewHomeViewController alloc] init];
     BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:view1];
     homenav.tabBarItem =item1;
     
@@ -74,7 +74,7 @@
     BaseNavigationViewController * homenav2 = [[BaseNavigationViewController alloc] initWithRootViewController:view3];
     homenav2.tabBarItem =item3;
     
-    MyViewController * view4 = [[MyViewController alloc] init];
+    MMyViewController * view4 = [[MMyViewController alloc] init];
     BaseNavigationViewController * homenav4 = [[BaseNavigationViewController alloc] initWithRootViewController:view4];
     homenav4.tabBarItem =item4;
     

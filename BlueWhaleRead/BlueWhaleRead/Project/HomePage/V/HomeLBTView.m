@@ -37,7 +37,7 @@
         make.left.equalTo(ws).with.offset(0);
         make.top.equalTo(ws).with.offset(0);
         make.bottom.equalTo(ws).with.offset(0);
-        make.height.equalTo(ws.mas_width).multipliedBy(0.32552);
+        make.height.equalTo(ws.mas_width).multipliedBy(0.416);
     }];
 }
 - (void)setItemArray:(NSMutableArray *)itemArray{

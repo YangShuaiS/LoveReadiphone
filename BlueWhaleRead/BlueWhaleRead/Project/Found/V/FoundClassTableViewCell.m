@@ -8,7 +8,6 @@
 
 #import "FoundClassTableViewCell.h"
 #import "HomeModerateCollectView.h"
-#import "FiendOrMedalView.h"
 
 #import "FriendViewController.h"
 
@@ -21,7 +20,6 @@
     BaseLabel * Jf;
 //    HomeFriendReadingCollectionView * collectView;
     HomeModerateCollectView * collectView;
-    FiendOrMedalView * touxiang;
     BaseLabel * weidu;
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -109,26 +107,7 @@
 //        make.bottom.equalTo(ws).with.offset(-LENGTH(31));
         make.height.mas_offset(itemHeight);
     }];
-    
-    
-    UICollectionViewFlowLayout *flowLayouts = [[UICollectionViewFlowLayout alloc] init];
-    flowLayouts.itemSize = CGSizeMake(LENGTH(32),LENGTH(32));
-    //定义每个UICollectionView 横向的间距
-    flowLayouts.minimumLineSpacing = LENGTH(2);
-    //定义每个UICollectionView 纵向的间距
-    flowLayouts.minimumInteritemSpacing = LENGTH(2);
-    //定义每个UICollectionView 的边距距
-    flowLayouts.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);//上左下右
-    flowLayouts.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    touxiang = [[FiendOrMedalView alloc] initWithLayOut:flowLayouts];
-    touxiang.foundinter = 5;
-    [self addSubview:touxiang];
-    [touxiang mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self->UserImageView.mas_centerY);
-        make.left.equalTo(ws).with.offset(LENGTH(188));
-//        make.right.equalTo(ws).with.offset(-LENGTH(26));
-        make.height.mas_equalTo(LENGTH(32));
-    }];
+
     
     weidu = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(12) TextAlignment:NSTextAlignmentCenter Text:@""];
     [self addSubview:weidu];
@@ -147,7 +126,6 @@
 }
 
 - (void) setModel:(FoundFriendBooKModel *)model{
-    touxiang.nav = self.nav;
     collectView.nav = self.nav;
     _model = model;
     UIImage * img;
@@ -160,8 +138,7 @@
     Name.text = model.name;
     lV.text = [NSString stringWithFormat:@"Lv%@",model.level];
     Jf.text = [NSString stringWithFormat:@"%@积分",model.score];
-//    touxiang.nav = self.nav;
-    touxiang.itemarray = model.badgeList;
+
     if (model.studentBook.count == 0) {
         weidu.text = @"TA暂时还没读书哦~";
         collectView.itemarray = model.studentBook;
@@ -170,27 +147,7 @@
         collectView.itemarray = model.studentBook;
     }
 }
-//- (void)setItemarray:(NSMutableArray *)itemarray{
-//    _itemarray = itemarray;
-//    NSMutableArray * arr =[NSMutableArray array];
-//    for (LINSHI * model in itemarray) {
-//        [arr addObject:model];
-//        
-//    }
-//    for (LINSHI * model in itemarray) {
-//        [arr addObject:model];
-//        
-//    }
-//    float f = arr.count/6.0;
-//    int a;
-//    a = ceil(f);
-//    [collectView mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.height.mas_offset(itemHeight * a+LENGTH(31)*(a-1));
-//
-//    }];
-//    collectView.itemarray = arr;
-//    touxiang.itemarray = arr;
-//}
+
 
 - (void)tap{
     FriendViewController * vc = [FriendViewController new];

@@ -51,15 +51,7 @@
         make.bottom.equalTo(ws.view);
     }];
     
-//    topImageView = [FLAnimatedImageView new];
-//    topImageView.image = UIIMAGE(@"bg_推荐书籍");
-//    [scrollView addSubview:topImageView];
-//    [topImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self->scrollView.mas_top).with.offset(0);
-//        make.left.equalTo(ws.view).with.offset(0);
-//        make.right.equalTo(ws.view).with.offset(0);
-//        make.height.mas_equalTo(LENGTH(155));
-//    }];
+
     
     name = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(8,8,8) LabelFont:TextFont(19) TextAlignment:NSTextAlignmentCenter Text:@""];
     name.numberOfLines = 0;
@@ -183,7 +175,6 @@
         }];
 }
 - (void)updata:(LunBoTuXQModel *)model{
-//    [topImageView sd_setImageWithURL:URLIMAGE(model.banner.banner_img) placeholderImage:UIIMAGE(@"bg_推荐书籍")];
     time.text = [BaseObject TiemArray:model.banner.create_time String:@" "][0];
 //    name.text = model.banner.
     name.text = model.banner.title; 

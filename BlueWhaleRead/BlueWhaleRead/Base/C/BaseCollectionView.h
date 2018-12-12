@@ -10,5 +10,6 @@
 
 @interface BaseCollectionView : UICollectionView
 @property (nonatomic,strong) UINavigationController * nav;
+- (UIViewController*)viewController;
 
 @end

@@ -9,44 +9,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/HomePage/V/HomeActivityTableView.m"
-            timestampString = "564473770.555051"
+            filePath = "BlueWhaleRead/Project/NewTask/TasjXQ/V/TKXQTopView.m"
+            timestampString = "566291433.367072"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/HomePage/V/HomeActivityTableView.m"
-            timestampString = "564473770.555356"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/HomePage/V/HomeActivityTopView.m"
-            timestampString = "564473770.5554219"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "-setModel:"
             landmarkType = "7">
          </BreakpointContent>
@@ -57,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookList/C/ReadBookListViewController.m"
-            timestampString = "564464660.711693"
+            filePath = "BlueWhaleRead/Project/NewTask/TasjXQ/V/TKXQTopView.m"
+            timestampString = "566291433.36751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "-loadRequestData:nsstring:"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
+            landmarkName = "-setModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookList/C/UnreadViewController.m"
-            timestampString = "564464662.840638"
+            filePath = "BlueWhaleRead/Project/NewTask/Taskfor/C/TAskForViewController.m"
+            timestampString = "566291433.367797"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "-loadRequestData:nsstring:"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
+            landmarkName = "-lingqu:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookList/C/UnreadViewController.m"
-            timestampString = "564464701.306754"
+            filePath = "BlueWhaleRead/Project/NewTask/Taskfor/V/TKbuiltUpView.m"
+            timestampString = "566215780.929711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "-setBookName:"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "-quding"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -105,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookList/C/UnreadViewController.m"
-            timestampString = "564464703.728538"
+            filePath = "BlueWhaleRead/Project/NewTask/Taskfor/V/TakSZView.m"
+            timestampString = "566281265.588462"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "-lqrwclick"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookList/C/UnreadViewController.m"
-            timestampString = "564464706.027764"
+            filePath = "BlueWhaleRead/Project/NewTask/TUpVIew/V/TKJUpView.m"
+            timestampString = "566291433.367918"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
+            landmarkName = "-setModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/MyView/C/ModifyNameViewController.m"
-            timestampString = "564473770.556011"
+            filePath = "BlueWhaleRead/Project/NewTask/TUpVIew/V/TKJUpView.m"
+            timestampString = "566291433.367973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "-wanshan"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
+            landmarkName = "-setModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-            timestampString = "564656029.214011"
+            filePath = "BlueWhaleRead/Project/NewTask/Taskfor/C/TAskForViewController.m"
+            timestampString = "566291433.368023"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "544"
-            endingLineNumber = "544"
-            landmarkName = "-jieya"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "-UpData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-            timestampString = "564656029.214099"
+            filePath = "BlueWhaleRead/Project/NewTask/Taskfor/C/TAskForViewController.m"
+            timestampString = "566291433.368071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
-            landmarkName = "-createProgress"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "-cshtype:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -185,13 +153,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookXQ/V/BookXQDownView.m"
-            timestampString = "564656029.214162"
+            filePath = "BlueWhaleRead/Project/NewTask/Taskfor/C/TAskForViewController.m"
+            timestampString = "566291433.368114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
-            landmarkName = "-down"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "-cshtype:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -201,13 +169,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookXQ/C/HuiBenViewController.m"
-            timestampString = "564656029.214222"
+            filePath = "BlueWhaleRead/Project/NewTask/Taskfor/C/TAskForViewController.m"
+            timestampString = "566291433.368158"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "-setItemarray:"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-cshtype:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -217,13 +185,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/MyView/V/PersonXuanZeZhaoPian.m"
-            timestampString = "564913066.205372"
+            filePath = "BlueWhaleRead/Project/NewTask/TasjXQ/V/TKXQTopView.m"
+            timestampString = "566291433.368204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "-setStyle:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
