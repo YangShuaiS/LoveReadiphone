@@ -38,5 +38,8 @@ typedef void(^GenBlock)(FenXiangModel * model,ShareStyle sharestyle);
 @property(nonatomic,strong) UIViewController * vc;
 @property(nonatomic,strong)NSString * atype;//
 
+
+@property(nonatomic,assign)int inter;
+
 @end
 

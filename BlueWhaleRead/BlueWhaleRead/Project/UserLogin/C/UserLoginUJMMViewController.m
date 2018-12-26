@@ -148,12 +148,11 @@
                     UserLoginWJMMTwoViewController * vc = [UserLoginWJMMTwoViewController new];
                     vc.phone = self->phone.textField.text;
                     [self.navigationController pushViewController:vc animated:YES];
-                    mb.label.text = model.message;
-                    [mb hideAnimated:NO afterDelay:1];
-                }else{
-                    mb.label.text = model.message;
-                    [mb hideAnimated:NO afterDelay:1];
+                }else if ([model.code isEqual:@Notloggedin]){
+                    [self UpDengLu];
                 }
+                mb.label.text = model.message;
+                [mb hideAnimated:NO afterDelay:1];
             }else{
                 mb.label.text = @"网络请求失败";
                 [mb hideAnimated:NO afterDelay:1];

@@ -106,6 +106,8 @@
             self->model = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([self->model.code isEqual:@200]) {
                 [self UpData];
+            }else if ([self->model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

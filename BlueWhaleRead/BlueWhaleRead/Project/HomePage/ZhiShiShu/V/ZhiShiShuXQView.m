@@ -49,7 +49,10 @@
                 }
                 self->model.data = newarray;
                 [self upview];
-            }else{
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
+            }
+            else{
                 [self removeFromSuperview];
             }
         }else{

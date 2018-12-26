@@ -181,6 +181,8 @@
                     vc.bookfenshu = model.b_score;
                     [self.nav pushViewController:vc animated:YES];
                 }];
+            }else if ([Topmodel.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             
@@ -200,6 +202,8 @@
                 [self tableView:self commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
                 [self->_itemarray removeObjectAtIndex:indexPath.section];
                 [self deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }else if ([Topmodel.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

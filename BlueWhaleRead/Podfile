@@ -12,6 +12,7 @@ pod 'SDCycleScrollView'
 pod 'MJExtension'
 pod 'FXBlurView'
 pod 'MBProgressHUD'
+#pod 'SGQRCode'
 #pod 'CocoaAsyncSocket'
 
 #pod 'YYKit'

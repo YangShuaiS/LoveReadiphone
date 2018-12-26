@@ -7,6 +7,9 @@
 //
 
 #import "BaseAppRequestManager.h"
+
+#import "BaseNavigationViewController.h"
+#import "UserLoginViewController.h"
 //static NSString * const BasURLString = ZSFWQ;
 static BaseAppRequestManager * manger = nil;
 @implementation BaseAppRequestManager

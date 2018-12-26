@@ -76,4 +76,7 @@ extern MeModel const * Me;
 + (NSInteger)MonthDayLength:(NSDate *)date;
 + (NSDate *)LastDays:(NSDate *)date Days:(NSInteger)day;
 + (NSDate *)NextDays:(NSDate *)date Days:(NSInteger)day;
+
++ (NSMutableDictionary *)BenDiXinXi;
++ (NSString *)NowTime;
 @end

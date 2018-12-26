@@ -25,5 +25,7 @@
 @property (nonatomic, copy) NSString * ssid;//书id
 @property (nonatomic, assign) NSInteger is_like;//0 未选择  1 喜欢  2 不喜欢
 
+@property (nonatomic, copy) NSString * read_times;//书id
+@property (nonatomic, copy) NSString * b_download;
 
 @end

@@ -39,6 +39,8 @@
             TKATextFileModel * model = [TKATextFileModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
                 [self UpData:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
         }
@@ -235,6 +237,8 @@
                 NewHomeModel * model = [NewHomeModel mj_objectWithKeyValues:responseObject];
                 if ([model.code isEqual:@200]) {
                     [[self viewController].navigationController popViewControllerAnimated:YES];
+                }else if ([model.code isEqual:@Notloggedin]){
+                    [self UpDengLu];
                 }
                 [[MBProgressHUD showMessage:model.message] hideAnimated:YES afterDelay:1];
             } else {

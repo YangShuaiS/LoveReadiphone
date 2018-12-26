@@ -65,6 +65,8 @@
             if ([self->model.code isEqual:@200]) {
                 self->userModel = [MyZiLiaoModel mj_objectWithKeyValues:responseObject[@"user"]];
                 [self Addview];
+            }else if ([self->model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

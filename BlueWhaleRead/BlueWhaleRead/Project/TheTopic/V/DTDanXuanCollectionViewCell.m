@@ -95,11 +95,11 @@
             if ([model.code isEqual:@200]) {
                 self->fankuilabel.text = @"已反馈";
                 self->fankuilabel.textColor = RGB(33, 33, 33);
-                [mb hideAnimated:NO afterDelay:1];
-            }else{
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
+            }
                 mb.label.text = model.message;
                 [mb hideAnimated:NO afterDelay:1];
-            }
         }else{
             mb.label.text = @"网络请求失败";
             [mb hideAnimated:NO afterDelay:1];

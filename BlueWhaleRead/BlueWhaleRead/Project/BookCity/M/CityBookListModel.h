@@ -24,5 +24,7 @@
 @property (nonatomic, copy) NSString * publish_time;//发版时间    
 @property (nonatomic, copy) NSString * status;//状态
 @property(nonatomic,strong) NSMutableArray * badgeList;//勋章列表
+@property (nonatomic, copy) NSString * read_times;//书id
+@property (nonatomic, copy) NSString * b_download;
 
 @end

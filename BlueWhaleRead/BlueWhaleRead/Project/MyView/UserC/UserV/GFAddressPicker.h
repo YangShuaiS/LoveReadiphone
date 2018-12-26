@@ -6,7 +6,7 @@
 //  Copyright © 2017年 1暖通商城. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseView.h"
 @protocol GFAddressPickerDelegate <NSObject>
 @optional
 /** 代理方法返回省市区*/
@@ -15,7 +15,7 @@
 /** 取消代理方法*/
 - (void)GFAddressPickerCancleAction;
 @end
-@interface GFAddressPicker : UIView
+@interface GFAddressPicker : BaseView
 
 /** 省 */
 @property (nonatomic, strong) NSString *province;

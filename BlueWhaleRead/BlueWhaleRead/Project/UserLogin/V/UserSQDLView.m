@@ -8,6 +8,10 @@
 
 #import "UserSQDLView.h"
 #import "SanFangBDPhoneViewController.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
+@interface UserSQDLView ()
+@end
 @implementation UserSQDLView{
     NSMutableArray * viewarray;
 }
@@ -82,7 +86,7 @@
                 make.width.mas_equalTo(LENGTH(90));
                 make.height.mas_equalTo(1);
             }];
-            [rightxian mas_makeConstraints:^(MASConstraintMaker *make) {
+            [rightxian mas_makeConstraints:^(MASConstraintMaker *make) { 
                 make.centerY.mas_equalTo(oneview);
                 make.left.mas_equalTo(oneview.mas_right).with.offset(LENGTH(18));
                 make.width.mas_equalTo(LENGTH(90));
@@ -118,7 +122,6 @@
 
         }
     }
-
 }
 - (void)clickyes{
     for (FLAnimatedImageView * view in viewarray) {
@@ -137,13 +140,34 @@
 
 - (void)qqsq{
     [self clickyno];
-    [self wxsq:SSDKPlatformSubTypeQQFriend];
+//    [self wxsq:SSDKPlatformSubTypeQQFriend];
+    WXSubscribeMsgReq *req = [[WXSubscribeMsgReq alloc] init];
+    UInt32 scene = (UInt32)[@"1000" integerValue];
+    NSString *templateId = @"hJzLT9cbc0_AqCatjpj9OdUIqbaDsEwOvMOQNPASCJA";
+    NSString *reserved = @"hello";
+    req.scene = scene;
+    req.templateId = templateId;
+    req.reserved = reserved;
+    req.openID = @"oxSlRwdEtSm2rveTcuvx_3GUyLc0";
+    //    req.type = 1;
+    [WXApi sendReq:req];
 }
 
 - (void)push:(SSDKUser*)user{
     [self clickyes];
-    SanFangBDPhoneViewController * vc = [SanFangBDPhoneViewController new];
-    [self.nav pushViewController:vc animated:YES];
+    NSString * str = user.dictionaryValue.debugDescription;
+    
+    UInt32 scene = (UInt32)[@"1000" integerValue];
+    NSString *templateId = @"hJzLT9cbc0_AqCatjpj9OdUIqbaDsEwOvMOQNPASCJA";
+    NSString *reserved = @"hello";
+    WXSubscribeMsgReq *req = [[WXSubscribeMsgReq alloc] init];
+    req.scene = scene;
+    req.templateId = templateId;
+    req.reserved = reserved;
+    [WXApi sendReq:req];
+    
+//    SanFangBDPhoneViewController * vc = [SanFangBDPhoneViewController new];
+//    [self.nav pushViewController:vc animated:YES];
 
 }
 - (void)wxsq:(SSDKPlatformType)platformType{
@@ -189,4 +213,6 @@
     [ShareSDK cancelAuthorize:platformType result:^(NSError *error) {
     }];
 }
+
+
 @end

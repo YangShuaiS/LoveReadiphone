@@ -74,6 +74,8 @@
             ShiZiLiangModel * model = [ShiZiLiangModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
                 [self UpData:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             
@@ -135,6 +137,8 @@
             ShiZiLiangModel * model = [ShiZiLiangModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
                 [self UpData:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
             
         }else{

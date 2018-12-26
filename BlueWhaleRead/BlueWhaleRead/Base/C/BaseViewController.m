@@ -9,6 +9,8 @@
 #import "BaseViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
+#import "BaseNavigationViewController.h"
+#import "UserLoginViewController.h"
 @interface BaseViewController ()<UITabBarControllerDelegate>{
     NSInteger _currentIndex;
 }
@@ -163,5 +165,12 @@
     
     [alertC addAction:alertA];
     [self presentViewController:alertC animated:YES completion:nil];
+}
+
+- (void)UpDengLu{
+            BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
+    [self presentViewController:homenav animated:YES completion:^{
+        
+    }];
 }
 @end

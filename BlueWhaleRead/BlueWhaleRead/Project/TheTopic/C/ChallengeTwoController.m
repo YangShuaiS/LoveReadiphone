@@ -27,9 +27,11 @@
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_TZXUNZHANG];
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:nil andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
-            xunzhangmodel = [TXXunZhangModel mj_objectWithKeyValues:responseObject];
-            if ([xunzhangmodel.code isEqual:@200]) {
-                [self UpData:xunzhangmodel];
+            self->xunzhangmodel = [TXXunZhangModel mj_objectWithKeyValues:responseObject];
+            if ([self->xunzhangmodel.code isEqual:@200]) {
+                [self UpData:self->xunzhangmodel];
+            }else if ([self->xunzhangmodel.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

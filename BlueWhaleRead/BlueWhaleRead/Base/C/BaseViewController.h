@@ -14,4 +14,5 @@
 - (void)AddNavtion;//添加导航栏
 - (void)RefreshTheView;//刷新视图
 - (void)QRCodeScanVC:(UIViewController *)scanVC;//二维码
+- (void)UpDengLu;
 @end

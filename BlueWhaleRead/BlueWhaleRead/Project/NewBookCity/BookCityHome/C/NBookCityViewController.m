@@ -14,6 +14,13 @@
 #import "NBCweekReadingView.h"
 #import "NBClistAllView.h"
 #import "NBCclassificationView.h"
+#import "WCQRCodeScanningVC.h"
+
+#import "GuideBookCityOneView.h"
+#import "GuideBookCityTwoView.h"
+#import "GuideBookCityThreeView.h"
+
+#import "NewHpViewModel.h"
 @interface NBookCityViewController ()<NavDelegate,UIScrollViewDelegate>
 
 @end
@@ -39,7 +46,7 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"" Title:@"书城" RightTitle:@"搜索-深色" NativeStyle:nacStyleCengterAndRight];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"扫码" Title:@"书城" RightTitle:@"搜索-深色" NativeStyle:NavStyleLeftImageAndRightImageAndCenter];
      self.navtive.titcolor = RGB(0, 0, 0);
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
@@ -52,7 +59,8 @@
     self.navtive.downlayer = YES;
 }
 - (void)NavLeftClick{
-    
+    WCQRCodeScanningVC *WCVC = [[WCQRCodeScanningVC alloc] init];
+    [self QRCodeScanVC:WCVC];
 }
 
 - (void)NavCenterClick {
@@ -76,7 +84,7 @@
     scrollView.delegate = self;
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.navtive.mas_bottom).with.offset(LENGTH(4));
+        make.top.equalTo(ws.navtive.mas_bottom).with.offset(4);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
@@ -147,6 +155,8 @@
             NBCALLModel * model = [NBCALLModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
                 [self UpData:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
             [self->scrollView.mj_header endRefreshing];
         }else{
@@ -160,9 +170,59 @@
     cweek.model = model;
     List.model = model;
     classification.model = model;
+    [self.view.superview layoutIfNeeded];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self addGuideBookCityOneView];
+    });
+}
+- (void)addGuideBookCityOneView{
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
+    NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
+    if ([model.ydybookcity integerValue]<3) {
+        WS(ws);
+        GuideBookCityOneView * view = [GuideBookCityOneView new];
+        view.frames = self.navtive.frame;
+        [self.view.window addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(ws.view.window);
+        }];
+        [view setBlock:^{
+            [ws addGuideBookCityTwoView];
+        }];
+        
+        NSString * str = [NSString stringWithFormat:@"%ld",[model.ydybookcity integerValue]+1];
+        [dataDictionary setValue:str forKey:@"ydybookcity"];
+        [dataDictionary writeToFile:filePatch atomically:YES];
+    }
+}
+- (void)addGuideBookCityTwoView{
+    WS(ws);
+    GuideBookCityTwoView * view = [GuideBookCityTwoView new];
+    view.frames = channel.frame;
+    [self.view.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view.window);
+    }];
+    [view setBlock:^{
+        [ws addGuideBookCityThreeView];
+    }];
 }
 
-
+- (void)addGuideBookCityThreeView{
+    
+    [scrollView setContentOffset:CGPointMake(0, (cweek.frame.origin.y+cweek.frame.size.height)-scrollView.frame.size.height) animated:YES];
+    WS(ws);
+    GuideBookCityThreeView * view = [GuideBookCityThreeView new];
+    view.frames = cweek.frame;
+    [self.view.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view.window);
+    }];
+    [view setBlock:^{
+    }];
+}
 /*
 #pragma mark - Navigation
 

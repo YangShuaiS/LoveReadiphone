@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-
 @interface BookXqViewController : BaseViewController
 @property (nonatomic, assign) BookReadingStyle style;
 @property(nonatomic,strong) NSString * loadId;

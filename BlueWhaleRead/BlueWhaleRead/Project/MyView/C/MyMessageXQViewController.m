@@ -130,6 +130,8 @@
             if ([models.code isEqual:@200]) {
                 self.block();
                 [self.navigationController popViewControllerAnimated:YES];
+            }else if ([models.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             
@@ -149,6 +151,8 @@
             MyMessageXQModel * models = [MyMessageXQModel mj_objectWithKeyValues:responseObject];
             if ([models.code isEqual:@200]) {
                 [self updata:models];
+            }else if ([models.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

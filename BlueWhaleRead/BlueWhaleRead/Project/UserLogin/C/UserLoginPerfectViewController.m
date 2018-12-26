@@ -205,19 +205,19 @@
 //        [mb hideAnimated:NO afterDelay:1];
 //    }
     else{
-        NSDictionary * dic = @{@"phone":_itemarray[0],@"password":_itemarray[1],@"username":yhm.textField.text,@"birthday":shengri.djshj.text,@"sex":xb};
+        NSDictionary * dic = @{@"phone":_itemarray[0],@"password":_itemarray[1],@"username":yhm.textField.text,@"birthday":shengri.djshj.text,@"sex":xb,@"studentid":Me.ssid};
         [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
             if (responseObject) {
                 MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
                 if ([model.code isEqual:@200]) {
                     UserLoginWsXXViewController * vc = [UserLoginWsXXViewController new];
                     vc.itemarray = self->_itemarray;
-                    [self.navigationController pushViewController:vc animated:YES];                    mb.label.text = model.message;
-                    [mb hideAnimated:NO afterDelay:1];
-                }else{
-                    mb.label.text = model.message;
-                    [mb hideAnimated:NO afterDelay:1];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if ([model.code isEqual:@Notloggedin]){
+                    [self UpDengLu];
                 }
+                mb.label.text = model.message;
+                [mb hideAnimated:NO afterDelay:1];
             }else{
                 mb.label.text = @"网络请求失败";
                 [mb hideAnimated:NO afterDelay:1];

@@ -75,6 +75,8 @@
                 self->modelarray = [NSMutableArray array];
                 self->modelarray = model.data;
                 [self->_carousel reloadData];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

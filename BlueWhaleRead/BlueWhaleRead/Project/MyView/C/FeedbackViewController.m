@@ -152,13 +152,12 @@
         if (responseObject) {
             HomePage * model = [HomePage mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                mb.label.text = @"已反馈";
-                [mb hideAnimated:NO afterDelay:1];
                 [ws.navigationController popViewControllerAnimated:YES];
-            }else{
-                mb.label.text = model.message;
-                [mb hideAnimated:NO afterDelay:1];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
+            mb.label.text = model.message;
+            [mb hideAnimated:NO afterDelay:1];
         }else{
             mb.label.text = @"网络请求失败";
             [mb hideAnimated:NO afterDelay:1];

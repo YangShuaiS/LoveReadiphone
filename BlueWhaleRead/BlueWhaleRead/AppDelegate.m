@@ -13,27 +13,30 @@
 #import "YDYView.h"
 
 #import "DTLianXUanXIang.h"
-
-//#import "MOBShareSDKHelper.h"
-@interface AppDelegate ()
+#import "WXApi.h"
+@interface AppDelegate ()<WXApiDelegate>
 
 @end
 
 @implementation AppDelegate
 
 - (void)uodatazsfwq{
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_GHYM];
-    NSString * str = APP_VERSION;
-    NSString *sysVersion = [[UIDevice currentDevice] systemName]; //获取系统名称 例如：iPhone OS
-    NSString *sysVersions = [[UIDevice currentDevice] systemVersion]; //获取系统版本 例如：9.2
-    
-    NSDictionary * dic = @{@"UUID":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"mobileModel":[BaseObject deviceModelName],@"os":sysVersion,@"osVersion":sysVersions,@"appVersionCode":str};
-    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
-        if (responseObject) {
-        }else{
-            ZSFWQ = @"http://39.106.100.235/";
-        }
-    }];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_GHYM];
+        NSString * str = APP_VERSION;
+        NSString *sysVersion = [[UIDevice currentDevice] systemName]; //获取系统名称 例如：iPhone OS
+        NSString *sysVersions = [[UIDevice currentDevice] systemVersion]; //获取系统版本 例如：9.2
+        
+        NSDictionary * dic = @{@"UUID":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"mobileModel":[BaseObject deviceModelName],@"os":sysVersion,@"osVersion":sysVersions,@"appVersionCode":str};
+        [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+            if (responseObject) {
+                
+            }else{
+                //            ZSFWQ = @"http://39.106.100.235/";
+            }
+        }];
+    });
 }
 - (void)addwenjian{
     NSArray *pathArray =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -54,8 +57,37 @@
 //        NSLog(@"文件夹不存在");
 //    }
 }
+
+- (void)jiantingwangluo{
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+//                NSLog(@"未识别的网络");
+                break;
+                
+            case AFNetworkReachabilityStatusNotReachable:
+//                NSLog(@"不可达的网络(未连接)");
+                break;
+                
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                [self uodatazsfwq];
+                break;
+                
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                [self uodatazsfwq];
+                break;
+            default:
+                break;
+        }
+    }];
+    [manager startMonitoring];
+
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [self uodatazsfwq];
+    [WXApi registerApp:@"wx5b092cd426a86253"];
+    [self jiantingwangluo];
     [self addwenjian];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(denglu) name:kNotificationDenglu object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tuichudenglu) name:kNotificationTuiChuDenglu object:nil];
@@ -64,15 +96,8 @@
     
     Me = [[MeModel SharedModel] ADDvalue];
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
-
-    if (Me.ssid.length>0) {
-        MainTabBarViewController * main = [MainTabBarViewController new];
-        self.window.rootViewController = main;
-    }else{
-        BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
-        self.window.rootViewController = homenav;
-    }
-
+    MainTabBarViewController * main = [MainTabBarViewController new];
+    self.window.rootViewController = main;
     [self.window makeKeyWindow];
     [self loadModel];
     
@@ -221,28 +246,36 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 @synthesize persistentContainer = _persistentContainer;
 
-- (NSPersistentContainer *)persistentContainer {
+- (NSPersistentContainer *)persistentContainer  API_AVAILABLE(ios(10.0)){
     // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
     @synchronized (self) {
         if (_persistentContainer == nil) {
-            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"BlueWhaleRead"];
-            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
-                if (error != nil) {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    
-                    /*
-                     Typical reasons for an error here include:
-                     * The parent directory does not exist, cannot be created, or disallows writing.
-                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                     * The device is out of space.
-                     * The store could not be migrated to the current model version.
-                     Check the error message to determine what the actual problem was.
-                    */
-//                    NSLog(@"Unresolved error %@, %@", error, error.userInfo);
-                    abort();
-                }
-            }];
+            if (@available(iOS 10.0, *)) {
+                _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"BlueWhaleRead"];
+            } else {
+                // Fallback on earlier versions
+            }
+            if (@available(iOS 10.0, *)) {
+                [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+                    if (error != nil) {
+                        // Replace this implementation with code to handle the error appropriately.
+                        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                        
+                        /*
+                         Typical reasons for an error here include:
+                         * The parent directory does not exist, cannot be created, or disallows writing.
+                         * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                         * The device is out of space.
+                         * The store could not be migrated to the current model version.
+                         Check the error message to determine what the actual problem was.
+                         */
+                        //                    NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+                        abort();
+                    }
+                }];
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
     
@@ -261,25 +294,32 @@ void UncaughtExceptionHandler(NSException *exception) {
         abort();
     }
 }
-
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options NS_AVAILABLE_IOS(9_0); // no equiv. notification. return NO if the application can't open for some reason
 {
-    NSLog(@"application:openURL:sourceApplication:annotation:");
-    //    [self application:application handleOpenURL:url];
-    return  YES;
+    return [WXApi handleOpenURL:url delegate:self];
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    NSLog(@"application:handleOpenURL:");
-    //    [self application:application openURL:url sourceApplication:nil annotation:nil];
-    return  YES;
-}
 
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
-{
-    return  YES;
+-(void) onReq:(BaseReq*)reqonReq{
+    
+}
+-(void) onResp:(BaseResp*)resp{
+    if([resp isKindOfClass:[SendAuthResp class]]){//判断是否为授权登录类
+        
+        SendAuthResp *req = (SendAuthResp *)resp;
+        
+        if([req.state isEqualToString:@"123"]){//微信授权成功
+            
+        }
+    }
+    
+    if([resp isKindOfClass:[WXSubscribeMsgResp class]]){//判断是否为授权登录类
+        WXSubscribeMsgResp *req = (WXSubscribeMsgResp *)resp;
+        NSLog(@"###### %@",req.openId);
+    }
+}
+-(BOOL) sendReq:(BaseReq*)req{
+    return YES ;
 }
 
 -(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
@@ -288,5 +328,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     }
     return UIInterfaceOrientationMaskPortrait;//默认全局不支持横屏
 }
+
+
 
 @end

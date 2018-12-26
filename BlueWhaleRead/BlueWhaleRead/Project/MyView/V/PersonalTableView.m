@@ -242,6 +242,8 @@
             self->mo = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([self->mo.code isEqual:@200]) {
                 [self LoadData];
+            }else if ([self->mo.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             
@@ -258,6 +260,8 @@
             if ([self->mo.code isEqual:@200]) {
                 self->newModel = [MyZiLiaoModel mj_objectWithKeyValues:responseObject[@"user"]];
                 self.model = self->newModel;
+            }else if ([self->mo.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

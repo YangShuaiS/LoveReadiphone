@@ -531,4 +531,18 @@ MeModel * Me = nil;
     return range.length;
 }
 
++ (NSMutableDictionary *)BenDiXinXi{
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
+    return dataDictionary;
+}
++ (NSString *)NowTime{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    NSDate *datenow = [NSDate date];
+    NSString *currentTimeString = [formatter stringFromDate:datenow];
+    return currentTimeString;
+}
+
+
 @end

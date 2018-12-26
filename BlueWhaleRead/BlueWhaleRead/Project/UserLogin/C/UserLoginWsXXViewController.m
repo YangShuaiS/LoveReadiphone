@@ -145,6 +145,9 @@
                 [usersDic writeToFile:filePatch atomically:YES];
                 [mb hideAnimated:NO];
                 [self wansahn];
+            }else if ([m.code isEqual:@Notloggedin]){
+                [self UpDengLu];
+                [mb hideAnimated:NO];
             }else{
                 mb.label.text = m.message;
                 [mb hideAnimated:NO afterDelay:1];
@@ -183,6 +186,9 @@
                 [mb hideAnimated:NO];
                 NSNotification *notification =[NSNotification notificationWithName:kNotificationDenglu object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotification:notification];
+            }else if ([m.code isEqual:@Notloggedin]){
+                [self UpDengLu];
+                [mb hideAnimated:NO];
             }else{
                 mb.label.text = m.message;
                 [mb hideAnimated:NO afterDelay:1];
@@ -203,6 +209,8 @@
             if ([mo.code isEqual:@200]) {
                 NSNotification *notification =[NSNotification notificationWithName:kNotificationDenglu object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotification:notification];
+            }else if ([mo.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

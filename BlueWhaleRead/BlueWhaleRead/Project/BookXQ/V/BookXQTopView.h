@@ -8,6 +8,7 @@
 
 #import "BaseView.h"
 #import "JKStarDisplayView.h"
+typedef void(^click)(void);
 
 @interface BookXQTopView : BaseView<UIScrollViewDelegate>
 @property(nonatomic,strong) BookXQbookModel *model;
@@ -16,5 +17,6 @@
 @property (nonatomic, assign) BookReadingStyle status;
 
 @property(nonatomic,strong) CityBadgeListModel*citymodel;
-
+@property(nonatomic,copy)click block;
+- (void)oneButtons;
 @end

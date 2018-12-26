@@ -6,8 +6,8 @@
 //  Copyright © 2017年 kingsic. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface WCQRCodeScanningVC : UIViewController
+@interface WCQRCodeScanningVC : BaseViewController
 
 @end

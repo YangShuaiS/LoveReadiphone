@@ -54,6 +54,8 @@
                 self->nav.title = model.data.name;
                 self->nav.titcolor = [BaseObject colorWithHexString:model.data.txt_color];
 //                [self->nav jianbian:model.data.name Color:@[(id)RGB(242,227,185).CGColor,(id)RGB(207,186,135).CGColor,(id)RGBA(172,145,84,1).CGColor]];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
             FLAnimatedImageView * imageview = [FLAnimatedImageView new];
             NSInteger scale_screen = [UIScreen mainScreen].scale;

@@ -53,7 +53,6 @@
     _TypeModel = TypeModel;
     title.text = TypeModel.name;
     [imageView sd_setImageWithURL:URLIMAGE(TypeModel.logo) placeholderImage:UIIMAGE(@"icon_书城_全部_未选中")];
-
 }
 - (void)setOrderModel:(CityOrderBookModel *)orderModel{
     _orderModel = orderModel;

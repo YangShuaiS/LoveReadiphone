@@ -203,6 +203,8 @@
                     MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
                     if ([model.code isEqual:@200]) {
                         [self UpData];
+                    }else if ([model.code isEqual:@Notloggedin]){
+                        [self UpDengLu];
                     }
                     mb.label.text = model.message;
                     [mb hideAnimated:NO afterDelay:1];

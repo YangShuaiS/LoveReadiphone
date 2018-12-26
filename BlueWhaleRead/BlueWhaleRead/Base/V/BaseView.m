@@ -7,7 +7,8 @@
 //
 
 #import "BaseView.h"
-
+#import "BaseNavigationViewController.h"
+#import "UserLoginViewController.h"
 @implementation BaseView
 #pragma mark - 算落点坐标
 
@@ -25,5 +26,11 @@ void Coordinate_2 (double pi, float l, float c_w , float c_h, float *x, float *y
         }
     }
     return nil;
+}
+- (void)UpDengLu{
+    BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
+    [[self viewController] presentViewController:homenav animated:YES completion:^{
+        
+    }];
 }
 @end

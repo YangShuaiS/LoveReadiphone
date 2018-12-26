@@ -7,8 +7,11 @@
 //
 
 #import "BaseView.h"
+typedef void(^click)(void);
 
 @interface BookXQDownView : BaseView
 @property(nonatomic,strong) BookXQbookModel *model;
+@property(nonatomic,assign) NSInteger joincity;
+@property(nonatomic,copy)click block;
 
 @end

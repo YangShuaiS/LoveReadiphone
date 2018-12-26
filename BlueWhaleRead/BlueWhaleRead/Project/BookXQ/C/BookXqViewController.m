@@ -13,6 +13,12 @@
 #import "MingShiDDViewController.h"
 #import "YouXiuSPViewController.h"
 #import "UserFriendViewController.h"
+
+#import "GuideBookXqOneView.h"
+#import "GuideBookXqTwoView.h"
+#import "GuideBookXqThreeView.h"
+
+#import "NewHpViewModel.h"
 @interface BookXqViewController ()<NavDelegate>
 
 @end
@@ -160,8 +166,21 @@
         make.height.mas_equalTo(LENGTH(TabBarHeight));
     }];
     
+    [bookTop setBlock:^{
+        [ws joincity];
+    }];
+    [bookDown setBlock:^{
+        [ws love];
+    }];
+    
+    
 }
-
+- (void)joincity{
+    bookDown.joincity = 1;
+}
+- (void)love{
+    [bookTop oneButtons];
+}
 - (void)left{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -180,6 +199,8 @@
             BookXQModel * model = [BookXQModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
                 [self UpData:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             
@@ -205,14 +226,18 @@
     bookTop.model = model.book;
 //    [self addIntensiveMenu:model];
     bookDown.model = model.book;
-
+    [self.view layoutIfNeeded];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self addGuideBookXqOneView];
+    });
 }
 - (void)addIntensiveMenu:(BookXQModel*)model{
     WS(ws);
     zt = 0;
     homeMenu = [[BookXQDownMenuView alloc] init];
     homeMenu.titarray = @[@"同学",@"读后感",@"优秀书评"];
-    [downView addSubview:homeMenu];
+    [self.view addSubview:homeMenu];
     [homeMenu mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self->downView.mas_left).with.offset(0);
         make.right.equalTo(self->downView.mas_right).with.offset(0);
@@ -339,4 +364,51 @@
 }
 */
 
+#pragma mark ------------------ 引导页
+- (void)addGuideBookXqOneView{
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
+    NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
+    if ([model.ydybookxq integerValue]<3) {
+        WS(ws);
+        GuideBookXqOneView * view = [GuideBookXqOneView new];
+        view.frames = bookTop.frame;
+        [self.view.window addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(ws.view.window);
+        }];
+        [view setBlock:^{
+            [ws addGuideBookXqTwoView];
+        }];
+        
+        NSString * str = [NSString stringWithFormat:@"%ld",[model.ydybookxq integerValue]+1];
+        [dataDictionary setValue:str forKey:@"ydybookxq"];
+        [dataDictionary writeToFile:filePatch atomically:YES];
+    }
+}
+
+- (void)addGuideBookXqTwoView{
+    WS(ws);
+    GuideBookXqTwoView * view = [GuideBookXqTwoView new];
+    view.frames = bookTop.frame;
+    [self.view.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view.window);
+    }];
+    [view setBlock:^{
+        [ws addGuideBookXqThreeView];
+    }];
+}
+- (void)addGuideBookXqThreeView{
+    WS(ws);
+    if (bookDown.model.imp_type == BookIntensiveReading) {
+        GuideBookXqThreeView * view = [GuideBookXqThreeView new];
+        view.frames = homeMenu.frame;
+        [self.view.window addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(ws.view.window);
+        }];
+    }else{
+    }
+}
 @end

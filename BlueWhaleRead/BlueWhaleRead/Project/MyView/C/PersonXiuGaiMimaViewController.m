@@ -53,15 +53,13 @@
         if (responseObject) {
             MyDeModel *model = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                self->mb.mode = MBProgressHUDModeCustomView;
-                self->mb.label.text = model.message;
-                [self->mb hideAnimated:YES afterDelay:2];
                 [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                self->mb.mode = MBProgressHUDModeCustomView;
-                self->mb.label.text = model.message;
-                [self->mb hideAnimated:YES afterDelay:2];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
+            self->mb.mode = MBProgressHUDModeCustomView;
+            self->mb.label.text = model.message;
+            [self->mb hideAnimated:YES afterDelay:2];
         }else{
             self->mb.mode = MBProgressHUDModeCustomView;
             self->mb.label.text = @"网络连接失败";

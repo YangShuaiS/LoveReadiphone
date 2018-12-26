@@ -88,6 +88,8 @@
             self->citymodel = [UserCityModel mj_objectWithKeyValues:responseObject];
             if ([self->citymodel.code isEqual:@200]) {
                 [self updata];
+            }else if ([self->citymodel.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
         }

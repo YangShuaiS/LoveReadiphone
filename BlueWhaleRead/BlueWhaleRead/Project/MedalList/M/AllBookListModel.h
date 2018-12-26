@@ -24,7 +24,8 @@
 @property (nonatomic, copy) NSString * is_like;
 @property (nonatomic, assign) NSInteger joinstyle;
 
-
+@property (nonatomic, copy) NSString * read_times;//书id
+@property (nonatomic, copy) NSString * b_download;
 @property (nonatomic, strong) NSMutableArray *badgeList;
 
 @end

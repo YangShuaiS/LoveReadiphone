@@ -11,6 +11,13 @@
 #import "BlueWhaleRead-Swift.h"
 
 #import "HuiBenViewController.h"
+
+#import "GuideDaTiTwoView.h"
+#import "GuideDaTiOneView.h"
+#import "GuideDaTiThreeView.h"
+#import "GuideDaTiFourView.h"
+
+#import "NewHpViewModel.h"
 @implementation BookXQDownView{
     BaseView * yueduview;
     BaseView * Lefttview;
@@ -44,28 +51,31 @@
     }
     return self;
 }
-
+- (void)setJoincity:(NSInteger)joincity{
+    _joincity = joincity;
+    [self addbookcity];
+}
 - (void)addread{
     viewarray = [NSMutableArray array];
-    if (![_model.b_download isEqualToString:@""]) {
-        yueduview  = [BaseView new];
-        yueduview.backgroundColor = RGB(247,203,103);
-        yueduview.layer.masksToBounds = YES;
-        yueduview.layer.cornerRadius = LENGTH(21);
-        [self addSubview:yueduview];
-        yuedulabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"免费畅读"];
-        [yueduview addSubview:yuedulabel];
-        
-        [yuedulabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self->yueduview.mas_centerY);
-            make.centerX.mas_equalTo(self->yueduview.mas_centerX);
-        }];
-        [viewarray addObject:yueduview];
-        yueduview.userInteractionEnabled = YES;
-        UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createProgress)];
-        //将手势添加到需要相应的view中去
-        [yueduview addGestureRecognizer:tapGesture1];
-    }
+//    if (![_model.b_download isEqualToString:@""]) {
+//        yueduview  = [BaseView new];
+//        yueduview.backgroundColor = RGB(247,203,103);
+//        yueduview.layer.masksToBounds = YES;
+//        yueduview.layer.cornerRadius = LENGTH(21);
+//        [self addSubview:yueduview];
+//        yuedulabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"免费畅读"];
+//        [yueduview addSubview:yuedulabel];
+//        
+//        [yuedulabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.mas_equalTo(self->yueduview.mas_centerY);
+//            make.centerX.mas_equalTo(self->yueduview.mas_centerX);
+//        }];
+//        [viewarray addObject:yueduview];
+//        yueduview.userInteractionEnabled = YES;
+//        UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createProgress)];
+//        //将手势添加到需要相应的view中去
+//        [yueduview addGestureRecognizer:tapGesture1];
+//    }
     Lefttview  = [BaseView new];
     Lefttview.backgroundColor = RGB(255,167,96);
     Lefttview.layer.masksToBounds = YES;
@@ -94,7 +104,7 @@
     [viewarray addObject:rightview];
     Lefttview.userInteractionEnabled = YES;
     rightview.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tapGesture0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bookcity)];
+    UITapGestureRecognizer * tapGesture0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dati)];
     //将手势添加到需要相应的view中去
     [Lefttview addGestureRecognizer:tapGesture0];
     
@@ -158,6 +168,68 @@
     }];
     
 }
+- (void)dati{
+    [self bookcity];
+}
+- (void)addGuideDaTiOneView{
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
+    NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
+    if ([model.ydydati integerValue]<3) {
+        WS(ws);
+        GuideDaTiOneView * view = [GuideDaTiOneView new];
+        [self.window addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(ws.window);
+        }];
+        [view setBlock:^{
+            [ws addGuideDaTiTwoView];
+        }];
+        
+        NSString * str = [NSString stringWithFormat:@"%ld",[model.ydydati integerValue]+1];
+        [dataDictionary setValue:str forKey:@"ydydati"];
+        [dataDictionary writeToFile:filePatch atomically:YES];
+    }
+    
+    
+
+}
+- (void)addGuideDaTiTwoView{
+    WS(ws);
+    GuideDaTiTwoView * view = [GuideDaTiTwoView new];
+    [self.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.window);
+    }];
+    [view setBlock:^{
+        [ws addGuideDaTiThreeView];
+    }];
+}
+
+- (void)addGuideDaTiThreeView{
+    WS(ws);
+    GuideDaTiThreeView * view = [GuideDaTiThreeView new];
+    [self.window addSubview:view];
+//    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(ws.window);
+//    }];
+    [view setBlock:^{
+        [ws addGuideDaTiFourView];
+    }];
+}
+
+- (void)addGuideDaTiFourView{
+    WS(ws);
+    GuideDaTiFourView * view = [GuideDaTiFourView new];
+    [self.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.window);
+    }];
+    [view setBlock:^{
+        
+    }];
+}
+
 - (void)bookcity{
     if ([self.nav respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.nav.interactivePopGestureRecognizer.enabled = NO;
@@ -213,11 +285,15 @@
                     vc.bookfenshu = self.model.b_score;
                     [self.nav pushViewController:vc animated:YES];
                 }];
-                [mb hideAnimated:NO afterDelay:1];
-            }else{
+                static dispatch_once_t onceToken;
+                dispatch_once(&onceToken, ^{
+                    [self addGuideDaTiOneView];
+                });
+            }else if ([self->Topmodel.code isEqual:@Notloggedin]){
+                [self UpDengLu];
+            }
                 mb.label.text = self->Topmodel.message;
                 [mb hideAnimated:NO afterDelay:1];
-            }
             self->leftLabel.userInteractionEnabled = YES;
         }else{
             mb.label.text = @"网络请求失败";
@@ -263,31 +339,34 @@
             JoinBookModel * models = [JoinBookModel mj_objectWithKeyValues:responseObject];
             if ([models.code isEqual:@200]) {
                 [self addBook];
-                NSMutableArray * bagearray = self->_model.badgeList;
-                NSMutableArray * arr = ws.model.badgeList;
-                if (arr.count>0) {
-                    CityBadgeListModel * city = bagearray[0];
-                    WS(ws);
-                    GeneralUpView * genView = [GeneralUpView new];
-                    genView.nav = self.nav;
-                    genView.style = PopUpViewStyleBelong;
-                    [self.nav.view addSubview:genView];
-                    [genView mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.edges.mas_equalTo(ws.nav.view);
-                    }];
-                    
-                    GenPopViewModel * m = [GenPopViewModel new];
-                    m.title = self->_model.name;
-                    m.subtitle = city.name;
-                    genView.model = m;
-                    genView.joinmodel = models;
+//                NSMutableArray * bagearray = self->_model.badgeList;
+//                NSMutableArray * arr = ws.model.badgeList;
+//                if (arr.count>0) {
+//                    CityBadgeListModel * city = bagearray[0];
+//                    WS(ws);
+//                    GeneralUpView * genView = [GeneralUpView new];
+//                    genView.nav = self.nav;
+//                    genView.style = PopUpViewStyleBelong;
+//                    [self.nav.view addSubview:genView];
+//                    [genView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                        make.edges.mas_equalTo(ws.nav.view);
+//                    }];
+//                    
+//                    GenPopViewModel * m = [GenPopViewModel new];
+//                    m.title = self->_model.name;
+//                    m.subtitle = city.name;
+//                    genView.model = m;
+//                    genView.joinmodel = models;
+//                }
+                if (ws.joincity == 1) {
+                    ws.joincity = 2;
+                    ws.block();
                 }
-                [mb hideAnimated:NO afterDelay:1];
-
-            }else{
-                mb.label.text = models.message;
-                [mb hideAnimated:NO afterDelay:1];
+            }else if ([models.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
+            mb.label.text = models.message;
+            [mb hideAnimated:NO afterDelay:1];
         }else{
             mb.label.text = @"网络请求失败";
             [mb hideAnimated:NO afterDelay:1];

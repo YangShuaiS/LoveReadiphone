@@ -69,7 +69,7 @@
 #import "NBCALLModel.h"//新书成
 @interface MeModel : BaseModel
 @property (nonatomic, copy) NSString *avatar;
-@property (nonatomic, strong) NSString *code;
+@property (nonatomic, copy) NSString *code;
 @property (nonatomic, copy) NSString *level;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *phone;

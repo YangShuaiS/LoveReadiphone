@@ -105,6 +105,8 @@
                 self.block();
                 [self.navigationController popViewControllerAnimated:YES];
 
+            }else if ([mo.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             
@@ -121,6 +123,8 @@
             if ([mo.code isEqual:@200]) {
                 self.block();
                 [self.navigationController popViewControllerAnimated:YES];
+            }else if ([mo.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

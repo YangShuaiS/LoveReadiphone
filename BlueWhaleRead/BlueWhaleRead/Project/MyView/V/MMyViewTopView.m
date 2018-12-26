@@ -7,7 +7,7 @@
 //
 
 #import "MMyViewTopView.h"
-
+#import "MyTopErWeiMaView.h"
 @implementation MMyViewTopView{
     FLAnimatedImageView * UserImageView;
     BaseLabel * name;
@@ -136,7 +136,21 @@
         make.bottom.mas_equalTo(backview.mas_bottom).with.offset(-LENGTH(22));
     }];
     
-}
+    UIImageView * erweima = [UIImageView new];
+    erweima.contentMode = UIViewContentModeScaleAspectFit;
+    erweima.image = UIIMAGE(@"二维码icon");
+    [backview addSubview:erweima];
+    [erweima mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(backview).with.offset(LENGTH(26));
+        make.right.mas_equalTo(backview).with.offset(-LENGTH(30));
+        make.width.and.height.mas_equalTo(LENGTH(23));
+    }];
+    
+    backview.userInteractionEnabled = YES;
+    erweima.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapviewtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backview)];
+    //将手势添加到需要相应的view中去
+    [erweima addGestureRecognizer:tapviewtap];}
 
 - (void)setModel:(MyUserInfo *)model{
     _model = model;
@@ -158,5 +172,19 @@
     YDFJ.text = [NSString stringWithFormat:@"Lv %@",model.level];
     YDJF.text = model.score;
     BJPM.text = model.myRank;
+    
+    
+}
+
+
+
+
+- (void)backview{
+    WS(ws);
+    MyTopErWeiMaView * view = [MyTopErWeiMaView new];
+    [[self viewController].view.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([ws viewController].view);
+    }];
 }
 @end

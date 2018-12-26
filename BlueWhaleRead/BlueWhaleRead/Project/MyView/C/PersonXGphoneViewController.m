@@ -106,10 +106,11 @@
                 [self UpData];
                 mb.label.text = model.message;
                 [mb hideAnimated:NO afterDelay:1];
-            }else{
-                mb.label.text = model.message;
-                [mb hideAnimated:NO afterDelay:1];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
+            mb.label.text = model.message;
+            [mb hideAnimated:NO afterDelay:1];
         }else{
             mb.label.text = @"网络请求失败";
             [mb hideAnimated:NO afterDelay:1];

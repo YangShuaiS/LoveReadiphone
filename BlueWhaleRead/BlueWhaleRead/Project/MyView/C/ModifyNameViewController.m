@@ -78,6 +78,8 @@
                 Me = [[MeModel SharedModel] ADDvalue];
                 self.block();
                 [self.navigationController popViewControllerAnimated:YES];
+            }else if ([mo.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

@@ -307,6 +307,8 @@
                     [self.nav pushViewController:vc animated:YES];
                 }];
                 
+            }else if ([Topmodel.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
 //            self->leftLabel.userInteractionEnabled = NO;

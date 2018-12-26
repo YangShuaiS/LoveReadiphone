@@ -116,7 +116,9 @@
     }else{
         zijian.hidden = YES;
     }
-    fenshu.text = [NSString stringWithFormat:@"分数 %@",model.studentMission.score];
+    if ([model.mission.mission_type isEqualToString:@"1"]&&[model.studentMission.status isEqualToString:@"1"]) {
+        fenshu.text = @"";
+    }
     
     NSDate * receive_timedate = [BaseObject TimeStringForDate:model.studentMission.receive_time];
     NSDate * rcompleted_timedate = [BaseObject TimeStringForDate:model.studentMission.completed_time];

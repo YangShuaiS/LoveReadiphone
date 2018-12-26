@@ -38,7 +38,7 @@
     _model = model;
     NSString * currentVolum = [self HuanCunDaXiao];
     
-    titleArray = @[@"消息推送",@"修改密码",@"清除缓存",@"意见反馈",@"关于天天爱读",@"退出登录"];
+    titleArray = @[@"消息推送",@"修改密码",@"清除缓存",@"意见反馈",@"关于博万卷",@"退出登录"];
     subArray = @[@"",@"",currentVolum,@"",@"",@""];
     [self reloadData];
 }
@@ -222,13 +222,12 @@
         if (responseObject) {
             MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                mb.label.text = @"退出成功";
-                [mb hideAnimated:NO afterDelay:1];
                 [ws QINGCHU];
-            }else{
-                mb.label.text = model.message;
-                [mb hideAnimated:NO afterDelay:1];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
+            mb.label.text = @"退出成功";
+            [mb hideAnimated:NO afterDelay:1];
         }else{
             mb.label.text = @"网络请求失败";
             [mb hideAnimated:NO afterDelay:1];

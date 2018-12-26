@@ -96,11 +96,12 @@
     
     FLAnimatedImageView * right = [FLAnimatedImageView new];
     right.image = backImage;
+    right.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:right];
     [right mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(LENGTH(26));
-        make.bottom.equalTo(ws).with.offset(-(NavHeight-StatusBar-backImage.size.height)/2);
-        make.height.mas_equalTo(backImage.size.height);
+        make.bottom.equalTo(ws).with.offset(-10);
+        make.height.mas_equalTo(24);
         make.width.mas_equalTo(backImage.size.width);
     }];
     
@@ -179,14 +180,16 @@
     WS(ws);
     FLAnimatedImageView * right = [FLAnimatedImageView new];
     right.image = UIIMAGE(image);
+    right.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:right];
     
     [right mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(ws).with.offset(-LENGTH(25));
-        make.bottom.equalTo(ws).with.offset(-LENGTH(2));
+        make.bottom.equalTo(ws).with.offset(-10);
 //        make.centerY.mas_equalTo(ws).with.offset(StatusBar/2);
-//        make.height.mas_equalTo(23);
+        make.height.mas_equalTo(24);
 //        make.width.mas_equalTo(23);
+        make.width.mas_equalTo(right.image.size.width);
     }];
     
     BaseButton * LeftBigButton = [BaseButton buttonWithType:UIButtonTypeCustom];
@@ -207,7 +210,6 @@
 }
 - (void)right{
     [self.delegate NavRightClick];
-
 }
 - (void)centerBt{
     [self.delegate NavCenterClick];

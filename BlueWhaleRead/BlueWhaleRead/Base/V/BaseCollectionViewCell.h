@@ -11,5 +11,6 @@
 @interface BaseCollectionViewCell : UICollectionViewCell
 @property (nonatomic,strong) UINavigationController * nav;
 - (UIViewController*)viewController;
+- (void)UpDengLu;
 
 @end

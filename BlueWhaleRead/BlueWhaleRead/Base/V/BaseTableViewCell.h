@@ -10,5 +10,6 @@
 
 @interface BaseTableViewCell : UITableViewCell
 @property (nonatomic,strong) UINavigationController * nav;
-
+- (UIViewController*)viewController;
+- (void)UpDengLu;
 @end

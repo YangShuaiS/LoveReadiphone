@@ -73,6 +73,8 @@
                     self->itemarray = [NSMutableArray array];
                 }
                 [ws UpData:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             [ws.tableView.mj_header endRefreshing];

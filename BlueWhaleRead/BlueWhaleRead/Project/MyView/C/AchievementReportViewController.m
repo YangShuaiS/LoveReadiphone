@@ -64,6 +64,8 @@
             self->model = [AchievementModel mj_objectWithKeyValues:responseObject];
             if ([self->model.code isEqual:@200]) {
                 [self AddView];
+            }else if ([self->model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
         }

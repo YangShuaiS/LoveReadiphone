@@ -12,6 +12,10 @@
     BaseLabel * Title;
     BaseLabel * subtitle;
     BaseLabel * fuwenben;
+    BaseLabel * zxyd;
+    UIImageView * huo;
+    BaseLabel * ydcs;
+
     //    BaseView * downview;
     FLAnimatedImageView * RightImage;
     BaseButton * ComeOn;
@@ -55,14 +59,23 @@
     
     _jKStarDisplayView = [[JKStarDisplayView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.jKStarDisplayView.redValue = [@"0" floatValue];
-    [self addSubview:self.jKStarDisplayView];
+    [leftImage addSubview:self.jKStarDisplayView];
     
     subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:subtitle];
     
     fuwenben = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@"阅读分级: 0   分值: 0"];
     [self addSubview:fuwenben];
+    zxyd = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(240,179,0) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentLeft Text:@"可在线阅读"];
+    [self addSubview:zxyd];
     
+    huo = [UIImageView new];
+    huo.contentMode = UIViewContentModeScaleAspectFit;
+    huo.image = UIIMAGE(@"阅读次数-火");
+    [self addSubview:huo];
+    
+    ydcs = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(83,83,83) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentLeft Text:@"1000次阅读"];
+    [self addSubview:ydcs];
     
     [self updata];
     [self addYiDu];
@@ -88,7 +101,7 @@
             
             break;
         case BookCaseStyleSJYD:
-            [self likeYD];
+//            [self likeYD];
             break;
         default:
             break;
@@ -150,8 +163,8 @@
     }];
     
     [_jKStarDisplayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->Title.mas_bottom).with.offset(LENGTH(6));
-        make.left.equalTo(self->leftImage.mas_right).with.offset(LENGTH(16));
+        make.bottom.equalTo(self->leftImage.mas_bottom).with.offset(-LENGTH(2));
+        make.right.equalTo(self->leftImage.mas_right).with.offset(-LENGTH(2));
         make.width.mas_equalTo(LENGTH(75));
         make.height.mas_equalTo(LENGTH(14));
         //       make.right.equalTo(ws).with.offset(-12);
@@ -160,7 +173,7 @@
     
     
     [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.jKStarDisplayView.mas_bottom).with.offset(LENGTH(6.5));
+        make.top.equalTo(self->Title.mas_bottom).with.offset(LENGTH(6.5));
         make.left.equalTo(self->leftImage.mas_right).with.offset(LENGTH(16));
         make.right.equalTo(ws).with.offset(-LENGTH(12));
     }];
@@ -173,17 +186,31 @@
 //        make.width.mas_equalTo(LENGTH(200));
         //        make.bottom.equalTo(self->leftImage.mas_bottom).with.offset(LENGTH(0));
     }];
+    [zxyd mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self->fuwenben.mas_bottom).with.offset(LENGTH(11));
+        make.left.equalTo(self->leftImage.mas_right).with.offset(LENGTH(16));
+        make.right.equalTo(ws).with.offset(-LENGTH(12));
+    }];
     
+    [huo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self->zxyd.mas_bottom).with.offset(LENGTH(12));
+        make.left.equalTo(self->leftImage.mas_right).with.offset(LENGTH(16));
+        make.width.mas_equalTo(LENGTH(8));
+        make.height.mas_equalTo(LENGTH(12));
+    }];
     
-    
+    [ydcs mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self->huo.mas_right).with.offset(LENGTH(3));
+        make.centerY.mas_equalTo(self->huo);
+    }];
     
 }
 - (void)addsjwd{
     WS(ws);
-    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:subtitleColor LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:@"今日剩余0次答题机会"];
+    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(112, 112, 112) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:@"今日剩余0次答题机会"];
     [self addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(ws).with.offset(-LENGTH(25));
+        make.bottom.equalTo(ws).with.offset(-LENGTH(20));
         make.right.equalTo(ws).with.offset(-LENGTH(10));
     }];
     
@@ -285,7 +312,11 @@
 }
 -(void)setModel:(CityBookListModel *)model{
     _model = model;
-
+    zxyd.hidden = NO;
+    ydcs.text = [NSString stringWithFormat:@"%@次阅读",model.read_times];
+    if ([model.b_download isEqualToString:@""]) {
+        zxyd.hidden = YES;
+    }
     [leftImage sd_setImageWithURL:URLIMAGE(model.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = model.name;
     self.jKStarDisplayView.redValue = [model.mark floatValue];
@@ -309,7 +340,7 @@
     fuwenben.attributedText = AttributedStr;
 
         RightImage.hidden = YES;
-        
+    
         if (_model.is_read == 2) {
             RightImage.hidden = NO;
         }else{
@@ -320,7 +351,11 @@
 
 - (void)setAllmodel:(AllBookListModel *)allmodel{
     _allmodel = allmodel;
-    
+    zxyd.hidden = NO;
+    ydcs.text = [NSString stringWithFormat:@"%@次阅读",allmodel.read_times];
+    if ([allmodel.b_download isEqualToString:@""]) {
+        zxyd.hidden = YES;
+    }
     [leftImage sd_setImageWithURL:URLIMAGE(allmodel.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = allmodel.name;
     self.jKStarDisplayView.redValue = [allmodel.mark floatValue];
@@ -354,6 +389,11 @@
 
 - (void)setUnreadBookModel:(UnreadBookModel *)unreadBookModel{
     _unreadBookModel = unreadBookModel;
+    zxyd.hidden = NO;
+    ydcs.text = [NSString stringWithFormat:@"%@次阅读",unreadBookModel.read_times];
+    if ([unreadBookModel.b_download isEqualToString:@""]) {
+        zxyd.hidden = YES;
+    }
     [leftImage sd_setImageWithURL:URLIMAGE(unreadBookModel.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = unreadBookModel.name;
     self.jKStarDisplayView.redValue = [unreadBookModel.mark floatValue];
@@ -384,6 +424,11 @@
 
 - (void)setReadBookModel:(ReadbookModel *)readBookModel{
     _readBookModel = readBookModel;
+    zxyd.hidden = NO;
+    ydcs.text = [NSString stringWithFormat:@"%@次阅读",readBookModel.read_times];
+    if ([readBookModel.b_download isEqualToString:@""]) {
+        zxyd.hidden = YES;
+    }
     [leftImage sd_setImageWithURL:URLIMAGE(readBookModel.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = readBookModel.name;
     self.jKStarDisplayView.redValue = [readBookModel.mark floatValue];
@@ -487,6 +532,8 @@
             if ([model.code isEqual:@200]) {
                 [self upview:love];
 //                [self UpData:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
 
         }else{

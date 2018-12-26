@@ -9,6 +9,7 @@
 #import "FenXiangView.h"
 #import "GZWKWebView.h"
 #import <Photos/Photos.h>
+#import "NewHpViewModel.h"
 
 @interface FenXiangView ()<WKNavigationDelegate>
 //@property(nonatomic,strong) GZWKWebView *webView;
@@ -257,7 +258,8 @@
                 [self addview];
                 self->fxmodel = [FenXiangModel mj_objectWithKeyValues:responseObject[@"share"]];
                 [self loaddata];
-            }else{
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
         }
@@ -359,8 +361,13 @@
     BaseLabel * title = titarrays[titarrays.count-1];
     title.text = @"复制链接";
     
-    url = fxmodel.url;
-    _Text = fxmodel.content;
+    url = [NSString stringWithFormat:@"%@?showType=%@&studentId=%@&atype=%@",fxmodel.url,fxmodel.ssid,Me.ssid,@"1"];
+    _imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,fxmodel.img];
+    NSString * fxtext = fxmodel.content;
+    if (fxmodel.content.length>100) {
+        fxtext = [fxtext substringToIndex:99];
+    }
+    _Text = fxtext;
     _title = fxmodel.title;
 
 }
@@ -379,7 +386,7 @@
     _title = tit;
     _Text = _wzbt;
     if ([_Text isEqualToString:@""]) {
-        _Text = @"天天爱读";
+        _Text = @"博万卷";
     }
 }
 - (void)loaddata{
@@ -495,7 +502,36 @@
     
     [self shareWithParameters:parameters];
 }
+- (void)jlxinxi{
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    NSDate *datenow = [NSDate date];
+    NSString *currentTimeString = [formatter stringFromDate:datenow];
+    
+    NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
+    if (![model.sharetime isEqualToString:currentTimeString]) {
+        [dataDictionary setValue:currentTimeString forKey:@"sharetime"];
+        [dataDictionary setValue:[NSString stringWithFormat:@"%d",_inter] forKey:@"shretype"];
+        [dataDictionary writeToFile:filePatch atomically:YES];
+    }
+    [[self viewController].navigationController popViewControllerAnimated:YES];
+    self.block(self->bakmodel,self->_sharestyle);
+    [self share];
+}
+- (void)share{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_SHARE];
+        NSDictionary * dic = @{@"studentid":Me.ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
 
+        }else{
+
+        }
+    }];
+}
 - (void)shareWithParameters:(NSMutableDictionary *)parameters
 {
     //    if(_isShare)
@@ -527,10 +563,12 @@
          switch (state) {
              case SSDKResponseStateSuccess:
              {
-                 NSLog(@"分享成功");
                  titel = @"分享成功";
                  typeStr = @"成功";
                  typeColor = [UIColor blueColor];
+                 if (self->_inter != 0) {
+                     [self jlxinxi];
+                 }
                  break;
              }
              case SSDKResponseStateFail:
@@ -557,6 +595,7 @@
                                                    cancelButtonTitle:@"确定"
                                                    otherButtonTitles:nil];
          [alertView show];
+         [self removeFromSuperview];
      }];
 }
 - (void)hb{

@@ -6,12 +6,12 @@
 //  Copyright © 2018年 YS. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseCollectionViewCell.h"
 @protocol MedalXQDelegate // 代理传值方法
 @optional
 - (void)PushFriendViewCOntroller:(PushModel *)model;
 @end
-@interface DTDanXuanCollectionViewCell : UICollectionViewCell<BaseViewDelegate>
+@interface DTDanXuanCollectionViewCell : BaseCollectionViewCell<BaseViewDelegate>
 @property (nonatomic,assign)DaTiStyle style;
 @property (nonatomic,assign)NSInteger EndCell;
 

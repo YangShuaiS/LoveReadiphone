@@ -177,5 +177,33 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+// "tabBar": {
+//   "color": "#6e6d6b", //未选择时 底部导航文字的颜色
+//   "selectedColor": "#52c7c6", //选择时 底部导航文字的颜色
+//   // "borderStyle": "black" ,//底部导航边框的样色（注意 这里如果没有写入样式 会导致 导航框上边框会出现默认的浅灰色线条）
+//   "backgroundColor": "#fff",//底部导航栏颜色
+//   // "box-shadow":"0 0 6px 0",
+//   "list": [{
+//     "pagePath": "pages/index/index",
+//     "iconPath": "images/tabBar/icon_首页_未选中.png",
+//     "selectedIconPath": "images/tabBar/icon_首页_选中.png",
+//     "text": "首页"
+//   },{
+//     "pagePath": "pages/index/index",
+//     "iconPath": "images/tabBar/icon_发现_未选中.png",
+//     "selectedIconPath": "images/tabBar/icon_发现_选中.png",
+//     "text": "发现"
+//   },{
+//     "pagePath": "pages/index/index",
+//     "iconPath": "images/tabBar/icon_书城_未选中.png",
+//     "selectedIconPath": "images/tabBar/icon_书城_选中.png",
+//     "text": "书城"
+//   },{
+//     "pagePath": "pages/index/index",
+//     "iconPath": "images/tabBar/icon_我的_未选中.png",
+//     "selectedIconPath": "images/tabBar/icon_我的_选中.png",
+//     "text": "我的"
+//   }
+//   ]
+// },
 @end

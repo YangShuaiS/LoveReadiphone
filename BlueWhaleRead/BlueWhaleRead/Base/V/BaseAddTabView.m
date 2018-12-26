@@ -7,6 +7,8 @@
 //
 
 #import "BaseAddTabView.h"
+#import "BaseNavigationViewController.h"
+#import "UserLoginViewController.h"
 @interface BaseAddTabView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -39,5 +41,11 @@
         }
     }
     return nil;
+}
+- (void)UpDengLu{
+    BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
+    [[self viewController] presentViewController:homenav animated:YES completion:^{
+        
+    }];
 }
 @end

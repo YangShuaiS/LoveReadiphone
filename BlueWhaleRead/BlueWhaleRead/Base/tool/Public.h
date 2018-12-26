@@ -23,6 +23,7 @@
 #define kUserDefaults [NSUserDefaults standardUserDefaults]
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 #define IOS_X [UIDevice currentDevice].systemVersion
+#define Notloggedin 1000
 
 
 //#define ZSFWQ @"http://192.168.1.114:8088/"
@@ -62,8 +63,9 @@
 #define JK_RWWC @"api/v1.0/missionCompleted"//任务完成
 #define JK_RWLJ @"api/v1.0/receivePrize"//任务领奖
 #define JK_LJTJ @"api/v1.0/submitStudentPrize"//任务领奖
-
-#define JK_SHARERW @"api/v1.0/missionShare"//分享
+#define JK_SHARE @"api/v1.0/weekShare"//
+#define JK_SHARERW @"api/v1.0/missionShare"//分享1
+#define JK_HQID @"api/v1.0/visitorLogin"//获取id
 
 
 
@@ -159,7 +161,10 @@
 #define RGB(r, g, b)  RGBA(r, g, b, 1.0f)
 #define TabBarTitleColor mHexRGB(0x52c7c6) //字体深色
 #define RANDOMCOLORALPHA(f) [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:f];
-#define RANDOMCOLOR [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:1.0f];
+//#define RANDOMCOLOR [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:1.0f];
+
+#define RANDOMCOLOR [UIColor clearColor];
+
 
 // 系统版本
 #define SYTEM_VERSION [[UIDevice currentDevice].systemVersion floatValue]
@@ -192,7 +197,8 @@
 //url
 
 //#define URLIMAGE(string) [NSURL URLWithString:string]
-#define URLIMAGE(string) [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMAGEURL,string]]
+#define URLIMAGES(string) [[NSString stringWithFormat:@"%@%@",IMAGEURL,string] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+#define URLIMAGE(string) [NSURL URLWithString:URLIMAGES(string  )]
 //各种颜色
 #define DT_LABELCOLOR RGB(33, 33, 33)//答题label颜色
 

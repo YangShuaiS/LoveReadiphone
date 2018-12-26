@@ -10,6 +10,13 @@
 #import "MMviewTableView.h"
 #import "MTopSZorSCView.h"
 #import "MMyViewTopView.h"
+#import "GuideSZorSConeView.h"
+#import "GuideSZorSCtwoView.h"
+#import "GuideSZorSCthreeView.h"
+
+#import "MyMessageViewController.h"
+
+#import "NewHpViewModel.h"
 @interface MMyViewController ()<NavDelegate>{
     MyDeModel * model;
     MMviewTableView * tabview;
@@ -24,7 +31,7 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"" Title:@"我的" RightTitle:@"icon_我的_消息" NativeStyle:nacStyleCengterAndRight];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"" Title:@"我的" RightTitle:@"个人中心-消息" NativeStyle:nacStyleCengterAndRight];
     self.navtive.titcolor = RGB(0, 0, 0);
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
@@ -46,7 +53,8 @@
 
 
 - (void)NavRightClick {
-
+    MyMessageViewController *  vc = [MyMessageViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -81,17 +89,66 @@
 }
 
 - (void)Click:(NSInteger)inter{
-    WS(ws);
     if (inter == 0) {
-        MTopSZorSCView * view = [MTopSZorSCView new];
-        view.nav = self.navigationController;
+        [self szorsc];
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [self addGuideSZorSConeView];
+        });
+    }
+}
+- (void)szorsc{
+    WS(ws);
+    MTopSZorSCView * view = [MTopSZorSCView new];
+    view.nav = self.navigationController;
+    [self.view.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view.window);
+    }];
+}
+
+- (void)addGuideSZorSConeView{
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
+    NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
+    if ([model.ydyszsc integerValue]<3) {
+        WS(ws);
+        GuideSZorSConeView * view = [GuideSZorSConeView new];
         [self.view.window addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(ws.view.window);
         }];
+        [view setBlock:^{
+            [ws addGuideSZorSCtwoView];
+        }];
+        
+        NSString * str = [NSString stringWithFormat:@"%ld",[model.ydyszsc integerValue]+1];
+        [dataDictionary setValue:str forKey:@"ydyszsc"];
+        [dataDictionary writeToFile:filePatch atomically:YES];
     }
 }
-
+- (void)addGuideSZorSCtwoView{
+    WS(ws);
+    GuideSZorSCtwoView * view = [GuideSZorSCtwoView new];
+    [self.view.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view.window);
+    }];
+    [view setBlock:^{
+        [ws addGuideSZorSCthreeView];
+    }];
+}
+- (void)addGuideSZorSCthreeView{
+    WS(ws);
+    GuideSZorSCthreeView * view = [GuideSZorSCthreeView new];
+    [self.view.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view.window);
+    }];
+    [view setBlock:^{
+        
+    }];
+}
 - (void)LoadData{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_MYDE];
     NSDictionary * dic = @{@"studentid":Me.ssid};
@@ -100,6 +157,8 @@
             self->model = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([self->model.code isEqual:@200]) {
                 [self UpData];
+            }else if ([self->model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             

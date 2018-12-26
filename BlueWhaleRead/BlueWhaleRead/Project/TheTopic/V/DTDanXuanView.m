@@ -282,9 +282,9 @@
             [itemarray addObject:models];
         }
         [_zqdaarray addObject:itemarray[0]];
-        itemarray = (NSMutableArray *)[itemarray sortedArrayUsingComparator:(NSComparator)^(id obj1, id obj2) {
-            return (arc4random() % 3) - 1;
-        }];
+//        itemarray = (NSMutableArray *)[itemarray sortedArrayUsingComparator:(NSComparator)^(id obj1, id obj2) {
+//            return (arc4random() % 3) - 1;
+//        }];
         _timuarray = itemarray;
         [_tableView reloadData];
         dispatch_async(dispatch_get_main_queue(), ^{

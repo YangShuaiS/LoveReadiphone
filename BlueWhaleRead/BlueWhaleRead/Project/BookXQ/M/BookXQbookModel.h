@@ -7,7 +7,7 @@
 //
 
 #import "BaseModel.h"
-
+#import "BookDanModel.h"
 @interface BookXQbookModel : BaseModel
 @property (nonatomic, copy) NSString * author;
 @property (nonatomic, copy) NSString * b_score;
@@ -17,6 +17,8 @@
 @property (nonatomic, assign) NSInteger imp_type;//精读/泛读 精读为1 泛读为2
 @property (nonatomic, copy) NSString * info;//书简介
 @property (nonatomic, assign) NSInteger is_read;//是否已读       1-》未阅读 2-》已阅读
+@property (nonatomic, assign) NSInteger is_like;//是否已读       1-》未阅读 2-》已阅读
+
 @property (nonatomic, copy) NSString * isbn;
 @property (nonatomic, copy) NSString * levels;//等级
 @property (nonatomic, copy) NSString * mark;//星级
@@ -30,6 +32,7 @@
 @property(nonatomic,strong) NSMutableArray * badgeList; // CityBadgeListModel
 
 @property (nonatomic, assign) NSInteger dayTimes;//剩余答题次数
-
+@property (nonatomic, copy) NSString * read_times;//书id
+@property(nonatomic,strong) NSMutableArray * tags;
 
 @end

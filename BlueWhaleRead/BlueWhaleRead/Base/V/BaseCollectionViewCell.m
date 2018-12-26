@@ -7,7 +7,8 @@
 //
 
 #import "BaseCollectionViewCell.h"
-
+#import "BaseNavigationViewController.h"
+#import "UserLoginViewController.h"
 @implementation BaseCollectionViewCell
 - (UIViewController*)viewController {
     for (UIView* next = [self superview]; next; next = next.superview) {
@@ -18,5 +19,11 @@
         }
     }
     return nil;
+}
+- (void)UpDengLu{
+    BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
+    [[self viewController] presentViewController:homenav animated:YES completion:^{
+        
+    }];
 }
 @end

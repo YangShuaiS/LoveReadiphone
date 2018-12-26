@@ -58,6 +58,8 @@
             MyMessageListModel * model = [MyMessageListModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
                 [self updata:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             
