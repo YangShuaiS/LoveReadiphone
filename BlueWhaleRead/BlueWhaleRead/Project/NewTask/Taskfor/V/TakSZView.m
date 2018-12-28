@@ -367,7 +367,7 @@
         if (!error) {
             NewHomeModel * model = [NewHomeModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+                NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
                 NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
                 [dataDictionary setValue:@"1" forKey:@"ydyqbrw"];
                 [dataDictionary writeToFile:filePatch atomically:YES];

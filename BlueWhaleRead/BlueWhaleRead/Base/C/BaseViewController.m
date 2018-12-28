@@ -168,7 +168,7 @@
 }
 
 - (void)UpDengLu{
-            BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
+    BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
     [self presentViewController:homenav animated:YES completion:^{
         
     }];

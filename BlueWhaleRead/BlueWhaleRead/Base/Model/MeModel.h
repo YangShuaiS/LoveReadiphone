@@ -81,6 +81,9 @@
 @property (nonatomic, copy) NSString *token;
 @property(nonatomic,assign)NSInteger loginStyle;//登录状态,1为登录成功
 @property (nonatomic, copy) NSString *userid;
+@property (nonatomic, copy) NSString *birthday;//生日
+
+
 
 + (MeModel *)SharedModel;
 - (MeModel *)ADDvalue;

@@ -21,6 +21,8 @@
 
 #import "GuideHomeOneView.h"
 #import "GuideHomeTwoView.h"
+
+#import "UserXZageView.h"
 @interface NewHomeViewController (){
     HomeLBTView * homeLBT;
     NSMutableArray *  viewarray;
@@ -56,7 +58,13 @@
                 NSDictionary * dics = m.studentInfo;
                 [usersDic setObject:dics forKey:UserMe];
                 [usersDic writeToFile:filePatch atomically:YES];
-                [ws LoadData];
+                if ([Me.birthday isEqualToString:@""]) {
+                    [ws addnianji];
+                }else{
+                    [ws LoadData];
+                }
+            }else if ([m.code isEqual:@Notloggedin]){
+                [self UpDengLu];
             }
         }else{
             [ws hqid];
@@ -64,7 +72,26 @@
     }];
     
 }
+- (void)addnianji{
+    WS(ws);
+    UserXZageView * view = [UserXZageView new];
+    [self.view.window  addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view.window);
+    }];
+    [view setBlock:^(NSString * _Nonnull str) {
+        [ws bdstr:str];
 
+    }];
+
+}
+
+- (void)bdstr:(NSString *)str{
+    NSString *key = @"nianji";
+    [[NSUserDefaults standardUserDefaults] setInteger:[str integerValue] forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self LoadData];
+}
 - (void)LoadData{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_NEWHOME];
     NSDictionary * dic = @{@"studentid":Me.ssid};
@@ -101,7 +128,7 @@
 
 }
 - (void)addGuideHomeOne{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
     if ([model.ydyhome integerValue]<3) {
@@ -119,6 +146,7 @@
         NSString * str = [NSString stringWithFormat:@"%ld",[model.ydyhome integerValue]+1];
         [dataDictionary setValue:str forKey:@"ydyhome"];
         [dataDictionary writeToFile:filePatch atomically:YES];
+        
     }
 }
 - (void)GuideHomeTwo{
@@ -211,7 +239,7 @@
         }
         lastview = view;
     }
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NSString *currentTimeString = [BaseObject NowTime];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];

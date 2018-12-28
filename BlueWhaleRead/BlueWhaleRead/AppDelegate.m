@@ -10,10 +10,10 @@
 #import "BaseNavigationViewController.h"
 #import "MainTabBarViewController.h"
 #import "UserLoginViewController.h"
-#import "YDYView.h"
-
 #import "DTLianXUanXIang.h"
 #import "WXApi.h"
+
+#import "YDYViewController.h"
 @interface AppDelegate ()<WXApiDelegate>
 
 @end
@@ -95,39 +95,34 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     Me = [[MeModel SharedModel] ADDvalue];
-    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
-    MainTabBarViewController * main = [MainTabBarViewController new];
-    self.window.rootViewController = main;
-    [self.window makeKeyWindow];
+    //发送错误文件
+//    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     [self loadModel];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+//    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+//    if (localNotification) {
+//        NSLog(@"Recieved Notification === %@",localNotification);
+//    }
     
     /** App判断第一次启动的方法 */
     NSString *key = @"isFirst";
-
     BOOL isFirst = [[NSUserDefaults standardUserDefaults] boolForKey:key];
     if (!isFirst) {
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:key];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self addYDYView];
-    } else {
-    }
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (localNotification) {
-        NSLog(@"Recieved Notification === %@",localNotification);
+        BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[YDYViewController new]];
+        self.window.rootViewController = homenav;
+        [self.window makeKeyAndVisible];
+    }else{
+        MainTabBarViewController * main = [MainTabBarViewController new];
+        self.window.rootViewController = main;
+        [self.window makeKeyWindow];
     }
     [NSThread sleepForTimeInterval:1];
     return YES;
 
 }
-- (void)addYDYView{
-    WS(ws);
-    YDYView * view = [YDYView new];
-    [self.window.rootViewController.view addSubview:view];
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.window.rootViewController.view);
-    }];
-}
+
 - (void)denglu{
     [self.window.rootViewController removeFromParentViewController];
     MainTabBarViewController * main = [MainTabBarViewController new];

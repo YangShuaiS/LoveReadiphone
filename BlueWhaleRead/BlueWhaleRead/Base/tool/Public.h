@@ -66,6 +66,7 @@
 #define JK_SHARE @"api/v1.0/weekShare"//
 #define JK_SHARERW @"api/v1.0/missionShare"//分享1
 #define JK_HQID @"api/v1.0/visitorLogin"//获取id
+#define JK_WXDL @"api/v1.0/wxUserLogin"//微信登录
 
 
 
@@ -197,8 +198,8 @@
 //url
 
 //#define URLIMAGE(string) [NSURL URLWithString:string]
-#define URLIMAGES(string) [[NSString stringWithFormat:@"%@%@",IMAGEURL,string] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-#define URLIMAGE(string) [NSURL URLWithString:URLIMAGES(string  )]
+#define URLIMAGES(string) [[NSString stringWithFormat:@"%@%@",IMAGEURL,string] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]
+#define URLIMAGE(string) [NSURL URLWithString:URLIMAGES(string)]
 //各种颜色
 #define DT_LABELCOLOR RGB(33, 33, 33)//答题label颜色
 

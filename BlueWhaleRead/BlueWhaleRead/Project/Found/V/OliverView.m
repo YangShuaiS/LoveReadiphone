@@ -52,7 +52,6 @@
         make.right.mas_equalTo(self->backView.mas_right).with.offset(-LENGTH(26));
         make.top.mas_equalTo(LENGTH(20));
         make.bottom.mas_equalTo(self->backView).with.offset(-LENGTH(20));
-
     }];
     
 //    NSString * str1 = @"北京市第二小学    朱摇摇 ";

@@ -10,6 +10,8 @@
 #import "SanFangBDPhoneViewController.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
+#import "UserWXRWMDLVIew.h"
+#import "UserLoginPerfectViewController.h"
 @interface UserSQDLView ()
 @end
 @implementation UserSQDLView{
@@ -141,35 +143,76 @@
 - (void)qqsq{
     [self clickyno];
 //    [self wxsq:SSDKPlatformSubTypeQQFriend];
-    WXSubscribeMsgReq *req = [[WXSubscribeMsgReq alloc] init];
-    UInt32 scene = (UInt32)[@"1000" integerValue];
-    NSString *templateId = @"hJzLT9cbc0_AqCatjpj9OdUIqbaDsEwOvMOQNPASCJA";
-    NSString *reserved = @"hello";
-    req.scene = scene;
-    req.templateId = templateId;
-    req.reserved = reserved;
-    req.openID = @"oxSlRwdEtSm2rveTcuvx_3GUyLc0";
-    //    req.type = 1;
-    [WXApi sendReq:req];
+    UserWXRWMDLVIew * view = [UserWXRWMDLVIew new];
+    [self.window addSubview:view];
+    WS(ws);
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.window);
+    }];
 }
 
 - (void)push:(SSDKUser*)user{
     [self clickyes];
-    NSString * str = user.dictionaryValue.debugDescription;
-    
-    UInt32 scene = (UInt32)[@"1000" integerValue];
-    NSString *templateId = @"hJzLT9cbc0_AqCatjpj9OdUIqbaDsEwOvMOQNPASCJA";
-    NSString *reserved = @"hello";
-    WXSubscribeMsgReq *req = [[WXSubscribeMsgReq alloc] init];
-    req.scene = scene;
-    req.templateId = templateId;
-    req.reserved = reserved;
-    [WXApi sendReq:req];
-    
-//    SanFangBDPhoneViewController * vc = [SanFangBDPhoneViewController new];
-//    [self.nav pushViewController:vc animated:YES];
-
+    NSDictionary * dic = user.rawData;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_WXDL];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:nil error:nil];
+    request.timeoutInterval= 30;
+    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%lu",(unsigned long)jsonData.length] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:jsonData];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
+                                                 @"text/html",
+                                                 @"text/json",
+                                                 @"text/javascript",
+                                                 @"text/plain",
+                                                 nil];
+    manager.responseSerializer = responseSerializer;
+    [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        
+        if (!error) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:dict];
+            if ([m.code isEqual:@200]) {
+                NSString *filePatch = [BaseObject AddPathName:UserMe];
+                Me = [MeModel mj_objectWithKeyValues:m.studentInfo];
+                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
+                NSDictionary * dics = m.studentInfo;
+                [usersDic setObject:dics forKey:UserMe];
+                [usersDic writeToFile:filePatch atomically:YES];
+                [[self viewController] dismissViewControllerAnimated:YES completion:^{
+                    
+                }];
+            }else if([m.code isEqual:@201]){
+                UserLoginPerfectViewController * vc = [UserLoginPerfectViewController new];
+                vc.dict = dic;
+                [[self viewController].navigationController pushViewController:vc animated:YES];
+            }
+            NSLog(@"123");
+        } else {
+            
+        }
+    }] resume];
 }
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+
+
 - (void)wxsq:(SSDKPlatformType)platformType{
 #pragma mark - 调用获取用户授权信息
     [ShareSDK getUserInfo:platformType

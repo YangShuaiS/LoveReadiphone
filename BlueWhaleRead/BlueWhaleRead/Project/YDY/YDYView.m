@@ -179,10 +179,7 @@
     
 }
 - (void)oneButton{
-    [UIView animateWithDuration:1 animations:^{
-        self.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
+                    NSNotification *notification =[NSNotification notificationWithName:kNotificationDenglu object:nil userInfo:nil];
+                    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 @end

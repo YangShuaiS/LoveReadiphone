@@ -161,43 +161,8 @@
     
 }
 - (void)buwanshan{
-    WS(ws);
-    MBProgressHUD * mb = [MBProgressHUD new];
-    mb.mode = MBProgressHUDModeIndeterminate;
-    mb.label.text = @"正在完善信息";
-    [mb showAnimated:YES];
-    mb.removeFromSuperViewOnHide = YES;
-    [self.view.window addSubview:mb];
-    [mb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(ws.view.window);
-    }];
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_DENGLU];
-    NSDictionary * dic = @{@"code":_itemarray[0],@"password":_itemarray[1]};
-    [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
-        if (responseObject) {
-            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
-            if ([m.code isEqual:@200]) {
-                NSString *filePatch = [BaseObject AddPathName:UserMe];
-                Me = [MeModel mj_objectWithKeyValues:m.studentInfo];
-                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
-                NSDictionary * dics = m.studentInfo;
-                [usersDic setObject:dics forKey:UserMe];
-                [usersDic writeToFile:filePatch atomically:YES];
-                [mb hideAnimated:NO];
-                NSNotification *notification =[NSNotification notificationWithName:kNotificationDenglu object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotification:notification];
-            }else if ([m.code isEqual:@Notloggedin]){
-                [self UpDengLu];
-                [mb hideAnimated:NO];
-            }else{
-                mb.label.text = m.message;
-                [mb hideAnimated:NO afterDelay:1];
-            }
-            
-        }else{
-            mb.label.text = @"网络请求失败";
-            [mb hideAnimated:NO afterDelay:1];
-        }
+    [self dismissViewControllerAnimated:YES completion:^{
+        
     }];
 }
 - (void)wansahn{
@@ -207,8 +172,7 @@
         if (responseObject) {
             MyDeModel *mo = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([mo.code isEqual:@200]) {
-                NSNotification *notification =[NSNotification notificationWithName:kNotificationDenglu object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotification:notification];
+                [self buwanshan];
             }else if ([mo.code isEqual:@Notloggedin]){
                 [self UpDengLu];
             }
@@ -219,6 +183,7 @@
 }
 #pragma mark ----------- 返回
 - (void)addnav{
+
     WS(ws);
     UIImageView * back = [UIImageView new];
     back.image = UIIMAGE(@"backhei");
@@ -238,7 +203,8 @@
     }];
 }
 - (void)backClick{
-    [self.navigationController popViewControllerAnimated:YES];
+        [self buwanshan];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)tapGesture3{

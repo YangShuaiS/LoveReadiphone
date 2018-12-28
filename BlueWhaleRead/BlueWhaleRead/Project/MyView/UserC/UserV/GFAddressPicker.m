@@ -25,51 +25,42 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-        [self getAddressInformation];
+//        [self getAddressInformation];
+        [self updata];
     }
     return self;
 }
 - (void)updata{
-//    NSMutableDictionary * shengdic = [NSMutableDictionary dictionary];
-
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Address" ofType:@"plist"];
+    self.pickerDic = [[NSDictionary alloc] initWithContentsOfFile:path];
+//    self.provinceArray = [self.pickerDic allKeys];
+//    self.selectedArray = [self.pickerDic objectForKey:[[self.pickerDic allKeys] objectAtIndex:0]];
+//    if (self.selectedArray.count > 0) {
+//        self.cityArray = [[self.selectedArray objectAtIndex:0] allKeys];
+//    }
+//    if (self.cityArray.count > 0) {
+//        self.townArray = [[self.selectedArray objectAtIndex:0] objectForKey:[self.cityArray objectAtIndex:0]];
+//    }
+//    NSMutableDictionary * alldic = [NSMutableDictionary dictionary];
 //    for (UserCitySmolModel  * sheng in citymodel.areaList) {
-//        NSMutableDictionary * shidic = [NSMutableDictionary dictionary];
-//        NSMutableArray * quarray = [NSMutableArray array];
 //        NSString * shengstr = sheng.name;
+//        NSMutableDictionary * shengdic = [NSMutableDictionary dictionary];
+//        NSMutableArray * shengarray = [NSMutableArray array];
+//
 //        for (UserCitySmolModel * shi in sheng.cityList) {
-//            NSMutableArray * shiarray = [NSMutableArray array];
-//            NSMutableDictionary * qudic = [NSMutableDictionary dictionary];
 //            NSString * shistr = shi.name;
+//            NSMutableArray * shiarray = [NSMutableArray array];
+//
 //            for (UserCitySmolModel * qu in shi.areaList) {
 //                NSString * qustr = qu.name;
 //                [shiarray addObject:qustr];
 //            }
-//            [qudic setObject:shiarray forKey:shistr];
-//            [shidic setDictionary:qudic];
+//            [shengdic setObject:shiarray forKey:shistr];
+//            [shengarray addObject:shengdic];
 //        }
-//        [shengdic setDictionary:shidic];
-//
+//        [alldic setObject:shengarray forKey:shengstr];
 //    }
-    NSMutableDictionary * alldic = [NSMutableDictionary dictionary];
-    for (UserCitySmolModel  * sheng in citymodel.areaList) {
-        NSString * shengstr = sheng.name;
-        NSMutableDictionary * shengdic = [NSMutableDictionary dictionary];
-        NSMutableArray * shengarray = [NSMutableArray array];
-
-        for (UserCitySmolModel * shi in sheng.cityList) {
-            NSString * shistr = shi.name;
-            NSMutableArray * shiarray = [NSMutableArray array];
-
-            for (UserCitySmolModel * qu in shi.areaList) {
-                NSString * qustr = qu.name;
-                [shiarray addObject:qustr];
-            }
-            [shengdic setObject:shiarray forKey:shistr];
-            [shengarray addObject:shengdic];
-        }
-        [alldic setObject:shengarray forKey:shengstr];
-    }
-    self.pickerDic = alldic;
+//    self.pickerDic = alldic;
     self.provinceArray = [[self.pickerDic allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     self.selectedArray = [self.pickerDic objectForKey:[self.provinceArray objectAtIndex:0]];
     if (self.selectedArray.count > 0) {

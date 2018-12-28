@@ -11,5 +11,6 @@
 
 @interface UserLoginPerfectViewController : BaseViewController
 @property(nonatomic,strong)NSMutableArray * itemarray;
+@property(nonatomic,strong)NSDictionary * dict;
 @end
 

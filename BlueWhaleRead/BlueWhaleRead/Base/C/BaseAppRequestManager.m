@@ -48,7 +48,10 @@ static BaseAppRequestManager * manger = nil;
     mangers.requestSerializer.timeoutInterval = 30;
     [mangers.securityPolicy setAllowInvalidCertificates:YES];
     [mangers setSecurityPolicy:[BaseAppRequestManager customSecurityPolicy]];
-
+    
+    mangers.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+    mangers.securityPolicy.allowInvalidCertificates = YES;
+    [mangers.securityPolicy setValidatesDomainName:NO];
     return mangers;
 }
 #pragma mark - GET请求正常数据

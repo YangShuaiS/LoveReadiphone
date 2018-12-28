@@ -355,7 +355,7 @@
     NSMutableArray * allarray = [NSMutableArray array];
     [allarray addObject:szarray];
     for (NHTimeListModel * reedbook in model.weeksInfo.weeks) {
-        NSMutableArray * rwuarray = [NSMutableArray array];
+        NSMutableArray * rwuarray = [NSMutableArray array]; 
         NHTimeListModel * reedbooks = [NHTimeListModel new];
         reedbooks.book_is_completed = reedbook.book_is_completed;
         reedbooks.name = [NSString stringWithFormat:@"阅读完成%@本书(+%@分)",model.missionRole.week_book_num,reedbook.book_Score];

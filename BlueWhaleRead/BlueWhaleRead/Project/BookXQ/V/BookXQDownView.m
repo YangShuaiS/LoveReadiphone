@@ -172,7 +172,7 @@
     [self bookcity];
 }
 - (void)addGuideDaTiOneView{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
     if ([model.ydydati integerValue]<3) {
@@ -231,9 +231,7 @@
 }
 
 - (void)bookcity{
-    if ([self.nav respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.nav.interactivePopGestureRecognizer.enabled = NO;
-    }
+
     WS(ws);
     MBProgressHUD * mb = [MBProgressHUD new];
     mb.mode = MBProgressHUDModeIndeterminate;
@@ -258,9 +256,9 @@
                 ws.model = ws.model;
                 GeneralUpView * genView = [GeneralUpView new];
                 genView.style = PopUpViewStyleAnswer;
-                [self.nav.view addSubview:genView];
+                [self.window addSubview:genView];
                 [genView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.mas_equalTo(ws.nav.view);
+                    make.edges.mas_equalTo(ws.window);
                 }];
                 NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self->Topmodel.time%3600)/60];//分
 

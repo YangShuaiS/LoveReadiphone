@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/guide/GuideDaTiTwoView.m"
-            timestampString = "567436310.8748519"
+            filePath = "BlueWhaleRead/Project/NewHome/C/NewHomeViewController.m"
+            timestampString = "567680725.011644"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "-addview"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-hqid"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/guide/GuideDaTiTwoView.m"
-            timestampString = "567436310.876395"
+            filePath = "BlueWhaleRead/Project/NewHome/C/NewHomeViewController.m"
+            timestampString = "567680725.011737"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "-addview"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-hqid"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/BookXQ/C/BookXqViewController.m"
-            timestampString = "567428601.812441"
+            filePath = "BlueWhaleRead/Project/UserLogin/V/UserXZageCollectionView.m"
+            timestampString = "567680725.011815"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "-viewWillAppear:"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-setItemArray:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,61 +57,77 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueWhaleRead/Project/HomePage/C/LBTViewController.m"
-            timestampString = "567436324.051625"
+            filePath = "BlueWhaleRead/Project/UserLogin/V/UserXZageCollectionView.m"
+            timestampString = "567680725.011884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-setItemid:"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "-layoutSubviews"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[LBTViewController setItemid:]"
+                  symbolName = "-[UserXZageCollectionView layoutSubviews]"
                   moduleName = "BlueWhaleRead"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yangshuai/Desktop/Bovolumes/BlueWhaleRead/BlueWhaleRead/Project/HomePage/C/LBTViewController.m"
-                  timestampString = "567436324.270914"
+                  urlString = "file:///Users/yangshuai/Desktop/Bovolumes/BlueWhaleRead/BlueWhaleRead/Project/UserLogin/V/UserXZageCollectionView.m"
+                  timestampString = "567680384.3829499"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "166"
-                  endingLineNumber = "166"
-                  offsetFromSymbolStart = "372">
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "71">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__31-[LBTViewController setItemid:]_block_invoke"
+                  symbolName = "__41-[UserXZageCollectionView layoutSubviews]_block_invoke"
                   moduleName = "BlueWhaleRead"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yangshuai/Desktop/Bovolumes/BlueWhaleRead/BlueWhaleRead/Project/HomePage/C/LBTViewController.m"
-                  timestampString = "567436324.273227"
+                  urlString = "file:///Users/yangshuai/Desktop/Bovolumes/BlueWhaleRead/BlueWhaleRead/Project/UserLogin/V/UserXZageCollectionView.m"
+                  timestampString = "567680384.386254"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "80">
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "44">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.213"
+                  symbolName = "__destroy_helper_block_"
                   moduleName = "BlueWhaleRead"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yangshuai/Desktop/Bovolumes/BlueWhaleRead/BlueWhaleRead/Project/HomePage/C/LBTViewController.m"
-                  timestampString = "567436324.27555"
+                  urlString = "file:///Users/yangshuai/Desktop/Bovolumes/BlueWhaleRead/BlueWhaleRead/Project/UserLogin/V/UserXZageCollectionView.m"
+                  timestampString = "567680384.3889951"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "166"
-                  endingLineNumber = "166"
-                  offsetFromSymbolStart = "20">
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BlueWhaleRead/Project/NewHome/C/NewHomeViewController.m"
+            timestampString = "567680725.011947"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-addnianji"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

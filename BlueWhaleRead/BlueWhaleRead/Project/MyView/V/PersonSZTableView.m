@@ -12,6 +12,7 @@
 #import "AboutViewController.h"
 #import "PersonQingChuHUanCunView.h"
 #import "PersonXiuGaiMimaViewController.h"
+
 @interface PersonSZTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -191,15 +192,48 @@
     
 }
 #pragma mark  - 退出
-
+- (void)hqid{
+    WS(ws);
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_HQID];
+    NSDictionary * dic = @{@"uuid":[[UIDevice currentDevice] identifierForVendor].UUIDString};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                NSString *filePatch = [BaseObject AddPathName:UserMe];
+                Me = [MeModel mj_objectWithKeyValues:m.studentInfo];
+                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
+                NSDictionary * dics = m.studentInfo;
+                [usersDic setObject:dics forKey:UserMe];
+                [usersDic writeToFile:filePatch atomically:YES];
+                if ([Me.birthday isEqualToString:@""]) {
+                    [ws addnianji];
+                }else{
+                    [ws QINGCHU];
+                }
+            }else if ([m.code isEqual:@Notloggedin]){
+                [self UpDengLu];
+            }
+        }else{
+            [ws hqid];
+        }
+    }];
+    
+}
+- (void)addnianji{
+    NSString *key = @"nianji";
+    NSString * nianji  = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    //绑定年级
+    [self QINGCHU];
+}
 - (void)QINGCHU{
     NSString *filePatch = [BaseObject AddPathName:UserMe];
     NSMutableDictionary *WXDic = [NSMutableDictionary dictionary];
     NSDictionary * dic = [NSDictionary dictionary];
     [WXDic setObject:dic forKey:UserMe];
     [WXDic writeToFile:filePatch atomically:YES];
-    NSNotification *notification =[NSNotification notificationWithName:kNotificationTuiChuDenglu object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
+//    NSNotification *notification =[NSNotification notificationWithName:kNotificationTuiChuDenglu object:nil userInfo:nil];
+//    [[NSNotificationCenter defaultCenter] postNotification:notification];
     //    Me = [[MeModel SharedModel] ADDvalue];
     //        Me = nil;
     //    Me.token = @"";
@@ -222,9 +256,9 @@
         if (responseObject) {
             MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                [ws QINGCHU];
+                [ws hqid];
             }else if ([model.code isEqual:@Notloggedin]){
-                [self UpDengLu];
+                [ws UpDengLu];
             }
             mb.label.text = @"退出成功";
             [mb hideAnimated:NO afterDelay:1];

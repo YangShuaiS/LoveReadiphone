@@ -31,7 +31,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self ConfirmTheSize];
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+//    [self ConfirmTheSize];
     WS(ws);
     userImageView = [FLAnimatedImageView new];
     userImageView.image = UIIMAGE(@"天天爱读");
@@ -47,7 +50,7 @@
         make.height.mas_equalTo(LENGTH(65));
     }];
     
-    BaseLabel * title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(92, 92, 92) LabelFont:TextFontCu(25) TextAlignment:NSTextAlignmentCenter Text:@"天天爱读"];
+    BaseLabel * title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(92, 92, 92) LabelFont:TextFontCu(25) TextAlignment:NSTextAlignmentCenter Text:@"博万卷"];
     [self.view addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self->userImageView);
