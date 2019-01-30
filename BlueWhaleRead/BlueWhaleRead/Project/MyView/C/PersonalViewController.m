@@ -33,7 +33,8 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"个人中心" RightTitle:@"home-Click" NativeStyle:NavStyleGeneral];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@" " RightTitle:@"" NativeStyle:NavStyleGeneral];
+    self.navtive.titcolor = RGB(0, 0, 0);
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
     [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -42,6 +43,7 @@
         make.top.equalTo(ws.view).with.offset(0);
         make.height.mas_equalTo(NavHeight);
     }];
+    self.navtive.downlayer = YES;
     
 }
 - (void)NavLeftClick{

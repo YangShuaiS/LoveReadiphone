@@ -12,6 +12,9 @@
     FLAnimatedImageView * imageView;
     BaseLabel * label;
     BaseLabel * sublabel;
+    
+    UIImageView * rightimage;
+    UIImageView * rightimagetop;
 }
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -45,5 +48,38 @@
         make.top.mas_equalTo(self->label.mas_bottom).with.offset(LENGTH(3));
         make.centerX.mas_equalTo(self->imageView);
     }];
+    
+    rightimage = [UIImageView new];
+    rightimage.image = UIIMAGE(@"路径 76");
+    rightimage.contentMode = UIViewContentModeScaleAspectFit;
+    [self addSubview:rightimage];
+    [rightimage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.and.bottom.mas_equalTo(self->imageView);
+    }];
+    rightimage.hidden = YES;
+    
+    rightimagetop = [UIImageView new];
+    rightimagetop.image = UIIMAGE(@"组 362");
+    rightimagetop.contentMode = UIViewContentModeScaleAspectFit;
+    [rightimage addSubview:rightimagetop];
+    [rightimagetop mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self->rightimage.mas_right).with.offset(-LENGTH(2));
+        make.bottom.mas_equalTo(self->rightimage.mas_bottom).with.offset(-LENGTH(4));
+
+    }];
+    rightimagetop.hidden = YES;
+}
+- (void)setModel:(levelListModel *)model{
+    _model = model;
+    [imageView sd_setImageWithURL:URLIMAGE(model.img)];
+    label.text = model.name;
+    sublabel.text = model.title;
+    if (model.zt == 1) {
+        rightimage.hidden = NO;
+        rightimagetop.hidden = NO;
+    }else{
+        rightimage.hidden = YES;
+        rightimagetop.hidden = YES;
+    }
 }
 @end

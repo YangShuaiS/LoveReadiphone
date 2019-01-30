@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TKXQRLCollectionViewCell : BaseCollectionViewCell
 @property(nonatomic,strong)TKXQRLModel * model;
+@property(nonatomic,strong)NSMutableArray * colorarray;
 
 @end
 

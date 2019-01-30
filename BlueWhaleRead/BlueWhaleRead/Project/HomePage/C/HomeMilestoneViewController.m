@@ -18,7 +18,10 @@
 @implementation HomeMilestoneViewController{
     UIScrollView * scrollView;
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self AddNavtion];
@@ -111,12 +114,13 @@
     
     if (model.milestone.count > 0) {
         FLAnimatedImageView * imageview = [FLAnimatedImageView new];
-        imageview.image = UIIMAGE(@"告诉朋友");
+        imageview.image = UIIMAGE(@"4343");
         [self.navtive addSubview:imageview];
         [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
             make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
-            make.size.mas_equalTo(imageview.image.size);
+            make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);
+            make.width.and.height.mas_equalTo(24);
+            
         }];
         imageview.userInteractionEnabled = YES;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];

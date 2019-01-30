@@ -83,7 +83,7 @@
         }
 
     
-    self.navigationController.tabBarController.selectedIndex = 0;
+//    self.navigationController.tabBarController.selectedIndex = 0;
     [self.navigationController popToRootViewControllerAnimated:YES];
 //    [self.navigationController popViewControllerAnimated:YES];
 }
@@ -169,7 +169,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
 //    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
 //        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 //    }
@@ -288,12 +289,12 @@
     if (sharefriend == nil) {
         WS(ws);
         sharefriend = [FLAnimatedImageView new];
-        sharefriend.image = UIIMAGE(@"告诉朋友");
+        sharefriend.image = UIIMAGE(@"4343");
         [self.navtive addSubview:sharefriend];
         [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
+            make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);
             make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
-            make.size.mas_equalTo(self->sharefriend.image.size);
+            make.width.and.height.mas_equalTo(24);
         }];
         sharefriend.userInteractionEnabled = YES;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];

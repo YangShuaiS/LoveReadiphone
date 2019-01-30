@@ -13,9 +13,11 @@ CGFloat StatusBar = 0;
 CGFloat poinw = 0;
 
 //NSString * ZSFWQ = @"http://39.106.100.235/";
-//NSString * ZSFWQ = @"http://tiantianaidu.com/";
-NSString * ZSFWQ = @"http://192.168.1.221:8085/";
-//NSString * ZSFWQ = @"http://192.168.1.114:8069/";
+NSString * ZSFWQ = @"https://tiantianaidu.com/";
+//NSString * ZSFWQ = @"http://192.168.1.221:8085/";
+//NSString * ZSFWQ = @"http://119.90.89.88:8085/";
+
+//NSString * ZSFWQ = @"http://192.168.1.85:8069/";
 
 
 
@@ -110,6 +112,53 @@ MeModel * Me = nil;
     [AttributedStr addAttribute:NSForegroundColorAttributeName
                           value:color
                           range:range];
+    return AttributedStr;
+}
++ (NSMutableAttributedString*)AttributedAll:(NSArray *)modelarray{
+    AttributedStringModel * models = modelarray[0];
+    NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:models.textString];
+    
+    NSString *version= [UIDevice currentDevice].systemVersion;
+    
+    if(version.doubleValue >=9.0) {
+        
+        // 针对 9.0 以上的iOS系统进行处理
+        for (AttributedStringModel * model in modelarray) {
+            if ([models.textString rangeOfString:model.bianString].location !=NSNotFound) {
+                NSArray * arr = [BaseObject rangeOfSubString:model.bianString inString:model.textString];
+                if (model.integer == 0) {
+                    for (NSValue * value in arr) {
+                        NSRange range = [value rangeValue];
+                        if (model.fount!=0) {
+                            [AttributedStr addAttribute:NSFontAttributeName value:TextFont(model.fount) range:range];
+                        }
+                        if (model.color!=nil) {
+                            [AttributedStr addAttribute:NSForegroundColorAttributeName
+                                                  value:model.color
+                                                  range:range];
+                        }
+                    }
+                }else{
+                    if (model.integer<=arr.count) {
+                        NSRange range = [arr[model.integer] rangeValue];
+                        if (model.fount!=0) {
+                            [AttributedStr addAttribute:NSFontAttributeName value:TextFont(model.fount) range:range];
+                        }
+                        if (model.color!=nil) {
+                            [AttributedStr addAttribute:NSForegroundColorAttributeName
+                                                  value:model.color
+                                                  range:range];
+                        }
+                    }
+                }
+                
+                }
+        }
+    }else{
+        
+        // 针对 9.0 以下的iOS系统进行处理
+        
+    }
     return AttributedStr;
 }
 + (NSMutableAttributedString*)Attributed:(NSArray *)modelarray{
@@ -532,7 +581,7 @@ MeModel * Me = nil;
 }
 
 + (NSMutableDictionary *)BenDiXinXi{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
     NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
     return dataDictionary;
 }
@@ -544,5 +593,56 @@ MeModel * Me = nil;
     return currentTimeString;
 }
 
-
++ (NSMutableArray *)TaskColorArray:(NSInteger)inter{
+    NSMutableArray * colorarray = [NSMutableArray array];
+    //1 新手 3 自建 5   初阶    6   中阶    7   高阶
+    
+    //0 字体 1 深色 2 j浅色 3 阴影 4.排名背景 5 全部任务阴影色 6 圆圈颜色
+    if (inter == 1) {
+        [colorarray addObject:RGB(236,138,53)];//1
+        [colorarray addObject:RGB(255,163,81)];//1
+        [colorarray addObject:RGB(255,226,200)];//1
+        [colorarray addObject:RGBA(197,102,0,0.35)];//1
+        [colorarray addObject:RGB(255,247,232)];//1
+        [colorarray addObject:RGB(255,151,29)];//1
+        [colorarray addObject:RGB(250,138,28)];//1
+    }
+    if (inter == 3) {
+        [colorarray addObject:RGB(91,199,198)];//1
+        [colorarray addObject:RGB(108,208,207)];//1
+        [colorarray addObject:RGB(199,245,239)];//1
+        [colorarray addObject:RGBA(76,181,241,0.35)];//1
+        [colorarray addObject:RGB(229,254,251)];//1
+        [colorarray addObject:RGB(91,199,198)];//1
+        [colorarray addObject:RGB(133,213,212)];//1
+    }
+    if (inter == 5) {
+        [colorarray addObject:RGB(64,208,64)];  //1
+        [colorarray addObject:RGB(95,218,95)];//1
+        [colorarray addObject:RGB(197,248,197)];//1
+        [colorarray addObject:RGBA(64,208,64,0.35)];//1
+        [colorarray addObject:RGB(230,255,220)];//1
+        [colorarray addObject:RGB(119,188,1)];//1
+        [colorarray addObject:RGB(107,208,107)];//1
+    }
+    if (inter == 6) {
+        [colorarray addObject:RGB(76,181,241)];//1
+        [colorarray addObject:RGB(87,183,238)];//1
+        [colorarray addObject:RGB(195,233,255)];//1
+        [colorarray addObject:RGBA(76,181,241,0.35)];//1
+        [colorarray addObject:RGB(222,244,255)];//1
+        [colorarray addObject:RGB(10,145,222)];//1
+        [colorarray addObject:RGB(69,180,244)];//1
+    }
+    if (inter == 7) {
+        [colorarray addObject:RGB(139,157,249)];//1
+        [colorarray addObject:RGB(149,165,247)];//1
+        [colorarray addObject:RGB(224,229,253)];//1
+        [colorarray addObject:RGBA(76,181,241,0.35)];//1
+        [colorarray addObject:RGB(238,241,255)];//1
+        [colorarray addObject:RGB(122,108,224)];//1
+        [colorarray addObject:RGB(136,154,252)];//1
+    }
+    return colorarray;
+}
 @end

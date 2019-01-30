@@ -7,7 +7,6 @@
 //
 
 #import "AccountSettingsClick.h"
-
 @implementation AccountSettingsClick{
 
 }
@@ -38,8 +37,10 @@
     [_titlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(ws);
         make.left.mas_equalTo(ws.imageview.mas_right).with.offset(LENGTH(24));
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(100));
+//        make.right.mas_equalTo(ws).with.offset(-LENGTH(100));
     }];
+    
+
     
     FLAnimatedImageView * rightview = [FLAnimatedImageView new];
     rightview.image = UIIMAGE(@"icon_个人资料_箭头");
@@ -49,6 +50,14 @@
         make.right.mas_equalTo(ws);
         make.width.mas_equalTo(LENGTH(8));
         make.height.mas_equalTo(LENGTH(14));
+    }];
+    
+    _subtitlelabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(2,49,49) LabelFont:TextFontCu(16) TextAlignment:NSTextAlignmentRight Text:@""];
+    [self addSubview:_subtitlelabel];
+    [_subtitlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(ws);
+        make.left.mas_equalTo(ws.titlelabel.mas_right).with.offset(LENGTH(5));
+        make.right.mas_equalTo(rightview.mas_left).with.offset(-LENGTH(5));
     }];
     
     UIView * v = [UIView new];
@@ -62,5 +71,13 @@
     }];
 }
 
+- (void)bangding{
+    _subtitlelabel.textColor =RGB(2,49,49);
+    _subtitlelabel.text = @"解绑";
 
+}
+- (void)weibangding{
+    _subtitlelabel.textColor =RGB(82,199,198);
+    _subtitlelabel.text = @"尚未绑定";
+}
 @end

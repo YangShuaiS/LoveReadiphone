@@ -11,6 +11,7 @@
 #import "UserXZageCollectionView.h"
 @implementation UserXZageView{
     UserXZageCollectionView * collection;
+    NSString * nianji;
 }
 
 - (instancetype)init
@@ -56,11 +57,53 @@
         make.height.mas_equalTo(LENGTH(10));
     }];
     [collection setBlock:^(NSString * _Nonnull str) {
-        ws.block(str);
-        [ws remoview];
+        [ws hunianji:str];
     }];
-}
+    
+    BaseLabel * wc = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255, 255, 255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"完成"];
+    wc.backgroundColor = RGB(82,199,198);
+    wc.layer.masksToBounds = YES;
+    wc.layer.cornerRadius = LENGTH(25);
+    wc.layer.shadowColor = RGB(82, 199, 198).CGColor;
+    wc.layer.shadowOffset = CGSizeMake(0,2.5);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+    wc.layer.shadowRadius = LENGTH(15);
+    wc.layer.shadowOpacity = 0.3;
+    [self addSubview:wc];
+    [wc mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(76));
+        make.left.mas_equalTo(ws).with.offset(LENGTH(50));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(50));
+        make.height.mas_equalTo(LENGTH(50));
+    }];
+    wc.userInteractionEnabled = YES;
+    //添加手势
+    UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture1)];
+    //将手势添加到需要相应的view中去
+    [wc addGestureRecognizer:tapGesture1];
 
+    [self load];
+}
+- (void)hunianji:(NSString *)str{
+    nianji = str;
+}
+- (void)tapGesture1{
+    self.block(nianji);
+    [self remoview];
+}
+- (void)load{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_HQCLASS];
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:nil andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                self->collection.itemArray = m.levelList;
+            }
+
+        }else{
+        }
+    }];
+
+}
 - (void)remoview{
     [self removeFromSuperview];
 }

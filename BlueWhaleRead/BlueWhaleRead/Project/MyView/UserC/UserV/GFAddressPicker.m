@@ -25,42 +25,38 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-//        [self getAddressInformation];
-        [self updata];
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:kNotificationAddRess];
+        if (data == nil) {
+            [self getAddressInformation];
+        }else{
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            citymodel = [UserCityModel mj_objectWithKeyValues:jsonDict];
+            [self updata];
+        }
     }
     return self;
 }
 - (void)updata{
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"Address" ofType:@"plist"];
-    self.pickerDic = [[NSDictionary alloc] initWithContentsOfFile:path];
-//    self.provinceArray = [self.pickerDic allKeys];
-//    self.selectedArray = [self.pickerDic objectForKey:[[self.pickerDic allKeys] objectAtIndex:0]];
-//    if (self.selectedArray.count > 0) {
-//        self.cityArray = [[self.selectedArray objectAtIndex:0] allKeys];
-//    }
-//    if (self.cityArray.count > 0) {
-//        self.townArray = [[self.selectedArray objectAtIndex:0] objectForKey:[self.cityArray objectAtIndex:0]];
-//    }
-//    NSMutableDictionary * alldic = [NSMutableDictionary dictionary];
-//    for (UserCitySmolModel  * sheng in citymodel.areaList) {
-//        NSString * shengstr = sheng.name;
-//        NSMutableDictionary * shengdic = [NSMutableDictionary dictionary];
-//        NSMutableArray * shengarray = [NSMutableArray array];
-//
-//        for (UserCitySmolModel * shi in sheng.cityList) {
-//            NSString * shistr = shi.name;
-//            NSMutableArray * shiarray = [NSMutableArray array];
-//
-//            for (UserCitySmolModel * qu in shi.areaList) {
-//                NSString * qustr = qu.name;
-//                [shiarray addObject:qustr];
-//            }
-//            [shengdic setObject:shiarray forKey:shistr];
-//            [shengarray addObject:shengdic];
-//        }
-//        [alldic setObject:shengarray forKey:shengstr];
-//    }
-//    self.pickerDic = alldic;
+    NSMutableDictionary * alldic = [NSMutableDictionary dictionary];
+    for (UserCitySmolModel  * sheng in citymodel.areaList) {
+        NSString * shengstr = sheng.name;
+        NSMutableDictionary * shengdic = [NSMutableDictionary dictionary];
+        NSMutableArray * shengarray = [NSMutableArray array];
+        
+        for (UserCitySmolModel * shi in sheng.cityList) {
+            NSString * shistr = shi.name;
+            NSMutableArray * shiarray = [NSMutableArray array];
+            
+            for (UserCitySmolModel * qu in shi.areaList) {
+                NSString * qustr = qu.name;
+                [shiarray addObject:qustr];
+            }
+            [shengdic setObject:shiarray forKey:shistr];
+            [shengarray addObject:shengdic];
+        }
+        [alldic setObject:shengarray forKey:shengstr];
+    }
+    self.pickerDic = alldic;
     self.provinceArray = [[self.pickerDic allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     self.selectedArray = [self.pickerDic objectForKey:[self.provinceArray objectAtIndex:0]];
     if (self.selectedArray.count > 0) {
@@ -70,12 +66,15 @@
         self.townArray = [[self.selectedArray objectAtIndex:0] objectForKey:[self.cityArray objectAtIndex:0]];
     }
     [self setBaseView];
-  
 }
 - (void)getAddressInformation {
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_DIQU];
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:nil andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
+            NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+            [[NSUserDefaults standardUserDefaults] setValue:data forKey:kNotificationAddRess];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             self->citymodel = [UserCityModel mj_objectWithKeyValues:responseObject];
             if ([self->citymodel.code isEqual:@200]) {
                 [self updata];

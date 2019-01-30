@@ -100,7 +100,7 @@
 }
 - (void)tapGesture2{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FASONGYANZHENGMA];
-    NSDictionary * dic = @{@"phone":_zhanghao.textField.text};
+    NSDictionary * dic = @{@"phone":_zhanghao.textField.text,@"from":@"updatePhone"};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             self->model = [MyDeModel mj_objectWithKeyValues:responseObject];

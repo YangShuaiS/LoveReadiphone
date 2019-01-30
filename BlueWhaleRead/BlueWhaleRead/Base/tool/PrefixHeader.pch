@@ -40,6 +40,7 @@
 #import "PublicView.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ZipArchive.h>
+#import "MBProgressHUDYS.h"
 
 //#import "UINavigationController+FDFullscreenPopGesture.h"
 

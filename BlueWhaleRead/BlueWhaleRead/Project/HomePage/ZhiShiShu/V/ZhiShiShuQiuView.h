@@ -10,4 +10,7 @@
 
 @interface ZhiShiShuQiuView : BaseCollectionView
 @property (nonatomic, strong) NSMutableArray* itemarray;
+
+@property (nonatomic, strong) UIColor* colors;
+
 @end

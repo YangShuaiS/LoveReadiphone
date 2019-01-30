@@ -38,7 +38,7 @@
     return self;
 }
 - (void)addview{
-    
+    WS(ws);
     leftImage = [FLAnimatedImageView new];
     leftImage.layer.shadowOpacity = 0.4;
     leftImage.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -51,9 +51,15 @@
     Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(4,51,50) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:Title];
     
+    UIView * backxx = [UIView new];
+    backxx.backgroundColor = RGBA(0, 0, 0, 0.6);
+    [leftImage addSubview:backxx];
     _jKStarDisplayView = [[JKStarDisplayView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.jKStarDisplayView.redValue = [@"0" floatValue];
     [leftImage addSubview:self.jKStarDisplayView];
+    [backxx mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.jKStarDisplayView).with.insets(UIEdgeInsetsMake(-LENGTH(2), -LENGTH(2), -LENGTH(2), -LENGTH(2)));
+    }];
     
     subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:subtitle];

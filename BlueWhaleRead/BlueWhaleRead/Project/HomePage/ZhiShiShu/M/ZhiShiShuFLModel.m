@@ -15,7 +15,7 @@
         return @{@"data":@"ZhiShiShuFLOneModel"};
     }];
     [ZhiShiShuFLOneModel mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"children":@"ZhiShiShuFLOneModel"};
+        return @{@"children":@"ZhiShiShuFLOneModel",@"knowledge":@"ZhiShiShuTwoModel"};
     }];
 }
 

@@ -18,7 +18,10 @@
     AchievementMenu * achmenu;
     AchievementModel * model;
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = BEIJINGCOLOR;

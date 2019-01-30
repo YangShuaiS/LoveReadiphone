@@ -28,13 +28,13 @@
 - (void)addview{
     WS(ws);
     imageview = [FLAnimatedImageView new];
-    imageview.layer.masksToBounds = YES;
-    imageview.layer.cornerRadius = LENGTH(8);
+//    imageview.layer.masksToBounds = YES;
+//    imageview.layer.cornerRadius = LENGTH(8);
     [self addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws).with.offset(LENGTH(22));
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(22));;
-        make.top.mas_equalTo(ws).with.offset(LENGTH(22));;
+        make.left.mas_equalTo(ws).with.offset(LENGTH(0));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(0));;
+        make.top.mas_equalTo(ws).with.offset(LENGTH(0));;
         make.height.mas_equalTo(self->imageview.mas_width).multipliedBy(0.374);
     }];
     

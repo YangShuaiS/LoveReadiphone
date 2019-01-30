@@ -8,42 +8,56 @@
 
 #import "TAskForViewController.h"
 #import "TAKTopVIew.h"
-
 #import "TakTaskJSView.h"
 #import "TAKprizeView.h"
+#import "TAKLQGZView.h"
 #import "TAKGZView.h"
 #import "TakSZView.h"
+#import "BookCityViewController.h"
+
+#import "TKNewXQNavView.h"
+#import "TKNewXQTopView.h"
+#import "TKPGAndReadView.h"
+#import "TKWeeKCSView.h"
+#import "TKXQAllRiLiView.h"
 
 #import "TKXQTopView.h"
 #import "TKXQRLView.h"
 #import "TKXQGZView.h"
 #import "TKXQOtherView.h"
-@interface TAskForViewController ()<NavDelegate>
+@interface TAskForViewController ()<NavDelegate,UIScrollViewDelegate>
 @property(nonatomic,assign)TaxkXqStyele style;
 
 @end
 
 @implementation TAskForViewController{
+    BaseLabel * goreadbook;//去读书
+    TAKALLModel * allmodel;
     UIScrollView * scrollView;
     NSMutableArray *  viewarray;
     
     TAKTopVIew * topview;
     
     UIImageView * topimageview;
-    UIView * baskview;
 
     TakTaskJSView * TKJS;
     TAKprizeView * jp;//奖品
     TAKGZView * gz;//规则
+    TAKLQGZView * lqgz;//领取规则
     TakSZView * sz;//设置
 
-    UIImageView * bakimageview;
     TKXQTopView * topxqview;
     UIImageView * backImage;
-    TKXQRLView * rlview;//日历
     TKXQGZView * downview;
     TKXQOtherView * dowboolview;
-
+    
+    NSMutableArray * colorarray;
+    TKNewXQNavView * navs;
+    TKNewXQTopView * newxqtopview;
+    TKPGAndReadView * pgandradweek;
+    TKWeeKCSView * weekcsview;
+    TKXQAllRiLiView * rlview;//日历
+    
 }
 #pragma mark --------------------  导航栏以及代理
 - (void)AddNavtion{
@@ -91,14 +105,15 @@
     }else{
         dic = @{@"studentid":Me.ssid,@"type":_type,@"missionid":_missionid,@"friendid":_friendid};
     }
+    WS(ws);
     //    NSDictionary * dic = @{@"studentid":@"12"};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             TAKALLModel * model = [TAKALLModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                [self UpData:model];
+                [ws UpData:model];
             }else if ([model.code isEqual:@Notloggedin]){
-                [self UpDengLu];
+                [ws UpDengLu];
             }
         }else{
             
@@ -106,6 +121,7 @@
     }];
 }
 - (void)UpData:(TAKALLModel *)model{
+    colorarray = [BaseObject TaskColorArray:[model.mission.mission_type integerValue]];
     [self cshtype:model];
     if ([_weizhi isEqualToString:@"1"]) {
         [self lingqu:model];
@@ -135,6 +151,7 @@
 
 }
 - (void)cshtype:(TAKALLModel * )model{
+
     if ([_weizhi isEqualToString:@"1"]) {
         if ([model.mission.mission_type isEqualToString:@"1"]) {
             if ([model.missionStatus isEqualToString:@"1"]) {
@@ -196,19 +213,14 @@
     
     
     topimageview = [UIImageView new];
-    topimageview.backgroundColor = RANDOMCOLOR;
+    topimageview.layer.masksToBounds = YES;
+//    topimageview.backgroundColor = RANDOMCOLOR;
     topimageview.contentMode = UIViewContentModeScaleAspectFill;
     [scrollView addSubview:topimageview];
     [viewarray addObject:topimageview];
-
-    bakimageview = [UIImageView new];
-    bakimageview.backgroundColor = RANDOMCOLOR;
-    bakimageview.contentMode = UIViewContentModeScaleAspectFit;
-    [scrollView addSubview:bakimageview];
-
-    
     
     TKJS = [TakTaskJSView new];
+    TKJS.colorarray = colorarray;
     [scrollView addSubview:TKJS];
     [viewarray addObject:TKJS];
     TKJS.model = model;
@@ -220,12 +232,15 @@
         jp.model = model;
     }
 
-    gz = [TAKGZView new];
-    [scrollView addSubview:gz];
-    [viewarray addObject:gz];
-    gz.model = model;
+    lqgz = [TAKLQGZView new];
+    lqgz.colorarray = colorarray;
+    [scrollView addSubview:lqgz];
+    [viewarray addObject:lqgz];
+    lqgz.model = model;
     
     sz = [TakSZView new];
+    sz.vc = self;
+    sz.colorarray = colorarray;
     sz.missionid = _missionid;
     [scrollView addSubview:sz];
     [viewarray addObject:sz];
@@ -248,16 +263,22 @@
                 make.top.equalTo(self->scrollView.mas_top).with.offset(0);
                 make.left.equalTo(ws.view).with.offset(0);
                 make.right.equalTo(ws.view).with.offset(0);
-                make.height.mas_equalTo(LENGTH(115));
+                make.height.mas_equalTo(LENGTH(222));
             }];
         }else{
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(ws.view).with.offset(0);
                 make.right.equalTo(ws.view).with.offset(0);
                 if (i == 1) {
-                    make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(16));
+                    make.top.equalTo(lastview.mas_bottom).with.offset(-LENGTH(60));
+                }else if (i == 3){
+                    if (self->jp!=nil) {
+                        make.top.equalTo(lastview.mas_bottom).with.offset(-LENGTH(300));
+                    }else{
+                        make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(0));
+                    }
                 }else{
-                    make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(20));
+                    make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(0));
                 }
             }];
         }
@@ -268,16 +289,8 @@
         }
         lastview = view;
     }
-    [bakimageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self->scrollView.mas_bottom).with.offset(0);
-        make.left.equalTo(ws.view).with.offset(0);
-        make.right.equalTo(ws.view).with.offset(0);
-        make.height.mas_equalTo(LENGTH(480));
-    }];
-    NSURL * sss = URLIMAGE(model.mission.mission_content_img);
-    [topimageview sd_setImageWithURL:URLIMAGE(model.mission.mission_content_img)];
-    [bakimageview sd_setImageWithURL:URLIMAGE(model.mission.mission_background)];
 
+    [topimageview sd_setImageWithURL:URLIMAGE(model.mission.mission_content_img)];
     self.navtive.title = model.mission.mission_name;
 }
 - (void)backImage{
@@ -309,33 +322,67 @@
 
 - (void)lingqu:(TAKALLModel *)model{
     viewarray = [NSMutableArray array];
+    allmodel = model;
     WS(ws);
     scrollView = [UIScrollView new];
+    scrollView.delegate = self;
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(-StatusBar, 0, 0, 0));
     }];
-    bakimageview = [UIImageView new];
-    bakimageview.userInteractionEnabled = YES;
-    bakimageview.contentMode = UIViewContentModeScaleAspectFill;
-    bakimageview.backgroundColor = RANDOMCOLOR;
-    [scrollView addSubview:bakimageview];
     
-    baskview = [UIView new];
-    [bakimageview addSubview:baskview];
+    navs = [TKNewXQNavView new];
+    [self.view addSubview:navs];
+    [navs mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.left.and.right.mas_equalTo(ws.view);
+        make.height.mas_equalTo(NavHeight);
+    }];
+    navs.hidden = YES;
     
-    topxqview = [TKXQTopView new];
-    [scrollView addSubview:topxqview];
-    [viewarray addObject:topxqview];
+    newxqtopview = [TKNewXQTopView new];
+    [scrollView addSubview:newxqtopview];
+    [viewarray addObject:newxqtopview];
     
-    rlview = [TKXQRLView new];
+    pgandradweek = [TKPGAndReadView new];
+    [scrollView addSubview:pgandradweek];
+    [viewarray addObject:pgandradweek];
+    
+    weekcsview = [TKWeeKCSView new];
+    [scrollView addSubview:weekcsview];
+    [viewarray addObject:weekcsview];
+    
+    
+    if ([_friendid isEqualToString:@""]) {
+        pgandradweek.frien = 0;
+        weekcsview.frien = 0;
+    }else{
+        pgandradweek.frien = 1;
+        weekcsview.frien = 0;
+    }
+    if ([model.missionStatus isEqualToString:@"1"]){
+        pgandradweek.ing = 1;
+        weekcsview.ing = 1;
+    }else{
+        pgandradweek.ing = 0;
+        weekcsview.ing = 0;
+    }
+    
+    rlview = [TKXQAllRiLiView new];
     [scrollView addSubview:rlview];
     [viewarray addObject:rlview];
+
+
+//    topxqview = [TKXQTopView new];
+//    [scrollView addSubview:topxqview];
+//    [viewarray addObject:topxqview];
+//
+
     
     if ([_friendid isEqualToString:@""]) {
         downview = [TKXQGZView new];
         [scrollView addSubview:downview];
         [viewarray addObject:downview];
+        downview.colorarray = colorarray;
         downview.style = _style;
         downview.model = model;
 
@@ -346,19 +393,29 @@
         dowboolview.style = _style;
         dowboolview.model = model;
     }
-    topxqview.style = _style;
-    topxqview.model = model;
+    navs.style = _style;
+    navs.model = model;
+    
+    newxqtopview.colorarray = colorarray;
+    newxqtopview.style = _style;
+    newxqtopview.model = model;
+    
+    pgandradweek.colorarray = colorarray;
+    pgandradweek.model = model;
+    
+    weekcsview.colorarray = colorarray;
+    weekcsview.model = model;
+    
+    rlview.colorarray = colorarray;
     rlview.style = _style;
     rlview.model = model;
-    [self backImage];
+    
+    topxqview.style = _style;
+    topxqview.model = model;
+//    rlview.style = _style;
+//    rlview.model = model;
+//    [self backImage];
     [self layoutviews];
-    [bakimageview sd_setImageWithURL:URLIMAGE(model.mission.mission_background)];
-    if ([model.mission.mission_type isEqualToString:@"1"]) {
-        baskview.backgroundColor = RGBA(160, 231, 228, 0.8);
-    }else{
-        baskview.backgroundColor = RGBA(142, 191, 232, 0.8);
-    }
-
 }
 
 - (void)layoutviews{
@@ -378,7 +435,7 @@
                 make.left.equalTo(ws.view).with.offset(0);
                 make.right.equalTo(ws.view).with.offset(0);
                 if (i == 1) {
-                    make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(0));
+                    make.top.equalTo(lastview.mas_bottom).with.offset(-LENGTH(30));
                 }else{
                     make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(0));
                 }
@@ -391,15 +448,32 @@
         }
         lastview = view;
     }
-    [scrollView layoutIfNeeded];
-    [bakimageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->scrollView);
-        make.left.and.right.mas_equalTo(ws.view);
-        make.height.mas_equalTo(self->scrollView.contentSize.height);
+    goreadbook = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(18) TextAlignment:NSTextAlignmentCenter Text:@"去读书"];
+    goreadbook.backgroundColor = RGB(91,199,198);
+    [self.view addSubview:goreadbook];
+    [goreadbook mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.and.bottom.mas_equalTo(ws.view);
+        make.height.mas_equalTo(TabBarHeight);
     }];
-    [baskview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self->bakimageview);
-    }];
+    if (![_friendid isEqualToString:@""]||[allmodel.missionStatus isEqualToString:@"2"]||[allmodel.missionStatus isEqualToString:@"3"]) {
+        goreadbook.userInteractionEnabled = NO;
+        goreadbook.backgroundColor = RGB(240, 240, 240);
+        goreadbook.textColor = RGB(204, 204, 204);
+    }else{
+        goreadbook.backgroundColor = RGB(91,199,198);
+        goreadbook.textColor = RGB(255,255,255) ;
+        goreadbook.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tapviewtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reedbook)];
+        //将手势添加到需要相应的view中去
+        [goreadbook addGestureRecognizer:tapviewtap];
+    }
+}
+- (void)reedbook{
+    BookCityViewController * vc = [BookCityViewController new];
+    NSIndexPath * indpath = [NSIndexPath indexPathForRow:0 inSection:0];
+    vc.inpath = indpath;
+    vc.cata = [NSString stringWithFormat:@"100"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -417,5 +491,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y<NavHeight) {
+        navs.hidden = YES;
+    }else{
+        navs.hidden = NO;
+    }
+}
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if (jp!=nil) {
+        [jp xiaohui];
+        [jp removeFromSuperview];
+    }
+}
+- (void)dealloc{
 
+}
 @end

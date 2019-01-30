@@ -11,9 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TKmissionModel : BaseModel
-
-
+@property (nonatomic, copy) NSString * mission_background;
 @property (nonatomic, copy) NSString * mission_check_background;
+@property (nonatomic, copy) NSString * mission_content_img;
 @property (nonatomic, copy) NSString * mission_name;
 @property (nonatomic, copy) NSString * mission_type;
 @property (nonatomic, copy) NSString * ssid;

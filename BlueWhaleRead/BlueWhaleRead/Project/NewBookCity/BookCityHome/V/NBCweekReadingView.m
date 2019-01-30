@@ -7,13 +7,13 @@
 //
 
 #import "NBCweekReadingView.h"
-#import "NBCchannelCollectionView.h"
 #import "NBCmenuView.h"
 #import "NBCMoreWeekViewController.h"
+#import "NBCThemeViewController.h"
 @implementation NBCweekReadingView
 
 {
-    NBCchannelCollectionView * nfcc;
+    UIImageView * imageview;
 }
 
 - (instancetype)init
@@ -38,39 +38,64 @@
         [ws push];
     }];
     
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(LENGTH(332),LENGTH(108));
-    //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = LENGTH(12);
-    //定义每个UICollectionView 纵向的间距
-    flowLayout.minimumInteritemSpacing = 0;
-    //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, LENGTH(22), 0, LENGTH(22));//上左下右
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-
-    nfcc = [[NBCchannelCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
-//    nfcc.pagingEnabled = YES;
-    nfcc.more = NO;
-    nfcc.zt = NO;
-    nfcc.decelerationRate = UIScrollViewDecelerationRateNormal;
-
-    [self addSubview:nfcc];
-    [nfcc mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws).with.offset(0);
-        make.top.equalTo(menu.mas_bottom).with.offset(LENGTH(10));
-        make.right.equalTo(ws).with.offset(0);
-        make.bottom.equalTo(ws).with.offset(-LENGTH(14));
-        make.height.mas_equalTo(LENGTH(108)+LENGTH(14)+LENGTH(14));
+    imageview = [UIImageView new];
+    imageview.contentMode = UIViewContentModeScaleAspectFit;
+    [self addSubview:imageview];
+    [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(menu.mas_bottom);
+        make.left.mas_equalTo(ws).with.offset(LENGTH(22));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(22));
+        make.bottom.mas_equalTo(-LENGTH(15));
+        make.height.mas_equalTo(LENGTH(108));
     }];
+    imageview.layer.masksToBounds = YES;
+    imageview.layer.cornerRadius = LENGTH(8);
+    imageview.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapviewtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backview)];
+    //将手势添加到需要相应的view中去
+    [imageview addGestureRecognizer:tapviewtap];
+//    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+//    flowLayout.itemSize = CGSizeMake(LENGTH(332),LENGTH(108));
+//    //定义每个UICollectionView 横向的间距
+//    flowLayout.minimumLineSpacing = LENGTH(12);
+//    //定义每个UICollectionView 纵向的间距
+//    flowLayout.minimumInteritemSpacing = 0;
+//    //定义每个UICollectionView 的边距距
+//    flowLayout.sectionInset = UIEdgeInsetsMake(0, LENGTH(22), 0, LENGTH(22));//上左下右
+//    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//
+//    nfcc = [[NBCchannelCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
+////    nfcc.pagingEnabled = YES;
+//    nfcc.more = NO;
+//    nfcc.zt = NO;
+//    nfcc.decelerationRate = UIScrollViewDecelerationRateNormal;
+//
+//    [self addSubview:nfcc];
+//    [nfcc mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(ws).with.offset(0);
+//        make.top.equalTo(menu.mas_bottom).with.offset(LENGTH(10));
+//        make.right.equalTo(ws).with.offset(0);
+//        make.bottom.equalTo(ws).with.offset(-LENGTH(14));
+//        make.height.mas_equalTo(LENGTH(108)+LENGTH(14)+LENGTH(14));
+//    }];
 }
 
 - (void)push{
     NBCMoreWeekViewController * vc = [NBCMoreWeekViewController new];
     [self.nav pushViewController:vc animated:YES];
 }
+
+- (void)backview{
+    NBCclassificationModel * model = _model.themeWeek[0];
+    NBCThemeViewController * vc = [NBCThemeViewController new];
+    vc.bannerid = model.ssid;
+    vc.imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner_img];
+    [self.nav pushViewController:vc animated:YES];
+}
 - (void)setModel:(NBCALLModel *)model{
     _model = model;
-    nfcc.nav = self.nav;
-    nfcc.itemArray = model.themeWeek;
+    NSMutableArray * array = model.themeWeek;
+    NBCclassificationModel * mo = array[0];
+    [imageview sd_setImageWithURL:URLIMAGE(mo.banner_img)];
 }
 @end

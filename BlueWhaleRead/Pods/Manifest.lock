@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - Bugly (2.5.0)
   - FLAnimatedImage (1.0.12)
   - FXBlurView (1.6.4)
   - iCarousel (1.8.3)
@@ -25,7 +26,8 @@ PODS:
   - PGDatePicker (2.5.2):
     - PGPickerView
   - PGPickerView (1.3.1)
-  - SDCycleScrollView (1.3)
+  - SDCycleScrollView (1.75):
+    - SDWebImage (>= 4.0.0)
   - SDWebImage (4.4.1):
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
@@ -36,6 +38,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - Bugly
   - FXBlurView
   - iCarousel (~> 1.8.3)
   - Masonry
@@ -44,7 +47,7 @@ DEPENDENCIES:
   - MJRefresh
   - MOFSPickerManager
   - PGDatePicker
-  - SDCycleScrollView
+  - SDCycleScrollView (~> 1.75)
   - SDWebImage (~> 4.4.1)
   - SDWebImage/GIF
   - ZipArchive
@@ -52,6 +55,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - Bugly
     - FLAnimatedImage
     - FXBlurView
     - iCarousel
@@ -68,6 +72,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
@@ -78,10 +83,10 @@ SPEC CHECKSUMS:
   MOFSPickerManager: 045a02911030fa0181a541181bbddc9fb22eb204
   PGDatePicker: c551c36d44c7ef54df6b827868e2d7e11bfa5986
   PGPickerView: 22d63d37fb9f460e2bee82ac1f4b7b1d9c54947c
-  SDCycleScrollView: 90e43636fcc8e6a7f74e8b64d87418a8e96549b4
+  SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: 728554a5422488f788bdd12e8f88a273a0274f55
+PODFILE CHECKSUM: c927fc51f9f906cd873bdf61f2a967fade490164
 
 COCOAPODS: 1.5.3

@@ -53,7 +53,7 @@
 
     }];
     
-    BaseLabel * subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255, 255, 255) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:@"阅读任务主要通过读书答题获得分数，完成任务要求相应的本数后，该任务项会显示为 √ 已完成状态，其他任务同理，当所有任务项都显示为 √ ，那么恭喜你，你已经完成该任务啦～"];
+    BaseLabel * subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255, 255, 255) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:@"阅读任务主要通过读书答题获得分数，完成任务要求相应的本数后，该任务项会显示为（已完成）状态，其他任务同理，当所有任务项都显示为 （已完成） ，那么恭喜你，你已经完成该任务啦～"];
     subtitle.numberOfLines = 0;
     [downview addSubview:subtitle];
     [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,18 +66,7 @@
     model1.fount = 18;
     model1.color = RGB(255,201,73);
     
-    AttributedStringModel * model2 = [AttributedStringModel new];
-    model2.textString = subtitle.text;
-    model2.bianString = [NSString stringWithFormat:@"√"];
-    model2.fount = 18;
-    model2.color = RGB(255,201,73);
-    
-    AttributedStringModel * model3 = [AttributedStringModel new];
-    model3.textString = subtitle.text;
-    model3.bianString = [NSString stringWithFormat:@" √ ，"];
-    model3.fount = 18;
-    model3.color = RGB(255,201,73);
-    NSArray * modelarray2 = @[model1,model2,model3];
+    NSArray * modelarray2 = @[model1];
     
     NSMutableAttributedString *AttributedStr2 = [BaseObject Attributed:modelarray2];
     subtitle.attributedText = AttributedStr2;

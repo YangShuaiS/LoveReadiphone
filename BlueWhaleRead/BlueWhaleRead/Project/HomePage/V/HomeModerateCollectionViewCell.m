@@ -47,7 +47,7 @@
     imageView.layer.shadowOffset = CGSizeMake(0,0);
     
     Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:ChangYongTitLe LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
-    Title.numberOfLines = 2;
+    Title.numberOfLines = 1;
     [self addSubview:Title];
     
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {

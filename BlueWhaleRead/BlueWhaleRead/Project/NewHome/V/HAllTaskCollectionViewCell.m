@@ -59,14 +59,15 @@
     title.text = model.mission_name;
     lingqu.text = [NSString stringWithFormat:@"%@人已领取",model.received_num];
     wancheng.text = [NSString stringWithFormat:@"%@人已完成",model.completed_num];
+    [backimageview sd_setImageWithURL:URLIMAGE(model.mission_img)];
 }
 
 - (void)setInter:(NSInteger)inter{
     _inter = inter;
-    if (inter == 0) {
-        backimageview.backgroundColor = RGB(108,198,167);
-    }else{
-        backimageview.backgroundColor = RGB(254,190,122);
-    }
+//    if (inter == 0) {
+//        backimageview.backgroundColor = RGB(108,198,167);
+//    }else{
+//        backimageview.backgroundColor = RGB(254,190,122);
+//    }
 }
 @end

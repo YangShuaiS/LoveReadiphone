@@ -11,6 +11,7 @@
 @implementation ZhiShiShuOneDownView{
     BaseLabel * label;
     UIImageView * imageview;
+    
     ZhiShiShuQiuView * zssqiu;
     
     NSArray * jcarray;
@@ -31,12 +32,6 @@
 }
 - (void)addview{
     WS(ws);
-//    label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(102,102,102) LabelFont:TextFont(20) TextAlignment:NSTextAlignmentCenter Text:@""];
-//    [self addSubview:label];
-//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.mas_equalTo(ws);
-//        make.top.mas_equalTo(ws);
-//    }];
     
     imageview = [UIImageView new];
     imageview.contentMode = UIViewContentModeScaleAspectFit;
@@ -48,10 +43,19 @@
         make.height.mas_equalTo(LENGTH(43)*1.5);
     }];
     
+    label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(102,102,102) LabelFont:TextFontCu(20) TextAlignment:NSTextAlignmentCenter Text:@""];
+    [imageview addSubview:label];
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.center.mas_equalTo(self->imageview);
+        make.centerY.mas_equalTo(self->imageview).with.offset(-LENGTH(5));
+        make.centerX.mas_equalTo(self->imageview);
+    }];
+
+    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(LENGTH(53),LENGTH(53));
+    flowLayout.itemSize = CGSizeMake(LENGTH(62),LENGTH(62));
     //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = LENGTH(22);
+    flowLayout.minimumLineSpacing = LENGTH(3);
     //定义每个UICollectionView 纵向的间距
     flowLayout.minimumInteritemSpacing = LENGTH(22);
     //定义每个UICollectionView 的边距距
@@ -61,9 +65,9 @@
     [self addSubview:zssqiu];
     [zssqiu mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.equalTo(ws).with.offset(0);
-        make.top.equalTo(self->imageview.mas_bottom).with.offset(LENGTH(16));
+        make.top.equalTo(self->imageview.mas_bottom).with.offset(LENGTH(8));
 //        make.right.equalTo(ws).with.offset(0);
-        make.height.mas_equalTo(LENGTH(53));
+        make.height.mas_equalTo(LENGTH(62));
         make.centerX.mas_equalTo(ws);
         make.bottom.equalTo(ws).with.offset(LENGTH(0));
         
@@ -118,6 +122,11 @@
     zssqiu.nav = self.nav;
 //    label.text = model.name;
     [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.icon]]];
+    UIColor * color = [BaseObject colorWithHexString:model.text_color];
+    label.textColor = color;
+    label.text = model.name;
+    zssqiu.colors = color;
     zssqiu.itemarray = model.children;
 }
+
 @end

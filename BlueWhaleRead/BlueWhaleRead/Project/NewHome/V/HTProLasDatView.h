@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HTProLasDatView : BaseView
 @property(nonatomic,strong)NSString * zt;
+@property(nonatomic,strong)NSMutableArray * colorarray;
 
 @end
 

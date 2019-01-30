@@ -20,32 +20,35 @@
     }
     return self;
 }
-- (void)setFrame:(CGRect)frame{
-    frame.origin.x =  frame.origin.x + LENGTH(5);
-    frame.origin.y =  frame.origin.y + LENGTH(5);
-    frame.size.width = frame.size.width - LENGTH(10);
-    frame.size.height = frame.size.height - LENGTH(0);
-    [super setFrame:frame];
-    
-}
+//- (void)setFrame:(CGRect)frame{
+//    frame.origin.x =  frame.origin.x + LENGTH(5);
+//    frame.origin.y =  frame.origin.y + LENGTH(5);
+//    frame.size.width = frame.size.width - LENGTH(10);
+//    frame.size.height = frame.size.height - LENGTH(0);
+//    [super setFrame:frame];
+//
+//}
 - (void)setupUI{
-    self.layer.shadowOpacity = 0.2;
-    self.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.layer.shadowOffset = CGSizeMake(0,0);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
-    self.layer.shadowRadius = LENGTH(5);
-    //    self.layer.masksToBounds = YES;
-    self.layer.cornerRadius = LENGTH(3);
     WS(ws);
     
-    
     msdd = [YouXiuShuPingView new];
+    msdd.backgroundColor = [UIColor whiteColor];
     [self addSubview:msdd];
     [msdd mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws);
+        make.edges.mas_equalTo(ws).with.insets(UIEdgeInsetsMake(LENGTH(5), LENGTH(5), LENGTH(5), LENGTH(5)));
     }];
     [msdd setBlock:^{
         ws.block();
     }];
+}
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    msdd.layer.shadowOpacity = 0.2;
+    msdd.layer.shadowColor = [UIColor blackColor].CGColor;
+    msdd.layer.shadowOffset = CGSizeMake(0,0);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+    msdd.layer.shadowRadius = LENGTH(5);
+    //    self.layer.masksToBounds = YES;
+    msdd.layer.cornerRadius = LENGTH(3);
 }
 - (void)setModel:(BookXQBookReview *)model{
     msdd.model = model;

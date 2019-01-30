@@ -77,4 +77,11 @@
     [self reloadData];
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    WS(ws);
+    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(ws.contentSize.height);
+    }];
+}
 @end

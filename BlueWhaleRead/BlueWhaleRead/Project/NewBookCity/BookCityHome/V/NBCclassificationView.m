@@ -46,13 +46,13 @@
     flowLayout.minimumInteritemSpacing = 0;
     //定义每个UICollectionView 的边距距
     flowLayout.sectionInset = UIEdgeInsetsMake(0, LENGTH(22), 0, LENGTH(22));//上左下右
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     collectView = [[NBCclassificationCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
     [self addSubview:collectView];
     [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(LENGTH(0));
-        make.top.equalTo(menu.mas_bottom).with.offset(LENGTH(10));
+        make.top.equalTo(menu.mas_bottom).with.offset(LENGTH(0));
         make.right.equalTo(ws).with.offset(LENGTH(0));
         make.bottom.equalTo(ws).with.offset(-LENGTH(14));
         make.height.mas_equalTo(itemHeight);

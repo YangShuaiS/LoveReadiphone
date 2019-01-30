@@ -11,7 +11,9 @@
 @interface UserXZageCollectionView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
-@implementation UserXZageCollectionView
+@implementation UserXZageCollectionView{
+    levelListModel * lastmodel;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout{
     self = [super initWithFrame:frame collectionViewLayout:layout];
@@ -33,10 +35,6 @@
         self.showsVerticalScrollIndicator = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.pagingEnabled = YES;
-        _itemArray = [NSMutableArray array];
-        for (int i = 0; i < 6; i++) {
-            [_itemArray addObject:@"123"];
-        }
     }
     return self;
 }
@@ -55,12 +53,18 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     UserSZageCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserSZageCollectionViewCell" forIndexPath:indexPath];
+    cell.model = _itemArray[indexPath.row];
     return cell;
 }
 
 
 -( void )collectionView:( UICollectionView *)collectionView didSelectItemAtIndexPath:( NSIndexPath *)indexPath{
-    self.block([NSString stringWithFormat:@"%ld",indexPath.row]);
+    lastmodel.zt = 0;
+    levelListModel * model = _itemArray[indexPath.row];
+    model.zt = 1;
+    lastmodel = model;
+    [self reloadData];
+    self.block([NSString stringWithFormat:@"%@",model.ssid]);
 }
 
 
@@ -76,8 +80,16 @@
 
 - (void)setItemArray:(NSMutableArray *)itemArray{
     _itemArray = itemArray;
-    for (int i = 0; i < 6; i++) {
-        [_itemArray addObject:@"123"];
+
+    for (int i = 0; i < _itemArray.count; i++) {
+        levelListModel * model = _itemArray[i];
+        if (i == 0) {
+            lastmodel = model;
+            model.zt = 1;
+            self.block(model.ssid);
+        }else{
+            model.zt = 0;
+        }
     }
     [self reloadData];
 }

@@ -7,6 +7,9 @@
 //
 
 #import "MMyViewController.h"
+#import "MMyViewCenterView.h"
+
+
 #import "MMviewTableView.h"
 #import "MTopSZorSCView.h"
 #import "MMyViewTopView.h"
@@ -17,75 +20,83 @@
 #import "MyMessageViewController.h"
 
 #import "NewHpViewModel.h"
-@interface MMyViewController ()<NavDelegate>{
+@interface MMyViewController (){
+    UIScrollView * scrollView;
+    NSMutableArray *  viewarray;
+
     MyDeModel * model;
     MMviewTableView * tabview;
     MMyViewTopView * topview;
-    
+    MMyViewCenterView * cenview;
 }
 
 @end
 
 @implementation MMyViewController
-#pragma mark --------------------  导航栏以及代理
-- (void)AddNavtion{
-    [super AddNavtion];
-    WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"" Title:@"我的" RightTitle:@"个人中心-消息" NativeStyle:nacStyleCengterAndRight];
-    self.navtive.titcolor = RGB(0, 0, 0);
-    self.navtive.delegate = self;
-    [self.view addSubview:self.navtive];
-    [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws.view).with.offset(0);
-        make.right.equalTo(ws.view).with.offset(0);
-        make.top.equalTo(ws.view).with.offset(0);
-        make.height.mas_equalTo(NavHeight);
-    }];
-    self.navtive.backgroundColor = RGBA(255, 255, 255, 1);
-}
-- (void)NavLeftClick{
-    
-}
-
-- (void)NavCenterClick {
-    
-}
-
-
-- (void)NavRightClick {
-    MyMessageViewController *  vc = [MyMessageViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self LoadData];
     
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self AddNavtion];
-    
     WS(ws);
+    
+    viewarray = [NSMutableArray array];
+    scrollView = [UIScrollView new];
+    scrollView.userInteractionEnabled = YES;
+    [self.view addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(ws.view).with.offset(-StatusBar);
+        make.left.equalTo(ws.view).with.offset(0);
+        make.right.equalTo(ws.view).with.offset(0);
+        make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
+    }];
+    
+    
     topview = [MMyViewTopView new];
-    [self.view addSubview:topview];
-    [topview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws.navtive.mas_bottom);
-        make.left.mas_equalTo(ws.view);
-        make.right.mas_equalTo(ws.view);
+    [viewarray addObject:topview];
+
+    cenview = [MMyViewCenterView new];
+    [viewarray addObject:cenview];
+    [cenview setBlock:^(NSInteger inter) {
+        [ws Click:inter];
     }];
     
     tabview = [MMviewTableView new];
-    tabview.nav = self.navigationController;
-    [self.view addSubview:tabview];
-    [tabview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->topview.mas_bottom);
-        make.left.and.right.and.bottom.mas_equalTo(ws.view);
-    }];
+    [viewarray addObject:tabview];
+
     
-    [tabview setBlock:^(NSInteger inter) {
-        [ws Click:inter];
-    }];
+    BaseView * lastview;
+    for (int i = 0; i < viewarray.count; i++) {
+        BaseView * view = viewarray[i];
+        [scrollView addSubview:view];
+        if (!lastview) {
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self->scrollView.mas_top).with.offset(0);
+                make.left.equalTo(ws.view).with.offset(0);
+                make.right.equalTo(ws.view).with.offset(0);
+            }];
+        }else{
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(ws.view).with.offset(0);
+                make.right.equalTo(ws.view).with.offset(0);
+                if (i == 1) {
+                    make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(0));
+                }else{
+                    make.top.equalTo(lastview.mas_bottom).with.offset(LENGTH(0));
+                }
+            }];
+        }
+        if (i == viewarray.count-1) {
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(self->scrollView.mas_bottom).with.offset(0);
+            }];
+        }
+        lastview = view;
+    }
 }
 
 - (void)Click:(NSInteger)inter{
@@ -169,6 +180,5 @@
 
 - (void)UpData{
     topview.model = model.userinfo;
-    tabview.model = model.userinfo;
 }
 @end

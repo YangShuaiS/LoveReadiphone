@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * mission_check_background;
 @property (nonatomic, copy) NSString * mission_content_img;
 @property (nonatomic, copy) NSString * mission_name;
-@property (nonatomic, copy) NSString * mission_type;
+@property (nonatomic, copy) NSString * mission_type;//1 新手 3 自建 5   初阶    6   中阶    7   高阶
 @property (nonatomic, copy) NSString * periods_num;
 
 @property (nonatomic, copy) NSString * next_mission;

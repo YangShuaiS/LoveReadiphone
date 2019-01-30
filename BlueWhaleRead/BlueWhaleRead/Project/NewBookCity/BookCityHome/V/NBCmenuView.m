@@ -22,11 +22,27 @@
 }
 - (void)addview{
     WS(ws);
-    _label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(98, 98, 98) LabelFont:TextFontCu(22) TextAlignment:NSTextAlignmentLeft Text:@""];
+    
+    UIView * xian = [UIView new];
+    xian.backgroundColor = RGB(91,199,198);
+    xian.layer.masksToBounds = YES;
+    xian.layer.cornerRadius = LENGTH(1);
+    [self addSubview:xian];
+
+    
+    _label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(31, 31, 31) LabelFont:TextFontCu(20) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:_label];
     [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws).with.offset(LENGTH(22));
-        make.top.and.bottom.mas_equalTo(ws);
+        make.left.mas_equalTo(xian.mas_right).with.offset(LENGTH(15));
+        make.top.mas_equalTo(ws);
+        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(15));
+    }];
+    
+    [xian mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(ws).with.offset(LENGTH(18));
+        make.centerY.mas_equalTo(ws.label);
+        make.height.mas_equalTo(LENGTH(16));
+        make.width.mas_equalTo(LENGTH(2));
     }];
 }
 - (void)setStyles:(NBCmenuViewStyle)styles{
@@ -47,7 +63,7 @@
     [self addSubview:bakimage];
     [bakimage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(ws).with.offset(-LENGTH(22));
-        make.centerY.mas_equalTo(ws);
+        make.centerY.mas_equalTo(ws.label);
         make.size.mas_equalTo(CGSizeMake(LENGTH(20), LENGTH(20)));
     }];
     

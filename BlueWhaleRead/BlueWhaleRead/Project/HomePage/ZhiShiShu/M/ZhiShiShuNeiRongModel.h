@@ -23,4 +23,7 @@
 
 @property(nonatomic,strong)NSString * flag;//
 @property(nonatomic,strong)NSMutableArray * underline;
+
+@property(nonatomic,strong)NSString * is_background;//
+
 @end

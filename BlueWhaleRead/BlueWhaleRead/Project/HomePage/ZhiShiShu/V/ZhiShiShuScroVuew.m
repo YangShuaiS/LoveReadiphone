@@ -25,6 +25,7 @@
     NativeView * nav;
     
     CGPoint lastpoint;
+    CGRect frames;
 }
 - (void)setItemid:(NSString *)itemid{
     _itemid = itemid;
@@ -39,9 +40,9 @@
         if (responseObject) {
             ZhiShiShuModel * model = [ZhiShiShuModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
+                self->guanxi.datamodel = model.data;
                 self->ZSSView.data = model.data;
                 self->leftView.axidataarry = model.data.axis;
-                self->guanxi.datamodel = model.data;
                 CGFloat leftheight = 0;
                 for (ZhiShiShuTimeLineModel * m in model.data.axis) {
                     if (leftheight<m.end_y*poinw) {
@@ -54,8 +55,6 @@
                 self->nav.title = model.data.name;
                 self->nav.titcolor = [BaseObject colorWithHexString:model.data.txt_color];
 //                [self->nav jianbian:model.data.name Color:@[(id)RGB(242,227,185).CGColor,(id)RGB(207,186,135).CGColor,(id)RGBA(172,145,84,1).CGColor]];
-            }else if ([model.code isEqual:@Notloggedin]){
-                [self UpDengLu];
             }
             FLAnimatedImageView * imageview = [FLAnimatedImageView new];
             NSInteger scale_screen = [UIScreen mainScreen].scale;
@@ -118,13 +117,8 @@
     scrollView.directionalLockEnabled=YES;//定向锁定
 //    scrollView.alwaysBounceHorizontal = YES;
     [self addSubview:scrollView];
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->nav.mas_bottom);
-        make.left.mas_equalTo(ws);
-        make.right.mas_equalTo(ws);
-        make.bottom.mas_equalTo(ws);
-    }];
-    self.backgroundColor = [UIColor whiteColor];
+
+//    self.backgroundColor = [UIColor whiteColor];
 //    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchScrollView)];
 //    
 //    [recognizer setNumberOfTapsRequired:1];
@@ -137,16 +131,27 @@
     [self addSubview:guanxi];
     [guanxi mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(ws);
-        make.top.mas_equalTo(self->scrollView.mas_top);
+        make.top.mas_equalTo(self->nav.mas_bottom);
     }];
+    
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self->nav.mas_bottom);
+        make.left.mas_equalTo(ws);
+        make.right.mas_equalTo(ws);
+        make.bottom.mas_equalTo(ws);
+    }];
+    [self.superview layoutIfNeeded];
     
     ZSSView = [ZhiShiShuView new];
     ZSSView.lastview = self;
     [scrollView addSubview:ZSSView];
     [ZSSView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.mas_equalTo(self->guanxi.mas_bottom);
-        make.top.mas_equalTo(self->scrollView).with.offset(100);
+        make.top.mas_equalTo(self->scrollView).with.offset(0);
         make.left.and.right.and.bottom.mas_equalTo(self->scrollView);
+    }];
+    [ZSSView setBlock:^(CGRect frame) {
+        [ws block:frame];
     }];
     
     leftView = [ZhiShiSHuLeftView new];
@@ -193,7 +198,12 @@
 //    leftview.hidden = YES;
 
 }
-
+- (void)block:(CGRect )frame{
+    [self.superview layoutIfNeeded];
+    frames = frame;
+    frames.origin.y = frames.origin.y + NavHeight + guanxi.frame.size.height;
+    self.block(self->frames);
+}
 //- (void)oneButton{
 //    next++;
 //    [ZSSView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -219,14 +229,16 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     leftView.sizefloat = scrollView.contentOffset.y;
+//    NSLog(@"%f",scrollView.contentOffset.y);
+    ZSSView.sizey = scrollView.contentOffset.y;
     if (lastpoint.x+10 <scrollView.contentOffset.x||lastpoint.x-10>scrollView.contentOffset.x) {
         lastpoint = scrollView.contentOffset;
     }
 //    [ scrollView setContentOffset:scrollView.contentOffset animated:YES];//关闭动画效果
 
-    [guanxi mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->scrollView.mas_top).with.offset(-scrollView.contentOffset.y);
-    }];
+//    [guanxi mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self->scrollView.mas_top).with.offset(-scrollView.contentOffset.y);
+//    }];
     
     if (scrollView.contentOffset.y>=scrollView.contentSize.height-HEIGHT-HEIGHT/2) {
         [ZSSView huadong];
@@ -303,8 +315,8 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     ZSSView.nav = self.nav;
-    [ZSSView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->scrollView).with.offset(self->guanxi.frame.size.height);
+    [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self->nav.mas_bottom).with.offset(self->guanxi.frame.size.height);
     }];
 
 }

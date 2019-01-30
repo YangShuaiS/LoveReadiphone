@@ -9,7 +9,7 @@
 #import "NBClistCollectionViewCell.h"
 
 @implementation NBClistCollectionViewCell{
-    BaseLabel * label;
+    UIImageView * label;
 }
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -20,7 +20,7 @@
 }
 -(void)setupUI{
     WS(ws);
-    label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(17) TextAlignment:NSTextAlignmentCenter Text:@"清华附小书单"];
+    label = [UIImageView new];
     [self addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(ws);
@@ -28,6 +28,6 @@
 }
 - (void)setModel:(NBCclassificationModel *)model{
     _model = model;
-    label.text = model.name;
+    [label sd_setImageWithURL:URLIMAGE(model.rank_theme_img)];
 }
 @end

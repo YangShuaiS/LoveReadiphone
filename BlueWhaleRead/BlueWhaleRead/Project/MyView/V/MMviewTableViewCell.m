@@ -22,16 +22,17 @@
 - (void)addview{
     WS(ws);
     imageview = [FLAnimatedImageView new];
+    imageview.contentMode = UIViewContentModeScaleAspectFit;
 //    imageview.backgroundColor = RANDOMCOLOR;
     [self addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(LENGTH(42));
         make.top.mas_equalTo(ws).with.offset(LENGTH(16));
         make.bottom.mas_equalTo(ws).with.offset(-LENGTH(16));
-        make.width.and.height.mas_equalTo(LENGTH(33));
+        make.width.and.height.mas_equalTo(LENGTH(17));
     }];
     
-    name = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(68, 68, 68) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:@""];
+    name = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(51, 51, 51) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:name];
     [name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self->imageview.mas_right).with.offset(LENGTH(16));
@@ -54,6 +55,8 @@
     [bakimage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(ws.mas_right).with.offset(-LENGTH(38));
         make.centerY.mas_equalTo(ws);
+        make.width.mas_equalTo(LENGTH(8));
+        make.height.mas_equalTo(LENGTH(13));
     }];
     
 }

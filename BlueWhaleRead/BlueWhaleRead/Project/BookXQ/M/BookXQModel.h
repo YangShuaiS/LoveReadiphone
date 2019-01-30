@@ -14,6 +14,9 @@
 @interface BookXQModel : BaseModel
 @property (nonatomic, copy) NSNumber * code;
 @property (nonatomic, copy) NSString * message;
+@property (nonatomic, copy) NSString * bookDetailImgd;//xia
+@property (nonatomic, copy) NSString * bookDetailImgu;//shang
+
 @property (nonatomic, assign) BookReadingStyle status;
 @property(nonatomic,strong) BookXQbookModel * book;
 

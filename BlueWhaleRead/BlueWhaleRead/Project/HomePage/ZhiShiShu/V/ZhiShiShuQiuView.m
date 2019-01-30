@@ -46,16 +46,26 @@
 // 设置单元格
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
         ZhiShiSHuQiuCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ZhiShiSHuQiuCollectionViewCell" forIndexPath:indexPath];
+    cell.colors = _colors;
     cell.model = _itemarray[indexPath.row];
-        return cell;
+    return cell;
 }
 
 -( void )collectionView:( UICollectionView *)collectionView didSelectItemAtIndexPath:( NSIndexPath *)indexPath{
-    ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
     ZhiShiShuFLOneModel * model = _itemarray[indexPath.row];
-    vc.itemid =model.knowledge._id;
-    [self.nav pushViewController:vc animated:YES];
-   
+    if ([model.status isEqualToString:@"1"]) {
+        NSMutableArray * modelarray = model.knowledge;
+        if (modelarray.count>0) {
+            ZhiShiShuTwoModel * mo = modelarray[0];
+            ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
+            vc.itemid = mo._id;
+            [self.nav pushViewController:vc animated:YES];
+        }
+    }else{
+        [[MBProgressHUDYS SharedMBProgressHUDYS] addview:self.window];
+        [[MBProgressHUDYS SharedMBProgressHUDYS] shoumessage:@"敬请期待"];
+        [[MBProgressHUDYS SharedMBProgressHUDYS] hideAnimated:YES afterDelay:1];
+    }
 }
 
 

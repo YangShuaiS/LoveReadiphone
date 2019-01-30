@@ -12,8 +12,8 @@
 #import "GuideTaskTwoView.h"
 #import "GuideTaskThreeView.h"
 #import "GuideTaskFourView.h"
-
 #import "NewHpViewModel.h"
+#import "TKbuiltUpView.h"
 @interface TKAlltaskViewController ()<NavDelegate>
 @property (strong, nonatomic) TKAlltaskTableView *tableView;
 
@@ -51,6 +51,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self AddNavtion];
     [self LoadData];
     WS(ws);
@@ -63,9 +64,38 @@
         make.right.mas_equalTo(ws.view);
         make.bottom.mas_equalTo(ws.view);
     }];
+    
+    UIImageView * zj = [UIImageView new];
+    zj.contentMode = UIViewContentModeScaleAspectFit;
+    zj.image = UIIMAGE(@"自建加号");
+    [self.view addSubview:zj];
+    [zj mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(ws.view);
+        make.bottom.mas_equalTo(ws.view.mas_bottom).with.offset(-TabBarHeight);
+    }];
+    
+    BaseLabel * zjlabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(91,199,198) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:@"自建任务"];
+    [self.view addSubview:zjlabel];
+    [zjlabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(ws.view);
+        make.top.mas_equalTo(zj.mas_bottom).with.offset(10);
+    }];
+    
+    zj.userInteractionEnabled = YES;
+    UITapGestureRecognizer * zjclick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(zjclick)];
+    //将手势添加到需要相应的view中去
+    [zj addGestureRecognizer:zjclick];
     // Do any additional setup after loading the view.
 }
-
+- (void)zjclick{
+    TKbuiltUpView * v = [TKbuiltUpView new];
+    v.nav = self.navigationController;
+    [self.view.window addSubview:v];
+    WS(ws);
+    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view.window);
+    }];
+}
 - (void)LoadData{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_ALLTASK];
     NSDictionary * dic = @{@"studentid":Me.ssid};

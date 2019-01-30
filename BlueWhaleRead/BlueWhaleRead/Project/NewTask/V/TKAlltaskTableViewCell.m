@@ -25,6 +25,9 @@
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(ws);
     }];
+    [view setBlock:^{
+        ws.block();
+    }];
 }
 - (void)setModel:(TKTaskListModel *)model{
     _model = model;

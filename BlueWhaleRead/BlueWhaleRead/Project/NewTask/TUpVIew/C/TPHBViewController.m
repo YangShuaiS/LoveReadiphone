@@ -54,10 +54,7 @@
     _tableView.nav = self.nav;
     _tableView.missionid = @"1";
     _tableView.itemArray = itemarray;
-    WS(ws);
-    [_tableView setBlock:^{
-        ws.block();
-    }];
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -73,6 +70,9 @@
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(LENGTH(5), LENGTH(5), LENGTH(5), LENGTH(5)));
+    }];
+    [_tableView setBlock:^{
+        ws.block();
     }];
     // Do any additional setup after loading the view.
 }

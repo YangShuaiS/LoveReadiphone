@@ -16,8 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NHMissionModel : BaseModel
 @property (nonatomic, strong) NHthisWeekInfoModel * thisWeekInfo;
 @property (nonatomic, strong) NHMmissionModel * mission;
-@property (nonatomic, assign) NSString * userRatio;
+@property (nonatomic, copy) NSString * userRatio;
 @property (nonatomic, strong) TAKmissionRoleModel * missionRole;
+@property (nonatomic, copy) NSString * now_time;
+@property (nonatomic, assign) NSInteger now_week;
 
 @end
 

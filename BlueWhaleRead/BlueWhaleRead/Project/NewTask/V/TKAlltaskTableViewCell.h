@@ -9,10 +9,11 @@
 #import "BaseTableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef void(^click)(void);
 @interface TKAlltaskTableViewCell : BaseTableViewCell
 //@property(nonatomic,assign)TKAlltaskStyle askStyle;
 @property(nonatomic,strong)TKTaskListModel * model;
+@property(nonatomic,copy)click block;
 
 @end
 

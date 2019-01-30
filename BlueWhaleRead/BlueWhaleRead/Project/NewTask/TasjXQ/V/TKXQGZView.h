@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TKXQGZView : BaseView
 @property(nonatomic,assign)TaxkXqStyele style;
 @property (strong, nonatomic) TAKALLModel *model;
+@property(nonatomic,strong)NSMutableArray * colorarray;
 
 @end
 

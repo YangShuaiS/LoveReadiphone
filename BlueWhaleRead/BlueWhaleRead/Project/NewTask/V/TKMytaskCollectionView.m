@@ -54,7 +54,6 @@
     return cell;
 }
 
-
 -( void )collectionView:( UICollectionView *)collectionView didSelectItemAtIndexPath:( NSIndexPath *)indexPath{
     TKMyListModel * model = _itemArray[indexPath.row];
     TAskForViewController * vc = [TAskForViewController new];

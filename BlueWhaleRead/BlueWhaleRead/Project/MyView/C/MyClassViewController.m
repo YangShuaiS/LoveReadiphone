@@ -22,7 +22,11 @@
     
     MyClassListModel * models;
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = BEIJINGCOLOR;
@@ -44,12 +48,13 @@
     }];
     
     FLAnimatedImageView * sharefriend = [FLAnimatedImageView new];
-    sharefriend.image = UIIMAGE(@"告诉朋友");
+    sharefriend.image = UIIMAGE(@"4343");
     [self.navtive addSubview:sharefriend];
     [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
+        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);
         make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
-        make.size.mas_equalTo(sharefriend.image.size);
+//        make.size.mas_equalTo(sharefriend.image.size);
+        make.width.and.height.mas_equalTo(24);
     }];
     sharefriend.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];

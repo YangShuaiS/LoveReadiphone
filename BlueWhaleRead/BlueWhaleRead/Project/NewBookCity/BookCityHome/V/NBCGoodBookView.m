@@ -11,7 +11,7 @@
 #import "NBCGoodBookCollectionView.h"
 #import "HomeActivityViewController.h"
 #define itemWidth LENGTH(99)
-#define itemHeight LENGTH(195)
+#define itemHeight LENGTH(170)
 @implementation NBCGoodBookView{
     NBCGoodBookCollectionView * collectView;
     NBCmenuView * menu;
@@ -55,9 +55,9 @@
     [self addSubview:collectView];
     [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(0);
-        make.top.equalTo(self->menu.mas_bottom).with.offset(LENGTH(10));
+        make.top.equalTo(self->menu.mas_bottom).with.offset(LENGTH(0));
         make.right.equalTo(ws).with.offset(0);
-        make.bottom.equalTo(ws).with.offset(-LENGTH(14));
+        make.bottom.equalTo(ws).with.offset(-LENGTH(15));
         make.height.mas_equalTo(itemHeight);
     }];
 }

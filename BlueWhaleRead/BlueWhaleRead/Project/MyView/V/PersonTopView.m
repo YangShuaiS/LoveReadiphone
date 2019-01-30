@@ -20,17 +20,22 @@
     return self;
 }
 -(void)setupUI{
-    self.backgroundColor = MAINCOLOR;
+    self.backgroundColor = RGBA(255, 255, 255, 1);
     WS(ws);
     BaseView * backView = [BaseView new];
-    backView.backgroundColor = MAINCOLOR;
+    backView.backgroundColor = RGBA(255, 255, 255, 1);
     [self addSubview:backView];
     [backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws);
-        make.right.mas_equalTo(ws);
-        make.top.mas_equalTo(ws);
-        make.bottom.mas_equalTo(ws);
+        make.top.mas_equalTo(ws).with.offset(LENGTH(8));
+        make.left.mas_equalTo(ws).with.offset(LENGTH(22));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(22));
+        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(8));
     }];
+    
+    backView.layer.shadowColor = RGB(26, 26, 26).CGColor;
+    backView.layer.shadowOffset = CGSizeMake(0,3);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+    backView.layer.shadowRadius = LENGTH(15);
+    backView.layer.shadowOpacity = 0.1;
     
     userImageView = [FLAnimatedImageView new];
     userImageView.backgroundColor = RGB(245,250,250);
@@ -48,21 +53,6 @@
     userImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userImage:)];
     [userImageView addGestureRecognizer:tapGesturRecognizer];
-
-
-    FLAnimatedImageView * shezhi = [FLAnimatedImageView new];
-    shezhi.image = UIIMAGE(@"icon_个人资料_设置");
-     [backView addSubview:shezhi];
-    [shezhi mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(backView.mas_top).with.offset(LENGTH(9));
-        make.right.mas_equalTo(backView.mas_right).with.offset(-LENGTH(21.5));
-        make.width.mas_equalTo(LENGTH(25));
-        make.height.mas_equalTo(LENGTH(25));
-    }];
-    
-    shezhi.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGesturRecognizer1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(shezhi:)];
-    [shezhi addGestureRecognizer:tapGesturRecognizer1];
     
 }
 - (void)userImage:(UITapGestureRecognizer *)tap{
@@ -109,11 +99,6 @@
 //            MJExtensionLog(@"请求失败：%@",error);
     
         }];
-}
-- (void)shezhi:(UITapGestureRecognizer *)tap{
-    PersonSheZhiViewController * vc = [PersonSheZhiViewController new];
-    vc.model = _model;
-    [self.nav pushViewController:vc animated:YES];
 }
 - (void)setModel:(MyZiLiaoModel *)model{
     _model = model;

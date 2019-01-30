@@ -29,9 +29,10 @@
     userImageView.layer.masksToBounds = YES;
     [self addSubview:userImageView];
     [userImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.mas_equalTo(ws);
+        make.left.mas_equalTo(ws);
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(5));
         make.height.mas_equalTo(self->userImageView.mas_width);
-        make.top.mas_equalTo(ws);
+        make.top.mas_equalTo(ws).with.offset(LENGTH(5));
     }];
     
     UIImageView * BF = [UIImageView new];
@@ -53,7 +54,8 @@
     [self addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->userImageView.mas_bottom).with.offset(ws.frame.size.height*0.134);
-        make.left.and.right.mas_equalTo(ws);
+        make.left.mas_equalTo(ws);
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(5));
         make.height.mas_equalTo(ws.mas_height).multipliedBy(0.175);
     }];
 }
@@ -82,7 +84,7 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    userImageView.layer.cornerRadius = self.frame.size.width/2;
+    userImageView.layer.cornerRadius = LENGTH(5);
     WS(ws);
     [label mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->userImageView.mas_bottom).with.offset(ws.frame.size.height*0.134);

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TakTaskJSView : BaseView
 @property (strong, nonatomic) TAKALLModel *model;
+@property(nonatomic,strong)NSMutableArray * colorarray;
 
 @end
 

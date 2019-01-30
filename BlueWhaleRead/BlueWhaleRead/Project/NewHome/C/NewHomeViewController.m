@@ -31,6 +31,8 @@
     HTaskView * task;
     HAllTaskView * alltask;//任务
     HHotBookView * booklist;
+    
+    NSInteger now;
 }
 
 @end
@@ -38,16 +40,126 @@
 @implementation NewHomeViewController
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (Me.ssid.length>0) {
-        [self LoadData];
+    if (now == 0) {
+        now = 1;
+        [self upapp];
     }else{
-        [self hqid];
+        [self willupview];
+    }
+
+    
+}
+- (void)willupview{
+    NSString * nianji  = [[NSUserDefaults standardUserDefaults] objectForKey:kNotificationNianJi];
+    if (nianji == nil || [nianji isEqualToString:@""]) {
+        [self addnianji];
+    }else{
+        if (Me.ssid.length>0) {
+            [self LoadData];
+        }else{
+            [self hqid:nianji];
+        }
     }
 }
-- (void)hqid{
+
+- (void)upapp{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_NOWBANBENHAO];
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:nil andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UpAppModel * m = [UpAppModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                [self panduanbanbenhao:m];
+            }
+        }else{
+            [self willupview];
+        }
+    }];
+    
+}
+- (void)panduanbanbenhao:(UpAppModel *)model{
+//    NSString * iosVersionName = APP_VERSION;
+    NSInteger iosVersionCode = [APP_BUILD integerValue];
+    if( IS_IPHONE )
+    {
+        if ([model.iosVersionCode integerValue] > iosVersionCode) {
+            if ([model.isForceUpdate isEqualToString:@"1"]) {
+                [self qiangzhiup];
+            }else{
+                [self willupview];
+                [self noqiangzhiup];
+            }
+        }else{
+            [self willupview];
+        }
+    }
+    else
+    {
+        if ([model.ipadVersionCode integerValue] > iosVersionCode) {
+            if ([model.isForceUpdate isEqualToString:@"1"]) {
+                [self qiangzhiup];
+            }else{
+                [self willupview];
+                [self noqiangzhiup];
+            }
+        }else{
+            [self willupview];
+        }
+        
+    }
+    
+}
+
+- (void)qiangzhiup{
+    NSString * url ;
+    if( IS_IPHONE ){
+       url = [[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/博万卷-学生中文课外阅读app/id1434054632?mt=8"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    }else{
+        url = [[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/博万卷-学生中文课外阅读app-pad/id1422331735?mt=8"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+
+    }
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"更新"
+                                                                   message:@"应用有新版本，请及时更新"
+preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             //响应事件
+                                                             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+                                                             exit(0);
+                                                            
+
+                                                         }];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+- (void)noqiangzhiup{
+    NSString * url ;
+    if( IS_IPHONE ){
+        url = [[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/博万卷-学生中文课外阅读app/id1434054632?mt=8"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    }else{
+        url = [[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/博万卷-学生中文课外阅读app-pad/id1422331735?mt=8"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        
+    }
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"更新"
+                                                                   message:@"应用有新版本，请及时更新"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"暂不更新" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                          }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             //响应事件
+                                                             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];                                                         }];
+    
+    [alert addAction:defaultAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+- (void)hqid:(NSString *)nianji{
     WS(ws);
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_HQID];
-    NSDictionary * dic = @{@"uuid":[[UIDevice currentDevice] identifierForVendor].UUIDString};
+    NSDictionary * dic = @{@"uuid":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"level":nianji};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
@@ -58,16 +170,12 @@
                 NSDictionary * dics = m.studentInfo;
                 [usersDic setObject:dics forKey:UserMe];
                 [usersDic writeToFile:filePatch atomically:YES];
-                if ([Me.birthday isEqualToString:@""]) {
-                    [ws addnianji];
-                }else{
-                    [ws LoadData];
-                }
+                [ws LoadData];
             }else if ([m.code isEqual:@Notloggedin]){
                 [self UpDengLu];
             }
         }else{
-            [ws hqid];
+//            [ws hqid:nianji];
         }
     }];
     
@@ -75,28 +183,31 @@
 - (void)addnianji{
     WS(ws);
     UserXZageView * view = [UserXZageView new];
-    [self.view.window  addSubview:view];
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.view.window);
+    UIViewController * vc = [UIViewController new];
+    vc.view = view;
+    [self presentViewController:vc animated:YES completion:^{
+        
     }];
     [view setBlock:^(NSString * _Nonnull str) {
         [ws bdstr:str];
-
+        [ws dismissViewControllerAnimated:YES completion:^{
+            
+        }];
     }];
-
 }
 
 - (void)bdstr:(NSString *)str{
-    NSString *key = @"nianji";
-    [[NSUserDefaults standardUserDefaults] setInteger:[str integerValue] forKey:key];
+    [[NSUserDefaults standardUserDefaults] setValue:str forKey:kNotificationNianJi];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self LoadData];
+    [self hqid:str];
 }
 - (void)LoadData{
+    [self cshxx];
+
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_NEWHOME];
     NSDictionary * dic = @{@"studentid":Me.ssid};
-//    NSDictionary * dic = @{@"studentid":@"12"};
-
+    //    NSDictionary * dic = @{@"studentid":@"12"};
+    
     
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
@@ -125,7 +236,6 @@
     dispatch_once(&onceToken, ^{
         [self addGuideHomeOne];
     });
-
 }
 - (void)addGuideHomeOne{
     NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
@@ -175,26 +285,26 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self ConfirmTheSize];
-
+    
     viewarray = [NSMutableArray array];
     
     scrollView = [UIScrollView new];
     scrollView.userInteractionEnabled = YES;
     [self.view addSubview:scrollView];
     scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headRefresh)];
-
+    
     
     homeLBT = [HomeLBTView new];
     homeLBT.nav = self.navigationController;
     [viewarray addObject:homeLBT];
     
-    prover = [HproverbView new];
-    prover.nav = self.navigationController;
-    [viewarray addObject:prover];
-    
     task = [HTaskView new];
     task.nav = self.navigationController;
     [viewarray addObject:task];
+    
+    prover = [HproverbView new];
+    prover.nav = self.navigationController;
+    [viewarray addObject:prover];
     
     alltask = [HAllTaskView new];
     alltask.nav = self.navigationController;
@@ -210,7 +320,7 @@
         make.right.equalTo(ws.view).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
     }];
-    
+//
     BaseView * lastview;
     for (int i = 0; i < viewarray.count; i++) {
         BaseView * view = viewarray[i];
@@ -239,58 +349,17 @@
         }
         lastview = view;
     }
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
-    NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
-    NSString *currentTimeString = [BaseObject NowTime];
-    NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
+   
+    //    [self kaijiangdaojishi];
+    //    [self xinshourenwuwancheng];
+    //    [self wanchengrenwu];
     
-    if (model.sfcj == nil) {
-        NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
-        [usersDic setValue:@"" forKey:@"ljrqtime"];
-        [usersDic setValue:@"" forKey:@"wcrwtime"];
-        [usersDic setValue:@"" forKey:@"ljymtime"];
-        [usersDic setValue:@"1" forKey:@"sfcj"];
-        [usersDic setValue:@"" forKey:@"sharetime"];
-        [usersDic setValue:@"" forKey:@"shretype"];
-        
-        [usersDic setValue:@"0" forKey:@"ydyhome"];
-        [usersDic setValue:@"0" forKey:@"ydybookcity"];
-        [usersDic setValue:@"0" forKey:@"ydyszsc"];
-        [usersDic setValue:@"0" forKey:@"ydybookxq"];
-        [usersDic setValue:@"0" forKey:@"ydydati"];
-        [usersDic setValue:@"0" forKey:@"ydylqrw"];
-        [usersDic setValue:@"0" forKey:@"ydyqbrw"];
-
-        [usersDic writeToFile:filePatch atomically:YES];
-    }else{
-        if (![model.ljrqtime isEqualToString:currentTimeString]) {
-            [self kaijiangdaojishi];
-            [dataDictionary setValue:currentTimeString forKey:@"ljrqtime"];
-            [dataDictionary writeToFile:filePatch atomically:YES];
-        }
-        if (![model.wcrwtime isEqualToString:currentTimeString]){
-            [self xinshourenwuwancheng];
-            [dataDictionary setValue:currentTimeString forKey:@"wcrwtime"];
-            [dataDictionary writeToFile:filePatch atomically:YES];
-        }
-        if (![model.ljymtime isEqualToString:currentTimeString]){
-            [self wanchengrenwu];
-            [dataDictionary setValue:currentTimeString forKey:@"ljymtime"];
-            [dataDictionary writeToFile:filePatch atomically:YES];
-
-        }
-        
-    }
-//    [self kaijiangdaojishi];
-//    [self xinshourenwuwancheng];
-//    [self wanchengrenwu];
-
     // Do any additional setup after loading the view.
 }
 - (void)kaijiangdaojishi{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_KJTS];
     NSDictionary * dic = @{@"studentid":Me.ssid};
-//        NSDictionary * dic = @{@"studentid":@"12"};
+//            NSDictionary * dic = @{@"studentid":@"12"};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             NewHomeModel * model = [NewHomeModel mj_objectWithKeyValues:responseObject];
@@ -300,26 +369,27 @@
                 [self UpDengLu];
             }
         }else{
-
+            
         }
     }];
 }
 - (void)upview:(NewHomeModel *)model{
     WS(ws);
-    TUpView * view = [TUpView new];
-    view.nav = self.navigationController;
-    view.model = model;
-    [self.view.window addSubview:view];
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.view.window);
-    }];
-
+    if (![model.remaindDays isEqualToString:@"0"]) {
+        TUpView * view = [TUpView new];
+        view.nav = self.navigationController;
+//        view.model = model;
+        [self.view.window addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(ws.view.window);
+        }];
+    }
 }
 
 - (void)xinshourenwuwancheng{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_XSRWWC];
     NSDictionary * dic = @{@"studentid":Me.ssid};
-//        NSDictionary * dic = @{@"studentid":@"12"};
+    //        NSDictionary * dic = @{@"studentid":@"12"};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             TKXSTaskXQModel * model = [TKXSTaskXQModel mj_objectWithKeyValues:responseObject];
@@ -348,15 +418,15 @@
 - (void)wanchengrenwu{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_RWWC];
     NSDictionary * dic = @{@"studentid":Me.ssid};
-//        NSDictionary * dic = @{@"studentid":@"12"};
+    //        NSDictionary * dic = @{@"studentid":@"12"};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             TKXSTaskXQModel * model = [TKXSTaskXQModel mj_objectWithKeyValues:responseObject];
-                        if ([model.code isEqual:@200]) {
-            [self upwanchengrw:model];
-                        }else if ([model.code isEqual:@Notloggedin]){
-                            [self UpDengLu];
-                        }
+            if ([model.code isEqual:@200]) {
+                [self upwanchengrw:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
+            }
         }else{
             
         }
@@ -374,13 +444,59 @@
     }];
 }
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
+- (void)cshxx{
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
+    NSString *currentTimeString = [BaseObject NowTime];
+    NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
+    
+    if (model.sfcj == nil) {
+        NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
+        [usersDic setValue:@"" forKey:@"ljrqtime"];
+        [usersDic setValue:@"" forKey:@"wcrwtime"];
+        [usersDic setValue:@"" forKey:@"ljymtime"];
+        [usersDic setValue:@"1" forKey:@"sfcj"];
+        [usersDic setValue:@"" forKey:@"sharetime"];
+        [usersDic setValue:@"" forKey:@"shretype"];
+        
+        [usersDic setValue:@"0" forKey:@"ydyhome"];
+        [usersDic setValue:@"0" forKey:@"ydybookcity"];
+        [usersDic setValue:@"0" forKey:@"ydyszsc"];
+        [usersDic setValue:@"0" forKey:@"ydybookxq"];
+        [usersDic setValue:@"0" forKey:@"ydydati"];
+        [usersDic setValue:@"0" forKey:@"ydylqrw"];
+        [usersDic setValue:@"0" forKey:@"ydyqbrw"];
+        [usersDic setValue:@"0" forKey:@"zhishiwang"];
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+        
+        [usersDic writeToFile:filePatch atomically:YES];
+    }else{
+        if (![model.ljrqtime isEqualToString:currentTimeString]) {
+            [self kaijiangdaojishi];
+            [dataDictionary setValue:currentTimeString forKey:@"ljrqtime"];
+            [dataDictionary writeToFile:filePatch atomically:YES];
+        }
+        if (![model.wcrwtime isEqualToString:currentTimeString]){
+            [self xinshourenwuwancheng];
+            [dataDictionary setValue:currentTimeString forKey:@"wcrwtime"];
+            [dataDictionary writeToFile:filePatch atomically:YES];
+        }
+        if (![model.ljymtime isEqualToString:currentTimeString]){
+            [self wanchengrenwu];
+            [dataDictionary setValue:currentTimeString forKey:@"ljymtime"];
+            [dataDictionary writeToFile:filePatch atomically:YES];
+            
+        }
+        
+    }
 }
-*/
 
 @end

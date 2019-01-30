@@ -11,7 +11,7 @@
 #import "HomeModerateCollectView.h"
 
 #import "NBCMoreChannelViewController.h"
-#define itemHeight LENGTH(190)
+#define itemHeight LENGTH(170)
 
 @implementation HHotBookView{
     NavigationMenuView * navMenu;
@@ -48,7 +48,7 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake((WIDTH - LENGTH(13)*2 -LENGTH(24)*2)/3,itemHeight);
     //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = LENGTH(13);
+    flowLayout.minimumLineSpacing = LENGTH(0);
     //定义每个UICollectionView 纵向的间距
     flowLayout.minimumInteritemSpacing = LENGTH(0);
     //定义每个UICollectionView 的边距距
@@ -56,14 +56,13 @@
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     collectView = [[HomeModerateCollectView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
-    collectView.foundinter = 15;
+    collectView.foundinter = 6;
     [self addSubview:collectView];
     [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(0);
-        make.top.equalTo(self->navMenu.mas_bottom).with.offset(LENGTH(10));
+        make.top.equalTo(self->navMenu.mas_bottom).with.offset(LENGTH(0));
         make.right.equalTo(ws).with.offset(0);
-        make.bottom.equalTo(ws);
-        
+        make.bottom.equalTo(ws).with.offset(-LENGTH(18));
     }];
 }
 

@@ -75,6 +75,13 @@
     [self addChildViewController:hotview1];
     [childVC addObject:hotview1];
     homeMenu.controllerArray = childVC;
+    
+    [hotview setBlock:^{
+        
+    }];
+    [hotview1 setBlock:^{
+        
+    }];
     // Do any additional setup after loading the view.
 }
 

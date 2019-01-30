@@ -8,10 +8,8 @@
 //
 
 #import "BookXQTopView.h"
-#import "BookTopLabel.h"
 #import "BlueWhaleRead-Swift.h"
 #import "HuiBenViewController.h"
-#import "BookXqTopCollectionView.h"
 @implementation BookXQTopView{
     FLAnimatedImageView * leftImageView;
     BaseLabel * Title;
@@ -38,16 +36,12 @@
     
     NSString * bookpngfile;
     NSArray * bookpng;
-    BookXqTopCollectionView * collection;
     
 //    BaseLabel * longtext;
-    BookTopLabel * longtext;
     BaseLabel * jd ;
     
-    FLAnimatedImageView* sanjiao;
     FLAnimatedImageView * backImageView;
     
-    UIScrollView * scrollView;
 }
 -(instancetype)init{
     self = [super init];
@@ -59,7 +53,7 @@
 -(void)setupUI{
     WS(ws);
     backImageView = [FLAnimatedImageView new];
-    backImageView.image = UIIMAGE(@"bg_书架_书籍详情");
+    backImageView.image = UIIMAGE(@"上");
     [self addSubview:backImageView];
     [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws);
@@ -78,15 +72,25 @@
         make.top.equalTo(ws).with.offset(15);
         make.width.mas_equalTo(LENGTH(110));
         make.height.mas_equalTo(LENGTH(154));
+        make.bottom.equalTo(ws.mas_bottom).with.offset(-LENGTH(18));
+
     }];
     
     Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(4,51,50) LabelFont:TextFont(17) TextAlignment:NSTextAlignmentLeft Text:ZHANWEIZI];
     Title.numberOfLines = 1;
     [self addSubview:Title];
     
+    
+    UIView * backxx = [UIView new];
+    backxx.backgroundColor = RGBA(0, 0, 0, 0.6);
+    [leftImageView addSubview:backxx];
+    
     _jKStarDisplayView = [[JKStarDisplayView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.jKStarDisplayView.redValue = [@"0" floatValue];
     [leftImageView addSubview:self.jKStarDisplayView];
+    [backxx mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.jKStarDisplayView).with.insets(UIEdgeInsetsMake(-LENGTH(2), -LENGTH(2), -LENGTH(2), -LENGTH(2)));
+    }];
 
     
     subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:ZHANWEIZI];
@@ -129,21 +133,6 @@
     BaseButton * oneButton = [BaseButton buttonWithType:UIButtonTypeCustom];
     [oneButton addTarget:self action:@selector(oneButton) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:oneButton];
-    
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(LENGTH(103),LENGTH(31));
-    //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = LENGTH(5);
-    //定义每个UICollectionView 纵向的间距
-    flowLayout.minimumInteritemSpacing = LENGTH(5);
-    //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, LENGTH(10), 0, LENGTH(10));//上左下右
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    
-    collection = [[BookXqTopCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
-    [self addSubview:collection];
-    
-
     
     
     [Title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -224,87 +213,11 @@
         make.height.mas_equalTo(LENGTH(20));
     }];
     
-    [collection mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->leftImageView.mas_bottom).with.offset(LENGTH(18));
-        make.left.and.right.mas_equalTo(ws);
-    }];
-    
-    scrollView = [UIScrollView new];
-    scrollView.backgroundColor = [UIColor clearColor];
-    scrollView.delegate = self;
-    scrollView.userInteractionEnabled = YES;
-    [self addSubview:scrollView];
-    
-//    longtext = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:subtitleColor LabelFont:TextFont(Font16) TextAlignment:NSTextAlignmentLeft Text:[NSString stringWithFormat:@""]];
-//    longtext.numberOfLines = 4;
-//    [scrollView addSubview:longtext];
-    longtext = [BookTopLabel new];
-    [scrollView addSubview:longtext];
-    
-    [longtext mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self->leftImageView.mas_left).with.offset(0);
-        make.top.equalTo(self->scrollView.mas_top).with.offset(0);
-        make.right.equalTo(ws).with.offset(-LENGTH(20));
-        make.bottom.equalTo(self->scrollView.mas_bottom).with.offset(0);
-//        make.size.greaterThanOrEqualTo(self->longtext);
-    }];
-    
-    
-    
-    
-    BaseLabel * zhankai = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(85,117,117)  LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:@""];
-    [self addSubview:zhankai];
-    [zhankai mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->scrollView.mas_bottom).with.offset(LENGTH(10));
-        make.centerX.mas_equalTo(ws);
-//        make.bottom.equalTo(ws.mas_bottom).with.offset(-LENGTH(20));
-        make.width.mas_equalTo(LENGTH(140));
-        make.height.mas_equalTo(LENGTH(50));
-    }];
-    
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->collection.mas_bottom).with.offset(LENGTH(12));
-        make.left.equalTo(self->leftImageView.mas_left).with.offset(0);
-        make.right.equalTo(ws).with.offset(-LENGTH(0));
-//        make.height.mas_equalTo(self->longtext.mas_height);
-        make.height.mas_equalTo(LENGTH(65));
-
-        //        make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
-    }];
-    
-    
-    zhankai.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture1)];
-        //将手势添加到需要相应的view中去
-    [zhankai addGestureRecognizer:tapGesture1];
-    
-    sanjiao = [FLAnimatedImageView new];
-    sanjiao.image = UIIMAGE(@"icon_文章_下箭头收起");
-    [self addSubview:sanjiao];
-    
-    [sanjiao mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->scrollView.mas_bottom).with.offset(LENGTH(10));
-        make.centerX.mas_equalTo(ws);
-        make.bottom.equalTo(ws.mas_bottom).with.offset(-LENGTH(20));
-        make.width.mas_equalTo(LENGTH(12));
-        make.height.mas_equalTo(LENGTH(7));
-    }];
-
-#pragma mark ----------------------- 还有?
-//    jd = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:subtitleColor LabelFont:TextFont(20) TextAlignment:NSTextAlignmentCenter Text:[NSString stringWithFormat:@"精读"]];
-//    jd.backgroundColor = RANDOMCOLOR;
-//    [self addSubview:jd];
-//    [jd mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self->leftImageView.mas_top).with.offset(LENGTH(24));
-//        make.width.mas_equalTo(LENGTH(100));
-//        make.height.mas_equalTo(LENGTH(40));
-//        make.right.mas_equalTo(ws).with.offset(-LENGTH(26));
-//    }];
-    
     zxyd.userInteractionEnabled = YES;
     UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createProgress)];
     //将手势添加到需要相应的view中去
     [zxyd addGestureRecognizer:tapGesture2];
+  
 }
 
 - (NSString *)dataFilePath{
@@ -519,22 +432,7 @@
         [self->mb hideAnimated:NO afterDelay:1];
     }
 }
-- (void)tapGesture1{
-    sanjiao.image = longtext.longlabel.numberOfLines ==0?UIIMAGE(@"icon_文章_下箭头收起"):UIIMAGE(@"icon_文章_上箭头收起");
 
-//    longtext.numberOfLines = longtext.numberOfLines>0?0:4;
-    longtext.longlabel.numberOfLines = longtext.longlabel.numberOfLines>0?0:4;
-
-    if (longtext.longlabel.numberOfLines == 4) {
-        [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(LENGTH(65));
-        }];
-    }else{
-        [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(LENGTH(80));
-        }];
-    }
-}
 - (void)setModel:(BookXQbookModel *)model{
     _model = model;
     zxyd.hidden = NO;
@@ -543,14 +441,12 @@
     if ([model.b_download isEqualToString:@""]) {
         zxyd.hidden = YES;
     }
-    collection.itemArray = model.tags;
     Title.text = model.name;
     self.jKStarDisplayView.redValue = [model.mark floatValue];
 
     subtitle.text =[NSString stringWithFormat:@"%@",model.author];
     dengji.text = [NSString stringWithFormat:@"%@",model.levels];
     nengli.text = model.b_score;
-    longtext.longlabel.text = model.info;
     if (_model.is_like==0) {
         xihuanimage.image =UIIMAGE(@"喜欢未选中");
     }else{

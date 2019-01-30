@@ -7,11 +7,15 @@
 //
 
 #import "BaseView.h"
+typedef void(^ClickBlock)(ZhiShiShuNeiRongModel*model);
 
 @interface ZhiShiShuNEiRong : BaseView
 @property(nonatomic,strong)ZhiShiShuNeiRongModel * neirong;
 @property(nonatomic,strong)ZhiShiShuDataModel * textmodel;
+@property(nonatomic,copy)ClickBlock block;
 
 - (void)addimage;
+- (void)yinying;
+- (void)wuyinying;
 @end
 

@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * content;
 @property (nonatomic, copy) NSString * ssid;
 @property (nonatomic, copy) NSString * status;
+@property (nonatomic, copy) NSString * img;
+@property (nonatomic, copy) NSString * proverbImg;
+
+
 
 @end
 

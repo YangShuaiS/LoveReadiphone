@@ -18,6 +18,8 @@
 
 #import "HTShareModel.h"//分享model
 
+#import "UpAppModel.h"
+#import "BookSDModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NewHomeModel : BaseModel

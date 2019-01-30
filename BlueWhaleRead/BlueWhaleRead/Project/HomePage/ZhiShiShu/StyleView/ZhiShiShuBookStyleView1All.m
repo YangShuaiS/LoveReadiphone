@@ -31,6 +31,7 @@
     [self addSubview:backview];
     [backview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(ws);
+//        make.top.mas_equalTo(LENGTH(<#x#>));
         make.width.mas_equalTo(LENGTH(327));
         make.height.mas_equalTo(LENGTH(472));
     }];
@@ -61,7 +62,7 @@
         make.height.mas_equalTo(LENGTH(38));
     }];
     
-    nrtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[UIColor whiteColor] LabelFont:[UIFont fontWithName:@"HYk1gj" size:FontSize(LENGTH(25))] TextAlignment:NSTextAlignmentCenter Text:@""];
+    nrtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[UIColor whiteColor] LabelFont:TextFont(25) TextAlignment:NSTextAlignmentCenter Text:@""];
     [titleview addSubview:nrtitle];
     [nrtitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(titleview).with.insets(UIEdgeInsetsMake(LENGTH(3), LENGTH(3), LENGTH(3), LENGTH(3)));

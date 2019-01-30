@@ -9,6 +9,7 @@
 #ifndef Public_h
 #define Public_h
 #define APP_VERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+#define APP_BUILD ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"])
 
 #define WIDTH  [UIScreen mainScreen].bounds.size.width
 #define HEIGHT  [UIScreen mainScreen].bounds.size.height
@@ -41,13 +42,15 @@
 //#define IMAGEURL @"http://39.106.100.235:8081/"
 //#define IMAGEURL @"http://192.168.1.221:8080/"
 
-#define IMAGEURL @"http://192.168.1.221:8081/"
-//#define IMAGEURL @"http://tiantianaidu.com/"
-
+//#define IMAGEURL @"http://192.168.1.221:8081/"
+//#define IMAGEURL @"http://119.90.89.88:8081/"
+#define IMAGEURL @"https://tiantianaidu.com/"
+ 
 //#define ZSTX @"http://192.168.1.231:9001/"//内网
 #define ZSTX @"http://119.90.89.88:9001/"//外网
 //#define ZSTX @"http://192.168.1.102/knowledge/public/"//
 
+#define JK_NOWBANBENHAO @"api/v1.0/returnVersion"//获取当前版本号
 #define JK_NEWHOME @"api/v1.0/missionPage"//新首页
 #define JK_ALLTASK @"api/v1.0/allMission"//全部任务
 #define JK_TASKXQ @"api/v1.0/missionDetail"//任务详情pastLotteryList
@@ -67,6 +70,13 @@
 #define JK_SHARERW @"api/v1.0/missionShare"//分享1
 #define JK_HQID @"api/v1.0/visitorLogin"//获取id
 #define JK_WXDL @"api/v1.0/wxUserLogin"//微信登录
+#define JK_NEWZC @"api/v1.0/newUserLogin"//新注册或登录
+#define JK_BDWX @"api/v1.0/bindWx"//绑定微信
+#define JK_JBWX @"api/v1.0/unBindWx"//解绑微信
+#define JK_XIUGAILEVEL @"api/v1.0/updateLevel"//修改年级
+#define JK_XIUGAISEX @"api/v1.0/updateSex"//修改性别
+#define JK_HQCLASS @"api/v1.0/levelList"//获取年级
+#define JK_TASKREMOVE @"api/v1.0/delSelfMission"//删除惹怒
 
 
 
@@ -112,6 +122,7 @@
 #define JK_WSXX @"api/v1.0/improveUserinfo"//完善信息
 #define JK_GHGHMM @"api/v1.0/checkPassword"//更换手机号密码
 #define JK_XGNAME @"api/v1.0/updateUserName"//修改昵称
+#define JK_XGBirsty @"api/v1.0/updateBirthday"//修改生日
 
 
 #define JK_GOODBOOKGAN @"api/v1.0/goodArticleList"//读后感
@@ -137,7 +148,7 @@
 
 #define JK_ZHISHITIXIXIANGQING @"knowledge/get-all"//体系详情
 #define JK_ZHISHITIXIXIFENLEI @"/knowledge/get-type"//体系分类
-#define JK_ZHISHITIXIXQ @"/knowledge/get-content"//体系详情
+#define JK_ZHISHITIXIXQ @"knowledge/get-content"//体系详情
 
 
 
@@ -169,6 +180,8 @@
 
 // 系统版本
 #define SYTEM_VERSION [[UIDevice currentDevice].systemVersion floatValue]
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_PAD (UI_USER_INTERFACE_IDIOM()== UIUserInterfaceIdiomPad)
 
 
 //通知名称
@@ -176,6 +189,8 @@
 #define kNotificationTuiChuDenglu        @"kNotificationTuiChuDenglu"
 #define kNotificationAcitivity     @"kNotificationAcitivity"//推荐书籍更多展开
 #define kNotificationGengHuanPhone    @"kNotificationGengHuanPhone"//更换手机号
+#define kNotificationNianJi   @"kNotificationNianJi"//年级
+#define kNotificationAddRess   @"kNotificationAddRess"//地区
 
 //字体大小
 #define TextFont(f) [UIFont fontWithName:@"PingFang-SC-Regular" size:FontSize(LENGTH(f))]

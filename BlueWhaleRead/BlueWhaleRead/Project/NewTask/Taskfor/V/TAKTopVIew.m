@@ -31,12 +31,11 @@
 - (void)addview{
     WS(ws);
     topimageview = [UIImageView new];
-    topimageview.backgroundColor = RANDOMCOLOR;
     topimageview.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:topimageview];
     [topimageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.and.right.mas_equalTo(ws);
-        make.height.mas_equalTo(LENGTH(115));
+//        make.height.mas_equalTo(LENGTH(115));
     }];
     
     TKJS = [TakTaskJSView new];

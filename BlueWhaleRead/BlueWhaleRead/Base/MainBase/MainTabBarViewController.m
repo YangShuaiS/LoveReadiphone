@@ -11,7 +11,7 @@
 #import "ViewController.h"
 
 #import "NewHomeViewController.h"
-#import "FoundViewController.h"
+#import "ZhiShiShuViewController.h"
 #import "NBookCityViewController.h"
 #import "MMyViewController.h"
 @interface MainTabBarViewController ()<UITabBarControllerDelegate>{
@@ -38,9 +38,9 @@
 
     UITabBarItem *item2 = [[UITabBarItem alloc] init];
     item2.tag = 2;
-    [item2 setTitle:@"发现"];
-    [item2 setImage:[UIImage imageNamed:@"icon_发现_未选中"]];
-    [item2 setSelectedImage:[[UIImage imageNamed:@"icon_发现_选中"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [item2 setTitle:@"知识网"];
+    [item2 setImage:[UIImage imageNamed:@"iocn_知识网_未选中"]];
+    [item2 setSelectedImage:[[UIImage imageNamed:@"iocn_知识网"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [item2 setTitleTextAttributes:@{NSForegroundColorAttributeName: TabBarTitleColor,NSFontAttributeName:[UIFont systemFontOfSize:40]}
                          forState:UIControlStateSelected];
     
@@ -66,7 +66,7 @@
     BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:view1];
     homenav.tabBarItem =item1;
     
-    FoundViewController * view2 = [[FoundViewController alloc] init];
+    ZhiShiShuViewController * view2 = [[ZhiShiShuViewController alloc] init];
     BaseNavigationViewController * homenav1 = [[BaseNavigationViewController alloc] initWithRootViewController:view2];
     homenav1.tabBarItem =item2;
     

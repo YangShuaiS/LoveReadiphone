@@ -20,9 +20,9 @@
 }
 -(void)setupUI{
     WS(ws);
-    self.layer.borderColor = RGB(73,172,171).CGColor;
     self.layer.borderWidth = LENGTH(1);
-    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(49,87,86) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentCenter Text:@""];
+    self.layer.cornerRadius = LENGTH(7);
+    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(49,87,86) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:@""];
     [self addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(ws);
@@ -34,14 +34,17 @@
     title.text = string;
 }
 - (void)xz{
-    self.backgroundColor = RGB(73,172,171);
+    self.backgroundColor = _neirongcolor;
+    title.textColor = [UIColor whiteColor];
 }
 - (void)wxz{
     self.backgroundColor = [UIColor whiteColor];
+    title.textColor = _neirongcolor;
 }
 
 - (void)setModel:(TKbuiltModel *)model{
     _model = model;
+    self.layer.borderColor = _neirongcolor.CGColor;
     title.text = model.name;
     if ([model.style isEqualToString:@"1"]) {
         [self xz];

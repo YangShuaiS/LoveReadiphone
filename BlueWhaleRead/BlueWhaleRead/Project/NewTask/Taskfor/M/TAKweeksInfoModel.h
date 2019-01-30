@@ -13,7 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TAKweeksInfoModel : BaseModel
 @property (nonatomic, copy) NSString * glossaryNum;//总识词次数
 @property (nonatomic, copy) NSString * literacyNum;//总识字次数
+@property (nonatomic, copy) NSString * glossaryScore;//总识字次数
+@property (nonatomic, copy) NSString * literacyScore;//总识字次数
+@property (nonatomic, copy) NSString * now_week;//总识字次数
+@property (nonatomic, copy) NSString * now_time;//总识字次数
+
 @property (nonatomic, strong) NSMutableArray * read_time;
+
 @property (nonatomic, strong) NSMutableArray * weeks;
 
 @end

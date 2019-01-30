@@ -20,7 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * rankinfo;//1上升
 @property (nonatomic, copy) NSString * received_time;
 @property (nonatomic, copy) NSString * share_is_completed;
+@property (nonatomic, copy) NSString * share_Score;
 @property (nonatomic, strong) NSMutableArray * readBookInfo;
+
+@property (nonatomic, copy) NSString * week_book_num;
+@property (nonatomic, copy) NSString * week_share_num;
 
 @end
 

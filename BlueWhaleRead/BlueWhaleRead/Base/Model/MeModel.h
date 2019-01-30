@@ -83,6 +83,16 @@
 @property (nonatomic, copy) NSString *userid;
 @property (nonatomic, copy) NSString *birthday;//生日
 
+@property (nonatomic, copy) NSString *area;
+@property (nonatomic, copy) NSString *expire_time;
+@property (nonatomic, copy) NSString *is_rebot;
+@property (nonatomic, copy) NSString *num;
+@property (nonatomic, copy) NSString *openid;
+@property (nonatomic, copy) NSString *password;
+@property (nonatomic, copy) NSString *true_class;
+@property (nonatomic, copy) NSString *true_school;
+@property (nonatomic, copy) NSString *unionid;
+@property (nonatomic, copy) NSString *uuid;
 
 
 + (MeModel *)SharedModel;

@@ -19,8 +19,9 @@
 @property (nonatomic, assign) NSInteger sex;
 @property (nonatomic, copy) NSString * ssid;
 @property (nonatomic, copy) NSString * praiseNum;//表扬数
-@property(nonatomic,strong)NSMutableDictionary * clazz;//班级
-@property(nonatomic,strong)NSMutableDictionary * grade;//班级
+@property(nonatomic,strong)MyClassTopModel * clazz;//班级
+@property(nonatomic,strong)MyClassTopModel * grade;//班级
+@property(nonatomic,strong)MyClassTopModel * school;//班级
 
 
 

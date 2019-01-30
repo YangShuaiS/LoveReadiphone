@@ -7,7 +7,7 @@
 //
 
 #import "TUpView.h"
-
+#import "TAskForViewController.h"
 @implementation TUpView{
     BaseLabel * time;
     BaseLabel * stime;
@@ -157,7 +157,12 @@
     [self removeFromSuperview];
 }
 - (void)push{
-    
+    TAskForViewController * vc = [TAskForViewController new];
+    vc.type = @"1";
+    vc.missionid = @"1";
+    vc.navtitle = @"新手任务";
+    [self.nav pushViewController:vc animated:YES];
+    [self shanchu];
 }
 - (void)setModel:(NewHomeModel *)model{
     _model = model;

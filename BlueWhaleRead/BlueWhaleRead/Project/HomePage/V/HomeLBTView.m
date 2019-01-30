@@ -25,9 +25,14 @@
     //轮播图
     cycleScrollerView = [SDCycleScrollView new];
     cycleScrollerView.delegate = self;
+    cycleScrollerView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
     cycleScrollerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
     cycleScrollerView.pageControlDotSize = CGSizeMake(20, 20);;
-    cycleScrollerView.dotColor = RGBA(0xff, 0x5e, 0x4d, 1); // 自定义分页控件小圆标颜色
+    cycleScrollerView.currentPageDotColor = RGB(130, 217, 216);// 自定义分页控件小圆标颜色
+    cycleScrollerView.pageDotColor = RGBA(0xaa, 0xaa, 0xaa, 0.6);
+    cycleScrollerView.autoScrollTimeInterval = 3;
+
+//    cycleScrollerView.backgroundColor = RGB(255, 255, 255);
     //    cycleScrollerView.layer.cornerRadius = 10;
     //    cycleScrollerView.layer.masksToBounds = YES;
     [ws addSubview:cycleScrollerView];
@@ -37,7 +42,7 @@
         make.left.equalTo(ws).with.offset(0);
         make.top.equalTo(ws).with.offset(0);
         make.bottom.equalTo(ws).with.offset(0);
-        make.height.equalTo(ws.mas_width).multipliedBy(0.416);
+        make.height.equalTo(ws.mas_width).multipliedBy(0.573333333);
     }];
 }
 - (void)setItemArray:(NSMutableArray *)itemArray{

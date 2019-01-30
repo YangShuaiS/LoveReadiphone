@@ -22,12 +22,20 @@
 
 @implementation TakSZView{
     BaseLabel * title;
-    TKChooseCollectionView *collectview;
+    UIImageView * leftimage;
     
+    TKChooseCollectionView *collectview;
     BaseLabel * subtitle;
     BaseLabel * times;
+    
+    UIView * duigouback;
     UIImageView * duigou;
-
+    
+    UIView * oneview;
+    UIView * twoview;
+    UIView * timeview;
+    UIImageView * imageview;
+    BaseLabel * tx;
 }
 
 - (instancetype)init
@@ -42,12 +50,59 @@
 }
 - (void)addview{
     WS(ws);
-    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(12,21,21) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentLeft Text:@"每日读书时间设置"];
-    [self addSubview:title];
-    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.backgroundColor = [UIColor clearColor];
+    UIView * backview = [UIView new];
+    backview.backgroundColor = RGB(255, 255, 255);
+    [self addSubview:backview];
+    [backview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws);
-        make.left.mas_equalTo(ws).with.offset(LENGTH(30));
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(30));
+        make.left.mas_equalTo(ws).with.offset(LENGTH(20));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(20));
+        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(28)-TabBarHeight);
+    }];
+    backview.layer.shadowOpacity = 0.24;
+    backview.layer.shadowColor = RGB(171, 171, 171).CGColor;
+    backview.layer.shadowRadius = LENGTH(8);
+    backview.layer.shadowOffset = CGSizeMake(0,4);
+    backview.layer.cornerRadius = LENGTH(12);
+    
+    
+    leftimage = [UIImageView new];
+//    leftimage.contentMode = UIViewContentModeScaleAspectFit;
+    leftimage.image = UIIMAGE(@"标题装饰紫色");
+    leftimage.image = [leftimage.image imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
+    [backview addSubview:leftimage];
+    
+    
+    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(51,51,51) LabelFont:TextFontCu(19) TextAlignment:NSTextAlignmentCenter Text:@"读书设置"];
+    [backview addSubview:title];
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(backview).with.offset(LENGTH(15));
+        make.left.mas_equalTo(backview).with.offset(LENGTH(15));
+        make.right.mas_equalTo(backview).with.offset(-LENGTH(15));
+    }];
+    
+    [leftimage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(ws);
+        make.left.mas_equalTo(self->title.mas_left).with.offset(LENGTH(34));
+        make.right.mas_equalTo(self->title.mas_right).with.offset(-LENGTH(34));
+        make.centerY.mas_equalTo(self->title);
+    }];
+    
+    BaseLabel * reedbooktime = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(51, 51, 51) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:@"每日读书时间"];
+    [backview addSubview:reedbooktime];
+    [reedbooktime mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(backview).with.offset(LENGTH(43));
+        make.top.mas_equalTo(self->title.mas_bottom).with.offset(LENGTH(22));
+    }];
+    
+    oneview = [self addyuanquan];
+    [backview addSubview:oneview];
+    [oneview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(backview).with.offset(LENGTH(26));
+//        make.top.mas_equalTo(reedbooktime).with.offset(LENGTH(4));
+        make.centerY.mas_equalTo(reedbooktime);
+        make.width.and.height.mas_equalTo(LENGTH(4));
     }];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -64,7 +119,7 @@
     collectview.decelerationRate = UIScrollViewDecelerationRateNormal;
     [self addSubview:collectview];
     [collectview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->title.mas_bottom).with.offset(LENGTH(15));
+        make.top.mas_equalTo(reedbooktime.mas_bottom).with.offset(LENGTH(15));
         make.left.mas_equalTo(ws);
         make.right.mas_equalTo(ws);
         make.height.mas_equalTo(LENGTH(32));
@@ -89,46 +144,52 @@
     }
     collectview.itemArray = itemarr;
     
-    subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(12,21,21) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentLeft Text:@"每日开始读书时间"];
-    [self addSubview:subtitle];
+    subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(51, 51, 51) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:@"每日开始读书时间"];
+    [backview addSubview:subtitle];
     [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(backview).with.offset(LENGTH(43));
         make.top.mas_equalTo(self->collectview.mas_bottom).with.offset(LENGTH(22));
-        make.left.mas_equalTo(ws).with.offset(LENGTH(30));
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(30));
     }];
     
-//    NSDateFormatter *formats = [[NSDateFormatter alloc] init];
-//    formats.dateFormat = @"HH:mm";
-//    NSDate *datenow = [NSDate date];
-//    time = [formats stringFromDate:datenow];
+    twoview = [self addyuanquan];
+    [backview addSubview:twoview];
+    [twoview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(backview).with.offset(LENGTH(26));
+        make.centerY.mas_equalTo(self->subtitle);
+        make.width.and.height.mas_equalTo(LENGTH(4));
+    }];
     
-    UIView * timeview = [UIView new];
+
+    
+    timeview = [UIView new];
     timeview.layer.borderWidth = LENGTH(1);
     timeview.layer.borderColor = RGB(73,172,171).CGColor;
-    [self addSubview:timeview];
+    timeview.layer.cornerRadius = LENGTH(7);
+    [backview addSubview:timeview];
     [timeview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->subtitle.mas_bottom).with.offset(LENGTH(15));
-        make.left.mas_equalTo(ws).with.offset(LENGTH(31));
-        make.width.mas_equalTo(LENGTH(132));
+        make.left.mas_equalTo(ws).with.offset(LENGTH(26));
+        make.width.mas_equalTo(LENGTH(121));
         make.height.mas_equalTo(LENGTH(32));
-        
+        make.bottom.mas_equalTo(backview).with.offset(-LENGTH(20));
     }];
     
-    times = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(49,87,86) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:[NSString stringWithFormat:@"%@开始",time]];
+    times = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(49,87,86) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:[NSString stringWithFormat:@"%@开始",time]];
     [timeview addSubview:times];
     [times mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.and.bottom.mas_equalTo(timeview);
-        make.left.mas_equalTo(timeview).with.offset(LENGTH(15));
+        make.top.and.bottom.mas_equalTo(self->timeview);
+        make.left.mas_equalTo(self->timeview).with.offset(LENGTH(13));
     }];
     
-    UIImageView * imageview = [UIImageView new];
+    imageview = [UIImageView new];
     imageview.contentMode = UIViewContentModeScaleAspectFit;
     imageview.image = UIIMAGE(@"icon_读后感_展开");
+    imageview.image = [imageview.image imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
     [timeview addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(timeview);
-        make.right.mas_equalTo(timeview).with.offset(-LENGTH(15));
-        make.width.mas_equalTo(LENGTH(7));
+        make.centerY.mas_equalTo(self->timeview);
+        make.right.mas_equalTo(self->timeview).with.offset(-LENGTH(10));
+        make.width.mas_equalTo(LENGTH(8));
         make.height.mas_equalTo(LENGTH(4));
     }];
     
@@ -137,41 +198,49 @@
     //将手势添加到需要相应的view中去
     [timeview addGestureRecognizer:tap];
     
+    duigouback = [UIView new];
+    duigouback.layer.cornerRadius = LENGTH(12);
+    duigouback.layer.masksToBounds = YES;
+    duigouback.layer.borderWidth = 1;
+    [backview addSubview:duigouback];
+    [duigouback mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self->timeview);
+        make.left.mas_equalTo(self->timeview.mas_right).with.offset(LENGTH(30));
+        make.width.and.height.mas_equalTo(LENGTH(24));
+    }];
+    
     duigou = [UIImageView new];
     duigou.contentMode = UIViewContentModeScaleAspectFit;
-//    duigou.image = UIIMAGE(@"勾");
-    duigou.layer.cornerRadius = LENGTH(12);
-    duigou.layer.masksToBounds = YES;
-    duigou.layer.borderWidth = 1;
-    duigou.layer.borderColor = RGB(198,215,241).CGColor;
-    [self addSubview:duigou];
+    duigou.image = [duigou.image imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
+    [duigouback addSubview:duigou];
     [duigou mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(timeview);
-        make.left.mas_equalTo(timeview.mas_right).with.offset(LENGTH(22));
-        make.width.and.height.mas_equalTo(LENGTH(24));
+        make.center.mas_equalTo(self->duigouback);
+//        make.left.mas_equalTo(self->timeview.mas_right).with.offset(LENGTH(30));
+        make.width.and.height.mas_equalTo(LENGTH(14));
     }];
     NSArray *notificaitons = [[UIApplication sharedApplication] scheduledLocalNotifications];
     for (UILocalNotification *notify in notificaitons) {
         if ([[notify.userInfo objectForKey:@"id"] isEqualToString:@"naozhong"]) {
-            duigou.image = UIIMAGE(@"勾");
+            duigou.image = UIIMAGE(@"对勾白色");
+            duigou.image = [duigou.image imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
             break;
         }
     }
     
-    BaseLabel * tx = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(105,189,185) LabelFont:TextFont(17) TextAlignment:NSTextAlignmentCenter Text:@"每日提醒"];
-    [self addSubview:tx];
+    tx = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(105,189,185) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:@"提醒"];
+    [backview addSubview:tx];
     [tx mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self->duigou);
-        make.left.mas_equalTo(self->duigou.mas_right).with.offset(LENGTH(10));
+        make.left.mas_equalTo(self->duigouback.mas_right).with.offset(LENGTH(8));
     }];
     
     UIView * txview  =[UIView new];
     txview.backgroundColor = [UIColor clearColor];
     [self addSubview:txview];
     [txview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self->duigou);
-        make.left.mas_equalTo(self->duigou.mas_left);
-        make.right.mas_equalTo(tx.mas_right);
+        make.centerY.mas_equalTo(self->duigouback);
+        make.left.mas_equalTo(self->duigouback.mas_left);
+        make.right.mas_equalTo(self->tx.mas_right);
         make.height.mas_equalTo(LENGTH(50));
     }];
     
@@ -180,21 +249,23 @@
     //将手势添加到需要相应的view中去
     [txview addGestureRecognizer:txtap];
     
-    BaseLabel * lqrw = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"领取"];
-    lqrw.backgroundColor = RGB(91,199,198);
-    [self addSubview:lqrw];
-    [lqrw mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(timeview.mas_bottom).with.offset(LENGTH(17));
-        make.left.and.right.and.bottom.mas_equalTo(ws);
-        make.bottom.mas_equalTo(ws);
-        make.height.mas_equalTo(LENGTH(49));
-    }];
-    lqrw.userInteractionEnabled = YES;
-    UITapGestureRecognizer * lqrwtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lqrwclick)];
-    //将手势添加到需要相应的view中去
-    [lqrw addGestureRecognizer:lqrwtap];
-}
 
+}
+- (void)setVc:(UIViewController *)vc{
+    _vc = vc;
+        BaseLabel * lqrw = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(18) TextAlignment:NSTextAlignmentCenter Text:@"领取任务"];
+        lqrw.backgroundColor = RGB(91,199,198);
+        [vc.view addSubview:lqrw];
+        [lqrw mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.mas_equalTo(backview.mas_bottom).with.offset(LENGTH(28));
+            make.left.and.right.and.bottom.mas_equalTo(vc.view);
+            make.height.mas_equalTo(TabBarHeight);
+        }];
+        lqrw.userInteractionEnabled = YES;
+        UITapGestureRecognizer * lqrwtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lqrwclick)];
+        //将手势添加到需要相应的view中去
+        [lqrw addGestureRecognizer:lqrwtap];
+}
 - (void)xzsj{
     PGDatePickManager *datePickManager = [[PGDatePickManager alloc]init];
     PGDatePicker *datePicker = datePickManager.datePicker;
@@ -242,7 +313,7 @@
     times.text = [NSString stringWithFormat:@"%@开始",time];
 }
 - (void)txclick{
-    if ([duigou.image isEqual:UIIMAGE(@"勾")]) {
+    if ([duigou.image isEqual:[UIIMAGE(@"对勾白色") imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)]]) {
         duigou.image = UIIMAGE(@"");
         NSArray *notificaitons = [[UIApplication sharedApplication] scheduledLocalNotifications];
         for (UILocalNotification *notify in notificaitons) {
@@ -254,7 +325,8 @@
             }
         }
     }else{
-        duigou.image = UIIMAGE(@"勾");
+        duigou.image = UIIMAGE(@"对勾白色");
+        duigou.image = [duigou.image imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
         txinter = @"1";
         NSDateFormatter *formats = [[NSDateFormatter alloc] init];
         formats.dateFormat = @"HH:mm";
@@ -289,7 +361,10 @@
     //6.推送内容
     [localNotification setAlertBody:@"读书时间到了！"];
     //7.推送声音
-    [localNotification setSoundName:@"Thunder Song.m4r"];
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+//    [localNotification setSoundName:<#(NSString * _Nullable)#>]
+//    localNotification.sound = [UNNotificationSound defaultSound];
+//    [localNotification setSoundName:@"Thunder Song.m4r"];
     localNotification.repeatInterval = kCFCalendarUnitDay;
     localNotification.userInfo = @{@"id":@"naozhong"};
 
@@ -375,6 +450,9 @@
             }else if ([model.code isEqual:@Notloggedin]){
                 [self UpDengLu];
             }
+            [[MBProgressHUDYS SharedMBProgressHUDYS] addview:[self viewController].view.window];
+            [[MBProgressHUDYS SharedMBProgressHUDYS] shoumessage:model.message];
+            [[MBProgressHUDYS SharedMBProgressHUDYS] hideAnimated:YES afterDelay:1];
         } else {
             
         }
@@ -396,5 +474,25 @@
 
 - (void)setModel:(TAKALLModel *)model{
     _model = model;
+    collectview.neirongcolor = _colorarray[0];
+    UIColor *color = _colorarray[0];
+    leftimage.tintColor = _colorarray[0];
+    oneview.backgroundColor = _colorarray[0];
+    twoview.backgroundColor = _colorarray[0];
+    timeview.layer.borderColor = color.CGColor;
+    times.textColor = color;
+    imageview.tintColor = color;
+    duigouback.layer.borderColor = color.CGColor;
+    duigou.tintColor = color;
+    tx.textColor = color;
+}
+
+
+- (UIView *)addyuanquan{
+    UIView * v = [UIView new];
+    v.backgroundColor = RGB(51,51,51);
+    v.layer.masksToBounds = YES;
+    v.layer.cornerRadius = LENGTH(2);
+    return v;
 }
 @end

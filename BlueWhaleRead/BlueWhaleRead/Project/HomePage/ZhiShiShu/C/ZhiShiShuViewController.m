@@ -10,6 +10,11 @@
 #import <iCarousel.h>
 #import "ZhiShiShuOneDownView.h"
 #import "ZhiShiShuSMViewController.h"
+
+#import "GuideKnowledgeOneView.h"
+#import "GuideKnowledgeTwoView.h"
+#import "GuideKnowledgeThreeView.h"
+#import "NewHpViewModel.h"
 @interface ZhiShiShuViewController ()<iCarouselDataSource, iCarouselDelegate,NavDelegate>
 @property (nonatomic, strong) iCarousel      *carousel;   // iCarousel
 @end
@@ -37,7 +42,7 @@
     [super AddNavtion];
     nowindext = 0;
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"知识树" RightTitle:@"？" NativeStyle:NavStyleLeftImageAndRightImageAndCenter];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"" Title:@"知识网" RightTitle:@"" NativeStyle:NavStyleLeftImageAndRightImageAndCenter];
     self.navtive.backgroundColor = [UIColor clearColor];
     self.navtive.titcolor = RGB(51,51,51);
     self.navtive.delegate = self;
@@ -51,22 +56,24 @@
 }
 
 - (void)NavCenterClick {
- 
+
 }
 
 - (void)NavLeftClick {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)NavRightClick {
-    ZhiShiShuSMViewController * vc = [ZhiShiShuSMViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+//    ZhiShiShuSMViewController * vc = [ZhiShiShuSMViewController new];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)loadUpData{
     //    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FOUND];
 //    NSString * url = [NSString stringWithFormat:@"%@%@",ZSTX,JK_ZHISHITIXIXIFENLEI];
-    NSString * url = @"http://192.168.1.102/knowledge/public/knowledge/get-type";
+//    NSString * url = @"http://119.90.89.88:9001/knowledge/get-type";
+    NSString * url = [NSString stringWithFormat:@"%@knowledge/get-type",ZSTX];
+    WS(ws);
     NSDictionary * dic = @{@"studentid":Me.ssid};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
@@ -75,15 +82,61 @@
                 self->modelarray = [NSMutableArray array];
                 self->modelarray = model.data;
                 [self->_carousel reloadData];
-            }else if ([model.code isEqual:@Notloggedin]){
-                [self UpDengLu];
+                static dispatch_once_t onceToken;
+                dispatch_once(&onceToken, ^{
+                    [ws addGuideKnowledgeOneView];
+                });
             }
         }else{
             
         }
     }];
 }
+- (void)addGuideKnowledgeOneView{
+    WS(ws);
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
+    NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
+    if ([model.zhishiwang integerValue]<3) {
+        WS(ws);
+        GuideKnowledgeOneView * view = [GuideKnowledgeOneView new];
+        [self.view.window addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(ws.view.window);
+        }];
+        [view setBlock:^{
+            [ws addGuideKnowledgeTwoView];
+        }];
+        
+        NSString * str = [NSString stringWithFormat:@"%ld",[model.zhishiwang integerValue]+1];
+        [dataDictionary setValue:str forKey:@"zhishiwang"];
+        [dataDictionary writeToFile:filePatch atomically:YES];
+        
+    }
+}
+- (void)addGuideKnowledgeTwoView{
+    WS(ws);
+    GuideKnowledgeTwoView * view = [GuideKnowledgeTwoView new];
+    [self.view.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view.window);
+    }];
+    [view setBlock:^{
+        [ws addGuideKnowledgeThreeView];
+    }];
+}
 
+- (void)addGuideKnowledgeThreeView{
+    WS(ws);
+    GuideKnowledgeThreeView * view = [GuideKnowledgeThreeView new];
+    [self.view.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.view.window);
+    }];
+    [view setBlock:^{
+        //        [ws addGuideBookCityThreeView];
+    }];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadUpData];
@@ -173,7 +226,7 @@
     downview.nav = self.navigationController;
     [self.view addSubview:downview];
     [downview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws.view).with.offset(HEIGHT/2+LENGTH(278)/2+LENGTH(28));
+        make.bottom.mas_equalTo(ws.view).with.offset(-TabBarHeight-LENGTH(15));
         make.left.mas_equalTo(ws.view);
         make.right.mas_equalTo(ws.view);
     }];
@@ -275,7 +328,6 @@
         }else{
             [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.mini_logo]]];
             view.alpha = 0.3;
-
         }
 //        downview.downstyle = carousel.currentItemIndex;
         downview.model = modelarray[carousel.currentItemIndex];

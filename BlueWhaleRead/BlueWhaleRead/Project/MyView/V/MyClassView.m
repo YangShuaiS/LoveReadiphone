@@ -29,7 +29,6 @@
 -(void)setupUI{
     WS(ws);
     imageView = [FLAnimatedImageView new];
-    imageView.image = UIIMAGE(@"bg_班级");
     [self addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws);
@@ -77,6 +76,7 @@
 }
 - (void)setModel:(MyClassListModel *)model{
     _model = model;
+    [imageView sd_setImageWithURL:URLIMAGE(model.myclassImg)];
     Title.text = model.school.name;
     subTitle.text = [NSString stringWithFormat:@"%@%@",model.grade.name,model.clazz.name];
 }

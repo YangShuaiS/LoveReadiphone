@@ -8,10 +8,11 @@
 
 #import "TKMytaskViewController.h"
 #import "TKMytaskCollectionView.h"
+#import "TKMytaskTableView.h"
 #define itemWidth LENGTH(350)
 #define itemHeight LENGTH(120)
 @interface TKMytaskViewController ()<NavDelegate>
-@property (strong, nonatomic) TKMytaskCollectionView *collectview;
+@property (strong, nonatomic) TKMytaskTableView *tableview;
 
 @end
 
@@ -51,20 +52,9 @@
     [self AddNavtion];
     self.view.backgroundColor = [UIColor whiteColor];
     WS(ws);
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(itemWidth,itemHeight);
-    //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = LENGTH(14);
-    //定义每个UICollectionView 纵向的间距
-    flowLayout.minimumInteritemSpacing = LENGTH(14);
-    //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(LENGTH(16), LENGTH(12), LENGTH(16), LENGTH(12));//上左下右
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    
-    _collectview = [[TKMytaskCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
-    _collectview.decelerationRate = UIScrollViewDecelerationRateNormal;
-    [self.view addSubview:_collectview];
-    [_collectview mas_makeConstraints:^(MASConstraintMaker *make) {
+    _tableview =[TKMytaskTableView new];
+    [self.view addSubview:_tableview];
+    [_tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws.navtive.mas_bottom);
         make.left.mas_equalTo(ws.view);
         make.right.mas_equalTo(ws.view);
@@ -90,7 +80,7 @@
     }];
 }
 - (void)UpData:(TKMymissionListModel *)model{
-    _collectview.itemArray = model.missionList;
+    _tableview.itemArray = model.missionList;
 }
 /*
 #pragma mark - Navigation

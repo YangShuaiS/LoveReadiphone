@@ -14,4 +14,8 @@
                     LabelFont:(UIFont *)font
                 TextAlignment:(NSTextAlignment)textAlignment
                          Text:(NSString *)text;
+- (instancetype)initWithTxteColor:(UIColor *)textcolor
+                    LabelFont:(UIFont *)font
+                TextAlignment:(NSTextAlignment)textAlignment
+                         Text:(NSString *)text;
 @end

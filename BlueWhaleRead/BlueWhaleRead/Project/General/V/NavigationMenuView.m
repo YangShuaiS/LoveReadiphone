@@ -28,23 +28,25 @@
 - (void)addView{
     WS(ws);
     BaseView * xianView = [BaseView new];
-    xianView.backgroundColor = RGB(204,204,204);
+    xianView.backgroundColor = RGB(91,199,198);
     [self addSubview:xianView];
     
     Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(31, 31, 31) LabelFont:TextFontCu(20) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:Title];
     
     [xianView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws).with.offset(LENGTH(16));
-        make.left.equalTo(ws).with.offset(LENGTH(8));
+//        make.top.equalTo(ws).with.offset(LENGTH(16));
+        make.left.equalTo(ws).with.offset(LENGTH(18));
+        make.centerY.mas_equalTo(self->Title);
         make.width.mas_equalTo(2);
-        make.height.mas_equalTo(17);
+        make.height.mas_equalTo(16);
     }];
     
     [Title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(xianView.mas_left).with.offset(LENGTH(5));
-        make.centerY.mas_equalTo(xianView.mas_centerY);
-        make.bottom.equalTo(ws).with.offset(-LENGTH(0));
+        make.left.equalTo(xianView.mas_left).with.offset(LENGTH(15));
+//        make.centerY.mas_equalTo(xianView.mas_centerY);
+        make.top.equalTo(ws);
+        make.bottom.equalTo(ws).with.offset(-LENGTH(18));
     }];
 }
 

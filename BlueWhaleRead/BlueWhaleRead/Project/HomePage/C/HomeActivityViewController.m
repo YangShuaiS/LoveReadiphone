@@ -28,7 +28,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self AddNavtion];
-    
     WS(ws);
     tableView = [HomeActivityTableView new];
     tableView.nav = self.navigationController;
@@ -56,6 +55,25 @@
 - (void)chushihua{
     page = 1;
     itemarray = [NSMutableArray array];
+    for (int i = 0; i < 6; i++) {
+//        BookSDModel * sdmodel = [BookSDModel new];
+//        if (i == 0) {
+//            sdmodel.name = @"一年级必读书目";
+//        }else if (i == 1){
+//            sdmodel.name = @"二年级必读书目";
+//        }else if (i == 2){
+//            sdmodel.name = @"三年级必读书目";
+//        }else if (i == 3){
+//            sdmodel.name = @"四年级必读书目";
+//        }else if (i == 4){
+//            sdmodel.name = @"五年级必读书目";
+//        }else if (i == 5){
+//            sdmodel.name = @"六年级必读书目";
+//        }
+//        sdmodel.booklist = [NSMutableArray array];
+        NSMutableArray * array  = [NSMutableArray array];
+        [itemarray addObject:array];
+    }
 }
 - (void)LoadData{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_ZHUTIPAGE];
@@ -83,25 +101,54 @@
     }];
     
 }
+- (NSInteger)SchoolClass:(NSString *)lv{
+    NSInteger schoolclass = 0;
+    NSArray * array = [BaseObject TiemArray:lv String:@","];
+    NSString * lvs = array[0];
+    if ([lvs isEqualToString:@"Lv1"]) {
+        schoolclass = 0;
+    }else if ([lvs isEqualToString:@"Lv2"]){
+        schoolclass = 1;
+    }else if ([lvs isEqualToString:@"Lv3"]){
+        schoolclass = 2;
+    }else if ([lvs isEqualToString:@"Lv4"]){
+        schoolclass = 3;
+    }else if ([lvs isEqualToString:@"Lv5"]){
+        schoolclass = 4;
+    }else if ([lvs isEqualToString:@"Lv6"]){
+        schoolclass = 5;
+    }
+    return schoolclass;
+}
 - (void)UpData:(ZHUTIMODEL *)model{
 
         if (wdView != nil) {
             [wdView removeFromSuperview];
         }
     tableView.model = model;
-    [itemarray addObjectsFromArray:model.tag.booklist];
-    tableView.itemarray =itemarray; 
+    for (CityBookListModel * mo in model.tag.booklist) {
+        NSString * lv = mo.levels;
+        NSInteger inter = [self SchoolClass:lv];
+        NSMutableArray * array = itemarray[inter];
+        [array addObject:mo];
+    }
+    if (model.tag.booklist.count == 0) {
+        
+    }else{
+        tableView.itemarray =itemarray;
+    }
     self.navtive.title = model.tag.name;
     
     WS(ws);
     if (sharefriend == nil) {
         sharefriend = [FLAnimatedImageView new];
-        sharefriend.image = UIIMAGE(@"告诉朋友");
+        sharefriend.image = UIIMAGE(@"组 928");
         [self.navtive addSubview:sharefriend];
         [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
+            make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);
             make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
-            make.size.mas_equalTo(self->sharefriend.image.size);
+            //        make.size.mas_equalTo(sharefriend.image.size);
+            make.width.and.height.mas_equalTo(24);
         }];
         sharefriend.userInteractionEnabled = YES;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];

@@ -9,7 +9,7 @@
 #import "FriendViewController.h"
 #import "FriendTopView.h"
 #import "FriendHotView.h"
-#import "MyViewController.h"
+#import "MMyViewController.h"
 @interface FriendViewController ()<NavDelegate,UIScrollViewDelegate>{
     UIScrollView * scrollView;
     NSMutableArray *  viewarray;
@@ -68,7 +68,7 @@
 - (void)tap{
     if (topview.usermodel!=nil) {
         if ([topview.usermodel.ssid isEqualToString:Me.ssid]) {
-            if ([self.navigationController.viewControllers[0] isKindOfClass:[MyViewController class]]) {
+            if ([self.navigationController.viewControllers[0] isKindOfClass:[MMyViewController class]]) {
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }else{
                 self.navigationController.tabBarController.selectedIndex = 3;

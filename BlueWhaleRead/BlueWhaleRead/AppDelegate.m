@@ -14,6 +14,8 @@
 #import "WXApi.h"
 
 #import "YDYViewController.h"
+
+#import <Bugly/Bugly.h>
 @interface AppDelegate ()<WXApiDelegate>
 
 @end
@@ -33,7 +35,7 @@
             if (responseObject) {
                 
             }else{
-                //            ZSFWQ = @"http://39.106.100.235/";
+//                            ZSFWQ = @"http://39.106.100.235/";
             }
         }];
     });
@@ -87,13 +89,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [WXApi registerApp:@"wx5b092cd426a86253"];
+    [Bugly startWithAppId:@"b5582f5e48"];
     [self jiantingwangluo];
     [self addwenjian];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(denglu) name:kNotificationDenglu object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tuichudenglu) name:kNotificationTuiChuDenglu object:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    
     Me = [[MeModel SharedModel] ADDvalue];
     //发送错误文件
 //    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
@@ -118,6 +120,7 @@
         self.window.rootViewController = main;
         [self.window makeKeyWindow];
     }
+
     [NSThread sleepForTimeInterval:1];
     return YES;
 
@@ -135,45 +138,45 @@
     self.window.rootViewController = homenav;
     [self.window makeKeyAndVisible];
 }
-void UncaughtExceptionHandler(NSException *exception) {
-    /**
-     *  获取异常崩溃信息
-     */
-    NSArray *callStack = [exception callStackSymbols];
-    NSString *reason = [exception reason];
-    NSString *name = [exception name];
-    NSString *content = [NSString stringWithFormat:@"========异常错误报告========\nname:%@\nreason:\n%@\ncallStackSymbols:\n%@",name,reason,[callStack componentsJoinedByString:@"\n"]];
-    
-    NSString *urlStr = [NSString stringWithFormat:@"mailto://1395325260@qq.com?subject=bug报告&body=感谢您的配合!" "错误详情:%@",content];
-    
-    NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-    [[UIApplication sharedApplication] openURL:url];
-    
-    
+//void UncaughtExceptionHandler(NSException *exception) {
 //    /**
-//     *  把异常崩溃信息发送至开发者邮件
+//     *  获取异常崩溃信息
 //     */
-//    NSMutableString *mailUrl = [NSMutableString string];
-//    //添加收件人,如有多个收件人，可以使用componentsJoinedByString方法连接，连接符为","
-//    NSString *recipients = @"15718862830@163.com";
-//    [mailUrl appendFormat:@"mailto:%@?", recipients];
-//    //添加抄送人
-//    NSString *ccRecipients = @"1395325260@qq.com";
-//    [mailUrl appendFormat:@"&cc=%@", ccRecipients];
-//    //添加密送人
-////    NSString *bccRecipients = @"15690725786@163.com";
-////    [mailUrl appendFormat:@"&bcc=%@", bccRecipients];
-//    //添加邮件主题
-//    [mailUrl appendFormat:@"&subject=%@",@"程序异常崩溃，请配合发送异常报告，谢谢合作"];
-//    //添加邮件内容
-//
-//    [mailUrl appendString:[NSString stringWithFormat:@"&body=%@",content]];
-//
-////    [mailUrl appendFormat:@"&body=%@", content];
-//    // 打开地址
-//    NSString *mailPath = [mailUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mailPath]];
-}
+//    NSArray *callStack = [exception callStackSymbols];
+//    NSString *reason = [exception reason];
+//    NSString *name = [exception name];
+//    NSString *content = [NSString stringWithFormat:@"========异常错误报告========\nname:%@\nreason:\n%@\ncallStackSymbols:\n%@",name,reason,[callStack componentsJoinedByString:@"\n"]];
+//    
+//    NSString *urlStr = [NSString stringWithFormat:@"mailto://1395325260@qq.com?subject=bug报告&body=感谢您的配合!" "错误详情:%@",content];
+//    
+//    NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+//    [[UIApplication sharedApplication] openURL:url];
+//    
+//    
+////    /**
+////     *  把异常崩溃信息发送至开发者邮件
+////     */
+////    NSMutableString *mailUrl = [NSMutableString string];
+////    //添加收件人,如有多个收件人，可以使用componentsJoinedByString方法连接，连接符为","
+////    NSString *recipients = @"15718862830@163.com";
+////    [mailUrl appendFormat:@"mailto:%@?", recipients];
+////    //添加抄送人
+////    NSString *ccRecipients = @"1395325260@qq.com";
+////    [mailUrl appendFormat:@"&cc=%@", ccRecipients];
+////    //添加密送人
+//////    NSString *bccRecipients = @"15690725786@163.com";
+//////    [mailUrl appendFormat:@"&bcc=%@", bccRecipients];
+////    //添加邮件主题
+////    [mailUrl appendFormat:@"&subject=%@",@"程序异常崩溃，请配合发送异常报告，谢谢合作"];
+////    //添加邮件内容
+////
+////    [mailUrl appendString:[NSString stringWithFormat:@"&body=%@",content]];
+////
+//////    [mailUrl appendFormat:@"&body=%@", content];
+////    // 打开地址
+////    NSString *mailPath = [mailUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+////    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mailPath]];
+//}
 - (void)loadModel{
     [NewHomeModel InitializeModel];//新首页
     [TKAllTaskModel InitializeModel];//任务列表
@@ -189,6 +192,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     [MyBadgeListModel InitializeModel];//我的勋章
     [TKJIEGUOMODEL InitializeModel];//挑战结果
     [JoinBookModel InitializeModel];//加入书架弹出视图
+    [UserLoginModel InitializeModel];//获取年级
     
     [BookXQModel InitializeModel];
     [UnreadBookListModel InitializeModel];

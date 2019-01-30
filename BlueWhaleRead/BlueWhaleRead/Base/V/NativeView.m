@@ -114,7 +114,7 @@
         make.left.equalTo(ws).with.offset(0);
         make.bottom.equalTo(ws).with.offset(0);
         make.height.mas_equalTo(@44);
-        make.width.mas_equalTo(@75);
+        make.width.mas_equalTo(LENGTH(75));
     }];
 }
 #pragma mark ----------------- 中间title

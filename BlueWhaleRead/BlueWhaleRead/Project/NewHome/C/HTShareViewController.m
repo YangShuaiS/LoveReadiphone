@@ -86,7 +86,7 @@
 - (void)upwanchengrw:(HTShareModel *)model{
     WS(ws);
     
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
     NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
     NewHpViewModel * models = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
     

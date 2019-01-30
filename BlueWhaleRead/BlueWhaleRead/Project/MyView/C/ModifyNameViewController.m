@@ -68,15 +68,16 @@
         if (responseObject) {
             MyDeModel *mo = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([mo.code isEqual:@200]) {
-                NSMutableDictionary * dic = [[MeModel SharedModel] ADDdic];
                 NSString *filePatch = [BaseObject AddPathName:UserMe];
-                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
-                dic[@"name"] =self->school.textField.text;
-                [usersDic setObject:dic forKey:UserMe];
-                [usersDic writeToFile:filePatch atomically:YES];
+                NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
+                NSMutableDictionary *dics = dataDictionary[UserMe];
+                    NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
+                [dics setValue:self->school.textField.text forKey:@"name"];
+                    [usersDic setObject:dics forKey:UserMe];
+                    [usersDic writeToFile:filePatch atomically:YES];
                 
-                Me = [[MeModel SharedModel] ADDvalue];
-                self.block();
+                Me.name = self->school.textField.text;
+//                self.block();
                 [self.navigationController popViewControllerAnimated:YES];
             }else if ([mo.code isEqual:@Notloggedin]){
                 [self UpDengLu];

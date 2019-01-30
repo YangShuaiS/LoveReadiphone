@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HorizontalcalCollectionViewCell : BaseCollectionViewCell
 @property(nonatomic,strong)NHthisReadbokModel * model;
+@property(nonatomic,strong)NSMutableArray * colorarray;
+
 - (void)wushuju;
 @end
 

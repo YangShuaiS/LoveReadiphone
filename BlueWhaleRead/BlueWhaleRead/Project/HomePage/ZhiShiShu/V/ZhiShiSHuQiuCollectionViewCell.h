@@ -9,5 +9,7 @@
 #import "BaseCollectionViewCell.h"
 @interface ZhiShiSHuQiuCollectionViewCell : BaseCollectionViewCell
 //@property(nonatomic,strong)NSString * imagestring;
+@property (nonatomic, strong) UIColor* colors;
+
 @property(nonatomic,strong)ZhiShiShuFLOneModel * model;
 @end

@@ -7,10 +7,13 @@
 //
 
 #import "HproverbView.h"
+#import "NavigationMenuView.h"
 
 @implementation HproverbView{
     FLAnimatedImageView * imageview;
-    BaseLabel * title;
+    NavigationMenuView * navMenu;//
+    UIImageView * backimage;
+
 }
 
 - (instancetype)init
@@ -23,36 +26,51 @@
 }
 - (void)addview{
     WS(ws);
-    imageview = [FLAnimatedImageView new];
-    imageview.contentMode = UIViewContentModeScaleToFill;
-    imageview.layer.masksToBounds = YES;
-    imageview.image = UIIMAGE(@"组29");
+    navMenu = [NavigationMenuView new];
+    navMenu.style = NavMenuStyleGeneral;
+    navMenu.leftTitle = @"每日格言";
+    [self addSubview:navMenu];
+    [navMenu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(ws).with.offset(0);
+        make.top.equalTo(ws).with.offset(LENGTH(0));
+        make.right.equalTo(ws).with.offset(0);
+    }];
+
     
-    imageview.layer.shadowColor = RGB(0, 0, 0).CGColor;
-    imageview.layer.shadowOffset = CGSizeMake(0,0);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
-    imageview.layer.shadowRadius = LENGTH(12);
-    imageview.layer.shadowOpacity = 0.13;
-    
-    [self addSubview:imageview];
-    [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws).with.insets(UIEdgeInsetsMake(LENGTH(13), LENGTH(11), LENGTH(13), LENGTH(11)));
-        make.height.mas_equalTo(LENGTH(44));
+    UIView * backview = [UIView new];
+    backview.backgroundColor = RGB(255, 255, 255);
+    backview.layer.shadowColor = RGB(171, 171, 171).CGColor;
+    backview.layer.shadowOffset = CGSizeMake(0,1);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+    backview.layer.shadowRadius = LENGTH(12);
+    backview.layer.shadowOpacity = 0.18;
+    backview.layer.cornerRadius = LENGTH(12);
+    [self addSubview:backview];
+    [backview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self->navMenu.mas_bottom);
+        make.left.mas_equalTo(ws).with.offset(LENGTH(20));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(20));
+        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(14));
     }];
     
-//    BaseLabel * leftlabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[UIColor blackColor] LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"每日\n谚语"];
-//    leftlabel.numberOfLines = 2;
-//    leftlabel.backgroundColor = RANDOMCOLOR;
-//    [imageview addSubview:leftlabel];
-//    [leftlabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self->imageview).with.offset(LENGTH(10));
-//        make.centerY.mas_equalTo(ws);
-//    }];
+    backimage = [UIImageView new];
+    backimage.contentMode = UIViewContentModeScaleToFill;
+    [backview addSubview:backimage];
+    backimage.layer.cornerRadius = LENGTH(12);
+    backimage.layer.masksToBounds = YES;
     
-    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(56,133,139) LabelFont:TextFontCu(16) TextAlignment:NSTextAlignmentLeft Text:CHANGWENZI];
-    [imageview addSubview:title];
-    [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws).with.offset(LENGTH(15));
-        make.centerY.mas_equalTo(ws);
+    
+    imageview = [FLAnimatedImageView new];
+    imageview.contentMode = UIViewContentModeScaleToFill;
+//    imageview.layer.cornerRadius = LENGTH(12);
+    imageview.layer.masksToBounds = YES;
+
+    [backview addSubview:imageview];
+    [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(backview).with.insets(UIEdgeInsetsMake(LENGTH(18), LENGTH(13), LENGTH(18), LENGTH(13)));
+    }];
+    
+    [backimage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(backview);
     }];
     
 }
@@ -60,8 +78,26 @@
 - (void)setItemArray:(NSMutableArray *)itemArray{
     _itemArray = itemArray;
     if (itemArray.count>0) {
+        WS(ws);
         NHProverbModel * model = itemArray[0];
-        title.text = model.content;
+        [imageview sd_setImageWithURL:URLIMAGE(model.img) completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            [ws upimage:image];
+        }];
+        [backimage sd_setImageWithURL:URLIMAGE(model.proverbImg)];
+        
     }
+}
+- (void)upimage:(UIImage *)image{
+    CGFloat bl = image.size.height/image.size.width*1.000;
+    [imageview mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self->imageview.mas_width).multipliedBy(bl);
+    }];
+}
+- (void)layoutSubviews{
+    [super layoutSubviews];
+//    self.layer.cornerRadius = LENGTH(12);
+//    backimage.layer.cornerRadius = LENGTH(12);
+//    imageview.layer.cornerRadius = LENGTH(12);
+
 }
 @end

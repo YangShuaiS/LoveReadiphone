@@ -7,155 +7,79 @@
 //
 
 #import "UserSQDLView.h"
-#import "SanFangBDPhoneViewController.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
 #import "UserWXRWMDLVIew.h"
-#import "UserLoginPerfectViewController.h"
 @interface UserSQDLView ()
 @end
-@implementation UserSQDLView{
-    NSMutableArray * viewarray;
-}
+@implementation UserSQDLView
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        [self qxwxsq:SSDKPlatformSubTypeWechatSession];
-        [self qxwxsq:SSDKPlatformSubTypeQQFriend];
         [self addview];
     }
     return self;
 }
 - (void)addview{
-    viewarray = [NSMutableArray array];
-    if ([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"weixin://"]]) {
-        FLAnimatedImageView * wxview = [FLAnimatedImageView new];
-        wxview.image = UIIMAGE(@"组 291");
-        wxview.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:wxview];
-        [viewarray addObject:wxview];
-        wxview.userInteractionEnabled = YES;
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(wxsq)];
-        [wxview addGestureRecognizer:tap];
-    }else{
-        
-    }
-    
-    if ([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"mqqapi://"]]) {
-        FLAnimatedImageView * qqview = [FLAnimatedImageView new];
-        qqview.image = UIIMAGE(@"组 276");
-        qqview.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:qqview];
-        [viewarray addObject:qqview];
-        qqview.userInteractionEnabled = YES;
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(qqsq)];
-        [qqview addGestureRecognizer:tap];
-    }else{
-        
-    }
-    
-    if (viewarray.count > 0) {
-        WS(ws);
-        BaseLabel * lab = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(155,177,176) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:@"使用第三方登录"];
-        [self addSubview:lab];
-        
-        BaseView * leftxian = [BaseView new];
-        leftxian.backgroundColor = RGB(155,177,176);
-        [self addSubview:leftxian];
-        
-        BaseView * rightxian = [BaseView new];
-        rightxian.backgroundColor = RGB(155,177,176);
-        [self addSubview:rightxian];
-        
-        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(ws);
-            make.left.and.right.mas_equalTo(ws);
-            make.centerX.mas_equalTo(ws);
-        }];
-        if (viewarray.count == 1) {
-            FLAnimatedImageView * oneview  = viewarray[0];
-            [oneview mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.mas_equalTo(ws);
-                make.top.mas_equalTo(lab.mas_bottom).with.offset(LENGTH(16));
-                make.bottom.mas_equalTo(ws);
-                make.width.and.height.mas_equalTo(LENGTH(30));
-            }];
-            
-            [leftxian mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.mas_equalTo(oneview);
-                make.right.mas_equalTo(oneview.mas_left).with.offset(-LENGTH(18));
-                make.width.mas_equalTo(LENGTH(90));
-                make.height.mas_equalTo(1);
-            }];
-            [rightxian mas_makeConstraints:^(MASConstraintMaker *make) { 
-                make.centerY.mas_equalTo(oneview);
-                make.left.mas_equalTo(oneview.mas_right).with.offset(LENGTH(18));
-                make.width.mas_equalTo(LENGTH(90));
-                make.height.mas_equalTo(1);
-            }];
-        }else if (viewarray.count == 2){
-            FLAnimatedImageView * oneview  = viewarray[0];
-            [oneview mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.mas_equalTo(ws).with.offset(-LENGTH(23));
-                make.top.mas_equalTo(lab.mas_bottom).with.offset(LENGTH(16));
-                make.bottom.mas_equalTo(ws);
-                make.width.and.height.mas_equalTo(LENGTH(30));
-            }];
-            FLAnimatedImageView * twoview  = viewarray[1];
-            [twoview mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.mas_equalTo(ws).with.offset(LENGTH(23));
-                make.top.mas_equalTo(lab.mas_bottom).with.offset(LENGTH(16));
-                make.width.and.height.mas_equalTo(LENGTH(30));
-            }];
-            
-            [leftxian mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.mas_equalTo(oneview);
-                make.right.mas_equalTo(oneview.mas_left).with.offset(-LENGTH(18));
-                make.width.mas_equalTo(LENGTH(36));
-                make.height.mas_equalTo(1);
-            }];
-            [rightxian mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.mas_equalTo(twoview);
-                make.left.mas_equalTo(twoview.mas_right).with.offset(LENGTH(18));
-                make.width.mas_equalTo(LENGTH(36));
-                make.height.mas_equalTo(1);
-            }];
-
-        }
-    }
-}
-- (void)clickyes{
-    for (FLAnimatedImageView * view in viewarray) {
-        view.userInteractionEnabled = YES;
-    }
-}
-- (void)clickyno{
-    for (FLAnimatedImageView * view in viewarray) {
-        view.userInteractionEnabled = YES;
-    }
-}
-- (void)wxsq{
-    [self clickyno];
-    [self wxsq:SSDKPlatformSubTypeWechatSession];
-}
-
-- (void)qqsq{
-    [self clickyno];
-//    [self wxsq:SSDKPlatformSubTypeQQFriend];
-    UserWXRWMDLVIew * view = [UserWXRWMDLVIew new];
-    [self.window addSubview:view];
     WS(ws);
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.window);
+    BaseView * backview = [BaseView new];
+    backview.backgroundColor = RGB(4,189,1);
+    backview.layer.cornerRadius = LENGTH(25);
+    [self addSubview:backview];
+    [backview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws);
     }];
+    
+    backview.layer.shadowColor = RGB(82, 199, 198).CGColor;
+    backview.layer.shadowOffset = CGSizeMake(0,2.5);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+    backview.layer.shadowRadius = LENGTH(15);
+    backview.layer.shadowOpacity = 0.3;
+    
+    BaseLabel *dl = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"微信登录"];
+    [backview addSubview:dl];
+    [dl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(backview);
+    }];
+    
+    UIImageView * wx = [UIImageView new];
+    wx.contentMode = UIViewContentModeScaleAspectFit;
+    wx.image = UIIMAGE(@"微信icon");
+    [backview addSubview:wx];
+    [wx mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(dl);
+        make.right.mas_equalTo(dl.mas_left).with.offset(-LENGTH(5));
+        make.width.and.height.mas_equalTo(LENGTH(20));
+    }];
+    backview.userInteractionEnabled = YES;
+    //添加手势
+    UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture1)];
+    //将手势添加到需要相应的view中去
+    [backview addGestureRecognizer:tapGesture1];
+
+}
+- (void)tapGesture1{
+    if ([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"weixin://"]]) {
+        [self wxsq:SSDKPlatformSubTypeWechatSession];
+    }else{
+        UserWXRWMDLVIew * view = [UserWXRWMDLVIew new];
+        [[self viewController].view addSubview:view];
+        WS(ws);
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo([ws viewController].view);
+        }];
+    }
 }
 
 - (void)push:(SSDKUser*)user{
-    [self clickyes];
-    NSDictionary * dic = user.rawData;
+    NSString * nianji  = [[NSUserDefaults standardUserDefaults] objectForKey:kNotificationNianJi];
+    if (nianji == nil || [nianji isEqualToString:@""]) {
+        nianji = @"1";
+    }
+    NSMutableDictionary * dic = (NSMutableDictionary *)user.rawData;
+    [dic setObject:nianji forKey:@"level"];
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_WXDL];
+    NSString * url = [NSString stringWithFormat:@"%@%@?loginType=2&studentid=%@",ZSFWQ,JK_NEWZC,Me.ssid];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:nil error:nil];
     request.timeoutInterval= 30;
@@ -185,12 +109,7 @@
                 [[self viewController] dismissViewControllerAnimated:YES completion:^{
                     
                 }];
-            }else if([m.code isEqual:@201]){
-                UserLoginPerfectViewController * vc = [UserLoginPerfectViewController new];
-                vc.dict = dic;
-                [[self viewController].navigationController pushViewController:vc animated:YES];
             }
-            NSLog(@"123");
         } else {
             
         }

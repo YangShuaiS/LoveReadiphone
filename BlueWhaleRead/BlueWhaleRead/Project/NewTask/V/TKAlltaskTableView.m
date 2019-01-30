@@ -42,6 +42,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    WS(ws);
     TKTaskListModel * model = _itemArray[indexPath.row];
     if ([model.mission_type isEqualToString:@"1"]) {
         NSString * rid = @"celltop";
@@ -60,6 +61,10 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = model;
+        [cell setBlock:^{
+            [ws.itemArray removeObject:model];
+            [ws reloadData];
+        }];
         return cell;
     }
 
@@ -77,7 +82,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0;
+    return TabBarHeight+50;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView * v = [UIView new];

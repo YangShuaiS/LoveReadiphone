@@ -256,7 +256,7 @@
 - (void)setModel:(MyUserInfo *)model{
     _model = model;
     name.text = model.name;
-    banji.text = [NSString stringWithFormat:@"%@%@",model.grade[@"name"],model.clazz[@"name"]];
+    banji.text = [NSString stringWithFormat:@"%@%@",model.grade.name,model.clazz.name];
     BiaoYang.text = [NSString stringWithFormat:@"表扬 %@",model.praiseNum];
     UIImage * img;
     if (model.sex == 1) {

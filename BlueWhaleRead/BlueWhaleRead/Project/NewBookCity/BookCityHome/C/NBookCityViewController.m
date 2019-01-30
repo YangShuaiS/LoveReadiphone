@@ -7,21 +7,21 @@
 //
 
 #import "NBookCityViewController.h"
-#import "SearchView.h"
+#import "NBCchannelLBTView.h"
+#import "NBCSearchView.h"
 
 #import "NBCchannelView.h"
 #import "NBCGoodBoookListTabView.h"
 #import "NBCweekReadingView.h"
 #import "NBClistAllView.h"
 #import "NBCclassificationView.h"
-#import "WCQRCodeScanningVC.h"
 
 #import "GuideBookCityOneView.h"
 #import "GuideBookCityTwoView.h"
 #import "GuideBookCityThreeView.h"
 
 #import "NewHpViewModel.h"
-@interface NBookCityViewController ()<NavDelegate,UIScrollViewDelegate>
+@interface NBookCityViewController ()<UIScrollViewDelegate>
 
 @end
 
@@ -29,52 +29,19 @@
     UIScrollView * scrollView;
     NSMutableArray *  viewarray;
     
-    NBCchannelView * channel;
+    NBCchannelLBTView * channel;
     NBCGoodBoookListTabView * goodbook;
     NBCweekReadingView * cweek;
     NBClistAllView * List;
     NBCclassificationView * classification;
+    NBCSearchView * search;
 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self AddNavtion];
     [self Addview];
 }
-#pragma mark --------------------  导航栏以及代理
-- (void)AddNavtion{
-    [super AddNavtion];
-    WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"扫码" Title:@"书城" RightTitle:@"搜索-深色" NativeStyle:NavStyleLeftImageAndRightImageAndCenter];
-     self.navtive.titcolor = RGB(0, 0, 0);
-    self.navtive.delegate = self;
-    [self.view addSubview:self.navtive];
-    [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws.view).with.offset(0);
-        make.right.equalTo(ws.view).with.offset(0);
-        make.top.equalTo(ws.view).with.offset(0);
-        make.height.mas_equalTo(NavHeight);
-    }];
-    self.navtive.downlayer = YES;
-}
-- (void)NavLeftClick{
-    WCQRCodeScanningVC *WCVC = [[WCQRCodeScanningVC alloc] init];
-    [self QRCodeScanVC:WCVC];
-}
-
-- (void)NavCenterClick {
-
-}
-
-
-- (void)NavRightClick {
-    SearchView * view = [SearchView new];
-    view.nav = self.navigationController;
-    view.frame = self.view.window.frame;
-    [self.view.window addSubview:view];
-}
-
 
 - (void)Addview{
     WS(ws);
@@ -84,7 +51,7 @@
     scrollView.delegate = self;
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.navtive.mas_bottom).with.offset(4);
+        make.top.equalTo(ws.view).with.offset(-StatusBar);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
@@ -92,10 +59,12 @@
     scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headRefresh)];
 
     
-    channel = [NBCchannelView new];
-    channel.nav = self.navigationController;
+    channel = [NBCchannelLBTView new];
     [viewarray addObject:channel];
     
+    search = [NBCSearchView new];
+    [viewarray addObject:search];
+
     goodbook = [NBCGoodBoookListTabView new];
     goodbook.nav = self.navigationController;
     [viewarray addObject:goodbook];
@@ -183,7 +152,7 @@
     if ([model.ydybookcity integerValue]<3) {
         WS(ws);
         GuideBookCityOneView * view = [GuideBookCityOneView new];
-        view.frames = self.navtive.frame;
+        view.frames = search.frame;
         [self.view.window addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(ws.view.window);
@@ -223,14 +192,6 @@
     [view setBlock:^{
     }];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

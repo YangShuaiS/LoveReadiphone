@@ -7,7 +7,7 @@
 //
 
 #import "ZhiShiShuNEiRong.h"
-
+#import "ZhiShiShuXQView.h"
 @implementation ZhiShiShuNEiRong{
     FLAnimatedImageView * imageview;
     BaseLabel * label;
@@ -16,6 +16,7 @@
     BaseView * downView;
     
     BaseView * lastview;
+    
 }
 - (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize{
     UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
@@ -34,11 +35,43 @@
     }
     return self;
 }
+- (void)donghua{
+//    ZhiShiShuNeiRongModel * neirong = _neirong;
+//    if ([neirong.flag isEqualToString:@""]||[neirong.flag isEqualToString:@"0"]) {
+//
+//    }else{
+////        ZhiShiShuXQView * view = [ZhiShiShuXQView new];
+////        view.itemid = neirong._id;
+////        view.nav = self.nav;
+////        [_lastview addSubview:view];
+////
+////        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+////            make.edges.mas_equalTo(ws.lastview);
+////        }];
+//    }
+//
+//    UIView * v = [UIView new];
+//    v.backgroundColor = RGBA(0, 0, 0, 0.9);
+//    [self addSubview:v];
+//    WS(ws);
+//    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.center.mas_equalTo(ws);
+//        make.width.and.height.mas_equalTo(1);
+//    }];
+//    [UIView animateWithDuration:1 animations:^{
+//        [v mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.and.height.mas_equalTo(ws);
+//        }];
+//        [v layoutIfNeeded];
+//    } completion:^(BOOL finished) {
+//        [v removeFromSuperview];
+//    }];
+}
 - (void)addview{
     WS(ws);
     
     imageview = [FLAnimatedImageView new];
-    imageview.layer.masksToBounds = YES;
+//    imageview.layer.masksToBounds = YES;
     imageview.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -48,6 +81,10 @@
         make.width.mas_equalTo(0);
         make.height.mas_equalTo(0);
     }];
+
+//    imageview.userInteractionEnabled = YES;
+//    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(donghua)];
+//    [imageview addGestureRecognizer:tap];
     
     downView = [BaseView new];
     downView.backgroundColor = [UIColor clearColor];
@@ -77,7 +114,13 @@
         make.left.mas_equalTo(self->textimag.mas_right).with.offset(LENGTH(5));
         make.right.mas_equalTo(self->downView);
     }];
-    
+    self.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
+    [self addGestureRecognizer:tap];
+
+}
+- (void)click{
+    self.block(_neirong);
 }
 - (void)setNeirong:(ZhiShiShuNeiRongModel *)neirong{
     _neirong = neirong;
@@ -102,6 +145,15 @@
         [self addoneimahe];
         [self addtwoimage];
     }
+    self.userInteractionEnabled = YES;
+    if ([neirong.is_background isEqualToString:@"1"]) {
+        self.userInteractionEnabled = NO;
+    }else{
+        if ([neirong.flag isEqualToString:@""]||[neirong.flag isEqualToString:@"0"]) {
+            self.userInteractionEnabled = NO;
+        }
+    }
+
     
 }
 - (void)addoneimahe{
@@ -202,6 +254,18 @@
         make.width.mas_equalTo(flo);
     }];
     
+
+}
+- (void)yinying{
+    imageview.layer.shadowOpacity = 1;
+    imageview.layer.shadowColor = RGBA(238,178,48,1).CGColor;
+    imageview.layer.shadowRadius = 25.f;
+    imageview.layer.shadowOffset = CGSizeMake(0,0);
+}
+
+- (void)wuyinying{
+    imageview.layer.shadowOpacity = 0;
+    imageview.layer.shadowRadius = 0;
 
 }
 @end

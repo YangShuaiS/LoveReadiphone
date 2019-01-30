@@ -22,5 +22,19 @@
     }
     return self;
 }
-
+- (instancetype)initWithTxteColor:(UIColor *)textcolor
+                        LabelFont:(UIFont *)font
+                    TextAlignment:(NSTextAlignment)textAlignment
+                             Text:(NSString *)text{
+    self = [super init];
+    if (self) {
+        self.textColor = textcolor;
+        if (font != nil) {
+            self.font = font;
+        }
+        self.textAlignment = textAlignment;
+        self.text = text;
+    }
+    return self;
+}
 @end

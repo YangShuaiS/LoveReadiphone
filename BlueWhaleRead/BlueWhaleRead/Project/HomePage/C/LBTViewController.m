@@ -27,7 +27,10 @@
 
 
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self AddNavtion];
@@ -37,7 +40,7 @@
 }
 - (void)addView{
     scrollView = [UIScrollView new];
-    scrollView.backgroundColor = RGB(237,243,243);
+    scrollView.backgroundColor = [UIColor whiteColor];
     scrollView.userInteractionEnabled = YES;
     [self.view addSubview:scrollView];
 //    if ([IOS_X integerValue]>=11.0) {
@@ -111,12 +114,12 @@
     }];
     
     FLAnimatedImageView * sharefriend = [FLAnimatedImageView new];
-    sharefriend.image = UIIMAGE(@"告诉朋友");
+    sharefriend.image = UIIMAGE(@"4343");
     [self.navtive addSubview:sharefriend];
     [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar);
         make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
-        make.size.mas_equalTo(sharefriend.image.size);
+        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);
+        make.width.and.height.mas_equalTo(24);
     }];
     sharefriend.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
@@ -215,7 +218,7 @@
         [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"completionHandler:nil];
 
     }
-    [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.background='#edf3f3'"completionHandler:nil];
+//    [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.background='#edf3f3'"completionHandler:nil];
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){

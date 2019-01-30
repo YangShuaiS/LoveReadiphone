@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * completedNum;//完成人数
 @property (nonatomic, copy) NSString * selfBuildNum;//自建人数
 
+@property (nonatomic, copy) NSString * create_time;//自建人数
 
 @property (nonatomic, copy) NSString * ssid;
 

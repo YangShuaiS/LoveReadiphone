@@ -24,7 +24,7 @@
     
     WS(ws);
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake((WIDTH-LENGTH(20))/7,LENGTH(55));
+    flowLayout.itemSize = CGSizeMake((WIDTH-LENGTH(60))/7,LENGTH(55));
     //定义每个UICollectionView 横向的间距
     flowLayout.minimumLineSpacing = LENGTH(0);
     //定义每个UICollectionView 纵向的间距
@@ -45,6 +45,7 @@
 
 - (void)setModel:(TKXQRLModel *)model{
     _model = model;
+    collectionview.colorarray = _colorarray;
     collectionview.qishi = model.qiwz;
     collectionview.itemArray = model.itemarray;
 }

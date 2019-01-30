@@ -49,7 +49,7 @@ extern MeModel const * Me;
                                  Fount:(CGFloat)font
                              TextColor:(UIColor*)color
                             BianString:(NSString *)BianString;
-
++ (NSMutableAttributedString*)AttributedAll:(NSArray *)modelarray;
 + (NSMutableAttributedString*)Attributed:(NSArray *)modelarray;
 
 + (NSMutableAttributedString*)AttributedStringModel:(AttributedStringModel*)model
@@ -79,4 +79,6 @@ extern MeModel const * Me;
 
 + (NSMutableDictionary *)BenDiXinXi;
 + (NSString *)NowTime;
+
++ (NSMutableArray *)TaskColorArray:(NSInteger)inter;
 @end

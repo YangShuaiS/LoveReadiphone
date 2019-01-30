@@ -27,7 +27,7 @@
 //    self.navigationBar.barTintColor = RGB(0x26, 0x60, 0xad);
     UIView *statusBar = [[UIApplication sharedApplication]  valueForKey:@"statusBar"];
     if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-//        statusBar.backgroundColor = RGB(0x33, 0x33, 0x33);
+//        statusBar.backgroundColor = RGB(255, 255, 255);
     }
 //    self.interactivePopGestureRecognizer.delegate = self;
 

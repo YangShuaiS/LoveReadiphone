@@ -8,7 +8,7 @@
 
 #import "TKXQOtherView.h"
 #import "HomeModerateCollectView.h"
-#define itemHeight LENGTH(190)
+#define itemHeight LENGTH(170)
 
 @implementation TKXQOtherView{
     HomeModerateCollectView * collectView;
@@ -35,7 +35,7 @@
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     collectView = [[HomeModerateCollectView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
-        collectView.foundinter = 6;
+//        collectView.foundinter = 6;
     [self addSubview:collectView];
     [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(0);

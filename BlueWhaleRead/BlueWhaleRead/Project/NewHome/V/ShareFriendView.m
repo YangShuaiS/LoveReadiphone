@@ -58,7 +58,7 @@
 }
 
 - (void)backview{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
     NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -69,6 +69,7 @@
     if (![model.sharetime isEqualToString:currentTimeString]) {
         WS(ws);
         FenXiangView * fenxiangs = [FenXiangView new];
+        fenxiangs.inter = 1;
         fenxiangs.shareid = [_model.type integerValue];
         fenxiangs.sharestyle = ShareStyleTag11;
         [[self viewController].view addSubview:fenxiangs];

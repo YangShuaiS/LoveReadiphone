@@ -197,7 +197,7 @@
             }];
             
             NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FASONGYANZHENGMA];
-            NSDictionary * dic = @{@"phone":_textField.text};
+            NSDictionary * dic = @{@"phone":_textField.text,@"from":@"login"};
             [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
                 if (responseObject) {
                     MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];

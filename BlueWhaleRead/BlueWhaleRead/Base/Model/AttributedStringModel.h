@@ -13,4 +13,6 @@
 @property (nonatomic, copy) NSString * bianString;
 @property (nonatomic, assign) CGFloat fount;
 @property (nonatomic, strong) UIColor * color;
+@property (nonatomic, assign) NSInteger integer;
+
 @end

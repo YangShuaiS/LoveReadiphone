@@ -11,7 +11,9 @@
 @interface HorizontalcalCollectionView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
-@implementation HorizontalcalCollectionView
+@implementation HorizontalcalCollectionView{
+    NSInteger now;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout{
     self = [super initWithFrame:frame collectionViewLayout:layout];
@@ -33,6 +35,7 @@
         self.showsVerticalScrollIndicator = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.pagingEnabled = YES;
+        now = 1;
     }
     return self;
 }
@@ -51,6 +54,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     HorizontalcalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HorizontalcalCollectionViewCell" forIndexPath:indexPath];
+    cell.colorarray = _colorarray;
     if (_qishi>indexPath.row) {
         [cell wushuju];
     }else{
@@ -77,15 +81,13 @@
 }
 - (void)setIndext:(NSInteger)indext{
     _indext = indext;
-    if (_indext == 0) {
-        [self scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_indext inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-        
-    }else if (_indext == 1){
-        [self scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_indext inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-        
-    }else if (_indext == 2){
-        [self scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_indext inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-        
+    [self scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_indext inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSInteger index = scrollView.contentOffset.x/self.frame.size.width+1;
+    if (now !=index) {
+        now = index;
+        self.block(index);
     }
 }
 @end

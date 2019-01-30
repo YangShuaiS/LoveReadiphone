@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * first_prize_num;//一等奖数量
 @property (nonatomic, copy) NSString * mission_background;//任务背景图
 @property (nonatomic, copy) NSString * mission_content_img;//任务内容头部图
+@property (nonatomic, copy) NSString * mission_check_background;//完成人数
+
 @property (nonatomic, copy) NSString * mission_info;//任务简介
 @property (nonatomic, copy) NSString * mission_name;//任务名
 @property (nonatomic, copy) NSString * mission_type;//任务类型
@@ -29,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * third_prize_id;//三等奖id
 @property (nonatomic, copy) NSString * third_prize_num;//三等奖数量
 @property (nonatomic, copy) NSString * periods_num;//期数
+@property (nonatomic, copy) NSString * default_background;//
+
 
 @property (nonatomic, assign) CGFloat userRatio;//用户进度
 

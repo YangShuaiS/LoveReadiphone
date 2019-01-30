@@ -13,7 +13,11 @@ typedef void(^zhuangtai)(NSInteger inter);
 
 @interface TKXQRLCollectionView : BaseCollectionView
 @property(nonatomic,strong)NSMutableArray * itemArray;
+@property(nonatomic,strong)NSMutableArray * colorarray;
+
 @property(nonatomic,assign)NSInteger qishi;
+@property(nonatomic,assign)NSInteger now;
+
 @property(nonatomic,copy)zhuangtai block;
 
 @end

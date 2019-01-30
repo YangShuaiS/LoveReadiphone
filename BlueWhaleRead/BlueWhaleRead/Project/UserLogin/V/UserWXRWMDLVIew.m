@@ -180,11 +180,53 @@ NSString *const kWXAppSecret = @"b75713455aff3c9c7fd54405e0a7523b";
 
     [[BaseAppRequestManager manager] getNormaldataURL:@"https://api.weixin.qq.com/sns/userinfo" dic:dict andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
-            [self removeFromSuperview];
+            [self updata:responseObject];
         }
     }];
 }
-
+- (void)updata:(NSMutableDictionary *)dic{
+    NSString * nianji  = [[NSUserDefaults standardUserDefaults] objectForKey:kNotificationNianJi];
+    if (nianji == nil || [nianji isEqualToString:@""]) {
+        nianji = @"1";
+    }
+    [dic setObject:nianji forKey:@"level"];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString * url = [NSString stringWithFormat:@"%@%@?loginType=2&studentid=%@",ZSFWQ,JK_NEWZC,Me.ssid];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:nil error:nil];
+    request.timeoutInterval= 30;
+    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%lu",(unsigned long)jsonData.length] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:jsonData];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
+                                                 @"text/html",
+                                                 @"text/json",
+                                                 @"text/javascript",
+                                                 @"text/plain",
+                                                 nil];
+    manager.responseSerializer = responseSerializer;
+    [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        
+        if (!error) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:dict];
+            if ([m.code isEqual:@200]) {
+                NSString *filePatch = [BaseObject AddPathName:UserMe];
+                Me = [MeModel mj_objectWithKeyValues:m.studentInfo];
+                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
+                NSDictionary * dics = m.studentInfo;
+                [usersDic setObject:dics forKey:UserMe];
+                [usersDic writeToFile:filePatch atomically:YES];
+                [[self viewController] dismissViewControllerAnimated:YES completion:^{
+                    
+                }];
+            }
+        } else {
+            
+        }
+    }] resume];
+}
 - (void)dealloc {
 }
 

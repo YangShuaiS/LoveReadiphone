@@ -9,10 +9,7 @@
 #import "BaseTableView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-typedef void(^GenBlock)(NSInteger inter);
 @interface MMviewTableView : BaseTableView
-@property (nonatomic , strong)MyUserInfo * model;
-@property(nonatomic,copy)GenBlock block;
 @end
 
 NS_ASSUME_NONNULL_END

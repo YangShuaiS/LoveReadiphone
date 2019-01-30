@@ -29,6 +29,9 @@
     }];
     }
     scroview.itemid = _itemid;
+    [scroview setBlock:^(CGRect frame) {
+        
+    }];
 
     // Do any additional setup after loading the view.
 }

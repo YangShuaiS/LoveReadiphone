@@ -16,7 +16,10 @@
 #import "ModifyNameViewController.h"
 
 #import <MOFSPickerManager.h>
-@interface PersonalTableView ()<UITableViewDelegate,UITableViewDataSource>
+
+#import <PGDatePickManager.h>
+
+@interface PersonalTableView ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate>
 @property(nonatomic,strong)NSMutableArray *provinces;
 @property(nonatomic,assign)NSInteger provinceIndex;
 @property(nonatomic,assign)NSInteger provinceIndextwo;
@@ -53,39 +56,39 @@
     NSString * xb;
     if (model.sex == 1) {
         xb = @"男";
-    }else{
+    }else if (model.sex == 2){
         xb = @"女";
-    }
-    NSString * phone = model.phone;
-    if (phone.length == 11) {
-        NSRange rangeone = {0,3};
-        NSRange rangetwo = {7,4};
-        NSString * str = [NSString stringWithFormat:@"%@****%@",[phone substringWithRange:rangeone],[phone substringWithRange:rangetwo]];
-        phone = str;
     }else{
-        phone = @"";
+        xb = @"待完善";
     }
-    if ([_model.source isEqualToString:@"2"]) {
-        titleArray = @[@"昵称",@"生日",@"等级",@"账号/绑定设置",@"所在地区",@"学校",@"班级",@"性别"];
-        NSString * area = model.area;
-        NSString * true_school = model.true_school;
-        NSString * true_class = model.true_class;
-        area=[area isEqualToString:@""]?@"待完善":area;
-        true_school=[true_school isEqualToString:@""]?@"待完善":true_school;
-        true_class=[true_class isEqualToString:@""]?@"待完善":true_class;
-        subArray = @[model.name,model.birthday,[NSString stringWithFormat:@"Lv%@",model.level],phone,area,true_school,true_class,xb];
-    }else{
-        titleArray = @[@"昵称",@"等级",@"修改预留手机号",@"学校",@"班级",@"性别"];
-        subArray = @[model.name,[NSString stringWithFormat:@"Lv%@",model.level],phone,model.school,model.clazz,xb];
+//    NSString * phone = model.phone;
+//    if (phone.length == 11) {
+//        NSRange rangeone = {0,3};
+//        NSRange rangetwo = {7,4};
+//        NSString * str = [NSString stringWithFormat:@"%@****%@",[phone substringWithRange:rangeone],[phone substringWithRange:rangetwo]];
+//        phone = str;
+//    }else{
+//        phone = @"";
+//    }
+    titleArray = @[@"姓名",@"生日",@"年级",@"等级",@"账号绑定",@"所在地区",@"学校",@"班级",@"性别"];
+    NSString * area = model.area;
+    NSString * true_school = model.true_school;
+    NSString * true_class = model.true_class;
+    NSString * schoolclass = model.true_class;
 
-    }
+    area=[area isEqualToString:@""]?@"待完善":area;
+    true_school=[true_school isEqualToString:@""]?@"待完善":true_school;
+    true_class=[true_class isEqualToString:@""]?@"待完善":true_class;
+    schoolclass=[true_class isEqualToString:@""]?@"待完善":schoolclass;
+
+    subArray = @[model.name,Me.birthday,Me.level,[NSString stringWithFormat:@"Lv%@",model.level],@"",area,true_school,true_class,xb];
     [self reloadData];
 }
 #pragma mark  - tableViewDelegate代理方法
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return titleArray.count+1;
+    return titleArray.count;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -95,48 +98,18 @@
     NSString * rid = [NSString stringWithFormat:@"cell%ld",(long)indexPath.row];
     PersonalTableViewCell * cell =[tableView dequeueReusableCellWithIdentifier:rid];
     if(cell==nil){
-        if ([_model.source isEqualToString:@"2"]) {
-            if(indexPath.row == 0){
-                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewTopStyle];
-                cell.model = _model;
-                cell.baseview = self.baseview;
-            }else if (indexPath.row == 4){
-                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
-                cell.title = titleArray[indexPath.row-1];
-                cell.subtitle = subArray[indexPath.row - 1];
-            }else if (indexPath.row == 1||indexPath.row == 5||indexPath.row == 6||indexPath.row ==7){
-                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
-                cell.title = titleArray[indexPath.row-1];
-                cell.subtitle = subArray[indexPath.row - 1];
-            }else{
-                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
-                cell.title = titleArray[indexPath.row-1];
-                cell.subtitle = subArray[indexPath.row - 1];
-            }
+//        if(indexPath.row == 0){
+//            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewTopStyle];
+//
+//        }else
+        if (indexPath.row == 3){
+            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
         }else{
-            if(indexPath.row == 0){
-                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewTopStyle];
-                cell.model = _model;
-                cell.baseview = self.baseview;
-            }else if (indexPath.row == 3){
-                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
-                cell.title = titleArray[indexPath.row-1];
-                cell.subtitle = subArray[indexPath.row - 1];
-            }else{
-                cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
-                cell.title = titleArray[indexPath.row-1];
-                cell.subtitle = subArray[indexPath.row - 1];
-            }
+            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
         }
     }
-    if ([_model.source isEqualToString:@"2"]) {
-        if (indexPath.row == 1||indexPath.row == 5||indexPath.row == 6||indexPath.row ==7){
-            cell.title = titleArray[indexPath.row-1];
-            cell.subtitle = subArray[indexPath.row - 1];
-        }
-    }else{
-        
-    }
+    cell.title = titleArray[indexPath.row];
+    cell.subtitle = subArray[indexPath.row];
     cell.nav = self.nav;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -182,18 +155,20 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_model.source isEqualToString:@"2"]) {
-        if (indexPath.row == 1) {
-            ModifyNameViewController * vc = [ModifyNameViewController new];
-            [self.nav pushViewController:vc animated:YES];
-            [vc setBlock:^{
-                [self LoadData];
-            }];
-        }else if (indexPath.row == 4) {
-        AccountSettingsViewController * vc = [AccountSettingsViewController new];
-        vc.phonetext = subArray[indexPath.row - 1];
+    if (indexPath.row == 0) {
+        ModifyNameViewController * vc = [ModifyNameViewController new];
         [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row ==5){
+        [vc setBlock:^{
+            [self LoadData];
+        }];
+    }else if (indexPath.row == 1){
+        [self shengri];
+    }else if (indexPath.row == 2){
+        [self nianling];
+    }else if (indexPath.row == 4){
+        AccountSettingsViewController * vc = [AccountSettingsViewController new];
+        [self.nav pushViewController:vc animated:YES];
+    }else if (indexPath.row == 5){
         [self diqu];
     }else if (indexPath.row == 6){
         WanShanXinXiViewController * vc = [WanShanXinXiViewController new];
@@ -209,13 +184,8 @@
         [vc setBlock:^{
             [self LoadData];
         }];
-    }
-    }else{
-        if (indexPath.row == 3) {
-            AccountSettingsViewController * vc = [AccountSettingsViewController new];
-            vc.phonetext = subArray[indexPath.row - 1];
-            [self.nav pushViewController:vc animated:YES];
-        }
+    }else if (indexPath.row == 8){
+        [self xingbie];
     }
 }
 
@@ -225,9 +195,78 @@
     self.pickerView.delegate = self;
     self.pickerView.font = [UIFont boldSystemFontOfSize:18];
     [_vc.view addSubview:self.pickerView];
-    
+}
+- (void)xingbie{
+//    [MOFSPickerManager shareManger].addressPicker.attributes = @{NSFontAttributeName : [UIFont systemFontOfSize:15], NSForegroundColorAttributeName : [UIColor redColor]};
+    [[MOFSPickerManager shareManger] showPickerViewWithDataArray:@[@"男",@"女"] tag:1 title:@"选择性别" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *string) {
+        NSString * sex;
+        if ([string isEqualToString:@"男"]) {
+            sex = @"1";
+        }else{
+            sex = @"2";
+        }
+        [self xiugaixingbie:sex];
+    } cancelBlock:^{
+        
+    }];
 }
 
+- (void)xiugaixingbie:(NSString *)sex{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_XIUGAISEX];
+    NSDictionary * dic = @{@"studentid":Me.ssid,@"sex":sex};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                NSString *filePatch = [BaseObject AddPathName:UserMe];
+                NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
+                NSMutableDictionary *dics = dataDictionary[UserMe];
+                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
+                dics[@"sex"] = sex;
+                [usersDic setObject:dics forKey:UserMe];
+                [usersDic writeToFile:filePatch atomically:YES];
+                Me.sex = sex;
+//                Me = [[MeModel SharedModel] ADDvalue];
+                [self LoadData];
+            }
+        }else{
+            
+        }
+    }];
+}
+
+- (void)nianling{
+    [[MOFSPickerManager shareManger] showPickerViewWithDataArray:@[@"1",@"2",@"3",@"4",@"5",@"6"] tag:1 title:@"选择年级" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *string) {
+        [self genggaunianji:string];
+    } cancelBlock:^{
+        
+    }];
+}
+
+- (void)genggaunianji:(NSString *)string{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_XIUGAILEVEL];
+    NSDictionary * dic = @{@"studentid":Me.ssid,@"level":string};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                NSString *filePatch = [BaseObject AddPathName:UserMe];
+                NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
+                NSMutableDictionary *dics = dataDictionary[UserMe];
+                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
+                dics[@"level"] = string;
+                [usersDic setObject:dics forKey:UserMe];
+                [usersDic writeToFile:filePatch atomically:YES];
+                Me.level = string;
+//                Me = [[MeModel SharedModel] ADDvalue];
+                [self LoadData];
+            }
+        }else{
+            
+        }
+    }];
+    
+}
 - (void)GFAddressPickerCancleAction
 {
     [self.pickerView removeFromSuperview];
@@ -260,6 +299,7 @@
             if ([self->mo.code isEqual:@200]) {
                 self->newModel = [MyZiLiaoModel mj_objectWithKeyValues:responseObject[@"user"]];
                 self.model = self->newModel;
+                [self reloadData];
             }else if ([self->mo.code isEqual:@Notloggedin]){
                 [self UpDengLu];
             }
@@ -270,4 +310,69 @@
 }
 
 
+
+- (void)shengri{
+    PGDatePickManager *datePickManager = [[PGDatePickManager alloc]init];
+    PGDatePicker *datePicker = datePickManager.datePicker;
+    datePicker.datePickerMode = PGDatePickerModeDate;
+    datePicker.delegate = self;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date = [dateFormatter dateFromString:Me.birthday];//上次设置的日期
+    if (!Me.birthday) {
+        date = [NSDate date];
+    }
+    [datePicker setDate:date];
+    
+    [_vc presentViewController:datePickManager animated:false completion:nil];
+    
+    datePickManager.titleLabel.text = @"选择生日";
+    //设置半透明的背景颜色
+    datePickManager.isShadeBackgroud = true;
+    //    //设置头部的背景颜色
+    //    datePickManager.headerViewBackgroundColor = [UIColor blueColor];
+    //    //设置线条的颜色
+    //    datePicker.lineBackgroundColor = [UIColor cyanColor];
+    //    //设置选中行的字体颜色
+    //    datePicker.textColorOfSelectedRow = [UIColor redColor];
+    //    //设置未选中行的字体颜色
+    //    datePicker.textColorOfOtherRow = [UIColor blackColor];
+    //设置取消按钮的字体颜色
+    //    datePickManager.cancelButtonTextColor = [UIColor blackColor];
+    //设置取消按钮的字
+    datePickManager.cancelButtonText = @"取消";
+    //设置取消按钮的字体大小
+    datePickManager.cancelButtonFont = [UIFont boldSystemFontOfSize:17];
+    
+    //设置确定按钮的字体颜色
+    //    datePickManager.confirmButtonTextColor = [UIColor redColor];
+    //设置确定按钮的字
+    datePickManager.confirmButtonText = @"确定";
+    //设置确定按钮的字体大小
+    datePickManager.confirmButtonFont = [UIFont boldSystemFontOfSize:17];
+}
+- (void)datePicker:(PGDatePicker *)datePicker didSelectDate:(NSDateComponents *)dateComponents {
+    NSString * day = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)dateComponents.year,(long)dateComponents.month,(long)dateComponents.day];
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_XGBirsty];
+    NSDictionary * dic = @{@"studentid":Me.ssid,@"birthday":day};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                NSString *filePatch = [BaseObject AddPathName:UserMe];
+                NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
+                NSMutableDictionary *dics = dataDictionary[UserMe];
+                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc ] init];
+                dics[@"birthday"] = day;
+                [usersDic setObject:dics forKey:UserMe];
+                [usersDic writeToFile:filePatch atomically:YES];
+                Me.birthday = day;
+//                Me = [[MeModel SharedModel] ADDvalue];
+                [self LoadData];
+            }
+        }else{
+            
+        }
+    }];
+}
 @end

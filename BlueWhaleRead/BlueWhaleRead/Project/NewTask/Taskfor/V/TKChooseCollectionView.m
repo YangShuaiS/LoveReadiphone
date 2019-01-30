@@ -56,7 +56,7 @@
     
     NSString * rid = [NSString stringWithFormat:@"TKChooseCollectionViewCell%ld",indexPath.row];
     TKChooseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:rid forIndexPath:indexPath];
-
+    cell.neirongcolor = _neirongcolor;
     cell.model = _itemArray[indexPath.row];
     if (indexPath.row == 0) {
         _time = 0.5;
@@ -79,11 +79,14 @@
         if (i == indexPath.row) {
             model.style = @"1";
         }else{
+           
             model.style = @"0";
         }
         [self reloadData];
     }
-
+    if (_open == YES) {
+        self.block(indexPath.row);
+    }
 }
 
 
@@ -94,6 +97,10 @@
 
 - (void)setItemArray:(NSMutableArray *)itemArray{
     _itemArray = itemArray;
+    if (_now_week !=0) {
+        TKbuiltModel * model = _itemArray[_now_week-1];
+        model.style = @"1";
+    }
     [self reloadData];
 }
 

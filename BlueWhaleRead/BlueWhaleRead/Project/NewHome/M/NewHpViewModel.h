@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * ydydati;
 @property (nonatomic, copy) NSString * ydyqbrw;
 @property (nonatomic, copy) NSString * ydylqrw;
+@property (nonatomic, copy) NSString * zhishiwang;
+
+
 
 
 

@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HorizontalcalendarView : BaseView
+@property(nonatomic,strong)NSMutableArray * colorarray;
 @property(nonatomic,strong)NHMissionModel * model;
 
 @end

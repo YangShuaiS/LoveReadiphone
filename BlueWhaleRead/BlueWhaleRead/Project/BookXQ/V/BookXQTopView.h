@@ -18,5 +18,7 @@ typedef void(^click)(void);
 
 @property(nonatomic,strong) CityBadgeListModel*citymodel;
 @property(nonatomic,copy)click block;
+
+
 - (void)oneButtons;
 @end

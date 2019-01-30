@@ -48,6 +48,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     TKXQRLCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TKXQRLCollectionViewCell" forIndexPath:indexPath];
+    cell.colorarray = _colorarray;
     cell.model = _itemArray[indexPath.row];
 //    cell.indexPath = indexPath;
 //    NSArray * arr = _itemArray[indexPath.section];
@@ -66,16 +67,18 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    NSInteger index = scrollView.contentOffset.x/WIDTH;
-    NSInteger inter;
-    if (index == 0) {
-        inter = index;
-        self.block(inter);
-    }
-    if (index == _itemArray.count-1) {
-        inter = index;
-        self.block(inter);
-    }
+    NSInteger index = scrollView.contentOffset.x/(WIDTH-LENGTH(40));
+//    NSInteger inter;
+    self.block(index);
+
+//    if (index == 0) {
+//        inter = index;
+//        self.block(inter);
+//    }
+//    if (index == _itemArray.count-1) {
+//        inter = index;
+//        self.block(inter);
+//    }
 }
 
 @end

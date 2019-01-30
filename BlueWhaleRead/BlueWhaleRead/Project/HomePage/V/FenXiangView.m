@@ -247,9 +247,9 @@
     NSString * urls = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FXLCB];
     NSDictionary * dic;
     if (_sharestyle == ShareStyleTag9||_sharestyle == ShareStyleTag10) {
-        dic = @{@"tag":tag,@"articleid":_textid};
+        dic = @{@"tag":tag,@"articleid":_textid,@"studentid":Me.ssid};
     }else{
-        dic = @{@"tag":tag};
+        dic = @{@"tag":tag,@"studentid":Me.ssid };
     }
     [[BaseAppRequestManager manager] getNormaldataURL:urls dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
@@ -503,7 +503,7 @@
     [self shareWithParameters:parameters];
 }
 - (void)jlxinxi{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",Me.ssid]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
     NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

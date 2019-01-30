@@ -9,5 +9,9 @@
 #import "UserLoginModel.h"
 
 @implementation UserLoginModel
-
++ (void)InitializeModel{
+    [UserLoginModel mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"levelList":@"levelListModel"};
+    }];
+}
 @end

@@ -8,6 +8,7 @@
 
 #import "BookXqTopCollectionView.h"
 #import "BookXqTopCollectionViewCell.h"
+#import "HomeActivityViewController.h"
 @interface BookXqTopCollectionView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
@@ -56,7 +57,11 @@
 }
 
 -( void )collectionView:( UICollectionView *)collectionView didSelectItemAtIndexPath:( NSIndexPath *)indexPath{
-   
+    BookDanModel * mode = _itemArray[indexPath.row];
+    HomeActivityViewController * vc = [HomeActivityViewController new];
+    vc.hiden = YES;
+    vc.itemid = mode.ssid;
+    [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 
 

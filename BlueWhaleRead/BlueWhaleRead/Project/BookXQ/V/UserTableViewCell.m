@@ -93,22 +93,23 @@
     JFALL = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(4,51,50) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:ZHANWEIZI];
     [self addSubview:JFALL];
     
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(LENGTH(23.5),LENGTH(23.5));
-    //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = -LENGTH(8);
-    //定义每个UICollectionView 纵向的间距
-    flowLayout.minimumInteritemSpacing = 0;
-    //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);//上左下右
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    touxiang = [[FiendOrMedalView alloc] initWithLayOut:flowLayout];
-    [self addSubview:touxiang];
-    
+//    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+//    flowLayout.itemSize = CGSizeMake(LENGTH(23.5),LENGTH(23.5));
+//    //定义每个UICollectionView 横向的间距
+//    flowLayout.minimumLineSpacing = -LENGTH(8);
+//    //定义每个UICollectionView 纵向的间距
+//    flowLayout.minimumInteritemSpacing = 0;
+//    //定义每个UICollectionView 的边距距
+//    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);//上左下右
+//    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//    touxiang = [[FiendOrMedalView alloc] initWithLayOut:flowLayout];
+//    [self addSubview:touxiang];
+//
     
     [Name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self->UserImage.mas_right).with.offset(LENGTH(10));
-        make.top.equalTo(backview.mas_top).with.offset(LENGTH(11));
+//        make.top.equalTo(backview.mas_top).with.offset(LENGTH(11));
+        make.centerY.mas_equalTo(ws);
     }];
     
     //    [TheClass mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,12 +122,12 @@
         make.centerY.equalTo(self->Name.mas_centerY).with.offset(0);
     }];
     
-    [touxiang mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self->UserImage.mas_right).with.offset(LENGTH(10));
-        make.bottom.equalTo(ws).with.offset(-LENGTH(10));
-//        make.right.equalTo(JF.mas_left).with.offset(-LENGTH(10));
-        make.height.mas_equalTo(LENGTH(23.5));
-    }];
+//    [touxiang mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self->UserImage.mas_right).with.offset(LENGTH(10));
+//        make.bottom.equalTo(ws).with.offset(-LENGTH(10));
+////        make.right.equalTo(JF.mas_left).with.offset(-LENGTH(10));
+//        make.height.mas_equalTo(LENGTH(23.5));
+//    }];
     
     [YDL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(JF.mas_bottom).with.offset(LENGTH(1));
@@ -160,7 +161,7 @@
     
     YDLALL.text = model.readnum;
     JFALL.text = model.score;
-    touxiang.itemarray = model.badgeList;
+//    touxiang.itemarray = model.badgeList;
 }
 
 - (void)awakeFromNib {

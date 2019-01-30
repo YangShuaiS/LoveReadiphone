@@ -24,7 +24,7 @@
     BaseLabel * byydl;
 
     
-    FiendOrMedalView * touxiang;
+//    FiendOrMedalView * touxiang;
 
 }
 
@@ -78,27 +78,27 @@
         make.left.mas_equalTo(self->Touxiang.mas_right).with.offset(LENGTH(6.5));
     }];
     
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(LENGTH(24),LENGTH(24));
-    //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = -LENGTH(5);
-    //定义每个UICollectionView 纵向的间距
-    flowLayout.minimumInteritemSpacing = LENGTH(0);
-    //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);//上左下右
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    touxiang = [[FiendOrMedalView alloc] initWithLayOut:flowLayout];
-    [self addSubview:touxiang];
+//    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+//    flowLayout.itemSize = CGSizeMake(LENGTH(24),LENGTH(24));
+//    //定义每个UICollectionView 横向的间距
+//    flowLayout.minimumLineSpacing = -LENGTH(5);
+//    //定义每个UICollectionView 纵向的间距
+//    flowLayout.minimumInteritemSpacing = LENGTH(0);
+//    //定义每个UICollectionView 的边距距
+//    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);//上左下右
+//    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//    touxiang = [[FiendOrMedalView alloc] initWithLayOut:flowLayout];
+//    [self addSubview:touxiang];
     jf = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:jf];
-    [touxiang mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->name.mas_bottom).with.offset(LENGTH(18));
-        make.left.mas_equalTo(self->Touxiang.mas_right).with.offset(LENGTH(6 ));
-        make.right.mas_equalTo(ws.mas_right).with.offset(-LENGTH(122));
-
-//            make.width.mas_equalTo(8*LENGTH(40));
-        make.height.mas_equalTo(LENGTH(24));
-    }];
+//    [touxiang mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self->name.mas_bottom).with.offset(LENGTH(18));
+//        make.left.mas_equalTo(self->Touxiang.mas_right).with.offset(LENGTH(6 ));
+//        make.right.mas_equalTo(ws.mas_right).with.offset(-LENGTH(122));
+//
+////            make.width.mas_equalTo(8*LENGTH(40));
+//        make.height.mas_equalTo(LENGTH(24));
+//    }];
     
 //    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
 //    flowLayout.itemSize = CGSizeMake(LENGTH(20),LENGTH(20));
@@ -157,7 +157,7 @@
 }
 - (void)setModel:(MyClassModel *)model{
     _model = model;
-    touxiang.nav = self.nav;
+//    touxiang.nav = self.nav;
 
     UIImage * img;
     if (model.sex == 1) {
@@ -215,7 +215,7 @@
     
     NSMutableArray * arr =[NSMutableArray array];
     [arr addObjectsFromArray:model.studentBadgeList];
-    touxiang.itemarray = arr;
+//    touxiang.itemarray = arr;
     
     if ([model.MonthReadNum isEqualToString:@"0"]&&[model.allReadNum isEqualToString:@"0"]&&[model.score isEqualToString:@"0"]) {
         paiming.hidden = YES;

@@ -11,32 +11,101 @@
 #import "UserLoginClickView.h"
 
 #import "UserLoginRegisteredViewController.h"
-#import "UserLoginDlViewController.h"
+#import "UserPhoneDlViewController.h"
 
 #import "UserSQDLView.h"
-@interface UserLoginViewController (){
-    FLAnimatedImageView * userImageView;
-    UserlLoginTextFileView * textFile;
-}
-
+@interface UserLoginViewController ()
 @end
 
 @implementation UserLoginViewController
-- (void)ConfirmTheSize{
-    UIView *statusBar = STAUBARHEIGHT;
-    StatusBar = statusBar.frame.size.height;
-    NavHeight = StatusBar+NAVIGATIONHeight;
-    TabBarHeight = TABBARHeight;
-    poinw = WIDTH/16;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-//    [self ConfirmTheSize];
     WS(ws);
-    userImageView = [FLAnimatedImageView new];
+    self.view.backgroundColor = [UIColor whiteColor];
+    UIImageView * backimageview = [UIImageView new];
+    backimageview.contentMode = UIViewContentModeScaleAspectFill;
+    backimageview.image = UIIMAGE(@"背景");
+    [self.view addSubview:backimageview];
+    [backimageview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.left.and.right.mas_equalTo(ws.view);
+        make.height.mas_equalTo(LENGTH(320));
+    }];
+    
+    UIImageView * back = [UIImageView new];
+    back.contentMode = UIViewContentModeScaleAspectFill;
+    back.image = UIIMAGE(@"icon_login_closebtn");
+    [self.view addSubview:back];
+    [back mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(ws.view).with.offset(StatusBar+20);
+        make.right.mas_equalTo(ws.view).with.offset(-LENGTH(20));
+        make.width.and.height.mas_equalTo(LENGTH(40));
+    }];
+    
+    back.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapviewtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backview)];
+    //将手势添加到需要相应的view中去
+    [back addGestureRecognizer:tapviewtap];
+    
+    BaseLabel * title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,129,51) LabelFont:TextFont(23) TextAlignment:NSTextAlignmentCenter Text:@"领新手任务"];
+    [backimageview addSubview:title];
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(backimageview).with.offset(NavHeight);
+        make.centerX.mas_equalTo(backimageview);
+    }];
+    
+    BaseLabel * subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,172,119) LabelFont:TextFont(21) TextAlignment:NSTextAlignmentCenter Text:@"赢取小米平衡车大奖"];
+    [backimageview addSubview:subtitle];
+    [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(title.mas_bottom).with.offset(LENGTH(6));
+        make.centerX.mas_equalTo(backimageview);
+    }];
+    
+    UIImageView * caidai = [UIImageView new];
+    caidai.contentMode = UIViewContentModeScaleAspectFit;
+    caidai.image = UIIMAGE(@"奖品");
+    [backimageview addSubview:caidai];
+    [caidai mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(subtitle.mas_bottom).with.offset(LENGTH(6));
+        make.centerX.mas_equalTo(backimageview);
+//        make.size.mas_equalTo(caidai.image.size);
+        make.width.mas_equalTo(LENGTH(300));
+        make.height.mas_equalTo(LENGTH(209));
+//        make.bottom.mas_equalTo(backimageview).with.offset(-LENGTH(20));
+    }];
+
+    
+    UserSQDLView * NewUser = [UserSQDLView new];
+    NewUser.userInteractionEnabled = YES;
+    [self.view addSubview:NewUser];
+    [NewUser mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(backimageview.mas_bottom).with.offset(LENGTH(9));
+        make.left.mas_equalTo(ws.view).with.offset(LENGTH(50));
+        make.right.mas_equalTo(ws.view).with.offset(-LENGTH(50));
+        make.height.mas_equalTo(LENGTH(50));
+    }];
+    
+    BaseLabel * phonedl = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(118,134,134) LabelFont:TextFont(17) TextAlignment:NSTextAlignmentCenter Text:@"手机号登录"];
+    
+    [self.view addSubview:phonedl];
+    [phonedl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(NewUser.mas_bottom).with.offset(LENGTH(5));
+        make.left.mas_equalTo(ws.view).with.offset(LENGTH(50));
+        make.right.mas_equalTo(ws.view).with.offset(-LENGTH(50));
+        make.height.mas_equalTo(LENGTH(50));
+    }];
+    phonedl.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapGesturedl = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(denglu)];
+    //将手势添加到需要相应的view中去
+    [phonedl addGestureRecognizer:tapGesturedl];
+    self.view.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture2)];
+    //将手势添加到需要相应的view中去
+    [self.view addGestureRecognizer:tapGesture2];
+    
+    UIImageView *userImageView = [UIImageView new];
     userImageView.image = UIIMAGE(@"天天爱读");
     userImageView.layer.shadowColor = RGB(0, 0, 0).CGColor;
     userImageView.layer.shadowOffset = CGSizeMake(0,0);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
@@ -44,72 +113,30 @@
     userImageView.layer.shadowOpacity = 0.1;
     [self.view addSubview:userImageView];
     [userImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws.view).with.offset(LENGTH(96));
-        make.top.mas_equalTo(ws.view.mas_top).with.offset(StatusBar+LENGTH(100));
-        make.width.mas_equalTo(LENGTH(65));
-        make.height.mas_equalTo(LENGTH(65));
+        make.top.mas_equalTo(phonedl.mas_bottom).with.offset(LENGTH(50));
+        make.centerX.mas_equalTo(ws.view).with.offset(-LENGTH(37));
+        make.width.mas_equalTo(LENGTH(37));
+        make.height.mas_equalTo(LENGTH(37));
     }];
     
-    BaseLabel * title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(92, 92, 92) LabelFont:TextFontCu(25) TextAlignment:NSTextAlignmentCenter Text:@"博万卷"];
-    [self.view addSubview:title];
-    [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self->userImageView);
-        make.left.mas_equalTo(self->userImageView.mas_right).with.offset(LENGTH(15));
+    BaseLabel * name = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(92, 92, 92) LabelFont:TextFontCu(13) TextAlignment:NSTextAlignmentCenter Text:@"博万卷"];
+    [self.view addSubview:name];
+    [name mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(userImageView);
+        make.left.mas_equalTo(userImageView.mas_right).with.offset(LENGTH(10));
     }];
-    
-    UserLoginClickView * NewUser = [[UserLoginClickView alloc] initWithImage:@"" Text:@"新手注册" Style:UserLoginClickStyleNoml];
-    NewUser.userInteractionEnabled = YES;
-    [self.view addSubview:NewUser];
-    [NewUser mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->userImageView.mas_bottom).with.offset(LENGTH(132));
-        make.left.mas_equalTo(ws.view).with.offset(LENGTH(50));
-        make.right.mas_equalTo(ws.view).with.offset(-LENGTH(50));
-        make.height.mas_equalTo(LENGTH(50));
-    }];
-    [NewUser setBlock:^{
-        [self pushNewUser];
-    }];
-    
-    UserLoginClickView * DL = [[UserLoginClickView alloc] initWithImage:@"" Text:@"登录" Style:UserLoginClickStyleNoml];
-    [DL whitherBacler];
-    DL.userInteractionEnabled = YES;
-    [self.view addSubview:DL];
-    [DL mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(NewUser.mas_bottom).with.offset(LENGTH(20));
-        make.left.mas_equalTo(ws.view).with.offset(LENGTH(50));
-        make.right.mas_equalTo(ws.view).with.offset(-LENGTH(50));
-        make.height.mas_equalTo(LENGTH(50));
-    }];
-    [DL setBlock:^{
-        [self denglu];
-    }];
-    
-    UserSQDLView * sqdl = [UserSQDLView new];
-    sqdl.nav = self.navigationController;
-    [self.view addSubview:sqdl];
-    [sqdl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(DL.mas_bottom).with.offset(LENGTH(80));
-        make.left.and.right.mas_equalTo(ws.view);
-    }];
-    
-    self.view.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture2)];
-    //将手势添加到需要相应的view中去
-    [self.view addGestureRecognizer:tapGesture2];
 }
-
-- (void)pushNewUser{
-    UserLoginRegisteredViewController * vc = [UserLoginRegisteredViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 - (void)denglu{
-    UserLoginDlViewController * vc = [UserLoginDlViewController new];
+    UserPhoneDlViewController * vc = [UserPhoneDlViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)tapGesture2{
-    [textFile returnKeyboard];
+//    [textFile returnKeyboard];
+}
+
+- (void)backview{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

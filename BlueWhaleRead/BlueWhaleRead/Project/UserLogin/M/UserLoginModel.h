@@ -7,10 +7,14 @@
 //
 
 #import "BaseModel.h"
-
+#import "levelListModel.h"
 @interface UserLoginModel : BaseModel
 @property (nonatomic, copy) NSNumber * code;
 @property (nonatomic, copy) NSString * message;
 @property (nonatomic, strong) NSMutableDictionary * studentInfo;
+
+@property (nonatomic, strong) NSMutableArray * levelList;
+
++ (void)InitializeModel;
 
 @end

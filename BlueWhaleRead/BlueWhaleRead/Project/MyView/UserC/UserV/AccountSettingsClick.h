@@ -11,4 +11,8 @@
 @interface AccountSettingsClick : BaseView
 @property(nonatomic,strong)UIImageView * imageview;
 @property(nonatomic,strong)BaseLabel * titlelabel;
+@property(nonatomic,strong)BaseLabel * subtitlelabel;
+
+- (void)bangding;
+- (void)weibangding;
 @end

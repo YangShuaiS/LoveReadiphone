@@ -13,6 +13,7 @@
 @interface MyClassListModel : BaseModel
 @property (nonatomic, copy) NSNumber * code;
 @property (nonatomic, copy) NSString * message;
+@property (nonatomic, copy) NSString * myclassImg;
 @property (nonatomic, assign) NSInteger studentnum;//本人位置 数组key
 @property (nonatomic, strong) MyClassTopModel * clazz;//班级信息
 @property (nonatomic, strong) MyClassTopModel * grade;//年级信息

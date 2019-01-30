@@ -98,7 +98,7 @@
         vc.navtitle = model.name;
         [self.nav pushViewController:vc animated:YES];
     }
-    self.block();
+//    self.block();
 }
 - (void)setItemArray:(NSMutableArray *)itemArray{
     _itemArray = itemArray;

@@ -17,6 +17,9 @@
 
 @property(nonatomic,strong)NSMutableArray * milestone;//里程碑信息
 
+@property (nonatomic, copy) NSString * myMilestoneL;
+@property (nonatomic, copy) NSString * myMilestoneR;
+
 + (void)InitializeModel;
 
 @end

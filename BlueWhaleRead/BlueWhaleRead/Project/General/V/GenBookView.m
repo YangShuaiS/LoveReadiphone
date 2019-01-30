@@ -35,15 +35,22 @@
     return self;
 }
 - (void)addView{
+    WS(ws);
     leftImage = [FLAnimatedImageView new];
     [self addSubview:leftImage];
     
     Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:LinShiZiTiYanSe LabelFont:TextFont(Font17) TextAlignment:NSTextAlignmentLeft Text:ZHANWEIZI];
     [self addSubview:Title];
     
+    UIView * backxx = [UIView new];
+    backxx.backgroundColor = RGBA(0, 0, 0, 0.6);
+    [leftImage addSubview:backxx];
     _jKStarDisplayView = [[JKStarDisplayView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.jKStarDisplayView.redValue = [@"4.3" floatValue];
     [leftImage addSubview:self.jKStarDisplayView];
+    [backxx mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.jKStarDisplayView).with.insets(UIEdgeInsetsMake(-LENGTH(2), -LENGTH(2), -LENGTH(2), -LENGTH(2)));
+    }];
     
     subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:LinShiZiTiYanSe LabelFont:TextFont(Font15) TextAlignment:NSTextAlignmentLeft Text:ZHANWEIZI];
     [self addSubview:subtitle];

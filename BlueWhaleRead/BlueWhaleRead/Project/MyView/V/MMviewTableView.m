@@ -7,29 +7,13 @@
 //
 
 #import "MMviewTableView.h"
-#import "MMviewTableViewCell.h"
-#import "MMyViewTopView.h"
-
-#import "BookListViewController.h"
 #import "MyClassViewController.h"
-#import "HomeMilestoneViewController.h"
-#import "AchievementReportViewController.h"
 #import "PersonalViewController.h"
 #import "PersonSheZhiViewController.h"
-#import "TKMytaskViewController.h"
-
-
-#import "TKAlltaskViewController.h"
-#import "TKAwardViewController.h"
-#import "TKPrizeViewController.h"
-#import "TKIssueViewController.h"
-#import "TFameViewController.h"
-#import "TUpView.h"
-#import "TKJUpView.h"
-#import "TCompleteView.h"
-@interface MMviewTableView ()<UITableViewDelegate,UITableViewDataSource>{
-    MMyViewTopView * v;
-}
+#import "BaseNavigationViewController.h"
+#import "UserLoginViewController.h"
+#import "MMviewTableViewCell.h"
+@interface MMviewTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 @implementation MMviewTableView{
@@ -49,9 +33,9 @@
         self.tableFooterView = [[UIView alloc]init];
         self.estimatedRowHeight = 300;//估算高度
         self.rowHeight = UITableViewAutomaticDimension;
-        
-        itemarray = @[@"能力测试",@"我的书架",@"我的任务",@"我的班级",@"我的里程碑",@"我的成就",@"个人资料",@"设置"];
-        imagearray = @[@"能力测试",@"我的书架",@"我的任务",@"我的班级",@"我的里程碑",@"我的成就",@"组 302-1",@"组 303-1"];
+        self.bounces = NO;
+        itemarray = @[@"我的班级",@"个人资料",@"设置"];
+        imagearray = @[@"我的班级",@"个人资料",@"设置"];
     }
     return self;
 }
@@ -72,7 +56,6 @@
     if(cell==nil){
         cell=[[MMviewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid];
     }
-    cell.nav = self.nav;
     cell.namestring = itemarray[indexPath.row];
     cell.imagestring = imagearray[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -96,36 +79,34 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        self.block(0);
-    }else if (indexPath.row == 1){
-        BookListViewController * vc = [BookListViewController new];
-        [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 2){
-//        WS(ws);
-//        TCompleteView * topview = [TCompleteView new];
-//        [self.window addSubview:topview];
-//        [topview mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.mas_equalTo(ws.window);
-//        }];
-        TKMytaskViewController * vc = [TKMytaskViewController new];
-        [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 3){
-        MyClassViewController * vc = [MyClassViewController new];
-        [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 4){
-        HomeMilestoneViewController * vc = [HomeMilestoneViewController new];
-        [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 5){
-        AchievementReportViewController * vc = [AchievementReportViewController new];
-        [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 6){
-        PersonalViewController * vc = [PersonalViewController new];
-        [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 7){
-        PersonSheZhiViewController * vc = [PersonSheZhiViewController new];
-        [self.nav pushViewController:vc animated:YES];
+    if ([Me.is_rebot isEqualToString:@"2"]) {
+        if (indexPath.row == 0) {
+            MyClassViewController * vc = [MyClassViewController new];
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row == 1){
+            PersonalViewController * vc = [PersonalViewController new];
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row == 2){
+            PersonSheZhiViewController * vc = [PersonSheZhiViewController new];
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }
+    }else{
+        if (indexPath.row == 2) {
+            PersonSheZhiViewController * vc = [PersonSheZhiViewController new];
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }else{
+            BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
+            [[self viewController] presentViewController:homenav animated:YES completion:^{
+                
+            }];
+        }
     }
 }
-
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    WS(ws);
+    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(ws.contentSize.height); 
+    }];
+}
 @end

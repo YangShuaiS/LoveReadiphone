@@ -33,7 +33,7 @@
     [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(LENGTH(11));
         make.right.equalTo(ws).with.offset(-LENGTH(11));
-        make.top.equalTo(ws).with.offset(LENGTH(11));
+        make.top.equalTo(ws).with.offset(LENGTH(5));
     }];
     
     sanjiao = [FLAnimatedImageView new];
@@ -89,8 +89,8 @@
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    CGRect frame = self.frame;
-    frame.size.height = frame.size.height;
-    subtitle.frame = frame;
+//    CGRect frame = self.frame;
+//    frame.size.height = frame.size.height;
+//    subtitle.frame = frame;
 }
 @end

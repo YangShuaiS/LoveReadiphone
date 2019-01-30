@@ -26,6 +26,7 @@
 - (void)addview{
     WS(ws);
     UIView * backv = [UIView new];
+    backv.userInteractionEnabled = YES;
     backv.backgroundColor =RGBA(0, 0, 0, 0.4);
     [self addSubview:backv];
     [backv mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -36,6 +37,7 @@
     v.backgroundColor = [UIColor whiteColor];
     v.layer.cornerRadius = LENGTH(10);
     v.layer.masksToBounds = YES;
+    v.userInteractionEnabled = YES;
     [self addSubview:v];
     [v mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(ws);
@@ -53,8 +55,10 @@
     
     UIView * taskviewname = [UIView new];
     v.userInteractionEnabled = YES;
+    taskviewname.layer.masksToBounds = YES;
+    taskviewname.layer.cornerRadius = LENGTH(5);
     taskviewname.layer.borderWidth = LENGTH(1);
-    taskviewname.layer.borderColor = RGB(73,172,171).CGColor;
+    taskviewname.layer.borderColor = RGB(91,199,198).CGColor;
     [v addSubview:taskviewname];
     [taskviewname mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(v).with.offset(LENGTH(28));
@@ -94,7 +98,8 @@
     
     readbook = [[TKChooseCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
     readbook.decelerationRate = UIScrollViewDecelerationRateNormal;
-    [v addSubview:readbook];
+    readbook.neirongcolor = RGB(91,199,198);
+    [self addSubview:readbook];
     [readbook mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weekread.mas_bottom).with.offset(LENGTH(15));
         make.left.mas_equalTo(v).with.offset(LENGTH(28));
@@ -135,7 +140,8 @@
     
     week = [[TKChooseCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayous];
     week.decelerationRate = UIScrollViewDecelerationRateNormal;
-    [v addSubview:week];
+    week.neirongcolor = RGB(91,199,198);
+    [self addSubview:week];
     [week mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weeks.mas_bottom).with.offset(LENGTH(15));
         make.left.mas_equalTo(v).with.offset(LENGTH(28));
@@ -159,7 +165,9 @@
     week.itemArray = weekarray;
     
     BaseLabel * qding = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"确定"];
-    qding.backgroundColor = RGB(80,197,190);
+    qding.backgroundColor = RGB(91,199,198);
+    qding.layer.cornerRadius = LENGTH(5);
+    qding.layer.masksToBounds = YES;
     [v addSubview:qding];
     [qding mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->week.mas_bottom).with.offset(LENGTH(25));
@@ -201,9 +209,18 @@
 - (void)hujptap{
     [textField resignFirstResponder];
 }
+
+
+
 - (void)quding{
+    if ([textField.text isEqualToString:@""]) {
+        [[MBProgressHUDYS SharedMBProgressHUDYS] addview:self];
+        [[MBProgressHUDYS SharedMBProgressHUDYS] shoumessage:@"任务名称不能为空"];
+        [[MBProgressHUDYS SharedMBProgressHUDYS] hideAnimated:YES afterDelay:1];
+    }else{
+        
     NSString * url = [NSString stringWithFormat:@"%@%@?studentid=%@",ZSFWQ,JK_AJTASK,Me.ssid];
-    NSDictionary * dic = @{@"mission_name":textField.text,@"week_book_num":[NSString stringWithFormat:@"%ld",readbook.booknum],@"mission_duration":[NSString stringWithFormat:@"%ld",readbook.booknum+2]};
+    NSDictionary * dic = @{@"mission_name":textField.text,@"week_book_num":[NSString stringWithFormat:@"%ld",(long)readbook.booknum],@"mission_duration":[NSString stringWithFormat:@"%ld",readbook.booknum+2]};
     NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -234,6 +251,8 @@
             
         }
     }] resume];
+    }
+
 
 }
 - (void)textfile{

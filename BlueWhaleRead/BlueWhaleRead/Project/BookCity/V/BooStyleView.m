@@ -250,8 +250,13 @@
     if (last1 == 9999999) {
         [arr addObject:@""];
     }else{
-        CityTypeListModel * TModel1 = item11[last1];
-        [arr addObject:TModel1.ssid];
+        if (item11.count == 0) {
+            [arr addObject:@"100"];
+        }else{
+            CityTypeListModel * TModel1 = item11[last1];
+            [arr addObject:TModel1.ssid];
+        }
+
     }
     //
     

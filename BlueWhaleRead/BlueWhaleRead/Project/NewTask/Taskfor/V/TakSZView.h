@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TakSZView : BaseView
 @property (strong, nonatomic) NSString *missionid;//任务id
 @property (strong, nonatomic) TAKALLModel *model;
+@property(nonatomic,strong)NSMutableArray * colorarray;
+
+@property (strong, nonatomic) UIViewController *vc;//任务id
 
 @end
 

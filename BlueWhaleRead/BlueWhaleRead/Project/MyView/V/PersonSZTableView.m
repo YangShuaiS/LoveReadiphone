@@ -13,6 +13,9 @@
 #import "PersonQingChuHUanCunView.h"
 #import "PersonXiuGaiMimaViewController.h"
 
+#import "BaseNavigationViewController.h"
+#import "UserLoginViewController.h"
+#import "UserXZageView.h"
 @interface PersonSZTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -38,9 +41,12 @@
 - (void)setModel:(MyZiLiaoModel *)model{
     _model = model;
     NSString * currentVolum = [self HuanCunDaXiao];
-    
-    titleArray = @[@"消息推送",@"修改密码",@"清除缓存",@"意见反馈",@"关于博万卷",@"退出登录"];
-    subArray = @[@"",@"",currentVolum,@"",@"",@""];
+    if ([Me.is_rebot isEqualToString:@"2"]) {
+        titleArray = @[@"消息推送",@"清除缓存",@"意见反馈",@"关于博万卷",@"退出登录"];
+    }else{
+        titleArray = @[@"消息推送",@"清除缓存",@"意见反馈",@"关于博万卷",@"登录"];
+    }
+    subArray = @[@"",currentVolum,@"",@"",@"",@""];
     [self reloadData];
 }
 - (NSString *)HuanCunDaXiao{
@@ -169,9 +175,6 @@
 {
     WS(ws);
     if (indexPath.row == 1) {
-        PersonXiuGaiMimaViewController * vc = [PersonXiuGaiMimaViewController new];
-        [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 2) {
         PersonQingChuHUanCunView * xuanze = [PersonQingChuHUanCunView new];
         [self.nav.view addSubview:xuanze];
         [xuanze mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -180,22 +183,29 @@
         [xuanze setBlock:^{
             [ws qingchu];
         }];
-    }else if (indexPath.row == 3){
+    }else if (indexPath.row == 2){
         FeedbackViewController * vc = [FeedbackViewController new];
         [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == 3){
         AboutViewController * vc = [AboutViewController new];
         [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 5){
-        [self tuichudenglu];
+    }else if (indexPath.row == 4){
+        if ([Me.is_rebot isEqualToString:@"2"]) {
+            [self tuichudenglu];
+        }else{
+            BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
+            [[self viewController] presentViewController:homenav animated:YES completion:^{
+                
+            }];
+        }
     }
     
 }
 #pragma mark  - 退出
-- (void)hqid{
+- (void)hqid:(NSString *)nianji{
     WS(ws);
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_HQID];
-    NSDictionary * dic = @{@"uuid":[[UIDevice currentDevice] identifierForVendor].UUIDString};
+    NSDictionary * dic = @{@"uuid":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"level":nianji};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
@@ -206,25 +216,33 @@
                 NSDictionary * dics = m.studentInfo;
                 [usersDic setObject:dics forKey:UserMe];
                 [usersDic writeToFile:filePatch atomically:YES];
-                if ([Me.birthday isEqualToString:@""]) {
-                    [ws addnianji];
-                }else{
-                    [ws QINGCHU];
-                }
+                [[self viewController].navigationController popViewControllerAnimated:YES];
             }else if ([m.code isEqual:@Notloggedin]){
                 [self UpDengLu];
             }
         }else{
-            [ws hqid];
+//            [ws hqid:nianji];
         }
     }];
     
 }
 - (void)addnianji{
-    NSString *key = @"nianji";
-    NSString * nianji  = [[NSUserDefaults standardUserDefaults] objectForKey:key];
-    //绑定年级
-    [self QINGCHU];
+    WS(ws);
+    UserXZageView * view = [UserXZageView new];
+    [self.window  addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws.window);
+    }];
+    [view setBlock:^(NSString * _Nonnull str) {
+        [ws bdstr:str];
+        
+    }];
+    
+}
+- (void)bdstr:(NSString *)str{
+    [[NSUserDefaults standardUserDefaults] setValue:str forKey:kNotificationNianJi];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self hqid:str];
 }
 - (void)QINGCHU{
     NSString *filePatch = [BaseObject AddPathName:UserMe];
@@ -256,7 +274,13 @@
         if (responseObject) {
             MyDeModel * model = [MyDeModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                [ws hqid];
+                [ws QINGCHU];
+                NSString * nianji  = [[NSUserDefaults standardUserDefaults] objectForKey:kNotificationNianJi];
+                if (nianji == nil || [nianji isEqualToString:@""]) {
+                    [self addnianji];
+                }else{
+                    [self hqid:nianji];
+                }
             }else if ([model.code isEqual:@Notloggedin]){
                 [ws UpDengLu];
             }
@@ -273,7 +297,7 @@
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
     [[SDImageCache sharedImageCache] clearMemory];//可不写
     NSString * currentVolum = [self HuanCunDaXiao];
-    subArray = @[@"",@"",currentVolum,@"",@"",@""];
+    subArray = @[@"",currentVolum,@"",@"",@"",@""];
     // 创建一个文件管理器
     NSArray *pathArray =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSFileManager *manager = [NSFileManager defaultManager];
