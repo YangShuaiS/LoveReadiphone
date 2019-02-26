@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NewKnowledgeModel.h"//知识网首页
+#import "ALLSearchModel.h"//搜索model
 #import "MedalBageFriendModel.h"
 #import "NewHomeModel.h"//新首页
 #import "TKXQRLModel.h"//

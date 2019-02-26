@@ -13,6 +13,7 @@
 #import "ZhiShiShuTimeLineModel.h"
 #import "ZhiShiShuViTypeModel.h"
 #import "ZhiShiShuLineModel.h"
+#import "ZhiShiShuClickModel.h"
 @interface ZhiShiShuModel : BaseModel
 @property (nonatomic, copy) NSNumber * code;
 @property(nonatomic,strong) ZhiShiShuDataModel * data;

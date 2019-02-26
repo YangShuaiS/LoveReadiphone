@@ -164,7 +164,14 @@
     weektabview.frien = _frien;
     weektabview.ing = _ing;
     weektabview.noweek = 0;
-    weektabview.itemarray = allarray[[model.weeksInfo.now_week integerValue]-1];
+    NSInteger nowwezhi;
+    if ([model.weeksInfo.now_week integerValue] > allarray.count) {
+        weektabview.itemarray = allarray[0];
+        nowwezhi = 1;
+    }else{
+        weektabview.itemarray = allarray[[model.weeksInfo.now_week integerValue]-1];
+        nowwezhi = [model.weeksInfo.now_week integerValue];
+    }
     NSMutableArray * weekarray = [NSMutableArray array];
 
     for (int i = 1; i <= allarray.count; i++) {
@@ -174,7 +181,7 @@
         model.style = @"0";
         [weekarray addObject:model];
     }
-    collectview.now_week = [model.weeksInfo.now_week integerValue];
+    collectview.now_week = nowwezhi;
     collectview.itemArray = weekarray;
 }
 - (void)upweektableview:(NSInteger)inter{

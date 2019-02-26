@@ -8,8 +8,6 @@
 
 #import "NBookCityViewController.h"
 #import "NBCchannelLBTView.h"
-#import "NBCSearchView.h"
-
 #import "NBCchannelView.h"
 #import "NBCGoodBoookListTabView.h"
 #import "NBCweekReadingView.h"
@@ -34,7 +32,6 @@
     NBCweekReadingView * cweek;
     NBClistAllView * List;
     NBCclassificationView * classification;
-    NBCSearchView * search;
 
 }
 
@@ -45,13 +42,12 @@
 
 - (void)Addview{
     WS(ws);
-    self.automaticallyAdjustsScrollViewInsets = NO;
     viewarray = [NSMutableArray array];
     scrollView = [UIScrollView new];
     scrollView.delegate = self;
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.view).with.offset(-StatusBar);
+        make.top.equalTo(ws.view).with.offset(0);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
@@ -62,12 +58,9 @@
     channel = [NBCchannelLBTView new];
     [viewarray addObject:channel];
     
-    search = [NBCSearchView new];
-    [viewarray addObject:search];
-
-    goodbook = [NBCGoodBoookListTabView new];
-    goodbook.nav = self.navigationController;
-    [viewarray addObject:goodbook];
+    classification = [NBCclassificationView new];
+    classification.nav = self.navigationController;
+    [viewarray addObject:classification];
     
     cweek = [NBCweekReadingView new];
     cweek.nav = self.navigationController;
@@ -77,10 +70,11 @@
     List.nav = self.navigationController;
     [viewarray addObject:List];
     
-    classification = [NBCclassificationView new];
-    classification.nav = self.navigationController;
-    [viewarray addObject:classification];
+    goodbook = [NBCGoodBoookListTabView new];
+    goodbook.nav = self.navigationController;
+    [viewarray addObject:goodbook];
     
+
     BaseView * lastview;
     for (int i = 0; i < viewarray.count; i++) {
         BaseView * view = viewarray[i];
@@ -152,8 +146,7 @@
     if ([model.ydybookcity integerValue]<3) {
         WS(ws);
         GuideBookCityOneView * view = [GuideBookCityOneView new];
-        view.frames = search.frame;
-        [self.view.window addSubview:view];
+         [self.view.window addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(ws.view.window);
         }];

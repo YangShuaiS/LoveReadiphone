@@ -7,7 +7,7 @@
 //
 
 #import "BookListViewController.h"
-#import "BookListMenu.h"
+#import "SearchMENUView.h"
 #import "UnreadViewController.h"
 #import "ReadBookListViewController.h"
 
@@ -28,7 +28,7 @@
     BaseView * sousuo;
     UnreadViewController* hotview;
     ReadBookListViewController * Familiar;
-    BookListMenu * homeMenu;
+    SearchMENUView * homeMenu;
     
     FLAnimatedImageView * sharefriend;
     
@@ -104,7 +104,7 @@
     
     BaseView * text = [BaseView new];
     text.backgroundColor = RGB(255, 255, 255);
-    text.alpha = 0.3;
+    text.alpha = 0.4;
     text.layer.masksToBounds = YES;
     text.layer.cornerRadius = 15;
     [sousuo addSubview:text];
@@ -113,6 +113,7 @@
     textField.borderStyle = UITextBorderStyleRoundedRect;
     textField.backgroundColor = [UIColor clearColor];
     textField.placeholder = @"请输入书名";
+    textField.font = TextFont(11);
     [textField becomeFirstResponder];//默认编辑状态
     [textField addTarget:self action:@selector(phoneNum_tfChange:) forControlEvents:UIControlEventEditingChanged];
     
@@ -136,14 +137,14 @@
     }];
     
     [text mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self->sousuo.mas_left).with.offset(LENGTH(60));
+        make.left.mas_equalTo(self->sousuo.mas_left).with.offset(LENGTH(20));
         make.right.mas_equalTo(self->sousuo.mas_right).with.offset(-LENGTH(60));
         make.bottom.mas_equalTo(self->sousuo.mas_bottom).with.offset(-6);
         make.height.mas_equalTo(30);
     }];
     
     [textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self->sousuo.mas_left).with.offset(LENGTH(60));
+        make.left.mas_equalTo(self->sousuo.mas_left).with.offset(LENGTH(20));
         make.right.mas_equalTo(self->sousuo.mas_right).with.offset(-LENGTH(60));
         make.bottom.mas_equalTo(self->sousuo.mas_bottom).with.offset(-6);
         make.height.mas_equalTo(30);
@@ -243,7 +244,8 @@
 #pragma mark --------------------  Menu
 - (void)AddMenu{
     WS(ws);
-    homeMenu = [BookListMenu new];
+    homeMenu = [SearchMENUView new];
+    homeMenu.styles = 2;
     homeMenu.titarray = @[@"未读书籍",@"已读书籍"];
     [self.view addSubview:homeMenu];
     [homeMenu mas_makeConstraints:^(MASConstraintMaker *make) {

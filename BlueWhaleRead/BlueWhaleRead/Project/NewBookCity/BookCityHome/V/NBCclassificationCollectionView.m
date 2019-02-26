@@ -40,40 +40,55 @@
     return self;
 }
 #pragma mark *** UICollectionViewDataSource ***
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    if (section == 0) {
+        return UIEdgeInsetsMake(0, LENGTH(22)+LENGTH(6)+LENGTH(51), 0, LENGTH(22)+LENGTH(6)+LENGTH(51));//上左下右
+    }else{
+        return UIEdgeInsetsMake(LENGTH(12), LENGTH(22), 0, LENGTH(22));//上左下右
+    }
+}
 // 设置组数
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return _itemarray.count;
 }
 
 // 设置行数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return cshgs;
+    NSMutableArray * arr = _itemarray[section];
+    return arr.count;
 }
 
 // 设置单元格
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NBCclassificationCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"NBCclassificationCollectionViewCell" forIndexPath:indexPath];
-    if (_itemarray.count == cshgs) {
-        cell.model = _itemarray[indexPath.row];
-    }
+    cell.model = _itemarray[indexPath.section][indexPath.row];
     return cell;
 }
 
 -( void )collectionView:( UICollectionView *)collectionView didSelectItemAtIndexPath:( NSIndexPath *)indexPath{
-    if (_itemarray.count == cshgs) {
-        NBCclassificationModel * model = _itemarray[indexPath.row];
+        NBCclassificationModel * model = _itemarray[indexPath.section][indexPath.row];
         BookCityViewController * vc = [BookCityViewController new];
         NSIndexPath * indpath = [NSIndexPath indexPathForRow:0 inSection:[model.ssid intValue]];
         vc.inpath = indpath;
         vc.cata = [NSString stringWithFormat:@"10%@",model.ssid];
         [self.nav pushViewController:vc animated:YES];
-    }
 }
 
 - (void)setItemarray:(NSMutableArray *)itemarray{
-    _itemarray = itemarray;
-    cshgs = itemarray.count;
+    NSMutableArray * onearray = [NSMutableArray array];
+    NSMutableArray * twoarray = [NSMutableArray array];
+    for (NBCclassificationModel * model in itemarray) {
+        if (onearray.count <2) {
+            [onearray addObject:model];
+        }else{
+            [twoarray addObject:model];
+        }
+    }
+    _itemarray = [NSMutableArray array];
+    [_itemarray addObject:onearray];
+    [_itemarray addObject:twoarray];
     [self reloadData];
 }
 

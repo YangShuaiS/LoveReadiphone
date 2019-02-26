@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface ZhiShiShuViewController : BaseViewController
+@property (nonatomic, strong) NSString* ids;
 
 @end

@@ -28,4 +28,6 @@ pod 'MOFSPickerManager'
 
 pod 'ZipArchive'
 pod 'Bugly'
+pod 'JPush' , '~> 3.1.2'
+pod 'JXPagingView/Pager'
 end

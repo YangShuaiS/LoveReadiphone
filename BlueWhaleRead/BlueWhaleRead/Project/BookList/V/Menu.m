@@ -40,22 +40,12 @@
 - (void)addview{
     WS(ws);
     backView = [[BaseView alloc] init];
-    backView.backgroundColor = [UIColor whiteColor];
     [self addSubview:backView];
     [backView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(0);
         make.top.equalTo(ws).with.offset(0);
         make.right.equalTo(ws).with.offset(0);
         make.height.mas_equalTo(MENU);
-    }];
-    UIView * down = [[UIView alloc] init];
-    down.backgroundColor = RGB(0xec, 0xec, 0xec);
-    [self addSubview:down];
-    [down mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws).with.offset(0);
-        make.right.equalTo(ws).with.offset(0);
-        make.top.equalTo(self->backView.mas_bottom).with.offset(-1);
-        make.height.mas_equalTo(@1);
     }];
 }
 

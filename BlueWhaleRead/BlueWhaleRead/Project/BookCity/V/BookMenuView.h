@@ -19,3 +19,4 @@
 - (void)Refresh:(NSInteger)Weizhi Title:(NSString *)string;
 - (void)UpText;
 @end
+  

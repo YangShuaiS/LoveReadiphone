@@ -136,15 +136,15 @@
 - (void)AddCenterSearch:(NSString *)title{
     WS(ws);
     BaseView * view = [BaseView new];
-    view.backgroundColor = RGBA(255, 255, 255, 0.3);
+    view.backgroundColor = RGBA(255, 255, 255, 0.4);
     view.layer.masksToBounds = YES;
     view.layer.cornerRadius = 15;
     [self addSubview:view];
     FLAnimatedImageView * searchImage = [FLAnimatedImageView new];
-    searchImage.image = UIIMAGE(@"icon_搜索");
+    searchImage.image = UIIMAGE(@"搜索图标_白");
     [view addSubview:searchImage];
     
-    BaseLabel * titleLable = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:title];
+    BaseLabel * titleLable = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentLeft Text:title];
     [view addSubview:titleLable];
     
     BaseButton * button = [BaseButton buttonWithType:UIButtonTypeCustom];
@@ -158,14 +158,14 @@
         make.height.mas_equalTo(@30);
     }];
     [searchImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(view.mas_left).with.offset(LENGTH(10));
+        make.right.equalTo(view).with.offset(-LENGTH(19));
         make.centerY.mas_equalTo(view.mas_centerY);
-        make.height.mas_equalTo(@20);
-        make.width.mas_equalTo(@20);
+        make.height.mas_equalTo(16);
+        make.width.mas_equalTo(16);
     }];
     
     [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(searchImage.mas_right).with.offset(LENGTH(5));
+        make.left.equalTo(view).with.offset(LENGTH(19));
         make.centerY.mas_equalTo(view.mas_centerY);
         make.right.mas_equalTo(view.mas_right);
     }];

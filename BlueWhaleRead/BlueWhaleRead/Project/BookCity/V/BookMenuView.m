@@ -26,7 +26,7 @@
 }
 -(void)setupUI{
     WS(ws);
-    self.backgroundColor = RGB(234,244,244);
+    self.backgroundColor = RGB(255,255,255);
     BaseView * oneView = [BaseView new];
     [self addSubview:oneView];
     
@@ -96,15 +96,15 @@
     
     
     oneImage = [FLAnimatedImageView new];
-    oneImage.image = UIIMAGE(@"icon_下三角");
+    oneImage.image = UIIMAGE(@"三角黑");
     [oneView addSubview:oneImage];
     
     twoImage = [FLAnimatedImageView new];
-    twoImage.image = UIIMAGE(@"icon_下三角");
+    twoImage.image = UIIMAGE(@"三角黑");
     [centerView addSubview:twoImage];
     
     threeImage = [FLAnimatedImageView new];
-    threeImage.image = UIIMAGE(@"icon_下三角");
+    threeImage.image = UIIMAGE(@"三角黑");
     [rightView addSubview:threeImage];
     
     [oneImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -127,55 +127,75 @@
         make.width.mas_equalTo(8);
         make.height.mas_equalTo(5);
     }];
+    
+    UIView * xian = [UIView new];
+    xian.backgroundColor = RGB(234, 234, 234);
+    [self addSubview:xian];
+    [xian mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.bottom.mas_equalTo(ws);
+        make.height.mas_equalTo(1);
+    }];
 }
 
 
 - (void)tapGesture1{
     ydfj.textColor = RGB(4,51,50);
-    oneImage.image = UIIMAGE(@"icon_下三角");
-    
+    oneImage.image = UIIMAGE(@"三角黑");
+    oneImage.transform = CGAffineTransformMakeRotation(0);
+
     mrpx.textColor = RGB(4,51,50);
-    threeImage.image = UIIMAGE(@"icon_下三角");
+    threeImage.image = UIIMAGE(@"三角黑");
+    threeImage.transform = CGAffineTransformMakeRotation(0);
+
     
-    sjlx.textColor = RGB(254,138,45);
-    twoImage.image = UIIMAGE(@"icon_上三角");
-    
+    sjlx.textColor = RGB(82,199,198);
+    twoImage.image = UIIMAGE(@"三角");
+    twoImage.transform = CGAffineTransformMakeRotation(M_PI);
+
     [self.delegete BackButtonIndext:1];
 }
 - (void)tapGesture2{
     mrpx.textColor = RGB(4,51,50);
-    threeImage.image = UIIMAGE(@"icon_下三角");
-    
+    threeImage.image = UIIMAGE(@"三角黑");
+    threeImage.transform = CGAffineTransformMakeRotation(0);
+
     sjlx.textColor = RGB(4,51,50);
-    twoImage.image = UIIMAGE(@"icon_下三角");
-    
-    ydfj.textColor = RGB(254,138,45);
-    oneImage.image = UIIMAGE(@"icon_上三角");
+    twoImage.image = UIIMAGE(@"三角黑");
+    twoImage.transform = CGAffineTransformMakeRotation(0);
+
+    ydfj.textColor = RGB(82,199,198);
+    oneImage.image = UIIMAGE(@"三角");
+    oneImage.transform = CGAffineTransformMakeRotation(M_PI);
+
     [self.delegete BackButtonIndext:2];
 }
 - (void)tapGesture3{
     sjlx.textColor = RGB(4,51,50);
-    twoImage.image = UIIMAGE(@"icon_下三角");
-    
+    twoImage.image = UIIMAGE(@"三角黑");
+    twoImage.transform = CGAffineTransformMakeRotation(0);
+
     ydfj.textColor = RGB(4,51,50);
-    oneImage.image = UIIMAGE(@"icon_下三角");
-    
-    mrpx.textColor = RGB(254,138,45);
-    threeImage.image = UIIMAGE(@"icon_上三角");
+    oneImage.image = UIIMAGE(@"三角黑");
+    oneImage.transform = CGAffineTransformMakeRotation(0);
+
+    mrpx.textColor = RGB(82,199,198);
+    threeImage.image = UIIMAGE(@"三角");
+    threeImage.transform = CGAffineTransformMakeRotation(M_PI);
+
     [self.delegete BackButtonIndext:3];
 }
 - (void)Refresh:(NSInteger)Weizhi Title:(NSString *)string{
     if (Weizhi == 1) {
         sjlx.textColor = RGB(4,51,50);
-        twoImage.image = UIIMAGE(@"icon_下三角");
+        twoImage.image = UIIMAGE(@"三角黑");
         sjlx.text = string;
     }else if (Weizhi == 2){
         ydfj.textColor = RGB(4,51,50);
-        oneImage.image = UIIMAGE(@"icon_下三角");
+        oneImage.image = UIIMAGE(@"三角黑");
         ydfj.text = string;
     }else{
         mrpx.textColor = RGB(4,51,50);
-        threeImage.image = UIIMAGE(@"icon_下三角");
+        threeImage.image = UIIMAGE(@"三角");
         mrpx.text = string;
     }
 }
@@ -183,9 +203,13 @@
     sjlx.textColor = RGB(4,51,50);
     ydfj.textColor = RGB(4,51,50);
     mrpx.textColor = RGB(4,51,50);
-    twoImage.image = UIIMAGE(@"icon_下三角");
-    oneImage.image = UIIMAGE(@"icon_下三角");
-    threeImage.image = UIIMAGE(@"icon_下三角");
+    twoImage.image = UIIMAGE(@"三角黑");
+    oneImage.image = UIIMAGE(@"三角黑");
+    threeImage.image = UIIMAGE(@"三角黑");
+    twoImage.transform = CGAffineTransformMakeRotation(0);
+    oneImage.transform = CGAffineTransformMakeRotation(0);
+    threeImage.transform = CGAffineTransformMakeRotation(0);
+
 }
 /*
 // Only override drawRect: if you perform custom drawing.

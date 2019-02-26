@@ -25,6 +25,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tabBarController.delegate = self;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    if (@available(iOS 11.0, *)) {
+        UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 
 }
 

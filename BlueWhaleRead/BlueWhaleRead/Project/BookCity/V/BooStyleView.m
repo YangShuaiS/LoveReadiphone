@@ -224,6 +224,8 @@
             [ws RefreshCaiDanView:indext LastInter:blockSelf->last3 Weizhi:indexpath Nsmuarray:blockSelf->item3];
         }
         [blockSelf delegetevlock];
+        [blockSelf->topview UpText];
+
      
     }];
     

@@ -54,7 +54,7 @@
         title.textColor = RGB(52,52,52);
         imageView.hidden = YES;
     }else{
-        title.textColor = RGB(255,109,11);
+        title.textColor = RGB(82,199,198);
         imageView.hidden = NO;
     }
 }
@@ -65,7 +65,7 @@
         title.textColor = RGB(52,52,52);
         imageView.hidden = YES;
     }else{
-        title.textColor = RGB(255,109,11);
+        title.textColor = RGB(82,199,198);
         imageView.hidden = NO;
     }
 }
@@ -76,7 +76,7 @@
         title.textColor = RGB(52,52,52);
         imageView.hidden = YES;
     }else{
-        title.textColor = RGB(255,109,11);
+        title.textColor = RGB(82,199,198);
         imageView.hidden = NO;
     }
 }

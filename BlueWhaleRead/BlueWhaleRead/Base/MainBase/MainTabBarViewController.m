@@ -10,8 +10,8 @@
 #import "BaseNavigationViewController.h"
 #import "ViewController.h"
 
+#import "NewKnowledgeRootViewController.h"
 #import "NewHomeViewController.h"
-#import "ZhiShiShuViewController.h"
 #import "NBookCityViewController.h"
 #import "MMyViewController.h"
 @interface MainTabBarViewController ()<UITabBarControllerDelegate>{
@@ -66,7 +66,7 @@
     BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:view1];
     homenav.tabBarItem =item1;
     
-    ZhiShiShuViewController * view2 = [[ZhiShiShuViewController alloc] init];
+    NewKnowledgeRootViewController * view2 = [[NewKnowledgeRootViewController alloc] init];
     BaseNavigationViewController * homenav1 = [[BaseNavigationViewController alloc] initWithRootViewController:view2];
     homenav1.tabBarItem =item2;
     

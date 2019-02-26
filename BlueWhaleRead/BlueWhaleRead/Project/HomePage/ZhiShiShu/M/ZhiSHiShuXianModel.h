@@ -17,4 +17,8 @@
 @property(nonatomic,assign)CGFloat start_y;//id
 @property(nonatomic,strong)NSString * updated_at;//更新时间
 
+@property(nonatomic,assign)NSInteger line_arrow_direction;//0 无箭头   1  左箭头   2  右箭头   3  双箭头
+@property(nonatomic,assign)CGFloat line_thickness;//现款
+@property(nonatomic,strong)NSString * line_words;//文本
+
 @end

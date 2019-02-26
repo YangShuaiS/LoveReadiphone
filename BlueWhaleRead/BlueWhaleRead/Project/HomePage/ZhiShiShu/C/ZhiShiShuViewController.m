@@ -74,7 +74,7 @@
 //    NSString * url = @"http://119.90.89.88:9001/knowledge/get-type";
     NSString * url = [NSString stringWithFormat:@"%@knowledge/get-type",ZSTX];
     WS(ws);
-    NSDictionary * dic = @{@"studentid":Me.ssid};
+    NSDictionary * dic = @{@"studentid":Me.ssid,@"knowledge_type_id":_ids};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             ZhiShiShuFLModel * model = [ZhiShiShuFLModel mj_objectWithKeyValues:responseObject];

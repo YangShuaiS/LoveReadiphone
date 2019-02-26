@@ -8,7 +8,6 @@
 
 #import "ZhiShiShuShuViewController.h"
 #import "ZhiShiShuScroVuew.h"
-
 @interface ZhiShiShuShuViewController (){
     ZhiShiShuScroVuew * scroview;
 }
@@ -32,12 +31,14 @@
     [scroview setBlock:^(CGRect frame) {
         
     }];
+    
 
     // Do any additional setup after loading the view.
 }
 - (void)dealloc{
     [self.view.superview removeFromSuperview];
     [self.view removeFromSuperview];
+    [scroview.superview removeFromSuperview];
     [scroview removeFromSuperview];
 }
 

@@ -34,10 +34,10 @@
     }];
     
     label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(102,102,102) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:@""];
-    label.numberOfLines = 2;
+    label.numberOfLines = 0;
     [imageview addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self->imageview).with.insets(UIEdgeInsetsMake(LENGTH(0), LENGTH(8), LENGTH(0), LENGTH(8)));
+        make.edges.mas_equalTo(self->imageview).with.insets(UIEdgeInsetsMake(LENGTH(0), LENGTH(0), LENGTH(0), LENGTH(0)));
     }];
     
     suo = [UIImageView new];
@@ -67,7 +67,11 @@
         label.textColor = RGB(167, 165, 163);
 
     }
-    
+//    NSMutableAttributedString *attributedString =  [[NSMutableAttributedString alloc] initWithString:model.name attributes:@{NSKernAttributeName : @(1.5f)}];
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    [paragraphStyle setLineSpacing:2];
+//    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, model.name.length)];
+//    label.attributedText = attributedString;
 
 }
 @end

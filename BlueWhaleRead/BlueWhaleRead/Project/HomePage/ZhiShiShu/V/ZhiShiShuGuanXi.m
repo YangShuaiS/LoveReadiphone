@@ -10,7 +10,10 @@
 #import "ZhiShiShuViView.h"
 #import "ZhiShiShuLineView.h"
 #import "ZhiShiShuRelationView.h"
-@implementation ZhiShiShuGuanXi
+@implementation ZhiShiShuGuanXi{
+    BaseView * topview;
+    NSInteger toplabeltr;
+}
 
 - (instancetype)init
 {
@@ -26,8 +29,33 @@
 
 - (void)setDatamodel:(ZhiShiShuDataModel *)datamodel{
     if (_datamodel == nil) {
+        self.layer.masksToBounds = YES;
         WS(ws);
         _datamodel = datamodel;
+        toplabeltr = 0;
+        if ([_datamodel.knowledge_info isEqualToString:@""]) {
+            toplabeltr = 0;
+        }else{
+            toplabeltr = LENGTH(10);
+        }
+        topview = [BaseView new];
+        topview.backgroundColor = RGBA(255, 255, 255, 0.4);
+        topview.layer.masksToBounds = YES;
+        topview.layer.cornerRadius = LENGTH(15);
+        [self addSubview:topview];
+        [topview mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(ws).with.offset(self->toplabeltr);
+            make.left.mas_equalTo(ws).with.offset(LENGTH(17));
+            make.right.mas_equalTo(ws).with.offset(-LENGTH(12));
+        }];
+        if (![_datamodel.knowledge_info isEqualToString:@""]) {
+            BaseLabel * label  =[[ BaseLabel alloc] initWithTxteColor:[BaseObject colorWithHexString:_datamodel.txt_color] LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:_datamodel.knowledge_info];
+            [topview addSubview:label];
+            [label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(self->topview).with.insets(UIEdgeInsetsMake(LENGTH(12), LENGTH(12), LENGTH(12), LENGTH(12)));
+            }];
+        }
+        
         NSInteger viviewonetr = 0;
         if (_datamodel.vi_type.count==0) {
             viviewonetr = 0;
@@ -37,7 +65,7 @@
         ZhiShiShuViView * viview = [ZhiShiShuViView new];
         [self addSubview:viview];
         [viview mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(ws).with.offset(viviewonetr);
+            make.top.mas_equalTo(self->topview.mas_bottom).with.offset(viviewonetr);
             make.centerX.mas_equalTo(ws);
         }];
         
@@ -73,7 +101,7 @@
         viview.itemarray = _datamodel.vi_type;
         lineview.itemarray = _datamodel.line_type;
         relationview.itemarray = _datamodel.relation_type;
-        if (_datamodel.vi_type.count ==0 && _datamodel.line_type.count == 0 && _datamodel.relation_type.count ==0) {
+        if (_datamodel.vi_type.count ==0 && _datamodel.line_type.count == 0 && _datamodel.relation_type.count ==0 && [_datamodel.knowledge_info isEqualToString:@""]) {
             [self mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(0);
             }];
@@ -81,4 +109,30 @@
     }
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    if (![_datamodel.knowledge_info isEqualToString:@""]) {
+        _labelallheight = topview.frame.size.height+toplabeltr;
+    }else{
+        _labelallheight = 0;
+    }
+}
+- (void)setLabelheight:(CGFloat)labelheight{
+    _labelheight = labelheight;
+    if (topview.frame.size.height == 0) {
+        
+    }else{
+        WS(ws);
+        if (labelheight<=topview.frame.size.height+toplabeltr) {
+                [topview mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(ws).with.offset(-labelheight);
+                }];    
+        }else{
+            [topview mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(ws).with.offset(-self->topview.frame.size.height-self->toplabeltr);
+            }];
+        }
+    }
+
+}
 @end

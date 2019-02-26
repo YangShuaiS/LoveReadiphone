@@ -16,7 +16,12 @@
 #import "YDYViewController.h"
 
 #import <Bugly/Bugly.h>
-@interface AppDelegate ()<WXApiDelegate>
+#import "JPUSHService.h"
+// iOS10 注册 APNs 所需头文件
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+@interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate>
 
 @end
 
@@ -90,6 +95,37 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [WXApi registerApp:@"wx5b092cd426a86253"];
     [Bugly startWithAppId:@"b5582f5e48"];
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    if (@available(iOS 12.0, *)) {
+        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound|JPAuthorizationOptionProvidesAppNotificationSettings;
+    } else {
+        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+        // Fallback on earlier versions
+    }
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        // 可以添加自定义 categories
+        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+    }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+
+    [JPUSHService setupWithOption:launchOptions appKey:@"4e472e2fb2a2991cadc6a1a0"
+                          channel:@"appstore"
+                 apsForProduction:NO
+            advertisingIdentifier:nil];
+    //2.1.9版本新增获取registration id block接口。
+    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+        if(resCode == 0){
+            NSLog(@"registrationID获取成功：%@",registrationID);
+            
+        }
+        else{
+            NSLog(@"registrationID获取失败，code：%d",resCode);
+        }
+    }];
+    
+    
+    
     [self jiantingwangluo];
     [self addwenjian];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(denglu) name:kNotificationDenglu object:nil];
@@ -179,6 +215,8 @@
 //}
 - (void)loadModel{
     [NewHomeModel InitializeModel];//新首页
+    [NewKnowledgeModel InitializeModel];//知识网首页
+    [ALLSearchModel InitializeModel];//搜索Model
     [TKAllTaskModel InitializeModel];//任务列表
     
     [BookCityModel InitializeModel];//书城
@@ -210,8 +248,12 @@
     [ZhiShiShuFLModel InitializeModel];//知识树分类
     [UserCityModel InitializeModel];//城市
     [NBCALLModel InitializeModel];//新书城
+    
+    [self onechushihua];
 }
+- (void)onechushihua{
 
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -231,6 +273,23 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    JPushNotificationIdentifier *identifier = [[JPushNotificationIdentifier alloc] init];
+    identifier.identifiers = nil;
+    if (@available(iOS 10.0, *)) {
+        identifier.delivered = YES;
+    } else {
+        // Fallback on earlier versions
+    }
+    identifier.findCompletionHandler = ^(NSArray *results) {
+        NSLog(@"查找所有通知 - 返回结果为：%@", results);
+//        NSString *title = [NSString stringWithFormat:@"查找所有通知 %ld 条",results.count];
+//        NSString *message = [NSString stringWithFormat:@"%@",results];
+//        [self showAlertControllerWithTitle:title message:message];
+    };
+    [JPUSHService findNotification:identifier];
+
+    [[UIApplication sharedApplication]setApplicationIconBadgeNumber:0];
+    [JPUSHService setBadge:0];
 }
 
 
@@ -327,7 +386,184 @@
     }
     return UIInterfaceOrientationMaskPortrait;//默认全局不支持横屏
 }
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    /// Required - 注册 DeviceToken
+    [JPUSHService registerDeviceToken:deviceToken];
+}
+- (void)application:(UIApplication *)application
+didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
 
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"iOS6及以下系统，收到通知:%@", [self logDic:userInfo]);
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:
+(void (^)(UIBackgroundFetchResult))completionHandler {
+    [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"iOS7及以上系统，收到通知:%@", [self logDic:userInfo]);
+    
+    if ([[UIDevice currentDevice].systemVersion floatValue]<10.0 || application.applicationState>0) {
+    }
+    
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)application:(UIApplication *)application
+didReceiveLocalNotification:(UILocalNotification *)notification {
+    [JPUSHService showLocalNotificationAtFront:notification identifierKey:nil];
+}
+
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#pragma mark- JPUSHRegisterDelegate
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    
+    UNNotificationRequest *request = notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+        NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
+        
+    }
+    else {
+        // 判断为本地通知
+        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
+}
+
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
+        
+    }
+    else {
+        // 判断为本地通知
+        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    
+    completionHandler();  // 系统要求执行这个方法
+}
+#endif
+
+#ifdef __IPHONE_12_0
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(UNNotification *)notification{
+//    NSString *title = nil;
+//    if (notification) {
+//        title = @"从通知界面直接进入应用";
+//    }else{
+//        title = @"从系统设置界面进入应用";
+//    }
+//    UIAlertView *test = [[UIAlertView alloc] initWithTitle:title
+//                                                   message:@"pushSetting"
+//                                                  delegate:self
+//                                         cancelButtonTitle:@"yes"
+//                                         otherButtonTitles:nil, nil];
+//    [test show];
+    
+}
+#endif
+
+// log NSSet with UTF8
+// if not ,log will be \Uxxx
+- (NSString *)logDic:(NSDictionary *)dic {
+    if (![dic count]) {
+        return nil;
+    }
+    NSString *tempStr1 =
+    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
+                                                 withString:@"\\U"];
+    NSString *tempStr2 =
+    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    NSString *tempStr3 =
+    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *str =
+    [NSPropertyListSerialization propertyListFromData:tempData
+                                     mutabilityOption:NSPropertyListImmutable
+                                               format:NULL
+                                     errorDescription:NULL];
+    return str;
+}
+#pragma mark -JPUSHGeofenceDelegate
+//进入地理围栏区域
+- (void)jpushGeofenceIdentifer:(NSString * _Nonnull)geofenceId didEnterRegion:(NSDictionary * _Nullable)userInfo error:(NSError * _Nullable)error{
+    NSLog(@"进入地理围栏区域");
+    if (error) {
+        NSLog(@"error = %@",error);
+        return;
+    }
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        [self testAlert:userInfo];
+    }else{
+        // 进入后台
+        [self geofenceBackgroudTest:userInfo];
+    }
+}
+//离开地理围栏区域
+- (void)jpushGeofenceIdentifer:(NSString * _Nonnull)geofenceId didExitRegion:(NSDictionary * _Nullable)userInfo error:(NSError * _Nullable)error{
+    NSLog(@"离开地理围栏区域");
+    if (error) {
+        NSLog(@"error = %@",error);
+        return;
+    }
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        [self testAlert:userInfo];
+    }else{
+        // 进入后台
+        [self geofenceBackgroudTest:userInfo];
+    }
+}
+//
+- (void)geofenceBackgroudTest:(NSDictionary * _Nullable)userInfo{
+    //静默推送：
+    if(!userInfo){
+        NSLog(@"静默推送的内容为空");
+        return;
+    }
+    //TODO
+    
+}
+
+- (void)testAlert:(NSDictionary*)userInfo{
+    if(!userInfo){
+        NSLog(@"messageDict 为 nil ");
+        return;
+    }
+    NSString *title = userInfo[@"title"];
+    NSString *body = userInfo[@"content"];
+    if (title &&  body ) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:body delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
+}
 
 
 @end

@@ -49,7 +49,7 @@
     scrollView.userInteractionEnabled = YES;
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.view).with.offset(-StatusBar);
+        make.top.equalTo(ws.view).with.offset(0);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);

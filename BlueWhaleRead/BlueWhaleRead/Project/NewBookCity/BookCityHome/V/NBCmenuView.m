@@ -51,6 +51,9 @@
         case NBCmenuViewStyleimage:
             [self NBCmenuViewStyleimage];
             break;
+        case NBCmenuViewStyleRefinish:
+            [self NBCmenuViewStyleRefinish];
+            break;
             
         default:
             break;
@@ -80,5 +83,37 @@
 }
 - (void)click{
     self.block();
+}
+
+- (void)NBCmenuViewStyleRefinish{
+    WS(ws);
+    UIView * backview = [UIView new];
+    [self addSubview:backview];
+    [backview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.bottom.mas_equalTo(ws);
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(22));
+    }];
+    
+    BaseLabel * label = [[BaseLabel alloc] initWithTxteColor:RGB(150, 150, 150) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentLeft Text:@"换一换"];
+    [backview addSubview:label];
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(backview);
+        make.centerY.mas_equalTo(ws.label);
+    }];
+    
+    bakimage = [FLAnimatedImageView new];
+    bakimage.image = UIIMAGE(@"换一换-图标");
+    [backview addSubview:bakimage];
+    [bakimage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(backview);
+        make.left.mas_equalTo(label.mas_right).with.offset(LENGTH(4));
+        make.centerY.mas_equalTo(ws.label);
+        make.size.mas_equalTo(CGSizeMake(LENGTH(14), LENGTH(11)));
+    }];
+    
+    backview.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
+    [backview addGestureRecognizer:tap];
+    
 }
 @end

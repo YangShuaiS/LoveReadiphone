@@ -12,20 +12,10 @@ CGFloat TabBarHeight = 0;
 CGFloat StatusBar = 0;
 CGFloat poinw = 0;
 
-//NSString * ZSFWQ = @"http://39.106.100.235/";
-NSString * ZSFWQ = @"https://tiantianaidu.com/";
-//NSString * ZSFWQ = @"http://192.168.1.221:8085/";
+//NSString * ZSFWQ = @"https://tiantianaidu.com/";
 //NSString * ZSFWQ = @"http://119.90.89.88:8085/";
-
+NSString * ZSFWQ = @"http://192.168.1.221:8085/";
 //NSString * ZSFWQ = @"http://192.168.1.85:8069/";
-
-
-
-
-//NSString *  ZSFWQ = @"http://192.168.1.221:8080/";
-//NSString * ZSFWQ = @"http://192.168.1.114:8075/";
-
-//NSString * ZSFWQ = @"http://119.90.89.88:8085/";
 
 
 MeModel * Me = nil;
@@ -376,7 +366,7 @@ MeModel * Me = nil;
     
     // String should be 6 or 8 characters
     if ([cString length] < 6) {
-        return [UIColor clearColor];
+        return [UIColor blackColor];
     }
     // 判断前缀
     if ([cString hasPrefix:@"0X"])
@@ -384,7 +374,7 @@ MeModel * Me = nil;
     if ([cString hasPrefix:@"#"])
         cString = [cString substringFromIndex:1];
     if ([cString length] != 6)
-        return [UIColor clearColor];
+        return [UIColor blackColor];
     // 从六位数值中找到RGB对应的位数并转换
     NSRange range;
     range.location = 0;

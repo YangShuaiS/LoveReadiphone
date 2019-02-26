@@ -10,7 +10,8 @@
 #import "ZhiShiShuView.h"
 #import "ZhiShiSHuLeftView.h"
 #import "ZhiShiShuGuanXi.h"
-
+#import "ZhiShiShuTDListView.h"
+#import "ZhiShiShiRightScroView.h"
 @implementation ZhiShiShuScroVuew{
     UIScrollView * scrollView;
     ZhiShiSHuLeftView * leftView;
@@ -18,14 +19,16 @@
     ZhiShiShuGuanXi * guanxi;
     BOOL Start;
     BOOL EndAni;
-
-    
+    ZhiShiShuTDListView * tableilistclick;
+    ZhiShiShiRightScroView * rightscroview;
     NSInteger next;
     
     NativeView * nav;
     
     CGPoint lastpoint;
     CGRect frames;
+    
+    BOOL scroviewhd;//yes  zuo  no 右
 }
 - (void)setItemid:(NSString *)itemid{
     _itemid = itemid;
@@ -33,16 +36,18 @@
 
 }
 - (void)loadUpData{
+    __block ZhiShiShuScroVuew * blockSelf = self;
 //    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FOUND];
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSTX,JK_ZHISHITIXIXIANGQING];
     NSDictionary * dic = @{@"studentid":Me.ssid,@"knowledge_id":_itemid};
+//    NSDictionary * dic = @{@"studentid":Me.ssid,@"knowledge_id":@"5bc86e068ffaed092e4305e4"};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             ZhiShiShuModel * model = [ZhiShiShuModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                self->guanxi.datamodel = model.data;
-                self->ZSSView.data = model.data;
-                self->leftView.axidataarry = model.data.axis;
+                blockSelf->guanxi.datamodel = model.data;
+                blockSelf->ZSSView.data = model.data;
+                blockSelf->leftView.axidataarry = model.data.axis;
                 CGFloat leftheight = 0;
                 for (ZhiShiShuTimeLineModel * m in model.data.axis) {
                     if (leftheight<m.end_y*poinw) {
@@ -52,8 +57,9 @@
                 [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.height.mas_equalTo(leftheight);
                 }];
-                self->nav.title = model.data.name;
-                self->nav.titcolor = [BaseObject colorWithHexString:model.data.txt_color];
+                blockSelf->nav.title = model.data.name;
+                blockSelf->nav.titcolor = [BaseObject colorWithHexString:model.data.txt_color];
+
 //                [self->nav jianbian:model.data.name Color:@[(id)RGB(242,227,185).CGColor,(id)RGB(207,186,135).CGColor,(id)RGBA(172,145,84,1).CGColor]];
             }
             FLAnimatedImageView * imageview = [FLAnimatedImageView new];
@@ -67,9 +73,17 @@
             }
             [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,topimage]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 UIColor *backgroundColor = [UIColor colorWithPatternImage:image];
-                [self setBackgroundColor:backgroundColor];
-                self->nav.backgroundColor = backgroundColor;
+                [blockSelf setBackgroundColor:backgroundColor];
+                [blockSelf->scrollView setBackgroundColor:backgroundColor];
             }];
+            [blockSelf->ZSSView layoutIfNeeded];
+            [blockSelf.superview layoutIfNeeded];
+            blockSelf->rightscroview.topheight = blockSelf->guanxi.frame.size.height;
+            blockSelf->rightscroview.labelheight = blockSelf->guanxi.labelallheight;
+            blockSelf->rightscroview.itemarray = model.data.arrow;
+            blockSelf->rightscroview.allheight = blockSelf->ZSSView.frame.size.height+blockSelf->guanxi.frame.size.height;
+
+
         }else{
             
         }
@@ -107,6 +121,7 @@
 - (void)addview{
     WS(ws);
     next = 1;
+    scroviewhd = YES;
     scrollView = [UIScrollView new];
 //    scrollView.backgroundColor = BEIJINGCOLOR;
     scrollView.delegate = self;
@@ -133,6 +148,8 @@
         make.left.and.right.mas_equalTo(ws);
         make.top.mas_equalTo(self->nav.mas_bottom);
     }];
+    [self addSubview:nav];
+
     
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->nav.mas_bottom);
@@ -168,6 +185,40 @@
     
     [self addSubview:nav];
 
+    rightscroview = [ZhiShiShiRightScroView new];
+    [self addSubview:rightscroview];
+    [rightscroview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(ws).with.offset(WIDTH/2);
+        make.top.mas_equalTo(ws);
+        make.bottom.mas_equalTo(ws);
+        make.width.mas_equalTo(WIDTH/2);
+    }];
+    rightscroview.tag = 100;
+//    rightscroview.userInteractionEnabled = NO;
+    __block ZhiShiShuScroVuew * blockSelf = self;
+    [rightscroview setBlocks:^(CGFloat scroy) {
+        blockSelf->scroviewhd = NO;
+        blockSelf->guanxi.labelheight = scroy;
+        NSLog(@"%f",scroy);
+        [blockSelf->scrollView setContentOffset:CGPointMake(blockSelf->scrollView.contentOffset.x, scroy) animated:NO];
+    }];
+
+    
+    tableilistclick = [ZhiShiShuTDListView new];
+    [self addSubview:tableilistclick];
+    [tableilistclick mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(ws);
+        make.bottom.mas_equalTo(ws).with.offset(-TabBarHeight-LENGTH(14));
+    }];
+    __block ZhiShiShuScroVuew * blockself = self;
+    [tableilistclick setBlock:^{
+        [blockself uptableliest];
+    }];
+    
+//    tableilistclick.userInteractionEnabled = YES;
+//    UITapGestureRecognizer *backtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(uptableliest)];
+//    //将手势添加到需要相应的view中去
+//    [tableilistclick addGestureRecognizer:backtap];
     
 //    BaseView * rightview = [BaseView new];
 //    rightview.backgroundColor = [UIColor redColor];
@@ -226,11 +277,46 @@
 //        leftview.hidden = YES;
 //    }
 //}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    WS(ws);
+    scroviewhd = YES;
+//    guanxi.labelheight = scrollView.contentOffset.y;
+    __block ZhiShiShuScroVuew * blockSelf = self;
+    [UIView animateWithDuration:0.5 animations:^{
+        [blockSelf->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(LENGTH(20));
+        }];
+        [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(ws).with.offset(-LENGTH(110));
+        }];
+        [blockSelf.superview layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+    }];
 
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (tableilistclick.frame.origin.x!=-LENGTH(110)) {
+        WS(ws);
+        [UIView animateWithDuration:0.5 animations:^{
+            [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_equalTo(LENGTH(20));
+            }];
+            [self->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(ws).with.offset(-LENGTH(110));
+            }];
+            [self.superview layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
     leftView.sizefloat = scrollView.contentOffset.y;
 //    NSLog(@"%f",scrollView.contentOffset.y);
     ZSSView.sizey = scrollView.contentOffset.y;
+    if (scroviewhd == YES) {
+        guanxi.labelheight = scrollView.contentOffset.y;
+        rightscroview.scroy = scrollView.contentOffset.y;
+    }
     if (lastpoint.x+10 <scrollView.contentOffset.x||lastpoint.x-10>scrollView.contentOffset.x) {
         lastpoint = scrollView.contentOffset;
     }
@@ -248,55 +334,83 @@
         make.left.mas_equalTo(self->scrollView).with.offset(scrollView.contentOffset.x);
     }];
     [leftView layoutIfNeeded];
-    if (Start == NO && EndAni == NO) {
-        EndAni = YES;
-        [UIView animateWithDuration:0.5 animations:^{
-            [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(LENGTH(20));
-            }];
-            [self.superview layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            self->EndAni = NO;
-        }];
-        Start = YES;
-    }
+//    if (Start == NO && EndAni == NO) {
+//        EndAni = YES;
+//        [UIView animateWithDuration:0.5 animations:^{
+//            [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.width.mas_equalTo(LENGTH(20));
+//            }];
+//            [self.superview layoutIfNeeded];
+//        } completion:^(BOOL finished) {
+//            self->EndAni = NO;
+//        }];
+//        Start = YES;
+//    }
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if (Start == YES && EndAni == NO) {
-        EndAni = YES;
-        double delayInSeconds = 2.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [UIView animateWithDuration:0.5 animations:^{
-                [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.width.mas_equalTo(LENGTH(1));
-                }];
-                [self.superview layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                self->EndAni = NO;
-            }];
-        });
-        Start = NO;
-    }
+    WS(ws);
+//    guanxi.labelheight = scrollView.contentOffset.y;
+
+    [UIView animateWithDuration:0.5 animations:^{
+        [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(LENGTH(1));
+        }];
+        [self->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(ws);
+        }];
+        [self.superview layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+    }];
+//    if (Start == YES && EndAni == NO) {
+//        EndAni = YES;
+//        double delayInSeconds = 2.0;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//            [UIView animateWithDuration:0.5 animations:^{
+//                [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                    make.width.mas_equalTo(LENGTH(1));
+//                }];
+//                [self.superview layoutIfNeeded];
+//            } completion:^(BOOL finished) {
+//                self->EndAni = NO;
+//            }];
+//        });
+//        Start = NO;
+//    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    if (Start == YES&& EndAni == NO) {
-        EndAni = YES;
-        double delayInSeconds = 2.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [UIView animateWithDuration:0.5 animations:^{
-                [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.width.mas_equalTo(LENGTH(1));
-                }];
-                [self.superview layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                self->EndAni = NO;
-            }];
-        });
-        Start = NO;
-    }
+    WS(ws);
+    guanxi.labelheight = scrollView.contentOffset.y;
+
+    [UIView animateWithDuration:0.5 animations:^{
+        [self->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(ws);
+        }];
+        [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(LENGTH(1));
+        }];
+        [self.superview layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+    }];
+//    if (Start == YES&& EndAni == NO) {
+//        EndAni = YES;
+//        double delayInSeconds = 2.0;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//            [UIView animateWithDuration:0.5 animations:^{
+//                [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                    make.width.mas_equalTo(LENGTH(1));
+//                }];
+//                [self.superview layoutIfNeeded];
+//            } completion:^(BOOL finished) {
+//                self->EndAni = NO;
+//            }];
+//        });
+//        Start = NO;
+//    }
 }
 #define mark ---------------- 放大
 //- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
@@ -318,7 +432,6 @@
     [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->nav.mas_bottom).with.offset(self->guanxi.frame.size.height);
     }];
-
 }
 
 
@@ -331,4 +444,31 @@
 //    [self LoadData];
 }
 
+#pragma mark ----- 显示tableview
+- (void)uptableliest{
+    WS(ws);
+    if (rightscroview.tag == 100) {
+        rightscroview.tag = 101;
+        [UIView animateWithDuration:0.5 animations:^{
+            [self->rightscroview mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(ws);
+            }];
+            [ws.superview layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            
+        }];
+    }else{
+        rightscroview.tag = 100;
+        [UIView animateWithDuration:0.5 animations:^{
+            [self->rightscroview mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(ws).with.offset(WIDTH/2);
+            }];
+            [ws.superview layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+
+
+}
 @end

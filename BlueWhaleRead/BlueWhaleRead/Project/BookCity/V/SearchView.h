@@ -7,7 +7,12 @@
 //
 
 #import "BaseView.h"
+typedef void(^GenBlocks)(NSString * str);
 
 @interface SearchView : BaseView
+@property (nonatomic, strong) NSMutableArray * controllerArray;
+@property (nonatomic, strong) NSString * title;
+@property(nonatomic,copy)GenBlocks block;
+@property (nonatomic, assign) NSInteger inter;
 
 @end

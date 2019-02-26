@@ -11,6 +11,12 @@
 #import "ZhiShiSHuTanKuang.h"
 #import "ZhiShiShuXQView.h"
 #import "ZhiShiShuAnimalView.h"
+#import "ZhiShiShuSanJIaoView.h"
+#import "ZhiShiShuClickView.h"
+#define radiansToDegrees(x) (180.0 * x / M_PI)
+#define radiansToJaiodu(x) (x*M_PI/180)
+
+
 static BOOL SDImageCacheOldShouldDecompressImages = YES;
 static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 @interface ZhiShiShuView ()<UIGestureRecognizerDelegate>
@@ -159,16 +165,63 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 //        [self addneirong:viewdataarray[2] weizhi:1];
 //    }
     
-    for (NSMutableArray * array in viewdataarray) {
-        [self addneirong:array weizhi:1];
-    }
+
     laststare = 2;
     lastend = 3;
     //线
     [layerdataarray addObjectsFromArray:data.relation];
     for (NSInteger i = layerarray.count; i <layerdataarray.count; i++) {
         ZhiSHiShuXianModel * xian = layerdataarray[i];
-
+//    ZhiSHiShuXianModel * xian = [ZhiSHiShuXianModel new];
+//    xian.color = @"3x3x3x";
+//1
+//        xian.start_x =1;
+//        xian.start_y = 1;
+//        xian.end_x = 4;
+//        xian.end_y = 1;
+    
+//2
+//    xian.start_x =1;
+//    xian.start_y = 1;
+//    xian.end_x = 2;
+//    xian.end_y = 5;
+    
+//3
+//    xian.start_x =1;
+//    xian.start_y = 1;
+//    xian.end_x = 1;
+//    xian.end_y = 5;
+    
+//4
+//    xian.start_x =2;
+//    xian.start_y = 1;
+//    xian.end_x = 1;
+//    xian.end_y = 5;
+    
+//5
+//        xian.start_x =3;
+//        xian.start_y = 1;
+//        xian.end_x = 1;
+//        xian.end_y = 1;
+    
+//6
+//            xian.start_x =3;
+//            xian.start_y = 5;
+//            xian.end_x = 1;
+//            xian.end_y = 1;
+    
+//7
+//                xian.start_x =3;
+//                xian.start_y = 5;
+//                xian.end_x = 3;
+//                xian.end_y = 1;
+    
+    //8
+//                    xian.start_x =1;
+//                    xian.start_y = 5;
+//                    xian.end_x = 3;
+//                    xian.end_y = 1;
+    
                 UIBezierPath *path = [UIBezierPath bezierPath];
                 CAShapeLayer * animLayer = [CAShapeLayer layer];
                 animLayer.lineJoin = kCALineJoinRound;
@@ -177,7 +230,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 //                animLayer.shadowColor = [UIColor blackColor].CGColor;
 //                animLayer.shadowRadius = 2.0f;
 //                animLayer.shadowOffset = CGSizeMake(0,0);
-                animLayer.lineWidth = 2.0f;
+        animLayer.lineWidth = xian.line_thickness;
                 animLayer.strokeColor = [BaseObject colorWithHexString:xian.color].CGColor;
                 animLayer.fillColor = [UIColor clearColor].CGColor;
                 [self.layer addSublayer:animLayer];
@@ -186,17 +239,230 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
                 CGPoint ends = CGPointMake(xian.end_x*poinw, xian.end_y*poinw);
                 [path moveToPoint:stars];
                 [path addLineToPoint:ends];
-
                 animLayer.path = path.CGPath;
+        
+        WS(ws);
+        if (xian.line_arrow_direction == 1 || xian.line_arrow_direction == 3) {
+            ZhiShiShuSanJIaoView * sanjiaostare = [ZhiShiShuSanJIaoView new];
+            sanjiaostare.point = xian;
+            [self addSubview:sanjiaostare];
+            [sanjiaostare mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(ws).with.offset(xian.start_x*poinw-6);
+                make.top.mas_equalTo(ws).with.offset(xian.start_y*poinw-4);
+                make.width.mas_equalTo(12);
+                make.height.mas_equalTo(8);
+            }];
+            CGFloat jiaodu = angleBetweenPoints(CGPointMake(xian.start_x*poinw, xian.start_y*poinw), CGPointMake(xian.end_x*poinw, xian.end_y*poinw));
 
-//        UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(xian.start_x*poinw-3, xian.start_y*poinw-3, 6, 6) cornerRadius:3];
-//        CAShapeLayer *fillLayer = [CAShapeLayer layer];
-//        fillLayer.path = circlePath.CGPath;
-//        fillLayer.fillRule = kCAFillRuleEvenOdd;
-//        fillLayer.fillColor = [UIColor blackColor].CGColor;
-//        fillLayer.opacity = 0.7;
-//        [self.layer addSublayer:fillLayer];
+            CGFloat bili = 0.0;
+            if (jiaodu == 0) {
+                if (xian.start_x>xian.end_x) {
+                    bili = 1;
+                }else{
+                    bili = 0 ;
+                }
+            }else if (jiaodu >0){
+                if (xian.start_x>xian.end_x) {
+                    if (xian.start_y>xian.end_y) {
+                        //                    bili = (180+jiaodu)/180;
+                    }else{
+                        bili = (180-jiaodu)/180;
+                    }
+                }else{
+                    if (xian.start_y>xian.end_y) {
+                        bili = 1+(180-jiaodu)/180;
+                    }else{
+                        bili = jiaodu/180;
+                    }
+                }
+            }else{
+                if (xian.start_x>xian.end_x) {
+                    if (xian.start_y>xian.end_y) {
+                        bili = 1+(-jiaodu)/180;
+                    }else{
+                        bili = 1+(-jiaodu)/180;
+                        
+                    }
+                    
+                }else{
+                    if (xian.start_y>xian.end_y) {
+                        bili = 1+(-jiaodu)/180;
+                    }else{
+                        bili = (-jiaodu)/180;
+                    }
+                }
+            }
+            sanjiaostare.transform = CGAffineTransformMakeRotation(M_PI*bili);
+            
+        }
+        if (xian.line_arrow_direction == 2 || xian.line_arrow_direction == 3) {
+            ZhiShiShuSanJIaoView * sanjiaoend = [ZhiShiShuSanJIaoView new];
+            sanjiaoend.point = xian;
+            [self addSubview:sanjiaoend];
+            [sanjiaoend mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(ws).with.offset(xian.end_x*poinw-6);
+                make.top.mas_equalTo(ws).with.offset(xian.end_y*poinw-4);
+                make.width.mas_equalTo(12);
+                make.height.mas_equalTo(8);
+            }];
+            
+            CGFloat jiaodu2 = angleBetweenPoints(CGPointMake(xian.end_x*poinw, xian.end_y*poinw),CGPointMake(xian.start_x*poinw, xian.start_y*poinw));
+            CGFloat bili2 = 0;
+            if (jiaodu2 == 0) {
+                if (xian.start_x>xian.end_x) {
+                    bili2 = 0;
+                }else{
+                    bili2 = 1 ;
+                }
+            }else if (jiaodu2 >0){
+                if (xian.start_x>xian.end_x) {
+                    if (xian.start_y>xian.end_y) {
+                        bili2 = jiaodu2/180;
+                    }else{
+                        bili2 = 1+(180-jiaodu2)/180;
+                        
+                    }
+                }else{
+                    bili2 = (180-jiaodu2)/180;
+                }
+            }else{
+                if (xian.start_x>xian.end_x) {
+                    bili2 = (-jiaodu2)/180;
+                }else{
+                    bili2 = 1+(-jiaodu2)/180;
+                }
+            }
+            sanjiaoend.transform = CGAffineTransformMakeRotation(M_PI*bili2);
+        }
+        if (![xian.line_words isEqualToString:@""]) {
+            CGFloat jiaodu = angleBetweenPoints(CGPointMake(xian.start_x*poinw, xian.start_y*poinw), CGPointMake(xian.end_x*poinw, xian.end_y*poinw));
+
+            BaseLabel * title = [[BaseLabel alloc] initWithTxteColor:RGB(33, 33, 33) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:xian.line_words];
+            [self addSubview:title];
+            CGFloat labelwidth = [self distanceFromPointX:CGPointMake(xian.start_x*poinw, xian.start_y*poinw) distanceToPointY:CGPointMake(xian.end_x*poinw, xian.end_y*poinw)];
+            
+            CGFloat titlex;
+            CGFloat titley;
+            if (xian.start_x>xian.end_x) {
+                titlex =((xian.start_x-xian.end_x)/2+xian.end_x)*poinw;
+            }else if (xian.start_x==xian.end_x){
+                titlex = xian.start_x * poinw;
+            }else{
+                titlex =((xian.end_x-xian.start_x)/2+xian.start_x)*poinw;
+            }
+            if (xian.start_y>xian.end_y) {
+                titley = ((xian.start_y-xian.end_y)/2+xian.end_y)*poinw;
+            }else if (xian.start_y == xian.end_y){
+                titley = xian.start_y * poinw;
+            }else{
+                titley = ((xian.end_y-xian.start_y)/2+xian.start_y)*poinw;
+            }
+            CGPoint labelcenter  = CGPointMake(titlex, titley);
+            CGFloat xianwight = 2;
+            CGFloat labeljd = 0.0;
+            CGAffineTransform transform = CGAffineTransformIdentity;
+            
+            if (jiaodu == 0) {
+                if (xian.start_x>xian.end_x) {
+                    if (xian.start_y>xian.end_y) {
+                        NSLog(@"123");
+                    }else{
+                        labelcenter = CGPointMake(titlex, titley-LENGTH(9)-xianwight);
+                        labeljd = 0;
+                    }
+                }else{
+                    if (xian.start_y>xian.end_y) {
+                        NSLog(@"123");
+                    }else{
+                        labelcenter = CGPointMake(titlex, titley-LENGTH(9)-xianwight);
+                        labeljd = 0;
+                    }
+                }
+            }else if (jiaodu > 0){
+                if (xian.start_x>xian.end_x) {
+                    if (xian.start_y>xian.end_y) {
+                        NSLog(@"123");
+                    }else{
+                        labelcenter = CGPointMake(titlex-LENGTH(9)-xianwight, titley);
+                        labeljd = 1-jiaodu/180+1;
+                    }
+                }else{
+                    if (xian.start_y>xian.end_y) {
+                        labelcenter = CGPointMake(titlex-LENGTH(9)-xianwight, titley);
+                        labeljd = -jiaodu/180;
+                    }else{
+                        labelcenter = CGPointMake(titlex+LENGTH(9)+xianwight, titley);
+                        labeljd = jiaodu/180;
+                    }
+                }
+            }else{
+                if (xian.start_x>xian.end_x) {
+                    if (xian.start_y>xian.end_y) {
+                        labelcenter = CGPointMake(titlex+LENGTH(9)+xianwight, titley);
+                        labeljd = (-jiaodu/180);
+                    }else{
+                        NSLog(@"123");
+                    }
+                }else{
+                    if (xian.start_y>xian.end_y) {
+                        labelcenter = CGPointMake(titlex+LENGTH(9)+xianwight, titley);
+                        labeljd = -jiaodu/180;
+                    }else{
+                        labelcenter = CGPointMake(titlex+LENGTH(9)+xianwight, titley);
+                        labeljd = (1-(jiaodu/180))+1;
+                    }
+                }
+            }
+            //    transform = CGAffineTransformMakeRotation(M_PI*labeljd);
+            transform = CGAffineTransformRotate(transform, M_PI*labeljd);
+            
+            title.frame = CGRectMake(0, 0, labelwidth, LENGTH(18));
+            title.center = labelcenter;
+            title.transform = transform;
+        }
+
+//        if (xian.start_x == xian.end_x) {
+//            if (xian.start_y == xian.end_y) {
 //
+//            }else if (xian.st)
+//
+//        }else if (xian.start_x > xian.end_x){
+//
+//        }else{
+//
+//        }
+//
+//        if (xian.start_x>xian.end_x) {
+//            if (xian.start_y>xian.end_y) {
+////                titlex = xian.end_x * poinw;
+//            }else if (xian.start_y == xian.end_y){
+//            }else{
+//            }
+//        }else if (xian.start_x==xian.end_x){
+//            if (xian.start_y>xian.end_y) {
+//            }else if (xian.start_y == xian.end_y){
+//            }else{
+//            }
+//        }else{
+//            if (xian.start_y>xian.end_y) {
+//            }else if (xian.start_y == xian.end_y){
+//            }else{
+//            }
+//        }
+
+        
+//        [title mas_makeConstraints:^(MASConstraintMaker *make) {
+////            make.center.mas_equalTo(labelcenter);
+//            make.width .mas_equalTo(labelwidth);
+////            make.height.mas_equalTo(20);
+//        }];
+
+        
+//        UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(xian.start_x*poinw-3, xian.start_y*poinw-3, 6, 6) cornerRadius:3];
+        
+
+
+
 //        UIBezierPath *circlePath1 = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(xian.end_x*poinw-3, xian.end_y*poinw-3, 6, 6) cornerRadius:3];
 //        CAShapeLayer *fillLayer1 = [CAShapeLayer layer];
 //        fillLayer1.path = circlePath1.CGPath;
@@ -207,50 +473,30 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 
         [layerarray addObject:animLayer];
     }
-//    //内容
-//    [viewdataarray addObjectsFromArray:data.point];
-//    for (NSInteger i = viewarray.count; i <viewdataarray.count; i++) {
-//            ZhiShiShuNeiRongModel * neirong = viewdataarray[i];
-//            if (lastw<neirong.width*poinw+neirong.x_axis*poinw) {
-//                lastw=neirong.width*poinw+neirong.x_axis*poinw;
-//            }
-//            if (lasth<neirong.height*poinw+neirong.y_axis*poinw) {
-//                lasth=neirong.height*poinw+neirong.y_axis*poinw;
-//            }
-//            ZhiShiShuNEiRong * imageview = [ZhiShiShuNEiRong new];
-//        imageview.userInteractionEnabled = YES;
-//        imageview.nav = self.nav;
-//            [self addSubview:imageview];
-//            [viewarray addObject:imageview];
-//            imageview.neirong = neirong;
-//        imageview.textmodel = data;
-//        if (neirong.width<=0) {
-//            [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.left.mas_equalTo((neirong.x_axis-neirong.width/2)*poinw);
-//                make.top.mas_equalTo((neirong.y_axis-neirong.height/2)*poinw-LENGTH(16));
-//            }];
-//        }else{
-//            [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.left.mas_equalTo((neirong.x_axis-neirong.width/2)*poinw);
-//                make.top.mas_equalTo((neirong.y_axis-neirong.height/2)*poinw);
-//            }];
-//        }
-//
-//        imageview.userInteractionEnabled = YES;
-//        BaseButton * oneButton = [BaseButton buttonWithType:UIButtonTypeCustom];
-//        oneButton.tag = 100+i;
-//        [oneButton addTarget:self action:@selector(oneButton:) forControlEvents:UIControlEventTouchUpInside];
-//        [imageview addSubview:oneButton];
-//        [oneButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.mas_equalTo(imageview);
-//        }];
-//
-//
-//    }
+    for (NSMutableArray * array in viewdataarray) {
+        [self addneirong:array weizhi:1];
+    }
+    [self addClickAnNiu:data];
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(WIDTH/2+self->lastw);
         make.height.mas_equalTo(HEIGHT/2+self->lasth);
     }];
+    
+}
+
+- (void)addClickAnNiu:(ZhiShiShuDataModel *)model{
+    WS(ws);
+    for (ZhiShiShuClickModel * modes in model.arrow) {
+        ZhiShiShuClickView * view = [ZhiShiShuClickView new];
+        view.model = modes;
+        [self addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(ws).with.offset(modes.x_axis*poinw);
+            make.top.mas_equalTo(ws).with.offset(modes.y_axis*poinw);
+//            make.top.mas_equalTo(ws).with.offset(100);
+//            make.left.mas_equalTo(ws).with.offset(100);
+        }];
+    }
     
 }
 - (void)setSizey:(CGFloat)sizey{
@@ -478,6 +724,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 
 - (void)clickbutton:(ZhiShiShuNeiRongModel*)neirong{
     WS(ws);
+
     if ([neirong.flag isEqualToString:@""]||[neirong.flag isEqualToString:@"0"]) {
         
     }else{
@@ -510,6 +757,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 
 
 -(void)pan:(UIPanGestureRecognizer *)pan{
+    
     //获取当前点
     if (animalzx == NO) {
         self.currentP = [pan locationInView:self];
@@ -551,4 +799,29 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     }
 }
 
+
+CGFloat angleBetweenLines(CGPoint line1Start, CGPoint line1End, CGPoint line2Start, CGPoint line2End) {
+    CGFloat a = line1End.x - line1Start.x;
+    CGFloat b = line1End.y - line1Start.y;
+    CGFloat c = line2End.x - line2Start.x;
+    CGFloat d = line2End.y - line2Start.y;
+    CGFloat rads = acos(((a*c) + (b*d)) / ((sqrt(a*a + b*b)) * (sqrt(c*c + d*d))));
+    return radiansToDegrees(rads);
+}
+//两个点之间的角度
+
+CGFloat angleBetweenPoints(CGPoint first, CGPoint second) {
+    CGFloat height = second.y - first.y;
+    CGFloat width = first.x - second.x;
+    CGFloat rads = atan(height/width);
+    return radiansToDegrees(rads);
+}
+-(CGFloat)distanceFromPointX:(CGPoint)start distanceToPointY:(CGPoint)end{
+    float distance;
+    //下面就是高中的数学，不详细解释了
+    CGFloat xDist = (end.x - start.x);
+    CGFloat yDist = (end.y - start.y);
+    distance = sqrt((xDist * xDist) + (yDist * yDist));
+    return distance;
+}
 @end

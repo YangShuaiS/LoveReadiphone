@@ -28,6 +28,8 @@
     BaseLabel * nolike;
     FLAnimatedImageView * likeimage;
     FLAnimatedImageView * nolikeimage;
+    UIView * yy;
+
 }
 - (instancetype)init
 {
@@ -39,14 +41,47 @@
 }
 - (void)addview{
     WS(ws);
+    UIView * yinyig = [UIView new];
+    yinyig.backgroundColor = [UIColor whiteColor];
+    [self addSubview:yinyig];
+    [yinyig mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(ws).with.offset(LENGTH(15));
+        make.left.equalTo(ws).with.offset(LENGTH(20));
+        make.width.mas_equalTo(LENGTH(100));
+        make.height.mas_equalTo(LENGTH(140));
+        //        make.height.equalTo(self->leftImage.mas_width).multipliedBy(1.5);
+        make.bottom.equalTo(ws).with.offset(-LENGTH(15));
+    }];
+    yinyig.layer.shadowOpacity = 0.16;
+    yinyig.layer.shadowColor = [UIColor blackColor].CGColor;
+    yinyig.layer.shadowRadius = LENGTH(4);
+    yinyig.layer.shadowOffset = CGSizeMake(0,0);
+    yinyig.layer.cornerRadius = LENGTH(5);
+    
+    yy = [UIView new];
+    yy.backgroundColor = [UIColor whiteColor];
+    [self addSubview:yy];
+    [yy mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(ws).with.offset(LENGTH(15));
+        make.left.equalTo(ws).with.offset(LENGTH(20));
+        make.width.mas_equalTo(LENGTH(100));
+        make.height.mas_equalTo(LENGTH(140));
+        //        make.height.equalTo(self->leftImage.mas_width).multipliedBy(1.5);
+        make.bottom.equalTo(ws).with.offset(-LENGTH(15));
+    }];
+    
     leftImage = [FLAnimatedImageView new];
-    leftImage.layer.shadowOpacity = 0.4;
-    leftImage.layer.shadowColor = [UIColor blackColor].CGColor;
-    leftImage.layer.shadowRadius = 2.f;
-    leftImage.layer.shadowOffset = CGSizeMake(0,0);
     leftImage.contentMode = UIViewContentModeScaleAspectFit;
     leftImage.image = UIIMAGE(ZHANWEITUSHU);
-    [self addSubview:leftImage];
+    [yy addSubview:leftImage];
+    
+    UIImageView * xian = [UIImageView new];
+    xian.image = UIIMAGE(@"书线");
+    [yy addSubview:xian];
+    [xian mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.bottom.and.left.mas_equalTo(self->yy);
+        make.width.mas_equalTo(LENGTH(9));
+    }];
     
     Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(4,51,50) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:Title];
@@ -149,12 +184,7 @@
 - (void)updata{
     WS(ws);
     [leftImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws).with.offset(LENGTH(15));
-        make.left.equalTo(ws).with.offset(LENGTH(20));
-        make.width.mas_equalTo(LENGTH(100));
-        make.height.mas_equalTo(LENGTH(140));
-        //        make.height.equalTo(self->leftImage.mas_width).multipliedBy(1.5);
-        make.bottom.equalTo(ws).with.offset(-LENGTH(15));
+        make.edges.mas_equalTo(self->yy);
     }];
     
     [Title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -519,4 +549,15 @@
     fuwenben.textColor = RGB(122,120,120);
 }
 
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:yy.bounds byRoundingCorners:UIRectCornerBottomRight | UIRectCornerTopRight cornerRadii:CGSizeMake(LENGTH(5),LENGTH(5))];
+    //创建 layer
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = yy.bounds;
+    //赋值
+    maskLayer.path = maskPath.CGPath;
+    yy.layer.mask = maskLayer;
+}
 @end

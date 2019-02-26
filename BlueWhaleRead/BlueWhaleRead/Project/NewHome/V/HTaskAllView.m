@@ -54,6 +54,7 @@
         make.top.mas_equalTo(ws);
         make.left.mas_equalTo(ws).with.offset(LENGTH(20));
         make.right.mas_equalTo(ws).with.offset(-LENGTH(20));
+        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(14));
 
     }];
     backview.layer.shadowOpacity = 0.24;
@@ -152,49 +153,49 @@
         make.height.mas_equalTo(LENGTH(12));
     }];
     
-    UIView * downview = [UIView new];
-    downview.backgroundColor = RGB(255, 255, 255);
-    [self addSubview:downview];
-    [downview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(backview.mas_bottom).with.offset(LENGTH(16));
-        make.left.mas_equalTo(ws).with.offset(LENGTH(20));
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(20));
-        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(14));
-    }];
-    downview.layer.shadowOpacity = 0.24;
-    downview.layer.shadowColor = RGB(171, 171, 171).CGColor;
-    downview.layer.shadowRadius = LENGTH(16);
-    downview.layer.shadowOffset = CGSizeMake(0,4);
-    downview.layer.cornerRadius = LENGTH(12);
+//    UIView * downview = [UIView new];
+//    downview.backgroundColor = RGB(255, 255, 255);
+//    [self addSubview:downview];
+//    [downview mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(backview.mas_bottom).with.offset(LENGTH(16));
+//        make.left.mas_equalTo(ws).with.offset(LENGTH(20));
+//        make.right.mas_equalTo(ws).with.offset(-LENGTH(20));
+//        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(14));
+//    }];
+//    downview.layer.shadowOpacity = 0.24;
+//    downview.layer.shadowColor = RGB(171, 171, 171).CGColor;
+//    downview.layer.shadowRadius = LENGTH(16);
+//    downview.layer.shadowOffset = CGSizeMake(0,4);
+//    downview.layer.cornerRadius = LENGTH(12);
     
     
-    lianjieone = [UIImageView new];
-    lianjieone.contentMode = UIViewContentModeScaleAspectFit;
-    lianjieone.image = UIIMAGE(@"连接橙色");
-    [self addSubview:lianjieone];
-    [lianjieone mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(backview).with.offset(LENGTH(50));
-        make.top.mas_equalTo(backview.mas_bottom).with.offset(-LENGTH(11));
-        make.width.mas_equalTo(LENGTH(10));
-        make.height.mas_equalTo(LENGTH(38));
-    }];
+//    lianjieone = [UIImageView new];
+//    lianjieone.contentMode = UIViewContentModeScaleAspectFit;
+//    lianjieone.image = UIIMAGE(@"连接橙色");
+//    [self addSubview:lianjieone];
+//    [lianjieone mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(backview).with.offset(LENGTH(50));
+//        make.top.mas_equalTo(backview.mas_bottom).with.offset(-LENGTH(11));
+//        make.width.mas_equalTo(LENGTH(10));
+//        make.height.mas_equalTo(LENGTH(38));
+//    }];
     
-    lianjietwo = [UIImageView new];
-    lianjietwo.contentMode = UIViewContentModeScaleAspectFit;
-    lianjietwo.image = UIIMAGE(@"连接橙色");
-    [self addSubview:lianjietwo];
-    [lianjietwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(backview).with.offset(-LENGTH(50));
-        make.top.mas_equalTo(backview.mas_bottom).with.offset(-LENGTH(11));
-        make.width.mas_equalTo(LENGTH(10));
-        make.height.mas_equalTo(LENGTH(38));
-    }];
+//    lianjietwo = [UIImageView new];
+//    lianjietwo.contentMode = UIViewContentModeScaleAspectFit;
+//    lianjietwo.image = UIIMAGE(@"连接橙色");
+//    [self addSubview:lianjietwo];
+//    [lianjietwo mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_equalTo(backview).with.offset(-LENGTH(50));
+//        make.top.mas_equalTo(backview.mas_bottom).with.offset(-LENGTH(11));
+//        make.width.mas_equalTo(LENGTH(10));
+//        make.height.mas_equalTo(LENGTH(38));
+//    }];
     
-    calend = [HorizontalcalendarView new];
-    [downview addSubview:calend];
-    [calend mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(downview);
-    }];
+//    calend = [HorizontalcalendarView new];
+//    [downview addSubview:calend];
+//    [calend mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(downview);
+//    }];
 
 }
 - (void)upcolor{

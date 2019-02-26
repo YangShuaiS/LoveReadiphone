@@ -7,84 +7,138 @@
 //
 
 #import "BookCityViewController.h"
-//#import "BookHeadView.h"
 #import "BooStyleView.h"
-#import "SearchView.h"
-@interface BookCityViewController ()<NavDelegate,BooStyleViewDelegate>
+#import "SearchOldView.h"
+@interface BookCityViewController ()<BooStyleViewDelegate>
 @property (strong, nonatomic) BooStyleView *menu;
 
 @end
 
 @implementation BookCityViewController{
-//    BookHeadView *headView;
+    UIView * backview;
+    BaseView * view;//搜索
     NSInteger page;
     NSArray  * arr;
     NSInteger allpage;
+    CGFloat alph;
+    BaseLabel * titleLable;
+    BOOL styles;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addnavtion];
     [self AddView];
     [self AddNavtion];
 }
-#pragma mark --------------------  导航栏以及代理
-- (void)AddNavtion{
-    [super AddNavtion];
+
+- (void)addnavtion{
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"请输入书籍名称" RightTitle:@"" NativeStyle:NacStyleBookCity];
-    self.navtive.delegate = self;
-    [self.view addSubview:self.navtive];
-    [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws.view).with.offset(0);
-        make.right.equalTo(ws.view).with.offset(0);
-        make.top.equalTo(ws.view).with.offset(0);
-        make.height.mas_equalTo(NavHeight);
+    styles = YES;
+    backview = [UIView new];
+    backview.backgroundColor = MAINCOLOR;
+    [self.view addSubview:backview];
+    [backview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.left.and.right.mas_equalTo(ws.view);
+    }];
+    UIImage * backImage = UIIMAGE(@"icon_返回_粗");
+
+    FLAnimatedImageView * left = [FLAnimatedImageView new];
+    left.image = backImage;
+    left.contentMode = UIViewContentModeScaleAspectFit;
+    [backview addSubview:left];
+    [left mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self->backview).with.offset(LENGTH(26));
+        make.top.equalTo(self->backview).with.offset(StatusBar+10);
+        make.height.mas_equalTo(22);
+        make.width.mas_equalTo(12);
+    }];
+    
+    BaseButton * LeftBigButton = [BaseButton buttonWithType:UIButtonTypeCustom];
+    [LeftBigButton addTarget:self action:@selector(leftclicks) forControlEvents:UIControlEventTouchUpInside];
+    [backview addSubview:LeftBigButton];
+    
+    [LeftBigButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self->backview).with.offset(0);
+        make.top.equalTo(self->backview).with.offset(StatusBar);
+        make.height.mas_equalTo(@44);
+        make.width.mas_equalTo(LENGTH(26)+12+LENGTH(5));
+    }];
+    
+    titleLable = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(0xff, 0xfe, 0xfe) LabelFont:TextFont(20) TextAlignment:NSTextAlignmentCenter Text:@"书库"];
+    [backview addSubview:titleLable];
+    [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self->backview);
+        make.centerY.mas_equalTo(left);
+        make.height.mas_equalTo(44);
     }];
     
     
+    view = [BaseView new];
+    view.backgroundColor = RGBA(255, 255, 255, 0.4);
+    view.layer.masksToBounds = YES;
+    view.layer.cornerRadius = 15;
+    [backview addSubview:view];
+    
+    FLAnimatedImageView * searchImage = [FLAnimatedImageView new];
+    searchImage.image = UIIMAGE(@"搜索图标_白");
+    [view addSubview:searchImage];
+    
+    BaseLabel * titleLables = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentLeft Text:@"输入书名/作者…"];
+    [view addSubview:titleLables];
+    
+    BaseButton * button = [BaseButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(centerBt) forControlEvents:UIControlEventTouchUpInside];
+    [backview addSubview:button];
+    
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self->backview).with.offset(-LENGTH(20));
+        make.left.equalTo(self->backview).with.offset(LENGTH(20));
+        make.top.mas_equalTo(self->backview).with.offset(NavHeight+7);
+        make.bottom.mas_equalTo(self->backview).with.offset(-7);
+        make.height.mas_equalTo(30);
+    }];
+    [searchImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self->view).with.offset(-LENGTH(19));
+        make.centerY.mas_equalTo(self->view.mas_centerY);
+        make.height.mas_equalTo(LENGTH(16));
+        make.width.mas_equalTo(LENGTH(16));
+    }];
+    
+    [titleLables mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self->view).with.offset(LENGTH(19));
+        make.centerY.mas_equalTo(self->view.mas_centerY);
+        make.right.mas_equalTo(self->view.mas_right);
+    }];
+    
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self->view);
+    }];
+    
 }
-- (void)NavLeftClick{
+- (void)leftclicks{
     [self.navigationController popViewControllerAnimated:YES];
-
+    
 }
-
-- (void)NavCenterClick {
-    SearchView * view = [SearchView new];
+- (void)centerBt {
+    SearchOldView * view = [SearchOldView new];
     view.nav = self.navigationController;
     view.frame = self.view.window.frame;
     [self.view.window addSubview:view];
 }
 
 
-- (void)NavRightClick {
-    
-}
-
 
 - (void)AddView{
     WS(ws);
     self.view.backgroundColor = BEIJINGCOLOR;
-    
-//    headView = [BookHeadView new];
-//    headView.nav = self.navigationController;
-//    headView.layer.shadowOpacity = 0.2;
-//    headView.layer.shadowColor = [UIColor blackColor].CGColor;
-//    headView.layer.shadowOffset = CGSizeMake(0,0);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
-//    headView.layer.shadowRadius = 4.f;
-//    [self.view addSubview:headView];
-//    [headView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(ws.view).with.offset(NavHeight+LENGTH(17));
-//        make.left.equalTo(ws.view).with.offset(LENGTH(25));
-//        make.right.equalTo(ws.view).with.offset(-LENGTH(25));
-//        make.height.mas_equalTo(LENGTH(250));
-//    }];
-//
     _menu = [BooStyleView new];
     _menu.delegete = self;
     _menu.nav = self.navigationController;
     [self.view addSubview:_menu];
     [_menu mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.view).with.offset(NavHeight);
+        make.top.equalTo(self->backview.mas_bottom);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(0);
@@ -125,29 +179,54 @@
 }
 #pragma mark -------------------- 上移动画，暂时取消
 - (void)scrollFloat:(CGFloat)flo{
-//    WS(ws);
-//    if (headView != nil) {
-//        CGFloat headerViewY;
+    CGFloat y = flo;
+    if (y>=(StatusBar+44)) {
+        y =StatusBar+44;
+        if (styles == NO) {
+            styles = YES;
+            [UIView animateWithDuration:0.5 animations:^{
+                self->titleLable.alpha = 0;
+                [self->view mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(self->backview).with.offset(12+LENGTH(26)+LENGTH(5));
+                    make.top.mas_equalTo(self->backview).with.offset(StatusBar + 7);
+                }];
+                [self.view.superview layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }else{
+        if (flo>0) {
+            if (styles == YES) {
+                styles = NO;
+                [UIView animateWithDuration:0.5 animations:^{
+                    self->titleLable.alpha = 1;
+                    [self->view mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.left.equalTo(self->backview).with.offset(LENGTH(20));
+                        make.top.mas_equalTo(self->backview).with.offset(NavHeight+7);
+                    }];
+                    [self.view.superview layoutIfNeeded];
+                } completion:^(BOOL finished) {
+                    
+                }];
+               
+            }
+        }
+    }
+//    if (y>0) {
+//        CGFloat tophei = 44*alph+StatusBar;
+//        CGFloat left =(12+LENGTH(6)+LENGTH(5))- (12+LENGTH(6)+LENGTH(5))*alph;
 //
-//        if (flo>0) {
-//            headerViewY = -flo + 64;
-//            if (flo > headView.frame.size.height) {
-//                headerViewY = -headView.frame.size.height + 64;
-//            }
-//        }else{
-//            headerViewY = NavHeight+LENGTH(17);
-//        }
-//        [headView mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(ws.view).with.offset(headerViewY);
+//        titleLable.alpha = alph;
 //
+//        [view mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self->backview).with.offset(LENGTH(20)+left);
+//            make.top.mas_equalTo(self->backview).with.offset(tophei+7);
+//            make.bottom.mas_equalTo(self->backview).with.offset(-7);
+//            make.height.mas_equalTo(30);
 //        }];
-//        [headView layoutIfNeeded];
-//
 //    }
-//    [_menu mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
-//    }];
-//    [_menu layoutIfNeeded];
+    
 }
 - (void)backbodys:(NSArray *)array{
     arr= array;
@@ -197,15 +276,6 @@
 - (void)UpData:(BookCityModel *)model{
     [_menu.tableView.mj_header endRefreshing];
     [_menu.tableView.mj_footer endRefreshing];
-//    if (model.readBalance.studentBalance.count == 0||model.readBalance.myReadNum<5) {
-//            WS(ws);
-////            [headView removeFromSuperview];
-//            [_menu mas_updateConstraints:^(MASConstraintMaker *make) {
-//                make.top.equalTo(ws.navtive.mas_bottom);
-//            }];
-//    }else{
-////        headView.readBalance = model.readBalance;
-//    }
     _menu.inpath = _inpath;
     _menu.model = model;
     allpage = model.totalCount;

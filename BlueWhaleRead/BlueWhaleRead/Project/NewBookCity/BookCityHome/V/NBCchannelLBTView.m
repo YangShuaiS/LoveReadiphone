@@ -9,6 +9,8 @@
 #import "NBCchannelLBTView.h"
 #import "NBCThemeViewController.h"
 #import "NBCMoreChannelViewController.h"
+#import "NBCSearchView.h"
+
 @interface NBCchannelLBTView ()<SDCycleScrollViewDelegate>
 
 @end
@@ -16,6 +18,8 @@
 @implementation NBCchannelLBTView{
     SDCycleScrollView * cycleScrollerView;
     BaseLabel * label;
+    NBCSearchView * search;
+
 }
 
 - (instancetype)init
@@ -30,7 +34,6 @@
     WS(ws);
     //轮播图
     cycleScrollerView = [SDCycleScrollView new];
-    cycleScrollerView.delegate = self;
     cycleScrollerView.delegate = self;
     cycleScrollerView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
     cycleScrollerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
@@ -48,11 +51,17 @@
         make.height.equalTo(ws.mas_width).multipliedBy(0.573333333);
     }];
     
+    search = [NBCSearchView new];
+    [self addSubview:search];
+    [search mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.right.and.left.mas_equalTo(ws);
+    }];
+    
     label = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:@"全部专题"];
     label.backgroundColor = RGB(91,199,198);
     [self addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws).with.offset(StatusBar+LENGTH(5));
+        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(17));
         make.right.mas_equalTo(ws);
         make.width.mas_equalTo(LENGTH(90));
         make.height.mas_equalTo(LENGTH(32));

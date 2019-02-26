@@ -122,5 +122,4 @@
     return WIDTH-LENGTH(22);
 }
 
-
 @end

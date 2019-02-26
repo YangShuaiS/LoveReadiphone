@@ -199,16 +199,13 @@ preferredStyle:UIAlertControllerStyleAlert];
 - (void)bdstr:(NSString *)str{
     [[NSUserDefaults standardUserDefaults] setValue:str forKey:kNotificationNianJi];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self hqid:str];
+//    [self hqid:str];
 }
 - (void)LoadData{
     [self cshxx];
-
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_NEWHOME];
     NSDictionary * dic = @{@"studentid":Me.ssid};
     //    NSDictionary * dic = @{@"studentid":@"12"};
-    
-    
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             NewHomeModel * model = [NewHomeModel mj_objectWithKeyValues:responseObject];
@@ -283,7 +280,6 @@ preferredStyle:UIAlertControllerStyleAlert];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     [self ConfirmTheSize];
     
     viewarray = [NSMutableArray array];
@@ -315,7 +311,7 @@ preferredStyle:UIAlertControllerStyleAlert];
     [viewarray addObject:booklist];
     WS(ws);
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.view).with.offset(-StatusBar);
+        make.top.equalTo(ws.view).with.offset(0);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);

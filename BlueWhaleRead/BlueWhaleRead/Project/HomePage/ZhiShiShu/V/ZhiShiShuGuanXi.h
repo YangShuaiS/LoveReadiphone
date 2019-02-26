@@ -11,4 +11,9 @@
 
 @interface ZhiShiShuGuanXi : BaseView
 @property(nonatomic,strong)ZhiShiShuDataModel * datamodel;
+
+@property(nonatomic,assign)CGFloat labelheight;
+
+@property(nonatomic,assign)CGFloat labelallheight;
+
 @end

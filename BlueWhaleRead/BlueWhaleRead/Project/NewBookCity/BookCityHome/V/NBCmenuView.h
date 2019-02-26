@@ -8,7 +8,7 @@
 
 #import "BaseView.h"
 typedef NS_ENUM(NSInteger, NBCmenuViewStyle) {
-    NBCmenuViewStyle1 = 1,//
+    NBCmenuViewStyleRefinish = 1,//
     NBCmenuViewStyleimage = 2,//
 };
 typedef void(^GenBlock)(void);

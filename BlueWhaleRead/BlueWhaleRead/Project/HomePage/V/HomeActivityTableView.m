@@ -149,16 +149,18 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
 
-    if (section == 0) {
-        return LENGTH(0);
-    }else{
-        NSMutableArray * array = _itemarray[section-1];
-        if (array.count == 0) {
-            return 0;
-        }else{
-            return LENGTH(23);
-        }
-    }
+    return LENGTH(0);
+
+//    if (section == 0) {
+//        return LENGTH(0);
+//    }else{
+//        NSMutableArray * array = _itemarray[section-1];
+//        if (array.count == 0) {
+//            return 0;
+//        }else{
+//            return LENGTH(23);
+//        }
+//    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView * v = [UIView new];

@@ -13,6 +13,7 @@ typedef void(^click)(void);
 
 @interface GuideBookCityOneView : BaseView
 @property(nonatomic,assign)CGRect frames;
+
 @property(nonatomic,copy)click block;
 @end
 

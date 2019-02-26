@@ -65,7 +65,7 @@
 }
 - (void)cellclick{
     self.backgroundColor = RGB(255,255,255);
-    title.textColor = RGB(254,138,45);
+    title.textColor = RGB(82,199,198);
     [imageView sd_setImageWithURL:URLIMAGE(_TypeModel.logo) placeholderImage:UIIMAGE(@"icon_书城_全部_未选中")];
 
 //    imageView.image = UIIMAGE(@"icon_书城_全部_选中");

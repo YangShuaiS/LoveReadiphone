@@ -81,7 +81,9 @@
         WS(ws);
         NHProverbModel * model = itemArray[0];
         [imageview sd_setImageWithURL:URLIMAGE(model.img) completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            [ws upimage:image];
+            if (image != nil) {
+                [ws upimage:image];
+            }
         }];
         [backimage sd_setImageWithURL:URLIMAGE(model.proverbImg)];
         

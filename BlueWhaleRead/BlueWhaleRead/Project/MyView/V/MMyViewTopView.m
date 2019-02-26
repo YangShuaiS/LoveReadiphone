@@ -201,7 +201,6 @@
     banji.text = [NSString stringWithFormat:@"%@%@",model.grade.name,model.clazz.name];
     nianji.text = model.school.name;
     UIImage * img;
-    
     if (model.sex == 1) {
         xingbie.image = UIIMAGE(@"男");
     }else{
