@@ -29,20 +29,25 @@
 //    self.navigationController.navigationBar.hidden = NO;
 //    self.navigationController.navigationBar.backgroundColor = MAINCOLOR;
     [super viewWillAppear:animated];
+//    self.navigationController.navigationBar.hidden = NO;
+//    self.navigationController.navigationBar.tintColor = [UIColor redColor];
+//    self.title = @"知识网";
+//    [self setNav];
+
 }
 - (void)viewWillDisappear:(BOOL)animated {
-//    [self.navigationController setNavigationBarHidden:YES animated:animated];
-//    [self.navigationController.navigationBar setbac]
-//    self.navigationController.navigationBar.backgroundColor = [UIColor redColor];
-
     [super viewWillDisappear:animated];
+//    self.navigationController.navigationBar.hidden = YES;
+}
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
 }
 #pragma mark --------------------  导航栏以及代理
 - (void)AddNavtion{
     [super AddNavtion];
     nowindext = 0;
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"" Title:@"知识网" RightTitle:@"" NativeStyle:NavStyleLeftImageAndRightImageAndCenter];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"知识网" RightTitle:@"" NativeStyle:NavStyleLeftImageAndRightImageAndCenter];
     self.navtive.backgroundColor = [UIColor clearColor];
     self.navtive.titcolor = RGB(51,51,51);
     self.navtive.delegate = self;
@@ -60,7 +65,7 @@
 }
 
 - (void)NavLeftClick {
-//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)NavRightClick {
@@ -283,11 +288,12 @@
 //    pointView.image = UIIMAGE(@"人文-孙悟空");
 
     ZhiShiShuFLOneModel * model = modelarray[index];
+    [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
+
     if (index == 0) {
-        [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
         pointView.alpha = 1;
     }else{
-        [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.mini_logo]]];
+//        [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.mini_logo]]];
         pointView.alpha = 0.3;
 
     }
@@ -322,11 +328,11 @@
         ZhiShiShuFLOneModel * model = modelarray[i];
 //        view.image = UIIMAGE(@"人文-孙悟空");
         if (carousel.currentItemIndex == i) {
-            [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
+//            [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
             view.alpha = 1;
 
         }else{
-            [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.mini_logo]]];
+//            [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.mini_logo]]];
             view.alpha = 0.3;
         }
 //        downview.downstyle = carousel.currentItemIndex;
@@ -356,5 +362,7 @@
     [self.view removeFromSuperview];
     [self.view.superview removeFromSuperview];
 }
+
+
 
 @end

@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^clickssss)(CGFloat scroy);
+typedef void(^endanimaal)(void);
+
 @interface ZhiShiShiRightScroView : BaseView<UIScrollViewDelegate>
 @property (nonatomic , strong)NSMutableArray * itemarray;
 @property (nonatomic , assign)CGFloat scroy;
@@ -20,6 +22,7 @@ typedef void(^clickssss)(CGFloat scroy);
 
 
 @property(nonatomic,copy)clickssss blocks;
+@property(nonatomic,copy)endanimaal blockss;
 
 @end
 

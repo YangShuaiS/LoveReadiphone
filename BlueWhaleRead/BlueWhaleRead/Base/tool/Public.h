@@ -94,7 +94,7 @@
 #define JK_JOOINBOOKCITY @"api/v1.0/addMyBook"//加入书架
 #define JK_REMOVEBOOKCITY @"api/v1.0/delMyBook"//移除书架
 #define JK_TZDTTIMU @"api/v1.0/bookProblem"//挑战答题题目
-#define JK_TIJIAODATI @"api/v1.0/submitProblem"//挑战答题结果
+#define JK_TIJIAODATI @"api/v1.0/submitProblem"//挑战答题结果q
 #define JK_LICHENGBEI @"api/v1.0/myMilestone"//里程碑
 #define JK_XUNZHANGLIST @"api/v1.0/badgeList"//勋章list
 #define JK_MyCLASS @"api/v1.0/myClass"  //我的班级

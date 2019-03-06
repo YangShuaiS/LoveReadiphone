@@ -167,9 +167,10 @@
 
 - (void)updata:(LunBoTuXQModel *)model{
     NSString * str = model.banner.content;
+//    NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'></header>";
+//    [webview loadHTMLString:[headerString stringByAppendingString:str] baseURL:nil];
     [webview loadHTMLString:str baseURL:nil];
 //    [webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.1.117/share_tiantian/aaaa.html"]]];
-    
 }
 //
 //- (void)webViewDidFinishLoad:(UIWebView *)webView

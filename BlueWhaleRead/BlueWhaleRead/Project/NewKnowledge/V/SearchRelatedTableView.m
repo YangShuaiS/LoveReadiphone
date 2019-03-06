@@ -8,6 +8,8 @@
 
 #import "SearchRelatedTableView.h"
 #import "SearchRelatedTableViewCell.h"
+
+#import "LBTViewController.h"
 @interface SearchRelatedTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -77,7 +79,11 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    AllSearchWZModel * model = _itemarray[indexPath.row];
+    LBTViewController * vc = [LBTViewController new];
+    vc.inter = 1;
+    vc.itemid = model.ssid;
+    [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 - (void)layoutSubviews{
     [super layoutSubviews];

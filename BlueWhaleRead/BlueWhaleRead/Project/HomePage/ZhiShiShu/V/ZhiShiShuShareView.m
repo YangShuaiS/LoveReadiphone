@@ -1,143 +1,52 @@
 //
-//  HaiBaoView.m
+//  ZhiShiShuShareView.m
 //  BlueWhaleRead
 //
-//  Created by 杨帅 on 2018/11/5.
-//  Copyright © 2018年 YS. All rights reserved.
+//  Created by 杨帅 on 2019/3/1.
+//  Copyright © 2019年 YS. All rights reserved.
 //
 
-#import "HaiBaoView.h"
-#import "GZWKWebView.h"
+#import "ZhiShiShuShareView.h"
 #import <Photos/Photos.h>
 
-@interface HaiBaoView ()<WKNavigationDelegate>
-@property(nonatomic,strong) GZWKWebView *webView;
-@property(nonatomic,strong) UIImageView *imageView;
-@end
-
-@implementation HaiBaoView{
-    NSMutableArray * viewarray;
-    NSInteger inter;
-    SSDKPlatformType platformType;
+@implementation ZhiShiShuShareView{
     BaseView * backview;
-    UIImage * haibaoimage;
-    MBProgressHUD * mb;
-    NSString * url;
-    
-    FLAnimatedImageView * backimageview;
-    
     UIView * wxclick;
     UIView * wxpyqclick;
     UIView * hbclick;
+    NSMutableArray * viewarray;
+    NSMutableArray * titarrays;
+    FLAnimatedImageView * hbimageview;
+    MBProgressHUD * mb;
+    SSDKPlatformType platformType;
+
+    FenXiangModel * models;
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        [self addview];
+        self.backgroundColor = RGBA(0x00, 0x00, 0x00, 0.6);
+        self.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(xiaoshi)];
+        [self addGestureRecognizer:tap];
     }
     return self;
 }
-- (void)addhaibao{
-    _webView = [GZWKWebView new];
-    _webView.navigationDelegate = self;
-    _webView.scrollView.bounces = NO;
-    [self addSubview:_webView];
-    WS(ws);
-    [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(ws).with.offset(StatusBar+50);
-//        make.bottom.mas_equalTo(self->backview.mas_top).with.offset(-LENGTH(12)-50);
-//        make.center.mas_equalTo(self->backview);
-//        make.left.mas_equalTo(ws).with.offset(LENGTH(100));
-//        make.right.mas_equalTo(ws).with.offset(-LENGTH(100));
-        make.width.mas_equalTo(LENGTH(322));
-        make.height.mas_equalTo(LENGTH(519));
-        make.top.mas_equalTo(ws.mas_bottom);
-    }];
-    
-    backimageview = [FLAnimatedImageView new];
-    backimageview.backgroundColor = [UIColor whiteColor];
-    backimageview.contentMode = UIViewContentModeScaleAspectFit;
-    [self addSubview:backimageview];
-    [backimageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws).with.offset(StatusBar);
-        make.bottom.mas_equalTo(self->backview.mas_top).with.offset(-LENGTH(12));
-//        make.width.mas_equalTo(self->backimageview.mas_height).multipliedBy(0.62);
-        //        make.centerX.mas_offset(ws);
-        make.centerX.mas_equalTo(self->backview);
-                make.left.mas_equalTo(ws).with.offset(LENGTH(26));
-                make.right.mas_equalTo(ws).with.offset(-LENGTH(26));
-    }];
-}
-- (void)setModes:(FenXiangModel *)modes{
-    _modes = modes;
-    if (_sharestyle == ShareStyleTag9||_sharestyle == ShareStyleTag10) {
-        url = [NSString stringWithFormat:@"%@?showType=%@&studentId=%@",_modes.url,_textid,Me.ssid];
-    }else{
-        url = [NSString stringWithFormat:@"%@?showType=2&studentId=%@",_modes.url,Me.ssid];
-    }
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-
-    double delayInSeconds = 5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        if (self->haibaoimage == nil) {
-            [self->_webView captureContentImage:^(UIImage *image) {
-                self->haibaoimage = image;
-                self->backimageview.image = image;
-                self->backimageview.backgroundColor = [UIColor clearColor];
-            }];
-        }
-    });
-//    switch (_sharestyle) {
-//        case ShareStyleTag1:
-//            url = [NSString stringWithFormat:@"%@?showType=2&studentId=%@",modes.url,Me.ssid];
-//            [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-//            _Text = modes.content;
-//            _title = modes.title;
-//            break;
-//        case ShareStyleTag2:
-//            url = [NSString stringWithFormat:@"%@?showType=2&studentId=%@",modes.url,Me.ssid];
-//            [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-//            _Text = modes.content;
-//            _title = modes.title;
-//            break;
-//        case ShareStyleTag3:
-//            url = [NSString stringWithFormat:@"%@?showType=2&studentId=%@",modes.url,Me.ssid];
-//            [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-//            _Text = modes.content;
-//            _title = modes.title;
-//            break;
-//        case ShareStyleTag4:
-//            url = [NSString stringWithFormat:@"%@?showType=2&studentId=%@",modes.url,Me.ssid];
-//            [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-//            _Text = modes.content;
-//            _title = modes.title;
-//            break;
-//        default:
-//            break;
-//    }
-
-
-}
 - (void)addview{
-    self.backgroundColor = RGBA(0x00, 0x00, 0x00, 0.6);
-    self.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(xiaoshi)];
-    [self addGestureRecognizer:tap];
+
     WS(ws);
-    
     backview = [BaseView new];
     backview.backgroundColor = [UIColor whiteColor];
     [self addSubview:backview];
     [backview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.bottom.mas_equalTo(ws);
-//        make.height.mas_equalTo(LENGTH(67)+LENGTH(StatusBar));
+        //        make.height.mas_equalTo(LENGTH(67)+LENGTH(StatusBar));
     }];
     backview.userInteractionEnabled = YES;
-    [self addhaibao];
-
+    [self addimage];
+    
     
     BaseLabel * title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(197,195,195) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentCenter Text:@"分享"];
     [backview addSubview:title];
@@ -155,16 +64,16 @@
         make.height.mas_equalTo(1);
         make.width.mas_equalTo(LENGTH(70));
     }];
-    
-    BaseView * twoxian = [BaseView new];
-    twoxian.backgroundColor = RGB(220,229,235);
-    [backview addSubview:twoxian];
-    [twoxian mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(title);
-        make.left.mas_equalTo(title.mas_right).with.offset(LENGTH(8));
-        make.height.mas_equalTo(1);
-        make.width.mas_equalTo(LENGTH(70));
-    }];
+//
+//    BaseView * twoxian = [BaseView new];
+//    twoxian.backgroundColor = RGB(220,229,235);
+//    [backview addSubview:twoxian];
+//    [twoxian mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(title);
+//        make.left.mas_equalTo(title.mas_right).with.offset(LENGTH(8));
+//        make.height.mas_equalTo(1);
+//        make.width.mas_equalTo(LENGTH(70));
+//    }];
     
     
     BaseView * topview = [BaseView new];
@@ -275,31 +184,35 @@
         }
     }
 }
+- (void)addimage{
+    WS(ws);
+    hbimageview = [FLAnimatedImageView new];
+    hbimageview.contentMode = UIViewContentModeScaleAspectFill;
+    [self addSubview:hbimageview];
+    [hbimageview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(ws).with.offset(StatusBar);
+        make.bottom.mas_equalTo(self->backview.mas_top).with.offset(-LENGTH(12));
+        //        make.width.mas_equalTo(self->backimageview.mas_height).multipliedBy(0.62);
+        //        make.centerX.mas_offset(ws);
+        make.centerX.mas_equalTo(self->backview);
+        make.left.mas_equalTo(ws).with.offset(LENGTH(26));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(26));
+    }];
+}
 
 - (void)wxhy{
-    inter = 1;
-    if (haibaoimage == nil) {
-        mb.label.text = @"正在生成海报，请稍后";
-        [mb hideAnimated:NO afterDelay:1];
-    }else{
         wxclick.userInteractionEnabled = NO;
         wxpyqclick.userInteractionEnabled = NO;
         hbclick.userInteractionEnabled = NO;
-        [self wxhys:self->_modes];
-    }
+        [self wxhys:models];
 }
 
 - (void)wxviewpyq{
-    inter = 2;
-    if (haibaoimage == nil) {
-        mb.label.text = @"正在生成海报，请稍后";
-        [mb hideAnimated:NO afterDelay:1];
-    }else{
+
         wxclick.userInteractionEnabled = NO;
         wxpyqclick.userInteractionEnabled = NO;
         hbclick.userInteractionEnabled = NO;
-        [self wxviewpyq:self->_modes];
-    }
+        [self wxviewpyq:models];
 }
 - (void)wxhys:(FenXiangModel *)dic{
     platformType = SSDKPlatformSubTypeWechatSession;
@@ -314,11 +227,11 @@
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     //平台定制
-    [parameters SSDKSetupWeChatParamsByText:_modes.content
-                                      title:_modes.title
+    [parameters SSDKSetupWeChatParamsByText:models.content
+                                      title:models.title
                                         url:nil
                                  thumbImage:nil
-                                      image:haibaoimage
+                                      image:URLIMAGE(models.share_img)
                                musicFileURL:nil
                                     extInfo:nil
                                    fileData:nil
@@ -332,14 +245,13 @@
 
 - (void)shareLinkhy:(FenXiangModel *)dic
 {
-    NSString * str = @"http://192.168.1.221:8081/images/share/5c75ff091677133e940003dc.jpg";
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     //平台定制
-    [parameters SSDKSetupWeChatParamsByText:_modes.content
-                                      title:_modes.title
+    [parameters SSDKSetupWeChatParamsByText:models.content
+                                      title:models.title
                                         url:nil
                                  thumbImage:nil
-                                      image:[NSURL URLWithString:str]
+                                      image:URLIMAGE(models.share_img)
                                musicFileURL:nil
                                     extInfo:nil
                                    fileData:nil
@@ -390,7 +302,7 @@
              case SSDKResponseStateFail:
              {
                  titel = @"分享失败";
-//                 typeStr = [NSString stringWithFormat:@"%@",error];
+                 //                 typeStr = [NSString stringWithFormat:@"%@",error];
                  typeColor = [UIColor redColor];
                  break;
              }
@@ -423,29 +335,22 @@
     [mb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(ws.window);
     }];
-    
-    if (haibaoimage == nil) {
-        mb.label.text = @"正在生成海报，请稍后";
-        [mb hideAnimated:NO afterDelay:1];
-    }else{
-            [[PHPhotoLibrary sharedPhotoLibrary]performChanges:^{
-                [PHAssetChangeRequest creationRequestForAssetFromImage:self->haibaoimage];
-            } completionHandler:^(BOOL success, NSError * _Nullable error) {
-                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    // 处理耗时操作的代码块...//通知主线程刷新
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                                //回调或者说是通知主线程刷新，
-                        if (error) {
-                            self->mb.label.text = @"保存失败";
-                            [self->mb hideAnimated:NO afterDelay:1];
-                        } else {
-                            self->mb.label.text = @"保存成功";
-                            [self->mb hideAnimated:NO afterDelay:1];
-                        }
-                    });
-                });
-            }];
-    }
+    [[PHPhotoLibrary sharedPhotoLibrary]performChanges:^{
+        [PHAssetChangeRequest creationRequestForAssetFromImage:self->hbimageview.image];
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            // 处理耗时操作的代码块...//通知主线程刷新
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error) {
+                    self->mb.label.text = @"保存失败";
+                    [self->mb hideAnimated:NO afterDelay:1];
+                } else {
+                    self->mb.label.text = @"保存成功";
+                    [self->mb hideAnimated:NO afterDelay:1];
+                }
+            });
+        });
+    }];
     
 }
 
@@ -456,21 +361,26 @@
         [self removeFromSuperview];
     }];
 }
-
-
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self->_webView captureContentImage:^(UIImage *image) {
-            self->haibaoimage = image;
-            self->backimageview.image = image;
-            self->backimageview.backgroundColor = [UIColor clearColor];
-
-        }];
-    });
+- (void)setZstid:(NSString *)zstid{
+    _zstid = zstid;
+    NSString * urls = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FXLCB];
+    NSDictionary * dic = @{@"tag":@"14",@"knowledge_id":_zstid};
+    [[BaseAppRequestManager manager] getNormaldataURL:urls dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            HomePage * model = [HomePage mj_objectWithKeyValues:responseObject];
+            if ([model.code isEqual:@200]) {
+                self->models = [FenXiangModel mj_objectWithKeyValues:responseObject[@"share"]];
+                [self loaddata];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
+            }
+        }else{
+        }
+    }];
 }
 
-
-
+- (void)loaddata{
+    [self addview];
+    [hbimageview sd_setImageWithURL:URLIMAGE(models.share_preview_img)];
+}
 @end

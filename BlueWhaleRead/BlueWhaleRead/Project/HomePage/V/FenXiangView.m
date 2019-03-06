@@ -483,7 +483,6 @@
 
 - (void)shareLinkhy:(FenXiangModel *)dic
 {
-
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     //平台定制
     [parameters SSDKSetupWeChatParamsByText:_Text

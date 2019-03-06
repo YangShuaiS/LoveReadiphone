@@ -37,13 +37,17 @@
     NSInteger inter = 0;
     if (_itemarray.count <= 2) {
         inter =1;
-    }else if (_itemarray.count <=4){
-        inter =2;
     }else{
-        CGFloat a = itemarray.count/2*1.0;
-        CGFloat viewcont = ceilf(a);
-        inter = viewcont;
+        inter = 2;
     }
+//    else if (_itemarray.count <=4){
+//        inter =2;
+//    }
+//    else{
+//        CGFloat a = itemarray.count/2*1.0;
+//        CGFloat viewcont = ceilf(a);
+//        inter = viewcont;
+//    }
     CGFloat height = LENGTH(51) + LENGTH(14)+ (LENGTH(162*0.610561)+LENGTH(15)+LENGTH(20)+LENGTH(5)+LENGTH(16))*inter + (inter-1)*LENGTH(7);
     [view mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(height);

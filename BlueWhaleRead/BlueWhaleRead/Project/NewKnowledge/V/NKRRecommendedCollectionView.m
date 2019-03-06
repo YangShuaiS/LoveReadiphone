@@ -9,6 +9,8 @@
 #import "NKRRecommendedCollectionView.h"
 #import "NKRRecommendedCollectionViewCell.h"
 
+#import "LBTViewController.h"
+#import "ZhiShiShuShuViewController.h"
 @interface NKRRecommendedCollectionView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
@@ -66,7 +68,19 @@
 }
 
 -( void )collectionView:( UICollectionView *)collectionView didSelectItemAtIndexPath:( NSIndexPath *)indexPath{
-    
+    NKRKnowledgeModel * model = _itemarray[indexPath.row];
+    if (model.related_type == 1) {
+        LBTViewController * vc = [LBTViewController new];
+        vc.inter = 1;
+        vc.itemid = model.ssid;
+        [[self viewController].navigationController pushViewController:vc animated:YES];
+    }else if (model.related_type == 2){
+        ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
+        vc.itemid = model.ssid;
+        [[self viewController].navigationController pushViewController:vc animated:YES];
+    }else{
+        
+    }
 }
 
 - (void)setItemarray:(NSMutableArray *)itemarray{

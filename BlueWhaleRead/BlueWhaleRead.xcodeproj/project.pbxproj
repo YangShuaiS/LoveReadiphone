@@ -86,6 +86,7 @@
 		0D0D7D6720E221B4003A3495 /* ShiZiJGTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0D7D6620E221B4003A3495 /* ShiZiJGTopView.m */; };
 		0D0D7D6A20E221C0003A3495 /* ShiZiJGDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0D7D6920E221C0003A3495 /* ShiZiJGDownView.m */; };
 		0D0D7D6D20E22D34003A3495 /* GenBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0D7D6C20E22D34003A3495 /* GenBookView.m */; };
+		0D0E8FD822293814004B7D5C /* ZhiShiShuShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0E8FD722293814004B7D5C /* ZhiShiShuShareView.m */; };
 		0D1025CD216DB2B800BAF30A /* ZhiShiShuTimeLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1025CC216DB2B800BAF30A /* ZhiShiShuTimeLineModel.m */; };
 		0D1025D0216E1DA200BAF30A /* ZhiShiShuGuanXi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1025CF216E1DA200BAF30A /* ZhiShiShuGuanXi.m */; };
 		0D1025D3216E23FC00BAF30A /* ZhiShiShuViTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1025D2216E23FC00BAF30A /* ZhiShiShuViTypeModel.m */; };
@@ -933,6 +934,8 @@
 		0D0D7D6920E221C0003A3495 /* ShiZiJGDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShiZiJGDownView.m; sourceTree = "<group>"; };
 		0D0D7D6B20E22D34003A3495 /* GenBookView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenBookView.h; sourceTree = "<group>"; };
 		0D0D7D6C20E22D34003A3495 /* GenBookView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenBookView.m; sourceTree = "<group>"; };
+		0D0E8FD622293814004B7D5C /* ZhiShiShuShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuShareView.h; sourceTree = "<group>"; };
+		0D0E8FD722293814004B7D5C /* ZhiShiShuShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuShareView.m; sourceTree = "<group>"; };
 		0D1025CB216DB2B800BAF30A /* ZhiShiShuTimeLineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuTimeLineModel.h; sourceTree = "<group>"; };
 		0D1025CC216DB2B800BAF30A /* ZhiShiShuTimeLineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuTimeLineModel.m; sourceTree = "<group>"; };
 		0D1025CE216E1DA200BAF30A /* ZhiShiShuGuanXi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuGuanXi.h; sourceTree = "<group>"; };
@@ -3560,6 +3563,8 @@
 				0D1F60882223CA3B008F95B5 /* ZSSRightNRView.m */,
 				0D7472D0221FF92800A3B516 /* ZhiShiShuClickView.h */,
 				0D7472D1221FF92800A3B516 /* ZhiShiShuClickView.m */,
+				0D0E8FD622293814004B7D5C /* ZhiShiShuShareView.h */,
+				0D0E8FD722293814004B7D5C /* ZhiShiShuShareView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -5495,6 +5500,7 @@
 				0DA1122820EE1F3F001A3D4E /* SZOrSCViewController.m in Sources */,
 				0DF411CA20C8D6630076B154 /* WCQRCodeScanningVC.m in Sources */,
 				0D260536210C162900D15D17 /* LunBoTuXQModel.m in Sources */,
+				0D0E8FD822293814004B7D5C /* ZhiShiShuShareView.m in Sources */,
 				0D46A8532101796C008D9ADD /* MyClassLabel.m in Sources */,
 				0D0AA5C621AFDDC200439A82 /* TKAllraskTopTableViewCell.m in Sources */,
 				0D7908F821C24DA500D99D1F /* GuideBookXqThreeView.m in Sources */,

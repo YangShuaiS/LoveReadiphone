@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)CGFloat  x_axis;//id
 @property(nonatomic,assign)CGFloat  y_axis;//id
 @property(nonatomic,strong)NSString * arrow_words_color;//id
+@property(nonatomic,strong)NSString * arrow_type;//1里面 2外面
+
 
 
 

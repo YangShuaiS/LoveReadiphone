@@ -24,7 +24,7 @@
     WS(ws);
     
     bakimageview = [FLAnimatedImageView new];
-    bakimageview.backgroundColor = RGB(239, 239, 239);
+    bakimageview.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:bakimageview];
     [bakimageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.and.right.mas_equalTo(ws);
@@ -41,7 +41,7 @@
 
 - (void)setModel:(NKRClassificationModel *)model{
     _model = model;
-    [bakimageview sd_setImageWithURL:URLIMAGE(model.img)];
+    [bakimageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.img]]];
     label.text = model.name;
 }
 

@@ -14,6 +14,8 @@ typedef void(^rightscrviewblock)(void);
 
 @property(nonatomic,copy)rightscrviewblock block;
 
+@property(nonatomic,assign)NSInteger style;
+
 @end
 
 NS_ASSUME_NONNULL_END

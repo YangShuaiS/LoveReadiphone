@@ -180,4 +180,16 @@
         
     }];
 }
+
+- (void)setNav{
+//    UINavigationBar *bar = [UINavigationBar appearance];
+////    //设置显示的颜色
+//////    bar.barTintColor = //设置显示的颜色
+//    bar.barTintColor = [UIColor clearColor];
+////    //设置字体颜色
+//    bar.tintColor = [UIColor redColor];
+//    [bar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor redColor]}];
+
+}
+
 @end

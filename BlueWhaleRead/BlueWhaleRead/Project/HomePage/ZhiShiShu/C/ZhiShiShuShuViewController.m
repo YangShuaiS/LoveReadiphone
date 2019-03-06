@@ -10,6 +10,8 @@
 #import "ZhiShiShuScroVuew.h"
 @interface ZhiShiShuShuViewController (){
     ZhiShiShuScroVuew * scroview;
+    NSInteger stare;
+    NSInteger end;
 }
 
 @end
@@ -31,7 +33,6 @@
     [scroview setBlock:^(CGRect frame) {
         
     }];
-    
 
     // Do any additional setup after loading the view.
 }
@@ -41,6 +42,7 @@
     [scroview.superview removeFromSuperview];
     [scroview removeFromSuperview];
 }
+
 
 /*
 #pragma mark - Navigation

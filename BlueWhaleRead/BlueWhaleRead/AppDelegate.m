@@ -136,7 +136,7 @@
     //发送错误文件
 //    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     [self loadModel];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 //    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
 //    if (localNotification) {
 //        NSLog(@"Recieved Notification === %@",localNotification);

@@ -7,11 +7,11 @@
 //
 
 #import "HAllTaskView.h"
-#import "NavigationMenuView.h"
+#import "NBCmenuView.h"
 #import "HAllTaskCollectionView.h"
 #import "TKAlltaskViewController.h"
 @implementation HAllTaskView{
-    NavigationMenuView * navMenu;
+    NBCmenuView * navMenu;
     HAllTaskCollectionView * collectview;
 
 }
@@ -27,10 +27,9 @@
 - (void)addview{
     WS(ws);
     
-    navMenu = [NavigationMenuView new];
-    navMenu.style = NavMenuStyleAll;
-    navMenu.leftTitle = @"热门任务";
-    navMenu.rightTitle = @"查看全部>";
+    navMenu = [NBCmenuView new];
+    navMenu.styles = NBCmenuViewStyleimage;
+    navMenu.label.text = @"热门任务";
     [navMenu setBlock:^{
         [ws LookAll];
     }];

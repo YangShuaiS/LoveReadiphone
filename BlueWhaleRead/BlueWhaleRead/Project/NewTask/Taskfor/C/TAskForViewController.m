@@ -25,6 +25,9 @@
 #import "TKXQRLView.h"
 #import "TKXQGZView.h"
 #import "TKXQOtherView.h"
+
+#import "TKAwardViewController.h"
+#import "TKATextFileModel.h"
 @interface TAskForViewController ()<NavDelegate,UIScrollViewDelegate>
 @property(nonatomic,assign)TaxkXqStyele style;
 
@@ -448,24 +451,62 @@
         }
         lastview = view;
     }
-    goreadbook = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(18) TextAlignment:NSTextAlignmentCenter Text:@"去读书"];
-    goreadbook.backgroundColor = RGB(91,199,198);
-    [self.view addSubview:goreadbook];
-    [goreadbook mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.and.bottom.mas_equalTo(ws.view);
-        make.height.mas_equalTo(TabBarHeight);
-    }];
-    if (![_friendid isEqualToString:@""]||[allmodel.missionStatus isEqualToString:@"2"]||[allmodel.missionStatus isEqualToString:@"3"]) {
-        goreadbook.userInteractionEnabled = NO;
-        goreadbook.backgroundColor = RGB(240, 240, 240);
-        goreadbook.textColor = RGB(204, 204, 204);
-    }else{
-        goreadbook.backgroundColor = RGB(91,199,198);
-        goreadbook.textColor = RGB(255,255,255) ;
-        goreadbook.userInteractionEnabled = YES;
-        UITapGestureRecognizer * tapviewtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reedbook)];
+
+    if ([allmodel.mission.mission_type isEqualToString:@"1"]&&[allmodel.missionStatus isEqualToString:@"2"]&&[_friendid isEqualToString:@""]) {
+        UIView * clickview = [UIView new];
+        clickview.backgroundColor = RGB(255,91,40);
+        clickview.layer.cornerRadius = LENGTH(22);
+        clickview.layer.masksToBounds = YES;
+        [self.view addSubview:clickview];
+        [clickview mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(ws.view).with.offset(-LENGTH(30));
+            make.centerX.mas_equalTo(ws.view);
+            make.height.mas_equalTo(LENGTH(44));
+        }];
+        
+        BaseLabel * ck = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255, 255, 255) LabelFont:TextFont(19) TextAlignment:NSTextAlignmentLeft Text:@"去领奖"];
+        [clickview addSubview:ck];
+        [ck mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.and.bottom.mas_equalTo(clickview);
+            make.left.mas_equalTo(clickview).with.offset(LENGTH(29));
+        }];
+        
+        UIImageView * jiantou = [UIImageView new];
+        jiantou.contentMode = UIViewContentModeScaleAspectFit;
+        jiantou.image = UIIMAGE(@"组110");
+        [clickview addSubview:jiantou];
+        [jiantou mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(clickview);
+            make.left.mas_equalTo(ck.mas_right).with.offset(LENGTH(5));
+            make.right.mas_equalTo(clickview).with.offset(-LENGTH(27));
+            make.width.mas_equalTo(LENGTH(21));
+            make.height.mas_equalTo(LENGTH(19));
+        }];
+        clickview.userInteractionEnabled = YES;
+        UITapGestureRecognizer * ljtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ljtap)];
         //将手势添加到需要相应的view中去
-        [goreadbook addGestureRecognizer:tapviewtap];
+        [clickview addGestureRecognizer:ljtap];
+    }else{
+        goreadbook = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(18) TextAlignment:NSTextAlignmentCenter Text:@"去读书"];
+        goreadbook.backgroundColor = RGB(91,199,198);
+        [self.view addSubview:goreadbook];
+        [goreadbook mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.and.bottom.mas_equalTo(ws.view);
+            make.height.mas_equalTo(TabBarHeight);
+        }];
+        if (![_friendid isEqualToString:@""]||[allmodel.missionStatus isEqualToString:@"2"]||[allmodel.missionStatus isEqualToString:@"3"]) {
+            goreadbook.userInteractionEnabled = NO;
+            goreadbook.backgroundColor = RGB(240, 240, 240);
+            goreadbook.textColor = RGB(204, 204, 204);
+   
+        }else{
+            goreadbook.backgroundColor = RGB(91,199,198);
+            goreadbook.textColor = RGB(255,255,255) ;
+            goreadbook.userInteractionEnabled = YES;
+            UITapGestureRecognizer * tapviewtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reedbook)];
+            //将手势添加到需要相应的view中去
+            [goreadbook addGestureRecognizer:tapviewtap];
+        }
     }
 }
 - (void)reedbook{
@@ -480,8 +521,33 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self LoadData];
 }
-
-
+- (void)ljtap{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_RWLJ];
+    NSDictionary * dic = @{@"studentid":Me.ssid};
+    //    NSDictionary * dic = @{@"studentid":@"12"};
+    
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            TKATextFileModel * model = [TKATextFileModel mj_objectWithKeyValues:responseObject];
+            if ([model.code isEqual:@200]) {
+                [self UpDate:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
+            }else{
+                [[MBProgressHUDYS SharedMBProgressHUDYS] addview:self.view.window];
+                [[MBProgressHUDYS SharedMBProgressHUDYS] shoumessage:model.message];
+                [[MBProgressHUDYS SharedMBProgressHUDYS] hideAnimated:YES afterDelay:1];
+            }
+        }else{
+        }
+    }];
+    
+}
+- (void)UpDate:(TKATextFileModel*)model{
+    TKAwardViewController * vc = [TKAwardViewController new];
+    vc.model = model;
+    [self.navigationController pushViewController: vc animated:YES];
+}
 /*
 #pragma mark - Navigation
 

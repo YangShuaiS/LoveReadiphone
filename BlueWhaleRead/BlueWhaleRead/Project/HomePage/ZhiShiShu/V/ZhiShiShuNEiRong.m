@@ -109,11 +109,12 @@
     label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(159,131,68) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:@""];
     [downView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self->textimag);
-//        make.top.mas_equalTo(self->textimag.mas_top);
+//        make.centerY.mas_equalTo(self->textimag);
+        make.top.mas_equalTo(self->textimag.mas_top);
         make.left.mas_equalTo(self->textimag.mas_right).with.offset(LENGTH(5));
         make.right.mas_equalTo(self->downView);
     }];
+    label.numberOfLines = 0;
     self.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
     [self addGestureRecognizer:tap];
@@ -130,9 +131,23 @@
         make.width.mas_equalTo(neirong.width*poinw);
         make.height.mas_equalTo(neirong.height*poinw);
     }];
-    [self->textimag sd_setImageWithURL:[NSURL URLWithString:imageurl]];
+//    [self->textimag sd_setImageWithURL:[NSURL URLWithString:imageurl]];
     label.text = neirong.name;
-    
+    if ([neirong.vi_logo isEqualToString:@""]) {
+        label.textAlignment = NSTextAlignmentCenter;
+        [textimag mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(LENGTH(0));
+            make.height.mas_equalTo(LENGTH(0));
+        }];
+    }else{
+        [textimag mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(LENGTH(32));
+            make.height.mas_equalTo(LENGTH(32));
+        }];
+        label.textAlignment = NSTextAlignmentLeft;
+    }
+//    label.text = @"水电费水电费\n水电费\n水电费水电费\n水电费";
+
     NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTX,neirong.vi_logo];
     [self->textimag sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo]];
     

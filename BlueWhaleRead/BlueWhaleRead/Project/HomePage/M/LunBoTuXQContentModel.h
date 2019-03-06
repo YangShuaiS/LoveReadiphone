@@ -17,4 +17,6 @@
 //@property (nonatomic, strong) CreatetimeModel * create_time;
 @property(nonatomic,copy) NSString * create_time;
 
+@property (nonatomic, copy) NSString * is_share;
+
 @end

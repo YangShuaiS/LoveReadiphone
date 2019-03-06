@@ -31,8 +31,6 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     NSMutableArray * layerarray;
 
     ZhiShiShuNEiRong * lastneirongview;
-//    CAShapeLayer * animLayer;
-    CGFloat lastw;
     CGFloat lasth;
     NSInteger laststare;
     NSInteger lastend;
@@ -57,6 +55,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 }
 
 - (void)addview{
+    _morenweizhi = @"0";
 //    SDImageCache *canche = [SDImageCache sharedImageCache];
 //    // SDImageCacheOldShouldDecompressImages = canche.shouldDecompressImages;
 //    // canche.shouldDecompressImages = NO;
@@ -74,7 +73,6 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     layerarray = [NSMutableArray array];
     viewdataarray = [NSMutableArray array];
     layerdataarray = [NSMutableArray array];
-    lastw = 0;
     lasth = 0;
     laststare = 0;
     lastend = 0;
@@ -134,37 +132,25 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     _data = data;
     NSMutableArray * datearray = data.point;
     for (ZhiShiShuNeiRongModel *neirong in datearray) {
-        if (lastw<neirong.width*poinw+neirong.x_axis*poinw) {
-            lastw=neirong.width*poinw+neirong.x_axis*poinw;
-        }
         if (lasth<neirong.height*poinw+neirong.y_axis*poinw) {
             lasth=neirong.height*poinw+neirong.y_axis*poinw;
         }
     }
     
-    CGFloat a = lasth/HEIGHT*1.0;
+    CGFloat a = lasth/_scroviewheight*1.0;
     CGFloat viewcont = ceilf(a);
     for (int i = 0; i<viewcont; i++) {
         NSMutableArray * array = [NSMutableArray array];
         [viewdataarray addObject:array];
     }
     for (ZhiShiShuNeiRongModel *neirong in datearray) {
-        NSInteger inter = neirong.y_axis*poinw/HEIGHT;
+        NSInteger inter = neirong.y_axis*poinw/_scroviewheight;
         [viewdataarray[inter] addObject:neirong];
     }
     if (viewdataarray.count==0) {
         
     }
-//    if (viewdataarray.count >=1){
-//        [self addneirong:viewdataarray[0] weizhi:1];
-//    }
-//    if (viewdataarray.count >=2){
-//        [self addneirong:viewdataarray[1] weizhi:1];
-//    }
-//    if (viewdataarray.count >=3){
-//        [self addneirong:viewdataarray[2] weizhi:1];
-//    }
-    
+
 
     laststare = 2;
     lastend = 3;
@@ -476,9 +462,18 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     for (NSMutableArray * array in viewdataarray) {
         [self addneirong:array weizhi:1];
     }
+//    if (viewdataarray.count >=1){
+//        [self addneirong:viewdataarray[0] weizhi:1];
+//    }
+//    if (viewdataarray.count >=2){
+//        [self addneirong:viewdataarray[1] weizhi:1];
+//    }
+//    if (viewdataarray.count >=3){
+//        [self addneirong:viewdataarray[2] weizhi:1];
+//    }
+
     [self addClickAnNiu:data];
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(WIDTH/2+self->lastw);
         make.height.mas_equalTo(HEIGHT/2+self->lasth);
     }];
     
@@ -487,41 +482,64 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 - (void)addClickAnNiu:(ZhiShiShuDataModel *)model{
     WS(ws);
     for (ZhiShiShuClickModel * modes in model.arrow) {
-        ZhiShiShuClickView * view = [ZhiShiShuClickView new];
-        view.model = modes;
-        [self addSubview:view];
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(ws).with.offset(modes.x_axis*poinw);
-            make.top.mas_equalTo(ws).with.offset(modes.y_axis*poinw);
-//            make.top.mas_equalTo(ws).with.offset(100);
-//            make.left.mas_equalTo(ws).with.offset(100);
-        }];
+        if ([modes.arrow_type isEqualToString:@"1"]) {
+            ZhiShiShuClickView * view = [ZhiShiShuClickView new];
+            view.model = modes;
+            [self addSubview:view];
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(ws.mas_left).with.offset(modes.x_axis*poinw);
+                make.top.mas_equalTo(ws).with.offset(modes.y_axis*poinw);
+                //            make.top.mas_equalTo(ws).with.offset(100);
+                //            make.left.mas_equalTo(ws).with.offset(100);
+            }];
+        }
+
     }
     
 }
-- (void)setSizey:(CGFloat)sizey{
-//        if (viewdataarray.count>3) {
-//            NSInteger inter =sizey/HEIGHT;
-//            if (sizey>_sizey && inter != nowpage && inter < viewdataarray.count-2) {
-//                nowpage = inter;
-//                [self remoview:viewarray[0]];
-//                [self addneirong:viewdataarray[inter+2] weizhi:1];
-//            }else if (sizey<_sizey && inter != nowpage && inter >= 0 && inter< viewdataarray.count-2 ) {
-//                nowpage = inter;
-//                [self remoview:viewarray[2]];
-//                [self addneirong:viewdataarray[inter] weizhi:0];
-//            }
-//        }
-//        _sizey = sizey;
-//            if (inter<=laststare) {
-//                [self remoview:viewarray[2]];
-//                [self addneirong:viewdataarray[inter] weizhi:0];
-//            laststare--;
 
-//            laststare = inter-1;
-//                lastend--;
+- (void)setMorenweizhi:(NSString *)morenweizhi{
+    _morenweizhi = morenweizhi;
+//    for (int i = 0; i < viewarray.count; i++) {
+//        [self remoview:viewarray[0]];
+//    }
+//    NSInteger inter =_weizhi/_scroviewheight;
+//    if ([_morenweizhi isEqualToString:@"1"]) {
+//        [self addneirong:viewdataarray[inter-1] weizhi:1];
+//        [self addneirong:viewdataarray[inter] weizhi:1];
+//        [self addneirong:viewdataarray[inter+1] weizhi:1];
+//    }
+//    _morenweizhi = @"0";
+
+}
+
+- (void)setSizey:(CGFloat)sizey{
+
+//    if (viewdataarray.count>3&&[_morenweizhi isEqualToString:@"0"]) {
+//        NSInteger inter =sizey/_scroviewheight;
+//        if (sizey>_sizey && inter != nowpage && inter < viewdataarray.count-2) {
+//            nowpage = inter;
+//            [self remoview:viewarray[0]];
+//            [self addneirong:viewdataarray[inter+2] weizhi:1];
+//        }else if (sizey<_sizey && inter != nowpage && inter >= 0 && inter< viewdataarray.count-2 ) {
+//            nowpage = inter;
+//            [self remoview:viewarray[2]];
+//            [self addneirong:viewdataarray[inter] weizhi:0];
 //        }
-    
+//    }
+//    _sizey = sizey;
+
+//        else{
+//
+//        if (inter<=laststare) {
+//            [self remoview:viewarray[2]];
+//            [self addneirong:viewdataarray[inter] weizhi:0];
+//            laststare--;
+//
+//            laststare = inter-1;
+//            lastend--;
+//        }
+//
 //    }
 }
 - (void)remoview:(NSMutableArray *)varray{
@@ -757,7 +775,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 
 
 -(void)pan:(UIPanGestureRecognizer *)pan{
-    
+
     //获取当前点
     if (animalzx == NO) {
         self.currentP = [pan locationInView:self];
@@ -788,6 +806,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
             }
         }
     }
+
 }
 //保证拖动手势和UIScrollView上的拖动手势互不影响
 -(BOOL)gestureRecognizer:(UIGestureRecognizer*) gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer*)otherGestureRecognizer
@@ -824,4 +843,5 @@ CGFloat angleBetweenPoints(CGPoint first, CGPoint second) {
     distance = sqrt((xDist * xDist) + (yDist * yDist));
     return distance;
 }
+
 @end

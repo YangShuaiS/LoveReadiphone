@@ -7,7 +7,6 @@
 //
 
 #import "YSInformationView.h"
-
 @implementation YSInformationView{
     FLAnimatedImageView * imageView;
     BaseLabel * onetitle;
@@ -24,7 +23,7 @@
 }
 - (void)addview{
     imageView = [FLAnimatedImageView new];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.layer.masksToBounds = YES;
     imageView.layer.cornerRadius = LENGTH(5);
     imageView.backgroundColor = RGB(239, 239, 239);
@@ -105,12 +104,27 @@
 
 - (void)setModel:(NKRKnowledgeModel *)model{
     _model = model;
-    if (model.inter == 1) {
-        [imageView sd_setImageWithURL:URLIMAGE(model.banner_img1)];
+    if (model.related_type == 1) {
+        if (model.inter == 1) {
+            [imageView sd_setImageWithURL:URLIMAGE(model.banner_img1)];
+        }else{
+            [imageView sd_setImageWithURL:URLIMAGE(model.banner_img)];
+        }
+    }else if (model.related_type == 2){
+        if (model.inter == 1) {
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.banner_img1]]];
+        }else{
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.banner_img]]];
+        }
     }else{
-        [imageView sd_setImageWithURL:URLIMAGE(model.banner_img)];
+        
     }
+    
+
+    
     onetitle.text = model.title;
     twotitle.text = model.banner_foreword;
 }
+
+
 @end

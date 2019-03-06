@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray* itemarray;
 @property (nonatomic , assign)NSInteger allinter;
 
+//@property (nonatomic , assign)NSInteger push;//0 根࿆据࿆type判࿆断࿆  1 文࿆章࿆ 2 脉࿆络࿆图࿆
+
 @end
 
 NS_ASSUME_NONNULL_END

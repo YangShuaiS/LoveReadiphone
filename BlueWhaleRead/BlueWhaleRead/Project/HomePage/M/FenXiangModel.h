@@ -17,4 +17,9 @@
 @property (nonatomic, copy) NSString * type;
 @property (nonatomic, copy) NSString * url;
 
+
+
+@property (nonatomic, copy) NSString * share_img;
+@property (nonatomic, copy) NSString * share_preview_img;
+
 @end

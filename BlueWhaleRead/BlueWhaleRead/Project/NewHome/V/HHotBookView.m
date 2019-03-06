@@ -7,14 +7,13 @@
 //
 
 #import "HHotBookView.h"
-#import "NavigationMenuView.h"
+#import "NBCmenuView.h"
 #import "HomeModerateCollectView.h"
-
 #import "NBCMoreChannelViewController.h"
 #define itemHeight LENGTH(170)
-
+#import "HomeActivityViewController.h"
 @implementation HHotBookView{
-    NavigationMenuView * navMenu;
+    NBCmenuView * navMenu;
     HomeModerateCollectView * collectView;
 }
 
@@ -29,10 +28,8 @@
 - (void)addview{
     WS(ws);
     
-    navMenu = [NavigationMenuView new];
-    navMenu.style = NavMenuStyleAll;
-    navMenu.leftTitle = @"热门书籍";
-    navMenu.rightTitle = @"专题列表>";
+    navMenu = [NBCmenuView new];
+    navMenu.styles = NBCmenuViewStyleimage;
     [navMenu setBlock:^{
         [ws LookAll];
     }];
@@ -67,13 +64,18 @@
 }
 
 - (void)LookAll{
-    NBCMoreChannelViewController * vc = [NBCMoreChannelViewController new];
-    [[self viewController].navigationController pushViewController:vc animated:YES];
+    HomeActivityViewController * vc = [HomeActivityViewController new];
+    vc.hiden = YES;
+    vc.itemid = _model.ssid;
+    [self.nav pushViewController:vc animated:YES];
+    
+//    NBCMoreChannelViewController * vc = [NBCMoreChannelViewController new];
+//    [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setModel:(NHBookTagModel *)model{
     _model = model;
-    navMenu.leftTitle = model.name;
+    navMenu.label.text = model.name;
     collectView.itemarray = model.bookList;
 
 }

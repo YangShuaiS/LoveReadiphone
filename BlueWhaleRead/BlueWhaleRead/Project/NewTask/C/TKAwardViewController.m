@@ -65,9 +65,14 @@
         make.left.and.right.mas_equalTo(ws.view);
         make.top.and.bottom.mas_equalTo(self->scrollView);
     }];
+    tkview.model = _model;
+
     // Do any additional setup after loading the view.
 }
-
+- (void)setModel:(TKATextFileModel *)model{
+    _model = model;
+}
+    
 /*
 #pragma mark - Navigation
 

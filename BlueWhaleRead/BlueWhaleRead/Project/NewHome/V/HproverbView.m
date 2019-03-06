@@ -7,11 +7,11 @@
 //
 
 #import "HproverbView.h"
-#import "NavigationMenuView.h"
+#import "NBCmenuView.h"
 
 @implementation HproverbView{
     FLAnimatedImageView * imageview;
-    NavigationMenuView * navMenu;//
+    NBCmenuView * navMenu;//
     UIImageView * backimage;
 
 }
@@ -26,9 +26,9 @@
 }
 - (void)addview{
     WS(ws);
-    navMenu = [NavigationMenuView new];
-    navMenu.style = NavMenuStyleGeneral;
-    navMenu.leftTitle = @"每日格言";
+    navMenu = [NBCmenuView new];
+    navMenu.styles = NBCmenuViewStyleimage;
+    navMenu.label.text = @"每日格言";
     [self addSubview:navMenu];
     [navMenu mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(0);

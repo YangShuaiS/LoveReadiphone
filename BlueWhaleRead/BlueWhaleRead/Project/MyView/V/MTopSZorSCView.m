@@ -40,7 +40,7 @@
     toplabel.backgroundColor = RGB(112,221,212);
     [self addSubview:toplabel];
     
-    BaseLabel * downlabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[UIColor whiteColor] LabelFont:TextFont(24) TextAlignment:NSTextAlignmentCenter Text:@"识字量测试"];
+    BaseLabel * downlabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[UIColor whiteColor] LabelFont:TextFont(24) TextAlignment:NSTextAlignmentCenter Text:@"识词量测试"];
     downlabel.backgroundColor = RGB(112,221,212);
     [self addSubview:downlabel];
     
@@ -52,7 +52,7 @@
     }];
     
     [downlabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(bakeview).with.offset(LENGTH(27));
+        make.left.mas_equalTo(bakeview).with.offset(LENGTH(27)); 
         make.right.mas_equalTo(bakeview).with.offset(-LENGTH(27));
         make.top.mas_equalTo(toplabel.mas_bottom).with.offset(LENGTH(13));
         make.height.mas_equalTo(LENGTH(60));

@@ -64,8 +64,7 @@
     }else{
         [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.n_logo]]];
         suo.hidden = NO;
-        label.textColor = RGB(167, 165, 163);
-
+        label.textColor = RGB(167, 165, 163); 
     }
 //    NSMutableAttributedString *attributedString =  [[NSMutableAttributedString alloc] initWithString:model.name attributes:@{NSKernAttributeName : @(1.5f)}];
 //    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

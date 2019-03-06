@@ -9,6 +9,8 @@
 #import "NKRHotKnowledgeView.h"
 #import "YSInformationView.h"
 #import "NBCmenuView.h"
+#import "LBTViewController.h"
+#import "ZhiShiShuShuViewController.h"
 
 @implementation NKRHotKnowledgeView{
     NBCmenuView * menu;
@@ -75,6 +77,10 @@
         make.right.mas_equalTo(ws).with.offset(-LENGTH(17));
         make.height.mas_equalTo(LENGTH(151)*0.610561+LENGTH(15)+LENGTH(14)+LENGTH(5)+LENGTH(11));
     }];
+    
+
+    
+
 }
 - (void)setItemArray:(NSMutableArray *)itemArray{
     _itemArray = itemArray;
@@ -84,14 +90,52 @@
         if (i == 0) {
             model.inter = 1;
             oneview.model = model;
+            oneview.userInteractionEnabled = YES;
+            UITapGestureRecognizer *backtap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click1)];
+            //将手势添加到需要相应的view中去
+            [oneview addGestureRecognizer:backtap1];
         }else if (i == 1){
             twoview.model = model;
+            twoview.userInteractionEnabled = YES;
+            UITapGestureRecognizer *backtap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click2)];
+            //将手势添加到需要相应的view中去
+            [twoview addGestureRecognizer:backtap2];
         }else if (i == 2){
             threeview.model = model;
+            threeview.userInteractionEnabled = YES;
+            UITapGestureRecognizer *backta3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click3)];
+            //将手势添加到需要相应的view中去
+            [threeview addGestureRecognizer:backta3];
         }
     }
 }
 
+- (void)click1{
+    NKRKnowledgeModel * model = _itemArray[0];
+    [self pushView:model];
+}
+- (void)click2{
+    NKRKnowledgeModel * model = _itemArray[1];
+    [self pushView:model];
+}
+- (void)click3{
+    NKRKnowledgeModel * model = _itemArray[2];
+    [self pushView:model];
+}
+- (void)pushView:(NKRKnowledgeModel*)model{
+    if (model.related_type == 1) {
+        LBTViewController * vc = [LBTViewController new];
+        vc.inter = 1;
+        vc.itemid = model.ssid;
+        [[self viewController].navigationController pushViewController:vc animated:YES];
+    }else if (model.related_type == 2){
+        ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
+        vc.itemid = model.ssid;
+        [[self viewController].navigationController pushViewController:vc animated:YES];
+    }else{
+        
+    }
+}
 -(void)setAllpage:(NSInteger)allpage{
     _allpage = allpage;
     CGFloat a = allpage/3*1.0;
@@ -114,12 +158,11 @@
     }];
 }
 - (void)UpData:(NewKnowledgeModel *)model{
-    NSMutableArray * itemarray = [NSMutableArray array];
-    [itemarray addObjectsFromArray:model.hotKnowledge];
-    [itemarray addObjectsFromArray:model.hotKnowledge];
+    _itemArray = [NSMutableArray array];
+    [_itemArray addObjectsFromArray:model.hotKnowledge];
 
-    for (int i = 0 ; i < itemarray.count; i ++) {
-        NKRKnowledgeModel * model = itemarray[i];
+    for (int i = 0 ; i < _itemArray.count; i ++) {
+        NKRKnowledgeModel * model = _itemArray[i];
         if (i == 0) {
             model.inter = 1;
             oneview.model = model;

@@ -7,11 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import "TKATextFileModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TKAwardViewController : BaseViewController
-
+@property (strong, nonatomic) TKATextFileModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

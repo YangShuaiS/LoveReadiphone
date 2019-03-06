@@ -14,5 +14,12 @@ typedef void(^click)(CGRect frame);
 @property(nonatomic,assign)CGFloat sizey;
 @property(nonatomic,copy)click block;
 
+@property(nonatomic,strong)NSString * neirongid;
+
+@property(nonatomic,assign)CGFloat scroviewheight;
+
+@property(nonatomic,assign)CGFloat weizhi;
+@property(nonatomic,strong)NSString * morenweizhi;
+
 - (void)huadong;
 @end

@@ -21,6 +21,7 @@
 @property(nonatomic,strong)NSString * txt_color;//字颜色
 @property(nonatomic,strong)NSString * updated_at;//更新时间
 @property(nonatomic,strong)NSString * knowledge_info;//最上面文本
+@property(nonatomic,strong)NSString * knowledge_type;//1为  体系   2为知识图
 
 
 

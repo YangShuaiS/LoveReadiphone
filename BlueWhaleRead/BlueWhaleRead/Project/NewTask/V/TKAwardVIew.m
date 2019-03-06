@@ -9,7 +9,6 @@
 #import "TKAwardVIew.h"
 
 #import "TKATextFileVIew.h"
-#import "TKATextFileModel.h"
 #import "MBProgressHUD+YS.h"
 @implementation TKAwardVIew{
     UIImageView * imageView;
@@ -29,28 +28,16 @@
 //    BaseLabel * name;
 
 }
-- (void)LoadData{
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_RWLJ];
-//    NSDictionary * dic = @{@"studentid":Me.ssid};
-    NSDictionary * dic = @{@"studentid":@"12"};
 
-    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
-        if (responseObject) {
-            TKATextFileModel * model = [TKATextFileModel mj_objectWithKeyValues:responseObject];
-            if ([model.code isEqual:@200]) {
-                [self UpData:model];
-            }else if ([model.code isEqual:@Notloggedin]){
-                [self UpDengLu];
-            }
-        }else{
-        }
-    }];
+- (void)setModel:(TKATextFileModel *)model{
+    _model = model;
+    [self UpData:model];
 }
 - (void)UpData:(TKATextFileModel *)model{
     textmodel = model;
     [jpimageview sd_setImageWithURL:URLIMAGE(model.prize.prize_img)];
     renwu.text = [NSString stringWithFormat:@"第%@期新手任务",model.periods_num];
-    jpxinxi.text = [NSString stringWithFormat:@"恭喜你获得%@等奖  %@ 一辆！",model.prize_level,model.prize.prize_name];
+    jpxinxi.text = [NSString stringWithFormat:@"恭喜你获得%@等奖  %@ 一个！",model.prize_level,model.prize.prize_name];
     
     AttributedStringModel * model1 = [AttributedStringModel new];
     model1.textString = jpxinxi.text;
@@ -67,7 +54,6 @@
     self = [super init];
     if (self) {
         [self addview];
-        [self LoadData];
     }
     return self;
 }
@@ -101,14 +87,14 @@
         make.height.mas_equalTo(100);
     }];
     
-    renwu = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFontCu(16) TextAlignment:NSTextAlignmentCenter Text:@"第16期新手任务"];
+    renwu = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFontCu(16) TextAlignment:NSTextAlignmentCenter Text:@"第xx期新手任务"];
     [jpimageview addSubview:renwu];
     [renwu mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->jpimageview.mas_bottom).with.offset(LENGTH(13));
         make.centerX.mas_equalTo(self->imageView);
     }];
     
-    jpxinxi = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"恭喜你获得一等奖  小米平衡车 一辆！"];
+    jpxinxi = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(16) TextAlignment:NSTextAlignmentCenter Text:@"恭喜你获得一等奖  xxx 一辆！"];
     [jpimageview addSubview:jpxinxi];
     [jpxinxi mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->renwu.mas_bottom).with.offset(LENGTH(15));

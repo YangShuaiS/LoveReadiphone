@@ -7,7 +7,7 @@
 //
 
 #import "HTaskView.h"
-#import "NavigationMenuView.h"
+#import "NBCmenuView.h"
 #import "HGetthetaskView.h"
 #import "HTaskAllView.h"
 
@@ -22,7 +22,7 @@
 #import "TKPrizeViewController.h"
 #import "BookListViewController.h"
 @implementation HTaskView{
-    NavigationMenuView * navMenu;//
+    NBCmenuView * navMenu;//
     HGetthetaskView * gettaskview;//未领取任务视图
     HTaskAllView * taskallView;//任务
     
@@ -54,9 +54,9 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     WS(ws);
-    navMenu = [NavigationMenuView new];
-    navMenu.style = NavMenuStyleGeneral;
-    navMenu.leftTitle = @"读书任务";
+    navMenu = [NBCmenuView new];
+    navMenu.styles = NBCmenuViewStyleimage;
+    navMenu.label.text = @"读书任务";
     [self addSubview:navMenu];
     [navMenu mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(0);

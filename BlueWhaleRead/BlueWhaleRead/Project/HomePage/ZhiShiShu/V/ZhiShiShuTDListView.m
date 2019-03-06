@@ -53,7 +53,7 @@
         make.size.mas_equalTo(CGSizeMake(LENGTH(14), LENGTH(15)));
     }];
     
-    
+     
     twoView = [UIView new];
     twoView.backgroundColor = RGB(64,199,198);
     twoView.layer.shadowOpacity = 1;
@@ -102,11 +102,15 @@
     //删除完再从新赋值，防止崩溃
     NSMutableArray * navarr = [NSMutableArray array];
     [navarr addObjectsFromArray:marr];
-    for (UIViewController *vc in marr) {
+    for (int i = 0; i < marr.count; i++) {
+        UIViewController * vc = marr[i];
         if ([vc isKindOfClass:[ZhiShiShuViewController class]]) {
             [[self viewController].navigationController popToViewController:vc animated:YES];
+            return;
         }
     }
+    [[self viewController].navigationController popToRootViewControllerAnimated:YES];
+
 }
 
 - (void)xianshi{
@@ -147,6 +151,13 @@
 //- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 //    NSLog(@"FlyElephant---触摸结束");
 //}
-
+- (void)setStyle:(NSInteger)style{
+    _style = style;
+    if (style == 2) {
+        [twoView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }
+}
 
 @end

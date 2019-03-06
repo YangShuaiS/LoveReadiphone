@@ -24,6 +24,7 @@
     BaseLabel * down;
     
     WKWebView *webView;
+    FLAnimatedImageView * sharefriend;
 
 
 }
@@ -72,7 +73,13 @@
         make.left.equalTo(ws.view).with.offset(LENGTH(12));
     }];
     
-    
+//    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+//    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+//    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+//    [wkUController addUserScript:wkUScript];
+//    WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
+//    wkWebConfig.userContentController = wkUController;
+//
     webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
     webView.navigationDelegate = self;
     webView.UIDelegate = self;
@@ -113,7 +120,7 @@
         make.height.mas_equalTo(NavHeight);
     }];
     
-    FLAnimatedImageView * sharefriend = [FLAnimatedImageView new];
+    sharefriend = [FLAnimatedImageView new];
     sharefriend.image = UIIMAGE(@"4343");
     [self.navtive addSubview:sharefriend];
     [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -180,11 +187,20 @@
         }];
 }
 - (void)updata:(LunBoTuXQModel *)model{
+    _imageurl = [NSString stringWithFormat:@"%@%@",ZSFWQ,model.banner.banner_img];
     time.text = [BaseObject TiemArray:model.banner.create_time String:@" "][0];
 //    name.text = model.banner.
     name.text = model.banner.title; 
     NSString * str = model.banner.content;
-    [webView loadHTMLString:str baseURL:nil];
+    NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'></header>";
+    [webView loadHTMLString:[headerString stringByAppendingString:str] baseURL:nil];
+//    [webView loadHTMLString:str baseURL:nil];
+    if ([model.banner.is_share isEqualToString:@"0"]) {
+        sharefriend.userInteractionEnabled = NO;
+        sharefriend.image = UIIMAGE(@"");
+        [sharefriend removeFromSuperview];
+    }
+
 //    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[str
 //                                                                             dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:
 //                                                                                                                                      NSHTMLTextDocumentType} documentAttributes:nil error:nil];
@@ -211,13 +227,13 @@
     //    [webView evaluateJavaScript:@"setTing()" completionHandler:^(id _Nullable response, NSError * _Nullable error) {
     //        //当然在这个setTing()返回的数据可以是个字典的数据形式。
     //    }];
-    if (_inter == 1) {
-        [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '200%'"completionHandler:nil];
-
-    }else{
-        [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"completionHandler:nil];
-
-    }
+//    if (_inter == 1) {
+//        [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '200%'"completionHandler:nil];
+//
+//    }else{
+//        [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"completionHandler:nil];
+//
+//    }
 //    [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.background='#edf3f3'"completionHandler:nil];
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
