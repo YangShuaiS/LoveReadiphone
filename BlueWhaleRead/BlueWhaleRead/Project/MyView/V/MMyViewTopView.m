@@ -127,7 +127,7 @@
     
     UIView * backview = [UIView new];
     backview.backgroundColor = RGBA(255, 255, 255, 1);
-    backview.layer.cornerRadius = LENGTH(12);
+    backview.layer.cornerRadius = LENGTH(10);
     [self addSubview:backview];
     [backview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(topview.mas_bottom).with.offset(-LENGTH(39));

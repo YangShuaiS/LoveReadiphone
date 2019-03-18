@@ -15,6 +15,7 @@
 @implementation NKRRecommendedView{
     NKRRecommendedCollectionView * collectView;
     NBCmenuView * menu;
+    CGFloat topheight;
 }
 
 - (instancetype)init
@@ -60,16 +61,33 @@
         make.bottom.equalTo(ws).with.offset(-LENGTH(14));
         make.height.mas_equalTo(itemHeight);
     }];
+    topheight = LENGTH(47);
 }
 - (void)setItemArray:(NSMutableArray *)itemArray{
     _itemArray = itemArray;
+    
     collectView.itemarray = itemArray;
 
+    if (itemArray.count == 0) {
+        menu.hidden = YES;
+        [menu mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }else{
+        [menu mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(self->topheight);
+        }];
+        menu.hidden = NO;
+
+    }
 }
 - (void)push{
     SearchMyHistoryViewController * vc = [SearchMyHistoryViewController new];
     vc.titles = @"我的视野";
     vc.style = 2;
     [[self viewController].navigationController pushViewController:vc animated:YES];
+}
+- (void)layoutSubviews{
+    [super layoutSubviews];
 }
 @end

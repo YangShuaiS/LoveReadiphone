@@ -8,6 +8,7 @@
 
 #import "ZhiShiShuRelationView.h"
 #import "ZhiShiShuRelationCollectionVIew.h"
+#import "JYEqualCellSpaceFlowLayout.h"
 @implementation ZhiShiShuRelationView{
     ZhiShiShuRelationCollectionVIew * collectView;
 }
@@ -21,7 +22,7 @@
 }
 - (void)addview{
     WS(ws);
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    JYEqualCellSpaceFlowLayout *flowLayout = [[JYEqualCellSpaceFlowLayout alloc] initWithType:AlignWithCenter betweenOfCell:5.0];
 //    flowLayout.itemSize = CGSizeMake(itemWidth,itemHeight);
     flowLayout.estimatedItemSize = CGSizeMake(20, 60);  // layout约束这边必须要用estimatedItemSize才能实现自适应,使用itemSzie无效
 

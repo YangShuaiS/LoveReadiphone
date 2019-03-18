@@ -23,6 +23,9 @@
     ZhiShiShuOneDownView * downview;
     NSMutableArray * modelarray;
     NSInteger nowindext;
+    UIImageView * bacimage;
+    
+    CGFloat lastscr;
 }
 - (void)viewWillAppear:(BOOL)animated{
 //    [self.navigationController setNavigationBarHidden:NO animated:animated];
@@ -99,7 +102,7 @@
 }
 - (void)addGuideKnowledgeOneView{
     WS(ws);
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
     if ([model.zhishiwang integerValue]<3) {
@@ -157,9 +160,9 @@
 //    UIImage *backgroundImage = [UIImage imageNamed:@"bg"];
 //    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
 //    self.view.backgroundColor = backgroundColor;
-    UIImageView * bacimage = [UIImageView new];
-    bacimage.contentMode = UIViewContentModeScaleAspectFill;
-    bacimage.image = UIIMAGE(@"bg");
+    bacimage = [UIImageView new];
+    bacimage.contentMode = UIViewContentModeScaleAspectFit;
+//    bacimage.image = UIIMAGE(@"bg-石");
     [self.view addSubview:bacimage];
     [bacimage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(ws.view);
@@ -289,7 +292,6 @@
 
     ZhiShiShuFLOneModel * model = modelarray[index];
     [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
-
     if (index == 0) {
         pointView.alpha = 1;
     }else{
@@ -311,7 +313,28 @@
     {
         return value * 1.9f;
     }
-    
+    CGFloat inter = carousel.currentItemIndex;
+    if (inter == carousel.scrollOffset) {
+        bacimage.alpha = 1;
+        lastscr = carousel.scrollOffset;
+    }else if (inter == 0 && carousel.scrollOffset+1>modelarray.count){
+        if (lastscr >carousel.scrollOffset) {
+            CGFloat pha = 1-(carousel.scrollOffset -(modelarray.count-1+0.5))*2;
+            bacimage.alpha = pha;
+        }else{
+            CGFloat pha = (carousel.scrollOffset -(modelarray.count-1+0.5))*2;
+            bacimage.alpha = pha;
+        }
+        lastscr = carousel.scrollOffset;
+    }else if (inter <= carousel.scrollOffset&&inter+0.5>= carousel.scrollOffset){
+        CGFloat pha = 1-(carousel.scrollOffset -inter)*2;
+        bacimage.alpha = pha;
+        lastscr = carousel.scrollOffset;
+    }else if (inter-0.5<=carousel.scrollOffset && inter>=carousel.scrollOffset){
+        CGFloat pha = (carousel.scrollOffset -(inter-0.5))*2;
+        bacimage.alpha = pha;
+        lastscr = carousel.scrollOffset;
+    }
     return value;
 }
 
@@ -328,6 +351,7 @@
         ZhiShiShuFLOneModel * model = modelarray[i];
 //        view.image = UIIMAGE(@"人文-孙悟空");
         if (carousel.currentItemIndex == i) {
+            [bacimage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.bg_img]]];
 //            [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
             view.alpha = 1;
 

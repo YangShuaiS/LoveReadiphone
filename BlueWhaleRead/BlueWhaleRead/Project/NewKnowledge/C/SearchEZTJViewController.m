@@ -27,7 +27,7 @@
     [self.view addSubview:tableview];
     [tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws.view).with.offset(LENGTH(0));
-        make.top.equalTo(ws.navtive.mas_bottom);
+        make.top.equalTo(ws.navtive.mas_bottom).with.offset(LENGTH(6));
         make.right.equalTo(ws.view).with.offset(LENGTH(0));
         make.bottom.equalTo(ws.view);
     }];

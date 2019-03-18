@@ -33,7 +33,7 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@" " RightTitle:@"" NativeStyle:NavStyleGeneral];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"个人资料 " RightTitle:@"" NativeStyle:NavStyleGeneral];
     self.navtive.titcolor = RGB(0, 0, 0);
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
@@ -85,7 +85,7 @@
         _tableView.baseview = self.view;
         [self.view addSubview:_tableView];
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(ws.navtive.mas_bottom).with.offset(0);
+            make.top.equalTo(ws.navtive.mas_bottom).with.offset(1);
             make.left.equalTo(ws.view).with.offset(0);
             make.right.equalTo(ws.view).with.offset(0);
             make.bottom.equalTo(ws.view).with.offset(0);

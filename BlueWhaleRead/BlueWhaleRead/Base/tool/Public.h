@@ -215,6 +215,7 @@
 #define ChildViewControllersCount self.navigationController.childViewControllers.count
 //plist文件
 #define UserMe @"UserMe.plist"
+#define BENDIXINXI @"BenDiXinXi-2.02"
 
 #define XAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 

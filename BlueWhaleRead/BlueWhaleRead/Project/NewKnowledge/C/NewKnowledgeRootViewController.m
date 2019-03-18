@@ -44,7 +44,7 @@
         make.top.equalTo(ws.view).with.offset(0);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
-        make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
+        make.bottom.equalTo(ws.view).with.offset(0);
     }];
     scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headRefresh)];
     

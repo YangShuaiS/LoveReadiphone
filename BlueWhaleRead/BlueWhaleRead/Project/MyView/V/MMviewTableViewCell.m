@@ -21,6 +21,7 @@
 }
 - (void)addview{
     WS(ws);
+    self.backgroundColor = [UIColor clearColor];
     imageview = [FLAnimatedImageView new];
     imageview.contentMode = UIViewContentModeScaleAspectFit;
 //    imageview.backgroundColor = RANDOMCOLOR;

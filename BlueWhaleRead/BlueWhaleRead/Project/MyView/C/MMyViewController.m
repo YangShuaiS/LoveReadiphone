@@ -52,7 +52,7 @@
         make.top.equalTo(ws.view).with.offset(0);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
-        make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
+        make.bottom.equalTo(ws.view).with.offset(0);
     }];
     
     
@@ -119,7 +119,7 @@
 }
 
 - (void)addGuideSZorSConeView{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
     if ([model.ydyszsc integerValue]<3) {

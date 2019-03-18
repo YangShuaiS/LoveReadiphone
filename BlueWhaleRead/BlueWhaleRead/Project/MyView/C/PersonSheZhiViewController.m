@@ -26,7 +26,8 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"设置" RightTitle:@"home-Click" NativeStyle:NavStyleGeneral];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"设置" RightTitle:@"" NativeStyle:NavStyleGeneral];
+    self.navtive.titcolor = RGB(0, 0, 0);
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
     [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -35,6 +36,11 @@
         make.top.equalTo(ws.view).with.offset(0);
         make.height.mas_equalTo(NavHeight);
     }];
+    self.navtive.backgroundColor = [UIColor whiteColor];
+    self.navtive.layer.shadowColor = RGB(0, 0, 0).CGColor;
+    self.navtive.layer.shadowOffset = CGSizeMake(0,2);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+    self.navtive.layer.shadowRadius = 4;
+    self.navtive.layer.shadowOpacity = 0.04;
     
 }
 - (void)NavLeftClick{
@@ -55,7 +61,7 @@
     _tableView.nav = self.navigationController;
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.navtive.mas_bottom).with.offset(0);
+        make.top.equalTo(ws.navtive.mas_bottom).with.offset(1);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(0);

@@ -43,6 +43,7 @@
     return self;
 }
 - (void)setTitle:(NSString *)title{
+    _title = title;
     titleLable.text = title;
 }
 - (void)setNativeStyle:(NavStyle)nativeStyle{
@@ -126,6 +127,7 @@
     [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(ws).with.offset(0);
         make.centerY.mas_equalTo(ws).with.offset(StatusBar/2);
+        make.width.mas_equalTo(ws).multipliedBy(0.5);
 
 //        make.bottom.equalTo(ws).with.offset(0);
 //        make.height.mas_equalTo(@44);

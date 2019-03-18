@@ -77,8 +77,10 @@
         text.numberOfLines = 0;
         [view addSubview:text];
         [text mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(10);
+//            make.centerY.mas_equalTo(10);
 //            make.edges.mas_equalTo(view);
-            make.top.and.left.and.right.mas_equalTo(view);
+            make.left.and.right.mas_equalTo(view);
         }];
         [labelviewarray addObject:view];
         [labelarray addObject:text];
@@ -88,21 +90,94 @@
 
 - (void)setSizefloat:(CGFloat)sizefloat{
     _sizefloat = sizefloat;
-    for (NSInteger i = 0; i <_axidataarry.count; i++) {
-        ZhiShiShuTimeLineModel * model = _axidataarry[i];
-        CGFloat star = model.start_y;
-        CGFloat end = model.end_y;
-        if (star*poinw<sizefloat&&end*poinw>sizefloat) {
-            BaseLabel * label = labelarray[i];
-            BaseView * view = labelviewarray[i];
-            
-            WS(ws);
-            [label mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(view).with.offset(sizefloat-star*poinw);
-            }];
-            break;
+    dispatch_queue_t queue = dispatch_queue_create("net.bujige.testQueue", DISPATCH_QUEUE_SERIAL);
+    __block ZhiShiSHuLeftView * blockSelf = self;
+    dispatch_sync(queue, ^{
+        for (int i = 0 ; i < blockSelf.axidataarry.count; i ++) {
+            ZhiShiShuTimeLineModel * model =blockSelf.axidataarry[i];
+            CGFloat star = model.start_y * poinw;
+            CGFloat end = model.end_y * poinw;
+            BaseLabel * label = blockSelf->labelarray[i];
+            BaseView * view = blockSelf->labelviewarray[i];
+            CGFloat downy = 0.0;
+            if (star <= sizefloat && end > sizefloat){
+                if (sizefloat + blockSelf.neirongheight < end) {
+                    downy = sizefloat - star + blockSelf.neirongheight/2;
+                }else{
+                    downy = (end - blockSelf.sizefloat)/2+ blockSelf.sizefloat- star;
+                }
+            }
+            if (star > sizefloat && end > sizefloat && end < sizefloat +blockSelf.neirongheight) {
+                downy = (end-star)/2;
+            }
+            if (star > sizefloat && end > sizefloat + blockSelf.neirongheight ) {
+                downy = (blockSelf.sizefloat + blockSelf.neirongheight - star)/2;
+            }
+            downy = downy- label.frame.size.height/2;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [label mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(view).with.offset(downy);
+//                    make.centerY.mas_equalTo(downy);
+
+                }];
+            });
+
         }
-    }
+    });
+
+    
+//    for (NSInteger i = 0; i <_axidataarry.count; i++) {
+//        ZhiShiShuTimeLineModel * model = _axidataarry[i];
+//        CGFloat star = model.start_y * poinw;
+//        CGFloat end = model.end_y * poinw;
+//        if (star < sizefloat && end > sizefloat) {
+//            BaseLabel * label = labelarray[i];
+//            BaseView * view = labelviewarray[i];
+//
+//            if (sizefloat + _neirongheight < end) {
+//                CGFloat topcenty = sizefloat - star + _neirongheight/2;
+//                [label mas_updateConstraints:^(MASConstraintMaker *make) {
+//                    make.top.mas_equalTo(view).with.offset(topcenty);
+//                }];
+//            }else{
+//                CGFloat topcenty = sizefloat - star + (end - sizefloat)/2;
+//                [label mas_updateConstraints:^(MASConstraintMaker *make) {
+//                    make.top.mas_equalTo(view).with.offset(topcenty);
+//                }];
+//                if (i != _axidataarry.count-1) {
+//                    ZhiShiShuTimeLineModel * model1 = _axidataarry[i+1];
+//                    CGFloat star1 = model1.start_y * poinw;
+//                    CGFloat end1 = model1.end_y * poinw;
+//
+//                    BaseLabel * label1 = labelarray[i+1];
+//                    BaseView * view1 = labelviewarray[i+1];
+//                    CGFloat downy = 0.0;
+//                    downy = (_sizefloat + _neirongheight - star1)/2;
+//                    if (end < _sizefloat + _neirongheight && star1 < _sizefloat + _neirongheight) {
+//                        downy = (_sizefloat + _neirongheight - star - star1)/2;
+//                    }
+//
+//                    if (i + 2 < _axidataarry.count) {
+//                        ZhiShiShuTimeLineModel * model2 = _axidataarry[i+2];
+//                        CGFloat star2 = model1.start_y * poinw;
+//                        CGFloat end2 = model2.end_y * poinw;
+//                        BaseLabel * label2 = labelarray[i+2];
+//                        BaseView * view2 = labelviewarray[i+2];
+//                        if (end1 < _sizefloat + _neirongheight && star2 < _sizefloat + _neirongheight) {
+//                            downy = (_sizefloat + _neirongheight - star1 - star2)/2;
+//                        }
+//                    }
+//
+//
+//
+//                    [label1 mas_updateConstraints:^(MASConstraintMaker *make) {
+//                        make.top.mas_equalTo(view1).with.offset(downy);
+//                    }];
+//                }
+//            }
+//
+//        }
+//    }
     
 }
 @end

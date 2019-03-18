@@ -235,7 +235,7 @@ preferredStyle:UIAlertControllerStyleAlert];
     });
 }
 - (void)addGuideHomeOne{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
     if ([model.ydyhome integerValue]<3) {
@@ -253,7 +253,6 @@ preferredStyle:UIAlertControllerStyleAlert];
         NSString * str = [NSString stringWithFormat:@"%ld",[model.ydyhome integerValue]+1];
         [dataDictionary setValue:str forKey:@"ydyhome"];
         [dataDictionary writeToFile:filePatch atomically:YES];
-        
     }
 }
 - (void)GuideHomeTwo{
@@ -314,7 +313,7 @@ preferredStyle:UIAlertControllerStyleAlert];
         make.top.equalTo(ws.view).with.offset(0);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
-        make.bottom.equalTo(ws.view).with.offset(-TabBarHeight);
+        make.bottom.equalTo(ws.view).with.offset(0);
     }];
 //
     BaseView * lastview;
@@ -449,7 +448,7 @@ preferredStyle:UIAlertControllerStyleAlert];
  }
  */
 - (void)cshxx{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NSString *currentTimeString = [BaseObject NowTime];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];

@@ -26,7 +26,7 @@
     self.backgroundColor = [UIColor clearColor];
     WS(ws);
     imageView = [FLAnimatedImageView new];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.layer.masksToBounds = YES;
     imageView.layer.cornerRadius = LENGTH(5);
     imageView.backgroundColor = RGB(239, 239, 239);

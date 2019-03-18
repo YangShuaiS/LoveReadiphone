@@ -395,7 +395,7 @@
 
 #pragma mark ------------------ 引导页
 - (void)addGuideBookXqOneView{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
     if ([model.ydybookxq integerValue]<3) {

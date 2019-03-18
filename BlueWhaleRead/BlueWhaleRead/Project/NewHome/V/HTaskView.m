@@ -55,7 +55,7 @@
     [super layoutSubviews];
     WS(ws);
     navMenu = [NBCmenuView new];
-    navMenu.styles = NBCmenuViewStyleimage;
+//    navMenu.styles = NBCmenuViewStyleimage;
     navMenu.label.text = @"读书任务";
     [self addSubview:navMenu];
     [navMenu mas_makeConstraints:^(MASConstraintMaker *make) {

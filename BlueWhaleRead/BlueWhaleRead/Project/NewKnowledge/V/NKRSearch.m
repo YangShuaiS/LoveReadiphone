@@ -29,7 +29,7 @@
     }];
     
     UIView * backview = [UIView new];
-    backview.backgroundColor = RGB(248,248,248);
+    backview.backgroundColor = RGBA(248,248,248,0.75);
     backview.layer.masksToBounds = YES;
     backview.layer.cornerRadius = LENGTH(15);
     [self addSubview:backview];

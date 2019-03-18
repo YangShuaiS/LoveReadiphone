@@ -27,7 +27,7 @@
 - (void)addview{
     WS(ws);
     navMenu = [NBCmenuView new];
-    navMenu.styles = NBCmenuViewStyleimage;
+//    navMenu.styles = NBCmenuViewStyleimage;
     navMenu.label.text = @"每日格言";
     [self addSubview:navMenu];
     [navMenu mas_makeConstraints:^(MASConstraintMaker *make) {

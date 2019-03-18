@@ -58,7 +58,7 @@
 }
 
 - (void)backview{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -72,6 +72,7 @@
         fenxiangs.inter = 1;
         fenxiangs.shareid = [_model.type integerValue];
         fenxiangs.sharestyle = ShareStyleTag11;
+        fenxiangs.vc = [self viewController];
         [[self viewController].view addSubview:fenxiangs];
         [fenxiangs mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo([ws viewController].view);

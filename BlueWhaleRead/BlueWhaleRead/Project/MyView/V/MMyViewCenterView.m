@@ -22,10 +22,10 @@
 }
 - (void)addview{
     WS(ws);
-    self.backgroundColor = RGBA(255, 255, 255, 1);
+    self.backgroundColor = [UIColor clearColor];
     UIView * backview = [UIView new];
     backview.backgroundColor = RGBA(255, 255, 255, 1);
-    backview.layer.cornerRadius = LENGTH(12);
+    backview.layer.cornerRadius = LENGTH(10);
     [self addSubview:backview];
     [backview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws).with.offset(LENGTH(10));

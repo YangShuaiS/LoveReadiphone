@@ -12,7 +12,7 @@
 
 #import <WebKit/WebKit.h>
 #import "BookXqViewController.h"
-@interface LBTViewController ()<NavDelegate,WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler>
+@interface LBTViewController ()<NavDelegate,WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate>
 
 @end
 
@@ -30,7 +30,6 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,6 +40,7 @@
 }
 - (void)addView{
     scrollView = [UIScrollView new];
+    scrollView.delegate = self;
     scrollView.backgroundColor = [UIColor whiteColor];
     scrollView.userInteractionEnabled = YES;
     [self.view addSubview:scrollView];
@@ -57,11 +57,11 @@
     
 
     
-    name = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(8,8,8) LabelFont:TextFont(19) TextAlignment:NSTextAlignmentCenter Text:@""];
+    name = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(8,8,8) LabelFont:TextFontCu(22) TextAlignment:NSTextAlignmentLeft Text:@""];
     name.numberOfLines = 0;
     [scrollView addSubview:name];
     [name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->scrollView.mas_top).with.offset(LENGTH(40));
+        make.top.equalTo(self->scrollView.mas_top).with.offset(LENGTH(20));
         make.right.equalTo(ws.view).with.offset(-LENGTH(12));
         make.left.equalTo(ws.view).with.offset(LENGTH(12));
     }];
@@ -88,8 +88,8 @@
     [scrollView addSubview:webView];
     [webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self->time.mas_bottom).with.offset(LENGTH(10));
-        make.right.equalTo(ws.view).with.offset(-LENGTH(12));
-        make.left.equalTo(ws.view).with.offset(LENGTH(12));
+        make.right.equalTo(ws.view);
+        make.left.equalTo(ws.view);
         make.bottom.equalTo(self->scrollView.mas_bottom).with.offset(-LENGTH(10));
         make.height.mas_equalTo(1);
     }];
@@ -110,7 +110,8 @@
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"" RightTitle:@"" NativeStyle:NavStyleGeneral];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"" RightTitle:@"" NativeStyle:NavStyleGeneral];
+    self.navtive.titcolor = RGB(0, 0, 0);
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
     [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -119,9 +120,15 @@
         make.top.equalTo(ws.view).with.offset(0);
         make.height.mas_equalTo(NavHeight);
     }];
+    self.navtive.backgroundColor = [UIColor whiteColor];
+    self.navtive.layer.shadowColor = RGB(0, 0, 0).CGColor;
+    self.navtive.layer.shadowOffset = CGSizeMake(0,2);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+    self.navtive.layer.shadowRadius = LENGTH(4);
+    self.navtive.layer.shadowOpacity = 0.04;
     
     sharefriend = [FLAnimatedImageView new];
-    sharefriend.image = UIIMAGE(@"4343");
+    sharefriend.image = UIIMAGE(@"组 928");
+    sharefriend.contentMode = UIViewContentModeScaleAspectFit;
     [self.navtive addSubview:sharefriend];
     [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
@@ -190,7 +197,9 @@
     _imageurl = [NSString stringWithFormat:@"%@%@",ZSFWQ,model.banner.banner_img];
     time.text = [BaseObject TiemArray:model.banner.create_time String:@" "][0];
 //    name.text = model.banner.
-    name.text = model.banner.title; 
+    name.text = model.banner.title;
+    self.navtive.title = @"";
+
     NSString * str = model.banner.content;
     NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'></header>";
     [webView loadHTMLString:[headerString stringByAppendingString:str] baseURL:nil];
@@ -289,5 +298,16 @@
     BookXqViewController * vc = [BookXqViewController new];
     vc.loadId = dic[@"id"];
     [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y > name.frame.origin.x + name.frame.size.height) {
+        if ([self.navtive.title isEqualToString:@""]) {
+            self.navtive.title = name.text;
+        }
+    }else{
+        if ([self.navtive.title isEqualToString:name.text]) {
+            self.navtive.title = @"";
+        }
+    }
 }
 @end

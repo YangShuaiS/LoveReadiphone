@@ -172,7 +172,7 @@
     [self bookcity];
 }
 - (void)addGuideDaTiOneView{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
     if ([model.ydydati integerValue]<3) {

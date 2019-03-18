@@ -61,11 +61,22 @@
 - (void)setItemarray:(NSMutableArray *)itemarray{
     _itemarray = itemarray;
     [self reloadData];
-}
 
+}
 - (void)layoutSubviews{
     [super layoutSubviews];
     WS(ws);
+
+//    if (self.contentSize.width>WIDTH) {
+//        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.mas_equalTo(WIDTH);
+//        }];
+//    }else{
+//        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.mas_equalTo(ws.contentSize.width);
+//        }];
+//    }
+//    [self layoutIfNeeded];
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(ws.contentSize.height);
     }];

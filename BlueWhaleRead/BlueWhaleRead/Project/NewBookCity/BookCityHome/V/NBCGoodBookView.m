@@ -46,7 +46,7 @@
     //定义每个UICollectionView 纵向的间距
     flowLayout.minimumInteritemSpacing = LENGTH(14);
     //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, LENGTH(25), 0, LENGTH(25));//上左下右
+    flowLayout.sectionInset = UIEdgeInsetsMake(LENGTH(5), LENGTH(25), 0, LENGTH(25));//上左下右
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     collectView = [[NBCGoodBookCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
@@ -55,7 +55,7 @@
     [self addSubview:collectView];
     [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(0);
-        make.top.equalTo(self->menu.mas_bottom).with.offset(LENGTH(0));
+        make.top.equalTo(self->menu.mas_bottom).with.offset(-LENGTH(5));
         make.right.equalTo(ws).with.offset(0);
         make.bottom.equalTo(ws).with.offset(-LENGTH(15));
         make.height.mas_equalTo(itemHeight);

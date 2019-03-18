@@ -11,7 +11,7 @@
 #import <Photos/Photos.h>
 #import "BaseNavigationViewController.h"
 #import "UserLoginViewController.h"
-@interface BaseViewController ()<UITabBarControllerDelegate>{
+@interface BaseViewController (){
     NSInteger _currentIndex;
 }
 
@@ -24,7 +24,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tabBarController.delegate = self;
+//    self.tabBarController.delegate = self;
     self.automaticallyAdjustsScrollViewInsets = NO;
     if (@available(iOS 11.0, *)) {
         UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;

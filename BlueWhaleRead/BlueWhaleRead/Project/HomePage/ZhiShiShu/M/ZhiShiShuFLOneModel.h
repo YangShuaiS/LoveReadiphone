@@ -18,6 +18,7 @@
 
 @property(nonatomic,strong)NSString * status;//状态 1 可点击
 @property(nonatomic,strong)NSString * n_logo;//不可点击图片
+@property(nonatomic,strong)NSString * bg_img;//背景图
 
 
 

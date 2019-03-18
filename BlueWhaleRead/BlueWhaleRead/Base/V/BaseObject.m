@@ -571,7 +571,7 @@ MeModel * Me = nil;
 }
 
 + (NSMutableDictionary *)BenDiXinXi{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
     return dataDictionary;
 }

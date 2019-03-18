@@ -502,7 +502,7 @@
     [self shareWithParameters:parameters];
 }
 - (void)jlxinxi{
-    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",@"bendixinxi"]];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -598,7 +598,7 @@
      }];
 }
 - (void)hb{
-    if (_sharestyle == ShareStyleTag9 || _sharestyle == ShareStyleTag10) {
+    if (_sharestyle == ShareStyleTag9 || _sharestyle == ShareStyleTag10 ||_sharestyle == ShareStyleTag11) {
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = url;
         UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"复制" message:@"已复制剪切板" preferredStyle:UIAlertControllerStyleAlert];

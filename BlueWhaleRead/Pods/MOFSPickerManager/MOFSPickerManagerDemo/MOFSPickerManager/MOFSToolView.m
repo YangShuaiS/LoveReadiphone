@@ -8,7 +8,7 @@
 
 #import "MOFSToolView.h"
 
-#define BAR_COLOR [UIColor colorWithRed:0.090  green:0.463  blue:0.906 alpha:1]
+#define BAR_COLOR [UIColor colorWithRed:91/255.0f  green:199/255.0f  blue:198/255.0f alpha:1]
 #define LINE_COLOR [UIColor colorWithRed:0.804  green:0.804  blue:0.804 alpha:1]
 #define UISCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define UISCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -22,7 +22,7 @@
         //self.translatesAutoresizingMaskIntoConstraints = false;
         
         _cancelBar = [UILabel new];
-        _cancelBar.font = [UIFont systemFontOfSize:14];
+        _cancelBar.font = [UIFont systemFontOfSize:18];
         _cancelBar.textColor = BAR_COLOR;
         _cancelBar.text = @"取消";
         _cancelBar.textAlignment = NSTextAlignmentLeft;
@@ -34,16 +34,16 @@
         [_cancelBar setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
         
         _titleBar = [UILabel new];
-        _titleBar.font = [UIFont systemFontOfSize:14];
+        _titleBar.font = [UIFont systemFontOfSize:18];
         _titleBar.text = @"标题";
         _titleBar.textAlignment = NSTextAlignmentCenter;
-        _titleBar.textColor = LINE_COLOR;
+        _titleBar.textColor = BAR_COLOR;
         [self addSubview:_titleBar];
         [_titleBar setTranslatesAutoresizingMaskIntoConstraints:false];
         [_titleBar setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
         
         _commitBar = [UILabel new];
-        _commitBar.font = [UIFont systemFontOfSize:14];
+        _commitBar.font = [UIFont systemFontOfSize:18];
         _commitBar.textColor = BAR_COLOR;
         _commitBar.text = @"完成";
         _commitBar.textAlignment = NSTextAlignmentRight;

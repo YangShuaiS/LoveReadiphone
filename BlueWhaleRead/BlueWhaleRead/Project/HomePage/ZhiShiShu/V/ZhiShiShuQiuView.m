@@ -9,6 +9,7 @@
 #import "ZhiShiShuQiuView.h"
 #import "ZhiShiSHuQiuCollectionViewCell.h"
 #import "ZhiShiShuShuViewController.h"
+#import "ClassJingQingQiDaiView.h"
 @interface ZhiShiShuQiuView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
@@ -62,12 +63,20 @@
             [self.nav pushViewController:vc animated:YES];
         }
     }else{
-        [[MBProgressHUDYS SharedMBProgressHUDYS] addview:self.window];
-        [[MBProgressHUDYS SharedMBProgressHUDYS] shoumessage:@"敬请期待"];
-        [[MBProgressHUDYS SharedMBProgressHUDYS] hideAnimated:YES afterDelay:1];
+        [self remoview];
+//        [[MBProgressHUDYS SharedMBProgressHUDYS] addview:self.window];
+//        [[MBProgressHUDYS SharedMBProgressHUDYS] shoumessage:@"敬请期待"];
+//        [[MBProgressHUDYS SharedMBProgressHUDYS] hideAnimated:YES afterDelay:1];
     }
 }
-
+- (void)remoview{
+    WS(ws);
+    ClassJingQingQiDaiView * view = [ClassJingQingQiDaiView new];
+    [[self viewController].view.window addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([ws viewController].view.window);
+    }];
+}
 
 - (void)layoutSubviews{
     [super layoutSubviews];

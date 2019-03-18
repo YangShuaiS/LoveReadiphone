@@ -49,7 +49,7 @@
         make.height.mas_equalTo(LENGTH(108));
     }];
     imageview.layer.masksToBounds = YES;
-    imageview.layer.cornerRadius = LENGTH(8);
+    imageview.layer.cornerRadius = LENGTH(10);
     imageview.userInteractionEnabled = YES;
     UITapGestureRecognizer * tapviewtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backview)];
     //将手势添加到需要相应的view中去

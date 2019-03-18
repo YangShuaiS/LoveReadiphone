@@ -7,8 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "CYLPlusButtonSubclass.h"
+
 #import "BaseNavigationViewController.h"
-#import "MainTabBarViewController.h"
+#import "MainTabBarController.h"
 #import "UserLoginViewController.h"
 #import "DTLianXUanXIang.h"
 #import "WXApi.h"
@@ -21,11 +23,13 @@
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
-@interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate>
+@interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate,CYLTabBarControllerDelegate,UITabBarControllerDelegate>
+@property (nonatomic, weak) UIButton *selectedCover;
 
 @end
 
 @implementation AppDelegate
+#define RANDOM_COLOR [UIColor colorWithHue: (arc4random() % 256 / 256.0) saturation:((arc4random()% 128 / 256.0 ) + 0.5) brightness:(( arc4random() % 128 / 256.0 ) + 0.5) alpha:1]
 
 - (void)uodatazsfwq{
     static dispatch_once_t onceToken;
@@ -152,7 +156,11 @@
         self.window.rootViewController = homenav;
         [self.window makeKeyAndVisible];
     }else{
-        MainTabBarViewController * main = [MainTabBarViewController new];
+        [CYLPlusButtonSubclass registerPlusButton];
+        MainTabBarController * main = [MainTabBarController new];
+        main.delegate = self;
+        [main hideTabBadgeBackgroundSeparator];
+        [self customizeInterfaceWithTabBarController:main];
         self.window.rootViewController = main;
         [self.window makeKeyWindow];
     }
@@ -164,9 +172,13 @@
 
 - (void)denglu{
     [self.window.rootViewController removeFromParentViewController];
-    MainTabBarViewController * main = [MainTabBarViewController new];
+    [CYLPlusButtonSubclass registerPlusButton];
+    MainTabBarController * main = [MainTabBarController new];
+    main.delegate = self;
+    [main hideTabBadgeBackgroundSeparator];
+    [self customizeInterfaceWithTabBarController:main];
     self.window.rootViewController = main;
-    [self.window makeKeyAndVisible];
+    [self.window makeKeyWindow];
 }
 - (void)tuichudenglu{
     [self.window.rootViewController removeFromParentViewController];
@@ -373,7 +385,6 @@
     
     if([resp isKindOfClass:[WXSubscribeMsgResp class]]){//判断是否为授权登录类
         WXSubscribeMsgResp *req = (WXSubscribeMsgResp *)resp;
-        NSLog(@"###### %@",req.openId);
     }
 }
 -(BOOL) sendReq:(BaseReq*)req{
@@ -563,6 +574,183 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:body delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alertView show];
     }
+}
+
+
+
+
+- (void)setSelectedCoverShow:(BOOL)show {
+    if (_selectedCover.superview && show) {
+        [self addOnceScaleAnimationOnView:_selectedCover];
+        return;
+    }
+    UIControl *selectedTabButton = [[self cyl_tabBarController].viewControllers[0].tabBarItem cyl_tabButton];
+    if (show && !_selectedCover.superview) {
+        UIButton *selectedCover = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImage *image = [UIImage imageNamed:@"home_select_cover"];
+        [selectedCover setImage:image forState:UIControlStateNormal];
+        selectedCover.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+        if (selectedTabButton) {
+            selectedCover.center = CGPointMake(selectedTabButton.cyl_tabImageView.center.x, selectedTabButton.center.y);
+            [self addOnceScaleAnimationOnView:selectedCover];
+            [selectedTabButton addSubview:(_selectedCover = selectedCover)];
+            [selectedTabButton bringSubviewToFront:_selectedCover];
+        }
+    } else if (_selectedCover.superview){
+        [_selectedCover removeFromSuperview];
+        _selectedCover = nil;
+    }
+    if (selectedTabButton) {
+        selectedTabButton.cyl_tabLabel.hidden =
+        (show );
+        selectedTabButton.cyl_tabImageView.hidden = (show);
+    }
+}
+
+//缩放动画
+- (void)addOnceScaleAnimationOnView:(UIView *)animationView {
+    //需要实现的帧动画，这里根据需求自定义
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    animation.keyPath = @"transform.scale";
+    animation.values = @[@0.5, @1.0];
+    animation.duration = 0.1;
+    //    animation.repeatCount = repeatCount;
+    animation.calculationMode = kCAAnimationCubic;
+    [animationView.layer addAnimation:animation forKey:nil];
+}
+
+- (void)customizeInterfaceWithTabBarController:(CYLTabBarController *)tabBarController {
+    //设置导航栏
+    [self setUpNavigationBarAppearance];
+    
+    [tabBarController hideTabBadgeBackgroundSeparator];
+    //添加小红点
+//    UIViewController *viewController = tabBarController.viewControllers[0];
+//    UIView *tabBadgePointView0 = [UIView cyl_tabBadgePointViewWithClolor:RANDOM_COLOR radius:4.5];
+//    [viewController.tabBarItem.cyl_tabButton cyl_setTabBadgePointView:tabBadgePointView0];
+//    [viewController cyl_showTabBadgePoint];
+//
+//    UIView *tabBadgePointView1 = [UIView cyl_tabBadgePointViewWithClolor:RANDOM_COLOR radius:4.5];
+//    @try {
+//        [tabBarController.viewControllers[1] cyl_setTabBadgePointView:tabBadgePointView1];
+//        [tabBarController.viewControllers[1] cyl_showTabBadgePoint];
+//
+//        UIView *tabBadgePointView2 = [UIView cyl_tabBadgePointViewWithClolor:RANDOM_COLOR radius:4.5];
+//        [tabBarController.viewControllers[2] cyl_setTabBadgePointView:tabBadgePointView2];
+//        [tabBarController.viewControllers[2] cyl_showTabBadgePoint];
+//
+//        [tabBarController.viewControllers[3] cyl_showTabBadgePoint];
+//
+//        //添加提示动画，引导用户点击
+//        [self addScaleAnimationOnView:tabBarController.viewControllers[3].cyl_tabButton.cyl_tabImageView repeatCount:20];
+//    } @catch (NSException *exception) {}
+    
+}
+
+/**
+ *  设置navigationBar样式
+ */
+- (void)setUpNavigationBarAppearance {
+    UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
+    
+    UIImage *backgroundImage = nil;
+    NSDictionary *textAttributes = nil;
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        backgroundImage = [UIImage imageNamed:@"navigationbar_background_tall"];
+        
+        textAttributes = @{
+                           NSFontAttributeName : [UIFont boldSystemFontOfSize:18],
+                           NSForegroundColorAttributeName : [UIColor whiteColor],
+                           };
+    } else {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+        backgroundImage = [UIImage imageNamed:@"navigationbar_background"];
+        textAttributes = @{
+                           UITextAttributeFont : [UIFont boldSystemFontOfSize:18],
+                           UITextAttributeTextColor : [UIColor blackColor],
+                           UITextAttributeTextShadowColor : [UIColor clearColor],
+                           UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetZero],
+                           };
+#endif
+    }
+    
+    [navigationBarAppearance setBackgroundImage:backgroundImage
+                                  forBarMetrics:UIBarMetricsDefault];
+    [navigationBarAppearance setTitleTextAttributes:textAttributes];
+    
+}
+
+
+#pragma mark - delegate
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    BOOL should = YES;
+    [[self cyl_tabBarController] updateSelectionStatusIfNeededForTabBarController:tabBarController shouldSelectViewController:viewController];
+    return should;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectControl:(UIControl *)control {
+    UIView *animationView;
+    //    NSLog(@"🔴类名与方法名：%@（在第%@行），描述：tabBarChildViewControllerIndex: %@, tabBarItemVisibleIndex : %@", @(__PRETTY_FUNCTION__), @(__LINE__), @(control.cyl_tabBarChildViewControllerIndex), @(control.cyl_tabBarItemVisibleIndex));
+    if ([control cyl_isTabButton]) {
+        //更改红标状态
+//        if ([[self cyl_tabBarController].selectedViewController cyl_isShowTabBadgePoint]) {
+//            [[self cyl_tabBarController].selectedViewController cyl_removeTabBadgePoint];
+//        } else {
+//            [[self cyl_tabBarController].selectedViewController cyl_showTabBadgePoint];
+//        }
+        animationView = [control cyl_tabImageView];
+    }
+    
+    UIButton *button = CYLExternPlusButton;
+    BOOL isPlusButton = [control cyl_isPlusButton];
+    // 即使 PlusButton 也添加了点击事件，点击 PlusButton 后也会触发该代理方法。
+    if (isPlusButton) {
+        animationView = button.imageView;
+    }
+            [self addScaleAnimationOnView:animationView repeatCount:1];
+
+//    [self addRotateAnimationOnView:animationView];
+//
+//    if ([self cyl_tabBarController].selectedIndex % 2 == 0) {
+//    } else {
+//    }
+    
+    //添加仿淘宝tabbar，第一个tab选中后有图标覆盖
+    //    if ([control cyl_isTabButton]|| [control cyl_isPlusButton]) {
+    //        BOOL shouldSelectedCoverShow = ([self cyl_tabBarController].selectedIndex == 0);
+    //        [self setSelectedCoverShow:shouldSelectedCoverShow];
+    //    }
+    
+}
+
+//缩放动画
+- (void)addScaleAnimationOnView:(UIView *)animationView repeatCount:(float)repeatCount {
+    //需要实现的帧动画，这里根据需求自定义
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    animation.keyPath = @"transform.scale";
+    animation.values = @[@1.0,@1.3,@0.9,@1.15,@0.95,@1.02,@1.0];
+    animation.duration = 1;
+    animation.repeatCount = repeatCount;
+    animation.calculationMode = kCAAnimationCubic;
+    [animationView.layer addAnimation:animation forKey:nil];
+}
+
+//旋转动画
+- (void)addRotateAnimationOnView:(UIView *)animationView {
+    // 针对旋转动画，需要将旋转轴向屏幕外侧平移，最大图片宽度的一半
+    // 否则背景与按钮图片处于同一层次，当按钮图片旋转时，转轴就在背景图上，动画时会有一部分在背景图之下。
+    // 动画结束后复位
+    animationView.layer.zPosition = 65.f / 2;
+    [UIView animateWithDuration:0.32 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        animationView.layer.transform = CATransform3DMakeRotation(M_PI, 0, 1, 0);
+    } completion:nil];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.70 delay:0 usingSpringWithDamping:1 initialSpringVelocity:0.2 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            animationView.layer.transform = CATransform3DMakeRotation(2 * M_PI, 0, 1, 0);
+        } completion:nil];
+    });
 }
 
 

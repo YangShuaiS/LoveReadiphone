@@ -29,10 +29,10 @@
     imageView.backgroundColor = RGB(239, 239, 239);
     [self addSubview:imageView];
     
-    onetitle = [[BaseLabel alloc] initWithTxteColor:RGB(31, 31, 31) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@"四大名著：西游记"];
+    onetitle = [[BaseLabel alloc] initWithTxteColor:RGB(31, 31, 31) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:onetitle];
     
-    twotitle = [[BaseLabel alloc] initWithTxteColor:RGB(175, 175, 175) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentLeft Text:@"一部浪漫主义长篇神魔小说"];
+    twotitle = [[BaseLabel alloc] initWithTxteColor:RGB(175, 175, 175) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:twotitle];
 
 }

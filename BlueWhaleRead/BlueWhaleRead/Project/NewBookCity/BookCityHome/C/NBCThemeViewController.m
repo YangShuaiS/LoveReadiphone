@@ -48,6 +48,7 @@
     
     FLAnimatedImageView * sharefriend = [FLAnimatedImageView new];
     sharefriend.image = UIIMAGE(@"组 928");
+    sharefriend.contentMode = UIViewContentModeScaleAspectFit;
     [self.navtive addSubview:sharefriend];
     [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);

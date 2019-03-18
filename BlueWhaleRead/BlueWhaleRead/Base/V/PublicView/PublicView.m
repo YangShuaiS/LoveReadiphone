@@ -38,7 +38,7 @@
     DownView = [BaseView new];
     DownView.backgroundColor = RGB(235,237,238);
     DownView.layer.masksToBounds = YES;
-    DownView.layer.cornerRadius = LENGTH(15);
+    DownView.layer.cornerRadius = LENGTH(10);
     [self addSubview:DownView];
     
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];

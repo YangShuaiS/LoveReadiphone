@@ -72,7 +72,7 @@
     
     imageview = [FLAnimatedImageView new];
 //    imageview.layer.masksToBounds = YES;
-    imageview.contentMode = UIViewContentModeScaleAspectFit;
+    imageview.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(ws);
@@ -132,7 +132,6 @@
         make.height.mas_equalTo(neirong.height*poinw);
     }];
 //    [self->textimag sd_setImageWithURL:[NSURL URLWithString:imageurl]];
-    label.text = neirong.name;
     if ([neirong.vi_logo isEqualToString:@""]) {
         label.textAlignment = NSTextAlignmentCenter;
         [textimag mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -146,8 +145,9 @@
         }];
         label.textAlignment = NSTextAlignmentLeft;
     }
-//    label.text = @"水电费水电费\n水电费\n水电费水电费\n水电费";
-
+//    label.text = @"地球/n地球自转一圈\n是一天";
+    label.text  = neirong.name;
+//    label.text = [[NSString stringWithFormat:@"%@",neirong.name]  stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
     NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTX,neirong.vi_logo];
     [self->textimag sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo]];
     

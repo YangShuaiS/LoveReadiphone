@@ -50,6 +50,7 @@
         }];
         if (![_datamodel.knowledge_info isEqualToString:@""]) {
             BaseLabel * label  =[[ BaseLabel alloc] initWithTxteColor:[BaseObject colorWithHexString:_datamodel.txt_color] LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:_datamodel.knowledge_info];
+            label.numberOfLines = 0;
             [topview addSubview:label];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.mas_equalTo(self->topview).with.insets(UIEdgeInsetsMake(LENGTH(12), LENGTH(12), LENGTH(12), LENGTH(12)));
@@ -120,19 +121,19 @@
 - (void)setLabelheight:(CGFloat)labelheight{
     _labelheight = labelheight;
     if (topview.frame.size.height == 0) {
-        
+
     }else{
         WS(ws);
         if (labelheight<=topview.frame.size.height+toplabeltr) {
                 [topview mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(ws).with.offset(-labelheight);
-                }];    
+                    make.top.mas_equalTo(ws).with.offset(self->toplabeltr-labelheight);
+                }];
         }else{
             [topview mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(ws).with.offset(-self->topview.frame.size.height-self->toplabeltr);
+                make.top.mas_equalTo(ws).with.offset(-self->topview.frame.size.height);
             }];
         }
     }
-
 }
+
 @end

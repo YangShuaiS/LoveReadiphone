@@ -49,7 +49,7 @@
     //定义每个UICollectionView 纵向的间距
     flowLayout.minimumInteritemSpacing = LENGTH(0);
     //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, LENGTH(24), 0, LENGTH(24));//上左下右
+    flowLayout.sectionInset = UIEdgeInsetsMake(LENGTH(5), LENGTH(24), 0, LENGTH(24));//上左下右
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     collectView = [[HomeModerateCollectView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
@@ -57,7 +57,7 @@
     [self addSubview:collectView];
     [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(0);
-        make.top.equalTo(self->navMenu.mas_bottom).with.offset(LENGTH(0));
+        make.top.equalTo(self->navMenu.mas_bottom).with.offset(-LENGTH(5));
         make.right.equalTo(ws).with.offset(0);
         make.bottom.equalTo(ws).with.offset(-LENGTH(18));
     }];

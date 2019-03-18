@@ -35,7 +35,7 @@
     backview.layer.shadowColor = RGB(171, 171, 171).CGColor;
     backview.layer.shadowRadius = LENGTH(8);
     backview.layer.shadowOffset = CGSizeMake(0,4);
-    backview.layer.cornerRadius = LENGTH(12);
+    backview.layer.cornerRadius = LENGTH(10);
     
     UIImageView * backviews = [UIImageView new];
     backviews.userInteractionEnabled = YES;
@@ -43,7 +43,7 @@
     backviews.image = UIIMAGE(@"测试任务背景");
     backviews.backgroundColor = RGB(255, 255, 255);
     backviews.layer.masksToBounds = YES;
-    backviews.layer.cornerRadius = LENGTH(12);
+    backviews.layer.cornerRadius = LENGTH(10);
     [backview addSubview:backviews];
     [backviews mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(backview).with.insets(UIEdgeInsetsMake(0, LENGTH(0), LENGTH(0), LENGTH(0)));

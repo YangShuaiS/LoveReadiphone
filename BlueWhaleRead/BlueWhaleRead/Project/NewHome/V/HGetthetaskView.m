@@ -33,10 +33,10 @@
     backview.layer.shadowOpacity = 0.24;
     backview.layer.shadowColor = RGB(171, 171, 171).CGColor;
     backview.layer.shadowRadius = LENGTH(16);
-    backview.layer.shadowOffset = CGSizeMake(0,4);
-    backview.layer.cornerRadius = LENGTH(12);
+    backview.layer.shadowOffset = CGSizeMake(0,8);
+    backview.layer.cornerRadius = LENGTH(10);
     
-    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(51, 51, 51) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:[NSString stringWithFormat:@"亲爱的 %@同学～你还没有属于自己的读书任务哦，快来制定你的读书任务吧！",Me.name]];
+    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(51, 51, 51) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:[NSString stringWithFormat:@"亲爱的 %@ 同学～你还没有属于自己的读书任务哦，快来制定你的读书任务吧！",Me.name]];
     title.numberOfLines = 0;
     [backview addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -48,6 +48,7 @@
     model1.textString = title.text;
     model1.bianString = Me.name;
     model1.color = RGB(91,199,198);
+    model1.fount = 17;
     
     AttributedStringModel * model2 = [AttributedStringModel new];
     model2.textString = title.text;

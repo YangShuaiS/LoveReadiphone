@@ -55,7 +55,7 @@
     backview.layer.shadowColor = RGB(171, 171, 171).CGColor;
     backview.layer.shadowRadius = LENGTH(8);
     backview.layer.shadowOffset = CGSizeMake(0,4);
-    backview.layer.cornerRadius = LENGTH(12);
+    backview.layer.cornerRadius = LENGTH(10);
     
     
     leftimage = [UIImageView new];

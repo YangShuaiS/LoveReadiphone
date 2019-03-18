@@ -65,7 +65,7 @@
     //定义每个UICollectionView 纵向的间距
     flowLayout.minimumInteritemSpacing = LENGTH(12);
     //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(LENGTH(21), LENGTH(21 ), TabBarHeight, LENGTH(22));//上左下右
+    flowLayout.sectionInset = UIEdgeInsetsMake(0, LENGTH(21 ), TabBarHeight, LENGTH(22));//上左下右
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     nfcc = [[NBCchannelCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];

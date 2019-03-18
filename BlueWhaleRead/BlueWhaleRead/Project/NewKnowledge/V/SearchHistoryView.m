@@ -56,7 +56,7 @@
     [click addGestureRecognizer:backtap];
     
     SearchFlowLayout *flowLayout = [[SearchFlowLayout alloc] init];
-//        flowLayout.itemSize = CGSizeMake(10,10);
+//        flowLayout.itemSize = CGSizeMake(100,30);
     flowLayout.estimatedItemSize = CGSizeMake(20, 60);  // layout约束这边必须要用estimatedItemSize才能实现自适应,使用itemSzie无效
     
     //定义每个UICollectionView 横向的间距
@@ -71,8 +71,9 @@
     [self addSubview:collectView];
     [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(title.mas_bottom).with.offset(LENGTH(17));
-        make.left.and.right.mas_equalTo(ws); 
+        make.left.mas_equalTo(ws);
         make.bottom.mas_equalTo(ws);
+        make.width.mas_equalTo(WIDTH);
         make.height.mas_equalTo(LENGTH(60)+LENGTH(8));
     }];
     
@@ -82,10 +83,32 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(denglu) name:SEARCHHISTORY object:nil];
+    
+    if (collectView.itemarray.count == 1) {
+        [self upcollectView:collectView.itemarray[0]];
+    }else{
+        [collectView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(WIDTH);
+        }];
+    }
 }
 
 - (void)denglu{
     collectView.itemarray = [[NSUserDefaults standardUserDefaults] objectForKey:SEARCHHISTORY];
+    if (collectView.itemarray.count == 1) {
+        [self upcollectView:collectView.itemarray[0]];
+    }else{
+        [collectView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(WIDTH);
+        }];
+    }
+}
+- (void)upcollectView:(NSString *)title{
+    CGRect rect = [title boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 60) options:NSStringDrawingTruncatesLastVisibleLine| NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:LENGTH(13)]} context:nil];
+    CGFloat collwidth = rect.size.width+ LENGTH(28)+LENGTH(34);
+    [collectView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(collwidth);
+    }];
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
@@ -97,5 +120,21 @@
     
     NSNotification *notification =[NSNotification notificationWithName:SEARCHHISTORY object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    
+    
+    
+    NSInteger numberOfItems = [collectionView numberOfItemsInSection:0];
+    
+    CGFloat combinedItemWidth = (numberOfItems * collectionViewLayout.itemSize.width) + ((numberOfItems - 1)*collectionViewLayout.minimumInteritemSpacing);
+    
+    CGFloat padding = (collectionView.frame.size.width - combinedItemWidth)/2;
+    
+    padding = padding>0 ? padding :0 ;
+    
+    return UIEdgeInsetsMake(0, padding,0, padding);
+    
 }
 @end
