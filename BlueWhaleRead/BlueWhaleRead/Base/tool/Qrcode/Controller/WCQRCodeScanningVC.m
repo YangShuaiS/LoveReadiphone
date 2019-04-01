@@ -9,7 +9,7 @@
 #import "WCQRCodeScanningVC.h"
 #import "SGQRCode.h"
 #import "ScanSuccessJumpVC.h"
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 
 #import "SaoMaBookViewController.h"
 @interface WCQRCodeScanningVC () <SGQRCodeScanManagerDelegate, SGQRCodeAlbumManagerDelegate>

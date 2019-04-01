@@ -50,9 +50,9 @@
     [super AddNavtion];
     nowindext = 0;
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"知识网" RightTitle:@"" NativeStyle:NavStyleLeftImageAndRightImageAndCenter];
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"知识网" RightTitle:@"" NativeStyle:NavStyleLeftImageAndRightImageAndCenter];
     self.navtive.backgroundColor = [UIColor clearColor];
-    self.navtive.titcolor = RGB(51,51,51);
+    self.navtive.titcolor = RGB(255,255,255);
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
     [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -77,6 +77,7 @@
 }
 
 - (void)loadUpData{
+    __weak ZhiShiShuViewController * blockSelf = self;
     //    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_FOUND];
 //    NSString * url = [NSString stringWithFormat:@"%@%@",ZSTX,JK_ZHISHITIXIXIFENLEI];
 //    NSString * url = @"http://119.90.89.88:9001/knowledge/get-type";
@@ -90,18 +91,31 @@
                 self->modelarray = [NSMutableArray array];
                 self->modelarray = model.data;
                 [self->_carousel reloadData];
+                [blockSelf upcarousel];
+                if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[self class]]) {
+
                 static dispatch_once_t onceToken;
                 dispatch_once(&onceToken, ^{
                     [ws addGuideKnowledgeOneView];
                 });
+                }
             }
         }else{
             
         }
     }];
 }
+- (void)upcarousel{
+    for (int i = 0; i < modelarray.count; i++) {
+        ZhiShiShuFLOneModel * model = modelarray[i];
+        if ([model._id isEqualToString:_twoid]) {
+            [_carousel scrollToItemAtIndex:i animated:YES];
+            break;
+        }
+    }
+}
+    
 - (void)addGuideKnowledgeOneView{
-    WS(ws);
     NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
@@ -147,6 +161,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self loadUpData];
     WS(ws);
 //    ZhiShiShuScroVuew * scroview = [ZhiShiShuScroVuew new];
@@ -161,12 +176,26 @@
 //    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
 //    self.view.backgroundColor = backgroundColor;
     bacimage = [UIImageView new];
-    bacimage.contentMode = UIViewContentModeScaleAspectFit;
+    bacimage.contentMode = UIViewContentModeScaleAspectFill;
 //    bacimage.image = UIIMAGE(@"bg-石");
     [self.view addSubview:bacimage];
     [bacimage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(ws.view);
     }];
+    CAGradientLayer* gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    //    gradient.colors = @[(id)RGBA(0, 0, 0, 1),RGBA(0, 0, 0, 0)];
+    UIColor * color1 = RGBA(0, 0, 0, 0.5);
+    UIColor * color2 = RGBA(0, 0, 0, 0.15);
+    UIColor * color3 = RGBA(0, 0, 0, 0.15);
+    UIColor * color4 = RGBA(0, 0, 0, 0.5);
+
+    gradient.colors = @[(id)color1.CGColor,(id)color2.CGColor,(id)color3.CGColor,(id)color4.CGColor];
+    gradient.locations = @[@0,@0.11244,@0.67766,@1];
+    gradient.startPoint = CGPointMake(0.5, 0);
+    gradient.endPoint = CGPointMake(0.5, 1);
+    [self.view.layer addSublayer:gradient];
+    
 
     self.carousel = [iCarousel new];
     self.carousel.backgroundColor = [UIColor clearColor];
@@ -317,23 +346,45 @@
     if (inter == carousel.scrollOffset) {
         bacimage.alpha = 1;
         lastscr = carousel.scrollOffset;
+        NSLog(@"##%f",carousel.scrollOffset);
     }else if (inter == 0 && carousel.scrollOffset+1>modelarray.count){
         if (lastscr >carousel.scrollOffset) {
-            CGFloat pha = 1-(carousel.scrollOffset -(modelarray.count-1+0.5))*2;
-            bacimage.alpha = pha;
+            if (carousel.scrollOffset <= modelarray.count-0.25) {
+                CGFloat pha = 1-(carousel.scrollOffset -(modelarray.count-1+0.5))*4;
+                bacimage.alpha = pha;
+            }else{
+                bacimage.alpha = 1;
+            }
         }else{
-            CGFloat pha = (carousel.scrollOffset -(modelarray.count-1+0.5))*2;
-            bacimage.alpha = pha;
+            if (carousel.scrollOffset <= modelarray.count-0.25) {
+                CGFloat pha = (carousel.scrollOffset -(modelarray.count-1+0.5))*4;
+                bacimage.alpha = pha;
+            }else{
+                bacimage.alpha = 1;
+            }
         }
         lastscr = carousel.scrollOffset;
     }else if (inter <= carousel.scrollOffset&&inter+0.5>= carousel.scrollOffset){
-        CGFloat pha = 1-(carousel.scrollOffset -inter)*2;
-        bacimage.alpha = pha;
+        if (carousel.scrollOffset >= inter+0.25) {
+//            CGFloat pha = 1-(carousel.scrollOffset -inter)*4;
+//            bacimage.alpha = pha;
+            CGFloat pha = ((inter+0.5)-carousel.scrollOffset)*4;
+            bacimage.alpha = pha;
+        }else{
+            bacimage.alpha = 1;
+        }
         lastscr = carousel.scrollOffset;
+
+
     }else if (inter-0.5<=carousel.scrollOffset && inter>=carousel.scrollOffset){
-        CGFloat pha = (carousel.scrollOffset -(inter-0.5))*2;
-        bacimage.alpha = pha;
+        if (carousel.scrollOffset <= inter-0.25) {
+            CGFloat pha = (carousel.scrollOffset -(inter-0.5))*4;
+            bacimage.alpha = pha;
+        }else{
+            bacimage.alpha = 1;
+        }
         lastscr = carousel.scrollOffset;
+
     }
     return value;
 }

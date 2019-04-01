@@ -14,12 +14,15 @@ typedef NS_ENUM(NSInteger, ClassroomTextFileViewStyle) {
     ClassroomTextFileViewClickGeneral = 1,//通用
     ClassroomTextFileViewPassWord = 2,//密码
 };
+typedef void(^GenBlocks)(void);
+
 @interface ClassroomTextFileView : BaseView<UITextFieldDelegate>
 - (instancetype)initWithTitle:(NSString *)title
                      Subtitle:(NSString *)subtitle
                    RightImage:(UIImage *)rightimage
                    ClassStyle:(ClassroomTextFileViewStyle)style;
 @property (strong, nonatomic) UITextField *textField;
+@property(nonatomic,copy)GenBlocks blocks;
 
 @end
 

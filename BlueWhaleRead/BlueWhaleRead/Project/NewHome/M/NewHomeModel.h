@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *bannerList;//轮播图
 @property (nonatomic, strong) NSMutableArray *proverb;//每日谚语
 @property (nonatomic, strong) NSMutableArray *missionList;//读书任务
+
 @property (nonatomic, strong) NHBookTagModel * tag;
 @property (nonatomic, strong) NHMissionModel * missionInfo;
 

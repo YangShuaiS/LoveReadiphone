@@ -32,7 +32,7 @@
         }];
         NSInteger scale_screen = [UIScreen mainScreen].scale;
         if (imagarrya.count == 0) {
-            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
+            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor Alpha:1] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
             [self addSubview:label];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(ws).with.offset(LENGTH(5));
@@ -63,7 +63,7 @@
                     make.height.mas_equalTo(he);
                 }];
             }];
-            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
+            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor Alpha:1] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
             [self addSubview:label];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(imageviewtop.mas_right).with.offset(LENGTH(5));
@@ -128,7 +128,7 @@
                     make.height.mas_equalTo(he);
                 }];
             }];
-            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
+            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor Alpha:1] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
             [self addSubview:label];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(downview.mas_right).with.offset(LENGTH(5));

@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString * arrow_words_color;//id
 @property(nonatomic,strong)NSString * arrow_type;//1里面 2外面
 
+@property(nonatomic,assign)NSInteger  banner_type;//id
 
 
 

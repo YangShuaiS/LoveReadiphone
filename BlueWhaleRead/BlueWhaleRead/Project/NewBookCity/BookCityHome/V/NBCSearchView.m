@@ -111,6 +111,7 @@
     BookCityViewController * vc = [BookCityViewController new];
     NSIndexPath * indpath = [NSIndexPath indexPathForRow:0 inSection:0];
     vc.inpath = indpath;
+    vc.mrclass = 1;
     vc.cata = [NSString stringWithFormat:@"100"];
     [[self viewController].navigationController pushViewController:vc animated:YES];
 }

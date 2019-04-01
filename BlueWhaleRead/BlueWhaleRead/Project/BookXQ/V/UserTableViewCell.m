@@ -73,9 +73,6 @@
     Name = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(4,51,50) LabelFont:TextFont(17) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:Name];
     
-    //    TheClass = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:LinShiZiTiYanSe LabelFont:TextFont(Font15) TextAlignment:NSTextAlignmentLeft Text:@""];
-    //    [self addSubview:TheClass];
-    
     Live = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(251,143,37) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:Live];
     

@@ -57,7 +57,7 @@
         make.top.mas_equalTo(self->navMenu.mas_bottom).with.offset(LENGTH(0));
         make.left.and.right.mas_equalTo(ws);
         make.height.mas_equalTo(LENGTH(104));
-        make.bottom.equalTo(ws).with.offset(-LENGTH(18));
+        make.bottom.equalTo(ws).with.offset(-LENGTH(14));
     }];
     
 }

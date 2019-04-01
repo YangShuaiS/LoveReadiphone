@@ -37,5 +37,8 @@
         informagtion.style = style;
     }
 }
-
+- (void)setBkzt:(NSInteger)bkzt{
+    _bkzt = bkzt;
+    informagtion.bkzt = bkzt;
+}
 @end

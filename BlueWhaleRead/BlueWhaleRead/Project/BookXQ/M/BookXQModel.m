@@ -11,7 +11,7 @@
 @implementation BookXQModel
 + (void)InitializeModel{
     [BookXQModel mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"badgeList":@"CityBadgeListModel",@"bookReview":@"BookXQBookReview",@"readFriend":@"BookXQReadFriendModel",@"readThought":@"BookXQReadThoughtModel"};
+        return @{@"badgeList":@"CityBadgeListModel",@"bookReview":@"BookXQBookReview",@"readFriend":@"BookXQReadFriendModel",@"readThought":@"BookXQReadThoughtModel",@"bookBuyLink":@"BookBuyLinkModel",@"knowledgeTXList":@"knowledgeTXListModel",@"bannerknowledgeList":@"NKRKnowledgeModel"};
     }];
     [BookXQReadFriendModel mj_setupObjectClassInArray:^NSDictionary *{
         return @{@"badgeList":@"CityBadgeListModel"};

@@ -16,7 +16,8 @@ pod 'MBProgressHUD'
 #pod 'CocoaAsyncSocket'
 
 #pod 'YYKit'
-#pod 'YYText'
+pod 'YYText'
+#pod 'YYImage'
 #pod 'TTTAttributedLabel'
 
 #use_frameworks!

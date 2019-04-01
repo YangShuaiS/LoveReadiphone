@@ -11,6 +11,8 @@
     FLAnimatedImageView * imageView;
     BaseLabel * onetitle;
     BaseLabel * twotitle;
+    
+    FLAnimatedImageView * dg;
 }
 
 - (instancetype)init
@@ -34,7 +36,21 @@
     
     twotitle = [[BaseLabel alloc] initWithTxteColor:RGB(175, 175, 175) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:twotitle];
+    
+    dg = [FLAnimatedImageView new];
+    dg.contentMode = UIViewContentModeScaleAspectFit;
+    dg.layer.cornerRadius = LENGTH(3);
+    dg.layer.borderColor = RGB(255, 255, 255).CGColor;
+    dg.layer.borderWidth = 1;
+    dg.layer.backgroundColor = RGBA(0, 0, 0,0.2).CGColor;
+    [imageView addSubview:dg];
+    [dg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self->imageView.mas_top).with.offset(LENGTH(8));
+        make.right.mas_equalTo(self->imageView.mas_right).with.offset(-LENGTH(8));
+        make.size.mas_equalTo(CGSizeMake(LENGTH(15), LENGTH(15)));
+    }];
 
+    dg.hidden = YES;
 }
 
 - (void)setStyle:(YSInformationViewStyle)style{
@@ -119,12 +135,24 @@
     }else{
         
     }
-    
-
-    
+    if (_bkzt == 1) {
+        if (model.duigou == 1) {
+            dg.image = UIIMAGE(@"单选");
+        }else{
+            dg.image = UIIMAGE(@"");
+            
+        }
+    }
     onetitle.text = model.title;
     twotitle.text = model.banner_foreword;
 }
 
-
+- (void)setBkzt:(NSInteger)bkzt{
+    _bkzt = bkzt;
+    if (bkzt == 1) {
+        dg.hidden = NO;
+    }else{
+        dg.hidden = YES;
+    }
+}
 @end

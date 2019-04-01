@@ -39,6 +39,7 @@
     }else{
         topView.backgroundColor = [UIColor whiteColor];
     }
+    topView.bianse = _bianse;
     topView.inter = _inter;
     topView.model = model;
     

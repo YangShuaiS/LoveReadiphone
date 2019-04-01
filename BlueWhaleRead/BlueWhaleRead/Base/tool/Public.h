@@ -80,9 +80,15 @@
 #define JK_TASKREMOVE @"api/v1.0/delSelfMission"//删除惹怒
 #define JK_ZHISHIWANGSHOUYE @"api/v1.0/knowledgePage"//知识网首页
 #define JK_ZHISHIWANGHOTREFINSH @"api/v1.0/hotKnowledge"//知识网热门刷新
+#define JK_ZHISHIMYHISTORY @"api/v1.0/myHistory"//我的视野
 #define JK_ZHISHIXGTJ @"api/v1.0/relatedRecommendations"//知识网相关推荐
 #define JK_ZHISHIBOOKTJ @"api/v1.0/relatedBookList"//书籍推荐
 #define JK_ZHISHIWENZHANG @"api/v1.0/goodBannerList"//文章推荐
+#define JK_SHOUCANGZHISHITU @"api/v1.0/addStudentCollection"//收藏
+#define JK_YICHUSHOUCANGZHISHITU @"api/v1.0/deleteStudentCollection"//移除收藏
+#define JK_MYSHOUCANG @"api/v1.0/myCollection"//我的收藏
+#define JK_BOOKXQZSWTUIJIAN @"api/v1.0/bookBannerKnowledgeList"//书详情相关推荐
+#define JK_PROVERBLIST @"api/v1.0/proverbList"//言语列表
 
 
 
@@ -215,7 +221,9 @@
 #define ChildViewControllersCount self.navigationController.childViewControllers.count
 //plist文件
 #define UserMe @"UserMe.plist"
-#define BENDIXINXI @"BenDiXinXi-2.02"
+#define BENDIXINXI @"BenDiXinXi-2.03"
+#define ALLCLASS @"HUOQUNIANJI"//获取年级
+
 
 #define XAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 

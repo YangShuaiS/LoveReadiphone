@@ -58,6 +58,7 @@
     }
     cell.namestring = itemarray[indexPath.row];
     cell.imagestring = imagearray[indexPath.row];
+    cell.inter = indexPath.row;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

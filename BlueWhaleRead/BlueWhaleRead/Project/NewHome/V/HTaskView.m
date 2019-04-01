@@ -19,7 +19,7 @@
 
 #import "TKAlltaskViewController.h"
 #import "TAskForViewController.h"
-#import "TKPrizeViewController.h"
+#import "NewTKPrizeViewController.h"
 #import "BookListViewController.h"
 @implementation HTaskView{
     NBCmenuView * navMenu;//
@@ -247,7 +247,7 @@
 }
 
 - (void)ckjpclick{
-    TKPrizeViewController * vc = [TKPrizeViewController new];
+    NewTKPrizeViewController * vc = [NewTKPrizeViewController new];
     [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 

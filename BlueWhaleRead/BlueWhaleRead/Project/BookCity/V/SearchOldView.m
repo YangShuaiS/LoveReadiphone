@@ -8,7 +8,7 @@
 
 #import "SearchOldView.h"
 #import "BookTableViewCell.h"
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 @interface SearchOldView ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) BaseTableView *tableView;
 
@@ -172,7 +172,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BookXqViewController * vc = [BookXqViewController new];
+    NewBookXQViewController * vc = [NewBookXQViewController new];
     CityBookListModel * model = array[indexPath.row];
     vc.loadId = model.ssid;
     [self.nav pushViewController:vc animated:YES];

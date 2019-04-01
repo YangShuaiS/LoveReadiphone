@@ -9,6 +9,7 @@
 #import "ZhiShiShuClickView.h"
 #import "LBTViewController.h"
 #import "ZhiShiShuShuViewController.h"
+#import "ArticleViewController.h"
 @implementation ZhiShiShuClickView{
     FLAnimatedImageView * left;
     FLAnimatedImageView * center;
@@ -35,7 +36,7 @@
     right = [self returnimageview];
     [self addSubview:right];
     
-    label = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(12) TextAlignment:NSTextAlignmentCenter Text:@"中国古代神话中地\n位最高，修为最\n深的大神"];
+    label = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(12) TextAlignment:NSTextAlignmentLeft Text:@"中国古代神话中地\n位最高，修为最\n深的大神"];
     label.numberOfLines = 2;
     [center addSubview:label];
     
@@ -81,7 +82,7 @@
     [right sd_setImageWithURL:[NSURL URLWithString:rightimage] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         [bloclself uprightimageL:image];
     }];
-    label.textColor = [BaseObject colorWithHexString:model.arrow_words_color];
+    label.textColor = [BaseObject colorWithHexString:model.arrow_words_color Alpha:1];
     NSMutableString* str=[[NSMutableString alloc]initWithString:model.arrow_words];
     if (str.length>15) {
         [str insertString:@"\n"atIndex:15];
@@ -116,10 +117,16 @@
 }
 - (void)click{
     if ([_model.click_type isEqualToString:@"2"]) {
-        LBTViewController * vc = [LBTViewController new];
-        vc.inter = 1;
-        vc.itemid = _model.click_to_id;
-        [[self viewController].navigationController pushViewController:vc animated:YES];
+        if (_model.banner_type == 1) {
+            LBTViewController * vc = [LBTViewController new];
+            vc.inter = 1;
+            vc.itemid = _model.click_to_id;
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }else{
+            ArticleViewController * vc = [ArticleViewController new];
+            vc.itemid = _model.click_to_id;
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }
     }else if ([_model.click_type isEqualToString:@"3"]){
         ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
         vc.itemid = _model.click_to_id;

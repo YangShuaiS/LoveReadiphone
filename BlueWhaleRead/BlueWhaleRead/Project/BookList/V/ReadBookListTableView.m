@@ -8,7 +8,7 @@
 
 #import "ReadBookListTableView.h"
 #import "BookTableViewCell.h"
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 @interface ReadBookListTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -82,7 +82,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BookXqViewController * vc = [BookXqViewController new];
+    NewBookXQViewController * vc = [NewBookXQViewController new];
     AllBookListModel * model = _itemarray[indexPath.section];
     vc.loadId = model.ssid;
     [self.nav pushViewController:vc animated:YES];

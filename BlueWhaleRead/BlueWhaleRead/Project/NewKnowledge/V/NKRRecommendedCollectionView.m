@@ -11,6 +11,7 @@
 
 #import "LBTViewController.h"
 #import "ZhiShiShuShuViewController.h"
+#import "ArticleViewController.h"
 @interface NKRRecommendedCollectionView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
@@ -62,24 +63,40 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NKRRecommendedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"NKRRecommendedCollectionViewCell" forIndexPath:indexPath];
-    cell.style = _style;
+    cell.bkzt = _bkzt;
+    if (_style == 3 || _style == 4) {
+        cell.style = 3;
+    }else{
+        cell.style = _style;
+    }
     cell.model = _itemarray[indexPath.row];
     return cell;
 }
 
 -( void )collectionView:( UICollectionView *)collectionView didSelectItemAtIndexPath:( NSIndexPath *)indexPath{
     NKRKnowledgeModel * model = _itemarray[indexPath.row];
-    if (model.related_type == 1) {
-        LBTViewController * vc = [LBTViewController new];
-        vc.inter = 1;
-        vc.itemid = model.ssid;
-        [[self viewController].navigationController pushViewController:vc animated:YES];
-    }else if (model.related_type == 2){
-        ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
-        vc.itemid = model.ssid;
-        [[self viewController].navigationController pushViewController:vc animated:YES];
+    if (_bkzt == 1) {
+        model.duigou = model.duigou == 1?0:1;
+        [self reloadData];
     }else{
-        
+        if (model.related_type == 1) {
+            if (model.banner_type == 1) {
+                LBTViewController * vc = [LBTViewController new];
+                vc.inter = 1;
+                vc.itemid = model.ssid;
+                [[self viewController].navigationController pushViewController:vc animated:YES];
+            }else{
+                ArticleViewController * vc = [ArticleViewController new];
+                vc.itemid = model.ssid;
+                [[self viewController].navigationController pushViewController:vc animated:YES];
+            }
+        }else if (model.related_type == 2){
+            ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
+            vc.itemid = model.ssid;
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }else{
+            
+        }
     }
 }
 
@@ -87,7 +104,10 @@
     _itemarray = itemarray;
     [self reloadData];
 }
-
+- (void)setBkzt:(NSInteger)bkzt{
+    _bkzt = bkzt;
+    [self reloadData];
+}
 - (void)layoutSubviews{
     [super layoutSubviews];
     if (_allinter!=0) {

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TPHBView : BaseView
 @property(nonatomic,assign)NSInteger inter;
 @property(nonatomic,strong)TFVUserModel * model;
+@property(nonatomic,strong)NSString * bianse;
 
 @end
 

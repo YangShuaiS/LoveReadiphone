@@ -22,6 +22,7 @@
     [super viewDidLoad];
     WS(ws);
     @autoreleasepool {
+        self.view.backgroundColor = [UIColor whiteColor];
     scroview = [ZhiShiShuScroVuew new];
     scroview.nav = self.navigationController;
     [self.view addSubview:scroview];

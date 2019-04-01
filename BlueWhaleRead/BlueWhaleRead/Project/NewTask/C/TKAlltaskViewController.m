@@ -116,10 +116,12 @@
     }];
 }
 - (void)UpData:(TKAllTaskModel *)model{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-         [self addGuideTaskOneView];
-    });
+    if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[self class]]) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [self addGuideTaskOneView];
+        });
+    }
     _tableView.itemArray = model.missionList;
 }
 - (void)addGuideTaskOneView{

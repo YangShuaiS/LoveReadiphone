@@ -9,7 +9,7 @@
 #import "TKXQGZView.h"
 #import "TAKGZView.h"
 
-#import "TKPrizeViewController.h"
+#import "NewTKPrizeViewController.h"
 #import "TKMytaskViewController.h"
 #import "BookCityViewController.h"
 @implementation TKXQGZView{
@@ -184,7 +184,7 @@
 }
 
 - (void)lingqujiangpin{
-    TKPrizeViewController * vc = [TKPrizeViewController new];
+    NewTKPrizeViewController * vc = [NewTKPrizeViewController new];
     [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 

@@ -18,6 +18,7 @@
 - (void)showMOFSPickerViewWithDataArray:(NSArray<NSString *> *)array commitBlock:(void(^)(NSString *string))commitBlock cancelBlock:(void(^)(void))cancelBlock;
 
 - (void)showMOFSPickerViewWithCustomDataArray:(NSArray<NSString *> *)array keyMapper:(NSString *)keyMapper commitBlock:(void(^)(id model))commitBlock cancelBlock:(void(^)(void))cancelBlock;
+- (void)hiddenWithAnimation;
 
 @end
 
@@ -26,5 +27,4 @@
 
 @property (nonatomic, copy) NSString *mofs_key;
 @property (nonatomic, assign) NSInteger mofs_int_key; 
-
 @end

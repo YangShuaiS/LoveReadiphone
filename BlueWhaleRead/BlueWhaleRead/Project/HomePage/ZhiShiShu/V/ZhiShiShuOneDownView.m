@@ -122,7 +122,7 @@
     zssqiu.nav = self.nav;
 //    label.text = model.name;
     [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.icon]]];
-    UIColor * color = [BaseObject colorWithHexString:model.text_color];
+    UIColor * color = [BaseObject colorWithHexString:model.text_color Alpha:1];
     label.textColor = color;
     label.text = model.name;
     zssqiu.colors = color;

@@ -165,15 +165,14 @@
     }];
 }
 - (void)fasongyzm{
-    WS(ws);
     MBProgressHUD * mb = [MBProgressHUD new];
     mb.mode = MBProgressHUDModeIndeterminate;
     mb.label.text = @"正在发送验证码...";
     [mb showAnimated:YES];
     mb.removeFromSuperViewOnHide = YES;
-    [self.view addSubview:mb];
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:mb];
     [mb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(ws.view);
+        make.edges.equalTo([[[UIApplication sharedApplication] delegate] window]);
     }];
     
     NSString * str;

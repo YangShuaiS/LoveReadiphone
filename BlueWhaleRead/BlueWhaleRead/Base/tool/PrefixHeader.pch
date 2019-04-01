@@ -26,6 +26,9 @@
 //#import <YYKit.h>
 //#import <YYText/YYText.h>
 //#import <TTTAttributedLabel/TTTAttributedLabel.h>
+//#import <YYText.h>
+//#import <YYKit.h>
+#import <YYText.h>
 #import <MJRefresh/MJRefresh.h>
 #import <SDCycleScrollView/SDCycleScrollView.h>
 

@@ -49,7 +49,7 @@
             make.right.mas_equalTo(ws).with.offset(-LENGTH(12));
         }];
         if (![_datamodel.knowledge_info isEqualToString:@""]) {
-            BaseLabel * label  =[[ BaseLabel alloc] initWithTxteColor:[BaseObject colorWithHexString:_datamodel.txt_color] LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:_datamodel.knowledge_info];
+            BaseLabel * label  =[[ BaseLabel alloc] initWithTxteColor:[BaseObject colorWithHexString:_datamodel.txt_color Alpha:1] LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:_datamodel.knowledge_info];
             label.numberOfLines = 0;
             [topview addSubview:label];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {

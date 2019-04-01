@@ -9,6 +9,7 @@
 #import "ZSSRightNRView.h"
 #import "LBTViewController.h"
 #import "ZhiShiShuShuViewController.h"
+#import "ArticleViewController.h"
 @implementation ZSSRightNRView{
     UIView * backview;
     BaseLabel * lable;
@@ -67,10 +68,16 @@
 }
 - (void)click{
     if ([_model.click_type isEqualToString:@"2"]) {
-        LBTViewController * vc = [LBTViewController new];
-        vc.inter = 1;
-        vc.itemid = _model.click_to_id;
-        [[self viewController].navigationController pushViewController:vc animated:YES];
+        if (_model.banner_type == 1) {
+            LBTViewController * vc = [LBTViewController new];
+            vc.inter = 1;
+            vc.itemid = _model.click_to_id;
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }else{
+            ArticleViewController * vc = [ArticleViewController new];
+            vc.itemid = _model.click_to_id;
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }
     }else if ([_model.click_type isEqualToString:@"3"]){
         ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
         vc.itemid = _model.click_to_id;

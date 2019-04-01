@@ -41,8 +41,8 @@
 }
 - (void)setModel:(ZhiShiShuViTypeModel *)model{
     _model = model;
-    view.backgroundColor = [BaseObject colorWithHexString:model.color];
-    label.textColor = [BaseObject colorWithHexString:_textcolor];
+    view.backgroundColor = [BaseObject colorWithHexString:model.color Alpha:1];
+    label.textColor = [BaseObject colorWithHexString:_textcolor Alpha:1];
     label.text = model.name;
 
 }

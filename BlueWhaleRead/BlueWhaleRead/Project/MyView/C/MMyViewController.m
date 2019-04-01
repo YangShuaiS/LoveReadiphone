@@ -102,10 +102,13 @@
 - (void)Click:(NSInteger)inter{
     if (inter == 0) {
         [self szorsc];
+        if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[self class]]) {
+
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             [self addGuideSZorSConeView];
         });
+        }
     }
 }
 - (void)szorsc{

@@ -134,10 +134,12 @@
     List.model = model;
     classification.model = model;
     [self.view.superview layoutIfNeeded];
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self addGuideBookCityOneView];
-    });
+    if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[self class]]) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [self addGuideBookCityOneView];
+        });
+    }
 }
 - (void)addGuideBookCityOneView{
     NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
@@ -146,9 +148,9 @@
     if ([model.ydybookcity integerValue]<3) {
         WS(ws);
         GuideBookCityOneView * view = [GuideBookCityOneView new];
-         [self.view.window addSubview:view];
+         [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(ws.view.window);
+            make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window]);
         }];
         [view setBlock:^{
             [ws addGuideBookCityTwoView];
@@ -163,9 +165,9 @@
     WS(ws);
     GuideBookCityTwoView * view = [GuideBookCityTwoView new];
     view.frames = channel.frame;
-    [self.view.window addSubview:view];
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.view.window);
+        make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window]);
     }];
     [view setBlock:^{
         [ws addGuideBookCityThreeView];
@@ -175,12 +177,11 @@
 - (void)addGuideBookCityThreeView{
     
     [scrollView setContentOffset:CGPointMake(0, (cweek.frame.origin.y+cweek.frame.size.height)-scrollView.frame.size.height) animated:YES];
-    WS(ws);
     GuideBookCityThreeView * view = [GuideBookCityThreeView new];
     view.frames = cweek.frame;
-    [self.view.window addSubview:view];
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.view.window);
+        make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window]);
     }];
     [view setBlock:^{
     }];

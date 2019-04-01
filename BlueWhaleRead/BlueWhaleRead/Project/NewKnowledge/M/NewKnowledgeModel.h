@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *bookList;//书列表
 @property (nonatomic, strong) NSMutableArray *goodBannerList;//文章推荐
 
+@property (nonatomic, strong) NSMutableArray *bannerknowledgeList;//书详情相关推荐
 
 
 

@@ -64,7 +64,7 @@
         make.top.equalTo(self->topview.mas_bottom).with.offset(0);
         make.left.equalTo(ws).with.offset(0);
         make.right.equalTo(ws).with.offset(0);
-        make.bottom.equalTo(ws).with.offset(-LENGTH(20));
+        make.bottom.equalTo(ws);
     }];
     [_tableView setBlock:^(CGFloat flo) {
         [ws daili:flo];
@@ -96,6 +96,19 @@
         [self RefreshCaiDanView:1 LastInter:last1 Weizhi:indexpa Nsmuarray:item11];
     }
 
+}
+- (void)setMrclass:(NSInteger)mrclass{
+    _mrclass = mrclass;
+    if (mrclass == 1) {
+        for (int i = 0; i < item2.count; i++) {
+            BookFenjiModel * models  = item2[i];
+            if ([models.ssid isEqualToString:Me.level]) {
+                models.type = 1;
+                NSIndexPath * indpath = [NSIndexPath indexPathForRow:0 inSection:i];
+                [self RefreshCaiDanView:2 LastInter:last2 Weizhi:indpath Nsmuarray:item2];
+            }
+        }
+    }
 }
 - (void)setNav:(UINavigationController *)nav{
     _tableView.nav = nav;
@@ -150,13 +163,19 @@
             make.top.equalTo(self->topview.mas_bottom).with.offset(0);
             make.left.equalTo(ws).with.offset(0);
             make.right.equalTo(ws).with.offset(0);
-            make.bottom.equalTo(ws).with.offset(0);
+            make.height.mas_equalTo(HEIGHT/2);
+//            make.bottom.equalTo(ws).with.offset(0);
         }];
         
         _caidantableivew.userInteractionEnabled = YES;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
         tap.delegate = self;
         [_caidantableivew addGestureRecognizer:tap];
+        
+        backview.userInteractionEnabled = YES;
+        UITapGestureRecognizer * taps = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+        [backview addGestureRecognizer:taps];
+
     }else{
         [_caidantableivew xianshi];
         _caidantableivew.hidden = NO;
@@ -167,8 +186,9 @@
         [_caidanlefttableivew mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self->topview.mas_bottom).with.offset(0);
             make.left.equalTo(ws).with.offset(0);
-            make.bottom.equalTo(ws).with.offset(0);
+//            make.bottom.equalTo(ws).with.offset(0);
             make.width.mas_equalTo(WIDTH/2);
+            make.height.mas_equalTo(HEIGHT/2);
         }];
         _caidanlefttableivew.hidden = YES;
     }
@@ -187,7 +207,8 @@
             make.top.equalTo(self->topview.mas_bottom).with.offset(0);
             make.left.equalTo(ws.caidanlefttableivew.mas_right).with.offset(0);
             make.right.equalTo(ws).with.offset(0);
-            make.bottom.equalTo(ws).with.offset(0);
+//            make.bottom.equalTo(ws).with.offset(0);
+            make.height.mas_equalTo(HEIGHT/2);
         }];
 
 
@@ -198,7 +219,9 @@
             make.top.equalTo(self->topview.mas_bottom).with.offset(0);
             make.left.equalTo(ws).with.offset(0);
             make.right.equalTo(ws).with.offset(0);
-            make.bottom.equalTo(ws).with.offset(0);
+//            make.bottom.equalTo(ws).with.offset(0);
+            make.height.mas_equalTo(HEIGHT/2);
+
         }];
     }else{
         _caidanlefttableivew.hidden = YES;
@@ -208,7 +231,9 @@
             make.top.equalTo(self->topview.mas_bottom).with.offset(0);
             make.left.equalTo(ws).with.offset(0);
             make.right.equalTo(ws).with.offset(0);
-            make.bottom.equalTo(ws).with.offset(0);
+//            make.bottom.equalTo(ws).with.offset(0);
+            make.height.mas_equalTo(HEIGHT/2);
+
         }];
     }
 

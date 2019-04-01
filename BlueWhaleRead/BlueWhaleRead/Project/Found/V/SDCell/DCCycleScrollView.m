@@ -10,7 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "DCCycleScrollViewCell.h"
 #import "DCCycleScrollViewFlowLayout.h"
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
 
 @interface DCCycleScrollView()<UICollectionViewDataSource,UICollectionViewDelegate>
@@ -207,7 +207,7 @@ static NSString *const cellID = @"cellID";
     }
     
     FoundLikeBookModel * mode = array[indexPath.row];
-    BookXqViewController * vc = [BookXqViewController new];
+    NewBookXQViewController * vc = [NewBookXQViewController new];
     vc.loadId = mode.ssid;
     [self.nav pushViewController:vc animated:YES];
     

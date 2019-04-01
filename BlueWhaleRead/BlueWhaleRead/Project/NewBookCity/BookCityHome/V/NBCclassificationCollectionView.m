@@ -68,12 +68,13 @@
 }
 
 -( void )collectionView:( UICollectionView *)collectionView didSelectItemAtIndexPath:( NSIndexPath *)indexPath{
-        NBCclassificationModel * model = _itemarray[indexPath.row];
-        BookCityViewController * vc = [BookCityViewController new];
-        NSIndexPath * indpath = [NSIndexPath indexPathForRow:0 inSection:indexPath.row+1];
-        vc.inpath = indpath;
-        vc.cata = [NSString stringWithFormat:@"10%@",model.ssid];
-        [self.nav pushViewController:vc animated:YES];
+    NBCclassificationModel * model = _itemarray[indexPath.row];
+    BookCityViewController * vc = [BookCityViewController new];
+    NSIndexPath * indpath = [NSIndexPath indexPathForRow:0 inSection:indexPath.row+1];
+    vc.inpath = indpath;
+    vc.mrclass = 1;
+    vc.cata = [NSString stringWithFormat:@"10%@",model.ssid];
+    [self.nav pushViewController:vc animated:YES];
 }
 
 - (void)setItemarray:(NSMutableArray *)itemarray{

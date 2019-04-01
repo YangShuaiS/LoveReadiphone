@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NKRRecommendedCollectionViewCell : BaseCollectionViewCell
 @property (nonatomic,assign)  NSInteger style;
 @property(nonatomic,strong)NKRKnowledgeModel * model;
+@property (nonatomic , assign)NSInteger bkzt;//编辑状态
 
 @end
 

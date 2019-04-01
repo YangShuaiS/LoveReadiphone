@@ -230,6 +230,8 @@
     [NewKnowledgeModel InitializeModel];//知识网首页
     [ALLSearchModel InitializeModel];//搜索Model
     [TKAllTaskModel InitializeModel];//任务列表
+    [LunBoTuXQModel InitializeModel];//轮播图
+    [MyFavoritesModel InitializeModel];//我的收藏
     
     [BookCityModel InitializeModel];//书城
     [HomePage InitializeModel];//首页

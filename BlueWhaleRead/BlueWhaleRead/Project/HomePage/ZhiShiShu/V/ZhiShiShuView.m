@@ -132,8 +132,8 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     _data = data;
     NSMutableArray * datearray = data.point;
     for (ZhiShiShuNeiRongModel *neirong in datearray) {
-        if (lasth<neirong.height*poinw+neirong.y_axis*poinw) {
-            lasth=neirong.height*poinw+neirong.y_axis*poinw;
+        if (lasth<neirong.height*poinw+((neirong.y_axis-neirong.height/2)*poinw)) {
+            lasth=neirong.height*poinw+((neirong.y_axis-neirong.height/2)*poinw);
         }
     }
     
@@ -217,7 +217,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 //                animLayer.shadowRadius = 2.0f;
 //                animLayer.shadowOffset = CGSizeMake(0,0);
         animLayer.lineWidth = xian.line_thickness;
-                animLayer.strokeColor = [BaseObject colorWithHexString:xian.color].CGColor;
+                animLayer.strokeColor = [BaseObject colorWithHexString:xian.color Alpha:1].CGColor;
                 animLayer.fillColor = [UIColor clearColor].CGColor;
                 [self.layer addSublayer:animLayer];
 
@@ -473,12 +473,18 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 //    }
 
     [self addClickAnNiu:data];
+    WS(ws);
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(HEIGHT/2+self->lasth);
+        make.height.mas_equalTo(self->lasth+ws.newheight);
     }];
     
 }
-
+- (void)setNewheight:(CGFloat)newheight{
+    _newheight = newheight;
+    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self->lasth+newheight);
+    }];
+}
 - (void)addClickAnNiu:(ZhiShiShuDataModel *)model{
     WS(ws);
     for (ZhiShiShuClickModel * modes in model.arrow) {

@@ -23,10 +23,15 @@
 @property(nonatomic,strong)NSString * knowledge_info;//最上面文本
 @property(nonatomic,strong)NSString * knowledge_type;//1为  体系   2为知识图
 
-
-
 @property(nonatomic,strong)NSMutableArray * line_type;//线样式
 @property(nonatomic,strong)NSMutableArray * relation_type;//关系样式
 @property(nonatomic,strong)NSMutableArray * vi_type;//
 @property(nonatomic,strong)NSMutableArray * arrow;
+
+@property (nonatomic, assign) NSInteger is_collect;//0未收昂
+
+
+@property (nonatomic, strong) NSMutableArray *knowledgeGrade;//体系title
+@property (nonatomic, strong) NSMutableArray *bookList;//书
+@property (nonatomic, strong) NSMutableArray *bannerKnowledgeList;//相关体系
 @end

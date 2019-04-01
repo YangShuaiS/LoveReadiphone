@@ -9,7 +9,7 @@
 #import "NBCGoodBookCollectionView.h"
 #import "HomeModerateCollectionViewCell.h"
 
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 
 @interface NBCGoodBookCollectionView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -63,7 +63,7 @@
 
 -( void )collectionView:( UICollectionView *)collectionView didSelectItemAtIndexPath:( NSIndexPath *)indexPath{
     if (_itemarray.count>indexPath.row) {
-        BookXqViewController * vc = [BookXqViewController new];
+        NewBookXQViewController * vc = [NewBookXQViewController new];
         BookListModel * model = _itemarray[indexPath.row];
         vc.loadId = model.ssid;
         [self.nav pushViewController:vc animated:YES];

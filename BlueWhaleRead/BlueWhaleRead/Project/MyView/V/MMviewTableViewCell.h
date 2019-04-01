@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString * imagestring;
 
+@property (nonatomic, assign) NSInteger inter;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -22,5 +22,7 @@
 @property(nonatomic,assign)NSInteger inter;
 
 @property(nonatomic,strong)NSIndexPath * inpath;
+@property(nonatomic,assign)NSInteger mrclass;//默认年级
+
 
 @end

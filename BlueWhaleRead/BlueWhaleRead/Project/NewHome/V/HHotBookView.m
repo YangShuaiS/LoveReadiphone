@@ -57,7 +57,7 @@
     [self addSubview:collectView];
     [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(0);
-        make.top.equalTo(self->navMenu.mas_bottom).with.offset(-LENGTH(5));
+        make.top.equalTo(self->navMenu.mas_bottom).with.offset(-LENGTH(10));
         make.right.equalTo(ws).with.offset(0);
         make.bottom.equalTo(ws).with.offset(-LENGTH(18));
     }];

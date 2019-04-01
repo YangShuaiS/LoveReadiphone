@@ -8,7 +8,7 @@
 
 #import "ZhiShiShuBookStyleView1.h"
 #import "BookTableViewCell.h"
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 @interface ZhiShiShuBookStyleView1 ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -74,7 +74,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BookXqViewController * vc = [BookXqViewController new];
+    NewBookXQViewController * vc = [NewBookXQViewController new];
     CityBookListModel * model = _itemarray[indexPath.row];
     vc.loadId = model.ssid;
     [self.nav pushViewController:vc animated:YES];

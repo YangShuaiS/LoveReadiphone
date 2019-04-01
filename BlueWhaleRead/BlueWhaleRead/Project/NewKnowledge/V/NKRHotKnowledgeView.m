@@ -11,7 +11,7 @@
 #import "NBCmenuView.h"
 #import "LBTViewController.h"
 #import "ZhiShiShuShuViewController.h"
-
+#import "ArticleViewController.h"
 @implementation NKRHotKnowledgeView{
     NBCmenuView * menu;
     YSInformationView * oneview;
@@ -124,10 +124,17 @@
 }
 - (void)pushView:(NKRKnowledgeModel*)model{
     if (model.related_type == 1) {
-        LBTViewController * vc = [LBTViewController new];
-        vc.inter = 1;
-        vc.itemid = model.ssid;
-        [[self viewController].navigationController pushViewController:vc animated:YES];
+        if (model.banner_type == 1) {
+            LBTViewController * vc = [LBTViewController new];
+            vc.inter = 1;
+            vc.itemid = model.ssid;
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }else{
+            ArticleViewController * vc = [ArticleViewController new];
+            vc.itemid = model.ssid;
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }
+
     }else if (model.related_type == 2){
         ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
         vc.itemid = model.ssid;

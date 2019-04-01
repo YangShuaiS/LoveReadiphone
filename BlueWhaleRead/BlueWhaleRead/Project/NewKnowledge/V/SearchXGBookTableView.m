@@ -8,7 +8,7 @@
 
 #import "SearchXGBookTableView.h"
 #import "BookTableViewCell.h"
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 @interface SearchXGBookTableView()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -86,7 +86,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BookXqViewController * vc = [BookXqViewController new];
+    NewBookXQViewController * vc = [NewBookXQViewController new];
     CityBookListModel * model = _itemarray[indexPath.row];
     vc.loadId = model.ssid;
     [[self viewController].navigationController pushViewController:vc animated:YES];

@@ -10,12 +10,11 @@
 
 @implementation LunBoTuXQModel
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
++ (void)InitializeModel{
+    [LunBoTuXQModel mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"knowledgeGrade":@"knowledgeGradeModel",@"bookList":@"BookListModel",@"bannerKnowledgeList":@"NKRKnowledgeModel"};
+    }];
+
 }
-*/
 
 @end

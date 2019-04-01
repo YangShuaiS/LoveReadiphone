@@ -11,6 +11,8 @@
 #import "BookXQBookReview.h"
 #import "BookXQReadFriendModel.h"
 #import "BookXQReadThoughtModel.h"
+#import "BookBuyLinkModel.h"
+#import "knowledgeTXListModel.h"
 @interface BookXQModel : BaseModel
 @property (nonatomic, copy) NSNumber * code;
 @property (nonatomic, copy) NSString * message;
@@ -25,6 +27,12 @@
 @property(nonatomic,strong) NSMutableArray * bookReview; //优秀书评
 @property(nonatomic,strong) NSMutableArray * readFriend; //在读同学
 @property(nonatomic,strong) NSMutableArray * readThought; //读后感列表
+@property(nonatomic,strong) NSMutableArray * bookBuyLink; //购买列表
+
+@property(nonatomic,strong) NSMutableArray * knowledgeTXList; //相关脉络图
+@property(nonatomic,strong) NSMutableArray * bannerknowledgeList; //相关知识图
+
+
 
 + (void)InitializeModel;
 @end

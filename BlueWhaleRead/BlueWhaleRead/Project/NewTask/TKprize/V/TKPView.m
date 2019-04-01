@@ -15,7 +15,7 @@
     BaseLabel * title;
     BaseLabel * subtitle;
     
-    BaseLabel * sxlabel;
+    UIImageView * sxlabel;
 }
 
 - (instancetype)init
@@ -31,11 +31,9 @@
     self.backgroundColor = [UIColor whiteColor];
     backimage = [UIImageView new];
     backimage.backgroundColor = RGB(238,238,238);
-    backimage.layer.cornerRadius = LENGTH(5);
-    backimage.layer.masksToBounds = YES;
     [ws addSubview:backimage];
     [backimage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws).with.insets(UIEdgeInsetsMake(LENGTH(5), LENGTH(10), LENGTH(5), LENGTH(10)));
+        make.edges.mas_equalTo(ws);
         make.height.mas_equalTo(LENGTH(145));
     }];
     
@@ -66,16 +64,27 @@
         make.top.mas_equalTo(self->title).with.offset(LENGTH(16));
     }];
     
-    sxlabel = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(3, 3, 3) LabelFont:TextFont(21) TextAlignment:NSTextAlignmentCenter Text:@"失效"];
-    sxlabel.backgroundColor = RGB(214, 214, 214);
+    sxlabel = [UIImageView new];
+    sxlabel.contentMode = UIViewContentModeScaleAspectFit;
+    sxlabel.image = UIIMAGE(@"已过期");
     [backimage addSubview:sxlabel];
     [sxlabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(LENGTH(70));
-        make.height.mas_equalTo(LENGTH(30));
-        make.top.mas_equalTo(LENGTH(6));
-        make.right.mas_equalTo(-LENGTH(6));
+        make.width.mas_equalTo(LENGTH(73));
+        make.height.mas_equalTo(LENGTH(58));
+        make.top.mas_equalTo(ws).with.offset(LENGTH(8));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(6));
     }];
-    sxlabel.transform = CGAffineTransformMakeRotation(M_PI/8);
+//    sxlabel.transform = CGAffineTransformMakeRotation(M_PI/8);
+    
+    UIView * xian = [UIView new];
+    xian.backgroundColor = RGB(220,220,220);
+    [self addSubview:xian];
+    [xian mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(ws).with.offset(LENGTH(14));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(14));
+        make.bottom.mas_equalTo(ws).with.offset(-LENGTH(1));
+        make.height.mas_equalTo(1);
+    }];
 }
 
 - (void)setModel:(TKPLModel *)model{
@@ -92,10 +101,13 @@
     
     subtitle.text = model.prize_name;
     
-    if ([model.prize_status isEqualToString:@"0"]) {
-        sxlabel.hidden = NO;
-    }else{
-        sxlabel.hidden = YES;
-    }
+//    if ([model.prize_status isEqualToString:@"0"]) {
+//        sxlabel.hidden = NO;
+//    }else{
+//        sxlabel.hidden = YES;
+//    }
+}
+- (void)layoutSubviews{
+    [super layoutSubviews];
 }
 @end

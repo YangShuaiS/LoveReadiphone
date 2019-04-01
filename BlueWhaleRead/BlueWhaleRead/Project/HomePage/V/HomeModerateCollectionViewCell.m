@@ -12,10 +12,12 @@
     FLAnimatedImageView * imageView;
     BaseLabel * Title;
     UIView * yy;
+    NSInteger inter;
 }
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        inter = 0;
         [self setupUI];
     }
     return self;
@@ -75,8 +77,8 @@
     [Title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self->yy.mas_bottom).with.offset(LENGTH(6));
 //        make.bottom.equalTo(ws).with.offset(0);
-        make.left.equalTo(ws.mas_left).with.offset(0);
-        make.right.equalTo(ws.mas_right).with.offset(0);
+        make.left.equalTo(self->imageView).with.offset(0);
+        make.right.equalTo(self->imageView).with.offset(0);
     }];
     
     UIImageView * xian = [UIImageView new];
@@ -96,12 +98,16 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:yy.bounds byRoundingCorners:UIRectCornerBottomRight | UIRectCornerTopRight cornerRadii:CGSizeMake(LENGTH(5),LENGTH(5))];
-    //创建 layer
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = yy.bounds;
-    //赋值
-    maskLayer.path = maskPath.CGPath;
-    yy.layer.mask = maskLayer;
+    if (inter == 0) {
+        inter = 1;
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:yy.bounds byRoundingCorners:UIRectCornerBottomRight | UIRectCornerTopRight cornerRadii:CGSizeMake(LENGTH(5),LENGTH(5))];
+        //创建 layer
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+        maskLayer.frame = yy.bounds;
+        //赋值
+        maskLayer.path = maskPath.CGPath;
+        yy.layer.mask = maskLayer;
+    }
+
 }
 @end

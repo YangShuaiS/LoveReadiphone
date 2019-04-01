@@ -67,6 +67,9 @@
         make.left.mas_equalTo(ws).with.offset(36);
         make.right.mas_equalTo(ws).with.offset(-LENGTH(36));
     }];
+    [one setBlocks:^{
+        [ws huishou];
+    }];
     
     three = [[ClassroomTextFileView alloc] initWithTitle:@"密码" Subtitle:@"请输入密码" RightImage:UIIMAGE(@"眼睛-关闭") ClassStyle:ClassroomTextFileViewPassWord];
     [scrollView addSubview:three];

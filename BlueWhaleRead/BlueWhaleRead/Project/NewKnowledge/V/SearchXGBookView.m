@@ -66,7 +66,7 @@
     }];
 }
 - (void)click{
-    self.pushblock(2);
+    self.pushblock(1);
 }
 - (void)setItemarray:(NSMutableArray *)itemarray{
     _itemarray = itemarray;

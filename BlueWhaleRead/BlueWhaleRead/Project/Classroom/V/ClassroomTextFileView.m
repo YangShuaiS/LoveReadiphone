@@ -13,6 +13,7 @@
     BaseLabel * titleLabel;
     UIView * xian;
     UIImageView * imageview;
+    UIView * rightview;
     ClassroomTextFileViewStyle styles;
 }
 
@@ -86,11 +87,18 @@
         make.centerY.mas_equalTo(ws.textField);
         make.right.mas_equalTo(ws).with.offset(-LENGTH(4));
     }];
+    [rightview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(ws.textField);
+//        make.top.and.bottom.and.right.mas_equalTo(ws.textField);
+        make.right.mas_equalTo(ws);
+        make.width.mas_equalTo(LENGTH(40));
+        make.height.mas_equalTo(LENGTH(50));
+    }];
     
-    imageview.userInteractionEnabled = YES;
+    rightview.userInteractionEnabled = YES;
     UITapGestureRecognizer *backtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mimaxianshi)];
     //将手势添加到需要相应的view中去
-    [imageview addGestureRecognizer:backtap];
+    [rightview addGestureRecognizer:backtap];
 
     _textField.keyboardType = UIKeyboardTypeAlphabet;
     _textField.secureTextEntry = YES;
@@ -122,6 +130,9 @@
     imageview.contentMode = UIViewContentModeScaleAspectFit;
     imageview.image = rightimage;
     [self addSubview:imageview];
+    
+    rightview = [UIView new];
+    [self addSubview:rightview];
 }
 - (void)GeneralLayout{
     WS(ws);
@@ -145,13 +156,14 @@
         return NO;
 
     }else{
+        [[MOFSPickerManager shareManger].pickView hiddenWithAnimation];
         return YES;
     }
 }
 
 - (void)xuanzekuang{
     imageview.image = UIIMAGE(@"三角形关闭");
-
+    self.blocks();
     [[MOFSPickerManager shareManger] showPickerViewWithDataArray:@[@"山西省临汾市三维小学",@"山西省临汾市义堂小学",@"山西省临汾市邓庄小学",@"山西省临汾市北续小学",@"山西省临汾市五一路学校",@"山西省临汾市八一学校",@"山西省临汾市临钢小学",@"山西省临汾市育红小学",@"山西省临汾市实验小学",@"山西省临汾市第三小学"] tag:1 title:@"选择学校" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *string) {
         [self genggauntextfile:string];
     } cancelBlock:^{

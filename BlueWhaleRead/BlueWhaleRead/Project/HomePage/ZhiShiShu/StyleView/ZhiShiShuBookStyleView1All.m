@@ -80,8 +80,8 @@
     [super layoutSubviews];
     gradient.frame = backview.bounds;
     gradient.colors = [NSArray arrayWithObjects:
-                       (id)[BaseObject colorWithHexString:@"#6ce5cd"].CGColor,
-                       (id)[BaseObject colorWithHexString:@"#41d4c6"].CGColor,nil];
+                       (id)[BaseObject colorWithHexString:@"#6ce5cd" Alpha:1].CGColor,
+                       (id)[BaseObject colorWithHexString:@"#41d4c6" Alpha:1].CGColor,nil];
     gradient.startPoint = CGPointMake(0, 0.5);
     gradient.endPoint = CGPointMake(1, 0.5);
     gradient.locations = @[@0.0, @1];

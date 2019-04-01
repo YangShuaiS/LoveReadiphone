@@ -26,7 +26,7 @@
 -(void)setupUI{
     WS(ws);
     imageView = [FLAnimatedImageView new];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.contentMode = UIViewContentModeScaleToFill;
     imageView.backgroundColor = [UIColor blackColor];
     imageView.layer.masksToBounds = YES;
     imageView.layer.cornerRadius = LENGTH(5);

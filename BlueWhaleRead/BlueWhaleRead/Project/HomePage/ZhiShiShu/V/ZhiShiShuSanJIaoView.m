@@ -31,7 +31,7 @@
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
     fillLayer.path = circlePath.CGPath;
     fillLayer.fillRule = kCAFillRuleEvenOdd;
-    fillLayer.fillColor = [BaseObject colorWithHexString:point.color].CGColor;
+    fillLayer.fillColor = [BaseObject colorWithHexString:point.color Alpha:1].CGColor;
     fillLayer.opacity = 1;
     [self.layer addSublayer:fillLayer];
 }
@@ -51,7 +51,7 @@
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
     fillLayer.path = circlePath.CGPath;
     fillLayer.fillRule = kCAFillRuleEvenOdd;
-    fillLayer.fillColor = [BaseObject colorWithHexString:pointwo.color].CGColor;
+    fillLayer.fillColor = [BaseObject colorWithHexString:pointwo.color Alpha:1].CGColor;
     fillLayer.opacity = 1;
     [self.layer addSublayer:fillLayer];
 }

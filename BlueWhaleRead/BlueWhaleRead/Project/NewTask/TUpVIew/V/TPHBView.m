@@ -61,14 +61,17 @@
 }
 - (void)setModel:(TFVUserModel *)model{
     _model = model;
-    if (_inter == 0) {
-        pm.text = model.myRank;
-        fenshu.text = [NSString stringWithFormat:@"分数：%@",model.mission_score];
-
+    if ([_bianse isEqualToString:@"1"]) {
+        if (_inter == 0) {
+            pm.text = model.myRank;
+            fenshu.text = [NSString stringWithFormat:@"分数：%@",model.mission_score];
+        }else{
+            pm.text = [NSString stringWithFormat:@"%ld",_inter];
+            fenshu.text = [NSString stringWithFormat:@"分数：%@",model.score];
+        }
     }else{
-        pm.text = [NSString stringWithFormat:@"%ld",_inter];
+        pm.text = [NSString stringWithFormat:@"%ld",_inter+1];
         fenshu.text = [NSString stringWithFormat:@"分数：%@",model.score];
-
     }
     [userimageview sd_setImageWithURL:URLIMAGE(model.avatar)];
     name.text = model.name;

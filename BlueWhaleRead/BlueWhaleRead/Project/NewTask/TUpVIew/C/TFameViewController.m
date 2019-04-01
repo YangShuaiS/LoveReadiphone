@@ -7,19 +7,24 @@
 //
 
 #import "TFameViewController.h"
-#import "TKJMenu.h"
+#import "TKPMenuView.h"
 #import "TPHBViewController.h"
+#import "NewTFameTableView.h"
 @interface TFameViewController ()<NavDelegate>
 
 @end
 
-@implementation TFameViewController
+@implementation TFameViewController{
+    UIImageView * imageview;
+    TKPMenuView * menu;
+    NSInteger weizhi;
+}
 #pragma mark --------------------  导航栏以及代理
 - (void)AddNavtion{
     [super AddNavtion];
     WS(ws);
-    self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"名人堂" RightTitle:@"" NativeStyle:NavStyleGeneral];
-    self.navtive.titcolor = RGB(0, 0, 0);
+    self.navtive = [[NativeView alloc] initWithLeftImage:@"icon_返回_粗" Title:@"名人堂" RightTitle:@"" NativeStyle:NavStyleGeneral];
+    self.navtive.titcolor = RGB(255, 255, 255);
     self.navtive.delegate = self;
     [self.view addSubview:self.navtive];
     [ws.navtive mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -28,7 +33,7 @@
         make.top.equalTo(ws.view).with.offset(0);
         make.height.mas_equalTo(NavHeight);
     }];
-    self.navtive.downlayer = YES;
+    self.navtive.backgroundColor = [UIColor clearColor];
 }
 - (void)NavLeftClick{
     [self.navigationController popViewControllerAnimated:YES];
@@ -49,42 +54,69 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self AddNavtion];
+    weizhi = 0;
     WS(ws);
-    TKJMenu * homeMenu = [TKJMenu new];
-    homeMenu.titarray = @[@"实时",@"往期"];
-    [self.view addSubview:homeMenu];
-    [homeMenu mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws.view).with.offset(LENGTH(20));
-        make.right.equalTo(ws.view).with.offset(-LENGTH(20));
-        make.top.equalTo(ws.navtive.mas_bottom).with.offset(LENGTH(2));
-        make.bottom.mas_equalTo(ws.view).with.offset(LENGTH(5));
+    self.view.backgroundColor = [UIColor whiteColor];
+    imageview = [UIImageView new];
+    imageview.contentMode = UIViewContentModeScaleAspectFit;
+    imageview.image = UIIMAGE(@"名人堂-头图");
+    [self.view addSubview:imageview];
+    [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.left.and.right.mas_equalTo(ws.view);
+        make.height.mas_equalTo(LENGTH(343));
     }];
-    NSMutableArray *childVC = [[NSMutableArray alloc] init];
-    TPHBViewController * hotview = [[TPHBViewController alloc] init];
-    //    hotview.bookCase = BookCaseStyleSJWD;
-    hotview.missionid = _missionid;
-    hotview.type = @"1";
-    [self addChildViewController:hotview];
-    [childVC addObject:hotview];
+    [self AddNavtion];
     
-    TPHBViewController * hotview1 = [[TPHBViewController alloc] init];
-    //    hotview.bookCase = BookCaseStyleSJWD;
-    hotview1.missionid = _missionid;
-    hotview1.type = @"2";
-    [self addChildViewController:hotview1];
-    [childVC addObject:hotview1];
-    homeMenu.controllerArray = childVC;
+    menu = [TKPMenuView new];
+    menu.layer.masksToBounds = YES;
+    menu.layer.cornerRadius = LENGTH(10);
+    [self.view addSubview:menu];
+    [menu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(ws.view).with.offset(LENGTH(335));
+        make.left.and.right.and.bottom.mas_equalTo(ws.view);
+    }];
     
-    [hotview setBlock:^{
-        
+    menu.titarray = @[@"实时",@"往期"];
+    NewTFameTableView * tableview1 = [NewTFameTableView new];
+    tableview1.missionid = _missionid;
+    tableview1.type = @"1";
+    NewTFameTableView * tableview2 = [NewTFameTableView new];
+    tableview2.missionid = _missionid;
+    tableview2.type = @"2";
+    menu.controllerArray = @[tableview1,tableview2];
+    [tableview1 setBlocks:^(CGFloat floa) {
+        [ws uoview:floa];
     }];
-    [hotview1 setBlock:^{
-        
+    [tableview2 setBlocks:^(CGFloat floa) {
+        [ws uoview:floa];
     }];
-    // Do any additional setup after loading the view.
 }
-
+-(void)uoview:(CGFloat)flo{
+    WS(ws);
+    if (flo<0 && weizhi == 1) {
+        weizhi = 0;
+        [UIView animateWithDuration:0.5 animations:^{
+            [self->menu mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(ws.view).with.offset(LENGTH(335));
+            }];
+            [ws.view.superview layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    }else if (flo>0 && weizhi == 0){
+        weizhi = 1;
+        [UIView animateWithDuration:0.5 animations:^{
+            [self->menu mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(ws.view).with.offset(NavHeight);
+            }];
+            [ws.view.superview layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    }
+}
 /*
 #pragma mark - Navigation
 

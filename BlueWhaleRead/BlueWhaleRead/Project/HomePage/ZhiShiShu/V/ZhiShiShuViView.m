@@ -42,7 +42,7 @@
         NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTX,model.img];
         [imageview sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo]];
         
-        BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
+        BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor Alpha:1] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
         [self addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(imageview.mas_right).with.offset(LENGTH(5));

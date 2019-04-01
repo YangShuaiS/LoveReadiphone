@@ -9,7 +9,7 @@
 #import "UnreadBookListTableView.h"
 #import "BookTableViewCell.h"
 #import "DTALLiewController.h"
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 @interface UnreadBookListTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -77,7 +77,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    BookXqViewController * vc = [BookXqViewController new];
+    NewBookXQViewController * vc = [NewBookXQViewController new];
     UnreadBookModel * model = _itemarray[indexPath.section];
     vc.loadId = model.ssid;
     [self.nav pushViewController:vc animated:YES];

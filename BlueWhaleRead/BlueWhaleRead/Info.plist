@@ -121,6 +121,7 @@
 		<string>renrenapi</string>
 		<string>renrenios</string>
 		<string>renreniphone</string>
+		<string>openapp.jdmobile</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

@@ -12,11 +12,10 @@
     FLAnimatedImageView * imageview;
     BaseLabel * label;
     
-    FLAnimatedImageView * textimag;
     BaseView * downView;
     
     BaseView * lastview;
-    
+    UIImageView * imageviews;
 }
 - (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize{
     UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
@@ -95,26 +94,28 @@
         make.bottom.mas_equalTo(ws);
     }];
     
-    textimag = [FLAnimatedImageView new];
-    textimag.contentMode = UIViewContentModeScaleAspectFit;
-    [downView addSubview:textimag];
-    [textimag mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->downView);
-        make.left.mas_equalTo(self->downView);
-        make.bottom.mas_equalTo(self->downView).with.offset(-LENGTH(5));
-        make.width.mas_equalTo(LENGTH(32));
-        make.height.mas_equalTo(LENGTH(32));
-    }];
+//    textimag = [FLAnimatedImageView new];
+//    textimag.contentMode = UIViewContentModeScaleAspectFit;
+//    [downView addSubview:textimag];
+//    [textimag mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self->downView);
+//        make.left.mas_equalTo(self->downView);
+//        make.bottom.mas_equalTo(self->downView).with.offset(-LENGTH(5));
+//        make.width.mas_equalTo(LENGTH(32));
+//        make.height.mas_equalTo(LENGTH(32));
+//    }];
     
-    label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(159,131,68) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:@""];
+    label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(159,131,68) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:@""];
+    label.numberOfLines = 0;
     [downView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.centerY.mas_equalTo(self->textimag);
-        make.top.mas_equalTo(self->textimag.mas_top);
-        make.left.mas_equalTo(self->textimag.mas_right).with.offset(LENGTH(5));
+        make.top.mas_equalTo(self->downView.mas_top);
+        make.left.mas_equalTo(self->downView).with.offset(LENGTH(5));
         make.right.mas_equalTo(self->downView);
+        make.bottom.mas_equalTo(self->downView).with.offset(-LENGTH(5));
+
     }];
-    label.numberOfLines = 0;
     self.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
     [self addGestureRecognizer:tap];
@@ -122,6 +123,22 @@
 }
 - (void)click{
     self.block(_neirong);
+}
+- (void)fwenben:(UIImage*)image{
+    NSDictionary *attributeDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   TextFont(13),NSFontAttributeName,nil];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:label.text attributes:attributeDict];
+    
+    //NSTextAttachment可以将要插入的图片作为特殊字符处理
+    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+    //定义图片内容及位置和大小
+    attch.image = image;
+    attch.bounds = CGRectMake(0, -LENGTH(7), LENGTH(23), LENGTH(23));
+    //创建带有图片的富文本
+    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+    [attributedString insertAttributedString:string atIndex:0];//插入到第几个下标
+    label.attributedText = attributedString;
+    [imageviews removeFromSuperview];
 }
 - (void)setNeirong:(ZhiShiShuNeiRongModel *)neirong{
     _neirong = neirong;
@@ -131,25 +148,22 @@
         make.width.mas_equalTo(neirong.width*poinw);
         make.height.mas_equalTo(neirong.height*poinw);
     }];
-//    [self->textimag sd_setImageWithURL:[NSURL URLWithString:imageurl]];
-    if ([neirong.vi_logo isEqualToString:@""]) {
-        label.textAlignment = NSTextAlignmentCenter;
-        [textimag mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(LENGTH(0));
-            make.height.mas_equalTo(LENGTH(0));
-        }];
-    }else{
-        [textimag mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(LENGTH(32));
-            make.height.mas_equalTo(LENGTH(32));
-        }];
-        label.textAlignment = NSTextAlignmentLeft;
-    }
+
 //    label.text = @"地球/n地球自转一圈\n是一天";
-    label.text  = neirong.name;
-//    label.text = [[NSString stringWithFormat:@"%@",neirong.name]  stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+    label.text  = [NSString stringWithFormat:@" %@",neirong.name];
     NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTX,neirong.vi_logo];
-    [self->textimag sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo]];
+
+    imageviews = [UIImageView new];
+    [self addSubview:imageviews];
+    __weak ZhiShiShuNEiRong * blockSelf = self;
+    [imageviews sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if (image!=nil) {
+            [blockSelf fwenben:image];
+        }else{
+            [self->imageviews removeFromSuperview];
+        }
+    }];
+
     
     NSMutableArray * imagarrya = _neirong.underline;
     if (imagarrya.count == 0) {
@@ -178,7 +192,7 @@
     BaseView * topview = [BaseView new];
     [downView addSubview:topview];
     [topview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self->textimag.mas_right);
+        make.left.mas_equalTo(self->label.mas_left);
         make.top.mas_equalTo(self->label.mas_bottom).with.offset(LENGTH(2));
         make.right.mas_equalTo(self->downView).with.offset(LENGTH(5));
         make.height.mas_equalTo(3);
@@ -248,17 +262,17 @@
 
 - (void)setTextmodel:(ZhiShiShuDataModel *)textmodel{
     _textmodel =textmodel;
-    label.textColor = [BaseObject colorWithHexString:textmodel.txt_color];
+    label.textColor = [BaseObject colorWithHexString:textmodel.txt_color Alpha:1];
 
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     CGFloat flo = 0;
-    if (imageview.frame.size.width>textimag.frame.size.width+LENGTH(5)+label.frame.size.width) {
+    if (imageview.frame.size.width>label.frame.size.width) {
         flo =imageview.frame.size.width;
     }else{
-        flo = textimag.frame.size.width+LENGTH(5)+label.frame.size.width;
+        flo = label.frame.size.width;
     }
     if (_neirong.width<=0) {
         [downView mas_updateConstraints:^(MASConstraintMaker *make) {

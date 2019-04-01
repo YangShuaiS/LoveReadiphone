@@ -39,6 +39,7 @@ PODS:
   - SDWebImage/GIF (4.4.1):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - YYText (1.0.7)
   - ZipArchive (1.4.0)
 
 DEPENDENCIES:
@@ -58,6 +59,7 @@ DEPENDENCIES:
   - SDCycleScrollView (~> 1.75)
   - SDWebImage (~> 4.4.1)
   - SDWebImage/GIF
+  - YYText
   - ZipArchive
 
 SPEC REPOS:
@@ -80,6 +82,7 @@ SPEC REPOS:
     - PGPickerView
     - SDCycleScrollView
     - SDWebImage
+    - YYText
     - ZipArchive
 
 SPEC CHECKSUMS:
@@ -101,8 +104,9 @@ SPEC CHECKSUMS:
   PGPickerView: 22d63d37fb9f460e2bee82ac1f4b7b1d9c54947c
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: 1093c46c5bdf410c200d8e44e1e95691e9476f1f
+PODFILE CHECKSUM: 8acfff983682bcdd5367d53668bdf950f1887d59
 
 COCOAPODS: 1.5.3

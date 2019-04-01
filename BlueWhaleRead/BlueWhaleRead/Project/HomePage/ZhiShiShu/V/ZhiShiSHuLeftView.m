@@ -64,7 +64,7 @@
             star = 0;
         }
         BaseView * view = [BaseView new];
-        view.backgroundColor = [BaseObject colorWithHexString:model.color];
+        view.backgroundColor = [BaseObject colorWithHexString:model.color Alpha:0.75];
         [self addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(ws);
@@ -73,7 +73,7 @@
             make.height.mas_equalTo((end-star)*poinw);
         }];
         
-        BaseLabel * text = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[UIColor whiteColor] LabelFont:TextFont(14) TextAlignment:NSTextAlignmentCenter Text:model.name];
+        BaseLabel * text = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[UIColor whiteColor] LabelFont:TextFont(18) TextAlignment:NSTextAlignmentCenter Text:model.name];
         text.numberOfLines = 0;
         [view addSubview:text];
         [text mas_makeConstraints:^(MASConstraintMaker *make) {

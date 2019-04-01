@@ -52,8 +52,10 @@
     }];
     if (_style == 2) {
         [self LoadData];
-    }else{
+    }else if (_style == 3){
         [self LoadDataXGTj];
+    }else if (_style == 4){
+        [self LoadDataBookXqXGTj];
     }
 }
 #pragma mark --------------------  导航栏以及代理
@@ -89,7 +91,7 @@
 
 
 - (void)LoadData{
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_ZHISHIWANGSHOUYE];
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_ZHISHIMYHISTORY];
     NSDictionary * dic = @{@"studentid":Me.ssid};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
@@ -121,12 +123,34 @@
         }
     }];
 }
+
+- (void)LoadDataBookXqXGTj{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_BOOKXQZSWTUIJIAN];
+    NSDictionary * dic = @{@"studentid":Me.ssid,@"bookid":_ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            NewKnowledgeModel * model = [NewKnowledgeModel mj_objectWithKeyValues:responseObject];
+            if ([model.code isEqual:@200]) {
+                [self UpData:model];
+            }else if ([model.code isEqual:@Notloggedin]){
+                [self UpDengLu];
+            }
+        }else{
+            
+        }
+    }];
+}
+
 - (void)UpData:(NewKnowledgeModel *)model{
+
     if (_style == 2) {
         collectView.itemarray = model.myHistory;
-    }else{
+    }else if (_style == 3){
         collectView.itemarray = model.relatedRecommendations;
+    }else if (_style == 4){
+        collectView.itemarray = model.bannerknowledgeList;
     }
+
 }
 /*
 #pragma mark - Navigation

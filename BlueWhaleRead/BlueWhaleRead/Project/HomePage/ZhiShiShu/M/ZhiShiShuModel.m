@@ -11,7 +11,7 @@
 @implementation ZhiShiShuModel
 + (void)InitializeModel{
     [ZhiShiShuDataModel mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"point":@"ZhiShiShuNeiRongModel",@"relation":@"ZhiSHiShuXianModel",@"axis":@"ZhiShiShuTimeLineModel",@"line_type":@"ZhiShiShuLineModel",@"relation_type":@"ZhiShiShuViTypeModel",@"vi_type":@"ZhiShiShuViTypeModel",@"arrow":@"ZhiShiShuClickModel"};
+        return @{@"point":@"ZhiShiShuNeiRongModel",@"relation":@"ZhiSHiShuXianModel",@"axis":@"ZhiShiShuTimeLineModel",@"line_type":@"ZhiShiShuLineModel",@"relation_type":@"ZhiShiShuViTypeModel",@"vi_type":@"ZhiShiShuViTypeModel",@"arrow":@"ZhiShiShuClickModel",@"knowledgeGrade":@"knowledgeGradeModel",@"bookList":@"BookListModel",@"bannerKnowledgeList":@"NKRKnowledgeModel"};
     }];
 }
 @end

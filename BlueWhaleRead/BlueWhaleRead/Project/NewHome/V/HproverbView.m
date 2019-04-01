@@ -8,7 +8,7 @@
 
 #import "HproverbView.h"
 #import "NBCmenuView.h"
-
+#import "NHMingYanViewController.h"
 @implementation HproverbView{
     FLAnimatedImageView * imageview;
     NBCmenuView * navMenu;//
@@ -27,8 +27,11 @@
 - (void)addview{
     WS(ws);
     navMenu = [NBCmenuView new];
-//    navMenu.styles = NBCmenuViewStyleimage;
+    navMenu.styles = NBCmenuViewStyleimage;
     navMenu.label.text = @"每日格言";
+    [navMenu setBlock:^{
+        [ws LookAll];
+    }];
     [self addSubview:navMenu];
     [navMenu mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(0);
@@ -101,5 +104,10 @@
 //    backimage.layer.cornerRadius = LENGTH(12);
 //    imageview.layer.cornerRadius = LENGTH(12);
 
+}
+
+- (void)LookAll{
+    NHMingYanViewController * vc = [NHMingYanViewController new];
+    [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 @end

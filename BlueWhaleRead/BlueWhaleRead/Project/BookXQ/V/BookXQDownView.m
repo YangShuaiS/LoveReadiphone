@@ -283,10 +283,12 @@
                     vc.bookfenshu = self.model.b_score;
                     [self.nav pushViewController:vc animated:YES];
                 }];
-                static dispatch_once_t onceToken;
-                dispatch_once(&onceToken, ^{
-                    [self addGuideDaTiOneView];
-                });
+                if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[[self viewController] class]]){
+                    static dispatch_once_t onceToken;
+                    dispatch_once(&onceToken, ^{
+                        [self addGuideDaTiOneView];
+                    });
+                }
             }else if ([self->Topmodel.code isEqual:@Notloggedin]){
                 [self UpDengLu];
             }

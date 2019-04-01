@@ -14,6 +14,11 @@
 #import "NKRRecTowTitleView.h"
 #import "NKRBookTJView.h"
 #import "NKRWenzhangView.h"
+
+#import "GuiDeZhiShiWangOneView.h"
+#import "GuiDeZhiShiWangTwoView.h"
+#import "GuiDeZhiShiWangThreeView.h"
+#import "NewHpViewModel.h"
 @interface NewKnowledgeRootViewController (){
     UIScrollView * scrollView;
     NSMutableArray *  viewarray;
@@ -24,13 +29,16 @@
     NKRRecommendedView * recommended;
     NKRRecTowTitleView * rectowtitle;
     NKRBookTJView * booktj;
-    NKRWenzhangView * wztj;
+//    NKRWenzhangView * wztj;
 }
 
 @end
 
 @implementation NewKnowledgeRootViewController
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self LoadData];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self Addview];
@@ -66,8 +74,8 @@
     booktj = [NKRBookTJView new];
     [viewarray addObject:booktj];
 
-    wztj = [NKRWenzhangView new];
-    [viewarray addObject:wztj];
+//    wztj = [NKRWenzhangView new];
+//    [viewarray addObject:wztj];
 
     BaseView * lastview;
     for (int i = 0; i < viewarray.count; i++) {
@@ -97,7 +105,6 @@
         }
         lastview = view;
     }
-    [self LoadData];
 }
 #pragma mark - 下拉刷新
 - (void)headRefresh{
@@ -131,7 +138,86 @@
     recommended.itemArray = model.myHistory;
     rectowtitle.itemArray = model.relatedRecommendations;
     booktj.itemarray = model.bookList;
-    wztj.itemarray = model.goodBannerList;
+    
+    if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[self class]]) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [self.view.superview layoutIfNeeded];
+            [self addGuiDeZhiShiWangOneView];
+        });
+    }
+    
+
+//    wztj.itemarray = model.goodBannerList;
+}
+
+#pragma mark ------------------ 引导页
+- (void)addGuiDeZhiShiWangOneView{
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
+    NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
+    NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
+    if ([model.zhishiwang integerValue]<3) {
+        WS(ws);
+        GuiDeZhiShiWangOneView * view = [GuiDeZhiShiWangOneView new];
+        view.frames = NKRCView.frame;
+        [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window] );
+        }];
+        [view setBlock:^{
+            [ws addGuiDeZhiShiWangTwoView];
+        }];
+        NSString * str = [NSString stringWithFormat:@"%ld",[model.ydyhome integerValue]+1];
+        [dataDictionary setValue:str forKey:@"zhishiwang"];
+        [dataDictionary writeToFile:filePatch atomically:YES];
+    }
+
+}
+
+- (void)addGuiDeZhiShiWangTwoView{
+    WS(ws);
+    if (recommended.itemArray.count > 0) {
+        [scrollView setContentOffset:CGPointMake(0,recommended.frame.origin.y - (HEIGHT -TabBarHeight-recommended.frame.size.height)/2) animated:NO];
+        GuiDeZhiShiWangTwoView * view = [GuiDeZhiShiWangTwoView new];
+        view.viewy =(HEIGHT -TabBarHeight-recommended.frame.size.height)/2;
+        [[[[UIApplication sharedApplication] delegate] window]  addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window] );
+        }];
+        [view setBlock:^{
+            [ws addGuiDeZhiShiWangThreeView];
+        }];
+        
+    }else{
+        if (self->rectowtitle.itemArray.count > 0) {
+            [scrollView setContentOffset:CGPointMake(0,rectowtitle.frame.origin.y - (HEIGHT -TabBarHeight-rectowtitle.frame.size.height)/2) animated:NO];
+            GuiDeZhiShiWangThreeView * view = [GuiDeZhiShiWangThreeView new];
+            view.viewy =(HEIGHT -TabBarHeight-rectowtitle.frame.size.height)/2;
+            [[[[UIApplication sharedApplication] delegate] window]  addSubview:view];
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window] );
+            }];
+            [view setBlock:^{
+                [self->scrollView setContentOffset:CGPointMake(0,0) animated:NO];
+                
+            }];
+        }
+
+    }
+}
+- (void)addGuiDeZhiShiWangThreeView{
+    if (self->rectowtitle.itemArray.count > 0) {
+        [scrollView setContentOffset:CGPointMake(0,rectowtitle.frame.origin.y - (HEIGHT -TabBarHeight-rectowtitle.frame.size.height)/2) animated:NO];
+        GuiDeZhiShiWangThreeView * view = [GuiDeZhiShiWangThreeView new];
+        view.viewy =(HEIGHT -TabBarHeight-rectowtitle.frame.size.height)/2;
+        [[[[UIApplication sharedApplication] delegate] window]  addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window] );
+        }];
+        [view setBlock:^{
+            [self->scrollView setContentOffset:CGPointMake(0,0) animated:NO];
+        }];
+    }
 }
 /*
 #pragma mark - Navigation

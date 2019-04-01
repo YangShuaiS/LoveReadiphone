@@ -100,7 +100,7 @@
     right.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:right];
     [right mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws).with.offset(LENGTH(26));
+        make.left.equalTo(ws).with.offset(LENGTH(16));
         make.bottom.equalTo(ws).with.offset(-10);
         make.height.mas_equalTo(24);
         make.width.mas_equalTo(backImage.size.width);

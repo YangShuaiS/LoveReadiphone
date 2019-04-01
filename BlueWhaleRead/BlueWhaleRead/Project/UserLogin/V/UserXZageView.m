@@ -41,18 +41,19 @@
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(LENGTH(88),LENGTH(52));
+    flowLayout.headerReferenceSize =CGSizeMake(WIDTH,LENGTH(20));//头视图大小
     //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = LENGTH(20);
+    flowLayout.minimumLineSpacing = LENGTH(5);
     //定义每个UICollectionView 纵向的间距
-    flowLayout.minimumInteritemSpacing = LENGTH(12);
+    flowLayout.minimumInteritemSpacing = LENGTH(5);
     //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(LENGTH(0), LENGTH(40), 0, LENGTH(40));//上左下右
+    flowLayout.sectionInset = UIEdgeInsetsMake(LENGTH(0), LENGTH(40),0, LENGTH(40));//上左下右
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     collection = [[UserXZageCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
     [self addSubview:collection];
     [collection mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(subtitle.mas_bottom).with.offset(LENGTH(80));
+        make.top.mas_equalTo(subtitle.mas_bottom).with.offset(LENGTH(40));
         make.left.and.right.mas_equalTo(ws);
         make.height.mas_equalTo(LENGTH(10));
     }];
@@ -92,8 +93,10 @@
 }
 - (void)load{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_HQCLASS];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",ALLCLASS]];
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:nil andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
+            [responseObject writeToFile:filePatch atomically:YES];
             UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
             if ([m.code isEqual:@200]) {
                 self->collection.itemArray = m.levelList;

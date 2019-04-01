@@ -63,7 +63,8 @@ extern MeModel const * Me;
                                       String:(NSString * )string;
 +(NSString*)getCurrentTimes;
 
-+ (UIColor *) colorWithHexString: (NSString *)color;
++ (UIColor *) colorWithHexString: (NSString *)color
+                           Alpha:(CGFloat)alpha;
 
 + (NSString *)Sharetitle:(NSString *)title;
 
@@ -81,4 +82,7 @@ extern MeModel const * Me;
 + (NSString *)NowTime;
 
 + (NSMutableArray *)TaskColorArray:(NSInteger)inter;
+
+//获取当前控制器
++ (UIViewController *)jsd_getCurrentViewController;
 @end

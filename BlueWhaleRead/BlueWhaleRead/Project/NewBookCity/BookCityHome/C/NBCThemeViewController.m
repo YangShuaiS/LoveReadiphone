@@ -8,7 +8,7 @@
 
 #import "NBCThemeViewController.h"
 #import <WebKit/WebKit.h>
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 #import "FenXiangView.h"
 #import "HaiBaoView.h"
 
@@ -240,7 +240,7 @@
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
 //    NSDictionary *dic = [NSDictionary parseJSONStringToNSDictionary:message];
-//    BookXqViewController * vc = [BookXqViewController new];
+//    NewBookXQViewController * vc = [NewBookXQViewController new];
 //    vc.loadId = message;
 //    [self.navigationController pushViewController:vc animated:YES];
     completionHandler();
@@ -260,8 +260,8 @@
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
     NSLog(@"name = %@, body = %@", message.name, message.body);
     NSDictionary *dic = message.body;
-        BookXqViewController * vc = [BookXqViewController new];
+        NewBookXQViewController * vc = [NewBookXQViewController new];
         vc.loadId = dic[@"id"];
-        [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

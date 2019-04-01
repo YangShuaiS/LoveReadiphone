@@ -10,5 +10,6 @@
 
 @interface ZhiShiShuViewController : BaseViewController
 @property (nonatomic, strong) NSString* ids;
+@property (nonatomic, strong) NSString* twoid;
 
 @end

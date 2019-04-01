@@ -7,7 +7,7 @@
 //
 
 #import "HTaskAllView.h"
-#import "TKPrizeViewController.h"
+#import "NewTKPrizeViewController.h"
 #import "HTaskprogressView.h"
 #import "HTProLasDatView.h"
 #import "HTaskWeekTableView.h"
@@ -282,7 +282,7 @@
 
 
 - (void)ckjpclick{
-    TKPrizeViewController * vc = [TKPrizeViewController new];
+    NewTKPrizeViewController * vc = [NewTKPrizeViewController new];
     [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 

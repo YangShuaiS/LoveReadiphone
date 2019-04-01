@@ -10,6 +10,7 @@
 
 @interface BookCityViewController : BaseViewController
 @property(nonatomic,strong)NSIndexPath * inpath;
+@property(nonatomic,assign)NSInteger mrclass;//默认年级
 @property(nonatomic,strong)NSString * cata;
 
 @end

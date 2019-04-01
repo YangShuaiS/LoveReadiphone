@@ -12,7 +12,7 @@
 + (void)InitializeModel{
     [NewKnowledgeModel mj_setupObjectClassInArray:^NSDictionary *{
         
-        return @{@"bannerList":@"LunboModel",@"knowledgeData":@"NKRClassificationModel",@"hotKnowledge":@"NKRKnowledgeModel",@"myHistory":@"NKRKnowledgeModel",@"relatedRecommendations":@"NKRKnowledgeModel",@"bookList":@"BookListModel",@"goodBannerList":@"AllSearchWZModel"};
+        return @{@"bannerList":@"LunboModel",@"knowledgeData":@"NKRClassificationModel",@"hotKnowledge":@"NKRKnowledgeModel",@"myHistory":@"NKRKnowledgeModel",@"relatedRecommendations":@"NKRKnowledgeModel",@"bookList":@"BookListModel",@"goodBannerList":@"AllSearchWZModel",@"bannerknowledgeList":@"NKRKnowledgeModel"};
     }];
 }
 @end

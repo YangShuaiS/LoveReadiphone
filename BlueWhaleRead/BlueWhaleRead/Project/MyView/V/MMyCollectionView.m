@@ -15,6 +15,7 @@
 #import "TKMytaskViewController.h"
 #import "BaseNavigationViewController.h"
 #import "UserLoginViewController.h"
+#import "MyFavoritesViewController.h"
 @interface MMyCollectionView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
@@ -40,7 +41,7 @@
         self.scrollsToTop = NO;
         self.showsVerticalScrollIndicator = NO;
         self.showsHorizontalScrollIndicator = NO;
-        titarray = @[@"能力测试",@"我的成就",@"我的书架",@"我的任务",@"我的里程碑"];
+        titarray = @[@"能力测试",@"我的成就",@"我的书架",@"我的任务",@"我的里程碑",@"收藏夹"];
     }
     return self;
 }
@@ -78,6 +79,9 @@
             [[self viewController].navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 4){
             HomeMilestoneViewController * vc = [HomeMilestoneViewController new];
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row == 5){
+            MyFavoritesViewController * vc = [MyFavoritesViewController new];
             [[self viewController].navigationController pushViewController:vc animated:YES];
         }
     }else{

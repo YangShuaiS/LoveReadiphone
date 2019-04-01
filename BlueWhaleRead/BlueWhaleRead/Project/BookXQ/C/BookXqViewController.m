@@ -261,13 +261,14 @@
     [downView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(HEIGHT-NavHeight-LENGTH(15)-LENGTH(TabBarHeight)-self->bookTop.frame.size.height-LENGTH(18));
     }];
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self addGuideBookXqOneView];
-    });
+    if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[self class]]) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [self addGuideBookXqOneView];
+        });
+    }
 }
 - (void)addIntensiveMenu:(BookXQModel*)model{
-    WS(ws);
     zt = 0;
     homeMenu = [[BookXQDownMenuView alloc] init];
     homeMenu.titarray = @[@"同学",@"读后感",@"优秀书评"];

@@ -32,7 +32,7 @@
     xian.image = UIIMAGE(@"线");
     [self addSubview:xian];
     [xian mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws).with.offset(ws.frames.origin.y+LENGTH(70)+LENGTH(70));
+        make.top.mas_equalTo(ws).with.offset(ws.frames.origin.y+17+LENGTH(6)+LENGTH(28)+LENGTH(21)+NavHeight+LENGTH(70));
         make.left.mas_equalTo(ws).with.offset(ws.frames.origin.x+LENGTH(105));
         make.width.mas_equalTo(LENGTH(36));
         make.height.mas_equalTo(LENGTH(56));
@@ -98,7 +98,7 @@
     //镂空
     //    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRect:myRect];
     //    [circlePath stroke];
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(_frames.origin.x+LENGTH(105), _frames.origin.y+LENGTH(70), LENGTH(242), LENGTH(70))];
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(_frames.origin.x+LENGTH(110)+LENGTH(20), _frames.origin.y+17+LENGTH(6)+LENGTH(28)+LENGTH(21)+NavHeight, LENGTH(242), LENGTH(50))];
     [path appendPath:circlePath];
     [path setUsesEvenOddFillRule:YES];
     

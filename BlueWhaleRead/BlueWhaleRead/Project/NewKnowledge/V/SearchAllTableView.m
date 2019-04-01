@@ -122,12 +122,12 @@
         models.itemarray = array;
         [itemarray addObject:models];
     }
-    if (_model.bannerdata.count > 0) {
-        AllSearchZYModel * models = [AllSearchZYModel new];
-        models.style = 2;
-        models.itemarray = _model.bannerdata;
-        [itemarray addObject:models];
-    }
+//    if (_model.bannerdata.count > 0) {
+//        AllSearchZYModel * models = [AllSearchZYModel new];
+//        models.style = 2;
+//        models.itemarray = _model.bannerdata;
+//        [itemarray addObject:models];
+//    }
     if (_model.bookdata.count > 0) {
         AllSearchZYModel * models = [AllSearchZYModel new];
         models.style = 3;

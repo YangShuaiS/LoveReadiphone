@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, YSInformationViewStyle) {
 };
 @property (nonatomic,assign)  YSInformationViewStyle style;
 @property(nonatomic,strong)NKRKnowledgeModel * model;
+@property (nonatomic , assign)NSInteger bkzt;//编辑状态
 
 @end
 

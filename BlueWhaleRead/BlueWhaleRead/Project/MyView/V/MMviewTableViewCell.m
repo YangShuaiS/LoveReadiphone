@@ -11,6 +11,7 @@
 @implementation MMviewTableViewCell{
     FLAnimatedImageView * imageview;
     BaseLabel * name;
+    UIView * dowxxian;
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self =  [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -40,7 +41,7 @@
         make.centerY.mas_equalTo(ws);
     }];
     
-    UIView * dowxxian = [UIView new];
+    dowxxian = [UIView new];
     dowxxian.backgroundColor = RGB(229,229,229);
     [self addSubview:dowxxian];
     [dowxxian mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,6 +70,15 @@
 - (void)setImagestring:(NSString *)imagestring{
     _imagestring = imagestring;
     imageview.image = UIIMAGE(imagestring);
+}
+
+- (void)setInter:(NSInteger)inter{
+    _inter = inter;
+    if (inter == 2 && dowxxian.hidden == NO) {
+        dowxxian.hidden = YES;
+    }else if (dowxxian.hidden == YES){
+        dowxxian.hidden = NO;
+    }
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

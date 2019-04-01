@@ -14,6 +14,7 @@
 #import "TKXQRLModel.h"//
 #import "LCBMilestone.h"//里程碑
 #import "TKAllTaskModel.h"
+#import "MyFavoritesModel.h"//我的收藏
 
 #import "PushModel.h"
 #import "AttributedStringModel.h"

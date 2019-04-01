@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * name;//
 @property (nonatomic, copy) NSString * ssid;//
 @property (nonatomic, copy) NSString * theme_color;//
+@property (nonatomic, copy) NSString * rank_theme_img;//
 
 @end
 

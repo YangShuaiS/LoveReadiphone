@@ -21,5 +21,8 @@ typedef void(^click)(CGRect frame);
 @property(nonatomic,assign)CGFloat weizhi;
 @property(nonatomic,strong)NSString * morenweizhi;
 
+
+@property(nonatomic,assign)CGFloat newheight;
+
 - (void)huadong;
 @end

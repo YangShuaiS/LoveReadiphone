@@ -11,10 +11,13 @@
 #import "NBCmenuView.h"
 #import "SearchMyHistoryViewController.h"
 #define itemWidth LENGTH(162)
-#define itemHeight LENGTH(162*0.610561)+LENGTH(15)+LENGTH(20)+LENGTH(5)+LENGTH(16)
+//#define itemHeight LENGTH(162*0.610561)+LENGTH(15)+LENGTH(20)+LENGTH(5)+LENGTH(16)
+#define itemHeight LENGTH(162)*0.610561+LENGTH(15)+LENGTH(16)+LENGTH(5)+LENGTH(16)
+
 @implementation NKRRecTowTitleView{
     NKRRecommendedCollectionView * collectView;
     NBCmenuView * menu;
+    CGFloat topheight;
 }
 
 - (instancetype)init
@@ -61,10 +64,24 @@
         make.bottom.equalTo(ws).with.offset(-LENGTH(14));
         make.height.mas_equalTo(itemHeight);
     }];
+    topheight = LENGTH(47);
 }
 - (void)setItemArray:(NSMutableArray *)itemArray{
     _itemArray = itemArray;
     collectView.itemarray = itemArray;
+    
+    if (itemArray.count == 0) {
+        menu.hidden = YES;
+        [menu mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }else{
+        [menu mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(self->topheight);
+        }];
+        menu.hidden = NO;
+        
+    }
 }
 - (void)push{
     SearchMyHistoryViewController * vc = [SearchMyHistoryViewController new];

@@ -9,7 +9,7 @@
 #import "HomeActivityTableView.h"
 #import "HomeActivityTopTableViewCell.h"
 #import "BookTableViewCell.h"
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 #import "BookDanTableViewCell.h"
 
 #import "HomeActivityHeaderView.h"
@@ -216,7 +216,7 @@
     if (indexPath.section>0) {
         NSMutableArray * array = _itemarray[indexPath.section-1];
         CityBookListModel * mod = array[indexPath.row];
-        BookXqViewController * vc = [BookXqViewController new];
+        NewBookXQViewController * vc = [NewBookXQViewController new];
         vc.loadId = mod.ssid;
         [self.nav pushViewController:vc animated:YES];
     }

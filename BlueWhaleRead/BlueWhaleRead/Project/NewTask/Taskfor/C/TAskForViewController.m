@@ -331,7 +331,7 @@
     scrollView.delegate = self;
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(-StatusBar, 0, 0, 0));
+        make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
     
     navs = [TKNewXQNavView new];

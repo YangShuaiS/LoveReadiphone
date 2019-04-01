@@ -19,4 +19,8 @@
 @property(nonatomic,strong)NSMutableArray * create_time;
 @property(nonatomic,strong)NSMutableArray * update_time;
 
+
+@property(nonatomic,assign)NSInteger banner_type; //1原先 2 新的
+@property(nonatomic,copy)NSString * banner_foreword;
+
 @end

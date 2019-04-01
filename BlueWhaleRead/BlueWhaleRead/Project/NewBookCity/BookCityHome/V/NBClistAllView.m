@@ -112,7 +112,6 @@
 }
 - (void)setModel:(NBCALLModel *)model{
     _model = model;
-    
     for (int i = 0 ; i <  model.rankList.count; i++) {
         NBCclassificationModel * mo = model.rankList[i];
         UIImageView * image = viewarray[i];

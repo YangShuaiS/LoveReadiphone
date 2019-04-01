@@ -85,7 +85,7 @@
     //镂空
 //    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRect:myRect];
     //    [circlePath stroke];
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_frames.origin.x+LENGTH(20), _frames.origin.y+LENGTH(100), LENGTH(136), LENGTH(136)) cornerRadius:LENGTH(68)];
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_frames.origin.x+LENGTH(20)+LENGTH(30), _frames.origin.y+LENGTH(110)*1.42+17, LENGTH(86), LENGTH(86)) cornerRadius:LENGTH(43)];
     [path appendPath:circlePath];
     [path setUsesEvenOddFillRule:YES];
     

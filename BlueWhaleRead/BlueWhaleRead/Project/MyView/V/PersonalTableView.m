@@ -34,6 +34,8 @@
     
     MyDeModel * mo;
     MyZiLiaoModel * newModel;
+    
+    UserLoginModel * livemodel;
 }
 
 - (instancetype)init{
@@ -48,6 +50,9 @@
         self.estimatedRowHeight = 300;//估算高度
         self.rowHeight = UITableViewAutomaticDimension;
         self.bounces = NO;
+        NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",ALLCLASS]];
+        NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
+        livemodel = [UserLoginModel mj_objectWithKeyValues:dataDictionary];
     }
     return self;
 }
@@ -80,8 +85,14 @@
     true_school=[true_school isEqualToString:@""]?@"待完善":true_school;
     true_class=[true_class isEqualToString:@""]?@"待完善":true_class;
     schoolclass=[true_class isEqualToString:@""]?@"待完善":schoolclass;
-
-    subArray = @[model.name,Me.birthday,Me.level,[NSString stringWithFormat:@"Lv%@",model.level],@"",area,true_school,true_class,xb];
+    
+    NSString * nianji = @"";
+    for (levelListModel *levemodel in livemodel.levelList) {
+        if ([model.level isEqualToString:levemodel.ssid]) {
+            nianji = levemodel.name;
+        }
+    }
+    subArray = @[model.name,Me.birthday,nianji,[NSString stringWithFormat:@"Lv%@",model.level],@"",area,true_school,true_class,xb];
     [self reloadData];
 }
 #pragma mark  - tableViewDelegate代理方法
@@ -236,8 +247,16 @@
 }
 
 - (void)nianling{
-    [[MOFSPickerManager shareManger] showPickerViewWithDataArray:@[@"1",@"2",@"3",@"4",@"5",@"6"] tag:1 title:@"选择年级" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *string) {
-        [self genggaunianji:string];
+    NSMutableArray * titlearray = [NSMutableArray array];
+    for (levelListModel *levemodel in livemodel.levelList) {
+        [titlearray addObject:levemodel.name];
+    }
+    [[MOFSPickerManager shareManger] showPickerViewWithDataArray:titlearray tag:1 title:@"选择年级" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *string) {
+        for (levelListModel *levemodel in self->livemodel.levelList) {
+            if ([levemodel.name isEqualToString:string]) {
+                [self genggaunianji:levemodel.ssid];
+            }
+        }
     } cancelBlock:^{
         
     }];

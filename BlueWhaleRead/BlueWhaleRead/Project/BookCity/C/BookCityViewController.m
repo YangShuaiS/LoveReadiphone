@@ -144,7 +144,7 @@
         make.bottom.equalTo(ws.view).with.offset(0);
     }];
     arr = [NSArray array];
-    arr = @[_cata,@"0",@"0"];
+    arr = @[_cata,Me.level,@"0"];
     [self chushihua];
     typeof(self) __weak weakSelf = self;
     _menu.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -248,7 +248,6 @@
     if ([sort isEqualToString:@""]) {
         sort = @"0";
     }
-
     NSDictionary * dic = @{@"studentid":Me.ssid,@"catalogid":catalogid,@"levelid":levelid,@"sort":sort,@"page":[NSString stringWithFormat:@"%ld",(long)page]};
     typeof(self) __weak weakSelf = self;
 
@@ -278,6 +277,10 @@
     [_menu.tableView.mj_footer endRefreshing];
     _menu.inpath = _inpath;
     _menu.model = model;
+    _menu.mrclass = _mrclass;
+    if (_mrclass == 1) {
+        _mrclass = 0;
+    }
     allpage = model.totalCount;
 }
 

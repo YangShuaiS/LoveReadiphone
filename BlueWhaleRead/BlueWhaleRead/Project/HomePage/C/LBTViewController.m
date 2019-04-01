@@ -11,7 +11,7 @@
 #import "HaiBaoView.h"
 
 #import <WebKit/WebKit.h>
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 @interface LBTViewController ()<NavDelegate,WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate>
 
 @end
@@ -25,6 +25,8 @@
     
     WKWebView *webView;
     FLAnimatedImageView * sharefriend;
+    FLAnimatedImageView * ShouCang;
+    LunBoTuXQModel *nmodel;
 
 
 }
@@ -93,7 +95,7 @@
         make.bottom.equalTo(self->scrollView.mas_bottom).with.offset(-LENGTH(10));
         make.height.mas_equalTo(1);
     }];
-        [[webView configuration].userContentController addScriptMessageHandler:self name:@"getMessage"];
+    [[webView configuration].userContentController addScriptMessageHandler:self name:@"getMessage"];
     
 //    down = [BaseLabel new];
 //    down.numberOfLines = 0;
@@ -138,8 +140,27 @@
     sharefriend.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
     [sharefriend addGestureRecognizer:tap];
+    
+    ShouCang = [FLAnimatedImageView new];
+    ShouCang.image = UIIMAGE(@"收藏0");
+    ShouCang.contentMode = UIViewContentModeScaleAspectFit;
+    [self.navtive addSubview:ShouCang];
+    [ShouCang mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20-24-10);
+        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);
+        make.width.and.height.mas_equalTo(24);
+    }];
+    ShouCang.userInteractionEnabled = NO;
+    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ShouCang)];
+    [ShouCang addGestureRecognizer:tap1];
 }
-
+- (void)ShouCang{
+    if (nmodel.is_collect == 0) {
+        [self shoucang];
+    }else{
+        [self yichushooucang];
+    }
+}
 - (void)FenXiang{
     FenXiangView * fenxiangs = [FenXiangView new];
     fenxiangs.atype = @"1";
@@ -171,7 +192,6 @@
     }];
 }
 - (void)NavLeftClick{
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -204,17 +224,51 @@
     NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'></header>";
     [webView loadHTMLString:[headerString stringByAppendingString:str] baseURL:nil];
 //    [webView loadHTMLString:str baseURL:nil];
+    WS(ws);
     if ([model.banner.is_share isEqualToString:@"0"]) {
         sharefriend.userInteractionEnabled = NO;
         sharefriend.image = UIIMAGE(@"");
         [sharefriend removeFromSuperview];
+        [ShouCang mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
+        }];
+    }
+    nmodel = model;
+    ShouCang.userInteractionEnabled = YES;
+    if (model.is_collect == 0) {
+        ShouCang.image = UIIMAGE(@"收藏0");
+    }else{
+        ShouCang.image = UIIMAGE(@"收藏");
     }
 
-//    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[str
-//                                                                             dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:
-//                                                                                                                                      NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-//
-//    down.attributedText = attrStr;
+}
+- (void)shoucang{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_SHOUCANGZHISHITU];
+    NSDictionary * dic = @{@"studentid":Me.ssid,@"collectionid":_itemid,@"collection_type":@"1"};
+    [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                self->ShouCang.image = UIIMAGE(@"收藏");
+                self->nmodel.is_collect = 1;
+            }
+        }
+    }];
+}
+- (void)yichushooucang{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_YICHUSHOUCANGZHISHITU];
+    NSDictionary * dic = @{@"delids":_itemid,@"studentid":Me.ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            LunBoTuXQModel * model = [LunBoTuXQModel mj_objectWithKeyValues:responseObject];
+            if ([model.code isEqual:@200]) {
+                self->ShouCang.image = UIIMAGE(@"收藏0");
+                self->nmodel.is_collect = 0;
+            }
+        }else{
+            
+        }
+    }];
 }
 //- (void)webViewDidFinishLoad:(UIWebView *)webView{
 //    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#edf3f3'"];
@@ -269,7 +323,7 @@
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
     //    NSDictionary *dic = [NSDictionary parseJSONStringToNSDictionary:message];
-    BookXqViewController * vc = [BookXqViewController new];
+    NewBookXQViewController * vc = [NewBookXQViewController new];
     vc.loadId = message;
     [self.navigationController pushViewController:vc animated:YES];
     completionHandler();
@@ -295,7 +349,7 @@
 */
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
     NSDictionary *dic = message.body;
-    BookXqViewController * vc = [BookXqViewController new];
+    NewBookXQViewController * vc = [NewBookXQViewController new];
     vc.loadId = dic[@"id"];
     [self.navigationController pushViewController:vc animated:YES];
 }

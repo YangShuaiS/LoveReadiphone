@@ -8,7 +8,7 @@
 
 #import "FoundOliverTableView.h"
 #import "FoundOlivewTableViewCell.h"
-#import "BookXqViewController.h"
+#import "NewBookXQViewController.h"
 @interface FoundOliverTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -92,9 +92,9 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BookXqViewController * vc = [BookXqViewController new];
+    NewBookXQViewController * vc = [NewBookXQViewController new];
     FoundGoodArticleModel * mo = _itemarray[indexPath.section];
-    vc.moren = 1;
+//    vc.moren = 1;
     vc.loadId = mo.book_id;
     [self.nav pushViewController:vc animated:YES];
     

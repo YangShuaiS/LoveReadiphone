@@ -19,7 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * ssid;
 
 
-@property (nonatomic, assign) NSInteger inter;//0 小  1 大
+@property (nonatomic, assign) NSInteger inter;//0 小  1 大  
+@property (nonatomic, assign) NSInteger duigou;//0 小  1 大  or 0 未选中 1 选中
+
+@property (nonatomic, assign) NSInteger banner_type;
 
 @end
 

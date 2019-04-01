@@ -10,7 +10,7 @@
 #import "HTaskprogressView.h"
 #import "TKIssueViewController.h"
 #import "TFameViewController.h"
-#import "TKPrizeViewController.h"
+#import "NewTKPrizeViewController.h"
 
 @implementation TKNewXQTopView{
     UIImageView* backImage;
@@ -369,7 +369,7 @@
     [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 - (void)qbjp{
-    TKPrizeViewController * vc = [TKPrizeViewController new];
+    NewTKPrizeViewController * vc = [NewTKPrizeViewController new];
     [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 - (void)NavLeftClick{

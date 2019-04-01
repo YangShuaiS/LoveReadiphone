@@ -158,6 +158,7 @@ preferredStyle:UIAlertControllerStyleAlert];
 }
 - (void)hqid:(NSString *)nianji{
     WS(ws);
+    //2AF887C1-A9CE-4F4D-A966-68F913182DAB
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_HQID];
     NSDictionary * dic = @{@"uuid":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"level":nianji};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
@@ -229,10 +230,12 @@ preferredStyle:UIAlertControllerStyleAlert];
     alltask.itemArray = model.missionList;
     booklist.model = model.tag;
     [self.view.superview layoutIfNeeded];
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self addGuideHomeOne];
-    });
+    if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[self class]]) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [self addGuideHomeOne];
+        });
+    }
 }
 - (void)addGuideHomeOne{
     NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
@@ -242,9 +245,9 @@ preferredStyle:UIAlertControllerStyleAlert];
         WS(ws);
         GuideHomeOneView * view = [GuideHomeOneView new];
         view.frames = homeLBT.frame;
-        [self.view.window addSubview:view];
+        [[[[UIApplication sharedApplication] delegate] window]  addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(ws.view.window);
+            make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window] );
         }];
         [view setBlock:^{
             [ws GuideHomeTwo];
@@ -256,12 +259,11 @@ preferredStyle:UIAlertControllerStyleAlert];
     }
 }
 - (void)GuideHomeTwo{
-    WS(ws);
     GuideHomeTwoView * view = [GuideHomeTwoView new];
     view.frames = task.frame;
-    [self.view.window addSubview:view];
+    [[[[UIApplication sharedApplication] delegate] window]  addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.view.window);
+        make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window] );
     }];
 }
 
@@ -373,7 +375,7 @@ preferredStyle:UIAlertControllerStyleAlert];
     if (![model.remaindDays isEqualToString:@"0"]) {
         TUpView * view = [TUpView new];
         view.nav = self.navigationController;
-//        view.model = model;
+        view.model = model;
         [self.view.window addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(ws.view.window);
@@ -465,12 +467,11 @@ preferredStyle:UIAlertControllerStyleAlert];
         [usersDic setValue:@"0" forKey:@"ydyhome"];
         [usersDic setValue:@"0" forKey:@"ydybookcity"];
         [usersDic setValue:@"0" forKey:@"ydyszsc"];
-        [usersDic setValue:@"0" forKey:@"ydybookxq"];
+        [usersDic setValue:@"0" forKey:@"ydybookxq"];//新书详情
         [usersDic setValue:@"0" forKey:@"ydydati"];
         [usersDic setValue:@"0" forKey:@"ydylqrw"];
         [usersDic setValue:@"0" forKey:@"ydyqbrw"];
-        [usersDic setValue:@"0" forKey:@"zhishiwang"];
-
+        [usersDic setValue:@"0" forKey:@"zhishiwang"];//知识网
         
         [usersDic writeToFile:filePatch atomically:YES];
     }else{

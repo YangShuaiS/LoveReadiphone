@@ -7,7 +7,7 @@
 //
 
 #import "TAKprizeView.h"
-#import "TKPrizeViewController.h"
+#import "NewTKPrizeViewController.h"
 #import "TAKJPView.h"
 #import <iCarousel.h>
 @interface TAKprizeView ()<iCarouselDataSource, iCarouselDelegate>
@@ -247,7 +247,7 @@
 }
 
 - (void)qbjp{
-    TKPrizeViewController * vc = [TKPrizeViewController new];
+    NewTKPrizeViewController * vc = [NewTKPrizeViewController new];
     [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 - (void)setModel:(TAKALLModel *)model{
