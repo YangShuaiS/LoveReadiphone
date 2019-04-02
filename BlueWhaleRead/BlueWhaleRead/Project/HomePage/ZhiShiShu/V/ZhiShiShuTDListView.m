@@ -23,6 +23,7 @@
 
 - (void)addview{
     WS(ws);
+    self.layer.masksToBounds = YES;
     oneView = [UIView new];
     oneView.backgroundColor = RGB(64,199,198);
     oneView.layer.shadowOpacity = 1;
@@ -32,15 +33,9 @@
     [self addSubview:oneView];
     [oneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.and.right.mas_equalTo(ws);
-        make.width.mas_equalTo(LENGTH(110));
+//        make.width.mas_equalTo(LENGTH(110));
+        make.left.and.right.mas_equalTo(ws);
         make.height.mas_equalTo(LENGTH(32));
-    }];
-    
-    BaseLabel * onelabel = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:@"返回二级菜单"];
-    [oneView addSubview:onelabel];
-    [onelabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.top.and.bottom.mas_equalTo(self->oneView);
-        make.right.mas_equalTo(self->oneView).with.offset(-LENGTH(28));
     }];
     
     UIImageView * oneimageview = [UIImageView new];
@@ -48,11 +43,17 @@
     oneimageview.image = UIIMAGE(@"返回二级菜单");
     [oneView addSubview:oneimageview];
     [oneimageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self->oneView).with.offset(-LENGTH(8));
+        make.left.mas_equalTo(self->oneView).with.offset(LENGTH(8));
         make.centerY.mas_equalTo(self->oneView);
         make.size.mas_equalTo(CGSizeMake(LENGTH(14), LENGTH(15)));
     }];
     
+    BaseLabel * onelabel = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:@"返回二级菜单"];
+    [oneView addSubview:onelabel];
+    [onelabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.bottom.mas_equalTo(self->oneView);
+        make.left.mas_equalTo(self->oneView).with.offset(LENGTH(28));
+    }];
      
     twoView = [UIView new];
     twoView.backgroundColor = RGB(64,199,198);
@@ -64,15 +65,9 @@
     [twoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->oneView.mas_bottom).with.offset(LENGTH(12));
         make.bottom.and.left.and.right.mas_equalTo(ws);
-        make.width.mas_equalTo(LENGTH(110));
+//        make.width.mas_equalTo(LENGTH(110));
+        make.left.and.right.mas_equalTo(ws);
         make.height.mas_equalTo(LENGTH(32));
-    }];
-    
-    BaseLabel * twolabel = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:@"全部知识图"];
-    [twoView addSubview:twolabel];
-    [twolabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.top.and.bottom.mas_equalTo(self->twoView);
-        make.right.mas_equalTo(self->twoView).with.offset(-LENGTH(28));
     }];
     
     UIImageView * twoimageview = [UIImageView new];
@@ -80,11 +75,17 @@
     twoimageview.image = UIIMAGE(@"全部知识图-图标");
     [twoView addSubview:twoimageview];
     [twoimageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self->twoView).with.offset(-LENGTH(8));
+        make.left.mas_equalTo(self->twoView).with.offset(LENGTH(8));
         make.centerY.mas_equalTo(self->twoView);
         make.size.mas_equalTo(CGSizeMake(LENGTH(14), LENGTH(15)));
     }];
     
+    BaseLabel * twolabel = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentCenter Text:@"全部知识图"];
+    [twoView addSubview:twolabel];
+    [twolabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.bottom.mas_equalTo(self->twoView);
+        make.left.mas_equalTo(self->twoView).with.offset(LENGTH(28));
+    }];
     
     oneView.userInteractionEnabled = YES;
     UITapGestureRecognizer *backtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(back)];
@@ -118,13 +119,13 @@
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:oneView.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadii:CGSizeMake(LENGTH(16), LENGTH(16))];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:oneView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(LENGTH(16), LENGTH(16))];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = oneView.bounds;
     maskLayer.path = maskPath.CGPath;
     oneView.layer.mask  = maskLayer;
     
-    UIBezierPath *twomaskPath = [UIBezierPath bezierPathWithRoundedRect:twoView.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadii:CGSizeMake(LENGTH(16), LENGTH(16))];
+    UIBezierPath *twomaskPath = [UIBezierPath bezierPathWithRoundedRect:twoView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(LENGTH(16), LENGTH(16))];
     CAShapeLayer *maskLayertwo = [[CAShapeLayer alloc] init];
     maskLayertwo.frame = twoView.bounds;
     maskLayertwo.path = twomaskPath.CGPath;

@@ -52,6 +52,11 @@
         label.text = @"六年级必读书目";
         label.textColor = RGB(208,118,188);
         v.backgroundColor = RGB(247,233,244);
+    }else if (section == 7){
+        xian.backgroundColor = RGB(208,118,188);
+        label.text = @"初一年级必读书目";
+        label.textColor = RGB(208,118,188);
+        v.backgroundColor = RGB(247,233,244);
     }
     
     [self addSubview:v];

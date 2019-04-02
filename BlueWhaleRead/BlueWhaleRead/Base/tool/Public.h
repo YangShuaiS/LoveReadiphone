@@ -25,7 +25,9 @@
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 #define IOS_X [UIDevice currentDevice].systemVersion
 #define Notloggedin 1000
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
+#define IS_PAD (UI_USER_INTERFACE_IDIOM()== UIUserInterfaceIdiomPad)
 
 //#define ZSFWQ @"http://192.168.1.114:8088/"
 //#define ZSFWQ @"http://119.90.89.88:8080/maven/"

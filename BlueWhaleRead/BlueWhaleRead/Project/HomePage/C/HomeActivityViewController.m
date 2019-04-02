@@ -55,7 +55,7 @@
 - (void)chushihua{
     page = 1;
     itemarray = [NSMutableArray array];
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 12; i++) {
 //        BookSDModel * sdmodel = [BookSDModel new];
 //        if (i == 0) {
 //            sdmodel.name = @"一年级必读书目";

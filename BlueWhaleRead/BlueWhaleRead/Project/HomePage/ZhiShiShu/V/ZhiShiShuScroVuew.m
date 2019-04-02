@@ -396,7 +396,8 @@
     tableilistclick = [ZhiShiShuTDListView new];
     [self addSubview:tableilistclick];
     [tableilistclick mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ws);
+        make.right.mas_equalTo(self->rightscroview.mas_left);
+        make.width.mas_equalTo(LENGTH(120));
         make.bottom.mas_equalTo(ws).with.offset(-TabBarHeight-LENGTH(14));
     }];
     __block ZhiShiShuScroVuew * blockself = self;
@@ -430,6 +431,17 @@
                     } completion:^(BOOL finished) {
                         
                     }];
+
+                    EndAni = YES;
+                    __block ZhiShiShuScroVuew * blockSelf = self;
+                    [UIView animateWithDuration:0.5 animations:^{
+                        [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
+                            make.width.mas_equalTo(LENGTH(28));
+                        }];
+                        [blockSelf.superview layoutIfNeeded];
+                    } completion:^(BOOL finished) {
+                        
+                    }];
                 }
             }
             if (rightscroview.tag == 101) {
@@ -440,6 +452,17 @@
                             make.right.mas_equalTo(ws).with.offset(WIDTH/2);
                         }];
                         [ws.superview layoutIfNeeded];
+                    } completion:^(BOOL finished) {
+                        
+                    }];
+                    
+                    EndAni = NO;
+                    __block ZhiShiShuScroVuew * blockSelf = self;
+                    [UIView animateWithDuration:0.5 animations:^{
+                        [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
+                            make.width.mas_equalTo(LENGTH(100));
+                        }];
+                        [blockSelf.superview layoutIfNeeded];
                     } completion:^(BOOL finished) {
                         
                     }];
@@ -492,12 +515,12 @@
         }];
     }
     
-    if (EndAni == NO) {
+    if (EndAni == NO && rightscroview.tag == 100) {
         EndAni = YES;
         __block ZhiShiShuScroVuew * blockSelf = self;
         [UIView animateWithDuration:0.5 animations:^{
             [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(ws).with.offset(-LENGTH(110)+LENGTH(28));
+                make.width.mas_equalTo(LENGTH(28));
             }];
             [blockSelf.superview layoutIfNeeded];
         } completion:^(BOOL finished) {
@@ -519,11 +542,11 @@
 - (void)jieshuclick{
     WS(ws);
     __block ZhiShiShuScroVuew * blockSelf = self;
-    if (blockSelf->EndAni == YES) {
+    if (blockSelf->EndAni == YES && rightscroview.tag == 100) {
         blockSelf->EndAni = NO;
     [UIView animateWithDuration:0.5 animations:^{
         [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(ws);
+            make.width.mas_equalTo(LENGTH(120));
         }];
         [blockSelf.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
@@ -564,12 +587,12 @@
         }];
     }
     
-    if (EndAni == NO) {
+    if (EndAni == NO && rightscroview.tag == 100) {
         EndAni = YES;
         __block ZhiShiShuScroVuew * blockSelf = self;
         [UIView animateWithDuration:0.5 animations:^{
             [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(ws).with.offset(-LENGTH(110)+LENGTH(28));
+                make.width.mas_equalTo(LENGTH(28));
             }];
             [blockSelf.superview layoutIfNeeded];
         } completion:^(BOOL finished) {
@@ -677,6 +700,16 @@
         } completion:^(BOOL finished) {
             
         }];
+        EndAni = YES;
+        __block ZhiShiShuScroVuew * blockSelf = self;
+        [UIView animateWithDuration:0.5 animations:^{
+            [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_equalTo(LENGTH(28));
+            }];
+            [blockSelf.superview layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            
+        }];
     }else{
         rightscroview.tag = 100;
         [UIView animateWithDuration:0.5 animations:^{
@@ -684,6 +717,16 @@
                 make.right.mas_equalTo(ws).with.offset(WIDTH/2);
             }];
             [ws.superview layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            
+        }];
+        EndAni = NO;
+        __block ZhiShiShuScroVuew * blockSelf = self;
+        [UIView animateWithDuration:0.5 animations:^{
+            [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_equalTo(LENGTH(120));
+            }];
+            [blockSelf.superview layoutIfNeeded];
         } completion:^(BOOL finished) {
             
         }];

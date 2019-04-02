@@ -206,9 +206,15 @@
     _carousel.viewpointOffset = CGSizeMake(0, -LENGTH(0));
     [self.view addSubview:_carousel];
 //    [_carousel setBackgroundColor:backgroundColor];
-    [_carousel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(-LENGTH(100), 0, -LENGTH(0), 0));
-    }];
+    if (IS_IPHONE) {
+        [_carousel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(-LENGTH(100), 0, -LENGTH(0), 0));
+        }];
+    }else{
+        [_carousel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(ws.view).with.insets(UIEdgeInsetsMake(-LENGTH(50), 0, -LENGTH(0), 0));
+        }];
+    }
     // 设置代理
     self.carousel.delegate   = self;
     self.carousel.dataSource = self;
@@ -263,7 +269,7 @@
     downview.nav = self.navigationController;
     [self.view addSubview:downview];
     [downview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(ws.view).with.offset(-TabBarHeight-LENGTH(15));
+        make.bottom.mas_equalTo(ws.view).with.offset(-LENGTH(15));
         make.left.mas_equalTo(ws.view);
         make.right.mas_equalTo(ws.view);
     }];
@@ -312,7 +318,12 @@
 {
     if (view == nil)
     {
-        view = [[FLAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, LENGTH(375), LENGTH(450))];
+        if (IS_IPHONE) {
+            view = [[FLAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, LENGTH(375), LENGTH(450))];
+
+        }else{
+            view = [[FLAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, LENGTH(375), LENGTHHEIGHT(600))];
+        }
     }
 
     // 强行转换指针

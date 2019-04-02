@@ -14,6 +14,7 @@
 #import "ZhiShiShuViTypeModel.h"
 #import "ZhiShiShuLineModel.h"
 #import "ZhiShiShuClickModel.h"
+#import "ZhiShiShuDownClickModel.h"
 @interface ZhiShiShuModel : BaseModel
 @property (nonatomic, copy) NSNumber * code;
 @property(nonatomic,strong) ZhiShiShuDataModel * data;

@@ -689,6 +689,8 @@
 		0DCD407F22439978009BD79F /* MyFavoritesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCD407E22439978009BD79F /* MyFavoritesModel.m */; };
 		0DCD40822243AB26009BD79F /* MyFavoritesDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCD40812243AB26009BD79F /* MyFavoritesDownView.m */; };
 		0DCEE2DD2238E588002BE2EF /* JYEqualCellSpaceFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEE2DB2238E588002BE2EF /* JYEqualCellSpaceFlowLayout.m */; };
+		0DD109BA2253113E001D3414 /* ZhiShiShuClickDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD109B92253113E001D3414 /* ZhiShiShuClickDownView.m */; };
+		0DD109BD22531214001D3414 /* ZhiShiShuDownClickModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD109BC22531214001D3414 /* ZhiShiShuDownClickModel.m */; };
 		0DD4B73D21D0D513008E7B8B /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD4B73C21D0D513008E7B8B /* WXApiManager.m */; };
 		0DD620B92179A86300AF1AD7 /* UserLoginClickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620B82179A86300AF1AD7 /* UserLoginClickView.m */; };
 		0DD620BC2179AEC700AF1AD7 /* UserLoginRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD620BB2179AEC700AF1AD7 /* UserLoginRegisteredViewController.m */; };
@@ -2153,6 +2155,10 @@
 		0DCD40812243AB26009BD79F /* MyFavoritesDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyFavoritesDownView.m; sourceTree = "<group>"; };
 		0DCEE2DB2238E588002BE2EF /* JYEqualCellSpaceFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYEqualCellSpaceFlowLayout.m; sourceTree = "<group>"; };
 		0DCEE2DC2238E588002BE2EF /* JYEqualCellSpaceFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYEqualCellSpaceFlowLayout.h; sourceTree = "<group>"; };
+		0DD109B82253113E001D3414 /* ZhiShiShuClickDownView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuClickDownView.h; sourceTree = "<group>"; };
+		0DD109B92253113E001D3414 /* ZhiShiShuClickDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuClickDownView.m; sourceTree = "<group>"; };
+		0DD109BB22531214001D3414 /* ZhiShiShuDownClickModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiShiShuDownClickModel.h; sourceTree = "<group>"; };
+		0DD109BC22531214001D3414 /* ZhiShiShuDownClickModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiShiShuDownClickModel.m; sourceTree = "<group>"; };
 		0DD4B73B21D0D513008E7B8B /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
 		0DD4B73C21D0D513008E7B8B /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
 		0DD620B72179A86300AF1AD7 /* UserLoginClickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginClickView.h; sourceTree = "<group>"; };
@@ -3844,6 +3850,8 @@
 				0D7472D1221FF92800A3B516 /* ZhiShiShuClickView.m */,
 				0D0E8FD622293814004B7D5C /* ZhiShiShuShareView.h */,
 				0D0E8FD722293814004B7D5C /* ZhiShiShuShareView.m */,
+				0DD109B82253113E001D3414 /* ZhiShiShuClickDownView.h */,
+				0DD109B92253113E001D3414 /* ZhiShiShuClickDownView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -4399,6 +4407,8 @@
 				0D29BECE2175F43A0000A00A /* ZhiShiShuTwoModel.m */,
 				0D7472CD221FF7A100A3B516 /* ZhiShiShuClickModel.h */,
 				0D7472CE221FF7A100A3B516 /* ZhiShiShuClickModel.m */,
+				0DD109BB22531214001D3414 /* ZhiShiShuDownClickModel.h */,
+				0DD109BC22531214001D3414 /* ZhiShiShuDownClickModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -5661,6 +5671,7 @@
 				0D65F1BA20D2663600F3B71F /* AchievementTableView.m in Sources */,
 				0DD66B7920DA47360056528B /* DTALLiewController.m in Sources */,
 				0D86590F21BA102500B80CEC /* TAKmissionModel.m in Sources */,
+				0DD109BA2253113E001D3414 /* ZhiShiShuClickDownView.m in Sources */,
 				0DEE76752192816A004D5DB7 /* NBClistCollectionView.m in Sources */,
 				0DD66B8420DA47360056528B /* DTPaiXuTableViewCell.m in Sources */,
 				0DE22F3820F84D70007DB0B8 /* GeneraNoDataView.m in Sources */,
@@ -5925,6 +5936,7 @@
 				0D56D8B120C911E700E24C23 /* BaseModel.m in Sources */,
 				0D7C3C212249F8C7005BBCBF /* ArticleOneDownView.m in Sources */,
 				0D65F1AD20D2661F00F3B71F /* MyMedalTopTableViewCell.m in Sources */,
+				0DD109BD22531214001D3414 /* ZhiShiShuDownClickModel.m in Sources */,
 				0D93169821EF1D15003E9DE9 /* NBCSearchView.m in Sources */,
 				0D7C3C272249F8DF005BBCBF /* ArticleThreeDownView.m in Sources */,
 				0DA1120A20ECD062001A3D4E /* PersonXgPhoneTwoViewController.m in Sources */,
@@ -6537,7 +6549,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/yangshuai/Desktop/天天爱读/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/General/IREADER/DZMeBookRead/other/BlueWhaleRead-Bridging-Pch.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -6576,7 +6588,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/yangshuai/Desktop/天天爱读/gitnew/iphone/BlueWhaleRead/BlueWhaleRead/Project/General/IREADER/DZMeBookRead/other/BlueWhaleRead-Bridging-Pch.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

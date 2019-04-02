@@ -13,6 +13,8 @@
 #import "ZhiShiShuAnimalView.h"
 #import "ZhiShiShuSanJIaoView.h"
 #import "ZhiShiShuClickView.h"
+
+#import "ZhiShiShuClickDownView.h"//最下面视图
 #define radiansToDegrees(x) (180.0 * x / M_PI)
 #define radiansToJaiodu(x) (x*M_PI/180)
 
@@ -473,10 +475,27 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 //    }
 
     [self addClickAnNiu:data];
+    [self addClickDown:data];
     WS(ws);
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(self->lasth+ws.newheight);
     }];
+    
+}
+
+- (void)addClickDown:(ZhiShiShuDataModel *)model{
+    for (ZhiShiShuDownClickModel * modees in model.click) {
+        ZhiShiShuClickDownView * view = [ZhiShiShuClickDownView new];
+        view.model = modees;
+        [self addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo((modees.x_axis-modees.width/2)*poinw);
+            make.top.mas_equalTo((modees.y_axis-modees.height/2)*poinw);
+        }];
+        if (lasth<modees.height*poinw+((modees.y_axis-modees.height/2)*poinw)) {
+            lasth=modees.height*poinw+((modees.y_axis-modees.height/2)*poinw);
+        }
+    }
     
 }
 - (void)setNewheight:(CGFloat)newheight{

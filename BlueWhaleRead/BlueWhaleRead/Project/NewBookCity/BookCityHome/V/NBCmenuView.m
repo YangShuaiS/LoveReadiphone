@@ -33,7 +33,7 @@
     _label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(31, 31, 31) LabelFont:TextFontCu(20) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:_label];
     [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(xian.mas_right).with.offset(LENGTH(18));
+        make.left.mas_equalTo(xian.mas_right).with.offset(LENGTH(10));
         make.top.mas_equalTo(ws);
         make.bottom.mas_equalTo(ws).with.offset(-LENGTH(12));
     }];

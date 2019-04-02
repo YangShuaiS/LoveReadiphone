@@ -27,6 +27,7 @@
 @property(nonatomic,strong)NSMutableArray * relation_type;//关系样式
 @property(nonatomic,strong)NSMutableArray * vi_type;//
 @property(nonatomic,strong)NSMutableArray * arrow;
+@property(nonatomic,strong)NSMutableArray * click;//最下面数组
 
 @property (nonatomic, assign) NSInteger is_collect;//0未收昂
 
