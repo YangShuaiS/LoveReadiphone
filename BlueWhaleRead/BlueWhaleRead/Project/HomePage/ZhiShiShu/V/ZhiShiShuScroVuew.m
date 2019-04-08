@@ -83,7 +83,7 @@
                         [topimage insertString:@"_3x" atIndex:topimage.length-4];
                     }
                 }
-                [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,topimage]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,topimage]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                     UIColor *backgroundColor = [UIColor colorWithPatternImage:image];
                     [blockSelf setBackgroundColor:backgroundColor];
                     [blockSelf->scrollView setBackgroundColor:backgroundColor];

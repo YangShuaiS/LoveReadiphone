@@ -57,12 +57,12 @@
     _model = model;
     label.text = model.name;
     if ([model.status isEqualToString:@"1"]) {
-        [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
+        [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.logo]]];
         suo.hidden = YES;
         label.textColor = _colors;
 
     }else{
-        [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.n_logo]]];
+        [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.n_logo]]];
         suo.hidden = NO;
         label.textColor = RGB(167, 165, 163); 
     }

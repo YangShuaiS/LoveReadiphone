@@ -11,6 +11,7 @@
 #import "LBTViewController.h"
 #import "ArticleViewController.h"
 #import "LBTCollectionViewCell.h"
+#import "ZhiShiShuShuViewController.h"
 @interface NKRLbtView ()<SDCycleScrollViewDelegate>
 
 @end
@@ -58,17 +59,24 @@
 /** 点击图片回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     LunboModel * model = _itemArray[index];
-    if (model.banner_type == 1) {
-        LBTViewController * vc = [LBTViewController new];
-        vc.inter = 1;
-        vc.itemid = model.ssid;
-        vc.imageurl = cycleScrollerView.imageURLStringsGroup[index];
-        [[self viewController].navigationController pushViewController:vc animated:YES];
+    if (model.related_type == 1) {
+        if (model.banner_type == 1) {
+            LBTViewController * vc = [LBTViewController new];
+            vc.inter = 1;
+            vc.itemid = model.ssid;
+            vc.imageurl = cycleScrollerView.imageURLStringsGroup[index];
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }else{
+            ArticleViewController * vc = [ArticleViewController new];
+            vc.itemid = model.ssid;
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }
     }else{
-        ArticleViewController * vc = [ArticleViewController new];
+        ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
         vc.itemid = model.ssid;
         [[self viewController].navigationController pushViewController:vc animated:YES];
     }
+
 }
 - (Class)customCollectionViewCellClassForCycleScrollView:(SDCycleScrollView *)view{
     if (view != cycleScrollerView) {
@@ -86,9 +94,12 @@
 - (void)setItemArray:(NSMutableArray *)itemArray{
     _itemArray = itemArray;
     NSMutableArray * imageArray = [NSMutableArray array];
-    for (LunboModel * model in itemArray) {
-        NSString * url = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner_img];
-        [imageArray addObject:url];
+    for (int i = 0; i < itemArray.count; i++) {
+        if (i < 6) {
+            LunboModel * model = itemArray[i];
+            NSString * url = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner_img];
+            [imageArray addObject:url];
+        }
     }
     cycleScrollerView.imageURLStringsGroup = imageArray;
     

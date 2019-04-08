@@ -77,6 +77,7 @@
         make.top.mas_equalTo(self->webView.mas_bottom);
         make.left.and.right.and.bottom.mas_equalTo(ws);
     }];
+
 }
 - (void)setModel:(LunBoTuXQModel *)model{
     _model = model;
@@ -90,12 +91,24 @@
     NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'></header>";
     [webView loadHTMLString:[headerString stringByAppendingString:str] baseURL:nil];
     
-    share.atype = @"1";
-    share.imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner.banner_img];
-    share.wzbt = model.banner.title;
-    share.textid = model.banner.ssid;
-    share.bookname = model.banner.title;
-    share.model = model;
+    if ([_model.banner.is_share isEqualToString:@"1"]) {
+        share.atype = @"1";
+        share.imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner.banner_img];
+        share.wzbt = model.banner.title;
+        share.textid = model.banner.ssid;
+        share.bookname = model.banner.title;
+        share.model = model;
+    }else{
+        [share mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+        }];
+        [share removeFromSuperview];
+        WS(ws);
+        [webView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(ws);
+
+        }];
+    }
 }
 - (void)layoutSubviews{
     [super layoutSubviews];

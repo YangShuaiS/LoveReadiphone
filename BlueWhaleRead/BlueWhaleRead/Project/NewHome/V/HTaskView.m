@@ -293,7 +293,22 @@
                 make.left.and.right.bottom.mas_equalTo(ws);
             }];
         }
-        taskallView.model = _model;
+        
+        if ([_model.mission.mission_type isEqualToString:taskallView.model.mission.mission_type]) {
+            taskallView.model = _model;
+        }else{
+            [taskallView removeFromSuperview];
+            taskallView = nil;
+            if (!taskallView) {
+                taskallView = [HTaskAllView new];
+                [self addSubview:taskallView];
+                [taskallView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(self->navMenu.mas_bottom);
+                    make.left.and.right.bottom.mas_equalTo(ws);
+                }];
+            }
+            taskallView.model = _model;
+        }
 
 //
 //        if (model.mission.periods_num.length == 0 || [model.mission.periods_num isEqualToString:@"0"]) {

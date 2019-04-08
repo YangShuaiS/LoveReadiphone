@@ -119,7 +119,7 @@
     NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",BENDIXINXI]];
     NSMutableDictionary *dataDictionary = [BaseObject BenDiXinXi];
     NewHpViewModel * model = [NewHpViewModel mj_objectWithKeyValues:dataDictionary];
-    if ([model.zhishiwang integerValue]<3) {
+    if ([model.ydyzhuanzhuanzhuan integerValue]<3) {
         WS(ws);
         GuideKnowledgeOneView * view = [GuideKnowledgeOneView new];
         [self.view.window addSubview:view];
@@ -130,8 +130,8 @@
             [ws addGuideKnowledgeTwoView];
         }];
         
-        NSString * str = [NSString stringWithFormat:@"%ld",[model.zhishiwang integerValue]+1];
-        [dataDictionary setValue:str forKey:@"zhishiwang"];
+        NSString * str = [NSString stringWithFormat:@"%ld",[model.ydyzhuanzhuanzhuan integerValue]+1];
+        [dataDictionary setValue:str forKey:@"ydyzhuanzhuanzhuan"];
         [dataDictionary writeToFile:filePatch atomically:YES];
         
     }
@@ -331,7 +331,7 @@
 //    pointView.image = UIIMAGE(@"人文-孙悟空");
 
     ZhiShiShuFLOneModel * model = modelarray[index];
-    [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
+    [pointView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.logo]]];
     if (index == 0) {
         pointView.alpha = 1;
     }else{
@@ -357,7 +357,6 @@
     if (inter == carousel.scrollOffset) {
         bacimage.alpha = 1;
         lastscr = carousel.scrollOffset;
-        NSLog(@"##%f",carousel.scrollOffset);
     }else if (inter == 0 && carousel.scrollOffset+1>modelarray.count){
         if (lastscr >carousel.scrollOffset) {
             if (carousel.scrollOffset <= modelarray.count-0.25) {
@@ -413,7 +412,7 @@
         ZhiShiShuFLOneModel * model = modelarray[i];
 //        view.image = UIIMAGE(@"人文-孙悟空");
         if (carousel.currentItemIndex == i) {
-            [bacimage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.bg_img]]];
+            [bacimage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.bg_img]]];
 //            [view sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.logo]]];
             view.alpha = 1;
 

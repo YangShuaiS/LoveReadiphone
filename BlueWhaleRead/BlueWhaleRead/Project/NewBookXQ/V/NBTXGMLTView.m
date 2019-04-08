@@ -7,7 +7,7 @@
 //
 
 #import "NBTXGMLTView.h"
-
+#import "ZhiShiShuShuViewController.h"
 @implementation NBTXGMLTView
 
 - (instancetype)init
@@ -77,7 +77,10 @@
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex
 {
-//    NSLog(@"点击第%d个广告",subIndex);
+    knowledgeTXListModel * model = _advArray[subIndex];
+    ZhiShiShuShuViewController * vc = [ZhiShiShuShuViewController new];
+    vc.itemid = model.ssid;
+    [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 #pragma mark JQFlowViewDatasource
 - (NSInteger)numberOfPagesInFlowView:(HQFlowView *)flowView

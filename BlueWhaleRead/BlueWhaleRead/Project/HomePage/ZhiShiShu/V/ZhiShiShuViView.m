@@ -39,7 +39,7 @@
             make.width.mas_equalTo(LENGTH(26));
             make.height.mas_equalTo(LENGTH(26));
         }];
-        NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTX,model.img];
+        NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.img];
         [imageview sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo]];
         
         BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor Alpha:1] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];

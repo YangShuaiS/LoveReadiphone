@@ -774,10 +774,10 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
         ZhiShiShuXQView * view = [ZhiShiShuXQView new];
         view.itemid = neirong._id;
         view.nav = self.nav;
-        [_lastview addSubview:view];
+        [[self viewController].view.window addSubview:view];
         
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(ws.lastview);
+            make.edges.mas_equalTo([self viewController].view.window);
         }];
     }
 }

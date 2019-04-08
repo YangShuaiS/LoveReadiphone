@@ -167,7 +167,7 @@
         [view setBlock:^{
             [ws addGuiDeZhiShiWangTwoView];
         }];
-        NSString * str = [NSString stringWithFormat:@"%ld",[model.ydyhome integerValue]+1];
+        NSString * str = [NSString stringWithFormat:@"%ld",[model.zhishiwang integerValue]+1];
         [dataDictionary setValue:str forKey:@"zhishiwang"];
         [dataDictionary writeToFile:filePatch atomically:YES];
     }

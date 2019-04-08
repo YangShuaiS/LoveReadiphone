@@ -106,6 +106,7 @@
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str attributes:attributeDict];
     __weak ArticleTopView * blockSelf = self;
     if (ZhiShiSHUmodel.data.knowledgeGrade.count == 3) {
+        [self addview];
         for (int i = 0; i<ZhiShiSHUmodel.data.knowledgeGrade.count; i++) {
             knowledgeGradeModel *knowmodel = ZhiShiSHUmodel.data.knowledgeGrade[i];
             NSRange range = [str rangeOfString:knowmodel.name];

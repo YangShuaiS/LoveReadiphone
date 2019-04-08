@@ -96,9 +96,17 @@
 }
 
 - (void)shanchu{
-    [self yichushooucang];
-    inter = 0;
-    dg.image = UIIMAGE(@"");
+    WS(ws);
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要删除该收藏吗？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction * okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [ws yichushooucang];
+        self->inter = 0;
+        self->dg.image = UIIMAGE(@"");
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [[self viewController].navigationController presentViewController: alertController animated: YES completion: nil];
 }
 
 - (void)yichushooucang{

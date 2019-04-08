@@ -13,6 +13,7 @@
     UIView * backviews;
     BaseLabel * title;
     BaseLabel * subtitle;
+    CAGradientLayer *gradient;
 }
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -24,7 +25,7 @@
 -(void)setupUI{
     WS(ws);
     imageview = [FLAnimatedImageView new];
-    imageview.contentMode = UIViewContentModeScaleAspectFit;
+    imageview.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(ws);
@@ -56,19 +57,13 @@
         make.right.mas_equalTo(self->backviews).with.offset(-LENGTH(7));
     }];
     
-    [backviews layoutIfNeeded];
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = backviews.bounds;
-    //    gradient.colors = @[(id)RGBA(0, 0, 0, 1),RGBA(0, 0, 0, 0)];
+   gradient = [CAGradientLayer layer];
     UIColor * color1 = RGBA(0, 0, 0, 0.5);
     UIColor * color2 = RGBA(0, 0, 0, 0);
     gradient.colors = @[(id)color2.CGColor,(id)color1.CGColor];
     gradient.locations = @[@0, @1];
     gradient.startPoint = CGPointMake(0, 0);
     gradient.endPoint = CGPointMake(0, 1);
-    [backviews.layer addSublayer:gradient];
-    [backviews addSubview:title];
-    [backviews addSubview:subtitle];
 }
 
 - (void)setModel:(LunboModel *)model{
@@ -76,8 +71,20 @@
     [imageview sd_setImageWithURL:URLIMAGE(model.banner_img)];
     title.text = model.title;
     subtitle.text = model.banner_foreword;
+    [backviews layoutIfNeeded];
+    NSString *str = [NSString stringWithFormat:@"%@", title.text];
+    NSString *str1 = [NSString stringWithFormat:@"%@", subtitle.text];
+    if (![str isEqualToString:@""]||![str1 isEqualToString:@""]) {
+        gradient.frame = backviews.bounds;
+    }else{
+        gradient.frame = CGRectMake(0, 0, 0, 0 );
+    }
+
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
+    [backviews.layer addSublayer:gradient];
+    [backviews addSubview:title];
+    [backviews addSubview:subtitle];
 }
 @end

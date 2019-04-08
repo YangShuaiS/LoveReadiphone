@@ -120,7 +120,7 @@ MeModel * Me = nil;
                     for (NSValue * value in arr) {
                         NSRange range = [value rangeValue];
                         if (model.fount!=0) {
-                            [AttributedStr addAttribute:NSFontAttributeName value:TextFont(model.fount) range:range];
+                            [AttributedStr addAttribute:NSFontAttributeName value:TextFontCu(model.fount) range:range];
                         }
                         if (model.color!=nil) {
                             [AttributedStr addAttribute:NSForegroundColorAttributeName
@@ -132,7 +132,7 @@ MeModel * Me = nil;
                     if (model.integer<=arr.count) {
                         NSRange range = [arr[model.integer] rangeValue];
                         if (model.fount!=0) {
-                            [AttributedStr addAttribute:NSFontAttributeName value:TextFont(model.fount) range:range];
+                            [AttributedStr addAttribute:NSFontAttributeName value:TextFontCu(model.fount) range:range];
                         }
                         if (model.color!=nil) {
                             [AttributedStr addAttribute:NSForegroundColorAttributeName

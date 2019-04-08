@@ -154,7 +154,7 @@
     nrtitle.text = model.name;
     NSMutableArray * imagearray = [NSMutableArray array];
     for (NSString * image in model.img) {
-        NSString * imageurl = [NSString stringWithFormat:@"%@%@",ZSTX,image];
+        NSString * imageurl = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,image];
         [imagearray addObject:imageurl];
     }
     if (imagearray.count ==0) {

@@ -68,17 +68,17 @@
 - (void)setModel:(ZhiShiShuClickModel *)model{
     _model = model;
     __block ZhiShiShuClickView * bloclself = self;
-    NSString * log1 = [[NSString stringWithFormat:@"%@%@",ZSTX,model.left_img] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString * log1 = [[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.left_img] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [left sd_setImageWithURL:[NSURL URLWithString:log1] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         [bloclself upleftimage:image];
     }];
     
-    NSString * centerimage = [[NSString stringWithFormat:@"%@%@",ZSTX,model.middle_img] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString * centerimage = [[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.middle_img] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [center sd_setImageWithURL:[NSURL URLWithString:centerimage] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         [bloclself upcenterimage:image];
     }];
     
-    NSString * rightimage = [[NSString stringWithFormat:@"%@%@",ZSTX,model.right_img] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString * rightimage = [[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.right_img] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [right sd_setImageWithURL:[NSURL URLWithString:rightimage] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         [bloclself uprightimageL:image];
     }];

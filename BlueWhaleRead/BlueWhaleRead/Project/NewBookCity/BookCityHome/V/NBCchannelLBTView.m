@@ -88,9 +88,12 @@
 - (void)setModel:(NBCALLModel *)model{
     _model = model;
     NSMutableArray * imagearray = [NSMutableArray array];
-    for (NBCclassificationModel * model in _model.themeTop) {
-        NSString * url = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner_img];
-        [imagearray addObject:url];
+    for (int i = 0; i < _model.themeTop.count; i++) {
+        if (i < 6) {
+            NBCclassificationModel * model = _model.themeTop[i];
+            NSString * url = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner_img];
+            [imagearray addObject:url];
+        }
     }
     cycleScrollerView.imageURLStringsGroup = imagearray;
 }

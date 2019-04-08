@@ -49,7 +49,7 @@
                 }
             }
 
-            NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTX,topimage];
+            NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,topimage];
             [imageviewtop sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 UIImage *backgroundImage = image;
                 backgroundImage = [self scaleImage:backgroundImage toScale:1.0/scale_screen];
@@ -89,7 +89,7 @@
                     [dowimage insertString:@"_3x" atIndex:dowimage.length-4];
                 }
             }
-            NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTX,topimage];
+            NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,topimage];
             [imageviewtop sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 UIImage *backgroundImage = image;
                 backgroundImage = [self scaleImage:backgroundImage toScale:1.0/scale_screen];
@@ -114,7 +114,7 @@
                 make.width.mas_equalTo(LENGTH(40));
                 make.height.mas_equalTo(LENGTH(3));
             }];
-            NSString * imageurlvilogo1 = [NSString stringWithFormat:@"%@%@",ZSTX,dowimage];
+            NSString * imageurlvilogo1 = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,dowimage];
             [imageviewdown sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo1] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 UIImage *backgroundImage = image;
                 backgroundImage = [self scaleImage:backgroundImage toScale:1.0/scale_screen];

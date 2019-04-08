@@ -48,10 +48,15 @@
 //#define IMAGEURL @"http://119.90.89.88:8081/"
 //#define IMAGEURL @"https://tiantianaidu.com/"
 
+//#define ZSTX @"https://knowledge.tiantianaidu.com/"//
 #define ZSTX @"http://192.168.1.231:9003/"//最新内网
 //#define ZSTX @"http://192.168.1.231:9001/"//内网
 //#define ZSTX @"http://119.90.89.88:9001/"//外网
 //#define ZSTX @"http://192.168.1.102/knowledge/public/"//
+
+#define ZSTXIMAGEURL @"http://192.168.1.231:9003/"
+//#define ZSTXIMAGEURL @"https://tiantianaidu.com/"
+
 
 #define JK_NOWBANBENHAO @"api/v1.0/returnVersion"//获取当前版本号
 #define JK_NEWHOME @"api/v1.0/missionPage"//新首页
@@ -80,7 +85,7 @@
 #define JK_XIUGAISEX @"api/v1.0/updateSex"//修改性别
 #define JK_HQCLASS @"api/v1.0/levelList"//获取年级
 #define JK_TASKREMOVE @"api/v1.0/delSelfMission"//删除惹怒
-#define JK_ZHISHIWANGSHOUYE @"api/v1.0/knowledgePage"//知识网首页
+#define JK_ZHISHIWANGSHOUYE @"api/v1.0/knowledgePageNew"//知识网首页
 #define JK_ZHISHIWANGHOTREFINSH @"api/v1.0/hotKnowledge"//知识网热门刷新
 #define JK_ZHISHIMYHISTORY @"api/v1.0/myHistory"//我的视野
 #define JK_ZHISHIXGTJ @"api/v1.0/relatedRecommendations"//知识网相关推荐

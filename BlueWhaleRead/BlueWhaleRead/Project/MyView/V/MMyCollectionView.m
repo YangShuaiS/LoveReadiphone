@@ -42,6 +42,8 @@
         self.showsVerticalScrollIndicator = NO;
         self.showsHorizontalScrollIndicator = NO;
         titarray = @[@"能力测试",@"我的成就",@"我的书架",@"我的任务",@"我的里程碑",@"收藏夹"];
+        titarray = @[@"能力测试",@"收藏夹",@"我的书架",@"我的任务",@"我的成就",@"我的里程碑"];
+
     }
     return self;
 }
@@ -69,7 +71,7 @@
         if (indexPath.row == 0) {
             self.block(0);
         }else if (indexPath.row == 1){
-            AchievementReportViewController * vc = [AchievementReportViewController new];
+            MyFavoritesViewController * vc = [MyFavoritesViewController new];
             [[self viewController].navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 2){
             BookListViewController * vc = [BookListViewController new];
@@ -78,10 +80,10 @@
             TKMytaskViewController * vc = [TKMytaskViewController new];
             [[self viewController].navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 4){
-            HomeMilestoneViewController * vc = [HomeMilestoneViewController new];
+            AchievementReportViewController * vc = [AchievementReportViewController new];
             [[self viewController].navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 5){
-            MyFavoritesViewController * vc = [MyFavoritesViewController new];
+            HomeMilestoneViewController * vc = [HomeMilestoneViewController new];
             [[self viewController].navigationController pushViewController:vc animated:YES];
         }
     }else{

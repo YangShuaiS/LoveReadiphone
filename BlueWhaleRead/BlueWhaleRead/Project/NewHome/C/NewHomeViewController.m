@@ -40,6 +40,8 @@
 @implementation NewHomeViewController
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    NewHomeModel * model = [ NewHomeModel new];
+    model = [NewHomeModel mj_objectWithKeyValues:@{}];
     if (now == 0) {
         now = 1;
         [self upapp];
@@ -471,6 +473,7 @@ preferredStyle:UIAlertControllerStyleAlert];
         [usersDic setValue:@"0" forKey:@"ydydati"];
         [usersDic setValue:@"0" forKey:@"ydylqrw"];
         [usersDic setValue:@"0" forKey:@"ydyqbrw"];
+        [usersDic setValue:@"0" forKey:@"ydyzhuanzhuanzhuan"];//转转转
         [usersDic setValue:@"0" forKey:@"zhishiwang"];//知识网
         
         [usersDic writeToFile:filePatch atomically:YES];

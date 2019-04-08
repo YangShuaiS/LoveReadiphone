@@ -50,9 +50,12 @@
 - (void)setItemArray:(NSMutableArray *)itemArray{
     _itemArray = itemArray;
     NSMutableArray * imageArray = [NSMutableArray array];
-    for (LunboModel * model in itemArray) {
-        NSString * url = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner_img];
-        [imageArray addObject:url];
+    for (int i = 0; i < itemArray.count; i++) {
+        if (i < 6) {
+            LunboModel * model = itemArray[i];
+            NSString * url = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner_img];
+            [imageArray addObject:url];
+        }
     }
     cycleScrollerView.imageURLStringsGroup = imageArray;
 

@@ -121,7 +121,8 @@
 - (void)setModel:(ZhiShiShuFLOneModel *)model{
     zssqiu.nav = self.nav;
 //    label.text = model.name;
-    [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.icon]]];
+    [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.icon]]];
+    NSLog(@"%@",[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.icon]);
     UIColor * color = [BaseObject colorWithHexString:model.text_color Alpha:1];
     label.textColor = color;
     label.text = model.name;

@@ -142,7 +142,7 @@
 }
 - (void)setNeirong:(ZhiShiShuNeiRongModel *)neirong{
     _neirong = neirong;
-    NSString * imageurl = [NSString stringWithFormat:@"%@%@",ZSTX,neirong.pic];
+    NSString * imageurl = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,neirong.pic];
     [self->imageview sd_setImageWithURL:[NSURL URLWithString:imageurl]];
     [self->imageview mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(neirong.width*poinw);
@@ -151,7 +151,7 @@
 
 //    label.text = @"地球/n地球自转一圈\n是一天";
     label.text  = [NSString stringWithFormat:@" %@",neirong.name];
-    NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTX,neirong.vi_logo];
+    NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,neirong.vi_logo];
 
     imageviews = [UIImageView new];
     [self addSubview:imageviews];
@@ -205,7 +205,7 @@
             [topimage insertString:@"_3x" atIndex:topimage.length-4];
         }
     }
-    NSString * imageurlvilogo0 = [NSString stringWithFormat:@"%@%@",ZSTX,topimage];
+    NSString * imageurlvilogo0 = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,topimage];
     [imageviewtop sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo0] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         UIImage *backgroundImage = image;
         backgroundImage = [self scaleImage:backgroundImage toScale:1.0/scale_screen];
@@ -243,7 +243,7 @@
         }
     }
     
-    NSString * imageurlvilogo1 = [NSString stringWithFormat:@"%@%@",ZSTX,dowimage];
+    NSString * imageurlvilogo1 = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,dowimage];
     [imageviewdown sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo1] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         UIImage *backgroundImage = image;
         backgroundImage = [self scaleImage:backgroundImage toScale:1.0/scale_screen];

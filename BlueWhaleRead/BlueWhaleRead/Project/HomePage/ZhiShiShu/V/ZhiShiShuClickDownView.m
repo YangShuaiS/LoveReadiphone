@@ -36,7 +36,7 @@
 }
 - (void)setModel:(ZhiShiShuDownClickModel *)model{
     _model = model;
-    NSString * imageurl = [NSString stringWithFormat:@"%@%@",ZSTX,model.img];
+    NSString * imageurl = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.img];
     [imageview sd_setImageWithURL:[NSURL URLWithString:imageurl]];
     [imageview mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(model.width*poinw);

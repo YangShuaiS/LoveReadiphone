@@ -95,7 +95,10 @@
 - (void)setModel:(NBCALLModel *)model{
     _model = model;
     NSMutableArray * array = model.themeWeek;
-    NBCclassificationModel * mo = array[0];
-    [imageview sd_setImageWithURL:URLIMAGE(mo.banner_img)];
+    if (array.count>0) {
+        NBCclassificationModel * mo = array[0];
+        [imageview sd_setImageWithURL:URLIMAGE(mo.banner_img)];
+    }
+
 }
 @end

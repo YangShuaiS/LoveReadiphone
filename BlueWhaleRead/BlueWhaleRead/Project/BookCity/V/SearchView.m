@@ -104,7 +104,7 @@
         make.top.mas_equalTo(text.mas_bottom);
         make.left.and.right.and.bottom.mas_equalTo(ws);
     }];
-    men.titarray = @[@"全部",@"书籍",@"知识图"];
+    men.titarray = @[@"全部",@"文章",@"书籍",@"知识图"];
 
 }
 - (void)setControllerArray:(NSMutableArray *)controllerArray{

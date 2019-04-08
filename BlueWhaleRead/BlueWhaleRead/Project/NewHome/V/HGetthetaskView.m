@@ -36,7 +36,7 @@
     backview.layer.shadowOffset = CGSizeMake(0,8);
     backview.layer.cornerRadius = LENGTH(10);
     
-    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(51, 51, 51) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:[NSString stringWithFormat:@"亲爱的 %@ 同学～你还没有属于自己的读书任务哦，快来制定你的读书任务吧！",Me.name]];
+    title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(51, 51, 51) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:[NSString stringWithFormat:@"亲爱的 %@ 同学～\n你还没有属于自己的读书任务哦，\n快来制定你的读书任务吧！",Me.name]];
     title.numberOfLines = 0;
     [backview addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -48,15 +48,24 @@
     model1.textString = title.text;
     model1.bianString = Me.name;
     model1.color = RGB(91,199,198);
-    model1.fount = 17;
+    model1.fount = 18;
     
-    AttributedStringModel * model2 = [AttributedStringModel new];
-    model2.textString = title.text;
-    model2.bianString = [NSString stringWithFormat:@"读书任务"];
-    model2.color = RGB(91,199,198);
-    model2.integer = 1;
-    NSArray * modelarray = @[model1,model2];
-    NSMutableAttributedString *AttributedStr = [BaseObject AttributedAll:modelarray];
+//    AttributedStringModel * model2 = [AttributedStringModel new];
+//    model2.textString = title.text;
+//    model2.bianString = [NSString stringWithFormat:@"读书任务"];
+//    model2.color = RGB(91,199,198);
+//    model2.integer = 1;
+    NSArray * modelarray = @[model1];
+    NSDictionary *attributeDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   TextFont(15),NSFontAttributeName,nil];
+    NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc] initWithString:title.text attributes:attributeDict];
+    
+    AttributedStr = [BaseObject AttributedAll:modelarray];
+    NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    // 行间距设置为
+    [paragraphStyle  setLineSpacing:LENGTH(3)];
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    [AttributedStr  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [title.text length])];
     title.attributedText = AttributedStr;
     
     UIImageView * cengimage = [UIImageView new];

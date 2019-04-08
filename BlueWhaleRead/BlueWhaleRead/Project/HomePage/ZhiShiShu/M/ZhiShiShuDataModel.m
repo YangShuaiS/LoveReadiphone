@@ -9,5 +9,10 @@
 #import "ZhiShiShuDataModel.h"
 
 @implementation ZhiShiShuDataModel
-
+- (NSMutableArray *)click{
+    if (_click == nil) {
+        _click = [NSMutableArray array];
+    }
+    return _click;
+}
 @end

@@ -141,18 +141,18 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
     [sharefriend addGestureRecognizer:tap];
     
-    ShouCang = [FLAnimatedImageView new];
-    ShouCang.image = UIIMAGE(@"收藏0");
-    ShouCang.contentMode = UIViewContentModeScaleAspectFit;
-    [self.navtive addSubview:ShouCang];
-    [ShouCang mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20-24-10);
-        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);
-        make.width.and.height.mas_equalTo(24);
-    }];
-    ShouCang.userInteractionEnabled = NO;
-    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ShouCang)];
-    [ShouCang addGestureRecognizer:tap1];
+//    ShouCang = [FLAnimatedImageView new];
+//    ShouCang.image = UIIMAGE(@"收藏0");
+//    ShouCang.contentMode = UIViewContentModeScaleAspectFit;
+//    [self.navtive addSubview:ShouCang];
+//    [ShouCang mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20-24-10);
+//        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);
+//        make.width.and.height.mas_equalTo(24);
+//    }];
+//    ShouCang.userInteractionEnabled = NO;
+//    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ShouCang)];
+//    [ShouCang addGestureRecognizer:tap1];
 }
 - (void)ShouCang{
     if (nmodel.is_collect == 0) {
@@ -224,22 +224,22 @@
     NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'></header>";
     [webView loadHTMLString:[headerString stringByAppendingString:str] baseURL:nil];
 //    [webView loadHTMLString:str baseURL:nil];
-    WS(ws);
+//    WS(ws);
     if ([model.banner.is_share isEqualToString:@"0"]) {
         sharefriend.userInteractionEnabled = NO;
         sharefriend.image = UIIMAGE(@"");
         [sharefriend removeFromSuperview];
-        [ShouCang mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
-        }];
+//        [ShouCang mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
+//        }];
     }
     nmodel = model;
-    ShouCang.userInteractionEnabled = YES;
-    if (model.is_collect == 0) {
-        ShouCang.image = UIIMAGE(@"收藏0");
-    }else{
-        ShouCang.image = UIIMAGE(@"收藏");
-    }
+//    ShouCang.userInteractionEnabled = YES;
+//    if (model.is_collect == 0) {
+//        ShouCang.image = UIIMAGE(@"收藏0");
+//    }else{
+//        ShouCang.image = UIIMAGE(@"收藏");
+//    }
 
 }
 - (void)shoucang{
@@ -249,7 +249,7 @@
         if (responseObject) {
             UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
             if ([m.code isEqual:@200]) {
-                self->ShouCang.image = UIIMAGE(@"收藏");
+//                self->ShouCang.image = UIIMAGE(@"收藏");
                 self->nmodel.is_collect = 1;
             }
         }
@@ -262,7 +262,7 @@
         if (responseObject) {
             LunBoTuXQModel * model = [LunBoTuXQModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                self->ShouCang.image = UIIMAGE(@"收藏0");
+//                self->ShouCang.image = UIIMAGE(@"收藏0");
                 self->nmodel.is_collect = 0;
             }
         }else{

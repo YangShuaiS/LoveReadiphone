@@ -117,6 +117,18 @@
         schoolclass = 4;
     }else if ([lvs isEqualToString:@"Lv6"]){
         schoolclass = 5;
+    }else if ([lvs isEqualToString:@"Lv7"]){
+        schoolclass = 6;
+    }else if ([lvs isEqualToString:@"Lv8"]){
+        schoolclass = 7;
+    }else if ([lvs isEqualToString:@"Lv9"]){
+        schoolclass = 8;
+    }else if ([lvs isEqualToString:@"Lv10"]){
+        schoolclass = 9;
+    }else if ([lvs isEqualToString:@"Lv11"]){
+        schoolclass = 10;
+    }else if ([lvs isEqualToString:@"Lv12"]){
+        schoolclass = 11;
     }
     return schoolclass;
 }

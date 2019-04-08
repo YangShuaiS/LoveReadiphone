@@ -15,6 +15,8 @@
 @property(nonatomic,copy)NSString * item_id;
 @property(nonatomic,copy)NSString * status;
 @property(nonatomic,copy)NSString * title;
+@property(nonatomic,assign)NSInteger related_type;
+
 
 @property(nonatomic,strong)NSMutableArray * create_time;
 @property(nonatomic,strong)NSMutableArray * update_time;

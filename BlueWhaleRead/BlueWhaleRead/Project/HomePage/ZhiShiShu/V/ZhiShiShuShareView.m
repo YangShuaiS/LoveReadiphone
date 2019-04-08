@@ -187,7 +187,7 @@
 - (void)addimage{
     WS(ws);
     hbimageview = [FLAnimatedImageView new];
-    hbimageview.contentMode = UIViewContentModeScaleAspectFill;
+    hbimageview.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:hbimageview];
     [hbimageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws).with.offset(StatusBar);

@@ -41,7 +41,7 @@
 
 - (void)setModel:(NKRClassificationModel *)model{
     _model = model;
-    [bakimageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,model.img]]];
+    [bakimageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.img]]];
     label.text = model.name;
 }
 

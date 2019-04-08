@@ -246,6 +246,7 @@
                        break;
                    case SSDKResponseStateCancel:
                    {
+                       
                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"授权取消"
                                                                            message:nil
                                                                           delegate:nil

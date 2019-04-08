@@ -53,8 +53,33 @@
         label.textColor = RGB(208,118,188);
         v.backgroundColor = RGB(247,233,244);
     }else if (section == 7){
+        xian.backgroundColor = RGB(71,198,198);
+        label.text = @"七年级必读书目";
+        label.textColor = RGB(71,198,198);
+        v.backgroundColor = RGB(211,242,242);
+    }else if (section == 8){
+        xian.backgroundColor = RGB(255,121,121);
+        label.text = @"八年级必读书目";
+        label.textColor = RGB(255,121,121);
+        v.backgroundColor = RGB(252,218,218);
+    }else if (section == 9){
+        xian.backgroundColor = RGB(87,174,255);
+        label.text = @"九年级必读书目";
+        label.textColor = RGB(87,174,255);
+        v.backgroundColor = RGB(211,231,249);
+    }else if (section == 10){
+        xian.backgroundColor = RGB(255,185,49);
+        label.text = @"高一年级必读书目";
+        label.textColor = RGB(255,185,49);
+        v.backgroundColor = RGB(251,238,213);
+    }else if (section == 11){
+        xian.backgroundColor = RGB(154,138,250);
+        label.text = @"高二年级必读书目";
+        label.textColor = RGB(154,138,250);
+        v.backgroundColor = RGB(235,232,250);
+    }else if (section == 12){
         xian.backgroundColor = RGB(208,118,188);
-        label.text = @"初一年级必读书目";
+        label.text = @"高三年级必读书目";
         label.textColor = RGB(208,118,188);
         v.backgroundColor = RGB(247,233,244);
     }
@@ -87,7 +112,23 @@
         downview.layer.shadowColor = RGB(253,185,240).CGColor;
         downview.backgroundColor = RGB(235,232,250);
         downview.layer.shadowOpacity = 1;
-//        downview.backgroundColor = RGB(247,233,244);
+    }else if (section == 7){
+
+    }else if (section == 8){
+        downview.layer.shadowColor = RGB(250,184,184).CGColor;
+        downview.backgroundColor = RGB(211,242,242);
+    }else if (section == 9){
+        downview.layer.shadowColor = RGB(149,199,245).CGColor;
+        downview.backgroundColor = RGB(252,218,218);
+    }else if (section == 10){
+        downview.layer.shadowColor = RGB(255,219,152).CGColor;
+        downview.backgroundColor = RGB(211,231,249);
+    }else if (section == 11){
+        downview.layer.shadowColor = RGB(211,203,252).CGColor;
+        downview.backgroundColor = RGB(251,238,213);
+    }else if (section == 12){
+        downview.layer.shadowColor = RGB(253,185,240).CGColor;
+        downview.backgroundColor = RGB(235,232,250);
     }
     [self addSubview:downview];
     [downview mas_makeConstraints:^(MASConstraintMaker *make) {

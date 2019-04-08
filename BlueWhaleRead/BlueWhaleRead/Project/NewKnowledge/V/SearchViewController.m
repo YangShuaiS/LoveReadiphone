@@ -33,7 +33,7 @@
         [ws LoadDate:str];
     }];
     childVC = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         if (i == 0) {
             SearchAllViewController * vcs = [SearchAllViewController new];
             [self addChildViewController:vcs];
@@ -45,16 +45,16 @@
                 view.inter = inter;
             }];
         }
-//        else if (i == 1){
-//            SearchWenZhangViewController * vcs = [SearchWenZhangViewController new];
-//            [self addChildViewController:vcs];
-//            [childVC addObject:vcs];
-//        }
-    else if (i == 1){
+        else if (i == 1){
+            SearchWenZhangViewController * vcs = [SearchWenZhangViewController new];
+            [self addChildViewController:vcs];
+            [childVC addObject:vcs];
+        }
+    else if (i == 2){
             SearchBookJiViewController * vcs = [SearchBookJiViewController new];
             [self addChildViewController:vcs];
             [childVC addObject:vcs];
-        }else if (i == 2){
+        }else if (i == 3){
             SearchZSWViewController * vcs = [SearchZSWViewController new];
             [self addChildViewController:vcs];
             [childVC addObject:vcs];
@@ -94,14 +94,14 @@
             SearchAllViewController * vcs = childVC[i];
             vcs.model = model;
         }
-//        else if (i ==1){
-//            SearchWenZhangViewController * vcs = childVC[i];
-//            vcs.model = model;
-//        }
-        else if (i == 1){
+        else if (i ==1){
+            SearchWenZhangViewController * vcs = childVC[i];
+            vcs.model = model;
+        }
+        else if (i == 2){
             SearchBookJiViewController * vcs = childVC[i];
             vcs.model = model;
-        }else if (i == 2){
+        }else if (i == 3){
             SearchZSWViewController * vcs = childVC[i];
             vcs.model = model;
         }
