@@ -16,7 +16,11 @@ typedef void(^clickallshanchu)(void);
 @property(nonatomic,copy)click block;
 @property(nonatomic,copy)clickallshanchu blocks;
 
-@property(nonatomic,strong) NSMutableArray * itemarray;
+@property(nonatomic,strong) MyFavoritesModel * model;
+
+@property(nonatomic,assign) NSInteger qxzt;
+@property(nonatomic,assign) NSInteger nowinter;
+
 @end
 
 NS_ASSUME_NONNULL_END

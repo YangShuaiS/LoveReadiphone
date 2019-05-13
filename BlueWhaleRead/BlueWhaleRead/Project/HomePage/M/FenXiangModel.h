@@ -21,5 +21,8 @@
 
 @property (nonatomic, copy) NSString * share_img;
 @property (nonatomic, copy) NSString * share_preview_img;
+@property (nonatomic, copy) NSString * small_program_code;
+
+
 
 @end

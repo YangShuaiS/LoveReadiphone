@@ -18,12 +18,16 @@
 #import "YDYViewController.h"
 
 #import <Bugly/Bugly.h>
+#import <AdSupport/AdSupport.h>
 #import "JPUSHService.h"
+#import "UserXZageView.h"
+#import <StoreKit/StoreKit.h>
+
 // iOS10 注册 APNs 所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
-@interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate,CYLTabBarControllerDelegate,UITabBarControllerDelegate>
+@interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate,CYLTabBarControllerDelegate,UITabBarControllerDelegate,SKPaymentTransactionObserver,SKProductsRequestDelegate>
 @property (nonatomic, weak) UIButton *selectedCover;
 
 @end
@@ -38,8 +42,9 @@
         NSString * str = APP_VERSION;
         NSString *sysVersion = [[UIDevice currentDevice] systemName]; //获取系统名称 例如：iPhone OS
         NSString *sysVersions = [[UIDevice currentDevice] systemVersion]; //获取系统版本 例如：9.2
+        NSString * idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
         
-        NSDictionary * dic = @{@"UUID":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"mobileModel":[BaseObject deviceModelName],@"os":sysVersion,@"osVersion":sysVersions,@"appVersionCode":str};
+        NSDictionary * dic = @{@"UUID":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"mobileModel":[BaseObject deviceModelName],@"os":sysVersion,@"osVersion":sysVersions,@"appVersionCode":str,@"idfa":idfa};
         [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
             if (responseObject) {
                 
@@ -133,14 +138,17 @@
     [self jiantingwangluo];
     [self addwenjian];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(denglu) name:kNotificationDenglu object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tuichudenglu) name:kNotificationTuiChuDenglu object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hqnj) name:kNotificationHaveClass object:nil];
+    //支付代理
+//    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tuichudenglu) name:kNotificationTuiChuDenglu object:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     Me = [[MeModel SharedModel] ADDvalue];
     //发送错误文件
 //    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     [self loadModel];
-//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 //    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
 //    if (localNotification) {
 //        NSLog(@"Recieved Notification === %@",localNotification);
@@ -156,13 +164,19 @@
         self.window.rootViewController = homenav;
         [self.window makeKeyAndVisible];
     }else{
-        [CYLPlusButtonSubclass registerPlusButton];
-        MainTabBarController * main = [MainTabBarController new];
-        main.delegate = self;
-        [main hideTabBadgeBackgroundSeparator];
-        [self customizeInterfaceWithTabBarController:main];
-        self.window.rootViewController = main;
-        [self.window makeKeyWindow];
+        NSString * nianji  = [[NSUserDefaults standardUserDefaults] objectForKey:kNotificationNianJi];
+        if (nianji == nil || [nianji isEqualToString:@""]) {
+            [self hqnj];
+        }else{
+            [CYLPlusButtonSubclass registerPlusButton];
+            MainTabBarController * main = [MainTabBarController new];
+            main.selectedIndex = 2;
+            main.delegate = self;
+            [main hideTabBadgeBackgroundSeparator];
+            [self customizeInterfaceWithTabBarController:main];
+            self.window.rootViewController = main;
+            [self.window makeKeyWindow];
+        }
     }
 
     [NSThread sleepForTimeInterval:1];
@@ -172,13 +186,34 @@
 
 - (void)denglu{
     [self.window.rootViewController removeFromParentViewController];
-    [CYLPlusButtonSubclass registerPlusButton];
-    MainTabBarController * main = [MainTabBarController new];
-    main.delegate = self;
-    [main hideTabBadgeBackgroundSeparator];
-    [self customizeInterfaceWithTabBarController:main];
-    self.window.rootViewController = main;
-    [self.window makeKeyWindow];
+    NSString * nianji  = [[NSUserDefaults standardUserDefaults] objectForKey:kNotificationNianJi];
+    if (nianji == nil || [nianji isEqualToString:@""]) {
+        [self hqnj];
+    }else{
+        [CYLPlusButtonSubclass registerPlusButton];
+        MainTabBarController * main = [MainTabBarController new];
+        main.selectedIndex = 2;
+        main.delegate = self;
+        [main hideTabBadgeBackgroundSeparator];
+        [self customizeInterfaceWithTabBarController:main];
+        self.window.rootViewController = main;
+        [self.window makeKeyWindow];
+    }
+
+}
+
+- (void)hqnj{
+    WS(ws);
+    [self.window.rootViewController removeFromParentViewController];
+    UserXZageView * view = [UserXZageView new];
+    UIViewController * vc = [UIViewController new];
+    vc.view = view;
+    BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = homenav;
+    [self.window makeKeyAndVisible];
+    [view setBlock:^(NSString * _Nonnull str) {
+        [ws denglu];
+    }];
 }
 - (void)tuichudenglu{
     [self.window.rootViewController removeFromParentViewController];
@@ -262,6 +297,7 @@
     [ZhiShiShuFLModel InitializeModel];//知识树分类
     [UserCityModel InitializeModel];//城市
     [NBCALLModel InitializeModel];//新书城
+    [BuyAllModel InitializeModel];//我的支付
     
     [self onechushihua];
 }
@@ -755,5 +791,48 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     });
 }
 
+//#pragma mark - SKProductRequestDelegate
+//
+//// 13.监听购买结果
+//- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transaction {
+//
+//    for (SKPaymentTransaction *tran in transaction){
+//
+//        switch (tran.transactionState) {
+//            case SKPaymentTransactionStatePurchased:{
+//                NSLog(@"交易完成");
+//                // 订阅特殊处理
+//                if (tran.originalTransaction) {
+//                    NSString *orderUserId = [[tran payment] applicationUsername];// 得到该订单的用户Id
+//
+//                    NSLog(@"自动续费的订单,originalTransaction = %@",tran.originalTransaction);
+////                    [[SKPaymentQueue defaultQueue] finishTransaction:tran];
+//
+//                } else {
+//                    // 普通购买，以及第一次购买自动订阅
+//                    NSLog(@"普通购买，以及第一次购买自动订阅");
+//
+//                }
+//
+//
+//            }
+//                break;
+//            case SKPaymentTransactionStatePurchasing:
+//                NSLog(@"商品添加进列表");
+//                break;
+//            case SKPaymentTransactionStateRestored:
+//                NSLog(@"已经购买过商品");
+//                [[SKPaymentQueue defaultQueue] finishTransaction:tran];
+//                break;
+//            case SKPaymentTransactionStateFailed:
+//                NSLog(@"交易失败");
+//                [[SKPaymentQueue defaultQueue] finishTransaction:tran];
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+//}
 
+//
 @end

@@ -13,4 +13,6 @@
 @property(nonatomic,assign)CGFloat sizefloat;
 @property(nonatomic,assign)CGFloat neirongheight;
 
+@property(nonatomic,strong)UIColor * backcolor;
+
 @end

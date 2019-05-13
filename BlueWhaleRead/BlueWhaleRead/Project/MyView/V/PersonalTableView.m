@@ -18,7 +18,7 @@
 #import <MOFSPickerManager.h>
 
 #import <PGDatePickManager.h>
-
+#import "PersonXuanZeZhaoPian.h"
 @interface PersonalTableView ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate>
 @property(nonatomic,strong)NSMutableArray *provinces;
 @property(nonatomic,assign)NSInteger provinceIndex;
@@ -75,7 +75,7 @@
 //    }else{
 //        phone = @"";
 //    }
-    titleArray = @[@"姓名",@"生日",@"年级",@"等级",@"账号绑定",@"所在地区",@"学校",@"班级",@"性别"];
+    titleArray = @[@"头像",@"姓名",@"生日",@"年级",@"等级",@"账号绑定",@"所在地区",@"学校",@"班级",@"性别"];
     NSString * area = model.area;
     NSString * true_school = model.true_school;
     NSString * true_class = model.true_class;
@@ -92,7 +92,7 @@
             nianji = levemodel.name;
         }
     }
-    subArray = @[model.name,Me.birthday,nianji,[NSString stringWithFormat:@"Lv%@",model.level],@"",area,true_school,true_class,xb];
+    subArray = @[Me.avatar,model.name,Me.birthday,nianji,[NSString stringWithFormat:@"Lv%@",model.level],@"",area,true_school,true_class,xb];
     [self reloadData];
 }
 #pragma mark  - tableViewDelegate代理方法
@@ -113,8 +113,10 @@
 //            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewTopStyle];
 //
 //        }else
-        if (indexPath.row == 3){
+        if (indexPath.row == 4){
             cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
+        }else if (indexPath.row == 0){
+            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownImage];
         }else{
             cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownClickStyle];
         }
@@ -167,35 +169,37 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
+        [self userImage];
+    }else if (indexPath.row == 1) {
         ModifyNameViewController * vc = [ModifyNameViewController new];
         [self.nav pushViewController:vc animated:YES];
         [vc setBlock:^{
             [self LoadData];
         }];
-    }else if (indexPath.row == 1){
-        [self shengri];
     }else if (indexPath.row == 2){
+        [self shengri];
+    }else if (indexPath.row == 3){
         [self nianling];
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == 5){
         AccountSettingsViewController * vc = [AccountSettingsViewController new];
         [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 5){
-        [self diqu];
     }else if (indexPath.row == 6){
+        [self diqu];
+    }else if (indexPath.row == 7){
         WanShanXinXiViewController * vc = [WanShanXinXiViewController new];
         vc.style = WanShanXinXiStyleScholl;
         [self.nav pushViewController:vc animated:YES];
         [vc setBlock:^{
             [self LoadData];
         }];
-    }else if (indexPath.row == 7){
+    }else if (indexPath.row == 8){
         WanShanXinXiViewController * vc = [WanShanXinXiViewController new];
         vc.style = WanShanXinXiStyleClass;
         [self.nav pushViewController:vc animated:YES];
         [vc setBlock:^{
             [self LoadData];
         }];
-    }else if (indexPath.row == 8){
+    }else if (indexPath.row == 9){
         [self xingbie];
     }
 }
@@ -245,21 +249,42 @@
         }
     }];
 }
-
-- (void)nianling{
-    NSMutableArray * titlearray = [NSMutableArray array];
-    for (levelListModel *levemodel in livemodel.levelList) {
-        [titlearray addObject:levemodel.name];
-    }
-    [[MOFSPickerManager shareManger] showPickerViewWithDataArray:titlearray tag:1 title:@"选择年级" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *string) {
-        for (levelListModel *levemodel in self->livemodel.levelList) {
-            if ([levemodel.name isEqualToString:string]) {
-                [self genggaunianji:levemodel.ssid];
+- (void)addnianji{
+    WS(ws);
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_HQCLASS];
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",ALLCLASS]];
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:nil andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            [responseObject writeToFile:filePatch atomically:YES];
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                [ws addnianji];
             }
+        }else{
         }
-    } cancelBlock:^{
-        
     }];
+}
+- (void)nianling{
+    NSString *filePatch = [BaseObject AddPathName:[NSString stringWithFormat:@"%@.plist",ALLCLASS]];
+    NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePatch];
+    if (dataDictionary == nil) {
+        [self addnianji];
+    }else{
+        livemodel = [UserLoginModel mj_objectWithKeyValues:dataDictionary];
+        NSMutableArray * titlearray = [NSMutableArray array];
+        for (levelListModel *levemodel in livemodel.levelList) {
+            [titlearray addObject:levemodel.name];
+        }
+        [[MOFSPickerManager shareManger] showPickerViewWithDataArray:titlearray tag:1 title:@"选择年级" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *string) {
+            for (levelListModel *levemodel in self->livemodel.levelList) {
+                if ([levemodel.name isEqualToString:string]) {
+                    [self genggaunianji:levemodel.ssid];
+                }
+            }
+        } cancelBlock:^{
+            
+        }];
+    }
 }
 
 - (void)genggaunianji:(NSString *)string{
@@ -392,6 +417,53 @@
         }else{
             
         }
+    }];
+}
+
+
+- (void)userImage{
+    WS(ws);
+    PersonXuanZeZhaoPian * xuanze = [PersonXuanZeZhaoPian new];
+    xuanze.nav = [self viewController].navigationController;
+    [[UIApplication sharedApplication].delegate.window addSubview:xuanze];
+    [xuanze mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].delegate.window);
+    }];
+    [xuanze setBlock:^(UIImage *image) {
+        [ws updataImage:image];
+    }];
+}
+- (void)updataImage:(UIImage *)image{
+//    UserImageView.image = image;
+    NSData * imageData = UIImageJPEGRepresentation(image, 0.5);
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_SCTP];
+    NSDictionary * dic = @{@"studentid":Me.ssid};
+    //    1.创建管理者对象
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    //2.上传文件
+    [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        NSString * str = [BaseObject getCurrentTimes];
+        str = [NSString stringWithFormat:@"%@.jpg",str];
+        //上传文件参数
+        [formData appendPartWithFileData:imageData name:@"fileid" fileName:str mimeType:@"image/jpeg"];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        //打印上传进度
+        CGFloat progress = 100.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount;
+        NSLog(@"%f",progress);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        MJExtensionLog(@"请求成功：%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        //请求失败
+        //            MJExtensionLog(@"请求失败：%@",error);
+        
     }];
 }
 @end

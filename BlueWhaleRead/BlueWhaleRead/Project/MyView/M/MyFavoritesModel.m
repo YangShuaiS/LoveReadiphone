@@ -11,7 +11,7 @@
 @implementation MyFavoritesModel
 + (void)InitializeModel{
     [MyFavoritesModel mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"collectionList":@"NKRKnowledgeModel"};
+        return @{@"collectionList":@"NKRKnowledgeModel",@"proverbList":@"NHProverbModel"};
     }];
 }
 @end

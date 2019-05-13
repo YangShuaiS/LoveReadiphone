@@ -30,13 +30,13 @@
         self.delegate = self;
         self.dataSource = self;
         // 设置是否允许滚动
-        self.scrollEnabled = YES;
+        self.scrollEnabled = NO;
         //背景颜色
         self.backgroundColor = [UIColor clearColor];
         //自适应大小
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.scrollsToTop = NO;
-        cshgs = 4;
+        cshgs = 6;
     }
     return self;
 }
@@ -66,18 +66,26 @@
         NewBookXQViewController * vc = [NewBookXQViewController new];
         BookListModel * model = _itemarray[indexPath.row];
         vc.loadId = model.ssid;
-        [self.nav pushViewController:vc animated:YES];
+        [[self viewController].navigationController pushViewController:vc animated:YES];
+//        [self.nav pushViewController:vc animated:YES];
     }
 }
 
 
 - (void)layoutSubviews{
     [super layoutSubviews];
+//    WS(ws);
+//    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(ws.contentSize.height);
+//    }];
 }
 
 - (void)setItemarray:(NSMutableArray *)itemarray{
     _itemarray = itemarray;
     cshgs = itemarray.count;
+    if (cshgs>6) {
+        cshgs = 6;
+    }
     [self reloadData];
 }
 @end

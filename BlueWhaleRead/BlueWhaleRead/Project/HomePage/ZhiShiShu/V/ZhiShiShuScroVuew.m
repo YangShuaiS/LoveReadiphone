@@ -10,21 +10,22 @@
 #import "ZhiShiShuView.h"
 #import "ZhiShiSHuLeftView.h"
 #import "ZhiShiShuGuanXi.h"
-#import "ZhiShiShuTDListView.h"
 #import "ZhiShiShiRightScroView.h"
 
 #import "ZhiShiShuShareView.h"
 #import "ArticleTopView.h"
-#import "ArticleScroDownView.h"
 
+
+#import "ZhiShiShuViewController.h"
+#import "BuyPopPurchaseView.h"
 @implementation ZhiShiShuScroVuew{
+    UIImageView * backImageView;
     UIScrollView * scrollView;
     ZhiShiSHuLeftView * leftView;
     ZhiShiShuView * ZSSView;
     ZhiShiShuGuanXi * guanxi;
     BOOL Start;
     BOOL EndAni;
-    ZhiShiShuTDListView * tableilistclick;
     ZhiShiShiRightScroView * rightscroview;
     NSInteger next;
     
@@ -39,14 +40,16 @@
     NSInteger starex;
     NSInteger endx;
     NSTimer *timer;
-    NSTimer *timer1;
     
     ArticleTopView * topView;
     ArticleScroDownView * scrodownview;
     
-    FLAnimatedImageView * ShouCang;
     ZhiShiShuModel * nmodel;
 
+    CommentsView * comentsview;
+    UIImageView * backroot;
+    UIImageView * rightclick;
+    BuyPopPurchaseView * PopPurchase;
 }
 - (void)setItemid:(NSString *)itemid{
     NSArray * array = [BaseObject TiemArray:itemid String:@","];
@@ -61,6 +64,7 @@
     }
     starex = 0;
     endx = 0;
+    scrodownview.itemid = _itemid;
     [self loadUpData];
 
 }
@@ -74,7 +78,6 @@
         if (responseObject) {
             ZhiShiShuModel * model = [ZhiShiShuModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                FLAnimatedImageView * imageview = [FLAnimatedImageView new];
                 NSInteger scale_screen = [UIScreen mainScreen].scale;
                 NSMutableString *topimage = [[NSMutableString alloc] initWithString:model.data.bg_img];
                 if (topimage.length >4) {
@@ -83,21 +86,35 @@
                         [topimage insertString:@"_3x" atIndex:topimage.length-4];
                     }
                 }
-                [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,topimage]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-                    UIColor *backgroundColor = [UIColor colorWithPatternImage:image];
-                    [blockSelf setBackgroundColor:backgroundColor];
-                    [blockSelf->scrollView setBackgroundColor:backgroundColor];
+                [self->backImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,topimage]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+//                    image = [BaseObject TransformtoSize:image];
+//                    UIColor *backgroundColor = [UIColor colorWithPatternImage:image];
+                    if ([model.data.knowledge_type isEqualToString:@"2"]) {
+//                        [blockSelf setBackgroundColor:backgroundColor];
+                    }else{
+                        blockSelf.backgroundColor =  [BaseObject colorWithHexString:model.data.bg_part_color Alpha:[model.data.head_transparency floatValue]];
+                    }
+//                    [blockSelf->scrollView setBackgroundColor:backgroundColor];
                 }];
                 
                 blockSelf->guanxi.datamodel = model.data;
+                blockSelf->guanxi.backgroundColor = [BaseObject colorWithHexString:model.data.bg_part_color Alpha:[model.data.head_transparency floatValue]];
+                blockSelf->nav.backgroundColor = [BaseObject colorWithHexString:model.data.bg_part_color Alpha:[model.data.head_transparency floatValue]];
                 [blockSelf updataview:model];
-                blockSelf->leftView.axidataarry = model.data.axis;
                 CGFloat leftheight = 0;
-                for (ZhiShiShuTimeLineModel * m in model.data.axis) {
-                    if (leftheight<m.end_y*poinw) {
-                        leftheight = m.end_y*poinw;
+//                if (model.data.axis != nil && ![model.data.axis isKindOfClass:[NSNull class]] && model.data.axis.count != 0){
+
+                if ([BaseObject ArratClass:model.data.axis]) {
+                    blockSelf->leftView.axidataarry = model.data.axis;
+                    for (ZhiShiShuTimeLineModel * m in model.data.axis) {
+                        if (leftheight<m.end_y*poinw) {
+                            leftheight = m.end_y*poinw;
+                        }
                     }
                 }
+
+//                }
+
                 [self->leftView mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.height.mas_equalTo(leftheight);
                 }];
@@ -109,20 +126,123 @@
 
             [blockSelf->ZSSView layoutIfNeeded];
             [blockSelf.superview layoutIfNeeded];
-            blockSelf->rightscroview.topheight = blockSelf->guanxi.frame.size.height;
-            blockSelf->rightscroview.labelheight = blockSelf->guanxi.labelallheight;
-            blockSelf->rightscroview.itemarray = model.data.arrow;
-            blockSelf->rightscroview.allheight = blockSelf->ZSSView.frame.size.height+blockSelf->guanxi.frame.size.height;
+//            blockSelf->rightscroview.topheight = blockSelf->guanxi.frame.size.height;
+//            blockSelf->rightscroview.labelheight = blockSelf->guanxi.labelallheight;
+            blockSelf->rightscroview.backcolor =[BaseObject colorWithHexString:model.data.bg_part_color Alpha:[model.data.head_transparency floatValue]];
+
+            if ([BaseObject ArratClass:model.data.arrow]) {
+                blockSelf->rightscroview.itemarray = model.data.arrow;
+            }
             [blockSelf scroviewsliding:model];
             blockSelf->nmodel = model;
             if ([model.data.knowledge_type isEqualToString:@"2"]) {
                 [blockSelf nowzhishiwang];
+                blockSelf->scrodownview.Type = 2;
+            }else{
+                blockSelf->scrodownview.sfzsw = 1;
+                blockSelf->scrodownview.Type = 3;
+                blockSelf->nav.leftimage = @"icon_返回_粗";
+                blockSelf->backroot.image = UIIMAGE(@"返回二级分类");
+                blockSelf->nav.titcolor = [UIColor whiteColor];
+                [blockSelf youce];
             }
+            [blockSelf addshurukuang];
+            blockSelf->scrodownview.ZhiShiSHUmodel = model;
+            [blockSelf->scrodownview layoutIfNeeded];
+            [blockSelf layoutIfNeeded];
+            blockSelf->ZSSView.newheight = blockSelf->scrodownview.frame.size.height+LENGTH(20);
+            
+            blockSelf->rightscroview.allheight = blockSelf->ZSSView.frame.size.height+ blockSelf->scrodownview.frame.size.height;
+
         }else{
             
         }
     }];
 }
+- (void)youce{
+    rightclick = [UIImageView new];
+    rightclick.userInteractionEnabled = YES;
+    rightclick.image = UIIMAGE(@"全部知识图-图标拷贝");
+    rightclick.contentMode = UIViewContentModeScaleAspectFit;
+    [nav addSubview:rightclick];
+    [rightclick mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self->nav).with.offset(-LENGTH(16));
+        make.centerY.mas_equalTo(self->nav).with.offset(StatusBar/2);
+    }];
+    
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(uptableliest)];
+    [rightclick addGestureRecognizer:tap];
+}
+#pragma mark ----------------- 输入框
+- (void)addshurukuang{
+    WS(ws);
+    if ([nmodel.data.knowledge_type isEqualToString:@"2"]) {
+        comentsview = [[CommentsView alloc] initWithBackColor:RGBA(255, 255, 255, 1) Style:CommentsStyle1 Original:1];
+
+    }else{
+        comentsview = [[CommentsView alloc] initWithBackColor:[BaseObject colorWithHexString:nmodel.data.bg_part_color Alpha:[nmodel.data.head_transparency floatValue]] Style:CommentsStyle2 Original:1];
+    }
+    comentsview.delegateComments = self;
+    [self addSubview:comentsview];
+    [comentsview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.and.bottom.mas_equalTo(ws);
+        make.height.mas_equalTo(TabBarHeight);
+    }];
+    comentsview.model1 =nmodel;
+
+}
+- (void)CommentsShouCang{
+    [self ShouCang];
+}
+
+- (void)CommentsDianZan{
+    if (nmodel !=nil) {
+        if (nmodel.data.is_like == 0) {
+            [self dianzan];
+        }else{
+            [self quxiaodainzan];
+        }
+    }
+}
+- (void)CommentsFenXiang{
+    [self FenXiang];
+}
+- (void)CommentsPingLun{
+//    [scrodownview.comlist.tableview scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+//        [scrollViews setContentOffset:CGPointMake(0, scrollViews.contentSize.height-(HEIGHT-NavHeight)) animated:YES];
+    if (scrodownview.comlist.frame.size.height>=HEIGHT-NavHeight-TabBarHeight) {
+        [scrollView setContentOffset:CGPointMake(0, scrollView.contentSize.height-scrodownview.comlist.frame.size.height) animated:YES];
+    }else{
+        [scrollView setContentOffset:CGPointMake(0, scrollView.contentSize.height-(HEIGHT - NavHeight-TabBarHeight)) animated:YES];
+    }
+    
+}
+- (void)CommentsShuRuKuang{
+    CommentsShuRuKuangView * backview = [CommentsShuRuKuangView new];
+    backview.itemid = _itemid;
+    if ([nmodel.data.knowledge_type isEqualToString:@"2"]) {
+        backview.itemid = @"14";
+        backview.comment_type = 2;
+    }else{
+        backview.comment_type = 3;
+    }
+    backview.itemid = _itemid;
+    backview.zhishishumodel = nmodel;
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:backview];
+    [backview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window]);
+    }];
+    WS(ws);
+    [backview setBlocks:^(PingLunModel * _Nonnull model) {
+        [ws UpCommentsList:model];
+    }];
+}
+- (void)UpCommentsList:(PingLunModel*)model{
+    [nmodel.data.studentCommentList insertObject:model atIndex:0];
+    scrodownview.ZhiShiSHUmodel = nmodel;
+    
+}
+
 - (void)updataview:(ZhiShiShuModel*)model{
 
     [ZSSView layoutIfNeeded];
@@ -143,39 +263,6 @@
     }];
     ZSSView.scroviewheight = scrollView.frame.size.height;
     
-    FLAnimatedImageView * sharefriend = [FLAnimatedImageView new];
-    sharefriend.image = UIIMAGE(@"组 928");
-    sharefriend.contentMode = UIViewContentModeScaleAspectFit;
-    [nav addSubview:sharefriend];
-    [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->nav.mas_top).with.offset(StatusBar+10);
-        make.right.mas_equalTo(self->nav.mas_right).with.offset(-20);
-        //        make.size.mas_equalTo(sharefriend.image.size);
-        make.width.and.height.mas_equalTo(24);
-    }];
-    sharefriend.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
-    [sharefriend addGestureRecognizer:tap];
-    
-    ShouCang = [FLAnimatedImageView new];
-    if (nmodel.data.is_collect == 0) {
-        ShouCang.image = UIIMAGE(@"收藏0");
-    }else{
-        ShouCang.image = UIIMAGE(@"收藏");
-    }
-    ShouCang.contentMode = UIViewContentModeScaleAspectFit;
-    [nav addSubview:ShouCang];
-    [ShouCang mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self->nav.mas_right).with.offset(-20-24-10);
-        make.top.mas_equalTo(self->nav.mas_top).with.offset(StatusBar+10);
-        make.width.and.height.mas_equalTo(24);
-    }];
-    ShouCang.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ShouCang)];
-    [ShouCang addGestureRecognizer:tap1];
-    
-    tableilistclick.style = 2;
-    
     WS(ws);
     topView = [ArticleTopView new];
     [self addSubview:topView];
@@ -184,17 +271,8 @@
         make.left.and.right.mas_equalTo(ws);
     }];
     
-    
-    scrodownview = [ArticleScroDownView new];
-    [scrollView addSubview:scrodownview];
-    [scrodownview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self->scrollView.mas_bottom).with.offset(-LENGTH(20));
-        make.left.and.right.mas_equalTo(ws);
-    }];
     topView.ZhiShiSHUmodel = nmodel;
-    scrodownview.ZhiShiSHUmodel = nmodel;
     [topView layoutIfNeeded];
-    [scrodownview layoutIfNeeded];
     [self.superview layoutIfNeeded];
     if (topView!=nil) {
         [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -208,8 +286,9 @@
             make.top.mas_equalTo(self->nav.mas_bottom).with.offset(self->guanxi.frame.size.height);
         }];
     }
-    ZSSView.newheight = scrodownview.frame.size.height+LENGTH(20);
+    
 }
+
 - (void)ShouCang{
     if (nmodel.data.is_collect == 0) {
         [self shoucang];
@@ -218,14 +297,34 @@
     }
 }
 - (void)shoucang{
+    NSString * type = @"";
+    if ([nmodel.data.knowledge_type isEqualToString:@"2"]) {
+        type = @"2";
+    }else{
+        type = @"3";
+    }
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_SHOUCANGZHISHITU];
-    NSDictionary * dic = @{@"studentid":Me.ssid,@"collectionid":_itemid,@"collection_type":@"2"};
+    NSDictionary * dic = @{@"studentid":Me.ssid,@"collectionid":_itemid,@"collection_type":type};
     [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
             if ([m.code isEqual:@200]) {
-                self->ShouCang.image = UIIMAGE(@"收藏");
+                self->nmodel.data.is_collect++;
+                [self->scrodownview.share.sc ClickDianZanWithImage:@"收藏-成功" Title:[NSString stringWithFormat:@"%ld",self->nmodel.data.is_collect]];
                 self->nmodel.data.is_collect = 1;
+                self->comentsview.model1 = self->nmodel;
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[[UIApplication sharedApplication] delegate] window]  animated:YES];
+                hud.label.text = @"收藏成功";
+                hud.mode = MBProgressHUDModeCustomView;
+                UIImage *image = [[UIImage imageNamed:@"收藏成功"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                UIImageView *imgView = [[UIImageView alloc] initWithImage:image];
+                hud.customView = imgView;
+                hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+                hud.bezelView.color = [UIColor colorWithWhite:0.0 alpha:0.8];
+                //文字颜色
+                hud.contentColor = [UIColor whiteColor];
+                hud.animationType = MBProgressHUDAnimationFade;
+                [hud hideAnimated:YES afterDelay:1];
             }
         }
     }];
@@ -237,8 +336,22 @@
         if (responseObject) {
             LunBoTuXQModel * model = [LunBoTuXQModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                self->ShouCang.image = UIIMAGE(@"收藏0");
+                self->nmodel.data.is_collect--;
+                [self->scrodownview.share.sc ClickDianZanWithImage:@"收藏-" Title:[NSString stringWithFormat:@"%ld",self->nmodel.data.is_collect]];
                 self->nmodel.data.is_collect = 0;
+                self->comentsview.model1 = self->nmodel;
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[[UIApplication sharedApplication] delegate] window]  animated:YES];
+                hud.label.text = @"取消收藏";
+                hud.mode = MBProgressHUDModeCustomView;
+                UIImage *image = [[UIImage imageNamed:@"取消收藏"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                UIImageView *imgView = [[UIImageView alloc] initWithImage:image];
+                hud.customView = imgView;
+                hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+                hud.bezelView.color = [UIColor colorWithWhite:0.0 alpha:0.8];
+                //文字颜色
+                hud.contentColor = [UIColor whiteColor];
+                hud.animationType = MBProgressHUDAnimationFade;
+                [hud hideAnimated:YES afterDelay:1];
             }
         }else{
             
@@ -248,6 +361,12 @@
 - (void)FenXiang{
     WS(ws);
     ZhiShiShuShareView * views = [ZhiShiShuShareView new];
+    views.model = nmodel;
+    if ([nmodel.data.knowledge_type isEqualToString:@"2"]) {
+        views.type = 1;
+    }else{
+        views.type = 2;
+    }
     views.zstid = _itemid;
     [self.window addSubview:views];
     [views mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -291,6 +410,33 @@
         make.top.equalTo(ws).with.offset(0);
         make.height.mas_equalTo(NavHeight);
     }];
+    
+    backroot = [UIImageView new];
+    backroot.userInteractionEnabled = YES;
+    backroot.image = UIIMAGE(@"返回二级分类-黑色");
+    backroot.contentMode = UIViewContentModeScaleAspectFit;
+    [nav addSubview:backroot];
+    [backroot mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self->nav).with.offset(LENGTH(16)+11+18);
+        make.centerY.mas_equalTo(self->nav).with.offset(StatusBar/2);
+    }];
+    
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backroot)];
+    [backroot addGestureRecognizer:tap];
+}
+- (void)backroot{
+    NSMutableArray *marr = [[NSMutableArray alloc]initWithArray:[self viewController].navigationController.viewControllers];
+    //删除完再从新赋值，防止崩溃
+    NSMutableArray * navarr = [NSMutableArray array];
+    [navarr addObjectsFromArray:marr];
+    for (int i = 0; i < marr.count; i++) {
+        UIViewController * vc = marr[i];
+        if ([vc isKindOfClass:[ZhiShiShuViewController class]]) {
+            [[self viewController].navigationController popToViewController:vc animated:YES];
+            return;
+        }
+    }
+    [[self viewController].navigationController popToRootViewControllerAnimated:YES];
 }
 - (void)NavLeftClick{
     [self.nav popViewControllerAnimated:YES];
@@ -305,6 +451,15 @@
     EndAni = NO;
     next = 1;
     scroviewhd = YES;
+    
+    backImageView = [UIImageView new];
+    backImageView.contentMode = UIViewContentModeScaleAspectFill;
+    backImageView.layer.masksToBounds = YES;
+    [self addSubview:backImageView];
+    [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(ws);
+    }];
+    
     scrollView = [UIScrollView new];
 //    scrollView.backgroundColor = BEIJINGCOLOR;
     scrollView.delegate = self;
@@ -313,6 +468,7 @@
     scrollView.minimumZoomScale = 0.5;
     scrollView.maximumZoomScale = 10;
     scrollView.directionalLockEnabled=YES;//定向锁定
+    scrollView.backgroundColor = [UIColor clearColor];
 //    scrollView.alwaysBounceHorizontal = YES;
     [self addSubview:scrollView];
 
@@ -371,7 +527,7 @@
     [self addSubview:rightscroview];
     [rightscroview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(ws).with.offset(WIDTH/2);
-        make.top.mas_equalTo(ws);
+        make.top.mas_equalTo(self->scrollView);
         make.bottom.mas_equalTo(ws);
         make.width.mas_equalTo(WIDTH/2);
     }];
@@ -393,27 +549,25 @@
     }];
 
     
-    tableilistclick = [ZhiShiShuTDListView new];
-    [self addSubview:tableilistclick];
-    [tableilistclick mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self->rightscroview.mas_left);
-        make.width.mas_equalTo(LENGTH(120));
-        make.bottom.mas_equalTo(ws).with.offset(-TabBarHeight-LENGTH(14));
-    }];
-    __block ZhiShiShuScroVuew * blockself = self;
-    [tableilistclick setBlock:^{
-        [blockself uptableliest];
-    }];
-    
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc]init];
     panGesture.delegate = self;
     [panGesture addTarget:self action:@selector(pan:)];
     [self addGestureRecognizer:panGesture];
+    
+    scrodownview = [ArticleScroDownView new];
+    [scrollView addSubview:scrodownview];
+    [scrodownview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self->scrollView.mas_bottom).with.offset(-LENGTH(20));
+        make.left.and.right.mas_equalTo(ws);
+    }];
+    scrodownview.sharetype = @"14";
+    scrodownview.delegateArticleScroTop = self;
 
 }
+
 -(void)pan:(UIPanGestureRecognizer *)pan{
-    if (tableilistclick.style!=2) {
+    if ([nmodel.data.knowledge_type isEqualToString:@"1"]) {
         if (pan.state == UIGestureRecognizerStateBegan) {
             starex = [pan locationInView:self].x;
         }
@@ -427,21 +581,15 @@
                         [self->rightscroview mas_updateConstraints:^(MASConstraintMaker *make) {
                             make.right.mas_equalTo(ws);
                         }];
+                        [self->comentsview mas_updateConstraints:^(MASConstraintMaker *make) {
+                            make.bottom.mas_equalTo(ws).with.offset(TabBarHeight);
+                        }];
                         [ws.superview layoutIfNeeded];
                     } completion:^(BOOL finished) {
                         
                     }];
 
                     EndAni = YES;
-                    __block ZhiShiShuScroVuew * blockSelf = self;
-                    [UIView animateWithDuration:0.5 animations:^{
-                        [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
-                            make.width.mas_equalTo(LENGTH(28));
-                        }];
-                        [blockSelf.superview layoutIfNeeded];
-                    } completion:^(BOOL finished) {
-                        
-                    }];
                 }
             }
             if (rightscroview.tag == 101) {
@@ -451,21 +599,15 @@
                         [self->rightscroview mas_updateConstraints:^(MASConstraintMaker *make) {
                             make.right.mas_equalTo(ws).with.offset(WIDTH/2);
                         }];
+                        [self->comentsview mas_updateConstraints:^(MASConstraintMaker *make) {
+                            make.bottom.mas_equalTo(ws);
+                        }];
                         [ws.superview layoutIfNeeded];
                     } completion:^(BOOL finished) {
                         
                     }];
                     
                     EndAni = NO;
-                    __block ZhiShiShuScroVuew * blockSelf = self;
-                    [UIView animateWithDuration:0.5 animations:^{
-                        [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
-                            make.width.mas_equalTo(LENGTH(100));
-                        }];
-                        [blockSelf.superview layoutIfNeeded];
-                    } completion:^(BOOL finished) {
-                        
-                    }];
                 }
             }
         }
@@ -517,15 +659,7 @@
     
     if (EndAni == NO && rightscroview.tag == 100) {
         EndAni = YES;
-        __block ZhiShiShuScroVuew * blockSelf = self;
-        [UIView animateWithDuration:0.5 animations:^{
-            [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(LENGTH(28));
-            }];
-            [blockSelf.superview layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            
-        }];
+
     }
 }
 - (void)endanimal{
@@ -534,26 +668,9 @@
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:UITrackingRunLoopMode];
     }
     
-    if (timer1 == nil) {
-        timer1 = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(jieshuclick) userInfo:nil repeats:NO];
-        [[NSRunLoop currentRunLoop] addTimer:timer1 forMode:UITrackingRunLoopMode];
-    }
+
 }
-- (void)jieshuclick{
-    WS(ws);
-    __block ZhiShiShuScroVuew * blockSelf = self;
-    if (blockSelf->EndAni == YES && rightscroview.tag == 100) {
-        blockSelf->EndAni = NO;
-    [UIView animateWithDuration:0.5 animations:^{
-        [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(LENGTH(120));
-        }];
-        [blockSelf.superview layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        
-    }];
-    }
-}
+
 - (void)jieshu{
     __block ZhiShiShuScroVuew * blockSelf = self;
     if (blockSelf->Start == YES) {
@@ -589,23 +706,12 @@
     
     if (EndAni == NO && rightscroview.tag == 100) {
         EndAni = YES;
-        __block ZhiShiShuScroVuew * blockSelf = self;
-        [UIView animateWithDuration:0.5 animations:^{
-            [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(LENGTH(28));
-            }];
-            [blockSelf.superview layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            
-        }];
     }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (timer!=nil) {
         [timer invalidate];
         timer = nil;
-        [timer1 invalidate];
-        timer1 = nil;
     }
     leftView.sizefloat = scrollView.contentOffset.y;
     leftView.neirongheight = scrollView.frame.size.height;
@@ -622,15 +728,37 @@
     if (lastpoint.x+10 <scrollView.contentOffset.x||lastpoint.x-10>scrollView.contentOffset.x) {
         lastpoint = scrollView.contentOffset;
     }
+    
+    if ([nmodel.data.knowledge_type isEqualToString:@"1"]) {
+        if (Me.is_member == 0) {
+            if (scrollView.contentOffset.y>(ZSSView.frame.size.height-ZSSView.newheight-LENGTH(50))/3.0) {
+                [scrollView setContentOffset:CGPointMake(0, (ZSSView.frame.size.height-ZSSView.newheight-LENGTH(50))/3.0) animated:NO];
+                if (PopPurchase == nil) {
+                    PopPurchase = [BuyPopPurchaseView new];
+                    PopPurchase.nav = [self viewController].navigationController;
+                    [[self viewController].view addSubview:PopPurchase];
+                    [PopPurchase mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.edges.mas_equalTo([self viewController].view);
+                    }];
+                    [PopPurchase setRemove:^{
+                        self->PopPurchase = nil;
+                    }];
+                }
+                
+                
+            }
+        }
+
+    }
 //    [ scrollView setContentOffset:scrollView.contentOffset animated:YES];//关闭动画效果
 
 //    [guanxi mas_updateConstraints:^(MASConstraintMaker *make) {
 //        make.top.mas_equalTo(self->scrollView.mas_top).with.offset(-scrollView.contentOffset.y);
 //    }];
     
-    if (scrollView.contentOffset.y>=scrollView.contentSize.height-HEIGHT-HEIGHT/2) {
-        [ZSSView huadong];
-    }
+//    if (scrollView.contentOffset.y>=scrollView.contentSize.height-HEIGHT-HEIGHT/2) {
+//        [ZSSView huadong];
+//    }
 
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -696,43 +824,80 @@
             [self->rightscroview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.right.mas_equalTo(ws);
             }];
+            [self->comentsview mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_equalTo(ws).with.offset(TabBarHeight);
+            }];
             [ws.superview layoutIfNeeded];
         } completion:^(BOOL finished) {
             
         }];
         EndAni = YES;
-        __block ZhiShiShuScroVuew * blockSelf = self;
-        [UIView animateWithDuration:0.5 animations:^{
-            [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(LENGTH(28));
-            }];
-            [blockSelf.superview layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            
-        }];
+
     }else{
         rightscroview.tag = 100;
         [UIView animateWithDuration:0.5 animations:^{
             [self->rightscroview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.right.mas_equalTo(ws).with.offset(WIDTH/2);
             }];
+            [self->comentsview mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_equalTo(ws);
+            }];
             [ws.superview layoutIfNeeded];
         } completion:^(BOOL finished) {
             
         }];
         EndAni = NO;
-        __block ZhiShiShuScroVuew * blockSelf = self;
-        [UIView animateWithDuration:0.5 animations:^{
-            [blockSelf->tableilistclick mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(LENGTH(120));
-            }];
-            [blockSelf.superview layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            
-        }];
     }
 
 
+}
+#pragma mark -------------- 分享视图
+
+- (void)ArticleScroTopViewShouCang{
+//    [self ShouCang];
+    comentsview.model1 = self->nmodel;
+}
+- (void)ArticleScroTopViewDianZan{
+    comentsview.model1 = self->nmodel;
+}
+
+
+
+#pragma mark ------------------- f点赞
+- (void)dianzan{
+    NSString * type = @"";
+    if ([nmodel.data.knowledge_type isEqualToString:@"2"]) {
+        type = @"2";
+    }else{
+        type = @"3";
+    }
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_ADDDIANZAN];
+    NSDictionary * dic = @{@"studentid":Me.ssid,@"likeid":_itemid,@"like_type":type};
+    [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                self->nmodel.data.is_like = 1;
+                self->nmodel.data.like_num ++;
+                [self->scrodownview.share.dz ClickDianZanWithImage:@"点赞-成功" Title:[NSString stringWithFormat:@"%ld",self->nmodel.data.like_num]];
+                self->comentsview.model1 = self->nmodel;
+            }
+        }
+    }];
+}
+
+- (void)quxiaodainzan{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_REMODIANZAN];
+    NSDictionary * dic = @{@"delid":_itemid,@"studentid":Me.ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        LunBoTuXQModel * model = [LunBoTuXQModel mj_objectWithKeyValues:responseObject];
+        if ([model.code isEqual:@200]) {
+            self->nmodel.data.is_like = 0;
+            self->nmodel.data.like_num --;
+            [self->scrodownview.share.dz ClickDianZanWithImage:@"点赞" Title:[NSString stringWithFormat:@"%ld",self->nmodel.data.like_num]];
+            self->comentsview.model1 = self->nmodel;
+        }
+    }];
 }
 
 @end

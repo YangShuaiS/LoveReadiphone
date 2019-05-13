@@ -26,7 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *bannerknowledgeList;//书详情相关推荐
 
+@property (nonatomic, strong) NSMutableArray *proverb;//每日谚语
 
+@property (nonatomic, strong) NSMutableArray *knowledges;//
 
 + (void)InitializeModel;
 

@@ -32,12 +32,16 @@
 //    self.navigationController.navigationBar.hidden = NO;
 //    self.navigationController.navigationBar.backgroundColor = MAINCOLOR;
     [super viewWillAppear:animated];
+//    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+
 //    self.navigationController.navigationBar.hidden = NO;
 //    self.navigationController.navigationBar.tintColor = [UIColor redColor];
 //    self.title = @"知识网";
 //    [self setNav];
 
 }
+
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 //    self.navigationController.navigationBar.hidden = YES;

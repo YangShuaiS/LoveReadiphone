@@ -11,7 +11,7 @@
 #import "HomeModerateCollectView.h"
 
 #import "SearchBookTJViewController.h"
-#define itemHeight LENGTH(170)
+#define itemHeight LENGTH(170)+LENGTH(19)
 
 @implementation NKRBookTJView{
     NBCmenuView * menu;

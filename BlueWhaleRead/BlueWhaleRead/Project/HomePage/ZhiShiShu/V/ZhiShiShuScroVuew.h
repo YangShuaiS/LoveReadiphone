@@ -7,9 +7,12 @@
 //
 
 #import "BaseView.h"
+#import "CommentsView.h"
+#import "CommentsShuRuKuangView.h"
+#import "ArticleScroDownView.h"
 
 typedef void(^clicks)(CGRect frame);
-@interface ZhiShiShuScroVuew : BaseView<UIScrollViewDelegate,NavDelegate,UIGestureRecognizerDelegate>
+@interface ZhiShiShuScroVuew : BaseView<UIScrollViewDelegate,NavDelegate,UIGestureRecognizerDelegate,CommentsViewDelegate,ArticleScroTopViewViewDelegate>
 @property(nonatomic,strong) NSString * itemid;
 @property(nonatomic,copy)clicks block;
 

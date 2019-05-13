@@ -13,6 +13,7 @@
     NSString * _title;
     NSString * _rightTitle;
     BaseLabel * titleLable;
+    FLAnimatedImageView * leftimageview;
 }
 - (instancetype)init{
     self = [super init];
@@ -95,11 +96,11 @@
     WS(ws);
     UIImage * backImage = UIIMAGE(image);
     
-    FLAnimatedImageView * right = [FLAnimatedImageView new];
-    right.image = backImage;
-    right.contentMode = UIViewContentModeScaleAspectFit;
-    [self addSubview:right];
-    [right mas_makeConstraints:^(MASConstraintMaker *make) {
+    leftimageview = [FLAnimatedImageView new];
+    leftimageview.image = backImage;
+    leftimageview.contentMode = UIViewContentModeScaleAspectFit;
+    [self addSubview:leftimageview];
+    [leftimageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(LENGTH(16));
         make.bottom.equalTo(ws).with.offset(-10);
         make.height.mas_equalTo(24);
@@ -115,7 +116,7 @@
         make.left.equalTo(ws).with.offset(0);
         make.bottom.equalTo(ws).with.offset(0);
         make.height.mas_equalTo(@44);
-        make.width.mas_equalTo(LENGTH(75));
+        make.width.mas_equalTo(LENGTH(16)+backImage.size.width);
     }];
 }
 #pragma mark ----------------- 中间title
@@ -262,12 +263,16 @@
 
 - (void)setDownlayer:(BOOL)downlayer{
     _downlayer = downlayer;
+    self.backgroundColor = [UIColor whiteColor];
     if (downlayer == YES) {
-        self.backgroundColor = [UIColor whiteColor];
         self.layer.shadowColor = RGB(0, 0, 0).CGColor;
         self.layer.shadowOffset = CGSizeMake(0,2);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
         self.layer.shadowRadius = 4;
         self.layer.shadowOpacity = 0.04;
     }
+}
+- (void)setLeftimage:(NSString *)leftimage{
+    _leftimage = leftimage;
+    leftimageview.image = UIIMAGE(leftimage);
 }
 @end

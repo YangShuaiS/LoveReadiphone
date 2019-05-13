@@ -30,7 +30,7 @@
     xian.image = UIIMAGE(@"线");
     [self addSubview:xian];
     [xian mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws).with.offset(ws.frames.size.height+LENGTH(2));
+        make.top.mas_equalTo(ws).with.offset(ws.frames.size.height+StatusBar+ws.frames.origin.y);
         make.left.mas_equalTo(ws).with.offset(LENGTH(50));
         make.width.mas_equalTo(LENGTH(46));
         make.height.mas_equalTo(LENGTH(48));
@@ -77,7 +77,7 @@
 }
 - (void)addArc {
     //中间镂空的矩形框
-    CGRect myRect =_frames;
+    CGRect myRect = CGRectMake(self.frames.origin.x, self.frames.origin.y+StatusBar, self.frames.size.width, self.frames.size.height);
     
     //背景
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:[UIScreen mainScreen].bounds cornerRadius:0];

@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     WS(ws);
-    @autoreleasepool {
+//    @autoreleasepool {
         self.view.backgroundColor = [UIColor whiteColor];
     scroview = [ZhiShiShuScroVuew new];
     scroview.nav = self.navigationController;
@@ -29,7 +29,7 @@
     [scroview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(ws.view);
     }];
-    }
+//    }
     scroview.itemid = _itemid;
     [scroview setBlock:^(CGRect frame) {
         
@@ -37,7 +37,21 @@
 
     // Do any additional setup after loading the view.
 }
+//- (void)qingchuhuancu:(UIControl*)Controls{
+//    for (UIControl * control in Controls.subviews) {
+//        if (control.subviews.count>0) {
+//            [self qingchuhuancu:control];
+//        }
+//        [control removeFromSuperview];
+//    }
+//}
 - (void)dealloc{
+//    for (UIControl * control in self.view.subviews) {
+//        if (control.subviews.count>0&&[control isKindOfClass:[BaseView class]]) {
+//            [self qingchuhuancu:control];
+//        }
+//        [control removeFromSuperview];
+//    }
     [self.view.superview removeFromSuperview];
     [self.view removeFromSuperview];
     [scroview.superview removeFromSuperview];

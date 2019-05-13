@@ -8,6 +8,7 @@
 
 #import "MMyViewController.h"
 #import "MMyViewCenterView.h"
+#import "MuBuyMembersView.h"
 
 
 #import "MMviewTableView.h"
@@ -27,6 +28,7 @@
     MyDeModel * model;
     MMviewTableView * tabview;
     MMyViewTopView * topview;
+    MuBuyMembersView * twoView;
     MMyViewCenterView * cenview;
 }
 
@@ -59,6 +61,9 @@
     topview = [MMyViewTopView new];
     [viewarray addObject:topview];
 
+    twoView = [MuBuyMembersView new];
+    [viewarray addObject:twoView];
+    
     cenview = [MMyViewCenterView new];
     [viewarray addObject:cenview];
     [cenview setBlock:^(NSInteger inter) {
@@ -182,6 +187,12 @@
 }
 
 - (void)UpData{
+//    NSCalendarUnit dayInfoUnits  = NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour |NSCalendarUnitMinute|NSCalendarUnitSecond;
+//    NSCalendar *gregorian = [[NSCalendar alloc]
+//                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//    model.userinfo.end_time = [gregorian components:dayInfoUnits fromDate:[BaseObject TimeStringForDate:model.userinfo.member_end_time]];
+//    model.userinfo.begin_time = [gregorian components:dayInfoUnits fromDate:[BaseObject TimeStringForDate:model.userinfo.member_begin_time]];
     topview.model = model.userinfo;
+    twoView.model = model.userinfo;
 }
 @end

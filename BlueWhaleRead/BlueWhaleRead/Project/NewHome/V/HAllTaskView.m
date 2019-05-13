@@ -44,11 +44,11 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake((WIDTH-LENGTH(14)*3)/2,LENGTH(104));
     //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = LENGTH(14);
+    flowLayout.minimumLineSpacing = LENGTH(10);
     //定义每个UICollectionView 纵向的间距
-    flowLayout.minimumInteritemSpacing = LENGTH(14);
+    flowLayout.minimumInteritemSpacing = LENGTH(10);
     //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(LENGTH(0), LENGTH(14), 0, LENGTH(14));//上左下右
+    flowLayout.sectionInset = UIEdgeInsetsMake(LENGTH(0), LENGTH(17), 0, LENGTH(17));//上左下右
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     collectview = [[HAllTaskCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];

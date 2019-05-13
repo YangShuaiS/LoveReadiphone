@@ -26,7 +26,7 @@
     [self addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws).with.offset(LENGTH(16));
-        make.width.and.height.mas_equalTo(LENGTH(40));
+        make.width.and.height.mas_equalTo(LENGTH(50));
         make.centerX.mas_equalTo(ws);
     }];
     

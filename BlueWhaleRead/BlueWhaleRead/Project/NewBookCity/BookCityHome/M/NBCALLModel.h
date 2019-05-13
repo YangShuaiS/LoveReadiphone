@@ -16,12 +16,13 @@
 @property (nonatomic, copy) NSString * message;
 @property (nonatomic, strong) NSMutableArray *catalogList;//分类
 @property (nonatomic, strong) NSMutableArray *rankList;//书单
+@property (nonatomic, strong) NSMutableArray *freeBookList;//免费阅读
 @property (nonatomic, strong) NSMutableArray *themeNew;//
 @property (nonatomic, strong) NSMutableArray *themeTop;//
 @property (nonatomic, strong) NSMutableArray *themeWeek;//
 
 @property (nonatomic, strong) NSMutableArray *weekList;//
-
+@property (nonatomic, strong) NSMutableArray *otherBookCatalogList;//其他人都看
 + (void)InitializeModel;
 @end
 

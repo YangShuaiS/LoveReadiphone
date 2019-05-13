@@ -17,7 +17,7 @@
         return @{@"badgeList":@"CityBadgeListModel"};
     }];
     [BookXQbookModel mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"badgeList":@"CityBadgeListModel",@"tags":@"BookDanModel"};
+        return @{@"badgeList":@"CityBadgeListModel",@"tags":@"NBCclassificationModel"};
     }];
 }
 @end

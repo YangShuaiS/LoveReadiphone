@@ -58,6 +58,7 @@
     if (_itemarray.count>indexPath.row) {
         cell.model = _itemarray[indexPath.row];
     }
+    cell.starehiden = _starehiden;
     return cell;
 }
 

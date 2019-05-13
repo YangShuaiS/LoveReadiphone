@@ -88,6 +88,6 @@
     collectView.itemarray = itemarray;
 }
 - (void)click{
-    self.pushblock(2);
+    self.pushblock(3);
 }
 @end

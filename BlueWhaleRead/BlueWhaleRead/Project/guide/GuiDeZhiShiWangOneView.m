@@ -41,7 +41,7 @@
     xian.image = UIIMAGE(@"线");
     [scrollView addSubview:xian];
     [xian mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->scrollView).with.offset(ws.frames.origin.y+ws.frames.size.height+LENGTH(2));
+        make.top.mas_equalTo(self->scrollView).with.offset(ws.frames.size.height+LENGTH(48)+StatusBar);
         make.left.mas_equalTo(ws).with.offset(LENGTH(94));
         make.width.mas_equalTo(LENGTH(35));
         make.height.mas_equalTo(LENGTH(57));
@@ -96,7 +96,7 @@
 }
 - (void)addArc {
     //中间镂空的矩形框
-    CGRect myRect =_frames;
+    CGRect myRect =CGRectMake(_frames.origin.x, LENGTH(48)+StatusBar, _frames.size.width, _frames.size.height);
     
     //背景
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:[UIScreen mainScreen].bounds cornerRadius:0];

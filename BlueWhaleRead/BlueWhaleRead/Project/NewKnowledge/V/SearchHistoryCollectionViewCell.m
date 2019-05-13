@@ -46,7 +46,7 @@
 
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes = [super preferredLayoutAttributesFittingAttributes:layoutAttributes];
-    CGRect rect = [label.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 60) options:NSStringDrawingTruncatesLastVisibleLine| NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:LENGTH(13)]} context:nil];
+    CGRect rect = [label.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, LENGTH(60)) options:NSStringDrawingTruncatesLastVisibleLine| NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:TextFontCu(13)} context:nil];
     rect.size.width +=LENGTH(28);
     rect.size.height = LENGTH(30);
     attributes.frame = rect;

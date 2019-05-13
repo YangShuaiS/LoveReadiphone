@@ -81,11 +81,13 @@
 - (void)addArc{
     //中间镂空的矩形框    
     //背景
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:[UIScreen mainScreen].bounds cornerRadius:0];
     //镂空
 //    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRect:myRect];
     //    [circlePath stroke];
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_frames.origin.x+LENGTH(20)+LENGTH(30), _frames.origin.y+LENGTH(110)*1.42+17, LENGTH(86), LENGTH(86)) cornerRadius:LENGTH(43)];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:[UIScreen mainScreen].bounds cornerRadius:0];
+
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(_frames.origin.x+LENGTH(110)+LENGTH(20), _frames.origin.y+17+LENGTH(28)+NavHeight, LENGTH(242), LENGTH(30))];
+
     [path appendPath:circlePath];
     [path setUsesEvenOddFillRule:YES];
     
@@ -95,6 +97,8 @@
     fillLayer.fillColor = [UIColor blackColor].CGColor;
     fillLayer.opacity = 0.7;
     [self.layer addSublayer:fillLayer];
+    
+    
     
 }
 @end

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZhiShiShuRelationCollectionVIew : BaseCollectionView
 @property(nonatomic,strong)NSMutableArray * itemarray;
-@property(nonatomic,strong)NSString * textcolor;
+@property(nonatomic,strong)UIColor * textcolor;
 
 @end
 

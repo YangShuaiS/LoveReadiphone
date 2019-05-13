@@ -8,7 +8,8 @@
 
 #import "ZhiShiShuShareView.h"
 #import <Photos/Photos.h>
-
+#import "ShareZhiShiTuView.h"
+#import "UIView+GZExtend.h"
 @implementation ZhiShiShuShareView{
     BaseView * backview;
     UIView * wxclick;
@@ -21,6 +22,8 @@
     SSDKPlatformType platformType;
 
     FenXiangModel * models;
+    NSTimer *timer;
+    ShareZhiShiTuView * view;
 }
 
 - (instancetype)init
@@ -201,23 +204,26 @@
 }
 
 - (void)wxhy{
+    if (hbimageview.image !=nil) {
         wxclick.userInteractionEnabled = NO;
         wxpyqclick.userInteractionEnabled = NO;
         hbclick.userInteractionEnabled = NO;
         [self wxhys:models];
+    }
 }
 
 - (void)wxviewpyq{
 
+    if (hbimageview.image !=nil) {
         wxclick.userInteractionEnabled = NO;
         wxpyqclick.userInteractionEnabled = NO;
         hbclick.userInteractionEnabled = NO;
         [self wxviewpyq:models];
+    }
 }
 - (void)wxhys:(FenXiangModel *)dic{
     platformType = SSDKPlatformSubTypeWechatSession;
     [self shareLinkhy:dic];
-    
 }
 - (void)wxviewpyq:(FenXiangModel *)dic{
     platformType = SSDKPlatformSubTypeWechatTimeline;
@@ -231,7 +237,7 @@
                                       title:models.title
                                         url:nil
                                  thumbImage:nil
-                                      image:URLIMAGE(models.share_img)
+                                      image:hbimageview.image
                                musicFileURL:nil
                                     extInfo:nil
                                    fileData:nil
@@ -251,7 +257,7 @@
                                       title:models.title
                                         url:nil
                                  thumbImage:nil
-                                      image:URLIMAGE(models.share_img)
+                                      image:hbimageview.image
                                musicFileURL:nil
                                     extInfo:nil
                                    fileData:nil
@@ -381,6 +387,32 @@
 
 - (void)loaddata{
     [self addview];
-    [hbimageview sd_setImageWithURL:URLIMAGE(models.share_preview_img)];
+    WS(ws);
+    if (_type == 1) {
+        view = [[ShareZhiShiTuView alloc] initWithType:0];
+    }else{
+        view = [[ShareZhiShiTuView alloc] initWithType:1];
+    }
+    
+    view.model= models;
+    view.zhishishuModel = _model;
+    [self addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(ws.mas_bottom).with.offset(HEIGHT);
+        make.centerX.mas_equalTo(ws);
+    }];
+    [view layoutIfNeeded];
+    [self upView];
+
+}
+- (void)upView{
+    if (view.now >=2) {
+        hbimageview.image = [view imageFromView];
+        [timer invalidate];
+        timer = nil;
+    }else{
+        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(upView) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:UITrackingRunLoopMode];
+    }
 }
 @end

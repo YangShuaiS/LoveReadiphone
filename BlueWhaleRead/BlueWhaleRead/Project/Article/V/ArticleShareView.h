@@ -7,11 +7,19 @@
 //
 
 #import "BaseView.h"
+#import "ArticleShareAnyOnelyView.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol ArticleShareViewDelegate <NSObject>
+@optional
+- (void)ArticleSharShouCang;
+- (void)ArticleSharDianZan;
+@end
 
 @interface ArticleShareView : BaseView
 @property(nonatomic,strong)LunBoTuXQModel * model;
+@property(nonatomic,strong)ZhiShiShuModel * ZSModel;
+
 @property(nonatomic,strong)NSString * Text;
 @property(nonatomic,strong)NSString * title;
 @property(nonatomic,strong)NSString * imageurl;
@@ -36,9 +44,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong) UIViewController * vc;
 @property(nonatomic,strong)NSString * atype;//
+@property(nonatomic,assign)NSInteger Type;//1文章类型知识图 2 知识体系类型知识图 3脉络图
 
 
 @property(nonatomic,assign)int inter;
+
+
+@property(nonatomic,strong)NSString * itemid;
+
+@property (nonatomic, weak) id <ArticleShareViewDelegate> delegateArticleShare;
+@property(nonatomic,strong)ArticleShareAnyOnelyView * dz;
+@property(nonatomic,strong)ArticleShareAnyOnelyView * sc;
+@property(nonatomic,assign)NSInteger sfzsw;//是否是知识网1
+
 
 @end
 

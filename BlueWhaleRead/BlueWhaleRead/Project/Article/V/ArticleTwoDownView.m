@@ -9,7 +9,7 @@
 #import "ArticleTwoDownView.h"
 #import "HomeModerateCollectView.h"
 
-#define itemHeight LENGTH(170)
+#define itemHeight LENGTH(170)+ LENGTH(19)
 
 @implementation ArticleTwoDownView{
     HomeModerateCollectView * collectView;
@@ -39,7 +39,7 @@
     //定义每个UICollectionView 纵向的间距
     flowLayout.minimumInteritemSpacing = LENGTH(0);
     //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(LENGTH(5), LENGTH(24), 0, LENGTH(24));//上左下右
+    flowLayout.sectionInset = UIEdgeInsetsMake(LENGTH(0), LENGTH(24), 0, LENGTH(24));//上左下右
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     collectView = [[HomeModerateCollectView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];

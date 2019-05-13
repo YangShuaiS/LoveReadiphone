@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSNumber * code;
 @property (nonatomic, copy) NSString * message;
 @property (nonatomic, strong) NSMutableArray *collectionList;
+@property (nonatomic, strong) NSMutableArray *proverbList;
 
 + (void)InitializeModel;
 @end

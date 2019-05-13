@@ -7,8 +7,8 @@
 //
 
 #import "BaseView.h"
-
-@interface NBClistAllView : BaseView
+#import "NBCBookDanCollectionView.h"
+@interface NBClistAllView : BaseView<NBCBookDanPageControlDelegate>
 @property(nonatomic,strong)NBCALLModel * model;
 
 @end

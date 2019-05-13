@@ -255,7 +255,8 @@
         default:
             break;
     }
-    if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[self class]]) {
+    
+    if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[self class]] || [[[BaseObject jsd_getCurrentViewController] class] isEqual:[NewBookXQSPViewController class]] || [[[BaseObject jsd_getCurrentViewController] class] isEqual:[NewBookReadViewController class]] || [[[BaseObject jsd_getCurrentViewController] class] isEqual:[NewMyClassViewController class]]) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             [self addGuideBookXqOneView];

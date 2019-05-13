@@ -7,7 +7,7 @@
 //
 
 #import "NBCweekReadingView.h"
-#import "NBCmenuView.h"
+//#import "NBCmenuView.h"
 #import "NBCMoreWeekViewController.h"
 #import "NBCThemeViewController.h"
 @implementation NBCweekReadingView
@@ -26,27 +26,27 @@
 }
 - (void)addview{
     WS(ws);
-    
-    NBCmenuView * menu = [NBCmenuView new];
-    menu.label.text = @"本周精读";
-    menu.styles = NBCmenuViewStyleimage;
-    [self addSubview:menu];
-    [menu mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.and.left.and.right.mas_equalTo(ws);
-    }];
-    [menu setBlock:^{
-        [ws push];
-    }];
+//
+//    NBCmenuView * menu = [NBCmenuView new];
+//    menu.label.text = @"本周精读";
+//    menu.styles = NBCmenuViewStyleimage;
+//    [self addSubview:menu];
+//    [menu mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.and.left.and.right.mas_equalTo(ws);
+//    }];
+//    [menu setBlock:^{
+//        [ws push];
+//    }];
     
     imageview = [UIImageView new];
     imageview.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(menu.mas_bottom);
-        make.left.mas_equalTo(ws).with.offset(LENGTH(22));
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(22));
-        make.bottom.mas_equalTo(-LENGTH(15));
-        make.height.mas_equalTo(LENGTH(108));
+        make.top.mas_equalTo(ws);
+        make.left.mas_equalTo(ws).with.offset(LENGTH(17));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(17));
+        make.bottom.mas_equalTo(-LENGTH(14));
+        make.height.mas_equalTo(LENGTH(110));
     }];
     imageview.layer.masksToBounds = YES;
     imageview.layer.cornerRadius = LENGTH(10);

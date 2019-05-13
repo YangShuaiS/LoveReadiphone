@@ -12,7 +12,7 @@
 
 + (void)InitializeModel{
     [LunBoTuXQModel mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"knowledgeGrade":@"knowledgeGradeModel",@"bookList":@"BookListModel",@"bannerKnowledgeList":@"NKRKnowledgeModel"};
+        return @{@"knowledgeGrade":@"knowledgeGradeModel",@"bookList":@"BookListModel",@"bannerKnowledgeList":@"NKRKnowledgeModel",@"studentCommentList":@"PingLunModel"};
     }];
 
 }

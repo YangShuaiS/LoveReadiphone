@@ -32,7 +32,7 @@
         }];
         NSInteger scale_screen = [UIScreen mainScreen].scale;
         if (imagarrya.count == 0) {
-            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor Alpha:1] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
+            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:_textcolor LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
             [self addSubview:label];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(ws).with.offset(LENGTH(5));
@@ -53,6 +53,8 @@
             [imageviewtop sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 UIImage *backgroundImage = image;
                 backgroundImage = [self scaleImage:backgroundImage toScale:1.0/scale_screen];
+                backgroundImage = [backgroundImage imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
+                
                 UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
                 [topview setBackgroundColor:backgroundColor];
                 CGFloat he = image.size.height/scale_screen;
@@ -63,7 +65,7 @@
                     make.height.mas_equalTo(he);
                 }];
             }];
-            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor Alpha:1] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
+            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:_textcolor LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
             [self addSubview:label];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(imageviewtop.mas_right).with.offset(LENGTH(5));
@@ -128,7 +130,7 @@
                     make.height.mas_equalTo(he);
                 }];
             }];
-            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor Alpha:1] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
+            BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:_textcolor LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
             [self addSubview:label];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(downview.mas_right).with.offset(LENGTH(5));

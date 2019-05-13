@@ -30,29 +30,29 @@
         UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     scroviewhd = YES;
-    self.backgroundColor = RGBA(0, 0, 0, 0.4);
-    BaseLabel * label = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:@"全部知识图"];
-    [self addSubview:label];
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws).with.offset(StatusBar);
-        make.left.mas_equalTo(ws).with.offset(LENGTH(23));
-        make.height.mas_equalTo(NavHeight-StatusBar);
-    }];
-    
-    UIView * xian = [UIView new];
-    xian.backgroundColor = [UIColor whiteColor];
-    [self addSubview:xian];
-    [xian mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(label.mas_bottom);
-        make.left.mas_equalTo(label);
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(17));
-        make.height.mas_equalTo(1);
-    }];
-    
+//    self.backgroundColor = RGBA(0, 0, 0, 0.4);
+//    BaseLabel * label = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:@"全部知识图"];
+//    [self addSubview:label];
+//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(ws).with.offset(StatusBar);
+//        make.left.mas_equalTo(ws).with.offset(LENGTH(23));
+//        make.height.mas_equalTo(NavHeight-StatusBar);
+//    }];
+//
+//    UIView * xian = [UIView new];
+//    xian.backgroundColor = [UIColor whiteColor];
+//    [self addSubview:xian];
+//    [xian mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(label.mas_bottom);
+//        make.left.mas_equalTo(label);
+//        make.right.mas_equalTo(ws).with.offset(-LENGTH(17));
+//        make.height.mas_equalTo(1);
+//    }];
+//
     
     scrollView = [UIScrollView new];
-    scrollView.backgroundColor = [UIColor clearColor];
-//    scrollView.backgroundColor = RGBA(0, 0, 0, 0.4);
+//    scrollView.backgroundColor = [UIColor clearColor];
+    scrollView.backgroundColor = RGBA(0, 0, 0, 0.4);
     scrollView.delegate = self;
     scrollView.userInteractionEnabled = YES;
     scrollView.bounces = NO;
@@ -61,7 +61,7 @@
     //    scrollView.alwaysBounceHorizontal = YES;
     [self addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws).with.insets(UIEdgeInsetsMake(NavHeight, 0, 0, 0));
+        make.edges.mas_equalTo(ws).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
     
     view = [ZhiShiShurightNriRongView new];
@@ -81,26 +81,27 @@
     if (alltopheights == 0) {
         
     }else{
-        WS(ws);
-        if (scrollView.contentOffset.y<=alltopheights) {
-            [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(ws).with.offset(NavHeight+ws.topheight-scrollView.contentOffset.y);
-            }];
-//            [view mas_updateConstraints:^(MASConstraintMaker *make) {
-//                make.top.mas_equalTo(self->scrollView).with.offset(-scrollView.contentOffset.y);
+//        WS(ws);
+//        if (scrollView.contentOffset.y<=alltopheights) {
+//            [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.top.mas_equalTo(ws).with.offset(NavHeight+ws.topheight-scrollView.contentOffset.y);
 //            }];
-        }else{
-            [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(ws).with.offset(NavHeight+ws.topheight-self->alltopheights);
-            }];
-//            [view mas_updateConstraints:^(MASConstraintMaker *make) {
-//                make.top.mas_equalTo(self->scrollView).with.offset(-self->alltopheights);
+////            [view mas_updateConstraints:^(MASConstraintMaker *make) {
+////                make.top.mas_equalTo(self->scrollView).with.offset(-scrollView.contentOffset.y);
+////            }];
+//        }else{
+//            [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.top.mas_equalTo(ws).with.offset(NavHeight+ws.topheight-self->alltopheights);
 //            }];
-        }
+////            [view mas_updateConstraints:^(MASConstraintMaker *make) {
+////                make.top.mas_equalTo(self->scrollView).with.offset(-self->alltopheights);
+////            }];
+//        }
     }
 }
 - (void)setItemarray:(NSMutableArray *)itemarray{
     _itemarray = itemarray;
+    view.backcolor = _backcolor;
     view.itemarray = itemarray;
 }
 - (void)setScroy:(CGFloat)scroy{
@@ -110,23 +111,23 @@
     if (alltopheights == 0) {
         
     }else{
-        if (scroy<=alltopheights) {
-            WS(ws);
-            [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(ws).with.offset(NavHeight+ws.topheight-scroy);
-            }];
-//                [view mas_updateConstraints:^(MASConstraintMaker *make) {
-//                    make.top.mas_equalTo(self->scrollView).with.offset(-scroy);
-//                }];
-        }else{
-            WS(ws);
-            [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(ws).with.offset(NavHeight+ws.topheight-self->alltopheights);
-            }];
-//            [view mas_updateConstraints:^(MASConstraintMaker *make) {
-//                make.top.mas_equalTo(self->scrollView).with.offset(-self->alltopheights);
+//        if (scroy<=alltopheights) {
+//            WS(ws);
+//            [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.top.mas_equalTo(ws).with.offset(NavHeight+ws.topheight-scroy);
 //            }];
-        }
+////                [view mas_updateConstraints:^(MASConstraintMaker *make) {
+////                    make.top.mas_equalTo(self->scrollView).with.offset(-scroy);
+////                }];
+//        }else{
+//            WS(ws);
+//            [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.top.mas_equalTo(ws).with.offset(NavHeight+ws.topheight-self->alltopheights);
+//            }];
+////            [view mas_updateConstraints:^(MASConstraintMaker *make) {
+////                make.top.mas_equalTo(self->scrollView).with.offset(-self->alltopheights);
+////            }];
+//        }
     }
 
 }

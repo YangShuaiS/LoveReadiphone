@@ -13,4 +13,6 @@
 
 @property(nonatomic,assign) NSInteger foundinter;//发现页无数据专用
 
+@property(nonatomic,assign) NSInteger starehiden;//是否隐藏心
+
 @end

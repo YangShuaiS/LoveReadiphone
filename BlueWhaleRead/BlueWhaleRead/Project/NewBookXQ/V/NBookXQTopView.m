@@ -11,7 +11,9 @@
 #import "JYEqualCellSpaceFlowLayout.h"
 #import "NewBookTopClickModel.h"
 #import "NBXQJJALLView.h"
+#import "StareMoreView.h"
 @implementation NBookXQTopView{
+    StareMoreView * stareview;
     FLAnimatedImageView * leftImageView;
     UIView * yy;
     BaseLabel * Title;
@@ -20,6 +22,7 @@
     BaseLabel * ydcs;
     NBTCollectionView * collectView;
     BaseLabel * jjxq;
+    BaseLabel * fenshu;
 }
 
 - (instancetype)init
@@ -76,20 +79,18 @@
         make.width.mas_equalTo(LENGTH(9));
     }];
     
-    Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(31,31,31) LabelFont:TextFont(20) TextAlignment:NSTextAlignmentLeft Text:ZHANWEIZI];
-    Title.numberOfLines = 1;
+    Title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(31,31,31) LabelFont:TextFont(20) TextAlignment:NSTextAlignmentLeft Text:@"书名"];
+    Title.numberOfLines = 2;
     [self addSubview:Title];
     
     
-    UIView * backxx = [UIView new];
-    backxx.backgroundColor = RGBA(0, 0, 0, 0.6);
-    [leftImageView addSubview:backxx];
-    
-    _jKStarDisplayView = [[JKStarDisplayView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
-    self.jKStarDisplayView.redValue = [@"0" floatValue];
-    [leftImageView addSubview:self.jKStarDisplayView];
-    [backxx mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.jKStarDisplayView).with.insets(UIEdgeInsetsMake(-LENGTH(2), -LENGTH(2), -LENGTH(2), -LENGTH(2)));
+    stareview = [StareMoreView new];
+    [self addSubview:stareview];
+    fenshu = [[BaseLabel alloc] initWithTxteColor:RGB(153, 153, 153) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentCenter Text:@"9.0"];
+    [self addSubview:fenshu];
+    [fenshu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self->stareview.mas_right).with.offset(LENGTH(8));
+        make.centerY.mas_equalTo(self->stareview);
     }];
     
     [Title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -98,19 +99,19 @@
         make.right.equalTo(ws).with.offset(-LENGTH(20));
     }];
     
-    [_jKStarDisplayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self->leftImageView.mas_right).with.offset(-LENGTH(2));
-        make.bottom.equalTo(self->leftImageView.mas_bottom).with.offset(-LENGTH(2));
-        make.width.mas_equalTo(LENGTH(80));
-        make.height.mas_equalTo(LENGTH(13));
+    [stareview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self->leftImageView.mas_right).with.offset(LENGTH(18));
+        make.top.equalTo(self->Title.mas_bottom).with.offset(LENGTH(6));
+        make.width.mas_equalTo(LENGTH(60));
     }];
+
     
     subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(153,153,153) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:@"作者："];
     [self addSubview:subtitle];
     
     [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self->leftImageView.mas_right).with.offset(LENGTH(18));
-        make.top.equalTo(self->Title.mas_bottom).with.offset(LENGTH(6));
+        make.top.equalTo(self->stareview.mas_bottom).with.offset(LENGTH(6));
         make.right.equalTo(ws).with.offset(-LENGTH(18));
     }];
     
@@ -132,7 +133,7 @@
     [self addSubview:ydcs];
     
     [huo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->dengji.mas_bottom).with.offset(LENGTH(60));
+        make.bottom.equalTo(self->leftImageView);
         make.left.equalTo(self->leftImageView.mas_right).with.offset(LENGTH(18));
         make.width.mas_equalTo(LENGTH(13.5));
         make.height.mas_equalTo(LENGTH(15.5));
@@ -247,8 +248,10 @@
     dengji.attributedText = AttributedStr;
     
     ydcs.text = [NSString stringWithFormat:@"%@次阅读",model.book.read_times];
-    self.jKStarDisplayView.redValue = [model.book.mark floatValue];
-    
+    stareview.redValue = [model.book.mark floatValue];
+    fenshu.text = [NSString stringWithFormat:@"%.1f",[model.book.mark floatValue]*2.0];
+
+
     NSMutableArray * arrays = [NSMutableArray array];
     for (int i = 0; i < 4; i ++) {
         NewBookTopClickModel * clickmodel = [NewBookTopClickModel new];

@@ -23,6 +23,10 @@
 @property(nonatomic,strong)MyClassTopModel * grade;//班级
 @property(nonatomic,strong)MyClassTopModel * school;//班级
 
-
+@property (nonatomic, assign) NSInteger is_member;//0未开通,1开通
+@property (nonatomic, copy) NSString * member_begin_time;
+@property (nonatomic, copy) NSString * member_end_time;
+@property (nonatomic, copy) NSDateComponents * begin_time;
+@property (nonatomic, copy) NSDateComponents * end_time;
 
 @end

@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger related_type;
 @property (nonatomic, copy) NSString * title;
 @property (nonatomic, copy) NSString * ssid;
+@property (nonatomic, copy) NSString * read_times;
+
+@property (nonatomic, copy) NSString * knowledge_width_img;
+@property (nonatomic, copy) NSString * knowledge_id;
 
 
 @property (nonatomic, assign) NSInteger inter;//0 小  1 大  

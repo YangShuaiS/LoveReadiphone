@@ -13,6 +13,8 @@ extern CGFloat NavHeight;
 extern CGFloat TabBarHeight;
 extern CGFloat StatusBar;
 extern CGFloat poinw;
+extern CGFloat iosVersionCode;
+
 
 
 extern NSString * ZSFWQ;
@@ -85,4 +87,8 @@ extern MeModel const * Me;
 
 //获取当前控制器
 + (UIViewController *)jsd_getCurrentViewController;
+//判断当前是不是可变数组
++ (BOOL)ArratClass:(id)array;
++ (UIImage*)TransformtoSize:(UIImage *)image;
+
 @end

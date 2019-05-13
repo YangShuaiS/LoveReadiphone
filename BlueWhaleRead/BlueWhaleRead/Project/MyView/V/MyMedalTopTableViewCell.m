@@ -39,7 +39,7 @@
 
 - (void)setModel:(MyBadgeListModel *)model{
     _model = model;
-    topView.model = _model;
+//    topView.model = _model;
 }
 
 - (void)awakeFromNib {

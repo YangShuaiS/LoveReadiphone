@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface FeedbackViewController : BaseViewController
+@interface FeedbackViewController : BaseViewController<UITextFieldDelegate>
+@property (strong, nonatomic) UITextField *textField;
 
 @end

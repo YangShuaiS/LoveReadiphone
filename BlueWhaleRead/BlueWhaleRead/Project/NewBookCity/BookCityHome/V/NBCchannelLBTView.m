@@ -9,8 +9,7 @@
 #import "NBCchannelLBTView.h"
 #import "NBCThemeViewController.h"
 #import "NBCMoreChannelViewController.h"
-#import "NBCSearchView.h"
-
+#import "LBTCollectionViewCell.h"
 @interface NBCchannelLBTView ()<SDCycleScrollViewDelegate>
 
 @end
@@ -18,8 +17,6 @@
 @implementation NBCchannelLBTView{
     SDCycleScrollView * cycleScrollerView;
     BaseLabel * label;
-    NBCSearchView * search;
-
 }
 
 - (instancetype)init
@@ -35,11 +32,11 @@
     //轮播图
     cycleScrollerView = [SDCycleScrollView new];
     cycleScrollerView.delegate = self;
-    cycleScrollerView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
-    cycleScrollerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-    cycleScrollerView.pageControlDotSize = CGSizeMake(20, 20);;
-    cycleScrollerView.currentPageDotColor = RGB(130, 217, 216);// 自定义分页控件小圆标颜色
-    cycleScrollerView.pageDotColor = RGBA(0xaa, 0xaa, 0xaa, 0.6);
+    cycleScrollerView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
+//    cycleScrollerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+//    cycleScrollerView.pageControlDotSize = CGSizeMake(20, 20);;
+//    cycleScrollerView.currentPageDotColor = RGB(130, 217, 216);// 自定义分页控件小圆标颜色
+//    cycleScrollerView.pageDotColor = RGBA(0xaa, 0xaa, 0xaa, 0.6);
     cycleScrollerView.autoScrollTimeInterval = 3;
     [ws addSubview:cycleScrollerView];
     
@@ -48,14 +45,9 @@
         make.left.equalTo(ws).with.offset(0);
         make.top.equalTo(ws).with.offset(0);
         make.bottom.equalTo(ws).with.offset(0);
-        make.height.equalTo(ws.mas_width).multipliedBy(0.573333333);
+        make.height.equalTo(ws.mas_width).multipliedBy(0.4692082);
     }];
     
-    search = [NBCSearchView new];
-    [self addSubview:search];
-    [search mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.and.right.and.left.mas_equalTo(ws);
-    }];
     
     label = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentCenter Text:@"全部专题"];
     label.backgroundColor = RGB(91,199,198);
@@ -105,6 +97,18 @@
     vc.bannerid = model.ssid;
     vc.imageurl = [NSString stringWithFormat:@"%@%@",IMAGEURL,model.banner_img];
     [[self viewController].navigationController pushViewController:vc animated:YES];
+}
+- (Class)customCollectionViewCellClassForCycleScrollView:(SDCycleScrollView *)view{
+    if (view != cycleScrollerView) {
+        return nil;
+    }
+    return [LBTCollectionViewCell class];
+}
+
+- (void)setupCustomCell:(UICollectionViewCell *)cell forIndex:(NSInteger)index cycleScrollView:(SDCycleScrollView *)view
+{
+    LBTCollectionViewCell *myCell = (LBTCollectionViewCell *)cell;
+    myCell.modelZT = _model.themeTop[index];
 }
 
 @end

@@ -24,6 +24,8 @@
     //设置navigationbar的半透明
     [self.navigationBar setTranslucent:NO];
     self.navigationBar.hidden = YES;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+
 //    self.navigationBar.barTintColor = RGB(0x26, 0x60, 0xad);
     UIView *statusBar = [[UIApplication sharedApplication]  valueForKey:@"statusBar"];
     if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {

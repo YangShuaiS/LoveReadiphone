@@ -29,10 +29,27 @@
 @property(nonatomic,strong)NSMutableArray * arrow;
 @property(nonatomic,strong)NSMutableArray * click;//最下面数组
 
-@property (nonatomic, assign) NSInteger is_collect;//0未收昂
 
 
 @property (nonatomic, strong) NSMutableArray *knowledgeGrade;//体系title
 @property (nonatomic, strong) NSMutableArray *bookList;//书
 @property (nonatomic, strong) NSMutableArray *bannerKnowledgeList;//相关体系
+@property (nonatomic, strong) NSMutableArray *studentCommentList;//评论mmodel
+
+@property (nonatomic, assign) NSInteger is_collect;//0未收昂
+@property (nonatomic, assign) NSInteger is_like;
+@property(nonatomic,assign)NSInteger like_num;//点赞
+@property(nonatomic,assign)NSInteger collection_num;//收藏个数
+
+@property(nonatomic,strong)NSString * bg_part_color;//
+@property(nonatomic,strong)NSString * head_transparency;//
+@property(nonatomic,strong)NSString * right_transparency;//
+@property(nonatomic,strong)NSString * bottom_transparency;//
+
+
+//@property(nonatomic,strong)NSString * bottom_transparency;//
+@property(nonatomic,strong)NSString * knowledge_img;//
+@property(nonatomic,strong)NSString * knowledge_img1;//
+@property(nonatomic,strong)NSString * knowledge_width_img;//
+
 @end

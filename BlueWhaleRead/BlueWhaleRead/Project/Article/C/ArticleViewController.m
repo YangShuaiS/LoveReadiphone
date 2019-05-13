@@ -11,19 +11,21 @@
 #import "ArticleScroTopView.h"
 #import "ArticleScroDownView.h"
 #import "FenXiangView.h"
-@interface ArticleViewController ()<NavDelegate,UIScrollViewDelegate>
+#import "CommentsView.h"
+#import "CommentsShuRuKuangView.h"
+@interface ArticleViewController ()<NavDelegate,UIScrollViewDelegate,UITableViewDelegate,CommentsViewDelegate,ArticleScroTopViewViewDelegate>
 
 @end
 
 @implementation ArticleViewController{
+    
     ArticleTopView * topView;
-    UIScrollView * scrollView;
+    UIScrollView * scrollViews;
     ArticleScroTopView * scrotopview;
     ArticleScroDownView * scrodownview;
     
-    FLAnimatedImageView * sharefriend;
-    FLAnimatedImageView * ShouCang;
     LunBoTuXQModel *nmodel;
+    CommentsView * comentsview;
 
 }
 #pragma mark --------------------  导航栏以及代理
@@ -41,32 +43,6 @@
         make.height.mas_equalTo(NavHeight);
     }];
     self.navtive.downlayer = YES;
-
-    sharefriend = [FLAnimatedImageView new];
-    sharefriend.image = UIIMAGE(@"组 928");
-    sharefriend.contentMode = UIViewContentModeScaleAspectFit;
-    [self.navtive addSubview:sharefriend];
-    [sharefriend mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
-        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);
-        make.width.and.height.mas_equalTo(24);
-    }];
-    sharefriend.userInteractionEnabled = NO;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FenXiang)];
-    [sharefriend addGestureRecognizer:tap];
-    
-    ShouCang = [FLAnimatedImageView new];
-    ShouCang.image = UIIMAGE(@"收藏0");
-    ShouCang.contentMode = UIViewContentModeScaleAspectFit;
-    [self.navtive addSubview:ShouCang];
-    [ShouCang mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20-24-10);
-        make.top.mas_equalTo(ws.navtive.mas_top).with.offset(StatusBar+10);
-        make.width.and.height.mas_equalTo(24);
-    }];
-    ShouCang.userInteractionEnabled = NO;
-    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ShouCang)];
-    [ShouCang addGestureRecognizer:tap1];
 }
 
 - (void)NavLeftClick{
@@ -81,13 +57,6 @@
 
 - (void)NavRightClick {
     
-}
-- (void)ShouCang{
-    if (nmodel.is_collect == 0) {
-        [self shoucang];
-    }else{
-        [self yichushooucang];
-    }
 }
 
 - (void)FenXiang{
@@ -109,34 +78,7 @@
     }];
     
 }
-- (void)shoucang{
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_SHOUCANGZHISHITU];
-    NSDictionary * dic = @{@"studentid":Me.ssid,@"collectionid":_itemid,@"collection_type":@"1"};
-    [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
-        if (responseObject) {
-            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
-            if ([m.code isEqual:@200]) {
-                self->ShouCang.image = UIIMAGE(@"收藏");
-                self->nmodel.is_collect = 1;
-            }
-        }
-    }];
-}
-- (void)yichushooucang{
-    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_YICHUSHOUCANGZHISHITU];
-    NSDictionary * dic = @{@"delids":_itemid,@"studentid":Me.ssid};
-    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
-        if (responseObject) {
-            LunBoTuXQModel * model = [LunBoTuXQModel mj_objectWithKeyValues:responseObject];
-            if ([model.code isEqual:@200]) {
-                self->ShouCang.image = UIIMAGE(@"收藏0");
-                self->nmodel.is_collect = 0;
-            }
-        }else{
-            
-        }
-    }];
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -152,10 +94,11 @@
     }];
     topView.alpha = 0;
     
-    scrollView = [UIScrollView new];
-    scrollView.delegate = self;
-    [self.view addSubview:scrollView];
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    scrollViews = [UIScrollView new];
+    scrollViews.delegate = self;
+    scrollViews.bounces = NO;
+    [self.view addSubview:scrollViews];
+    [scrollViews mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(ws.navtive.mas_bottom).with.offset(0);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
@@ -163,19 +106,24 @@
     }];
     
     scrotopview = [ArticleScroTopView new];
-    [scrollView addSubview:scrotopview];
+    [scrollViews addSubview:scrotopview];
     [scrotopview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->scrollView);
+        make.top.mas_equalTo(self->scrollViews);
         make.left.and.right.mas_equalTo(ws.view);
     }];
     
     scrodownview = [ArticleScroDownView new];
-    [scrollView addSubview:scrodownview];
+    scrodownview.itemid = _itemid;
+    [scrollViews addSubview:scrodownview];
     [scrodownview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->scrotopview.mas_bottom).with.offset(LENGTH(5));
+        make.top.mas_equalTo(self->scrotopview.mas_bottom);
         make.left.and.right.mas_equalTo(ws.view);
-        make.bottom.mas_equalTo(self->scrollView);
+        make.bottom.mas_equalTo(self->scrollViews);
     }];
+    scrodownview.sharetype = @"9";
+    scrodownview.Type = 1;
+    scrodownview.delegateArticleScroTop = self;
+
     
     [self.view addSubview:topView];
     topView.layer.shadowColor = RGB(0, 0, 0).CGColor;
@@ -183,6 +131,10 @@
     topView.layer.shadowRadius = LENGTH(7);
     topView.layer.shadowOpacity = 0.05;
     
+    scrodownview.comlist.tableview.delegate = self;
+
+    
+
 }
 
 - (void)loadupview{
@@ -205,27 +157,25 @@
 - (void)updata:(LunBoTuXQModel *)model{
 //    self.navtive.title = model.banner.title;
     nmodel = model;
-    sharefriend.userInteractionEnabled = YES;
-    ShouCang.userInteractionEnabled = YES;
     self.navtive.title = @"";
     topView.model = model;
     scrodownview.model = model;
-    WS(ws);
-    if ([model.banner.is_share isEqualToString:@"0"]) {
-        sharefriend.userInteractionEnabled = NO;
-        sharefriend.image = UIIMAGE(@"");
-        [sharefriend removeFromSuperview];
-        [ShouCang mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(ws.navtive.mas_right).with.offset(-20);
-        }];
-    }
-    if (model.is_collect == 0) {
-        ShouCang.image = UIIMAGE(@"收藏0");
-    }else{
-        ShouCang.image = UIIMAGE(@"收藏");
-    }
-    scrotopview.model = model;
 
+    scrotopview.model = model;
+    
+    if ([model.banner.is_share isEqualToString:@"0"]) {
+        comentsview = [[CommentsView alloc] initWithBackColor:RGBA(255, 255, 255, 1) Style:CommentsStyle1 Original:0];
+    }else{
+        comentsview = [[CommentsView alloc] initWithBackColor:RGBA(255, 255, 255, 1) Style:CommentsStyle1 Original:1];
+    }
+    comentsview.delegateComments = self;
+    [self.view addSubview:comentsview];
+    WS(ws);
+    [comentsview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.and.bottom.mas_equalTo(ws.view);
+        make.height.mas_equalTo(TabBarHeight);
+    }];
+    comentsview.model = model;
 
 }
 /*
@@ -239,6 +189,8 @@
  */
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView == scrollViews) {
+
     if (scrollView.contentOffset.y > scrotopview.sizeheight) {
         if (topView.alpha == 0) {
             topView.alpha = 1;
@@ -258,6 +210,162 @@
             self.navtive.title = @"";
         }
     }
+    }
+    
+    if (scrollView == scrodownview.comlist.tableview) {
+//        NSLog(@"%f",scrollView.contentOffset.y);
+    }
 }
 
+- (void)CommentsShouCang{
+    if (nmodel.is_collect == 0) {
+        [self shoucang];
+    }else{
+        [self yichushooucang];
+    }
+}
+- (void)shoucang{
+    WS(ws);
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_SHOUCANGZHISHITU];
+    NSDictionary * dic = @{@"studentid":Me.ssid,@"collectionid":_itemid,@"collection_type":@"1"};
+    [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                self->nmodel.collection_num++;
+                [self->scrodownview.share.sc ClickDianZanWithImage:@"收藏-成功" Title:[NSString stringWithFormat:@"%ld",self->nmodel.collection_num]];
+                self->nmodel.is_collect = 1;
+                self->comentsview.model = self->nmodel;
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[[UIApplication sharedApplication] delegate] window]  animated:YES];
+                hud.label.text = @"收藏成功";
+                hud.mode = MBProgressHUDModeCustomView;
+                UIImage *image = [[UIImage imageNamed:@"收藏成功"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                UIImageView *imgView = [[UIImageView alloc] initWithImage:image];
+                hud.customView = imgView;
+                hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+                hud.bezelView.color = [UIColor colorWithWhite:0.0 alpha:0.8];
+                //文字颜色
+                hud.contentColor = [UIColor whiteColor];
+                hud.animationType = MBProgressHUDAnimationFade;
+                [hud hideAnimated:YES afterDelay:1];
+            }
+        }
+    }];
+}
+- (void)yichushooucang{
+    WS(ws);
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_YICHUSHOUCANGZHISHITU];
+    NSDictionary * dic = @{@"delids":_itemid,@"studentid":Me.ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            LunBoTuXQModel * model = [LunBoTuXQModel mj_objectWithKeyValues:responseObject];
+            if ([model.code isEqual:@200]) {
+                self->nmodel.collection_num--;
+                [self->scrodownview.share.sc ClickDianZanWithImage:@"收藏-" Title:[NSString stringWithFormat:@"%ld",self->nmodel.collection_num]];
+                self->nmodel.is_collect = 0;
+                self->comentsview.model = self->nmodel;
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[[UIApplication sharedApplication] delegate] window]  animated:YES];
+                hud.label.text = @"取消收藏";
+                hud.mode = MBProgressHUDModeCustomView;
+                UIImage *image = [[UIImage imageNamed:@"取消收藏"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                UIImageView *imgView = [[UIImageView alloc] initWithImage:image];
+                hud.customView = imgView;
+                hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+                hud.bezelView.color = [UIColor colorWithWhite:0.0 alpha:0.8];
+                //文字颜色
+                hud.contentColor = [UIColor whiteColor];
+                hud.animationType = MBProgressHUDAnimationFade;
+                [hud hideAnimated:YES afterDelay:1];
+            }
+        }else{
+            
+        }
+    }];
+}
+
+- (void)CommentsDianZan{
+    if (nmodel !=nil) {
+        if (nmodel.is_like == 0) {
+            [self dianzan];
+        }else{
+            [self quxiaodainzan];
+        }
+    }
+}
+- (void)CommentsFenXiang{
+    [self FenXiang];
+}
+- (void)CommentsPingLun{
+    if (scrodownview.comlist.frame.size.height>=HEIGHT-NavHeight) {
+            [scrollViews setContentOffset:CGPointMake(0, scrollViews.contentSize.height-scrodownview.comlist.frame.size.height) animated:YES];
+    }else{
+            [scrollViews setContentOffset:CGPointMake(0, scrollViews.contentSize.height-(HEIGHT - NavHeight)) animated:YES];
+    }
+}
+- (void)CommentsShuRuKuang{
+    WS(ws);
+    CommentsShuRuKuangView * backview = [CommentsShuRuKuangView new];
+    if ([nmodel.banner.is_share isEqualToString:@"0"]) {
+        backview.sfShare = 1;
+    }else{
+        
+    }
+    backview.nmodel = nmodel;
+    backview.comment_type = 1;
+    backview.itemid = _itemid;
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:backview];
+    [backview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([[[UIApplication sharedApplication] delegate] window]);
+    }];
+    [backview setBlocks:^(PingLunModel * _Nonnull model) {
+        [ws UpCommentsList:model];
+    }];
+}
+
+- (void)UpCommentsList:(PingLunModel*)model{
+    [nmodel.studentCommentList insertObject:model atIndex:0];
+    scrodownview.model = nmodel;
+
+}
+#pragma mark ---------- ArticleShareViewDele
+- (void)ArticleScroTopViewShouCang{
+    self->comentsview.model = self->nmodel;
+}
+- (void)ArticleScroTopViewDianZan{
+    self->comentsview.model = self->nmodel;
+}
+
+
+
+
+#pragma mark ------------------- f点赞
+- (void)dianzan{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_ADDDIANZAN];
+    NSDictionary * dic = @{@"studentid":Me.ssid,@"likeid":_itemid,@"like_type":@"1"};
+    [[BaseAppRequestManager manager] PostNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];
+            if ([m.code isEqual:@200]) {
+                self->nmodel.is_like = 1;
+                self->nmodel.like_num ++;
+                [self->scrodownview.share.dz ClickDianZanWithImage:@"点赞-成功" Title:[NSString stringWithFormat:@"%ld",self->nmodel.like_num]];
+                self->comentsview.model = self->nmodel;
+            }
+        }
+    }];
+}
+
+- (void)quxiaodainzan{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_REMODIANZAN];
+    NSDictionary * dic = @{@"delid":_itemid,@"studentid":Me.ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        LunBoTuXQModel * model = [LunBoTuXQModel mj_objectWithKeyValues:responseObject];
+        if ([model.code isEqual:@200]) {
+            self->nmodel.is_like = 0;
+            self->nmodel.like_num --;
+            [self->scrodownview.share.dz ClickDianZanWithImage:@"点赞" Title:[NSString stringWithFormat:@"%ld",self->nmodel.like_num]];
+            self->comentsview.model = self->nmodel;
+        }
+    }];
+}
 @end

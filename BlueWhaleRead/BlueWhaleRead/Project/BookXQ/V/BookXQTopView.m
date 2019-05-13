@@ -10,8 +10,11 @@
 #import "BookXQTopView.h"
 #import "BlueWhaleRead-Swift.h"
 #import "HuiBenViewController.h"
+#import "StareMoreView.h"
+
 @implementation BookXQTopView{
     FLAnimatedImageView * leftImageView;
+    StareMoreView * stareview;
     BaseLabel * Title;
     BaseLabel * subtitle;
 
@@ -113,25 +116,18 @@
     [self addSubview:Title];
     
     
-    UIView * backxx = [UIView new];
-    backxx.backgroundColor = RGBA(0, 0, 0, 0.6);
-    [leftImageView addSubview:backxx];
-    
-    _jKStarDisplayView = [[JKStarDisplayView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
-    self.jKStarDisplayView.redValue = [@"0" floatValue];
-    [leftImageView addSubview:self.jKStarDisplayView];
-    [backxx mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.jKStarDisplayView).with.insets(UIEdgeInsetsMake(-LENGTH(2), -LENGTH(2), -LENGTH(2), -LENGTH(2)));
-    }];
+    stareview = [StareMoreView new];
+    [self addSubview:stareview];
+
 
     
-    subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:ZHANWEIZI];
+    subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@"书名"];
     [self addSubview:subtitle];
     
     BaseLabel * DJ = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@"阅读分级："];
     [self addSubview:DJ];
     
-    dengji = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(4,51,50) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@"999"];
+    dengji = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(4,51,50) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@"0"];
     [self addSubview:dengji];
     
     BaseLabel * NL = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@"分值："];
@@ -173,17 +169,17 @@
         make.right.equalTo(ws).with.offset(-LENGTH(14));
 //        make.height.mas_equalTo(LENGTH(50));
     }];
-
-    [_jKStarDisplayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self->leftImageView.mas_right).with.offset(-LENGTH(2));
-        make.bottom.equalTo(self->leftImageView.mas_bottom).with.offset(-LENGTH(2));
-        make.width.mas_equalTo(LENGTH(80));
-        make.height.mas_equalTo(LENGTH(13));
+    
+    [stareview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self->leftImageView.mas_right).with.offset(LENGTH(20));
+        make.top.equalTo(self->Title.mas_bottom).with.offset(LENGTH(4));
+        make.width.mas_equalTo(LENGTH(60));
     }];
+
 
     [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self->leftImageView.mas_right).with.offset(LENGTH(20));
-        make.top.equalTo(self->Title.mas_bottom).with.offset(LENGTH(10));
+        make.top.equalTo(self->stareview.mas_bottom).with.offset(LENGTH(5));
         make.right.equalTo(ws).with.offset(-LENGTH(14));
     }];
 
@@ -474,7 +470,7 @@
         zxyd.hidden = YES;
     }
     Title.text = model.name;
-    self.jKStarDisplayView.redValue = [model.mark floatValue];
+    stareview.redValue = [model.mark floatValue];
 
     subtitle.text =[NSString stringWithFormat:@"%@",model.author];
     dengji.text = [NSString stringWithFormat:@"%@",model.levels];

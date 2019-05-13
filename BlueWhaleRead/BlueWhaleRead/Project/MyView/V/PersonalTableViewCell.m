@@ -12,10 +12,12 @@
 @implementation PersonalTableViewCell{
     PersonTopView * topview;
     PersonDownView * downView;
+    ViewStyle laststyles;
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier ViewStyle:(ViewStyle)styles{
     self =  [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        laststyles = styles;
         [self addview:styles];
     }
     return self;
@@ -36,6 +38,12 @@
             case ViewDownSwith:
             [self down];
             [self swith];
+            break;
+            case ViewDownImage:
+            [self down];
+            [self addimage];
+            [self downclick];
+
             break;
         default:
             break;
@@ -110,7 +118,9 @@
 
 - (void)setSubtitle:(NSString *)subtitle{
     _subtitle = subtitle;
-    downView.subtitle = subtitle;
+    if (laststyles!=ViewDownImage) {
+        downView.subtitle = subtitle;
+    }
 }
 - (void)setNav:(UINavigationController *)nav{
     if(topview!=nil){
@@ -124,6 +134,22 @@
     if(topview!=nil){
         topview.baseview = baseview;
     }
+}
+
+- (void)addimage{
+    WS(ws);
+    UIImageView * imageVIew =[UIImageView new];
+    imageVIew.backgroundColor = RGB(170, 170, 170);
+    imageVIew.contentMode = UIViewContentModeScaleAspectFit;
+    imageVIew.layer.masksToBounds = YES;
+    imageVIew.layer.cornerRadius = LENGTH(19);
+    [self addSubview:imageVIew];
+    [imageVIew mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(50));
+        make.centerY.mas_equalTo(ws);
+        make.size.mas_equalTo(CGSizeMake(LENGTH(38), LENGTH(38)));
+    }];
+    [imageVIew sd_setImageWithURL:URLIMAGE(Me.avatar)];
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

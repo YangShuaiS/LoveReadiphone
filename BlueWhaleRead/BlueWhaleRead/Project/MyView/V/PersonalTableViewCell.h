@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger, ViewStyle) {
     ViewDownStyle = 1, //下面视图
     ViewDownClickStyle = 2,//可点击
     ViewDownSwith = 3,//swith
+    ViewDownImage = 4,//图片
 };
 @interface PersonalTableViewCell : BaseTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier ViewStyle:(ViewStyle)styles;

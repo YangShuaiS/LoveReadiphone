@@ -10,13 +10,11 @@
 
 @implementation MyFavoritesDownView{
     UIImageView * dg;
-    NSInteger inter;
 }
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        inter = 0;
         [self addview];
     }
     return self;
@@ -85,23 +83,29 @@
     [shanchu addGestureRecognizer:shanchutap];
 }
 - (void)quanxuan{
-    if (inter == 0) {
+    if (_qxzt == 0) {
         dg.image = UIIMAGE(@"全选");
-        inter = 1;
+        _qxzt = 1;
     }else{
-        inter = 0;
+        _qxzt = 0;
         dg.image = UIIMAGE(@"");
     }
     self.block();
 }
-
+- (void)setQxzt:(NSInteger)qxzt{
+    _qxzt = qxzt;
+    if (qxzt == 0) {
+        dg.image = UIIMAGE(@"");
+    }else{
+        
+    }
+}
 - (void)shanchu{
     WS(ws);
     UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要删除该收藏吗？" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction * okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [ws yichushooucang];
-        self->inter = 0;
         self->dg.image = UIIMAGE(@"");
     }];
     [alertController addAction:cancelAction];
@@ -112,17 +116,32 @@
 - (void)yichushooucang{
     NSString * str = @"";
     NSInteger inter = 0;
-    for (int i = 0; i < _itemarray.count; i++) {
-        NKRKnowledgeModel * model = _itemarray[i];
-        if (model.duigou == 1) {
-            if (inter == 0) {
-                inter ++;
-                str = [str stringByAppendingString:model.ssid];
-            }else{
-                str = [str stringByAppendingString:[NSString stringWithFormat:@",%@",model.ssid]];
+    if (_nowinter == 0) {
+        for (int i = 0; i < _model.collectionList.count; i++) {
+            NKRKnowledgeModel * model = _model.collectionList[i];
+            if (model.duigou == 1) {
+                if (inter == 0) {
+                    inter ++;
+                    str = [str stringByAppendingString:model.ssid];
+                }else{
+                    str = [str stringByAppendingString:[NSString stringWithFormat:@",%@",model.ssid]];
+                }
+            }
+        }
+    }else{
+        for (int i = 0; i < _model.proverbList.count; i++) {
+            NHProverbModel * model = _model.proverbList[i];
+            if (model.clicksatatus == 1) {
+                if (inter == 0) {
+                    inter ++;
+                    str = [str stringByAppendingString:model.ssid];
+                }else{
+                    str = [str stringByAppendingString:[NSString stringWithFormat:@",%@",model.ssid]];
+                }
             }
         }
     }
+
 
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_YICHUSHOUCANGZHISHITU];
     NSDictionary * dic = @{@"delids":str,@"studentid":Me.ssid};

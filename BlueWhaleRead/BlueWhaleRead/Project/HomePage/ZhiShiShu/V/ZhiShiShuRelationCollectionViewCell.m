@@ -42,7 +42,7 @@
 - (void)setModel:(ZhiShiShuViTypeModel *)model{
     _model = model;
     view.backgroundColor = [BaseObject colorWithHexString:model.color Alpha:1];
-    label.textColor = [BaseObject colorWithHexString:_textcolor Alpha:1];
+    label.textColor = _textcolor;
     label.text = model.name;
 
 }

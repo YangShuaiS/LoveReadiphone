@@ -154,8 +154,23 @@
         self.block(textField.text);
         NSMutableArray * arrays = [NSMutableArray array];
         [arrays addObject:textField.text];
+//        [arrays insertObject:textField.text atIndex:0];
         NSMutableArray * array = [[NSUserDefaults standardUserDefaults] objectForKey:SEARCHHISTORY];
         [arrays addObjectsFromArray:array];
+        for (NSInteger x = 0; x < arrays.count; x++) {
+            
+            for (NSInteger y = x+1;y < arrays.count; y++) {
+                NSString * one =arrays[x];
+                NSString * two =arrays[y];
+                if ([one isEqualToString:two]) {
+                    [arrays removeObject:arrays[y]];
+                }
+            }
+        }
+        [arrays removeObject:textField.text];
+                [arrays insertObject:textField.text atIndex:0];
+//        [arrays addObject:textField.text];
+
         [[NSUserDefaults standardUserDefaults] setObject:arrays forKey:SEARCHHISTORY];
         [[NSUserDefaults standardUserDefaults] synchronize];
         

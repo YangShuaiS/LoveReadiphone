@@ -44,18 +44,16 @@
 //#define IMAGEURL @"http://39.106.100.235:8081/"
 //#define IMAGEURL @"http://192.168.1.221:8080/"
 
-#define IMAGEURL @"http://192.168.1.221:8081/"
+//#define IMAGEURL @"http://192.168.1.221:8081/"
 //#define IMAGEURL @"http://119.90.89.88:8081/"
-//#define IMAGEURL @"https://tiantianaidu.com/"
+#define IMAGEURL @"https://tiantianaidu.com/"
 
-//#define ZSTX @"https://knowledge.tiantianaidu.com/"//
-#define ZSTX @"http://192.168.1.231:9003/"//最新内网
-//#define ZSTX @"http://192.168.1.231:9001/"//内网
-//#define ZSTX @"http://119.90.89.88:9001/"//外网
-//#define ZSTX @"http://192.168.1.102/knowledge/public/"//
+#define ZSTX @"https://knowledge.tiantianaidu.com/"//
+//#define ZSTX @"http://192.168.1.231:9003/"//最新内网
+//#define ZSTX @"http://119.90.89.88:9003/"//外网
 
-#define ZSTXIMAGEURL @"http://192.168.1.231:9003/"
-//#define ZSTXIMAGEURL @"https://tiantianaidu.com/"
+//#define ZSTXIMAGEURL @"http://192.168.1.231:9003/"
+#define ZSTXIMAGEURL @"https://tiantianaidu.com/"
 
 
 #define JK_NOWBANBENHAO @"api/v1.0/returnVersion"//获取当前版本号
@@ -96,6 +94,10 @@
 #define JK_MYSHOUCANG @"api/v1.0/myCollection"//我的收藏
 #define JK_BOOKXQZSWTUIJIAN @"api/v1.0/bookBannerKnowledgeList"//书详情相关推荐
 #define JK_PROVERBLIST @"api/v1.0/proverbList"//言语列表
+#define JK_FBPINGLUN @"api/v1.0/addStudentComment"//发表评论
+#define JK_REMOPINGLUN @"api/v1.0/delStudentComment"//删除评论
+#define JK_ADDDIANZAN @"api/v1.0/addStudentLike"//添加点赞
+#define JK_REMODIANZAN @"api/v1.0/deleteStudentLike"//移除点赞
 
 
 
@@ -180,6 +182,16 @@
 #define JK_NBCHOME @"api/v1.0/bookPage"//新书城home
 #define JK_NBCZT @"api/v1.0/themeList"//专题
 
+#define JK_MYMEMBER @"api/v1.0/myMember"//我的会员
+#define JK_YAPQING @"api/v1.0/invitedStudent"//邀请
+#define JK_BUYXIADAN @"api/v1.0/addMemberOrder"//下单
+#define JK_MYZHANGHU @"api/v1.0/myMemberPage"//我的账户
+#define JK_IospayNotifyUrl @"api/v1.0/IospayNotifyUrl"//支付成功回调
+#define JK_exchangeProduct @"api/v1.0/exchangeProduct"//兑换码
+#define JK_getUserInfo @"api/v1.0/getUserInfo"//刷新个人数据
+
+
+
 // 相对iphone6S 屏幕比
 #define KWidth_ScaleW [UIScreen mainScreen].bounds.size.width/414.0f
 #define KWidth_ScaleH [UIScreen mainScreen].bounds.size.height/736.0f
@@ -208,6 +220,7 @@
 
 //通知名称
 #define kNotificationDenglu        @"kNotificationDenglu"
+#define kNotificationHaveClass        @"kNotificationHaveClass"  //获取年级
 #define kNotificationTuiChuDenglu        @"kNotificationTuiChuDenglu"
 #define kNotificationAcitivity     @"kNotificationAcitivity"//推荐书籍更多展开
 #define kNotificationGengHuanPhone    @"kNotificationGengHuanPhone"//更换手机号

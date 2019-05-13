@@ -11,7 +11,10 @@
 @implementation NBCALLModel
 + (void)InitializeModel{
     [NBCALLModel mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"catalogList":@"NBCclassificationModel",@"rankList":@"NBCclassificationModel",@"themeTop":@"NBCclassificationModel",@"themeWeek":@"NBCclassificationModel",@"themeNew":@"TypeListModel",@"weekList":@"NBCclassificationModel"};
+        return @{@"catalogList":@"NBCclassificationModel",@"rankList":@"NBCclassificationModel",@"themeTop":@"NBCclassificationModel",@"themeWeek":@"NBCclassificationModel",@"themeNew":@"TypeListModel",@"weekList":@"NBCclassificationModel",@"freeBookList":@"AllBookListModel",@"otherBookCatalogList":@"TypeListModel"};
+    }];
+    [NBCclassificationModel mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"bookList":@"UnreadBookModel"};
     }];
 }
 @end

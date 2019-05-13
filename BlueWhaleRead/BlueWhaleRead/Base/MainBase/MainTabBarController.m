@@ -50,22 +50,23 @@ static CGFloat const CYLTabBarControllerHeight = 40.f;
     NewHomeViewController *firstViewController = [[NewHomeViewController alloc] init];
     BaseNavigationViewController *firstNavigationController = [[BaseNavigationViewController alloc]
                                                                initWithRootViewController:firstViewController];
-    
-    ClassroomViewController *secondViewController = [[ClassroomViewController alloc] init];
-    BaseNavigationViewController *secondNavigationController = [[BaseNavigationViewController alloc]
-                                                                initWithRootViewController:secondViewController];
+
     
     NBookCityViewController *thirdViewController = [[NBookCityViewController alloc] init];
     BaseNavigationViewController *thirdNavigationController = [[BaseNavigationViewController alloc]
                                                                initWithRootViewController:thirdViewController];
+    
+    ClassroomViewController *secondViewController = [[ClassroomViewController alloc] init];
+    BaseNavigationViewController *secondNavigationController = [[BaseNavigationViewController alloc]
+                                                                initWithRootViewController:secondViewController];
     
     MMyViewController *fourthViewController = [[MMyViewController alloc] init];
     BaseNavigationViewController *fourthNavigationController = [[BaseNavigationViewController alloc]
                                                                 initWithRootViewController:fourthViewController];
     NSArray *viewControllers = @[
                                  firstNavigationController,
-                                 secondNavigationController,
                                  thirdNavigationController,
+                                 secondNavigationController,
                                  fourthNavigationController
                                  ];
     return viewControllers;
@@ -85,14 +86,14 @@ static CGFloat const CYLTabBarControllerHeight = 40.f;
                                                   CYLTabBarItemTitle : @"课堂",
                                                   CYLTabBarItemImage : @"课堂1",
                                                   CYLTabBarItemSelectedImage : @"课堂",
-                                                  CYLTabBarItemTitlePositionAdjustment: [NSValue valueWithUIOffset:UIOffsetMake(secondXOffset, -3.5)]
+                                                  CYLTabBarItemTitlePositionAdjustment: [NSValue valueWithUIOffset:UIOffsetMake(-secondXOffset, -3.5)]
                                                   };
     
     NSDictionary *thirdTabBarItemsAttributes = @{
                                                  CYLTabBarItemTitle : @"书城",
                                                  CYLTabBarItemImage : @"书城1",
                                                  CYLTabBarItemSelectedImage : @"书城",
-                                                 CYLTabBarItemTitlePositionAdjustment: [NSValue valueWithUIOffset:UIOffsetMake(-secondXOffset, -3.5)]
+                                                 CYLTabBarItemTitlePositionAdjustment: [NSValue valueWithUIOffset:UIOffsetMake(secondXOffset, -3.5)]
                                                  };
     NSDictionary *fourthTabBarItemsAttributes = @{
                                                   CYLTabBarItemTitle : @"我的",
@@ -102,8 +103,8 @@ static CGFloat const CYLTabBarControllerHeight = 40.f;
                                                   };
     NSArray *tabBarItemsAttributes = @[
                                        firstTabBarItemsAttributes,
-                                       secondTabBarItemsAttributes,
                                        thirdTabBarItemsAttributes,
+                                       secondTabBarItemsAttributes,
                                        fourthTabBarItemsAttributes
                                        ];
     return tabBarItemsAttributes;

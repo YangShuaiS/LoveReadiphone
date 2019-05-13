@@ -304,7 +304,6 @@
 - (void)wxhys:(FenXiangModel *)dic{
     platformType = SSDKPlatformSubTypeWechatSession;
     [self shareLinkhy:dic];
-    
 }
 - (void)wxviewpyq:(FenXiangModel *)dic{
     platformType = SSDKPlatformSubTypeWechatTimeline;

@@ -77,7 +77,7 @@
 
 - (void)setModel:(BookXQModel *)model{
     _model = model;
-    titlelabel.text = model.book.name;
+    titlelabel.text = @"书籍详情";
     twoview.model = model;
 }
 

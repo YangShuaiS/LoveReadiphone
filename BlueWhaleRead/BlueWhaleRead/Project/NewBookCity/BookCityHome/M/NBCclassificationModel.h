@@ -18,6 +18,8 @@
 @property (nonatomic, copy) NSString * style_id;
 @property (nonatomic, copy) NSString * theme_img;
 @property (nonatomic, copy) NSString * rank_theme_img;
+@property (nonatomic, copy) NSString * bookCount;
+@property (nonatomic, strong) NSMutableArray * bookList;
 
 //theme
 @property (nonatomic, copy) NSString * banner_img;

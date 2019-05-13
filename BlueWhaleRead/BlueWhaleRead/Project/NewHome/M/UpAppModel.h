@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * ipadVersionName;
 @property (nonatomic, copy) NSString * ipadVersionCode;
 @property (nonatomic, copy) NSString * isForceUpdate;
+@property (nonatomic, copy) NSString * updateInfo;
+
+
 
 @end
 

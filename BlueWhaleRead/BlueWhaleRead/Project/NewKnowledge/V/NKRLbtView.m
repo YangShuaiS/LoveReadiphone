@@ -7,7 +7,6 @@
 //
 
 #import "NKRLbtView.h"
-#import "NKRSearch.h"
 #import "LBTViewController.h"
 #import "ArticleViewController.h"
 #import "LBTCollectionViewCell.h"
@@ -18,7 +17,6 @@
 
 @implementation NKRLbtView{
     SDCycleScrollView * cycleScrollerView;
-    NKRSearch * search;
 }
 - (instancetype)init
 {
@@ -45,14 +43,8 @@
         make.right.equalTo(ws).with.offset(0);
         make.left.equalTo(ws).with.offset(0);
         make.top.equalTo(ws).with.offset(0);
-        make.bottom.equalTo(ws).with.offset(0);
-        make.height.equalTo(ws.mas_width).multipliedBy(0.573333333);
-    }];
-    
-    search = [NKRSearch new];
-    [self addSubview:search];
-    [search mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.and.right.and.left.mas_equalTo(ws);
+        make.bottom.equalTo(ws).with.offset(-LENGTH(20));
+        make.height.equalTo(ws.mas_width).multipliedBy(0.4692082);
     }];
 }
 #pragma mark - 代理方法

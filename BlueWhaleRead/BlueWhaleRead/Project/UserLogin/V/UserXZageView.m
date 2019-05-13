@@ -88,6 +88,8 @@
     nianji = str;
 }
 - (void)tapGesture1{
+    [[NSUserDefaults standardUserDefaults] setValue:nianji forKey:kNotificationNianJi];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     self.block(nianji);
     [self remoview];
 }

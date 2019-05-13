@@ -13,6 +13,10 @@
 #import "BaseNavigationViewController.h"
 #import "UserLoginViewController.h"
 #import "MMviewTableViewCell.h"
+#import "MyAccountViewController.h"
+#import "FeedbackViewController.h"
+#import "BuyInvitationXQViewController.h"
+#import "AgreementViewController.h"
 @interface MMviewTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -34,8 +38,10 @@
         self.estimatedRowHeight = 300;//估算高度
         self.rowHeight = UITableViewAutomaticDimension;
         self.bounces = NO;
-        itemarray = @[@"我的班级",@"个人资料",@"设置"];
-        imagearray = @[@"我的班级",@"个人资料",@"设置"];
+//        itemarray = @[@"我的班级",@"个人资料",@"设置"];
+//        imagearray = @[@"我的班级",@"个人资料",@"设置"];
+        itemarray = @[@"我的班级",@"邀请有礼",@"我的账户",@"常见问题",@"意见反馈",@"检查更新",@"设置"];
+        imagearray =@[@"我的班级",@"邀请有礼",@"我的账户",@"常见问题",@"意见反馈",@"检查更新",@"设置"];
     }
     return self;
 }
@@ -80,20 +86,12 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([Me.is_rebot isEqualToString:@"2"]) {
-        if (indexPath.row == 0) {
-            MyClassViewController * vc = [MyClassViewController new];
-            [[self viewController].navigationController pushViewController:vc animated:YES];
-        }else if (indexPath.row == 1){
-            PersonalViewController * vc = [PersonalViewController new];
-            [[self viewController].navigationController pushViewController:vc animated:YES];
-        }else if (indexPath.row == 2){
-            PersonSheZhiViewController * vc = [PersonSheZhiViewController new];
-            [[self viewController].navigationController pushViewController:vc animated:YES];
-        }
-    }else{
-        if (indexPath.row == 2) {
-            PersonSheZhiViewController * vc = [PersonSheZhiViewController new];
+    if (indexPath.row == 0) {
+        MyClassViewController * vc = [MyClassViewController new];
+        [[self viewController].navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 1){
+        if ([Me.is_rebot isEqualToString:@"2"]) {
+            BuyInvitationXQViewController * vc = [BuyInvitationXQViewController new];
             [[self viewController].navigationController pushViewController:vc animated:YES];
         }else{
             BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
@@ -101,6 +99,36 @@
                 
             }];
         }
+    }else if (indexPath.row == 2){
+        if ([Me.is_rebot isEqualToString:@"2"]) {
+            MyAccountViewController * vc =[MyAccountViewController new];
+            [[self viewController].navigationController pushViewController:vc animated:YES];
+        }else{
+            BaseNavigationViewController * homenav = [[BaseNavigationViewController alloc] initWithRootViewController:[UserLoginViewController new]];
+            [[self viewController] presentViewController:homenav animated:YES completion:^{
+                
+            }];
+        }
+
+    }else if (indexPath.row == 3){
+        AgreementViewController * vc = [AgreementViewController new];
+        vc.titl = @"常见问题";
+        vc.url = @"http://tiantianaidu.com/app_help/member_help.html";
+        [[self viewController].navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 4){
+        FeedbackViewController * vc = [FeedbackViewController new];
+        [[self viewController].navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 5){
+        NSInteger iosVersionCodes = [APP_BUILD integerValue];
+        if (iosVersionCode > iosVersionCodes) {
+            NSString * url ;
+            url = [[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/博万卷-学生中文课外阅读app/id1434054632?mt=8"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        }
+    }
+    else if (indexPath.row == 6){
+        PersonSheZhiViewController * vc = [PersonSheZhiViewController new];
+        [[self viewController].navigationController pushViewController:vc animated:YES];
     }
 }
 - (void)layoutSubviews{

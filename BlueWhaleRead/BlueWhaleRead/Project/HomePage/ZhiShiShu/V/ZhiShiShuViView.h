@@ -10,7 +10,7 @@
 
 @interface ZhiShiShuViView : BaseView
 @property(nonatomic,strong)NSMutableArray * itemarray;
-@property(nonatomic,strong)NSString * textcolor;
+@property(nonatomic,strong)UIColor * textcolor;
 
 @end
 

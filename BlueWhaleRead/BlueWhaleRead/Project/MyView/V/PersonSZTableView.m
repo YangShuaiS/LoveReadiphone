@@ -16,6 +16,8 @@
 #import "BaseNavigationViewController.h"
 #import "UserLoginViewController.h"
 #import "UserXZageView.h"
+#import "PersonalViewController.h"
+#import <AdSupport/AdSupport.h>
 @interface PersonSZTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -42,11 +44,11 @@
     _model = model;
     NSString * currentVolum = [self HuanCunDaXiao];
     if ([Me.is_rebot isEqualToString:@"2"]) {
-        titleArray = @[@"消息推送",@"清除缓存",@"意见反馈",@"关于博万卷",@"退出登录"];
+        titleArray = @[@"个人资料",@"消息推送",@"清除缓存",@"意见反馈",@"关于博万卷",@"退出登录"];
     }else{
-        titleArray = @[@"消息推送",@"清除缓存",@"意见反馈",@"关于博万卷",@"登录"];
+        titleArray = @[@"个人资料",@"消息推送",@"清除缓存",@"意见反馈",@"关于博万卷",@"登录"];
     }
-    subArray = @[@"",currentVolum,@"",@"",@"",@""];
+    subArray = @[@"",@"",currentVolum,@"",@"",@""];
     [self reloadData];
 }
 - (NSString *)HuanCunDaXiao{
@@ -118,7 +120,7 @@
 //        if (indexPath.row == 0){
 //            cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownStyle];
 //        }else
-        if (indexPath.row == 0){
+        if (indexPath.row == 1){
             cell=[[PersonalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rid ViewStyle:ViewDownSwith];
 
         }else{
@@ -174,7 +176,9 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WS(ws);
-    if (indexPath.row == 1) {
+    if (indexPath.row == 0) {
+        [self push];
+    }else if (indexPath.row == 2) {
         PersonQingChuHUanCunView * xuanze = [PersonQingChuHUanCunView new];
         [self.nav.view addSubview:xuanze];
         [xuanze mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -183,13 +187,13 @@
         [xuanze setBlock:^{
             [ws qingchu];
         }];
-    }else if (indexPath.row == 2){
+    }else if (indexPath.row == 3){
         FeedbackViewController * vc = [FeedbackViewController new];
         [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 3){
+    }else if (indexPath.row == 4){
         AboutViewController * vc = [AboutViewController new];
         [self.nav pushViewController:vc animated:YES];
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == 5){
         if ([Me.is_rebot isEqualToString:@"2"]) {
             [self tuichudenglu];
         }else{
@@ -201,11 +205,16 @@
     }
     
 }
+- (void)push{
+    PersonalViewController * vc = [PersonalViewController new];
+    [[self viewController].navigationController pushViewController:vc animated:YES];
+}
 #pragma mark  - 退出
 - (void)hqid:(NSString *)nianji{
     WS(ws);
+    NSString * idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_HQID];
-    NSDictionary * dic = @{@"uuid":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"level":nianji};
+    NSDictionary * dic = @{@"uuid":[[UIDevice currentDevice] identifierForVendor].UUIDString,@"level":nianji,@"idfa":idfa};
     [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             UserLoginModel * m = [UserLoginModel mj_objectWithKeyValues:responseObject];

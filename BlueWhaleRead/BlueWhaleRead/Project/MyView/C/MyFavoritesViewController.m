@@ -9,8 +9,11 @@
 #import "MyFavoritesViewController.h"
 #import "NKRRecommendedCollectionView.h"
 #import "MyFavoritesDownView.h"
+#import "ShouCangMenuView.h"
 #define itemWidth LENGTH(162)
 #define itemHeight1 LENGTH(162*0.610561)+LENGTH(15)+LENGTH(20)+LENGTH(5)+LENGTH(16)
+
+#import "ShouCangTableView.h"
 @interface MyFavoritesViewController ()<NavDelegate>
 
 @end
@@ -18,12 +21,18 @@
     NKRRecommendedCollectionView * collectView1;
     BaseLabel * quxiao;
     MyFavoritesDownView * downview;
-    NSInteger inter;
+    
+    ShouCangMenuView * menu;
+    ShouCangTableView * tableview;
+    NSInteger nowInter;
+    NSInteger bjzt;
 }
 
 #pragma mark --------------------  导航栏以及代理
 - (void)AddNavtion{
     [super AddNavtion];
+    nowInter = 0;
+    bjzt = 0;
     WS(ws);
     self.navtive = [[NativeView alloc] initWithLeftImage:@"backhei" Title:@"收藏夹" RightTitle:@"" NativeStyle:NavStyleGeneral];
     self.navtive.titcolor = RGB(0, 0, 0);
@@ -65,9 +74,21 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    WS(ws);
     self.view.backgroundColor = [UIColor whiteColor];
     [self AddNavtion];
-    WS(ws);
+    menu = [ShouCangMenuView new];
+    [self.view addSubview:menu];
+    [menu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(ws.navtive.mas_bottom).with.offset(0);
+        make.left.and.right.and.bottom.mas_equalTo(ws.view);
+    }];
+    [menu setBlocks:^(NSInteger inter) {
+        [ws upNowWeozhi:inter];
+    }];
+    
+    menu.titarray = @[@"知识图",@"每日格言"];
+    
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
     flowLayout1.itemSize = CGSizeMake(itemWidth,itemHeight1);
     //    //定义每个UICollectionView 横向的间距
@@ -80,14 +101,14 @@
     
     collectView1 = [[NKRRecommendedCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout1];
     collectView1.style = 2;
-    [self.view addSubview:collectView1];
-    [collectView1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws.view);
-        make.top.equalTo(ws.navtive.mas_bottom).with.offset(LENGTH(5));
-        make.right.equalTo(ws.view);
-        make.bottom.equalTo(ws.view);
-    }];
-    
+//    [self.view addSubview:collectView1];
+//    [collectView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(ws.view);
+//        make.top.equalTo(ws.navtive.mas_bottom).with.offset(LENGTH(5));
+//        make.right.equalTo(ws.view);
+//        make.bottom.equalTo(ws.view);
+//    }];
+//
     __weak MyFavoritesViewController * blockSelf = self;
     downview = [MyFavoritesDownView new];
     [self.view addSubview:downview];
@@ -103,24 +124,43 @@
         [blockSelf quanshanshanchu];
     }];
     [self yichushooucang];
+    
+    tableview = [ShouCangTableView new];
+    [tableview setBlocks:^(NSInteger now) {
+        
+    }];
+    menu.controllerArray = @[collectView1,tableview];
+
 
 }
 - (void)quanshanshanchu{
-    inter = 0;
     [self yichushooucang];
 }
 - (void)quanxuan{
-    if (collectView1.itemarray.count >0) {
-        for (NKRKnowledgeModel * model in collectView1.itemarray) {
-            if (inter == 0) {
-                model.duigou = 1;
-            }else{
-                model.duigou = 0;
+    if (nowInter == 0) {
+        if (collectView1.itemarray.count >0) {
+            for (NKRKnowledgeModel * model in collectView1.itemarray) {
+                if (downview.qxzt == 1) {
+                    model.duigou = 1;
+                }else{
+                    model.duigou = 0;
+                }
             }
         }
+        [collectView1 reloadData];
+    }else{
+        if (tableview.itemarray.count >0) {
+            for (NHProverbModel * model in tableview.itemarray) {
+                if (downview.qxzt == 1) {
+                    model.clicksatatus = 1;
+                }else{
+                    model.clicksatatus = 0;
+                }
+            }
+        }
+        [tableview reloadData];
     }
-    inter = inter == 0 ?1 : 0;
-    [collectView1 reloadData];
+
 }
 - (void)yichushooucang{
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_MYSHOUCANG];
@@ -138,34 +178,91 @@
 }
 - (void)upview:(MyFavoritesModel*)model{
     collectView1.itemarray = model.collectionList;
-    downview.itemarray = model.collectionList;
+    for (NHProverbModel * promodel in model.proverbList) {
+        NSCalendarUnit dayInfoUnits  = NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+        NSCalendar *gregorian = [[NSCalendar alloc]
+                                 initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        promodel.timedate = [gregorian components:dayInfoUnits fromDate:[BaseObject TimeStringForDate:promodel.show_time]];
+    }
+    tableview.itemarray = model.proverbList;
+    downview.model = model;
 }
 - (void)guanli{
-    collectView1.bkzt = collectView1.bkzt==1?0:1;
-    quxiao.text = collectView1.bkzt==1?@"取消":@"管理";
     WS(ws);
-    if (collectView1.bkzt==1) {
-        [UIView animateWithDuration:1 animations:^{
+    if (bjzt == 0) {
+        bjzt = 1;
+        [UIView animateWithDuration:0.5 animations:^{
             [self->downview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(ws.view.mas_bottom).with.offset(-LENGTH(TabBarHeight));
             }];
-            [self->downview layoutIfNeeded];
-//            [ws.view.superview layoutIfNeeded];
-
+            [self.view.superview layoutIfNeeded];
         } completion:^(BOOL finished) {
             
         }];
 
     }else{
-        [UIView animateWithDuration:1 animations:^{
+        bjzt = 0;
+        [UIView animateWithDuration:0.5 animations:^{
             [self->downview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(ws.view.mas_bottom);
             }];
-            [self->downview layoutIfNeeded];
+            [self.view.superview layoutIfNeeded];
 //            [ws.view.superview layoutIfNeeded];
         } completion:^(BOOL finished) {
             
         }];
     }
+    quxiao.text = bjzt==1?@"取消":@"管理";
+    if (bjzt == 1) {
+        if (nowInter == 0 ) {
+            collectView1.bkzt  = 1;
+        }else{
+            tableview.intertype = 1;
+        }
+    }else{
+        collectView1.bkzt  = 0;
+        tableview.intertype = 0;
+        [self chushihua];
+    }
+}
+
+
+- (void)upNowWeozhi:(NSInteger)inter{
+    if (nowInter!=inter) {
+        WS(ws);
+        nowInter = inter;
+        bjzt = 0;
+        [UIView animateWithDuration:0.5 animations:^{
+            [self->downview mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(ws.view.mas_bottom);
+            }];
+            [self.view.superview layoutIfNeeded];
+            //            [ws.view.superview layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            
+        }];
+        quxiao.text = bjzt==1?@"取消":@"管理";
+        collectView1.bkzt  = 0;
+        tableview.intertype = 0;
+        downview.nowinter = inter;
+        [self chushihua];
+    }
+}
+
+- (void)chushihua{
+    if (collectView1.itemarray.count >0) {
+        for (NKRKnowledgeModel * model in collectView1.itemarray) {
+            model.duigou = 0;
+        }
+        [collectView1 reloadData];
+    }
+    
+    if (tableview.itemarray.count >0) {
+        for (NHProverbModel * model in tableview.itemarray) {
+            model.clicksatatus = 0;
+        }
+        [tableview reloadData];
+    }
+    downview.qxzt = 0;
 }
 @end

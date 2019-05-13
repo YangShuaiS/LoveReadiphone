@@ -11,10 +11,12 @@ CGFloat NavHeight = 0;
 CGFloat TabBarHeight = 0;
 CGFloat StatusBar = 0;
 CGFloat poinw = 0;
+CGFloat iosVersionCode = 0;
 
-//NSString * ZSFWQ = @"https://tiantianaidu.com/";
+
+NSString * ZSFWQ = @"https://tiantianaidu.com/";
 //NSString * ZSFWQ = @"http://119.90.89.88:8085/";
-NSString * ZSFWQ = @"http://192.168.1.221:8085/";
+//NSString * ZSFWQ = @"http://192.168.1.221:8085/";
 //NSString * ZSFWQ = @"http://192.168.1.85:8069/";
 
 
@@ -366,7 +368,7 @@ MeModel * Me = nil;
     
     // String should be 6 or 8 characters
     if ([cString length] < 6) {
-        return [UIColor blackColor];
+        return RGBA(255, 255, 255, alpha);
     }
     // 判断前缀
     if ([cString hasPrefix:@"0X"])
@@ -374,7 +376,7 @@ MeModel * Me = nil;
     if ([cString hasPrefix:@"#"])
         cString = [cString substringFromIndex:1];
     if ([cString length] != 6)
-        return [UIColor blackColor];
+        return RGBA(255, 255, 255, alpha);
     // 从六位数值中找到RGB对应的位数并转换
     NSRange range;
     range.location = 0;
@@ -679,4 +681,25 @@ MeModel * Me = nil;
     return window.rootViewController;
 }
 
++ (BOOL)ArratClass:(id)array{  
+    if ([array isKindOfClass:NSClassFromString(@"NSMutableArray")]){
+        return YES;
+    }
+    return NO;
+
+}
+
++ (UIImage*)TransformtoSize:(UIImage *)image{
+    // 创建一个bitmap的context
+    UIGraphicsBeginImageContext(image.size);
+    // 绘制改变大小的图片
+    [image drawInRect:CGRectMake(0,0, image.size.width/2, image.size.height/2)];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage*TransformedImg=UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    // 返回新的改变大小后的图片
+    return TransformedImg;
+    
+}
 @end

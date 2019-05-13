@@ -12,7 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NBookXQTopView : BaseView
-@property(nonatomic,strong) JKStarDisplayView *jKStarDisplayView;
 @property(nonatomic,strong) BookXQModel * model;
 
 @end

@@ -53,7 +53,7 @@
         make.top.equalTo(threetitle.mas_bottom).with.offset(LENGTH(16));
         make.right.equalTo(ws).with.offset(0);
         make.height.mas_equalTo(itemHeight1);
-        make.bottom.equalTo(ws).with.offset(-LENGTH(18));
+        make.bottom.equalTo(ws).with.offset(0);
     }];
 }
 

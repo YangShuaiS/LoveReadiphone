@@ -7,8 +7,11 @@
 //
 
 #import "BaseCollectionViewCell.h"
+//#import "JKStarDisplayView.h"
 
 @interface HomeModerateCollectionViewCell : BaseCollectionViewCell
 @property(nonatomic,strong)BookListModel * model;
+//@property(nonatomic,strong) JKStarDisplayView *jKStarDisplayView;
+@property(nonatomic,assign) NSInteger starehiden;//是否隐藏心
 
 @end

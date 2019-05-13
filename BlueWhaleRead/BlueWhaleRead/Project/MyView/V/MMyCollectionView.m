@@ -41,7 +41,7 @@
         self.scrollsToTop = NO;
         self.showsVerticalScrollIndicator = NO;
         self.showsHorizontalScrollIndicator = NO;
-        titarray = @[@"能力测试",@"我的成就",@"我的书架",@"我的任务",@"我的里程碑",@"收藏夹"];
+//        titarray = @[@"能力测试",@"我的成就",@"我的书架",@"我的任务",@"我的里程碑",@"收藏夹"];
         titarray = @[@"能力测试",@"收藏夹",@"我的书架",@"我的任务",@"我的成就",@"我的里程碑"];
 
     }

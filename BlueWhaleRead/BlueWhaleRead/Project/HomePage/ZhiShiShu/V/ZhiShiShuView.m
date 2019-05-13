@@ -478,7 +478,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
     [self addClickDown:data];
     WS(ws);
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(self->lasth+ws.newheight);
+        make.height.mas_equalTo(self->lasth+ws.newheight+LENGTH(50));
     }];
     
 }
@@ -501,7 +501,7 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
 - (void)setNewheight:(CGFloat)newheight{
     _newheight = newheight;
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(self->lasth+newheight);
+        make.height.mas_equalTo(self->lasth+newheight+LENGTH(50));
     }];
 }
 - (void)addClickAnNiu:(ZhiShiShuDataModel *)model{
@@ -774,10 +774,10 @@ static BOOL SDImagedownloderOldShouldDecompressImages = YES;
         ZhiShiShuXQView * view = [ZhiShiShuXQView new];
         view.itemid = neirong._id;
         view.nav = self.nav;
-        [[self viewController].view.window addSubview:view];
+        [[self viewController].view addSubview:view];
         
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo([self viewController].view.window);
+            make.edges.mas_equalTo([self viewController].view);
         }];
     }
 }

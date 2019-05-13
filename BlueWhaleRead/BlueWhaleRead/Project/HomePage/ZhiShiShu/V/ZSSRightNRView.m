@@ -26,7 +26,10 @@
 - (void)addview{
     WS(ws);
     backview = [UIView new];
-    backview.backgroundColor = [UIColor whiteColor];
+    backview.layer.masksToBounds = YES;
+    backview.layer.cornerRadius = LENGTH(10);
+    backview.layer.borderWidth = 1;
+    backview.layer.borderColor = RGB(255, 255, 255).CGColor;
     [self addSubview:backview];
     [backview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.bottom.mas_equalTo(ws);
@@ -34,7 +37,7 @@
         make.right.mas_equalTo(ws).with.offset(-LENGTH(14));
     }];
     
-    lable = [[BaseLabel alloc] initWithTxteColor:RGB(0, 0, 0) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:@""];
+    lable = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(13) TextAlignment:NSTextAlignmentLeft Text:@""];
     lable.numberOfLines = 0;
     [backview addSubview:lable];
     [lable mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,13 +46,13 @@
     
     FLAnimatedImageView * imageview =[FLAnimatedImageView new];
     imageview.contentMode = UIViewContentModeScaleAspectFit;
-    imageview.image = UIIMAGE(@"查看-图标");
+    imageview.image = UIIMAGE(@"圆底箭头");
     [backview addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self->backview);
         make.right.mas_equalTo(self->backview).with.offset(-LENGTH(5));
-        make.width.mas_equalTo(LENGTH(5));
-        make.height.mas_equalTo(LENGTH(8));
+        make.width.mas_equalTo(LENGTH(16));
+        make.height.mas_equalTo(LENGTH(16));
     }];
     
     self.userInteractionEnabled = YES;
@@ -60,11 +63,10 @@
 - (void)setModel:(ZhiShiShuClickModel *)model{
     _model = model;
     lable.text  = model.arrow_words;
+    backview.backgroundColor = _backcolor;
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    backview.layer.masksToBounds = YES;
-    backview.layer.cornerRadius = backview.frame.size.height/2;
 }
 - (void)click{
     if ([_model.click_type isEqualToString:@"2"]) {

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)NSMutableArray * itemarray;
 @property (nonatomic , assign)CGFloat allheight;
 @property (nonatomic , assign)CGFloat topheight;
+@property (nonatomic , strong)UIColor * backcolor;
 
 @end
 

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZhiShiShuRelationCollectionViewCell : BaseCollectionViewCell
 @property(nonatomic,strong)ZhiShiShuViTypeModel * model;
-@property(nonatomic,strong)NSString * textcolor;
+@property(nonatomic,strong)UIColor * textcolor;
 @end
 
 NS_ASSUME_NONNULL_END

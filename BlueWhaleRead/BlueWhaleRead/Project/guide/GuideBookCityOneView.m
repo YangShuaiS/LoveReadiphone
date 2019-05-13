@@ -28,12 +28,12 @@
     xian.image = UIIMAGE(@"线");
     [self addSubview:xian];
     [xian mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws).with.offset(LENGTH(26)+LENGTH(30));
-        make.left.mas_equalTo(ws).with.offset(LENGTH(25));
+        make.top.mas_equalTo(ws).with.offset(StatusBar + LENGTH(5)+LENGTH(40));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(25));
         make.width.mas_equalTo(LENGTH(38));
         make.height.mas_equalTo(LENGTH(56));
     }];
-    //    xian.transform = CGAffineTransformMakeRotation(M_PI);
+        xian.transform = CGAffineTransformMakeRotation(M_PI);
     
     BaseLabel * title = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255, 255, 255) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:@"还在为找不到书烦恼？在这里你可以直接扫面图书背后的ISBN码（条形码），系统会自动为你找到相关书籍~"];
     title.numberOfLines = 0;
@@ -80,7 +80,7 @@
     //背景
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:[UIScreen mainScreen].bounds cornerRadius:0];
     //镂空
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(LENGTH(5), LENGTH(26)+LENGTH(5), LENGTH(40),LENGTH(40)) cornerRadius:LENGTH(20)];
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(WIDTH-LENGTH(50), StatusBar+LENGTH(5), LENGTH(40),LENGTH(40)) cornerRadius:LENGTH(25)];
     [path appendPath:circlePath];
     [path setUsesEvenOddFillRule:YES];
 

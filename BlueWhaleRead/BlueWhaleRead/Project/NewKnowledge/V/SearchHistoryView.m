@@ -114,6 +114,25 @@
     [super layoutSubviews];
 }
 - (void)click{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"删除历史搜索"
+                                                                   message:@"确认要删除历史搜索吗？"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                          }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             [self shanchu];
+                                                         }];
+    
+    [alert addAction:defaultAction];
+    [alert addAction:cancelAction];
+    [[self viewController] presentViewController:alert animated:YES completion:nil];
+    
+   
+}
+- (void)shanchu{
     NSMutableArray * array = [NSMutableArray array];
     [[NSUserDefaults standardUserDefaults] setObject:array forKey:SEARCHHISTORY];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -121,7 +140,6 @@
     NSNotification *notification =[NSNotification notificationWithName:SEARCHHISTORY object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
-
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     
     

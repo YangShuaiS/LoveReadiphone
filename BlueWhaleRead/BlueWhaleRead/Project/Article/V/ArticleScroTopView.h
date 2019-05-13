@@ -7,6 +7,7 @@
 //
 
 #import "BaseView.h"
+#import "ArticleTopView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)LunBoTuXQModel * model;
 @property(nonatomic,assign)CGFloat sizeheight;
 @property(nonatomic,assign)CGFloat titleheight;
+
+
+@property(nonatomic,strong)ArticleTopView * topView;
+
+
+
 
 @end
 

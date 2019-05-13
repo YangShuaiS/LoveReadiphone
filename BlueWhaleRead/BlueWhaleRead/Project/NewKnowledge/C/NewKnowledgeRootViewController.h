@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NewKnowledgeRootViewController : BaseViewController
+@interface NewKnowledgeRootViewController : BaseViewController<UIScrollViewDelegate>
 
 @end
 

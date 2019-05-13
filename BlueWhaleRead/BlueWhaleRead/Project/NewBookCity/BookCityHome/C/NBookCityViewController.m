@@ -7,6 +7,9 @@
 //
 
 #import "NBookCityViewController.h"
+#import "NBCFreeReadingView.h"
+#import "NBCOtherReadBookView.h"
+
 #import "NBCchannelLBTView.h"
 #import "NBCchannelView.h"
 #import "NBCGoodBoookListTabView.h"
@@ -19,6 +22,8 @@
 #import "GuideBookCityThreeView.h"
 
 #import "NewHpViewModel.h"
+
+#import "NKTopSearchView.h"
 @interface NBookCityViewController ()<UIScrollViewDelegate>
 
 @end
@@ -26,13 +31,15 @@
 @implementation NBookCityViewController{
     UIScrollView * scrollView;
     NSMutableArray *  viewarray;
-    
+    NKTopSearchView * search;
     NBCchannelLBTView * channel;
+    NBCclassificationView * classification;
+    NBCFreeReadingView * freeread;
+
     NBCGoodBoookListTabView * goodbook;
     NBCweekReadingView * cweek;
     NBClistAllView * List;
-    NBCclassificationView * classification;
-
+    NBCOtherReadBookView * readbook;
 }
 
 - (void)viewDidLoad {
@@ -42,12 +49,20 @@
 
 - (void)Addview{
     WS(ws);
+    
+    search = [NKTopSearchView new];
+    [self.view addSubview:search];
+    [search mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(ws.view).with.offset(StatusBar+LENGTH(8));
+        make.left.and.right.mas_equalTo(ws.view);
+    }];
+    
     viewarray = [NSMutableArray array];
     scrollView = [UIScrollView new];
     scrollView.delegate = self;
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.view).with.offset(0);
+        make.top.equalTo(self->search.mas_bottom).with.offset(0);
         make.left.equalTo(ws.view).with.offset(0);
         make.right.equalTo(ws.view).with.offset(0);
         make.bottom.equalTo(ws.view).with.offset(0);
@@ -62,6 +77,13 @@
     classification.nav = self.navigationController;
     [viewarray addObject:classification];
     
+    freeread = [NBCFreeReadingView new];
+    [viewarray addObject:freeread];
+    
+    goodbook = [NBCGoodBoookListTabView new];
+    goodbook.nav = self.navigationController;
+    [viewarray addObject:goodbook];
+    
     cweek = [NBCweekReadingView new];
     cweek.nav = self.navigationController;
     [viewarray addObject:cweek];
@@ -70,9 +92,8 @@
     List.nav = self.navigationController;
     [viewarray addObject:List];
     
-    goodbook = [NBCGoodBoookListTabView new];
-    goodbook.nav = self.navigationController;
-    [viewarray addObject:goodbook];
+    readbook = [NBCOtherReadBookView new];
+    [viewarray addObject:readbook];
     
 
     BaseView * lastview;
@@ -130,9 +151,11 @@
 - (void)UpData:(NBCALLModel *)model{
     channel.model = model;
     goodbook.model = model;
+    freeread.model = model;
     cweek.model = model;
     List.model = model;
     classification.model = model;
+    readbook.model = model;
     [self.view.superview layoutIfNeeded];
     if ([[[BaseObject jsd_getCurrentViewController] class] isEqual:[self class]]) {
         static dispatch_once_t onceToken;

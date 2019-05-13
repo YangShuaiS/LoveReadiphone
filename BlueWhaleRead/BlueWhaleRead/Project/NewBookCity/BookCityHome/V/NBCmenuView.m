@@ -62,7 +62,7 @@
 - (void)NBCmenuViewStyleimage{
     WS(ws);
     bakimage = [FLAnimatedImageView new];
-    bakimage.image = UIIMAGE(@"箭头");
+    bakimage.image = UIIMAGE(@"更多—箭头图标");
     [self addSubview:bakimage];
     [bakimage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(ws).with.offset(-LENGTH(22));

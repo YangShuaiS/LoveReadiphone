@@ -35,54 +35,55 @@
     }];
     
     mlttj = [UIImageView new];
-    mlttj.contentMode = UIViewContentModeScaleAspectFill;
+    mlttj.contentMode = UIViewContentModeScaleToFill;
     mlttj.layer.masksToBounds = YES;
     mlttj.layer.cornerRadius = LENGTH(5);
     [self addSubview:mlttj];
     [mlttj mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(onetitle.mas_bottom).with.offset(LENGTH(16));
-        make.left.mas_equalTo(ws).with.offset(LENGTH(18));
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(18));
+        make.left.mas_equalTo(ws).with.offset(LENGTH(17));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(17));
         make.bottom.mas_equalTo(ws);
-        make.height.mas_equalTo(LENGTH(160));
+        make.height.mas_equalTo(LENGTH(110));
     }];
     
     mlttj.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(push)];
     [mlttj addGestureRecognizer:tap];
     
-    backviews = [UIView new];
-    [mlttj addSubview:backviews];
-    [backviews mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.and.bottom.mas_equalTo(self->mlttj);
-        make.height.mas_equalTo(LENGTH(66));
-    }];
-    
-    
-    title = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFontCu(16) TextAlignment:NSTextAlignmentLeft Text:@""];
-    [backviews addSubview:title];
-    [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self->backviews).with.offset(-LENGTH(25));
-        make.left.mas_equalTo(self->backviews).with.offset(LENGTH(7));
-        make.right.mas_equalTo(self->backviews).with.offset(-LENGTH(7));
-    }];
-    
-    subtitle = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
-    [backviews addSubview:subtitle];
-    [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self->backviews).with.offset(-LENGTH(4));
-        make.left.mas_equalTo(self->backviews).with.offset(LENGTH(7));
-        make.right.mas_equalTo(self->backviews).with.offset(-LENGTH(7));
-        
-    }];
+//    backviews = [UIView new];
+//    [mlttj addSubview:backviews];
+//    [backviews mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.and.right.and.bottom.mas_equalTo(self->mlttj);
+//        make.height.mas_equalTo(LENGTH(66));
+//    }];
+//
+//
+//    title = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFontCu(16) TextAlignment:NSTextAlignmentLeft Text:@""];
+//    [backviews addSubview:title];
+//    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.mas_equalTo(self->backviews).with.offset(-LENGTH(25));
+//        make.left.mas_equalTo(self->backviews).with.offset(LENGTH(7));
+//        make.right.mas_equalTo(self->backviews).with.offset(-LENGTH(7));
+//    }];
+//
+//    subtitle = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
+//    [backviews addSubview:subtitle];
+//    [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.mas_equalTo(self->backviews).with.offset(-LENGTH(4));
+//        make.left.mas_equalTo(self->backviews).with.offset(LENGTH(7));
+//        make.right.mas_equalTo(self->backviews).with.offset(-LENGTH(7));
+//
+//    }];
 }
 - (void)setModel:(LunBoTuXQModel *)model{
     _model = model;
     if (model.knowledgeGrade.count == 3) {
         knowledgeGradeModel * mo = model.knowledgeGrade[model.knowledgeGrade.count-1];
-        [mlttj sd_setImageWithURL:URLIMAGE(mo.knowledge.knowledge_width_img)];
-        title.text = mo.knowledge.name;
-        subtitle.text = mo.knowledge.knowledge_info;
+        [mlttj sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTX,mo.knowledge.knowledge_width_img]]];
+//        [mlttj sd_setImageWithURL:URLIMAGE(mo.knowledge.knowledge_width_img)];
+//        title.text = mo.knowledge.name;
+//        subtitle.text = mo.knowledge.knowledge_info;
     }
 }
 

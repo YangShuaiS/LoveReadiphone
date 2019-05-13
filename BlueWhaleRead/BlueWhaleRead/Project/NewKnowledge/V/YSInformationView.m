@@ -14,6 +14,9 @@
     
     UIImageView * dgbj;
     FLAnimatedImageView * dg;
+    
+    UIView * backview;
+    BaseLabel * geshu;
 }
 
 - (instancetype)init
@@ -59,6 +62,32 @@
         make.centerY.mas_equalTo(self->dgbj);
         make.left.mas_equalTo(self->dgbj).with.offset(LENGTH(3));
         make.right.mas_equalTo(self->dgbj).with.offset(-LENGTH(3));
+    }];
+    
+    backview = [UIView new];
+    backview.backgroundColor = RGBA(239, 189, 39, 0.9);
+    [imageView addSubview:backview];
+    [backview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.and.bottom.mas_equalTo(self->imageView);
+        make.height.mas_equalTo(LENGTH(17));
+    }];
+    
+    geshu = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentCenter Text:@"999"];
+    [backview addSubview:geshu];
+    [geshu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.bottom.mas_equalTo(self->backview);
+        make.right.mas_equalTo(self->backview).with.offset(-LENGTH(9));
+    }];
+    
+    UIImageView * yanjing = [UIImageView new];
+    yanjing.contentMode = UIViewContentModeScaleAspectFit;
+    yanjing.image = UIIMAGE(@"观看量-图标");
+    [backview addSubview:yanjing];
+    [yanjing mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self->backview);
+        make.left.mas_equalTo(self->backview).with.offset(LENGTH(10));
+        make.right.mas_equalTo(self->geshu.mas_left).with.offset(-LENGTH(5));
+        make.size.mas_equalTo(CGSizeMake(LENGTH(13), LENGTH(10)));
     }];
 }
 
@@ -127,6 +156,17 @@
     }];
 }
 
+- (void)upyuanjiao{
+    [self.superview layoutIfNeeded];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:backview.bounds byRoundingCorners:UIRectCornerTopLeft cornerRadii:CGSizeMake(LENGTH(5),LENGTH(5))];
+    //创建 layer
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = backview.bounds;
+    //赋值
+    maskLayer.path = maskPath.CGPath;
+    backview.layer.mask = maskLayer;
+}
+
 - (void)setModel:(NKRKnowledgeModel *)model{
     _model = model;
     if (model.related_type == 1) {
@@ -154,6 +194,13 @@
     }
     onetitle.text = model.title;
     twotitle.text = model.banner_foreword;
+    geshu.text = model.read_times;
+    if ([geshu.text isEqualToString:@""]) {
+        backview.hidden = YES;
+    }else{
+        backview.hidden = NO;
+    }
+    [self upyuanjiao];
 }
 
 - (void)setBkzt:(NSInteger)bkzt{
@@ -164,4 +211,5 @@
         dgbj.hidden = YES;
     }
 }
+
 @end

@@ -119,6 +119,7 @@
             }];
             
             [alertC addAction:alertA];
+            [self xuaoshi];
             [self.nav presentViewController:alertC animated:YES completion:nil];
         }
     }
@@ -133,6 +134,8 @@
     imagePicker.allowsEditing = YES;
     imagePicker.delegate = self;
     [self.nav presentViewController:imagePicker animated:YES completion:nil];
+    [self xuaoshi];
+
 }
 
 #pragma mark - - - UIImagePickerControllerDelegate
@@ -151,6 +154,7 @@
 
 }
 - (void)shexiangtou:(UITapGestureRecognizer *)tap{
+    [self xuaoshi];
     pickerCon = [[UIImagePickerController alloc]init];
     pickerCon.sourceType = UIImagePickerControllerSourceTypeCamera;
     pickerCon.allowsEditing = YES;//是否可编辑

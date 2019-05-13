@@ -10,7 +10,7 @@
 #import "NBCmenuView.h"
 #import "HomeModerateCollectView.h"
 #import "NBCMoreChannelViewController.h"
-#define itemHeight LENGTH(170)
+#define itemHeight LENGTH(170)+LENGTH(19)
 #import "HomeActivityViewController.h"
 @implementation HHotBookView{
     NBCmenuView * navMenu;

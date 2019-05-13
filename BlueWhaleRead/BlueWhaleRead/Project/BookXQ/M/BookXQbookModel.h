@@ -15,6 +15,8 @@
 @property (nonatomic, copy) NSString * catalogs;//分类id
 @property (nonatomic, copy) NSString * cover;//封皮
 @property (nonatomic, assign) NSInteger imp_type;//精读/泛读 精读为1 泛读为2
+@property (nonatomic, assign) NSInteger is_free;//精读/泛读 精读为1 泛读为2
+
 @property (nonatomic, copy) NSString * info;//书简介
 @property (nonatomic, assign) NSInteger is_read;//是否已读       1-》未阅读 2-》已阅读
 @property (nonatomic, assign) NSInteger is_like;//是否已读       1-》未阅读 2-》已阅读

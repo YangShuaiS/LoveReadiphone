@@ -28,6 +28,7 @@
     for (ZhiShiShuViTypeModel * model in itemarray) {
         FLAnimatedImageView * imageview = [FLAnimatedImageView new];
         imageview.contentMode = UIViewContentModeScaleAspectFit;
+
         [self addSubview:imageview];
         [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
             if (!lastlabel) {
@@ -40,9 +41,13 @@
             make.height.mas_equalTo(LENGTH(26));
         }];
         NSString * imageurlvilogo = [NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.img];
-        [imageview sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo]];
+        [imageview sd_setImageWithURL:[NSURL URLWithString:imageurlvilogo] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            image = [image imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
+            imageview.image = image;
+            imageview.tintColor = self->_textcolor;
+        }];
         
-        BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:[BaseObject colorWithHexString:_textcolor Alpha:1] LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
+        BaseLabel * label = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:_textcolor LabelFont:TextFontCu(11) TextAlignment:NSTextAlignmentLeft Text:model.name];
         [self addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(imageview.mas_right).with.offset(LENGTH(5));

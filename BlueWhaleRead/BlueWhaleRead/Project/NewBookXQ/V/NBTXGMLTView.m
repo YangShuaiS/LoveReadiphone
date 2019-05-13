@@ -46,10 +46,10 @@
         make.top.mas_equalTo(jj.mas_bottom).with.offset(LENGTH(13));
         make.left.and.right.mas_equalTo(ws);
         make.bottom.mas_equalTo(ws).with.offset(-LENGTH(19));
-        make.height.mas_equalTo(LENGTH(132));
+        make.height.mas_equalTo(LENGTH(94));
     }];
     
-    _pageFlowView = [[HQFlowView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, LENGTH(132))];
+    _pageFlowView = [[HQFlowView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, LENGTH(94))];
     _pageFlowView.delegate = self;
     _pageFlowView.dataSource = self;
     _pageFlowView.minimumPageAlpha = 0.3;
@@ -66,13 +66,18 @@
     _advArray = advArray;
     _pageFlowView.orginPageCount = _advArray.count;
     [self.pageFlowView reloadData];//刷新轮播
+    if (advArray.count == 0) {
+        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }
 
 }
 
 #pragma mark JQFlowViewDelegate
 - (CGSize)sizeForPageInFlowView:(HQFlowView *)flowView
 {
-    return CGSizeMake(LENGTH(280), LENGTH(131));
+    return CGSizeMake(LENGTH(321), LENGTH(94));
 }
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex
@@ -96,38 +101,40 @@
         bannerView.layer.cornerRadius = 5;
         bannerView.layer.masksToBounds = YES;
         bannerView.coverView.backgroundColor = [UIColor clearColor];
+        bannerView.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
+//        UIView * backviews = [[UIView alloc] initWithFrame:CGRectMake(0, LENGTH(131)-LENGTH(66), WIDTH, LENGTH(66))];
+//        [bannerView addSubview:backviews];
+//        CAGradientLayer *gradient = [CAGradientLayer layer];
+//        gradient.frame = backviews.bounds;
+//        //    gradient.colors = @[(id)RGBA(0, 0, 0, 1),RGBA(0, 0, 0, 0)];
+//        UIColor * color1 = RGBA(3, 0, 0, 0.5);
+//        UIColor * color2 = RGBA(0, 0, 0, 0);
+//        gradient.colors = @[(id)color2.CGColor,(id)color1.CGColor];
+//        gradient.locations = @[@0, @1];
+//        gradient.startPoint = CGPointMake(0.5, 0);
+//        gradient.endPoint = CGPointMake(0.5, 1);
+//        [backviews.layer addSublayer:gradient];
         
-        UIView * backviews = [[UIView alloc] initWithFrame:CGRectMake(0, LENGTH(131)-LENGTH(66), WIDTH, LENGTH(66))];
-        [bannerView addSubview:backviews];
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        gradient.frame = backviews.bounds;
-        //    gradient.colors = @[(id)RGBA(0, 0, 0, 1),RGBA(0, 0, 0, 0)];
-        UIColor * color1 = RGBA(3, 0, 0, 0.5);
-        UIColor * color2 = RGBA(0, 0, 0, 0);
-        gradient.colors = @[(id)color2.CGColor,(id)color1.CGColor];
-        gradient.locations = @[@0, @1];
-        gradient.startPoint = CGPointMake(0.5, 0);
-        gradient.endPoint = CGPointMake(0.5, 1);
-        [backviews.layer addSublayer:gradient];
-        
-        BaseLabel * title = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFontCu(16) TextAlignment:NSTextAlignmentLeft Text:model.title];
-        [backviews addSubview:title];
-        [title mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(backviews).with.offset(-LENGTH(25));
-            make.left.mas_equalTo(backviews).with.offset(LENGTH(7));
-            make.right.mas_equalTo(backviews).with.offset(-LENGTH(7));
-        }];
-        
-        BaseLabel * subtitle = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:model.banner_foreword];
-        [backviews addSubview:subtitle];
-        [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(backviews).with.offset(-LENGTH(4));
-            make.left.mas_equalTo(backviews).with.offset(LENGTH(7));
-            make.right.mas_equalTo(backviews).with.offset(-LENGTH(7));
-        }];
+//        BaseLabel * title = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFontCu(16) TextAlignment:NSTextAlignmentLeft Text:model.title];
+//        [backviews addSubview:title];
+//        [title mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.mas_equalTo(backviews).with.offset(-LENGTH(25));
+//            make.left.mas_equalTo(backviews).with.offset(LENGTH(7));
+//            make.right.mas_equalTo(backviews).with.offset(-LENGTH(7));
+//        }];
+//
+//        BaseLabel * subtitle = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:model.banner_foreword];
+//        [backviews addSubview:subtitle];
+//        [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.mas_equalTo(backviews).with.offset(-LENGTH(4));
+//            make.left.mas_equalTo(backviews).with.offset(LENGTH(7));
+//            make.right.mas_equalTo(backviews).with.offset(-LENGTH(7));
+//        }];
     }
     //在这里下载网络图片
-        [bannerView.mainImageView sd_setImageWithURL:URLIMAGE(model.banner_img) placeholderImage:nil];
+    [bannerView.mainImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ZSTXIMAGEURL,model.banner_img]] placeholderImage:nil];
+
+//        [bannerView.mainImageView sd_setImageWithURL:URLIMAGE(model.banner_img) placeholderImage:nil];
     //加载本地图片
 //    bannerView.mainImageView.image = [UIImage imageNamed:self.advArray[index]];
     

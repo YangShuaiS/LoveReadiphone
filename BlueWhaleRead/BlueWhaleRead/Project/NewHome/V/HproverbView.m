@@ -10,9 +10,10 @@
 #import "NBCmenuView.h"
 #import "NHMingYanViewController.h"
 @implementation HproverbView{
-    FLAnimatedImageView * imageview;
     NBCmenuView * navMenu;//
     UIImageView * backimage;
+    BaseLabel * title;
+    BaseLabel * time;
 
 }
 
@@ -27,7 +28,7 @@
 - (void)addview{
     WS(ws);
     navMenu = [NBCmenuView new];
-    navMenu.styles = NBCmenuViewStyleimage;
+//    navMenu.styles = NBCmenuViewStyleimage;
     navMenu.label.text = @"每日格言";
     [navMenu setBlock:^{
         [ws LookAll];
@@ -55,49 +56,59 @@
         make.bottom.mas_equalTo(ws).with.offset(-LENGTH(14));
     }];
     
-    backimage = [UIImageView new];
-    backimage.contentMode = UIViewContentModeScaleToFill;
-    [backview addSubview:backimage];
-    backimage.layer.cornerRadius = LENGTH(12);
-    backimage.layer.masksToBounds = YES;
-    
-    
-    imageview = [FLAnimatedImageView new];
-    imageview.contentMode = UIViewContentModeScaleToFill;
-//    imageview.layer.cornerRadius = LENGTH(12);
-    imageview.layer.masksToBounds = YES;
-
-    [backview addSubview:imageview];
-    [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(backview).with.insets(UIEdgeInsetsMake(LENGTH(18), LENGTH(13), LENGTH(18), LENGTH(13)));
-    }];
-    
-    [backimage mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView * backview1 = [UIView new];
+    backview1.layer.masksToBounds = YES;
+    backview1.layer.cornerRadius = LENGTH(12);
+    [backview addSubview:backview1];
+    [backview1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(backview);
     }];
     
+    backimage = [UIImageView new];
+    backimage.contentMode = UIViewContentModeScaleAspectFill;
+    backimage.layer.masksToBounds = YES;
+    backimage.backgroundColor = RGB(155, 155, 155);
+    [backview1 addSubview:backimage];
+    [backimage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.bottom.and.left.mas_equalTo(backview1);
+        make.size.mas_equalTo(CGSizeMake(LENGTH(91), LENGTH(88)));
+    }];
+    
+    time = [[BaseLabel alloc] initWithTxteColor:RGB(255, 255, 255) LabelFont:TextFontCu(18) TextAlignment:NSTextAlignmentCenter Text:@""];
+    [backimage addSubview:time];
+    [time mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self->backimage);
+    }];
+    
+    title = [[BaseLabel alloc] initWithTxteColor:RGB(3, 3, 3) LabelFont:TextFont(15) TextAlignment:NSTextAlignmentLeft Text:@""];
+    title.numberOfLines = 2;
+    [backview1 addSubview:title];
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(backview1);
+        make.left.mas_equalTo(self->backimage.mas_right).with.offset(LENGTH(16));
+        make.right.mas_equalTo(backview1).with.offset(-LENGTH(16));
+    }];
+    
+    self.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LookAll)];
+    [self addGestureRecognizer:tap];
 }
 
 - (void)setItemArray:(NSMutableArray *)itemArray{
     _itemArray = itemArray;
-    if (itemArray.count>0) {
-        WS(ws);
-        NHProverbModel * model = itemArray[0];
-        [imageview sd_setImageWithURL:URLIMAGE(model.img) completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            if (image != nil) {
-                [ws upimage:image];
-            }
-        }];
-        [backimage sd_setImageWithURL:URLIMAGE(model.proverbImg)];
-        
+    if (itemArray.count > 0) {
+        NHProverbModel * model = _itemArray[0];
+        NSCalendarUnit dayInfoUnits  = NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+        NSCalendar *gregorian = [[NSCalendar alloc]
+                                 initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        model.timedate = [gregorian components:dayInfoUnits fromDate:[BaseObject TimeStringForDate:model.show_time]];
+        [backimage sd_setImageWithURL:URLIMAGE(model.img)];
+        title.text = model.content;
+        time.text = [NSString stringWithFormat:@"%ld / %ld",model.timedate.month,model.timedate.day];
     }
+    
 }
-- (void)upimage:(UIImage *)image{
-    CGFloat bl = image.size.height/image.size.width*1.000;
-    [imageview mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(self->imageview.mas_width).multipliedBy(bl);
-    }];
-}
+
 - (void)layoutSubviews{
     [super layoutSubviews];
 //    self.layer.cornerRadius = LENGTH(12);

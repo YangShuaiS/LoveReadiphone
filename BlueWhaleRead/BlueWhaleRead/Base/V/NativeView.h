@@ -24,6 +24,7 @@
 @property (nonatomic, weak) id <NavDelegate> delegate;
 @property(nonatomic,strong) NSString * title;
 @property(nonatomic,strong) UIColor * titcolor;
+@property(nonatomic,strong) NSString * leftimage;
 
 @property(nonatomic,assign) BOOL downlayer;
 

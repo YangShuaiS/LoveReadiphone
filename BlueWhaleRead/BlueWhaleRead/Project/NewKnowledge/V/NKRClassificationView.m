@@ -8,8 +8,8 @@
 
 #import "NKRClassificationView.h"
 #import "NKRClassificationCollectionView.h"
-#define itemWidth (WIDTH - LENGTH(34)-LENGTH(20))/3
-#define itemHeight LENGTH(59)+LENGTH(5)+LENGTH(15)
+#define itemWidth LENGTH(107)
+#define itemHeight LENGTH(89)
 @implementation NKRClassificationView{
     NKRClassificationCollectionView * collectView;
 }
@@ -27,7 +27,7 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(itemWidth,itemHeight);
     //    //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = LENGTH(10);
+    flowLayout.minimumLineSpacing = LENGTH(17);
     //    //定义每个UICollectionView 纵向的间距
     flowLayout.minimumInteritemSpacing = 0;
     //    //定义每个UICollectionView 的边距距
@@ -38,7 +38,7 @@
     [self addSubview:collectView];
     [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(LENGTH(0));
-        make.top.equalTo(ws).with.offset(LENGTH(14));
+        make.top.equalTo(ws).with.offset(LENGTH(0));
         make.right.equalTo(ws).with.offset(LENGTH(0));
         make.bottom.equalTo(ws).with.offset(-LENGTH(14));
         make.height.mas_equalTo(itemHeight);

@@ -70,32 +70,45 @@
 #import "FenXiangModel.h"//分享
 
 #import "NBCALLModel.h"//新书成
+
+#import "BuyAllModel.h"//购买model
+#import "YSGmBouncedView.h"//通用提示弹框
+#import "BaseShareObject.h"
+
 @interface MeModel : BaseModel
+@property (nonatomic, copy) NSString *area;
 @property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, copy) NSString *code;
+@property (nonatomic, copy) NSString *birthday;//生日
+@property (nonatomic, copy) NSString *expire_time;
+@property (nonatomic, assign) NSInteger is_member;
+@property (nonatomic, copy) NSString *is_rebot;
+@property (nonatomic, copy) NSString *is_renew;
 @property (nonatomic, copy) NSString *level;
+@property (nonatomic, copy) NSString *member_begin_time;
+@property (nonatomic, copy) NSString *member_end_time;
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *num;
 @property (nonatomic, copy) NSString *phone;
 @property (nonatomic, copy) NSString *school_id;
 @property (nonatomic, copy) NSString *score;
 @property (nonatomic, copy) NSString *sex;
+@property (nonatomic, copy) NSString *source;
 @property (nonatomic, copy) NSString *ssid;
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSString *token;
-@property(nonatomic,assign)NSInteger loginStyle;//登录状态,1为登录成功
-@property (nonatomic, copy) NSString *userid;
-@property (nonatomic, copy) NSString *birthday;//生日
-
-@property (nonatomic, copy) NSString *area;
-@property (nonatomic, copy) NSString *expire_time;
-@property (nonatomic, copy) NSString *is_rebot;
-@property (nonatomic, copy) NSString *num;
-@property (nonatomic, copy) NSString *openid;
-@property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *true_class;
 @property (nonatomic, copy) NSString *true_school;
-@property (nonatomic, copy) NSString *unionid;
 @property (nonatomic, copy) NSString *uuid;
+
+
+@property(nonatomic,assign)NSInteger loginStyle;//登录状态,1为登录成功
+@property (nonatomic, copy) NSString *userid;
+
+@property (nonatomic, copy) NSString *openid;
+@property (nonatomic, copy) NSString *password;
+
+@property (nonatomic, copy) NSString *unionid;
 
 
 + (MeModel *)SharedModel;

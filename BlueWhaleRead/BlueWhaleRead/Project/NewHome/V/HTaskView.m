@@ -267,6 +267,8 @@
             [taskallView removeFromSuperview];
             taskallView = nil;
         }
+        [gettaskview removeFromSuperview];
+        gettaskview = nil;
         if (!gettaskview) {
             gettaskview = [HGetthetaskView new];
             [self addSubview:gettaskview];

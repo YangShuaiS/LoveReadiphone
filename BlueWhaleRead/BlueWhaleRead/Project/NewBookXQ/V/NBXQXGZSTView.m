@@ -9,8 +9,8 @@
 #import "NBXQXGZSTView.h"
 #import "NKRRecommendedCollectionView.h"
 #import "SearchMyHistoryViewController.h"
-#define itemWidth LENGTH(102)
-#define itemHeight LENGTH(102)*0.610561+LENGTH(15)+LENGTH(14)
+#define itemWidth LENGTH(162)
+#define itemHeight LENGTH(162)*0.610561+LENGTH(15)+LENGTH(14)
 @implementation NBXQXGZSTView{
     NKRRecommendedCollectionView * collectView;
     UIView * tab;
@@ -77,7 +77,7 @@
     
     collectView = [[NKRRecommendedCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
     collectView.style = 2;
-    collectView.allinter = 3;
+    collectView.allinter = 2;
     [self addSubview:collectView];
     [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws).with.offset(LENGTH(0));

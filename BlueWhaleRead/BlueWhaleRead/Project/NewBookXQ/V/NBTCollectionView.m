@@ -19,6 +19,7 @@
 #import "GuideDaTiOneView.h"
 #import "GuideDaTiThreeView.h"
 #import "GuideDaTiFourView.h"
+#import "BuyPopPurchaseView.h"
 @interface NBTCollectionView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
@@ -32,6 +33,7 @@
     NSString * zipname;
     TheTopPicModel * Topmodel;
     MBProgressHUD * mb ;
+    BuyPopPurchaseView *PopPurchase;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout{
@@ -107,7 +109,21 @@
         }
         
         if (indexPath.row == 3) {
-            [self createProgress];
+            if (Me.is_member == 0) {
+                if (PopPurchase == nil) {
+                    PopPurchase = [BuyPopPurchaseView new];
+                    PopPurchase.nav = [self viewController].navigationController;
+                    [[self viewController].view addSubview:PopPurchase];
+                    [PopPurchase mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.edges.mas_equalTo([self viewController].view);
+                    }];
+                    [PopPurchase setRemove:^{
+                        self->PopPurchase = nil;
+                    }];
+                }
+            }else{
+                [self createProgress];
+            }
         }
     }
 }
@@ -186,9 +202,8 @@
     return filePaths;
 }
 - (void)createProgress{
-    [mb showAnimated:YES];
-    self->mb.label.text = @"正在读取...";
-    [self->mb hideAnimated:YES afterDelay:1];
+    YSGmBouncedView * view = [[YSGmBouncedView alloc] initWithMessage:@"正在读取...."];
+    [view AddWindow];
     NSFileManager* fm=[NSFileManager defaultManager];
     NSString * paths = [self dataFilePath] ;
     NSArray *files = [fm subpathsAtPath:paths];
@@ -198,9 +213,12 @@
         NSURL *fileURL = [[NSBundle mainBundle] URLForAuxiliaryExecutable:booklujing];
         
         [DZMReadParser ParserLocalURLWithUrl:fileURL complete:^(DZMReadModel * _Nonnull readModel) {
-            [self->mb showAnimated:YES];
-            self->mb.label.text = @"读取成功";
-            [self->mb hideAnimated:YES afterDelay:1];
+//            [self->mb showAnimated:YES];
+//            self->mb.label.text = @"读取成功";
+//            [self->mb hideAnimated:YES afterDelay:1];
+            YSGmBouncedView * view = [[YSGmBouncedView alloc] initWithMessage:@"读取成功"];
+            [view AddWindow];
+
             DZMReadController * read = [[DZMReadController alloc] init];
             
             read.readModel = readModel;
@@ -208,9 +226,11 @@
             [[weakSelf viewController].navigationController pushViewController:read animated:YES];
         }];
     }else if ([files containsObject: [NSString stringWithFormat:@"%@",_model.book.name]]) {
-        [self->mb showAnimated:YES];
-        self->mb.label.text = @"读取成功";
-        [self->mb hideAnimated:YES afterDelay:1];
+//        [self->mb showAnimated:YES];
+//        self->mb.label.text = @"读取成功";
+//        [self->mb hideAnimated:YES afterDelay:1];
+        YSGmBouncedView * view = [[YSGmBouncedView alloc] initWithMessage:@"读取成功"];
+        [view AddWindow];
         bookpngfile = [NSString stringWithFormat:@"%@/%@",paths,_model.book.name];
         bookpng = [fm subpathsAtPath:bookpngfile];
         HuiBenViewController * vc = [HuiBenViewController new];
@@ -362,9 +382,11 @@
             NSURL *fileURL = [[NSBundle mainBundle] URLForAuxiliaryExecutable:booklujing];
             
             [DZMReadParser ParserLocalURLWithUrl:fileURL complete:^(DZMReadModel * _Nonnull readModel) {
-                [self->mb showAnimated:YES];
-                self->mb.label.text = @"读取成功";
-                [self->mb hideAnimated:YES afterDelay:1];
+//                [self->mb showAnimated:YES];
+//                self->mb.label.text = @"读取成功";
+//                [self->mb hideAnimated:YES afterDelay:1];
+                YSGmBouncedView * view = [[YSGmBouncedView alloc] initWithMessage:@"读取成功"];
+                [view AddWindow];
                 DZMReadController * read = [[DZMReadController alloc] init];
                 
                 read.readModel = readModel;
@@ -372,9 +394,11 @@
                 [[weakSelf viewController].navigationController pushViewController:read animated:YES];
             }];
         }else if ([files containsObject: [NSString stringWithFormat:@"%@",_model.book.name]]) {
-            [self->mb showAnimated:YES];
-            self->mb.label.text = @"读取成功";
-            [self->mb hideAnimated:YES afterDelay:1];
+//            [self->mb showAnimated:YES];
+//            self->mb.label.text = @"读取成功";
+//            [self->mb hideAnimated:YES afterDelay:1];
+            YSGmBouncedView * view = [[YSGmBouncedView alloc] initWithMessage:@"读取成功"];
+            [view AddWindow];
             bookpngfile = [NSString stringWithFormat:@"%@/%@",paths,_model.book.name];
             bookpng = [fm subpathsAtPath:bookpngfile];
             HuiBenViewController * vc = [HuiBenViewController new];

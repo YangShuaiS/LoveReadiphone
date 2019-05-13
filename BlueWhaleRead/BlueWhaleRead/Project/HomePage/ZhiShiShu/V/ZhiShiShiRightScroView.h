@@ -24,6 +24,8 @@ typedef void(^endanimaal)(void);
 @property(nonatomic,copy)clickssss blocks;
 @property(nonatomic,copy)endanimaal blockss;
 
+@property (nonatomic , strong)UIColor * backcolor;
+
 @end
 
 NS_ASSUME_NONNULL_END

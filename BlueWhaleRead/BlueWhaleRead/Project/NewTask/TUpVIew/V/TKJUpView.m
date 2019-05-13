@@ -238,13 +238,12 @@
 
 - (void)gengduo{
     TKMytaskViewController * vc = [TKMytaskViewController new];
-    
-    [self.nav pushViewController:vc animated:YES];
+    [self.nav pushViewController:vc animated:NO];
     [self removeFromSuperview];
 }
 - (void)ljtap{
     TKAwardViewController * vc = [TKAwardViewController new];
-    [self.nav pushViewController: vc animated:YES];
+    [self.nav pushViewController: vc animated:NO];
     [self removeFromSuperview];
 }
 - (void)setModel:(TKXSTaskXQModel *)model{

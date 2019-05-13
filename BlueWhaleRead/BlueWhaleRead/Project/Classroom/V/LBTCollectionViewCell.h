@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LBTCollectionViewCell : BaseCollectionViewCell
 @property (strong, nonatomic) LunboModel *model;
+@property (strong, nonatomic) NBCclassificationModel *modelZT;
 
 @end
 

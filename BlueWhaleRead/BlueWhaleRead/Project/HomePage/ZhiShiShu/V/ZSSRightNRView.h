@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZSSRightNRView : BaseView
 @property (nonatomic , strong)ZhiShiShuClickModel * model;
+@property (nonatomic , strong)UIColor * backcolor;
 
 @end
 

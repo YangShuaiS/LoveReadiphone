@@ -103,7 +103,7 @@
     }
     NSDictionary * dic = [NSDictionary dictionary];
     if ([_weizhi isEqualToString:@"1"]) {
-        dic = @{@"studentid":Me.ssid,@"type":_type,@"missionid":_missionid,@"friendid":_friendid,@"type":@"3",@"studentMissionid":@""};
+        dic = @{@"studentid":Me.ssid,@"missionid":_missionid,@"friendid":_friendid,@"type":@"3",@"studentMissionid":_studentMissionid};
         
     }else{
         dic = @{@"studentid":Me.ssid,@"type":_type,@"missionid":_missionid,@"friendid":_friendid};
@@ -131,7 +131,7 @@
     }else{
         if ([_friendid isEqualToString:@""]) {
             if (model.is_receive == 1) {
-                if ([model.missionStatus isEqualToString:@"3"]) {
+                if ([model.missionStatus isEqualToString:@"3"] || [model.missionStatus isEqualToString:@"2"]) {
                     if ([model.mission.mission_type isEqualToString:@"1"]) {
                         [self lingqu:model];
                     }else{

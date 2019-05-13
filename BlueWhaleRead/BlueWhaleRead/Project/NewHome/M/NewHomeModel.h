@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * prize_img;
 @property (nonatomic, copy) NSString * periods_num;//期数
 
+
+@property (nonatomic, copy) NSString * order_no;
+
 + (void)InitializeModel;
 @end
 
