@@ -57,7 +57,7 @@
     [self.superview layoutIfNeeded];
     CAGradientLayer * gradient = [CAGradientLayer layer];
     gradient.frame = jianbian.bounds;
-    gradient.colors = @[(id)[UIColor colorWithRed:3/255.0f green:0/255.0f blue:0/255.0f alpha:0.5].CGColor,(id)[UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:0].CGColor];
+    gradient.colors = @[(id)[UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:0.5].CGColor,(id)[UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:0].CGColor];
     gradient.locations = @[@0, @1];
     [gradient setStartPoint:CGPointMake(0, 1)];
     [gradient setEndPoint:CGPointMake(1, 1)];

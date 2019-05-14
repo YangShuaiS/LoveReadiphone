@@ -22,7 +22,7 @@
 #define MENU  LENGTH(53)
 
 #define kUserDefaults [NSUserDefaults standardUserDefaults]
-#define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+#define WS(weakSelf) __weak __typeof(&*self)weakSelf = self;
 #define IOS_X [UIDevice currentDevice].systemVersion
 #define Notloggedin 1000
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
@@ -44,16 +44,16 @@
 //#define IMAGEURL @"http://39.106.100.235:8081/"
 //#define IMAGEURL @"http://192.168.1.221:8080/"
 
-//#define IMAGEURL @"http://192.168.1.221:8081/"
+#define IMAGEURL @"http://192.168.1.221:8081/"
 //#define IMAGEURL @"http://119.90.89.88:8081/"
-#define IMAGEURL @"https://tiantianaidu.com/"
+//#define IMAGEURL @"https://tiantianaidu.com/"
 
-#define ZSTX @"https://knowledge.tiantianaidu.com/"//
-//#define ZSTX @"http://192.168.1.231:9003/"//最新内网
+//#define ZSTX @"https://knowledge.tiantianaidu.com/"//
+#define ZSTX @"http://192.168.1.231:9003/"//最新内网
 //#define ZSTX @"http://119.90.89.88:9003/"//外网
 
-//#define ZSTXIMAGEURL @"http://192.168.1.231:9003/"
-#define ZSTXIMAGEURL @"https://tiantianaidu.com/"
+#define ZSTXIMAGEURL @"http://192.168.1.231:9003/"
+//#define ZSTXIMAGEURL @"https://tiantianaidu.com/"
 
 
 #define JK_NOWBANBENHAO @"api/v1.0/returnVersion"//获取当前版本号

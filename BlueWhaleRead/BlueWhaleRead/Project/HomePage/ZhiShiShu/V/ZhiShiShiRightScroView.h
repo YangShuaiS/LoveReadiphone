@@ -9,21 +9,8 @@
 #import "BaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef void(^clickssss)(CGFloat scroy);
-typedef void(^endanimaal)(void);
-
-@interface ZhiShiShiRightScroView : BaseView<UIScrollViewDelegate>
+@interface ZhiShiShiRightScroView : BaseView
 @property (nonatomic , strong)NSMutableArray * itemarray;
-@property (nonatomic , assign)CGFloat scroy;
-@property (nonatomic , assign)CGFloat allheight;
-@property (nonatomic , assign)CGFloat topheight;
-@property (nonatomic , assign)CGFloat labelheight;
-
-
-@property(nonatomic,copy)clickssss blocks;
-@property(nonatomic,copy)endanimaal blockss;
-
 @property (nonatomic , strong)UIColor * backcolor;
 
 @end

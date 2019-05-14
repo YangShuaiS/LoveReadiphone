@@ -132,7 +132,6 @@
 }
 - (void)setZhiShiSHUmodel:(ZhiShiShuModel *)ZhiShiSHUmodel{
     NSString * str = [NSString stringWithFormat:@""];
-    [self addview];
     if ([ZhiShiSHUmodel.data.knowledgeGrade isKindOfClass:[NSMutableArray class]]) {
         if (ZhiShiSHUmodel.data.knowledgeGrade.count== 3) {
             [self addview];

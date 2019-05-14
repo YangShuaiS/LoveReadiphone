@@ -14,9 +14,9 @@ CGFloat poinw = 0;
 CGFloat iosVersionCode = 0;
 
 
-NSString * ZSFWQ = @"https://tiantianaidu.com/";
+//NSString * ZSFWQ = @"https://tiantianaidu.com/";
 //NSString * ZSFWQ = @"http://119.90.89.88:8085/";
-//NSString * ZSFWQ = @"http://192.168.1.221:8085/";
+NSString * ZSFWQ = @"http://192.168.1.221:8085/";
 //NSString * ZSFWQ = @"http://192.168.1.85:8069/";
 
 

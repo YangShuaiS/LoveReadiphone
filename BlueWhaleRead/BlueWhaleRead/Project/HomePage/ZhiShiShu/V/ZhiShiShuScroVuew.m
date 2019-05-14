@@ -50,6 +50,7 @@
     UIImageView * backroot;
     UIImageView * rightclick;
     BuyPopPurchaseView * PopPurchase;
+    UIImageView * imagevi;
 }
 - (void)setItemid:(NSString *)itemid{
     NSArray * array = [BaseObject TiemArray:itemid String:@","];
@@ -151,8 +152,6 @@
             [blockSelf->scrodownview layoutIfNeeded];
             [blockSelf layoutIfNeeded];
             blockSelf->ZSSView.newheight = blockSelf->scrodownview.frame.size.height+LENGTH(20);
-            
-            blockSelf->rightscroview.allheight = blockSelf->ZSSView.frame.size.height+ blockSelf->scrodownview.frame.size.height;
 
         }else{
             
@@ -533,20 +532,21 @@
     }];
     rightscroview.tag = 100;
 //    rightscroview.userInteractionEnabled = NO;
-    __block ZhiShiShuScroVuew * blockSelf = self;
-    [rightscroview setBlocks:^(CGFloat scroy) {
-        blockSelf->scroviewhd = NO;
-        blockSelf->guanxi.labelheight = scroy;
-        [blockSelf->scrollView setContentOffset:CGPointMake(blockSelf->scrollView.contentOffset.x, scroy) animated:NO];
-        [blockSelf->guanxi layoutIfNeeded];
-        [blockSelf->scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(blockSelf->nav.mas_bottom).with.offset(blockSelf->guanxi.frame.size.height);
-        }];
-        [blockSelf animalbegin];
+
+    
+    imagevi = [UIImageView new];
+    imagevi.contentMode = UIViewContentModeScaleAspectFit;
+    imagevi.image = UIIMAGE(@"收缩手势");
+    [self addSubview:imagevi];
+    [imagevi mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(ws);
+        make.right.mas_equalTo(self->rightscroview.mas_left);
+        make.size.mas_equalTo(CGSizeMake(LENGTH(self->imagevi.image.size.width), LENGTH(self->imagevi.image.size.height)));
     }];
-    [rightscroview setBlockss:^{
-        [blockSelf endanimal];
-    }];
+    
+    imagevi.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
+    [imagevi addGestureRecognizer:tap];
 
     
     
@@ -564,6 +564,10 @@
     scrodownview.sharetype = @"14";
     scrodownview.delegateArticleScroTop = self;
 
+}
+
+- (void)click{
+    NSLog(@"123");
 }
 
 -(void)pan:(UIPanGestureRecognizer *)pan{
@@ -723,7 +727,6 @@
         [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self->nav.mas_bottom).with.offset(self->guanxi.frame.size.height);
         }];
-        rightscroview.scroy = scrollView.contentOffset.y;
     }
     if (lastpoint.x+10 <scrollView.contentOffset.x||lastpoint.x-10>scrollView.contentOffset.x) {
         lastpoint = scrollView.contentOffset;
