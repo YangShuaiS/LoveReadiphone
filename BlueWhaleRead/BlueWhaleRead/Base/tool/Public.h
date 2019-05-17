@@ -98,7 +98,7 @@
 #define JK_REMOPINGLUN @"api/v1.0/delStudentComment"//删除评论
 #define JK_ADDDIANZAN @"api/v1.0/addStudentLike"//添加点赞
 #define JK_REMODIANZAN @"api/v1.0/deleteStudentLike"//移除点赞
-
+#define JK_ALLHOTZST @"api/v1.0/hotKnowledgeAll"//全部热门知识图
 
 
 

@@ -48,7 +48,9 @@
     }
     cell.nav = self.nav;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell. bookCase = BookCaseStyleSJWD;
+    cell.bookCase = BookCaseStyleSJWD;
+    cell.bookCase = BookCaseStyleSJYD;
+
     cell.unreadBookModel = _itemarray[indexPath.section];
     return cell;
     

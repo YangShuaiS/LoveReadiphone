@@ -9,8 +9,8 @@
 #import "NBXQXGZSTView.h"
 #import "NKRRecommendedCollectionView.h"
 #import "SearchMyHistoryViewController.h"
-#define itemWidth LENGTH(162)
-#define itemHeight LENGTH(162)*0.610561+LENGTH(15)+LENGTH(14)
+#define itemWidth LENGTH(163)
+#define itemHeight LENGTH(163)*0.552147+LENGTH(10)+LENGTH(14)
 @implementation NBXQXGZSTView{
     NKRRecommendedCollectionView * collectView;
     UIView * tab;

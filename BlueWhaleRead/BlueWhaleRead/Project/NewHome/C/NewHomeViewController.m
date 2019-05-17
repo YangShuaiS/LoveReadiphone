@@ -162,8 +162,8 @@
     prover.nav = self.navigationController;
     [viewarray addObject:prover];
     
-//    BuyTemporaryView * vc = [BuyTemporaryView new];
-//    [viewarray addObject:vc];
+    BuyTemporaryView * vc = [BuyTemporaryView new];
+    [viewarray addObject:vc];
     
     alltask = [HAllTaskView new];
     alltask.nav = self.navigationController;

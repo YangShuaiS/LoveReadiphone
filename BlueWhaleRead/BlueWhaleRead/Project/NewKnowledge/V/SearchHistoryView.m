@@ -55,7 +55,7 @@
     //将手势添加到需要相应的view中去
     [click addGestureRecognizer:backtap];
     
-    SearchFlowLayout *flowLayout = [[SearchFlowLayout alloc] init];
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
 //        flowLayout.itemSize = CGSizeMake(100,30);
     flowLayout.estimatedItemSize = CGSizeMake(20, 60);  // layout约束这边必须要用estimatedItemSize才能实现自适应,使用itemSzie无效
     

@@ -8,6 +8,7 @@
 
 #import "NBXQMyClassTableView.h"
 #import "NBXQMyClassTableViewCell.h"
+#import "FriendViewController.h"
 @interface NBXQMyClassTableView()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -75,10 +76,10 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    BookXQReadFriendModel * mo = _itemarray[indexPath.section];
-//    FriendViewController * vc = [FriendViewController new];
-//    vc.itemid = mo.ssid;
-//    [self.nav pushViewController:vc animated:YES];
+    BookXQReadFriendModel * mo = _itemarray[indexPath.section];
+    FriendViewController * vc = [FriendViewController new];
+    vc.itemid = mo.ssid;
+    [[self viewController].navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setItemarray:(NSMutableArray *)itemarray{

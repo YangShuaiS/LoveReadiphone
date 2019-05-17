@@ -15,6 +15,7 @@ typedef void(^Reloade)(void);
 @interface BuyPaymentButtonView : BaseView<SKPaymentTransactionObserver,SKProductsRequestDelegate>
 @property (nonatomic, strong) BuyPackage * model;
 @property(nonatomic,copy)Reloade reloade;
+@property (nonatomic, strong) BuyAllModel * models;
 
 @end
 

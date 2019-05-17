@@ -7,12 +7,12 @@
 //
 
 #import "BaseView.h"
+#import "NKRHotKnowledgeCollectionView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NKRHotKnowledgeView : BaseView
+@interface NKRHotKnowledgeView : BaseView<NBCBookDanPageControlDelegate>
 @property(nonatomic,strong)NSMutableArray * itemArray;
-@property(nonatomic,assign)NSInteger allpage;
 
 @end
 

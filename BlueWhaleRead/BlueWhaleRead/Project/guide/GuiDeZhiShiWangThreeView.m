@@ -8,7 +8,7 @@
 
 #import "GuiDeZhiShiWangThreeView.h"
 //#define itemHeight LENGTH(162)*0.610561+LENGTH(15)+LENGTH(16)+LENGTH(5)+LENGTH(16)+LENGTH(17)
-#define itemHeight LENGTH(162)*0.610561+LENGTH(15)+LENGTH(16)+LENGTH(5)+LENGTH(16)
+#define itemHeight LENGTH(163)*0.552147+LENGTH(10)+LENGTH(14)+LENGTH(3)+LENGTH(12)
 
 @implementation GuiDeZhiShiWangThreeView
 

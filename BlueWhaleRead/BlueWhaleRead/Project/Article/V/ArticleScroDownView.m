@@ -202,4 +202,8 @@
 - (void)ArticleSharDianZan{
     [self.delegateArticleScroTop ArticleScroTopViewDianZan];
 }
+- (void)setSfzsw:(NSInteger)sfzsw{
+    _sfzsw = sfzsw;
+    _share.sfzsw = sfzsw;
+}
 @end

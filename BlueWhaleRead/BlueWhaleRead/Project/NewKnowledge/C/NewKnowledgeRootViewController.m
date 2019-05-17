@@ -329,7 +329,7 @@
     channel.itemArray = model.bannerList;
     NKRCView.itemArray = model.knowledgeData;
     topFL.itemarray = model.knowledgeData;
-    hotkledge.allpage = [model.hotKnowledgeNum integerValue];
+//    hotkledge.allpage = [model.hotKnowledgeNum integerValue];
     hotkledge.itemArray = model.hotKnowledge;
     TJContextView.itemArray = model.knowledges;
     recommended.itemArray = model.myHistory;
@@ -478,13 +478,11 @@
         [self kaijiangdaojishi];
         [dataDictionary setValue:currentTimeString forKey:@"ljrqtime"];
         [dataDictionary writeToFile:filePatch atomically:YES];
-    }
-    if (![model.wcrwtime isEqualToString:currentTimeString]){
+    }else if (![model.wcrwtime isEqualToString:currentTimeString]){
         [self xinshourenwuwancheng];
         [dataDictionary setValue:currentTimeString forKey:@"wcrwtime"];
         [dataDictionary writeToFile:filePatch atomically:YES];
-    }
-    if (![model.ljymtime isEqualToString:currentTimeString]){
+    }else if (![model.ljymtime isEqualToString:currentTimeString]){
         [self wanchengrenwu];
         [dataDictionary setValue:currentTimeString forKey:@"ljymtime"];
         [dataDictionary writeToFile:filePatch atomically:YES];

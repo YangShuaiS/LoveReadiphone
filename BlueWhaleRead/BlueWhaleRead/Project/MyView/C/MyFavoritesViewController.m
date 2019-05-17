@@ -11,7 +11,7 @@
 #import "MyFavoritesDownView.h"
 #import "ShouCangMenuView.h"
 #define itemWidth LENGTH(162)
-#define itemHeight1 LENGTH(162*0.610561)+LENGTH(15)+LENGTH(20)+LENGTH(5)+LENGTH(16)
+#define itemHeight1 LENGTH(162*0.610561)+LENGTH(14)+LENGTH(14)+LENGTH(3)+LENGTH(14)
 
 #import "ShouCangTableView.h"
 @interface MyFavoritesViewController ()<NavDelegate>

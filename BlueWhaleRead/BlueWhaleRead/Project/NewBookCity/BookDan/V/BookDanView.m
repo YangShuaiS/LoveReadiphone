@@ -7,8 +7,11 @@
 //
 
 #import "BookDanView.h"
+#import "StareMoreView.h"
 
 @implementation BookDanView{
+    StareMoreView * stareview;
+    BaseLabel * fenshu;
     FLAnimatedImageView * leftImage;
     BaseLabel * Title;
     BaseLabel * subtitle;
@@ -30,11 +33,26 @@
     FLAnimatedImageView * nolikeimage;
     UIView * yy;
 
+    UIView * topbackview;
+    UIImageView * topimageview;
+    MBProgressHUD * mb;
+
 }
 - (instancetype)init
 {
     self = [super init];
     if (self) {
+        mb = [MBProgressHUD new];
+        mb.label.text = @"";
+        mb.mode = MBProgressHUDModeText;
+        //        [mb showAnimated:YES];
+        mb.removeFromSuperViewOnHide = NO;
+        mb.label.numberOfLines = 0;
+        //        [mb hideAnimated:YES afterDelay:0];
+        [[[[UIApplication sharedApplication] delegate] window] addSubview:mb];
+        [mb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo([[[UIApplication sharedApplication] delegate] window]);
+        }];
         [self addview];
     }
     return self;
@@ -75,6 +93,26 @@
     leftImage.image = UIIMAGE(ZHANWEITUSHU);
     [yy addSubview:leftImage];
     
+    topbackview = [UIView new];
+    topbackview.backgroundColor = RGBA(0, 0, 0, 0.5);
+    [yy addSubview:topbackview];
+    [topbackview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.top.mas_equalTo(self->yy);
+        make.size.mas_equalTo(CGSizeMake(LENGTH(28), LENGTH(23)));
+    }];
+    
+    topimageview = [UIImageView new];
+    topimageview.contentMode = UIViewContentModeScaleAspectFit;
+    topimageview.image = UIIMAGE(@"添加");
+    [topbackview addSubview:topimageview];
+    [topimageview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self->topbackview);
+        make.size.mas_equalTo(CGSizeMake(LENGTH(18), LENGTH(15)));
+    }];
+    topbackview.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ShouCang)];
+    [topbackview addGestureRecognizer:tap];
+    
     UIImageView * xian = [UIImageView new];
     xian.image = UIIMAGE(@"书线");
     [yy addSubview:xian];
@@ -89,12 +127,13 @@
     UIView * backxx = [UIView new];
     backxx.backgroundColor = RGBA(0, 0, 0, 0.6);
     [leftImage addSubview:backxx];
-    _jKStarDisplayView = [[JKStarDisplayView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
-    self.jKStarDisplayView.redValue = [@"0" floatValue];
-    [leftImage addSubview:self.jKStarDisplayView];
-    [backxx mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws.jKStarDisplayView).with.insets(UIEdgeInsetsMake(-LENGTH(2), -LENGTH(2), -LENGTH(2), -LENGTH(2)));
-    }];
+    
+    stareview = [StareMoreView new];
+    [self addSubview:stareview];
+
+    fenshu = [[BaseLabel alloc] initWithTxteColor:RGB(153, 153, 153) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentCenter Text:@"9.0"];
+    [self addSubview:fenshu];
+    
     
     subtitle = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@""];
     [self addSubview:subtitle];
@@ -102,8 +141,9 @@
     fuwenben = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(137,159,159) LabelFont:TextFont(14) TextAlignment:NSTextAlignmentLeft Text:@"阅读分级: 0   分值: 0"];
     [self addSubview:fuwenben];
     
-    zxyd = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(240,179,0) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentLeft Text:@"可在线阅读"];
-    [self addSubview:zxyd];
+    zxyd = [[BaseLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0) LabelTxteColor:RGB(255,255,255) LabelFont:TextFont(11) TextAlignment:NSTextAlignmentCenter Text:@"在线阅读"];
+    zxyd.backgroundColor = RGB(91,199,198);
+    [yy addSubview:zxyd];
     
     huo = [UIImageView new];
     huo.contentMode = UIViewContentModeScaleAspectFit;
@@ -125,6 +165,7 @@
             
             break;
         case BookCaseStyleYD:
+            
             break;
         case BookCaseStyleHomeWD:
             
@@ -193,18 +234,20 @@
         make.right.equalTo(ws).with.offset(-LENGTH(12));
     }];
     
-    [_jKStarDisplayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self->leftImage.mas_bottom).with.offset(-LENGTH(2));
-        make.right.equalTo(self->leftImage.mas_right).with.offset(-LENGTH(2));
-        make.width.mas_equalTo(LENGTH(75));
-        make.height.mas_equalTo(LENGTH(14));
-        //       make.right.equalTo(ws).with.offset(-12);
+    [stareview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self->leftImage.mas_right).with.offset(LENGTH(16));
+        make.top.equalTo(self->Title.mas_bottom).with.offset(LENGTH(6.5));
+        make.width.mas_equalTo(LENGTH(60));
+    }];
+    
+    [fenshu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self->stareview.mas_right).with.offset(LENGTH(8));
+        make.centerY.mas_equalTo(self->stareview);
     }];
     
     
-    
     [subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->Title.mas_bottom).with.offset(LENGTH(6.5));
+        make.top.equalTo(self->stareview.mas_bottom).with.offset(LENGTH(6.5));
         make.left.equalTo(self->leftImage.mas_right).with.offset(LENGTH(16));
         make.right.equalTo(ws).with.offset(-LENGTH(12));
     }];
@@ -219,13 +262,13 @@
     }];
     
     [zxyd mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->fuwenben.mas_bottom).with.offset(LENGTH(11));
-        make.left.equalTo(self->leftImage.mas_right).with.offset(LENGTH(16));
-        make.right.equalTo(ws).with.offset(-LENGTH(12));
+        make.right.equalTo(self->yy.mas_right);
+        make.bottom.mas_equalTo(self->leftImage);
+        make.size.mas_equalTo(CGSizeMake(LENGTH(55), LENGTH(17)));
     }];
     
     [huo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self->zxyd.mas_bottom).with.offset(LENGTH(12));
+        make.bottom.equalTo(self->leftImage.mas_bottom);
         make.left.equalTo(self->leftImage.mas_right).with.offset(LENGTH(16));
         make.width.mas_equalTo(LENGTH(8));
         make.height.mas_equalTo(LENGTH(12));
@@ -351,7 +394,9 @@
         zxyd.hidden = YES;
     }
     Title.text = model.name;
-    self.jKStarDisplayView.redValue = [model.mark floatValue];
+    stareview.redValue = [model.mark floatValue];
+    fenshu.text = [NSString stringWithFormat:@"%.1f",[model.mark floatValue]*2.0];
+
     subtitle.text = model.author;
     
     NSString * book = model.levels;
@@ -378,7 +423,11 @@
     }else{
         RightImage.hidden = YES;
     }
-    
+    if (_model.is_read == 0) {
+        topimageview.image = UIIMAGE(@"添加");
+    }else{
+        topimageview.image = UIIMAGE(@"收藏-收藏状态");
+    }
 }
 
 - (void)setAllmodel:(AllBookListModel *)allmodel{
@@ -390,7 +439,9 @@
     }
     [leftImage sd_setImageWithURL:URLIMAGE(allmodel.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = allmodel.name;
-    self.jKStarDisplayView.redValue = [allmodel.mark floatValue];
+    stareview.redValue = [allmodel.mark floatValue];
+    fenshu.text = [NSString stringWithFormat:@"%.1f",[allmodel.mark floatValue]*2.0];
+
     subtitle.text = allmodel.author;
     
     NSString * book = allmodel.levels;
@@ -412,11 +463,17 @@
     
     RightImage.hidden = YES;
     
-    if (_model.is_read == 2) {
+    if (allmodel.is_read == 2) {
         RightImage.hidden = NO;
     }else{
         RightImage.hidden = YES;
     }
+    if (allmodel.is_read == 0) {
+        topimageview.image = UIIMAGE(@"添加");
+    }else{
+        topimageview.image = UIIMAGE(@"收藏-收藏状态");
+    }
+    
 }
 
 - (void)setUnreadBookModel:(UnreadBookModel *)unreadBookModel{
@@ -428,7 +485,9 @@
     }
     [leftImage sd_setImageWithURL:URLIMAGE(unreadBookModel.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = unreadBookModel.name;
-    self.jKStarDisplayView.redValue = [unreadBookModel.mark floatValue];
+    stareview.redValue = [unreadBookModel.mark floatValue];
+    fenshu.text = [NSString stringWithFormat:@"%.1f",[unreadBookModel.mark floatValue]*2.0];
+
     subtitle.text = unreadBookModel.author;
     
     NSString * book = unreadBookModel.levels;
@@ -452,6 +511,11 @@
     }else{
         title.text = [NSString stringWithFormat:@"今日剩余%ld次答题机会",unreadBookModel.dayTimes];
     }
+    if (unreadBookModel.is_read == 0) {
+        topimageview.image = UIIMAGE(@"添加");
+    }else{
+        topimageview.image = UIIMAGE(@"收藏-收藏状态");
+    }
 }
 
 - (void)setReadBookModel:(ReadbookModel *)readBookModel{
@@ -463,7 +527,9 @@
     }
     [leftImage sd_setImageWithURL:URLIMAGE(readBookModel.cover) placeholderImage:UIIMAGE(ZHANWEITUSHU)];
     Title.text = readBookModel.name;
-    self.jKStarDisplayView.redValue = [readBookModel.mark floatValue];
+    stareview.redValue = [readBookModel.mark floatValue];
+    fenshu.text = [NSString stringWithFormat:@"%.1f",[readBookModel.mark floatValue]*2.0];
+
     subtitle.text = readBookModel.author;
     
     NSString * book = readBookModel.levels;
@@ -492,6 +558,11 @@
     }else{
         likeimage.image = UIIMAGE(@"icon_喜欢_未选中");
         nolikeimage.image = UIIMAGE(@"icon_不喜欢_选中");
+    }
+    if (readBookModel.is_read == 0) {
+        topimageview.image = UIIMAGE(@"添加");
+    }else{
+        topimageview.image = UIIMAGE(@"收藏-收藏状态");
     }
 }
 
@@ -559,5 +630,167 @@
     //赋值
     maskLayer.path = maskPath.CGPath;
     yy.layer.mask = maskLayer;
+    
+    UIBezierPath *maskPath2 = [UIBezierPath bezierPathWithRoundedRect:topbackview.bounds byRoundingCorners:UIRectCornerBottomRight cornerRadii:CGSizeMake(LENGTH(5),LENGTH(5))];
+    //创建 layer
+    CAShapeLayer *maskLayer2 = [[CAShapeLayer alloc] init];
+    maskLayer2.frame = topbackview.bounds;
+    //赋值
+    maskLayer2.path = maskPath2.CGPath;
+    topbackview.layer.mask = maskLayer2;
+    
+    UIBezierPath *maskPath3 = [UIBezierPath bezierPathWithRoundedRect:zxyd.bounds byRoundingCorners:UIRectCornerTopLeft cornerRadii:CGSizeMake(LENGTH(5),LENGTH(5))];
+    //创建 layer
+    CAShapeLayer *maskLayer3 = [[CAShapeLayer alloc] init];
+    maskLayer3.frame = zxyd.bounds;
+    //赋值
+    maskLayer3.path = maskPath3.CGPath;
+    zxyd.layer.mask = maskLayer3;
 }
+
+- (void)ShouCang{
+    if (_model != nil) {
+        if (_model.is_read == 0) {
+            [self addbookcity:_model.ssid];
+        }else if (_model.is_read == 1){
+            [self remobookcity:_model.ssid];
+        }else{
+            [mb showAnimated:YES];
+            mb.label.text = @"这是已读完书籍\n会永远保存在你的书架里哦～";
+            [mb hideAnimated:YES afterDelay:1];
+        }
+    }
+    
+    if (_allmodel != nil) {
+        if (_allmodel.is_read == 0) {
+            [self addbookcity:_allmodel.ssid];
+        }else if (_allmodel.is_read == 1){
+            [self remobookcity:_allmodel.ssid];
+        }else{
+            [mb showAnimated:YES];
+            mb.label.text = @"这是已读完书籍\n会永远保存在你的书架里哦～";
+            [mb hideAnimated:YES afterDelay:1];
+        }
+    }
+    
+    
+    if (_unreadBookModel != nil) {
+        if (_unreadBookModel.is_read == 0) {
+            [self addbookcity:_unreadBookModel.ssid];
+        }else if (_unreadBookModel.is_read == 1){
+            [self remobookcity:_unreadBookModel.ssid];
+        }else{
+            [mb showAnimated:YES];
+            mb.label.text = @"这是已读完书籍\n会永远保存在你的书架里哦～";
+            [mb hideAnimated:YES afterDelay:1];
+        }
+    }
+    
+    
+    
+    if (_readBookModel != nil) {
+        if (_readBookModel.is_read == 0) {
+            [self addbookcity:_readBookModel.ssid];
+        }else if (_readBookModel.is_read == 1){
+            [self remobookcity:_readBookModel.ssid];
+        }else{
+            [mb showAnimated:YES];
+            mb.label.text = @"这是已读完书籍\n会永远保存在你的书架里哦～";
+            [mb hideAnimated:YES afterDelay:1];
+        }
+    }
+    
+    
+}
+
+- (void)upmodelshchu{
+    topimageview.image = UIIMAGE(@"添加");
+    if (_model != nil) {
+        _model.is_read = 0;
+    }
+    
+    if (_allmodel != nil) {
+        _allmodel.is_read = 0;
+    }
+    
+    if (_unreadBookModel != nil) {
+        _unreadBookModel.is_read = 0;
+    }
+    
+    if (_readBookModel != nil) {
+        _readBookModel.is_read = 0;
+    }
+}
+- (void)upmodelyijiaru{
+    topimageview.image = UIIMAGE(@"收藏-收藏状态");
+    
+    if (_model != nil) {
+        _model.is_read = 1;
+    }
+    
+    if (_allmodel != nil) {
+        _allmodel.is_read = 1;
+    }
+    
+    
+    if (_unreadBookModel != nil) {
+        _unreadBookModel.is_read = 1;
+        
+    }
+    
+    if (_readBookModel != nil) {
+        _readBookModel.is_read = 1;
+    }
+    
+}
+- (void)addbookcity:(NSString *)ssid{
+    WS(ws);
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_JOOINBOOKCITY];
+    //studentid 学生id
+    NSDictionary * dic = @{@"bookid":ssid,@"studentid":Me.ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            JoinBookModel * models = [JoinBookModel mj_objectWithKeyValues:responseObject];
+            if ([models.code isEqual:@200]) {
+                [ws upmodelyijiaru];
+                //                [ws addshoucang];
+            }else if ([models.code isEqual:@Notloggedin]){
+                
+            }
+            [self->mb showAnimated:YES];
+            self->mb.label.text = models.message;
+            [self->mb hideAnimated:YES afterDelay:1];
+        }else{
+            [self->mb showAnimated:YES];
+            self->mb.label.text = @"网络请求失败";
+            [self->mb hideAnimated:YES afterDelay:1];
+        }
+    }];
+}
+
+- (void)remobookcity:(NSString *)ssid{
+    WS(ws);
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_REMOVEBOOKCITY];
+    NSDictionary * dic = @{@"bookid":ssid,@"studentid":Me.ssid};
+    
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            TheTopPicModel *Topmodel = [TheTopPicModel mj_objectWithKeyValues:responseObject];
+            if ([Topmodel.code isEqual:@200]) {
+                [ws upmodelshchu];
+                
+            }else if ([Topmodel.code isEqual:@Notloggedin]){
+            }
+            [self->mb showAnimated:YES];
+            self->mb.label.text = Topmodel.message;
+            [self->mb hideAnimated:YES afterDelay:1];
+        }else{
+            [self->mb showAnimated:YES];
+            self->mb.label.text = @"网络请求失败";
+            [self->mb hideAnimated:YES afterDelay:1];
+        }
+    }];
+}
+
 @end

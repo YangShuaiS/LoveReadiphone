@@ -257,10 +257,11 @@
         NewBookTopClickModel * clickmodel = [NewBookTopClickModel new];
         if (i == 0) {
             clickmodel.title = @"我喜欢";
-            if (_model.book.is_like==0) {
-                clickmodel.image =@"组 457";
+            if (_model.book.is_read==1 || _model.book.is_read==2 || _model.book.is_read==99) {
+                clickmodel.image =@"收藏-收藏状态";
             }else{
-                clickmodel.image =@"组 459";
+                clickmodel.image =@"收藏-未收藏状态";
+
             }
             clickmodel.is_like = _model.book.is_like;
             clickmodel.style = 0;

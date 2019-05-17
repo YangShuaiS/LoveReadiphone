@@ -52,5 +52,4 @@
     attributes.frame = rect;
     return attributes;
 }
-
 @end

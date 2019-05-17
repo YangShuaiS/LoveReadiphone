@@ -83,6 +83,7 @@
     }
 
     if (_sfzsw == 1) {
+        
     }else{
         _sc = [[ArticleShareAnyOnelyView alloc] initWithImage:scimage Title:[NSString stringWithFormat:@"%ld",scinter]];
 //        [self addSubview:_sc];

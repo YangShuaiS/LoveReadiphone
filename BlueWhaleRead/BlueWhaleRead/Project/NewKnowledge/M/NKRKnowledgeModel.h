@@ -28,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger banner_type;
 
+@property (nonatomic, assign) NSInteger style;//cell样式
+
+
 @end
 
 NS_ASSUME_NONNULL_END

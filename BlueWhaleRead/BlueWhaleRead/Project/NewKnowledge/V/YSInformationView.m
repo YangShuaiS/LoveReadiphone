@@ -28,6 +28,7 @@
     return self;
 }
 - (void)addview{
+    self.backgroundColor = [UIColor clearColor];
     imageView = [FLAnimatedImageView new];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.layer.masksToBounds = YES;
@@ -112,16 +113,18 @@
     WS(ws);
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.and.right.mas_equalTo(ws);
-        make.height.mas_equalTo(self->imageView.mas_width).multipliedBy(1.422857);
+        make.height.mas_equalTo(self->imageView.mas_width).multipliedBy(1.423312);
     }];
     
     [onetitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->imageView.mas_bottom).with.offset(LENGTH(14));
+        make.top.mas_equalTo(self->imageView.mas_bottom).with.offset(LENGTH(10));
+        make.height.mas_equalTo(LENGTH(14));
         make.left.and.right.mas_equalTo(ws);
     }];
     
     [twotitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->onetitle.mas_bottom).with.offset(LENGTH(3));
+        make.height.mas_equalTo(LENGTH(12));
         make.left.and.right.mas_equalTo(ws);
     }];
 }
@@ -129,11 +132,12 @@
     WS(ws);
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.and.right.mas_equalTo(ws);
-        make.height.mas_equalTo(self->imageView.mas_width).multipliedBy(0.610561);
+        make.height.mas_equalTo(self->imageView.mas_width).multipliedBy(0.552147);
     }];
     
     [onetitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->imageView.mas_bottom).with.offset(LENGTH(13));
+        make.top.mas_equalTo(self->imageView.mas_bottom).with.offset(LENGTH(10));
+        make.height.mas_equalTo(LENGTH(14));
         make.left.and.right.mas_equalTo(ws);
     }];
 }
@@ -142,16 +146,18 @@
     WS(ws);
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.and.right.mas_equalTo(ws);
-        make.height.mas_equalTo(self->imageView.mas_width).multipliedBy(0.610561);
+        make.height.mas_equalTo(self->imageView.mas_width).multipliedBy(0.552147);
     }];
     
     [onetitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self->imageView.mas_bottom).with.offset(LENGTH(14));
+        make.top.mas_equalTo(self->imageView.mas_bottom).with.offset(LENGTH(10));
+        make.height.mas_equalTo(LENGTH(14));
         make.left.and.right.mas_equalTo(ws);
     }];
     
     [twotitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self->onetitle.mas_bottom).with.offset(LENGTH(3));
+        make.height.mas_equalTo(LENGTH(12));
         make.left.and.right.mas_equalTo(ws);
     }];
 }

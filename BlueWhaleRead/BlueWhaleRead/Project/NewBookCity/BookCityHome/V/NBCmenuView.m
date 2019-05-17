@@ -62,12 +62,19 @@
 - (void)NBCmenuViewStyleimage{
     WS(ws);
     bakimage = [FLAnimatedImageView new];
-    bakimage.image = UIIMAGE(@"更多—箭头图标");
+    bakimage.image = UIIMAGE(@"查看更多");
     [self addSubview:bakimage];
     [bakimage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(ws).with.offset(-LENGTH(22));
+        make.right.mas_equalTo(ws).with.offset(-LENGTH(17));
         make.centerY.mas_equalTo(ws.label);
-        make.size.mas_equalTo(CGSizeMake(LENGTH(20), LENGTH(20)));
+        make.size.mas_equalTo(CGSizeMake(LENGTH(6), LENGTH(10)));
+    }];
+    
+    BaseLabel * title = [[BaseLabel alloc] initWithTxteColor:RGB(150, 150, 150) LabelFont:TextFont(12) TextAlignment:NSTextAlignmentCenter Text:@"查看更多"];
+    [self addSubview:title];
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(ws.label);
+        make.right.mas_equalTo(self->bakimage.mas_left).with.offset(-LENGTH(5));
     }];
     
     UIView * tab = [UIView new];

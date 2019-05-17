@@ -7,18 +7,21 @@
 //
 
 #import "SearchMyHistoryViewController.h"
-#define itemWidth LENGTH(162)
-#define itemHeight LENGTH(162)*0.610561+LENGTH(15)+LENGTH(14)
-#define itemHeightone LENGTH(162*0.610561)+LENGTH(15)+LENGTH(20)+LENGTH(5)+LENGTH(16)
+//#define itemWidth LENGTH(162)
+#define itemHeight LENGTH(163)*0.552147+LENGTH(10)+LENGTH(14)
+#define itemHeightone LENGTH(163)*0.552147+LENGTH(10)+LENGTH(14)+LENGTH(3)+LENGTH(12)
+#define itemHeighttwo LENGTH(163)*1.423312+LENGTH(10)+LENGTH(14)+LENGTH(3)+LENGTH(12)
+#import "SearchFlowLayout.h"
+#import "NKRArmPBLCollectionView.h"
 
-#import "NKRRecommendedCollectionView.h"
-
-@interface SearchMyHistoryViewController ()<NavDelegate>
+@interface SearchMyHistoryViewController ()<NavDelegate,LMHWaterFallLayoutDeleaget>
 
 @end
 
 @implementation SearchMyHistoryViewController{
-    NKRRecommendedCollectionView * collectView;
+    NKRArmPBLCollectionView * collectView;
+    SearchFlowLayout * flowLayout;
+    NSMutableArray * itemarray;
 }
 
 - (void)viewDidLoad {
@@ -26,36 +29,42 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self AddNavtion];
     WS(ws);
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    if (_style == 2) {
-        flowLayout.itemSize = CGSizeMake(itemWidth,itemHeight);
-    }else{
-        flowLayout.itemSize = CGSizeMake(itemWidth,itemHeightone);
+    flowLayout = [[SearchFlowLayout alloc] init];
+//    if (_style == 2) {
+//        flowLayout.itemSize = CGSizeMake(itemWidth,itemHeight);
+//    }else{
+//        flowLayout.itemSize = CGSizeMake(itemWidth,itemHeightone);
+//
+//    }
+//    flowLayout.estimatedItemSize = CGSizeMake(20, 60);  // layout约束这边必须要用estimatedItemSize才能实现自适应,使用itemSzie无效
 
-    }
     //    //定义每个UICollectionView 横向的间距
-    flowLayout.minimumLineSpacing = LENGTH(15);
-    //    //定义每个UICollectionView 纵向的间距
-    flowLayout.minimumInteritemSpacing = 0;
-    //    //定义每个UICollectionView 的边距距
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, LENGTH(17), TabBarHeight, LENGTH(17));//上左下右
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    
-    collectView = [[NKRRecommendedCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
+    flowLayout.LMHDefaultColunmCount = 2;
+    flowLayout.LMHDefaultColunmMargin = LENGTH(15);
+    flowLayout.LMHDefaultRowMargin = LENGTH(10);
+    flowLayout.LMHDefaultEdgeInsets =UIEdgeInsetsMake(0, LENGTH(17), TabBarHeight+LENGTH(100), LENGTH(17));//上左下右
+//    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    flowLayout.delegate = self;
+//    collectView = [[NKRArmPBLCollectionView alloc] initWithFrame:CGRectMake(0, 0, 0,0) collectionViewLayout:flowLayout];
+    collectView = [[NKRArmPBLCollectionView alloc]initWithFrame:CGRectMake(0, NavHeight, WIDTH, HEIGHT) collectionViewLayout:flowLayout];
+
     collectView.style = _style;
+    collectView.sfsj = 1;
     [self.view addSubview:collectView];
-    [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ws.view).with.offset(LENGTH(0));
-        make.top.equalTo(ws.navtive.mas_bottom).with.offset(LENGTH(6));
-        make.right.equalTo(ws.view).with.offset(LENGTH(0));
-        make.bottom.equalTo(ws.view);
-    }];
+//    [collectView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(ws.view).with.offset(LENGTH(0));
+//        make.top.equalTo(ws.navtive.mas_bottom).with.offset(LENGTH(6));
+//        make.right.equalTo(ws.view).with.offset(LENGTH(0));
+//        make.bottom.equalTo(ws.view);
+//    }];
     if (_style == 2) {
         [self LoadData];
     }else if (_style == 3){
         [self LoadDataXGTj];
     }else if (_style == 4){
         [self LoadDataBookXqXGTj];
+    }else if (_style == 5){
+        [self LoadDataHot];
     }
 }
 #pragma mark --------------------  导航栏以及代理
@@ -141,14 +150,79 @@
     }];
 }
 
+- (void)LoadDataHot{
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_ALLHOTZST];
+    NSDictionary * dic = @{@"studentid":Me.ssid};
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            NewKnowledgeModel * model = [NewKnowledgeModel mj_objectWithKeyValues:responseObject];
+//            if ([model.code isEqual:@200]) {
+                [self UpData:model];
+//            }else if ([model.code isEqual:@Notloggedin]){
+//                [self UpDengLu];
+//            }
+        }else{
+            
+        }
+    }];
+}
 - (void)UpData:(NewKnowledgeModel *)model{
-
     if (_style == 2) {
+        for (NKRKnowledgeModel * mo in model.myHistory) {
+            NSInteger inter = arc4random()%2;
+            if (inter == 1) {
+                mo.inter = 1;
+                mo.style = 1;
+            }else{
+//                if (_style == 3) {
+//                    mo.style = 3;
+//                }else{
+                    mo.style = _style;
+//                }
+            }
+        }
+        itemarray = model.myHistory;
         collectView.itemarray = model.myHistory;
     }else if (_style == 3){
+        for (NKRKnowledgeModel * mo in model.relatedRecommendations) {
+            NSInteger inter = arc4random()%2;
+            if (inter == 1) {
+                mo.inter = 1;
+                mo.style = 1;
+            }else{
+//                if (_style == 3) {
+//                    mo.style = 3;
+//                }else{
+                    mo.style = _style;
+//                }
+            }
+        }
+        itemarray = model.relatedRecommendations;
         collectView.itemarray = model.relatedRecommendations;
     }else if (_style == 4){
+        for (NKRKnowledgeModel * mo in model.bannerknowledgeList) {
+            mo.style = 3;
+        }
+        itemarray = model.bannerknowledgeList;
         collectView.itemarray = model.bannerknowledgeList;
+    }else if (_style == 5){
+        for (NKRKnowledgeModel * mo in model.hotKnowledge) {
+            NSInteger inter = arc4random()%2;
+            if (inter == 1) {
+                mo.inter = 1;
+                mo.style = 1;
+            }else{
+                mo.style = 3;
+//
+//                if (_style == 5) {
+//                    mo.style = 3;
+//                }else{
+//                    mo.style = _style;
+//                }
+            }
+        }
+        itemarray = model.hotKnowledge;
+        collectView.itemarray = model.hotKnowledge;
     }
 
 }
@@ -162,4 +236,28 @@
 }
 */
 
+#pragma mark  - <LMHWaterFallLayoutDeleaget>
+- (CGFloat)waterFallLayout:(SearchFlowLayout *)waterFallLayout heightForItemAtIndexPath:(NSUInteger)indexPath itemWidth:(CGFloat)itemWidth{
+    NKRKnowledgeModel * mo = itemarray[indexPath];
+    if (mo.style == 1) {
+        return itemHeighttwo;
+    }else if (mo.style == 2){
+        return itemHeight;
+    }else if (mo.style == 3){
+        return itemHeightone;
+    }else{
+        return itemHeightone;
+    }
+}
+- (CGFloat)rowMarginInWaterFallLayout:(SearchFlowLayout *)waterFallLayout{
+    
+    return LENGTH(15);
+    
+}
+
+- (NSUInteger)columnCountInWaterFallLayout:(SearchFlowLayout *)waterFallLayout{
+    
+    return 2;
+    
+}
 @end

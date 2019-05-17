@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)  NSInteger style;
 @property(nonatomic,strong)NKRKnowledgeModel * model;
 @property (nonatomic , assign)NSInteger bkzt;//编辑状态
+@property (nonatomic , assign)NSInteger sfsj;//是否是随机数
+
 
 @end
 

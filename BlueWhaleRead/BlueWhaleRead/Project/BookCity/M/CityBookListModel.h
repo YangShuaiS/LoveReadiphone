@@ -9,6 +9,7 @@
 #import "BaseModel.h"
 
 @interface CityBookListModel : BaseModel
+@property (nonatomic, copy) NSString * is_like;
 @property (nonatomic, copy) NSString * author;//作者
 @property (nonatomic, copy) NSString * b_score;//分数
 @property (nonatomic, copy) NSString * catalogs;//分类id

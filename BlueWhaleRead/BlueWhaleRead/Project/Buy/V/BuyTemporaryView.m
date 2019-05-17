@@ -10,6 +10,7 @@
 #import "BuyMembersViewController.h"
 #import <StoreKit/StoreKit.h>
 #import "BuyPopPurchaseView.h"
+#import "ArticleTabViewController.h"
 @implementation BuyTemporaryView
 - (instancetype)init
 {
@@ -35,6 +36,8 @@
 }
 - (void)click{
     WS(ws);
+    ArticleTabViewController * vc =[ArticleTabViewController new];
+    [[self viewController].navigationController pushViewController:vc animated:YES];
 //    BuyPopPurchaseView * vc = [BuyPopPurchaseView new];
 //    vc.nav = [self viewController].navigationController;
 //    [[UIApplication sharedApplication].delegate.window addSubview:vc];

@@ -7,7 +7,6 @@
 //
 
 #import "BaseView.h"
-#import "JKStarDisplayView.h"
 typedef void(^click)(void);
 
 @interface BookXQTopView : BaseView<UIScrollViewDelegate>

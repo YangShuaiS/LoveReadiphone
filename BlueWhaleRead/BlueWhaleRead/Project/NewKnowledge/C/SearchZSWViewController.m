@@ -8,8 +8,8 @@
 
 #import "SearchZSWViewController.h"
 #import "NKRRecommendedCollectionView.h"
-#define itemWidth LENGTH(162)
-#define itemHeight LENGTH(162*0.610561)+LENGTH(15)+LENGTH(20)+LENGTH(5)+LENGTH(16)
+#define itemWidth LENGTH(163)
+#define itemHeight LENGTH(163)*0.552147+LENGTH(10)+LENGTH(14)+LENGTH(3)+LENGTH(12)
 @interface SearchZSWViewController ()
 
 @end

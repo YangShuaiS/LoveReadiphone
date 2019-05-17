@@ -7,10 +7,8 @@
 //
 
 #import "BaseView.h"
-#import "JKStarDisplayView.h"
 @interface GenBookView : BaseView
 @property(nonatomic,assign)BookCaseStyle bookCase;
-@property(nonatomic,strong)JKStarDisplayView *jKStarDisplayView;
 @property(nonatomic,strong)CityBookListModel * model;
 @property(nonatomic,strong)AllBookListModel * allmodel;
 @property(nonatomic,strong)UnreadBookModel * unreadBookModel;

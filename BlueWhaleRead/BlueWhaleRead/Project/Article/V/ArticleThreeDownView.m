@@ -11,8 +11,8 @@
 
 #import "ArticleThreeDownView.h"
 #import "NKRRecommendedCollectionView.h"
-#define itemWidth LENGTH(162)
-#define itemHeight1 LENGTH(162*0.610561)+LENGTH(15)+LENGTH(20)+LENGTH(5)+LENGTH(16)
+#define itemWidth LENGTH(163)
+#define itemHeight1 LENGTH(163)*0.552147+LENGTH(10)+LENGTH(14)+LENGTH(3)+LENGTH(12)
 @implementation ArticleThreeDownView{
     NKRRecommendedCollectionView * collectView1;
 }

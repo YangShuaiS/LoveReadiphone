@@ -15,7 +15,7 @@
 @property (nonatomic, copy) NSString * cover;//封皮
 @property (nonatomic, assign) NSInteger dayTimes;//剩余次数
 @property (nonatomic, copy) NSString * imp_type;//精读/泛读 精读为1 泛读为2
-@property (nonatomic, copy) NSString * is_read;//状态 1-》未阅读 2-》已阅读
+@property (nonatomic, assign) NSInteger is_read;//状态 1-》未阅读 2-》已阅读
 @property (nonatomic, copy) NSString * levels;//等级
 @property (nonatomic, copy) NSString * mark;//星级
 @property (nonatomic, copy) NSString * master_id;//主图书id

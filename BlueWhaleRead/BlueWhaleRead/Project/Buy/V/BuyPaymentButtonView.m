@@ -18,6 +18,7 @@
     MBProgressHUD * mb;
     BaseLabel * clickLabel;
     BuyXieYiView * xy;
+    BuyYaoQingModel * yaoqing;
 }
 
 - (instancetype)init
@@ -110,7 +111,21 @@
 - (void)xiadan:(NSString *)is_renew{
     WS(ws);
     NSString * url = [NSString stringWithFormat:@"%@%@?pay_from=3",ZSFWQ,JK_BUYXIADAN];
-    NSDictionary * dic = @{@"studentid":Me.ssid,@"pay_type":@"1",@"is_renew":is_renew,@"discount_id":_model.ssid};
+    NSString * pay_type = @"";
+    NSDictionary * dic;
+    if ([yaoqing isKindOfClass:NSClassFromString(@"BuyYaoQingModel")]) {
+        pay_type = @"2";
+        if (_model.price_times == 3) {
+            PackageTypeModel * mo = _models.productInfoIos[0];
+                    dic = @{@"studentid":Me.ssid,@"pay_type":pay_type,@"is_renew":is_renew,@"discount_id":_model.ssid,@"pre_invited_id":[NSString stringWithFormat:@"%ld",mo.ssid]};
+        }else{
+            PackageTypeModel * mo = _models.productInfoIos[1];
+                    dic = @{@"studentid":Me.ssid,@"pay_type":pay_type,@"is_renew":is_renew,@"discount_id":_model.ssid,@"pre_invited_id":[NSString stringWithFormat:@"%ld",mo.ssid]};
+        }
+
+    }else{
+        pay_type = @"1";
+    }
     NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
     //    NSData *data =[jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -225,9 +240,15 @@
         clickLabel.text = @"免费领取";
     }else{
         clickLabel.text = @"立即支付";
-
     }
-
+    
+    if (model.price_times == 3) {
+        PackageTypeModel * mo = _models.productInfoIos[0];
+        yaoqing = mo.studentInvitedInfo;
+    }else{
+        PackageTypeModel * mo = _models.productInfoIos[1];
+        yaoqing = mo.studentInvitedInfo;
+    }
 }
 
 

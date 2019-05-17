@@ -9,27 +9,32 @@
 #import "HomeModerateCollectionViewCell.h"
 #import "StareMoreView.h"
 @implementation HomeModerateCollectionViewCell{
-    UIView * topbackview;
     FLAnimatedImageView * imageView;
     BaseLabel * Title;
     UIView * yy;
     NSInteger inter;
     
+    UIView * topbackview;
     UIImageView * topimageview;
+    
     BaseLabel * zxyd;
     
     StareMoreView * stareview;
     BaseLabel * fenshu;
     MBProgressHUD * mb;
+
 }
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        
         inter = 0;
         mb = [MBProgressHUD new];
         mb.label.text = @"";
+        mb.mode = MBProgressHUDModeText;
         //        [mb showAnimated:YES];
         mb.removeFromSuperViewOnHide = NO;
+        mb.label.numberOfLines = 0;
         //        [mb hideAnimated:YES afterDelay:0];
         [[[[UIApplication sharedApplication] delegate] window] addSubview:mb];
         [mb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -85,7 +90,7 @@
     
     topimageview = [UIImageView new];
     topimageview.contentMode = UIViewContentModeScaleAspectFit;
-    topimageview.image = UIIMAGE(@"收藏-未收藏状态");
+    topimageview.image = UIIMAGE(@"添加");
     [topbackview addSubview:topimageview];
     [topimageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self->topbackview);
@@ -185,11 +190,11 @@
     }else{
         zxyd.hidden = NO;
     }
-    
-    if (model.is_like == 0) {
-        topimageview.image = UIIMAGE(@"收藏-未收藏状态");
-    }else{
+    if (_model.is_read==1 || _model.is_read==2 || _model.is_read==99) {
         topimageview.image = UIIMAGE(@"收藏-收藏状态");
+    }else{
+        topimageview.image = UIIMAGE(@"添加");
+
     }
 }
 
@@ -198,8 +203,12 @@
     if (_model != nil) {
         if (_model.is_read == 0) {
             [self addbookcity];
+        }else if (_model.is_read == 1){
+            [self remobookcity];
         }else{
-            [self addshoucang];
+            [mb showAnimated:YES];
+            mb.label.text = @"这是已读完书籍\n会永远保存在你的书架里哦～";
+            [mb hideAnimated:YES afterDelay:1];
         }
     }
 
@@ -225,7 +234,8 @@
             JoinBookModel * models = [JoinBookModel mj_objectWithKeyValues:responseObject];
             if ([models.code isEqual:@200]) {
                 ws.model.is_read = 1;
-                [ws addshoucang];
+                [ws upview];
+//                [ws addshoucang];
             }else if ([models.code isEqual:@Notloggedin]){
                 
             }
@@ -240,6 +250,31 @@
     }];
 }
 
+- (void)remobookcity{
+    WS(ws);
+
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_REMOVEBOOKCITY];
+    NSDictionary * dic = @{@"bookid":_model.ssid,@"studentid":Me.ssid};
+    
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            TheTopPicModel *Topmodel = [TheTopPicModel mj_objectWithKeyValues:responseObject];
+            if ([Topmodel.code isEqual:@200]) {
+                ws.model.is_read = 0;
+                [ws upview];
+
+            }else if ([Topmodel.code isEqual:@Notloggedin]){
+            }
+            [self->mb showAnimated:YES];
+            self->mb.label.text = Topmodel.message;
+            [self->mb hideAnimated:YES afterDelay:1];
+        }else{
+            [self->mb showAnimated:YES];
+            self->mb.label.text = @"网络请求失败";
+            [self->mb hideAnimated:YES afterDelay:1];
+        }
+    }];
+}
 - (void)addshoucang{
     WS(ws);
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_LOVEANDNOLOVE];
@@ -265,8 +300,8 @@
     }];
 }
 - (void)upview{
-    if (_model.is_like == 0) {
-        topimageview.image = UIIMAGE(@"收藏-未收藏状态");
+    if (_model.is_read == 0) {
+        topimageview.image = UIIMAGE(@"添加");
     }else{
         topimageview.image = UIIMAGE(@"收藏-收藏状态");
     }

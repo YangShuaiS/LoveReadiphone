@@ -7,7 +7,7 @@
 //
 
 #import "BaseModel.h"
-
+#import "KnowledgegraphlistModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface knowledgeGradeModel : BaseModel

@@ -11,7 +11,7 @@
 #import "NBCmenuView.h"
 #import "SearchMyHistoryViewController.h"
 #define itemWidth LENGTH(162)
-#define itemHeight LENGTH(162)*0.610561+LENGTH(15)+LENGTH(14)
+#define itemHeight LENGTH(163)*0.552147+LENGTH(10)+LENGTH(14)
 @implementation NKRRecommendedView{
     NKRRecommendedCollectionView * collectView;
     NBCmenuView * menu;

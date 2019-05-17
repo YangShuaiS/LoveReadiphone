@@ -7,7 +7,6 @@
 //
 
 #import "BaseCollectionViewCell.h"
-//#import "JKStarDisplayView.h"
 
 @interface HomeModerateCollectionViewCell : BaseCollectionViewCell
 @property(nonatomic,strong)BookListModel * model;

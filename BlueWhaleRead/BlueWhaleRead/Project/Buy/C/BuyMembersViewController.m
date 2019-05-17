@@ -85,6 +85,7 @@
         model.student.end_time = [gregorian components:dayInfoUnits fromDate:[BaseObject TimeStringForDate:model.student.member_end_time]];
         model.student.begin_time = [gregorian components:dayInfoUnits fromDate:[BaseObject TimeStringForDate:model.student.member_begin_time]];
     allView.model = model;
+    buyPay.models = model;
 }
 /*
 #pragma mark - Navigation

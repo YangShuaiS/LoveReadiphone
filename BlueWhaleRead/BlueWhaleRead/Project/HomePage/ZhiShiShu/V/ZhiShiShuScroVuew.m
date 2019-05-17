@@ -79,6 +79,8 @@
         if (responseObject) {
             ZhiShiShuModel * model = [ZhiShiShuModel mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
+                blockSelf->nmodel = model;
+
                 NSInteger scale_screen = [UIScreen mainScreen].scale;
                 NSMutableString *topimage = [[NSMutableString alloc] initWithString:model.data.bg_img];
                 if (topimage.length >4) {
@@ -133,9 +135,13 @@
 
             if ([BaseObject ArratClass:model.data.arrow]) {
                 blockSelf->rightscroview.itemarray = model.data.arrow;
+            }else{
+                blockSelf->imagevi.hidden = YES;
+            }
+            if (![model.data.knowledge_type isEqualToString:@"1"]) {
+                blockSelf->imagevi.hidden = YES;
             }
             [blockSelf scroviewsliding:model];
-            blockSelf->nmodel = model;
             if ([model.data.knowledge_type isEqualToString:@"2"]) {
                 [blockSelf nowzhishiwang];
                 blockSelf->scrodownview.Type = 2;
@@ -535,17 +541,17 @@
 
     
     imagevi = [UIImageView new];
-    imagevi.contentMode = UIViewContentModeScaleAspectFit;
+    imagevi.contentMode = UIViewContentModeScaleAspectFill;
     imagevi.image = UIIMAGE(@"收缩手势");
     [self addSubview:imagevi];
     [imagevi mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(ws);
+        make.centerY.mas_equalTo(self->scrollView);
         make.right.mas_equalTo(self->rightscroview.mas_left);
-        make.size.mas_equalTo(CGSizeMake(LENGTH(self->imagevi.image.size.width), LENGTH(self->imagevi.image.size.height)));
+        make.size.mas_equalTo(CGSizeMake(LENGTH(self->imagevi.image.size.width)*1.0, LENGTH(self->imagevi.image.size.height)*1.0));
     }];
     
     imagevi.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(uptableliest)];
     [imagevi addGestureRecognizer:tap];
 
     
@@ -590,7 +596,7 @@
                         }];
                         [ws.superview layoutIfNeeded];
                     } completion:^(BOOL finished) {
-                        
+                        self->imagevi.image = UIIMAGE(@"收缩手势拷贝");
                     }];
 
                     EndAni = YES;
@@ -608,7 +614,8 @@
                         }];
                         [ws.superview layoutIfNeeded];
                     } completion:^(BOOL finished) {
-                        
+                        self->imagevi.image = UIIMAGE(@"收缩手势");
+
                     }];
                     
                     EndAni = NO;
@@ -646,7 +653,6 @@
 //    }
 //}
 - (void)animalbegin{
-    WS(ws);
     if (Start == NO) {
         Start = YES;
         
@@ -692,7 +698,6 @@
     }
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    WS(ws);
     scroviewhd = YES;
     if (Start == NO) {
         Start = YES;
@@ -832,7 +837,8 @@
             }];
             [ws.superview layoutIfNeeded];
         } completion:^(BOOL finished) {
-            
+            self->imagevi.image = UIIMAGE(@"收缩手势拷贝");
+
         }];
         EndAni = YES;
 
@@ -847,7 +853,8 @@
             }];
             [ws.superview layoutIfNeeded];
         } completion:^(BOOL finished) {
-            
+            self->imagevi.image = UIIMAGE(@"收缩手势");
+
         }];
         EndAni = NO;
     }

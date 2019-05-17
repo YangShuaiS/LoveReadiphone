@@ -45,6 +45,7 @@
     }];
     
     FLAnimatedImageView * imageview =[FLAnimatedImageView new];
+    imageview.alpha = 0.7;
     imageview.contentMode = UIViewContentModeScaleAspectFit;
     imageview.image = UIIMAGE(@"圆底箭头");
     [backview addSubview:imageview];

@@ -10,6 +10,9 @@
 
 @interface LunBoTuXQContentModel : BaseView
 @property (nonatomic, copy) NSString * banner_img;
+@property (nonatomic, copy) NSString * content_img;
+@property (nonatomic, assign) NSInteger banner_type;
+
 @property (nonatomic, copy) NSString * content;
 @property (nonatomic, copy) NSString * ssid;
 @property (nonatomic, copy) NSString * status;

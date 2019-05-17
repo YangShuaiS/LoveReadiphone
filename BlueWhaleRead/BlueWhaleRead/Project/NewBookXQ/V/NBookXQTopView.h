@@ -7,7 +7,6 @@
 //
 
 #import "BaseView.h"
-#import "JKStarDisplayView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

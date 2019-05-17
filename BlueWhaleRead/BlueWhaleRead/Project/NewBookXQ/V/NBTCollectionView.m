@@ -57,8 +57,11 @@
         WS(ws);
         mb = [MBProgressHUD new];
         mb.label.text = @"";
+        mb.mode = MBProgressHUDModeText;
 //        [mb showAnimated:YES];
         mb.removeFromSuperViewOnHide = NO;
+        mb.label.numberOfLines = 0;
+
 //        [mb hideAnimated:YES afterDelay:0];
         [[[[UIApplication sharedApplication] delegate] window] addSubview:mb];
         [mb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -93,11 +96,14 @@
     NewBookTopClickModel * model = _itemArray[indexPath.row];
     if (model.style == 0) {
         if (indexPath.row == 0) {
-            if (_is_read == 1||_is_read == 2||_is_read == 999){
-                model.is_like = model.is_like == 1?0:1;
-                [self loadLove:[NSString stringWithFormat:@"%ld",model.is_like] NewBookTopClickModel:model];
-            }else{
+            if (_is_read == 0) {
                 [self addbookcityNewBookTopClickModel:model];
+            }else if (_is_read == 1){
+                [self RemovebookClickModel:model];
+            }else{
+                [self->mb showAnimated:YES];
+                self->mb.label.text = @"这是已读完书籍\n会永远保存在你的书架里哦～";
+                [self->mb hideAnimated:YES afterDelay:1];
             }
         }
         if (indexPath.row == 1) {
@@ -143,7 +149,30 @@
     [self reloadData];
 }
 
+- (void)RemovebookClickModel:(NewBookTopClickModel*)model{
+    __block NBTCollectionView * blockSelf = self;
 
+    NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_REMOVEBOOKCITY];
+    NSDictionary * dic = @{@"bookid":_model.book.ssid,@"studentid":Me.ssid};
+    
+    [[BaseAppRequestManager manager] getNormaldataURL:url dic:dic andBlock:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            TheTopPicModel *Topmodel = [TheTopPicModel mj_objectWithKeyValues:responseObject];
+            if ([Topmodel.code isEqual:@200]) {
+                model.image = [model.image isEqualToString:@"收藏-未收藏状态"]?@"收藏-收藏状态":@"收藏-未收藏状态";
+                blockSelf.is_read = 0;
+                [blockSelf reloadData];
+                [self->mb showAnimated:YES];
+                self->mb.label.text = Topmodel.message;
+                [self->mb hideAnimated:YES afterDelay:1];
+            }else if ([Topmodel.code isEqual:@Notloggedin]){
+                blockSelf.block();
+            }
+        }else{
+            
+        }
+    }];
+}
 - (void)loadLove:(NSString *)love NewBookTopClickModel:(NewBookTopClickModel*)models{
     __block NBTCollectionView * blockSelf = self;
     NSString * url = [NSString stringWithFormat:@"%@%@",ZSFWQ,JK_LOVEANDNOLOVE];
@@ -153,7 +182,7 @@
         if (responseObject) {
             HomePage * model = [HomePage mj_objectWithKeyValues:responseObject];
             if ([model.code isEqual:@200]) {
-                models.image = [models.image isEqualToString:@"组 457"]?@"组 459":@"组 457";
+                models.image = [models.image isEqualToString:@"收藏-未收藏状态"]?@"收藏-收藏状态":@"收藏-未收藏状态";
                 [blockSelf reloadData];
             }else if ([model.code isEqual:@Notloggedin]){
                 blockSelf.block();
@@ -174,9 +203,12 @@
         if (responseObject) {
             JoinBookModel * models = [JoinBookModel mj_objectWithKeyValues:responseObject];
             if ([models.code isEqual:@200]) {
-                model.is_like = model.is_like == 1?0:1;
-                blockSelf.is_read = 999;
-                [self loadLove:[NSString stringWithFormat:@"%ld",model.is_like] NewBookTopClickModel:model];
+//                model.is_like = model.is_like == 1?0:1;
+                blockSelf.is_read = 1;
+                model.image = [model.image isEqualToString:@"收藏-未收藏状态"]?@"收藏-收藏状态":@"收藏-未收藏状态";
+                [blockSelf reloadData];
+
+//                [self loadLove:[NSString stringWithFormat:@"%ld",model.is_like] NewBookTopClickModel:model];
             }else if ([models.code isEqual:@Notloggedin]){
                 blockSelf.block();
             }

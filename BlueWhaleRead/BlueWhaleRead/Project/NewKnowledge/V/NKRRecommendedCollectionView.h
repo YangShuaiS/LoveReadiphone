@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //@property (nonatomic , assign)NSInteger push;//0 根࿆据࿆type判࿆断࿆  1 文࿆章࿆ 2 脉࿆络࿆图࿆
 @property (nonatomic , assign)NSInteger bkzt;//编辑状态
+@property (nonatomic , assign)NSInteger sfsj;//是否是随机数
 
 @end
 
